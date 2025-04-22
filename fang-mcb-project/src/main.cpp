@@ -85,7 +85,7 @@ int main()
 
         if (sendMotorTimeout.execute())
         {
-            PROFILE(drivers->profiler, drivers->mpu6500.periodicIMUUpdate, ());
+            PROFILE(drivers->profiler, drivers->bmi088.periodicIMUUpdate, ());
             PROFILE(drivers->profiler, drivers->commandScheduler.run, ());
             PROFILE(drivers->profiler, drivers->djiMotorTxHandler.encodeAndSendCanData, ());
             PROFILE(drivers->profiler, drivers->terminalSerial.update, ());
@@ -104,7 +104,7 @@ static void initializeIo(src::Drivers *drivers)
     drivers->can.initialize();
     drivers->errorController.init();
     drivers->remote.initialize();
-    drivers->mpu6500.init(MAIN_LOOP_FREQUENCY, 0.1, 0);
+    drivers->bmi088.initialize(MAIN_LOOP_FREQUENCY, 0.1, 0);
     drivers->refSerial.initialize();
     drivers->terminalSerial.initialize();
     drivers->schedulerTerminalHandler.init();
@@ -120,5 +120,6 @@ static void updateIo(src::Drivers *drivers)
     drivers->canRxHandler.pollCanData();
     drivers->refSerial.updateSerial();
     drivers->remote.read();
-    drivers->mpu6500.read();
+    drivers->bmi088.periodicIMUUpdate();
+    //drivers->bmi088.read();
 }
