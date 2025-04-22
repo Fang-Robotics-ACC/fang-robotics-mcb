@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "preLaunchTask": "Build Tests - Debug",
-            "program": "${workspaceFolder}/template-project/build/tests/scons-debug/template-project-tests.elf",
+            "program": "${workspaceFolder}/fang-mcb-project/build/tests/scons-debug/fang-mcb-project-tests.elf",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -26,7 +26,7 @@
             "type": "cppdbg",
             "request": "launch",
             "preLaunchTask": "Build Sim - Debug",
-            "program": "${workspaceFolder}/template-project/build/sim/scons-debug/template-project.elf",
+            "program": "${workspaceFolder}/fang-mcb-project/build/sim/scons-debug/fang-mcb-project.elf",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -48,10 +48,10 @@
             "servertype": "openocd",
             "cwd": "${workspaceRoot}",
             "preLaunchTask": "Program - Debug",
-            "executable": "./template-project/build/hardware/scons-debug/template-project.elf",
+            "executable": "./fang-mcb-project/build/hardware/scons-debug/fang-mcb-project.elf",
             "device": "STM32F427II",
             "configFiles": [
-                "./template-project/openocd.cfg"
+                "./fang-mcb-project/openocd.cfg"
             ]
         }
     ]
