@@ -29,6 +29,7 @@ TAPROOT_PATH         = "taproot"
 SRC_PATH             = "src"
 TEST_PATH            = "test"
 RAIL_PATH            = "lib/RAIL-Robomaster-Abstraction-Interface-Library/include"
+UNIT_PATH            = "lib/units/include"
 
 
 TAPROOT_SCRIPTS_TOOLPATH = abspath("../taproot-scripts/scons-tools")
