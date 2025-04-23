@@ -7,3 +7,6 @@
 [submodule "fang-mcb-project/lib/RAIL-Robomaster-Abstraction-Interface-Library"]
 	path = fang-mcb-project/lib/RAIL-Robomaster-Abstraction-Interface-Library
 	url = https://github.com/RavenRandomz/RAIL-Robomaster-Abstraction-Interface-Library.git
+[submodule "fang-mcb-project/lib/units"]
+	path = fang-mcb-project/lib/units
+	url = https://github.com/nholthaus/units.git
