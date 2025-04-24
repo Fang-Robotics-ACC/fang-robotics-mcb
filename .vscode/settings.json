@@ -92,4 +92,5 @@
             100
         ]
     },
+    "terminal.integrated.scrollback": 5000,
 }
