@@ -1,13 +1,14 @@
 #ifndef MK2_MOTORS_HPP_ASFEFKLSJKDFJSAEFE
 #define MK2_MOTORS_HPP_ASFEFKLSJKDFJSAEFE
 #include "idcmotor.h"
+#include "iwattbudgeter.h"
 #include "units.h"
 
 #include "unitaliases.hpp"
 
 namespace motors
 {
-    class MK2 : public rail::IDCMotor<MetersPerSecond, NewtonMeters, Watts> 
+    class MK2 : virtual public rail::IDCMotor<MetersPerSecond, NewtonMeters, Watts>, virtual public rail::IWattBudgeter<Watts>
     {
     public:
         void setWattBudget(const Watts& wattage) override;
