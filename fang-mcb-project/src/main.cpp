@@ -42,7 +42,9 @@
 
 /* control includes ---------------------------------------------------------*/
 #include "tap/architecture/clock.hpp"
+#include "units.h"
 
+#include "mk2.hpp"
 /* define timers here -------------------------------------------------------*/
 static constexpr float MAIN_LOOP_FREQUENCY = 500.0f;
 tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / MAIN_LOOP_FREQUENCY);
@@ -80,6 +82,7 @@ int main()
 
     while (1)
     {
+        motors::MK2 test {};
         // do this as fast as you can
         PROFILE(drivers->profiler, updateIo, (drivers));
 
@@ -97,6 +100,7 @@ int main()
 
 static void initializeIo(src::Drivers *drivers)
 {
+    units::length::centimeter_t test {1.0};
     drivers->analog.init();
     drivers->pwm.init();
     drivers->digital.init();
