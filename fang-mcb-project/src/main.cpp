@@ -17,6 +17,8 @@
  * along with fang-mcb.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include "mk2.hpp"
+
 #ifdef PLATFORM_HOSTED
 /* hosted environment (simulator) includes --------------------------------- */
 #include <iostream>
@@ -24,6 +26,7 @@
 #include "tap/communication/tcp-server/tcp_server.hpp"
 #include "tap/motor/motorsim/dji_motor_sim_handler.hpp"
 #endif
+
 
 #include "tap/board/board.hpp"
 
@@ -42,9 +45,7 @@
 
 /* control includes ---------------------------------------------------------*/
 #include "tap/architecture/clock.hpp"
-#include "units.h"
 
-#include "mk2.hpp"
 /* define timers here -------------------------------------------------------*/
 static constexpr float MAIN_LOOP_FREQUENCY = 500.0f;
 tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / MAIN_LOOP_FREQUENCY);
@@ -100,7 +101,6 @@ int main()
 
 static void initializeIo(src::Drivers *drivers)
 {
-    units::length::centimeter_t test {1.0};
     drivers->analog.init();
     drivers->pwm.init();
     drivers->digital.init();
