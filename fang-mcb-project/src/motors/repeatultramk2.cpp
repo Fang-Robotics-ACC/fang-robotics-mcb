@@ -2,7 +2,6 @@
 
 namespace motors
 {
-
     //Watt budget setters and getters
     void RepeatUltraMk2::setWattBudget(const Watts& wattage)
     {
@@ -35,7 +34,6 @@ namespace motors
         return m_maxSpeed;
     }
 
-    //Torque setters and getters
 	void RepeatUltraMk2::setMinSpeed(const MetersPerSecond& minSpeed)
     {
         m_minSpeed = minSpeed;
@@ -45,5 +43,14 @@ namespace motors
 	const MetersPerSecond& RepeatUltraMk2::getMinSpeed() const
     {
         return m_maxSpeed;
+    }
+
+    RepeatUltraMk2::RepeatUltraMk2(tap::Drivers& drivers, tap::gpio::Pwm::Pin pwmPin):
+        m_drivers{drivers}, m_pwmPin{pwmPin}
+    {}
+
+    void RepeatUltraMk2::setPWM(float dutyCycle)
+    {
+        m_drivers.pwm.write(dutyCycle, m_pwmPin); 
     }
 }//namespace motors
