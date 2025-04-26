@@ -10,7 +10,9 @@
 
 namespace motors
 {
-    //RPM is positive according to the right hand rule when the motor is the shaft pointing up.
+    /*!
+    RPM is positive according to the right hand rule when the motor is the shaft pointing up. This is the the gearbox detached!!!
+    */
     class RepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM, Watts>, virtual public rail::IWattBudgeter<Watts>
     {
     public:
@@ -37,6 +39,7 @@ namespace motors
         RPM m_minSpeed{0};
         tap::Drivers& m_drivers;
         tap::gpio::Pwm::Pin m_pwmPin;
+        const RPMPerVolt mk_kv{1450.0}; //This was the provided value for a 
 
         /*!
             PWM should be between 0 and 1
@@ -44,6 +47,7 @@ namespace motors
             Therefore the if the pwm is 0.5 the motor should be still.
         */
         void setPWM(float dutyCycle);
+        void controllerVoltageToSpeed(Volts& volts);
    };
 }
 #endif 
