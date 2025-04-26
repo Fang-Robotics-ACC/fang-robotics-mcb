@@ -1,4 +1,5 @@
 #include "repeatultramk2.hpp"
+#include "units.h"
 
 namespace motors
 {
@@ -17,6 +18,7 @@ namespace motors
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
         m_speed = speed;
+        
     }
 
 	const RPM& RepeatUltraMk2::getSpeed() const
@@ -52,5 +54,10 @@ namespace motors
     void RepeatUltraMk2::setPWM(float dutyCycle)
     {
         m_drivers.pwm.write(dutyCycle, m_pwmPin); 
+    }
+
+    const RPM& RepeatUltraMk2::controllerVoltageToSpeed(Volts& volts)
+    {
+        return volts * mk_kv; //The kv constant multiplied by the volts = the rpm
     }
 }//namespace motors
