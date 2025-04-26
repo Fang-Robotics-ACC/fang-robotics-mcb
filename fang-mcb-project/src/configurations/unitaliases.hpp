@@ -7,4 +7,5 @@ using Watts = units::power::watt_t;
 using Meters = units::length::meter_t;
 using MetersPerSecond = units::velocity::meters_per_second_t;
 using RPM = units::angular_velocity::revolutions_per_minute_t;
+using Volts = units::voltage::volt_t;
 #endif
