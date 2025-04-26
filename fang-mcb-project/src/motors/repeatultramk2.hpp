@@ -39,7 +39,7 @@ namespace motors
         RPM m_minSpeed{0};
         tap::Drivers& m_drivers;
         tap::gpio::Pwm::Pin m_pwmPin;
-        const Volts m_controllerInputVoltage;
+        const Volts mk_controllerInputVoltage;
         const RPMPerVolt mk_kv{1450.0}; //This was the provided value for a 
 
         /*!
