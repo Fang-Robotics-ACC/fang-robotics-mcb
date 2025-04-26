@@ -18,7 +18,11 @@ namespace motors
     public:
         RepeatUltraMk2(tap::Drivers& drivers, tap::gpio::Pwm::Pin pwmPin, const Volts& controllerInputVoltage);
 
+        /// @brief Does not limit anything yet
+        /// @param wattage 
         void setWattBudget(const Watts& wattage) override;
+
+        /// Does not limit anything yet
 		const Watts& getWattBudget() const override;
 
 		void setSpeed(const RPM& speed) override;
