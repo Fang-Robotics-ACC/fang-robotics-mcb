@@ -10,7 +10,8 @@
 
 namespace motors
 {
-    class RepeatUltraMk2 : virtual public rail::ISpeedMotor<MetersPerSecond, Watts>, virtual public rail::IWattBudgeter<Watts>
+    //RPM is positive according to the right hand rule when the motor is the shaft pointing up.
+    class RepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM, Watts>, virtual public rail::IWattBudgeter<Watts>
     {
     public:
         RepeatUltraMk2(tap::Drivers& drivers, tap::gpio::Pwm::Pin pwmPin);
@@ -18,24 +19,24 @@ namespace motors
         void setWattBudget(const Watts& wattage) override;
 		const Watts& getWattBudget() const override;
 
-		void setSpeed(const MetersPerSecond& speed) override;
-		const MetersPerSecond& getSpeed() const override;
+		void setSpeed(const RPM& speed) override;
+		const RPM& getSpeed() const override;
 
-		void setMaxSpeed(const MetersPerSecond& maxSpeed) override;
-		const MetersPerSecond& getMaxSpeed() const override;
-		void setMinSpeed(const MetersPerSecond& minSpeed) override;
-		const MetersPerSecond& getMinSpeed() const override;
+		void setMaxSpeed(const RPM& maxSpeed) override;
+		const RPM& getMaxSpeed() const override;
+		void setMinSpeed(const RPM& minSpeed) override;
+		const RPM& getMinSpeed() const override;
 
     private:
         Watts m_wattBudget{0};
         Watts m_maxWattBudget{0};
         Watts m_minWattBudget{0};
 
-        MetersPerSecond m_speed{0};
-        MetersPerSecond m_maxSpeed{0};
-        MetersPerSecond m_minSpeed{0};
+        RPM m_speed{0};
+        RPM m_maxSpeed{0};
+        RPM m_minSpeed{0};
         tap::Drivers& m_drivers;
-        const tap::gpio::Pwm::Pin m_pwmPin;
+        tap::gpio::Pwm::Pin m_pwmPin;
 
         /*!
             PWM should be between 0 and 1

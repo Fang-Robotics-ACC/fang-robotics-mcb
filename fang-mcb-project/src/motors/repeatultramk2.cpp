@@ -14,33 +14,33 @@ namespace motors
     }
 
     //Speed setters and getters
-	void RepeatUltraMk2::setSpeed(const MetersPerSecond& speed)
+	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
         m_speed = speed;
     }
 
-	const MetersPerSecond& RepeatUltraMk2::getSpeed() const
+	const RPM& RepeatUltraMk2::getSpeed() const
     {
         return m_speed;
     }
 
-	void RepeatUltraMk2::setMaxSpeed(const MetersPerSecond& maxSpeed)
+	void RepeatUltraMk2::setMaxSpeed(const RPM& maxSpeed)
     {
         m_maxSpeed = maxSpeed;
     }
 
-	const MetersPerSecond& RepeatUltraMk2::getMaxSpeed() const
+	const RPM& RepeatUltraMk2::getMaxSpeed() const
     {
         return m_maxSpeed;
     }
 
-	void RepeatUltraMk2::setMinSpeed(const MetersPerSecond& minSpeed)
+	void RepeatUltraMk2::setMinSpeed(const RPM& minSpeed)
     {
         m_minSpeed = minSpeed;
         
     }
 
-	const MetersPerSecond& RepeatUltraMk2::getMinSpeed() const
+	const RPM& RepeatUltraMk2::getMinSpeed() const
     {
         return m_maxSpeed;
     }
