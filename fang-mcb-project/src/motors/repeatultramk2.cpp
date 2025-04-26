@@ -1,4 +1,4 @@
-#include "mk2.hpp"
+#include "repeatultramk2.hpp"
 
 namespace motors
 {
@@ -46,33 +46,4 @@ namespace motors
     {
         return m_maxSpeed;
     }
-
-	void RepeatUltraMk2::setTorque(const NewtonMeters& torque)
-    {
-        m_torque = torque;
-    }
-	const NewtonMeters& RepeatUltraMk2::getTorque() const
-    {
-        return m_torque;
-    }
-
-	void RepeatUltraMk2::setMaxTorque(const NewtonMeters& maxTorque)
-    {
-        m_maxTorque = maxTorque;
-    }
-	const NewtonMeters& RepeatUltraMk2::getMaxTorque() const
-    {
-        return m_maxTorque;
-    }
-
-	void RepeatUltraMk2::setMinTorque(const NewtonMeters& minTorque)
-    {
-        m_minTorque = minTorque;
-    }
-
-	const NewtonMeters& RepeatUltraMk2::getMinTorque() const
-    {
-        return m_minTorque;
-    }
-
 }//namespace motors
