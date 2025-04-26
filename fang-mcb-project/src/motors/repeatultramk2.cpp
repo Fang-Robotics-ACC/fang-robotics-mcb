@@ -23,7 +23,8 @@ namespace motors
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
         m_speed = speed;
-        
+        Volts voltage = speedToControllerVoltage(speed);
+
     }
 
 	const RPM& RepeatUltraMk2::getSpeed() const
@@ -57,8 +58,13 @@ namespace motors
         m_drivers.pwm.write(dutyCycle, m_pwmPin); 
     }
 
-    const RPM& RepeatUltraMk2::controllerVoltageToSpeed(Volts& volts)
+    const RPM& RepeatUltraMk2::controllerVoltageToSpeed(const Volts& volts)
     {
         return volts * mk_kv; //The kv constant multiplied by the volts = the rpm
+    }
+
+    const Volts& RepeatUltraMk2::speedToControllerVoltage(const RPM& speed)
+    {
+        return speed / mk_kv; //The kv constant multiplied by the volts = the rpm
     }
 }//namespace motors
