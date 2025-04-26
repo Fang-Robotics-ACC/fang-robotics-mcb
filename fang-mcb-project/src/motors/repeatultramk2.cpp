@@ -3,6 +3,11 @@
 
 namespace motors
 {
+
+    RepeatUltraMk2::RepeatUltraMk2(tap::Drivers& drivers, tap::gpio::Pwm::Pin pwmPin, const Volts& controllerInputVoltage):
+        m_drivers{drivers}, m_pwmPin{pwmPin}, m_controllerInputVoltage {controllerInputVoltage}
+    {}
+
     //Watt budget setters and getters
     void RepeatUltraMk2::setWattBudget(const Watts& wattage)
     {
@@ -46,10 +51,6 @@ namespace motors
     {
         return m_maxSpeed;
     }
-
-    RepeatUltraMk2::RepeatUltraMk2(tap::Drivers& drivers, tap::gpio::Pwm::Pin pwmPin, const Volts& controllerInputVoltage):
-        m_drivers{drivers}, m_pwmPin{pwmPin}, m_controllerInputVoltage {controllerInputVoltage}
-    {}
 
     void RepeatUltraMk2::setPWM(float dutyCycle)
     {
