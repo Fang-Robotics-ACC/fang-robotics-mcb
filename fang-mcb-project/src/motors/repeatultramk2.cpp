@@ -5,7 +5,7 @@ namespace motors
 {
 
     RepeatUltraMk2::RepeatUltraMk2(tap::Drivers& drivers, tap::gpio::Pwm::Pin pwmPin, const Volts& controllerInputVoltage):
-        m_drivers{drivers}, m_pwmPin{pwmPin}, m_controllerInputVoltage {controllerInputVoltage}
+        m_drivers{drivers}, m_pwmPin{pwmPin}, mk_controllerInputVoltage {controllerInputVoltage}
     {}
 
     //Watt budget setters and getters
@@ -23,8 +23,10 @@ namespace motors
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
         m_speed = speed;
-        Volts voltage = speedToControllerVoltage(speed);
-
+        const Volts outputVoltage = speedToControllerVoltage(speed);
+        //The ratio between the desired output voltage the intput voltage
+        const float dutyCycle = outputVoltage / mk_controllerInputVoltage; 
+        setPWM(dutyCycle);
     }
 
 	const RPM& RepeatUltraMk2::getSpeed() const
