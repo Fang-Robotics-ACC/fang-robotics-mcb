@@ -47,8 +47,8 @@ namespace motors
         return m_maxSpeed;
     }
 
-    RepeatUltraMk2::RepeatUltraMk2(tap::Drivers& drivers, tap::gpio::Pwm::Pin pwmPin):
-        m_drivers{drivers}, m_pwmPin{pwmPin}
+    RepeatUltraMk2::RepeatUltraMk2(tap::Drivers& drivers, tap::gpio::Pwm::Pin pwmPin, const Volts& controllerInputVoltage):
+        m_drivers{drivers}, m_pwmPin{pwmPin}, m_controllerInputVoltage {controllerInputVoltage}
     {}
 
     void RepeatUltraMk2::setPWM(float dutyCycle)

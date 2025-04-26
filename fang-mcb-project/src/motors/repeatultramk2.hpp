@@ -16,7 +16,7 @@ namespace motors
     class RepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM, Watts>, virtual public rail::IWattBudgeter<Watts>
     {
     public:
-        RepeatUltraMk2(tap::Drivers& drivers, tap::gpio::Pwm::Pin pwmPin);
+        RepeatUltraMk2(tap::Drivers& drivers, tap::gpio::Pwm::Pin pwmPin, const Volts& controllerInputVoltage);
 
         void setWattBudget(const Watts& wattage) override;
 		const Watts& getWattBudget() const override;
@@ -39,6 +39,7 @@ namespace motors
         RPM m_minSpeed{0};
         tap::Drivers& m_drivers;
         tap::gpio::Pwm::Pin m_pwmPin;
+        const Volts m_controllerInputVoltage;
         const RPMPerVolt mk_kv{1450.0}; //This was the provided value for a 
 
         /*!
@@ -48,6 +49,7 @@ namespace motors
         */
         void setPWM(float dutyCycle);
         const RPM& controllerVoltageToSpeed(Volts& volts);
+        const Volts& speedToControllerVoltage(RPM& speed);
    };
 }
 #endif 
