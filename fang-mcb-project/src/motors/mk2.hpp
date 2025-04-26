@@ -8,7 +8,7 @@
 
 namespace motors
 {
-    class MK2 : virtual public rail::IDCMotor<MetersPerSecond, NewtonMeters, Watts>, virtual public rail::IWattBudgeter<Watts>
+    class RepeatUltraMk2 : virtual public rail::IDCMotor<MetersPerSecond, NewtonMeters, Watts>, virtual public rail::IWattBudgeter<Watts>
     {
     public:
         void setWattBudget(const Watts& wattage) override;

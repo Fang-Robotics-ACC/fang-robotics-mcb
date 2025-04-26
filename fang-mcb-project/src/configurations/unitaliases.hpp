@@ -1,5 +1,6 @@
 #ifndef UNIT_ALIASES_HPP_SDLDDFLKJSKFJELKFJAS
 #define UNIT_ALIASES_HPP_SDLDDFLKJSKFJELKFJAS
+#define UNIT_LIB_DEFAULT_TYPE float
 #include "units.h"
 using NewtonMeters = units::torque::newton_meter_t;
 using Watts = units::power::watt_t;

@@ -82,7 +82,7 @@ int main()
 
     while (1)
     {
-        motors::MK2 test {};
+        motors::RepeatUltraMk2 test {};
         // do this as fast as you can
         PROFILE(drivers->profiler, updateIo, (drivers));
 
