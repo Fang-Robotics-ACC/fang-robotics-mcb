@@ -1,4 +1,5 @@
 #include "repeatultramk2.hpp"
+#include "brushlessutils.hpp"
 #include "units.h"
 
 namespace motors
@@ -23,7 +24,7 @@ namespace motors
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
         m_speed = speed;
-        const Volts outputVoltage = speedToControllerVoltage(speed);
+        const Volts outputVoltage = util::speedToControllerVoltage(speed, mk_kv);
         //The ratio between the desired output voltage the intput voltage
         const float dutyCycle = outputVoltage / mk_controllerInputVoltage; 
         setPWM(dutyCycle);
@@ -58,15 +59,5 @@ namespace motors
     void RepeatUltraMk2::setPWM(float dutyCycle)
     {
         m_drivers.pwm.write(dutyCycle, m_pwmPin); 
-    }
-
-    const RPM& RepeatUltraMk2::controllerVoltageToSpeed(const Volts& volts)
-    {
-        return volts * mk_kv; //The kv constant multiplied by the volts = the rpm
-    }
-
-    const Volts& RepeatUltraMk2::speedToControllerVoltage(const RPM& speed)
-    {
-        return speed / mk_kv; //The kv constant multiplied by the volts = the rpm
     }
 }//namespace motors
