@@ -44,7 +44,8 @@ namespace motors
         tap::Drivers& m_drivers;
         tap::gpio::Pwm::Pin m_pwmPin;
         const Volts mk_controllerInputVoltage;
-        const RPMPerVolt mk_kv{1450.0}; //This was the provided value for a 
+        // This was the Repeat Robotics provided value for the ratio between the rpm and the voltage associated with i
+        const RPMPerVolt mk_kv{1450.0};
 
         /*!
             PWM should be between 0 and 1
