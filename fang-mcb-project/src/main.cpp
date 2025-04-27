@@ -100,7 +100,6 @@ int main()
 
 static void initializeIo(src::Drivers *drivers)
 {
-    units::length::centimeter_t test {1.0};
     drivers->analog.init();
     drivers->pwm.init();
     drivers->digital.init();
