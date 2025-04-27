@@ -25,25 +25,15 @@
 
 TEST(brushlessUtils , RPMVoltageConversion)
 {
-    Volts voltage{24.0};
+    Volts maxVoltage{24.0};
     Volts zeroVoltage {0.0};
-    RPMPerVolt kv {1450.0};
-
-    //RPM zeroTest {motors::util::brushless::controllerVoltageToSpeed(zeroVoltage, kv)};
-    //RPM ultraTest {motors::util::brushless::controllerVoltageToSpeed(voltage, kv)};
-
-    //EXPECT_DOUBLE_EQ(zeroTest.to<double>(), 0.0);
-    //EXPECT_DOUBLE_EQ(ultraTest.to<double>(), 34800.0);
-}
-
-TEST(brushlessUtils , RPMToVoltage)
-{
-    RPMPerVolt kv {1450.0};
-    RPM zeroRPM{0.0};
+    RPM zeroRPM {0.0};
     RPM maxUltraRPM{34800.0};
+    RPMPerVolt kv {1450.0};
 
-    //Volts zeroRPMTest {motors::util::brushless::speedToControllerVoltage(zeroRPM, kv)};
-    //Volts maxRPMTest {motors::util::brushless::speedToControllerVoltage(maxUltraRPM, kv)};
-    //EXPECT_DOUBLE_EQ(zeroRPMTest.to<double>(), 0.0);
-    //EXPECT_DOUBLE_EQ(maxRPMTest.to<double>(), 0.0);
+    EXPECT_DOUBLE_EQ(motors::util::brushless::controllerVoltageToSpeed(zeroVoltage, kv).to<double>(), zeroRPM.to<double>());
+    EXPECT_DOUBLE_EQ(motors::util::brushless::controllerVoltageToSpeed(maxVoltage, kv).to<double>(), maxUltraRPM.to<double>());
+
+    EXPECT_DOUBLE_EQ(motors::util::brushless::speedToControllerVoltage(zeroRPM, kv).to<double>(), zeroVoltage.to<double>());
+    EXPECT_DOUBLE_EQ(motors::util::brushless::speedToControllerVoltage(maxUltraRPM, kv).to<double>(), maxVoltage.to<double>());
 }
