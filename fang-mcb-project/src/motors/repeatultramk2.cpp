@@ -24,7 +24,7 @@ namespace motors
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
         m_speed = speed;
-        const Volts outputVoltage = util::speedToControllerVoltage(speed, mk_kv);
+        const Volts outputVoltage = util::brushless::speedToControllerVoltage(speed, mk_kv);
         //The ratio between the desired output voltage the intput voltage
         const float dutyCycle = outputVoltage / mk_controllerInputVoltage; 
         setPWM(dutyCycle);

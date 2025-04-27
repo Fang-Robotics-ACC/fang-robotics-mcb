@@ -1,18 +1,21 @@
-#include "brushlessfunctions.hpp"
+#include "brushlessutils.hpp"
 
 namespace motors
 {
-    namespace util
+    namespace util 
     {
-        const RPM& controllerVoltageToSpeed(const Volts& volts, const RPMPerVolt& kv)
+        namespace brushless 
         {
-            return volts * kv; //The kv constant multiplied by the volts = the rpm
-        }
+            const RPM& controllerVoltageToSpeed(const Volts& volts, const RPMPerVolt& kv)
+            {
+                return volts * kv; //The kv constant multiplied by the volts = the rpm
+            }
 
-        const Volts& speedToControllerVoltage(const RPM& speed, const RPMPerVolt& kv)
-        {
-            return speed / kv; //The kv constant multiplied by the volts = the rpm
+            const Volts& speedToControllerVoltage(const RPM& speed, const RPMPerVolt& kv)
+            {
+                return speed / kv; //The kv constant multiplied by the volts = the rpm
+            }
         }
     }
-
+    
 }
