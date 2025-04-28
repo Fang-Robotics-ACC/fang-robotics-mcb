@@ -33,6 +33,7 @@ namespace motors
 		void setMinSpeed(const RPM& minSpeed) override;
 		const RPM& getMinSpeed() const override;
 
+
     private:
         Watts m_wattBudget{0};
         Watts m_maxWattBudget{0};
