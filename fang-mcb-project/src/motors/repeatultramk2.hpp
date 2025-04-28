@@ -13,7 +13,7 @@ namespace motors
     /*!
     RPM is positive according to the right hand rule when the motor is the shaft pointing up. This is the the gearbox detached!!!
     */
-    class RepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM, Watts>, virtual public rail::IWattBudgeter<Watts>
+    class RepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM>, virtual public rail::IWattBudgeter<Watts>
     {
     public:
         RepeatUltraMk2(tap::Drivers& drivers, tap::gpio::Pwm::Pin pwmPin, const Volts& controllerInputVoltage);
@@ -23,15 +23,15 @@ namespace motors
         void setWattBudget(const Watts& wattage) override;
 
         /// Does not limit anything yet
-		const Watts& getWattBudget() const override;
+		Watts getWattBudget() const override;
 
 		void setSpeed(const RPM& speed) override;
-		const RPM& getSpeed() const override;
+		RPM getSpeed() const override;
 
 		void setMaxSpeed(const RPM& maxSpeed) override;
-		const RPM& getMaxSpeed() const override;
+		RPM getMaxSpeed() const override;
 		void setMinSpeed(const RPM& minSpeed) override;
-		const RPM& getMinSpeed() const override;
+		RPM getMinSpeed() const override;
 
 
     private:
@@ -57,9 +57,11 @@ namespace motors
         /*!
         This provides the speed that the motor will output to achieve the
         given output voltage from the controller.*/
+        const RPM& controllerVoltageToSpeed(const Volts& volts);
         /*!
         This provides the voltage that the controller will output to achieve the
         given speed on the motor.*/
+        const Volts& speedToControllerVoltage(const RPM& speed);
    };
 }
 #endif 

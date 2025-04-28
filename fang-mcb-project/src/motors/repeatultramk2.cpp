@@ -15,7 +15,7 @@ namespace motors
         m_wattBudget = wattage;
     }
 
-	const Watts& RepeatUltraMk2::getWattBudget() const
+	Watts RepeatUltraMk2::getWattBudget() const
     {
         return m_wattBudget;
     }
@@ -30,7 +30,7 @@ namespace motors
         setPWM(dutyCycle);
     }
 
-	const RPM& RepeatUltraMk2::getSpeed() const
+	RPM RepeatUltraMk2::getSpeed() const
     {
         return m_speed;
     }
@@ -40,7 +40,7 @@ namespace motors
         m_maxSpeed = maxSpeed;
     }
 
-	const RPM& RepeatUltraMk2::getMaxSpeed() const
+	RPM RepeatUltraMk2::getMaxSpeed() const
     {
         return m_maxSpeed;
     }
@@ -51,7 +51,7 @@ namespace motors
         
     }
 
-	const RPM& RepeatUltraMk2::getMinSpeed() const
+	RPM RepeatUltraMk2::getMinSpeed() const
     {
         return m_maxSpeed;
     }
