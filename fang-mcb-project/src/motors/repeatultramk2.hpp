@@ -54,6 +54,7 @@ namespace motors
             Therefore the if the pwm is 0.5 the motor should be still.
         */
         void setPWM(float dutyCycle);
+        void initialize();
    };
 }
 #endif 
