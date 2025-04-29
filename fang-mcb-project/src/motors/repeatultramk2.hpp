@@ -54,14 +54,6 @@ namespace motors
             Therefore the if the pwm is 0.5 the motor should be still.
         */
         void setPWM(float dutyCycle);
-        /*!
-        This provides the speed that the motor will output to achieve the
-        given output voltage from the controller.*/
-        const RPM& controllerVoltageToSpeed(const Volts& volts);
-        /*!
-        This provides the voltage that the controller will output to achieve the
-        given speed on the motor.*/
-        const Volts& speedToControllerVoltage(const RPM& speed);
    };
 }
 #endif 
