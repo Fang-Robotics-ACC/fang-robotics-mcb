@@ -22,8 +22,6 @@
 
 #include "tap/drivers.hpp"
 
-namespace src
-{
 class Drivers : public tap::Drivers
 {
     friend class DriversSingleton;
@@ -34,8 +32,6 @@ public:
     Drivers() : tap::Drivers{} {}
 
 public:
+
 };  // class Drivers
-
-}  // namespace src
-
 #endif  // DRIVERS_HPP_
