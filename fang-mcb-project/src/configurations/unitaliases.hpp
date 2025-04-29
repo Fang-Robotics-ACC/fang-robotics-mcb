@@ -12,4 +12,7 @@ using RawRPM = units::angular_velocity::revolutions_per_minute;
 using RawVolts = units::voltage::volts;
 using RawRPMPerVolt = units::compound_unit<RawRPM, units::inverse<RawVolts>>; //Used in Motor Constants
 using RPMPerVolt = units::unit_t<RawRPMPerVolt>;
+using Hertz = units::frequency::hertz_t;
+using Seconds = units::time::second_t;
+using Milliseconds = units::time::millisecond_t;
 #endif

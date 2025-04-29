@@ -7,6 +7,7 @@
 #include "tap/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
 #include "unitaliases.hpp"
+#include "units.h"
 
 namespace motors
 {
@@ -47,6 +48,10 @@ namespace motors
         const Volts mk_controllerInputVoltage;
         // This was the Repeat Robotics provided value for the ratio between the rpm and the voltage associated with i
         const RPMPerVolt mk_kv{1450.0};
+        // The Vortex uses a range of pulses between 1 to 2 milliseconds via rc pwm
+        const Milliseconds mk_vortexESCPeriod{2};
+        // This should be 500 kHz
+        const Hertz mk_vortexPWMFrequency{1.0/mk_vortexESCPeriod};
 
         /*!
             PWM should be between 0 and 1
@@ -54,14 +59,7 @@ namespace motors
             Therefore the if the pwm is 0.5 the motor should be still.
         */
         void setPWM(float dutyCycle);
-        /*!
-        This provides the speed that the motor will output to achieve the
-        given output voltage from the controller.*/
-        const RPM& controllerVoltageToSpeed(const Volts& volts);
-        /*!
-        This provides the voltage that the controller will output to achieve the
-        given speed on the motor.*/
-        const Volts& speedToControllerVoltage(const RPM& speed);
+        void initialize();
    };
 }
 #endif 
