@@ -74,7 +74,7 @@ namespace motors
 
 	bool RepeatUltraMk2::getWattOverbudgetStatus() const
     {
-
+        return m_overbudgetStatus;
     }
 	void RepeatUltraMk2::resetWattOverbudgetStatus()
     {
