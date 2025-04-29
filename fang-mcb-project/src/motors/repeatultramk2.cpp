@@ -60,4 +60,10 @@ namespace motors
     {
         m_drivers.pwm.write(dutyCycle, m_pwmPin); 
     }
+
+    void RepeatUltraMk2::initialize()
+    {
+        //Proper timer channel has not been verified
+        m_drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, mk_vortexPWMFrequency.to<int>());
+    }
 }//namespace motors
