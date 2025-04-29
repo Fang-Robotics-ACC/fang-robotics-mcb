@@ -26,8 +26,18 @@ namespace motors
         m_speed = speed;
         const Volts outputVoltage = util::brushless::speedToControllerVoltage(speed, mk_kv);
         //The ratio between the desired output voltage the intput voltage
-        const float dutyCycle = outputVoltage / mk_controllerInputVoltage; 
-        setPWM(dutyCycle);
+        //The range of inputs
+        const float rawDutyCycle = outputVoltage / mk_controllerInputVoltage;
+        const float squeezedDutyCycle = rawDutyCycle / 0.2f;
+        const float offset = 0.5f;
+        // rawDutyCycle will range between 0 and 1
+        // 0.50 will correspond to a 1ms pulse (minimum) assuming the pin is set to a frequency of 2ms
+        // 1 will correspond to a 2ms pulse.
+        // By dividing the total by 2. It results in the maximum being 0.5
+        // Adding the result to 0.5f will shift the minimum to 0.5 and the maximum to 1
+        //TODO: Figure out how to use mod::interpolation::Linear
+        //TODO: Make this testable
+        setPWM(squeezedDutyCycle + offset);
     }
 
 	RPM RepeatUltraMk2::getSpeed() const
