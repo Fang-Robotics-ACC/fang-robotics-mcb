@@ -51,12 +51,12 @@ tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / MAIN_LOOP_FREQUENCY);
 
 // Place any sort of input/output initialization here. For example, place
 // serial init stuff here.
-static void initializeIo(src::Drivers *drivers);
+static void initializeIo(Drivers *drivers);
 
 // Anything that you would like to be called place here. It will be called
 // very frequently. Use PeriodicMilliTimers if you don't want something to be
 // called as frequently.
-static void updateIo(src::Drivers *drivers);
+static void updateIo(Drivers *drivers);
 
 int main()
 {
@@ -69,7 +69,7 @@ int main()
      *      robot loop we must access the singleton drivers to update
      *      IO states and run the scheduler.
      */
-    src::Drivers *drivers = src::DoNotUse_getDrivers();
+    Drivers *drivers = DoNotUse_getDrivers();
 
     Board::initialize();
     initializeIo(drivers);
@@ -98,7 +98,7 @@ int main()
     return 0;
 }
 
-static void initializeIo(src::Drivers *drivers)
+static void initializeIo(Drivers *drivers)
 {
     drivers->analog.init();
     drivers->pwm.init();
@@ -114,7 +114,7 @@ static void initializeIo(src::Drivers *drivers)
     drivers->djiMotorTerminalSerialHandler.init();
 }
 
-static void updateIo(src::Drivers *drivers)
+static void updateIo(Drivers *drivers)
 {
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->updateSims();
