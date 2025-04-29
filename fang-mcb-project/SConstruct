@@ -70,7 +70,7 @@ env["CONFIG_PROFILE"] = args["BUILD_PROFILE"]
 env.AppendUnique(CPPPATH=[
     abspath(r"src"),
     abspath(r"src/motors"),
-    abspath(r"src/configurations"),
+    abspath(r"src/configuration"),
     abspath(r"lib/units/include"),
     abspath(r"lib/units/control"),
     abspath(r"lib/RAIL-Robomaster-Abstraction-Interface-Library/include"),
