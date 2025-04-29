@@ -27,6 +27,7 @@ namespace motors
 		Watts getWattBudget() const override;
         
 		virtual void setWattEstimateMode(bool mode) override;
+		virtual bool estimateModeAllowed() const override {return mk_estimateModeAllowed;}
 		virtual bool getWattOverbudgetStatus() const override;
 		virtual void resetWattOverbudgetStatus() override;
 		virtual Watts getWattOverbudgetAmount() const override;
@@ -46,6 +47,7 @@ namespace motors
         Watts m_minWattBudget{0};
         bool  m_estimateMode{0};
         bool  m_overbudgetStatus{false};
+        const bool mk_estimateModeAllowed{false};
 
         RPM m_speed{0};
         RPM m_maxSpeed{0};
