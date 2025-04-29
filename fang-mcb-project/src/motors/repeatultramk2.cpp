@@ -76,12 +76,13 @@ namespace motors
     {
         return m_overbudgetStatus;
     }
+
 	void RepeatUltraMk2::resetWattOverbudgetStatus()
     {
-
+        m_overbudgetStatus = false;
     }
     Watts RepeatUltraMk2::getWattOverbudgetAmount() const
     {
-
+        return Watts{0};
     }
 }//namespace motors
