@@ -14,4 +14,5 @@ using RawRPMPerVolt = units::compound_unit<RawRPM, units::inverse<RawVolts>>; //
 using RPMPerVolt = units::unit_t<RawRPMPerVolt>;
 using Hertz = units::frequency::hertz_t;
 using Seconds = units::time::second_t;
+using Milliseconds = units::time::millisecond_t;
 #endif
