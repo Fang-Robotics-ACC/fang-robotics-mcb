@@ -64,7 +64,7 @@ namespace motors
     void RepeatUltraMk2::initialize()
     {
         //Proper timer channel has not been verified
-        m_drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, mk_vortexPWMFrequency.to<int>());
+        //m_drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, mk_vortexPWMFrequency.to<int>());
     }
 
 	void RepeatUltraMk2::setWattEstimateMode(bool mode)

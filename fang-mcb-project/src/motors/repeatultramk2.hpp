@@ -41,8 +41,6 @@ namespace motors
 		RPM getMaxSpeed() const override;
 		void setMinSpeed(const RPM& minSpeed) override;
 		RPM getMinSpeed() const override;
-
-
     private:
         Watts m_wattBudget{0};
         Watts m_maxWattBudget{0};
@@ -59,10 +57,6 @@ namespace motors
         const Volts mk_controllerInputVoltage;
         // This was the Repeat Robotics provided value for the ratio between the rpm and the voltage associated with i
         const RPMPerVolt mk_kv{1450.0};
-        // The Vortex uses a range of pulses between 1 to 2 milliseconds via rc pwm
-        const Milliseconds mk_vortexESCPeriod{2};
-        // This should be 500 kHz
-        const Hertz mk_vortexPWMFrequency{1.0/mk_vortexESCPeriod};
 
         /*!
             PWM should be between 0 and 1
