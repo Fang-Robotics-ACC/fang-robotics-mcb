@@ -12,7 +12,7 @@
                 "fang-mcb-project/test",
                 "fang-mcb-project/src/motors",
                 "fang-mcb-project/src/control",
-                "fang-mcb-project/src/configurations"
+                "fang-mcb-project/src/configuration"
             ],
             "compilerPath": "g++",
             "intelliSenseMode": "gcc-x64",
@@ -41,7 +41,7 @@
                 "fang-mcb-project/lib/units/include",
                 "fang-mcb-project/src/control",
                 "fang-mcb-project/src/motors",
-                "fang-mcb-project/src/configurations"
+                "fang-mcb-project/src/configuration"
             ],
             "compilerPath": "arm-none-eabi-g++",
             "intelliSenseMode": "gcc-arm",
