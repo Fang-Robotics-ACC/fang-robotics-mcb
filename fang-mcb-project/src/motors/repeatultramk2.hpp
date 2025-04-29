@@ -50,6 +50,7 @@ namespace motors
         const RPMPerVolt mk_kv{1450.0};
         // The Vortex uses a range of pulses between 1 to 2 milliseconds via rc pwm
         const Milliseconds mk_vortexESCPeriod{2};
+        // This should be 500 kHz
         const Hertz mk_vortexPWMFrequency{1.0/mk_vortexESCPeriod};
 
         /*!
