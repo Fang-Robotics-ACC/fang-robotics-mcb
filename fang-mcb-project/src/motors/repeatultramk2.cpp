@@ -66,4 +66,22 @@ namespace motors
         //Proper timer channel has not been verified
         m_drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, mk_vortexPWMFrequency.to<int>());
     }
+
+	void RepeatUltraMk2::setWattEstimateMode(bool mode)
+    {
+        m_estimateMode = mode;
+    }
+
+	bool RepeatUltraMk2::getWattOverbudgetStatus() const
+    {
+
+    }
+	void RepeatUltraMk2::resetWattOverbudgetStatus()
+    {
+
+    }
+    Watts RepeatUltraMk2::getWattOverbudgetAmount() const
+    {
+
+    }
 }//namespace motors

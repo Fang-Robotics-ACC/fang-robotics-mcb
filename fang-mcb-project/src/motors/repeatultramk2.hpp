@@ -44,6 +44,7 @@ namespace motors
         Watts m_wattBudget{0};
         Watts m_maxWattBudget{0};
         Watts m_minWattBudget{0};
+        bool  m_estimateMode{0};
 
         RPM m_speed{0};
         RPM m_maxSpeed{0};
