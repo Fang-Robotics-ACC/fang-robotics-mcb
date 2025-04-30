@@ -9,7 +9,7 @@ namespace logic
     namespace chassis
     {
         template <typename Speed>
-        using QuadDriveData = data::chassis::QuadDriveData
+        using QuadDriveData = data::chassis::QuadDriveData<Speed>
         using Translation2D = modm::Vector<Speed> 
         using WheelDirection = modm::Vector<double> 
         class BaseMecanumMotionCalculator
@@ -28,6 +28,8 @@ namespace logic
              * left and right speeds of the left and right tank tracks.
              */
             Speed getLateralDifference() const;
+        private:
+            QuadDriveData m_quadDriveData;
         };
     }
 }
