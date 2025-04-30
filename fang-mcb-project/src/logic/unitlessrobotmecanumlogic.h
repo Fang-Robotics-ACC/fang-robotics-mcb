@@ -23,6 +23,10 @@ namespace logic
          */
         void setMotion(const Translation2D& translation, double rotation);
         QuadDriveData getWheelRotations() const;
+        double getFrontRightWheelSpeed() const;
+        double getFrontLeftWheelSpeed() const;
+        double getRearLeftWheelSpeed() const;
+        double getRearRightWheelSpeed() const;
         private:
         Translation2D m_translation{0,0};
         double m_rotation{0};
