@@ -13,6 +13,7 @@
                 "fang-mcb-project/src/motors",
                 "fang-mcb-project/src/control",
                 "fang-mcb-project/src/logic",
+                "fang-mcb-project/src/data",
                 "fang-mcb-project/src/subsystem/chassis",
                 "fang-mcb-project/src/configuration"
             ],
@@ -44,6 +45,7 @@
                 "fang-mcb-project/src/control",
                 "fang-mcb-project/src/motors",
                 "fang-mcb-project/src/logic",
+                "fang-mcb-project/src/data",
                 "fang-mcb-project/src/subsystem/chassis",
                 "fang-mcb-project/src/configuration"
             ],
