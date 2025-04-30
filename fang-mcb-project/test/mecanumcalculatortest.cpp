@@ -9,7 +9,7 @@ Calculator calc{};
 using QuadDriveData = data::chassis::QuadDriveData<double>;
 using Translation2D = logic::chassis::Translation2D;
 
-TEST(forwardTest, mecanumCalculator )
+TEST(forwardTest, baseMecanumMotionCalculator )
 {
 
     const QuadDriveData test{1.0,1.0,1.0,1.0};
@@ -20,7 +20,7 @@ TEST(forwardTest, mecanumCalculator )
     EXPECT_DOUBLE_EQ(calc.getTranslation().y, forwardTestExpectedMotion.y);
 }
 
-TEST(leftTest, mecanumCalculator )
+TEST(leftTest, baseMecanumMotionCalculator )
 {
 
     const QuadDriveData test{1.0,-1.0,-1.0,1.0};
