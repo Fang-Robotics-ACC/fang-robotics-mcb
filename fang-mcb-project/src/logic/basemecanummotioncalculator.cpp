@@ -33,7 +33,9 @@ namespace logic
         {
             const double offsetSum{-m_quadDriveData.frontLeft + m_quadDriveData.frontRight
                             - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight};
-            return offsetSum; 
+            //Refer to the formula. Essentially, if you don't divide by 4, everything is 4 times as larger
+            //Than expected.
+            return offsetSum * 0.25; 
 
         }
     }
