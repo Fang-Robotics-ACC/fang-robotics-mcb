@@ -12,6 +12,7 @@
                 "fang-mcb-project/test",
                 "fang-mcb-project/src/motors",
                 "fang-mcb-project/src/control",
+                "fang-mcb-project/src/logic",
                 "fang-mcb-project/src/configuration"
             ],
             "compilerPath": "g++",
@@ -41,6 +42,7 @@
                 "fang-mcb-project/lib/units/include",
                 "fang-mcb-project/src/control",
                 "fang-mcb-project/src/motors",
+                "fang-mcb-project/src/logic",
                 "fang-mcb-project/src/configuration"
             ],
             "compilerPath": "arm-none-eabi-g++",
