@@ -29,3 +29,13 @@ TEST(leftTest, baseMecanumMotionCalculator )
     EXPECT_DOUBLE_EQ(calc.getTranslation().x, expectedMotion.x);
     EXPECT_DOUBLE_EQ(calc.getTranslation().y, expectedMotion.y);
 }
+
+TEST(zeroTest, baseMecanumMotionCalculator )
+{
+
+    const QuadDriveData test{0,0,0,0};
+    const Translation2D expectedMotion{0.0, 0.0};
+    calc.setQuadDriveData(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x, expectedMotion.x);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y, expectedMotion.y);
+}
