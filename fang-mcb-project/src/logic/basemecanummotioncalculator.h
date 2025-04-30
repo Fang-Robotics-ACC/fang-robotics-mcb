@@ -2,6 +2,7 @@
 #define MECANUM_MOTION_CALCULATOR_H_YEET_YEET_SDLFJSELKFJ
 #include "quaddrivedata.h"
 #include "translation2d.h"
+#include "unitaliases.hpp"
 #include "modm/math/geometry/vector.hpp"
 
 namespace logic
@@ -14,11 +15,10 @@ namespace logic
          * https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
          */
 
-        template <typename Speed>
         class BaseMecanumMotionCalculator
         {
-        using QuadDriveData = data::chassis::QuadDriveData<Speed>;
-        using Translation2D = modm::Vector<Speed,2>;
+        using QuadDriveData = data::chassis::QuadDriveData<double>;
+        using Translation2D = modm::Vector<double,2>;
         using WheelDirection = modm::Vector<double, 2>;
         public:
             void setQuadDriveData(const QuadDriveData& quadDriveData);
@@ -33,7 +33,7 @@ namespace logic
              * drive, there would be a difference between the overrall
              * left and right speeds of the left and right tank tracks.
              */
-            Speed getLateralDifference() const;
+            double getLateralDifference() const;
         private:
             QuadDriveData m_quadDriveData;
             const WheelDirection mk_frontLeftDirection{WheelDirection{1,1}.normalize()};
