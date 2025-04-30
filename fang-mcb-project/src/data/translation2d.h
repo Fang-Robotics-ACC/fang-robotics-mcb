@@ -5,7 +5,7 @@ namespace data
     namespace physics
     {
         template <typename Velocity>
-        struct Translation2d 
+        struct Translation2D
         {
         public:
             Velocity x;
