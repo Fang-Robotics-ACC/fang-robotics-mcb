@@ -20,6 +20,7 @@ namespace logic
         class BaseMecanumMotionCalculator
         {
         public:
+            BaseMecanumMotionCalculator(){}
             void setQuadDriveData(const QuadDriveData& quadDriveData);
             /**
              * Returns the movement of the robot relative to the robot.
@@ -34,8 +35,7 @@ namespace logic
              */
             double getLateralDifference() const;
         private:
-            QuadDriveData m_quadDriveData;
-            const WheelDirection mk_frontLeftDirection{WheelDirection{1,1}.normalize()};
+            QuadDriveData m_quadDriveData{0,0,0,0};
         };
     }
 }
