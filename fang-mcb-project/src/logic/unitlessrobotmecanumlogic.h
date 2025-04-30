@@ -22,7 +22,7 @@ namespace logic
          * will mean the robot will rotate counterclockwise.)
          */
         void setMotion(const Translation2D& translation, double rotation);
-        QuadDriveData getWheelRotations() const;
+        QuadDriveData getWheelSpeeds() const;
         double getFrontRightWheelSpeed() const;
         double getFrontLeftWheelSpeed() const;
         double getRearLeftWheelSpeed() const;
