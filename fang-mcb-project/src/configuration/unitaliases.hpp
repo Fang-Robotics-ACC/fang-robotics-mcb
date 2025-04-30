@@ -15,4 +15,5 @@ using RPMPerVolt = units::unit_t<RawRPMPerVolt>;
 using Hertz = units::frequency::hertz_t;
 using Seconds = units::time::second_t;
 using Milliseconds = units::time::millisecond_t;
+using RadiansPerSecond = units::angular_velocity::radians_per_second_t;
 #endif
