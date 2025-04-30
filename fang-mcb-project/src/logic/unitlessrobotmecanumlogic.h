@@ -21,7 +21,7 @@ namespace logic
          * and right sides of the drive will be by 50 f/s. A positive value
          * will mean the robot will rotate counterclockwise.)
          */
-        void setMotion(const Translation2D& translation, double rotation);
+        void setMotion(const Translation2D& translation, double lateralOffset);
         QuadDriveData getWheelSpeeds() const;
         double getFrontRightWheelSpeed() const;
         double getFrontLeftWheelSpeed() const;
@@ -29,7 +29,7 @@ namespace logic
         double getRearRightWheelSpeed() const;
         private:
         Translation2D m_translation{0,0};
-        double m_rotation{0};
+        double m_lateralOffset{0};
         };
     }
 }
