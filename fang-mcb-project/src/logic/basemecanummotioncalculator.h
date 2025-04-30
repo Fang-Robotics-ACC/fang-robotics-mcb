@@ -4,6 +4,7 @@
 #include "translation2d.h"
 #include "unitaliases.hpp"
 #include "modm/math/geometry/vector.hpp"
+#include "chassislogicalises.h"
 
 namespace logic
 {
@@ -17,9 +18,6 @@ namespace logic
 
         class BaseMecanumMotionCalculator
         {
-        using QuadDriveData = data::chassis::QuadDriveData<double>;
-        using Translation2D = modm::Vector<double,2>;
-        using WheelDirection = modm::Vector<double, 2>;
         public:
             void setQuadDriveData(const QuadDriveData& quadDriveData);
             /**
