@@ -26,5 +26,15 @@ namespace logic
 
             return Translation2D{x, y};
         }
+
+        //Refer to equation 24
+        //Positive offset values are counterclockwise
+        double BaseMecanumMotionCalculator::getLateralDifference() const
+        {
+            const double offsetSum{-m_quadDriveData.frontLeft + m_quadDriveData.frontRight
+                            - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight};
+            return offsetSum; 
+
+        }
     }
 }
