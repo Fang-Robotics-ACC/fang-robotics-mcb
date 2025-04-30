@@ -1,7 +1,6 @@
 #include "basemecanummotioncalculator.h"
 #include "chassislogicaliases.h"
 
-
 namespace logic
 {
     namespace chassis
@@ -16,13 +15,15 @@ namespace logic
             //Refer to equation 22 in https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
             const double ySpeedSum{m_quadDriveData.frontLeft + m_quadDriveData.frontRight
                             + m_quadDriveData.rearLeft  + m_quadDriveData.rearRight};
-            const double y{ySpeedSum*(0.25)}; //The formula multiplies the sum by 1/4 of the radius
+
+            const double y{ySpeedSum * 0.25}; //The formula multiplies the sum by 1/4 of the radius
 
             //Refer to equation 23 in https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
-            //Adapted so right direciton is positive
+            //Adapted so right direction is positive
             const double xSpeedSum{m_quadDriveData.frontLeft - m_quadDriveData.frontRight
                             - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight};
-            const double x{xSpeedSum*(0.25)}; //The formula multiplies the sum by 1/4 of the radius
+
+            const double x{xSpeedSum * 0.25}; //The formula multiplies the sum by 1/4 of the radius
 
             return Translation2D{x, y};
         }
