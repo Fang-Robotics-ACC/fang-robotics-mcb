@@ -2,13 +2,16 @@
 #define MECANUM_MOTION_CALCULATOR_H_YEET_YEET_SDLFJSELKFJ
 #include "quaddrivedata.h"
 #include "translation2d.h"
+#include "modm/math/geometry/vector2.hpp"
+
 namespace logic
 {
     namespace chassis
     {
         template <typename Speed>
         using QuadDriveData = data::chassis::QuadDriveData
-        using Translation2D = data::physics::Translation2d
+        using Translation2D = modm::Vector<Speed> 
+        using WheelDirection = modm::Vector<double> 
         class BaseMecanumMotionCalculator
         {
         public:
