@@ -11,6 +11,15 @@ namespace logic
     namespace chassis
     {
         /**
+         * This provides values that "move" in the way that
+         * can abstractly decribe mecanum movement without units. 
+         * It allows the programmer to send "intuitive" singals
+         * without it being grounded in specific units.
+         * The regular motion calculator takes the output from this
+         * And applies the units/right side stuff from the equations 23-25
+         * (23-24 it will multipy it by r, the radius)
+         * (25 it will multiply it by the complicated term
+         * so that the output would be in rad/s)
          * This assumes that the wheels are at 45 degrees.
          * This uses the equations from this paper
          * https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
