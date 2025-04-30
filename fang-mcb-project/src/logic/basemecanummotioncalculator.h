@@ -2,18 +2,24 @@
 #define MECANUM_MOTION_CALCULATOR_H_YEET_YEET_SDLFJSELKFJ
 #include "quaddrivedata.h"
 #include "translation2d.h"
-#include "modm/math/geometry/vector2.hpp"
+#include "modm/math/geometry/vector.hpp"
 
 namespace logic
 {
     namespace chassis
     {
+        /**
+         * This assumes that the wheels are at 45 degrees.
+         * This uses the equations from this paper
+         * https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
+         */
+
         template <typename Speed>
-        using QuadDriveData = data::chassis::QuadDriveData<Speed>
-        using Translation2D = modm::Vector<Speed> 
-        using WheelDirection = modm::Vector<double> 
         class BaseMecanumMotionCalculator
         {
+        using QuadDriveData = data::chassis::QuadDriveData<Speed>;
+        using Translation2D = modm::Vector<Speed,2>;
+        using WheelDirection = modm::Vector<double, 2>;
         public:
             void setQuadDriveData(const QuadDriveData& quadDriveData);
             /**
@@ -30,6 +36,7 @@ namespace logic
             Speed getLateralDifference() const;
         private:
             QuadDriveData m_quadDriveData;
+            const WheelDirection mk_frontLeftDirection{WheelDirection{1,1}.normalize()};
         };
     }
 }
