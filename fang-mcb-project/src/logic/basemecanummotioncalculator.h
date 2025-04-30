@@ -4,7 +4,7 @@
 #include "translation2d.h"
 #include "unitaliases.hpp"
 #include "modm/math/geometry/vector.hpp"
-#include "chassislogicalises.h"
+#include "chassislogicaliases.h"
 
 namespace logic
 {
@@ -14,6 +14,7 @@ namespace logic
          * This assumes that the wheels are at 45 degrees.
          * This uses the equations from this paper
          * https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
+         * This assumes the radius of the wheels are 1
          */
 
         class BaseMecanumMotionCalculator
