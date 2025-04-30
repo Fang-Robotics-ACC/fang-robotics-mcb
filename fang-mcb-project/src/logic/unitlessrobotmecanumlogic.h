@@ -1,5 +1,8 @@
 #ifndef UNITLESS_ROBOT_CENTRIC_MECANUM_LOGIC_H_SDLJLSKSKEFLJASD
 #define UNITLESS_ROBOT_CENTRIC_MECANUM_LOGIC_H_SDLJLSKSKEFLJASD
+#include "quaddrivedata.h"
+#include "chassislogicaliases.h"
+#include "quaddrivedata.h"
 
 namespace logic
 {
@@ -18,12 +21,11 @@ namespace logic
          * and right sides of the drive will be by 50 f/s. A positive value
          * will mean the robot will rotate counterclockwise.)
          */
-        void setMotion(double x, double y, double rotation);
-        double getFrontLeftPercentage() const;
-        double getFrontRightPercentage() const;
-        double getRearLeftPercentage() const;
-        double getRearRightPercentage() const;
+        void setMotion(const Translation2D& translation, double rotation);
+        QuadDriveData getWheelRotations() const;
         private:
+        Translation2D m_translation{0,0};
+        double m_rotation{0};
         };
     }
 }
