@@ -12,8 +12,9 @@ using Translation2D = logic::chassis::Translation2D;
 TEST(forwardTest, mecanumCalculator )
 {
 
-    const QuadDriveData forwardTest{1.0,1.0,1.0,1.0};
+    const QuadDriveData test{1.0,1.0,1.0,1.0};
     const Translation2D forwardTestExpectedMotion{0.0, 1.0};
+    calc.setQuadDriveData(test);
     std::cout << calc.getTranslation().x;
     EXPECT_DOUBLE_EQ(calc.getTranslation().x, forwardTestExpectedMotion.x);
     EXPECT_DOUBLE_EQ(calc.getTranslation().y, forwardTestExpectedMotion.y);
