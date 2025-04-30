@@ -20,10 +20,10 @@ namespace data
                           frontLeft{frontLeftData}, frontRight{frontRightData},
                           rearLeft{rearLeftData},   rearRight{rearRightData}
                           {}
-            MotorUnit frontLeft;
-            MotorUnit frontRight;
-            MotorUnit rearLeft;
-            MotorUnit rearRight;
+            MotorUnit frontLeft{0};
+            MotorUnit frontRight{0};
+            MotorUnit rearLeft{0};
+            MotorUnit rearRight{0};
         };
     }
 }
