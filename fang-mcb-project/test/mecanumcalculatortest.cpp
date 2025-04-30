@@ -39,3 +39,12 @@ TEST(zeroTest, baseMecanumMotionCalculator )
     EXPECT_DOUBLE_EQ(calc.getTranslation().x, expectedMotion.x);
     EXPECT_DOUBLE_EQ(calc.getTranslation().y, expectedMotion.y);
 }
+
+TEST(clockwiseOffset, baseMecanumMotionCalculator )
+{
+
+    const QuadDriveData test{-1,1,-1,1};
+    const double expectedOffset{1};
+    calc.setQuadDriveData(test);
+    EXPECT_DOUBLE_EQ(calc.getLateralDifference(), expectedOffset);
+}
