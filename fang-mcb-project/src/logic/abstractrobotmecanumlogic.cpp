@@ -1,10 +1,10 @@
-#include "unitlessrobotmecanumlogic.h"
+#include "abstractrobotmecanumlogic.h"
 
 namespace logic
 {
     namespace chassis
     {
-        void UnitlessRobotMecanumLogic::setMotion(const Translation2D& translation, double rotationalOffset)
+        void AbstractRobotMecanumLogic::setMotion(const Translation2D& translation, double rotationalOffset)
         {
             m_translation = translation;
             m_rotationalOffset = rotationalOffset;

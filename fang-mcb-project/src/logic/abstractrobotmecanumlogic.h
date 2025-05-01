@@ -1,5 +1,5 @@
-#ifndef UNITLESS_ROBOT_CENTRIC_MECANUM_LOGIC_H_SDLJLSKSKEFLJASD
-#define UNITLESS_ROBOT_CENTRIC_MECANUM_LOGIC_H_SDLJLSKSKEFLJASD
+#ifndef ABSTRACT_ROBOT_CENTRIC_MECANUM_LOGIC_H_SDLJLSKSKEFLJASD
+#define ABSTRACT_ROBOT_CENTRIC_MECANUM_LOGIC_H_SDLJLSKSKEFLJASD
 #include "quaddrivedata.h"
 #include "chassislogicaliases.h"
 #include "quaddrivedata.h"
@@ -8,7 +8,7 @@ namespace logic
 {
     namespace chassis
     {
-        class UnitlessRobotMecanumLogic 
+        class AbstractRobotMecanumLogic 
         {
         public:
         /**
