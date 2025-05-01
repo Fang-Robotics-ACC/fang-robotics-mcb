@@ -28,7 +28,7 @@ namespace motors
         //The ratio between the desired output voltage the intput voltage
         //The range of inputs
         const float rawDutyCycle = outputVoltage / mk_controllerInputVoltage;
-        const float squeezedDutyCycle = rawDutyCycle / 0.2f;
+        const float squeezedDutyCycle = rawDutyCycle / 2.0f;
         const float offset = 0.5f;
         // rawDutyCycle will range between 0 and 1
         // 0.50 will correspond to a 1ms pulse (minimum) assuming the pin is set to a frequency of 2ms
