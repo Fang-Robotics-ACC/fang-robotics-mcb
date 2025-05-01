@@ -58,7 +58,7 @@ TEST(RotationTest, RobotMecanumLogic)
     Calculator calc{};
     Logic robotMecanum{};
     Translation2D expectedTranslation{0.0, 0.0};
-    double expectedRotationOffset{1.0};
+    double expectedRotationOffset{10.0};
 
     robotMecanum.setMotion(expectedTranslation, expectedRotationOffset);
 
