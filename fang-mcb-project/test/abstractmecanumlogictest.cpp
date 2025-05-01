@@ -10,12 +10,12 @@ using Logic = logic::chassis::AbstractRobotMecanumLogic;
 using QuadDriveData = data::chassis::QuadDriveData<double>;
 using Translation2D = logic::chassis::Translation2D;
 
-Calculator calc{};
-Logic robotMecanum{};
 
 
 TEST(ForwardTest, RobotMecanumLogic)
 {
+    Calculator calc{};
+    Logic robotMecanum{};
     robotMecanum.setMotion(Translation2D{0.0, 0.0}, 0.0);
     Translation2D expectedTranslation{1.0, 0.0};
     double expectedRotationOffset{0.0};
