@@ -30,7 +30,7 @@ namespace logic
         {
         public:
             AbstractMecanumCalculator(){}
-            void setQuadDriveData(const QuadDriveData& quadDriveData);
+            void setWheelSpeeds(const QuadDriveData& quadDriveData);
             /**
              * Returns the movement of the robot relative to the robot.
              * Refer to field mecanum calculator to get the translation relative

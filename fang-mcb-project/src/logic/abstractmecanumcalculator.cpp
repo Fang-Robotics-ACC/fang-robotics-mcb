@@ -5,7 +5,7 @@ namespace logic
 {
     namespace chassis
     {
-        void AbstractMecanumCalculator::setQuadDriveData(const QuadDriveData& quadDriveData)
+        void AbstractMecanumCalculator::setWheelSpeeds(const QuadDriveData& quadDriveData)
         {
             m_quadDriveData = quadDriveData;
         }

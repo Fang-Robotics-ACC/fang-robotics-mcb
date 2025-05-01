@@ -19,7 +19,7 @@ TEST(ZeroTest, RobotMecanumLogic)
     robotMecanum.setMotion(Translation2D{0.0, 0.0}, 0.0);
     Translation2D expectedTranslation{0.0, 0.0};
     double expectedRotationOffset{0.0};
-    calc.setQuadDriveData(robotMecanum.getWheelSpeeds());
+    calc.setWheelSpeeds(robotMecanum.getWheelSpeeds());
     EXPECT_DOUBLE_EQ(calc.getTranslation().x, expectedTranslation.x);
     EXPECT_DOUBLE_EQ(calc.getTranslation().y, expectedTranslation.y);
     EXPECT_DOUBLE_EQ(calc.getRotationOffset(), expectedRotationOffset);
@@ -32,7 +32,7 @@ TEST(ForwardTest, RobotMecanumLogic)
     robotMecanum.setMotion(Translation2D{0.0, 1.0}, 0.0);
     Translation2D expectedTranslation{0.0, 1.0};
     double expectedRotationOffset{0.0};
-    calc.setQuadDriveData(robotMecanum.getWheelSpeeds());
+    calc.setWheelSpeeds(robotMecanum.getWheelSpeeds());
     EXPECT_DOUBLE_EQ(calc.getTranslation().x, expectedTranslation.x);
     EXPECT_DOUBLE_EQ(calc.getTranslation().y, expectedTranslation.y);
     EXPECT_DOUBLE_EQ(calc.getRotationOffset(), expectedRotationOffset);
@@ -47,7 +47,7 @@ TEST(LateralTest, RobotMecanumLogic)
 
     robotMecanum.setMotion(expectedTranslation, expectedRotationOffset);
 
-    calc.setQuadDriveData(robotMecanum.getWheelSpeeds());
+    calc.setWheelSpeeds(robotMecanum.getWheelSpeeds());
     EXPECT_DOUBLE_EQ(calc.getTranslation().x, expectedTranslation.x);
     EXPECT_DOUBLE_EQ(calc.getTranslation().y, expectedTranslation.y);
     EXPECT_DOUBLE_EQ(calc.getRotationOffset(), expectedRotationOffset);
@@ -62,7 +62,7 @@ TEST(RotationTest, RobotMecanumLogic)
 
     robotMecanum.setMotion(expectedTranslation, expectedRotationOffset);
 
-    calc.setQuadDriveData(robotMecanum.getWheelSpeeds());
+    calc.setWheelSpeeds(robotMecanum.getWheelSpeeds());
     EXPECT_DOUBLE_EQ(calc.getTranslation().x, expectedTranslation.x);
     EXPECT_DOUBLE_EQ(calc.getTranslation().y, expectedTranslation.y);
     EXPECT_DOUBLE_EQ(calc.getRotationOffset(), expectedRotationOffset);
@@ -77,7 +77,7 @@ TEST(CombinedTest1, RobotMecanumLogic)
 
     robotMecanum.setMotion(expectedTranslation, expectedRotationOffset);
 
-    calc.setQuadDriveData(robotMecanum.getWheelSpeeds());
+    calc.setWheelSpeeds(robotMecanum.getWheelSpeeds());
     EXPECT_DOUBLE_EQ(calc.getTranslation().x, expectedTranslation.x);
     EXPECT_DOUBLE_EQ(calc.getTranslation().y, expectedTranslation.y);
     EXPECT_DOUBLE_EQ(calc.getRotationOffset(), expectedRotationOffset);
