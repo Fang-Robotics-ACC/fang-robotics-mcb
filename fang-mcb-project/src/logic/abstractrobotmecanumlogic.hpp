@@ -1,8 +1,8 @@
 #ifndef ABSTRACT_ROBOT_CENTRIC_MECANUM_LOGIC_H_SDLJLSKSKEFLJASD
 #define ABSTRACT_ROBOT_CENTRIC_MECANUM_LOGIC_H_SDLJLSKSKEFLJASD
-#include "quaddrivedata.h"
-#include "chassislogicaliases.h"
-#include "quaddrivedata.h"
+#include "quaddrivedata.hpp"
+#include "chassislogicaliases.hpp"
+#include "quaddrivedata.hpp"
 
 namespace logic
 {

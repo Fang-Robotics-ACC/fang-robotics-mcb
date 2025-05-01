@@ -1,7 +1,7 @@
 #ifndef CHASSIS_LOGIC_ALISES_H_SDFSF_YEET_YEET
 #define CHASSIS_LOGIC_ALISES_H_SDFSF_YEET_YEET
-#include "quaddrivedata.h"
-#include "translation2d.h"
+#include "quaddrivedata.hpp"
+#include "translation2d.hpp"
 #include "unitaliases.hpp"
 #include "modm/math/geometry/vector.hpp"
 

@@ -1,10 +1,10 @@
 #ifndef ABSTRACT_MECANUM_CALCULATOR_H_YEET_YEET_SDLFJSELKFJ
 #define ABSTRACT_MECANUM_CALCULATOR_H_YEET_YEET_SDLFJSELKFJ
-#include "quaddrivedata.h"
-#include "translation2d.h"
+#include "quaddrivedata.hpp"
+#include "translation2d.hpp"
 #include "unitaliases.hpp"
 #include "modm/math/geometry/vector.hpp"
-#include "chassislogicaliases.h"
+#include "chassislogicaliases.hpp"
 
 namespace logic
 {

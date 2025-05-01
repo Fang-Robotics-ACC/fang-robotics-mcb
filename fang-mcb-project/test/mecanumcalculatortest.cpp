@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
-#include "basemecanummotioncalculator.h"
-#include "quaddrivedata.h"
-#include "chassislogicaliases.h"
+#include "abstractmecanumcalculator.hpp"
+#include "quaddrivedata.hpp"
+#include "chassislogicaliases.hpp"
 #include <iostream>
 
 using Calculator = logic::chassis::AbstractMecanumCalculator;
