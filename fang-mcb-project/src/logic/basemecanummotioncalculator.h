@@ -47,7 +47,7 @@ namespace logic
              * of 0.25 is appllied to each side. The left track will be -0.25
              * The right track will be 0.25. The difference is 0.50. 
              */
-            double getLateralDifference() const;
+            double getRotationalOffset() const;
         private:
             QuadDriveData m_quadDriveData{0,0,0,0};
         };

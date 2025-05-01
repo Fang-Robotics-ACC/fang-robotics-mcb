@@ -46,5 +46,5 @@ TEST(clockwiseOffset, baseMecanumMotionCalculator )
     const QuadDriveData test{-1,1,-1,1};
     const double expectedOffset{1};
     calc.setQuadDriveData(test);
-    EXPECT_DOUBLE_EQ(calc.getLateralDifference(), expectedOffset);
+    EXPECT_DOUBLE_EQ(calc.getRotationalOffset(), expectedOffset);
 }
