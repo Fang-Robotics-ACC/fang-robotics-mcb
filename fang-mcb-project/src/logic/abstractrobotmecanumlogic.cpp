@@ -17,7 +17,7 @@ namespace logic
 
         void AbstractRobotMecanumLogic::setRotationOffset(double rotationalOffset)
         {
-            m_rotationalOffset = rotationalOffset;
+            m_rotationOffset = rotationalOffset;
         }
 
         Translation2D AbstractRobotMecanumLogic::getTranslation() const
@@ -27,7 +27,7 @@ namespace logic
 
         double AbstractRobotMecanumLogic::getRotationOffset() const
         {
-            return m_rotationalOffset;
+            return m_rotationOffset;
         }
 
         QuadDriveData AbstractRobotMecanumLogic::getWheelSpeeds() const
@@ -38,22 +38,22 @@ namespace logic
 
         double AbstractRobotMecanumLogic::getFrontLeftWheelSpeed() const
         {
-            return m_translation.y + m_translation.x - m_rotationalOffset;
+            return m_translation.y + m_translation.x - m_rotationOffset;
         }
 
         double AbstractRobotMecanumLogic::getFrontRightWheelSpeed() const
         {
-            return m_translation.y - m_translation.x + m_rotationalOffset;
+            return m_translation.y - m_translation.x + m_rotationOffset;
         }
 
         double AbstractRobotMecanumLogic::getRearLeftWheelSpeed() const
         {
-            return m_translation.y - m_translation.x - m_rotationalOffset;
+            return m_translation.y - m_translation.x - m_rotationOffset;
         }
 
         double AbstractRobotMecanumLogic::getRearRightWheelSpeed() const
         {
-            return m_translation.y + m_translation.x + m_rotationalOffset;
+            return m_translation.y + m_translation.x + m_rotationOffset;
         }
     }
 }

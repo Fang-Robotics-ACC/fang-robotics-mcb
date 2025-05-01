@@ -47,7 +47,7 @@ namespace logic
         double getRearRightWheelSpeed() const;
         private:
         Translation2D m_translation{0,0};
-        double m_rotationalOffset{0};
+        double m_rotationOffset{0};
         };
     }
 }
