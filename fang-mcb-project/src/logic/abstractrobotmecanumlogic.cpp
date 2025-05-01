@@ -38,7 +38,7 @@ namespace logic
 
         double AbstractRobotMecanumLogic::getFrontLeftWheelSpeed() const
         {
-            return m_translation.y + m_translation.x + m_rotationalOffset;
+            return m_translation.y + m_translation.x - m_rotationalOffset;
         }
 
         double AbstractRobotMecanumLogic::getFrontRightWheelSpeed() const
@@ -53,7 +53,7 @@ namespace logic
 
         double AbstractRobotMecanumLogic::getRearRightWheelSpeed() const
         {
-            return m_translation.y + m_translation.x - m_rotationalOffset;
+            return m_translation.y + m_translation.x + m_rotationalOffset;
         }
     }
 }

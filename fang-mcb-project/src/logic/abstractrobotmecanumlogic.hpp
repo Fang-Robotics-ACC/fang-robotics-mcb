@@ -24,7 +24,14 @@ namespace logic
          * and right sides of the drive will be by 50 f/s. A positive value
          * will mean the robot will rotate counterclockwise.)
          * 
+         * 
          * Refer to https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
+         * The formula has been adapted so that the positive rotation is counter-clockwise.
+         * Although this is does not smoothly translate joystick movements, it is mathematically
+         * consistent with the convention that counter-clockwise. That is the main context
+         * for MecanumLogic. With the IMU being involved, it is imperative that a single
+         * rotational convention is used. And it is recommended that the mathematical ones
+         * would be the choice.
          */
         void setMotion(const Translation2D& translation, double rotationalOffset);
         void setTranslation(const Translation2D& translation);
