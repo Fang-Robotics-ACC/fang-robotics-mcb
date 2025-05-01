@@ -27,6 +27,8 @@ namespace logic
          * Refer to https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
          */
         void setMotion(const Translation2D& translation, double rotationalOffset);
+        void setTranslation(const Translation2D& translation);
+        void setRotation(double rotationalOffset);
         QuadDriveData getWheelSpeeds() const;
         double getFrontRightWheelSpeed() const;
         double getFrontLeftWheelSpeed() const;

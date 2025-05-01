@@ -6,7 +6,17 @@ namespace logic
     {
         void AbstractRobotMecanumLogic::setMotion(const Translation2D& translation, double rotationalOffset)
         {
+            setTranslation(translation);
+            setRotation(rotationalOffset);
+        }
+
+        void AbstractRobotMecanumLogic::setTranslation(const Translation2D& translation)
+        {
             m_translation = translation;
+        }
+
+        void AbstractRobotMecanumLogic::setRotation(double rotationalOffset)
+        {
             m_rotationalOffset = rotationalOffset;
         }
 
