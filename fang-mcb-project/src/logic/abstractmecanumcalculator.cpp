@@ -5,12 +5,12 @@ namespace logic
 {
     namespace chassis
     {
-        void BaseMecanumMotionCalculator::setQuadDriveData(const QuadDriveData& quadDriveData)
+        void AbstractMecanumCalculator::setQuadDriveData(const QuadDriveData& quadDriveData)
         {
             m_quadDriveData = quadDriveData;
         }
 
-        Translation2D BaseMecanumMotionCalculator::getTranslation() const
+        Translation2D AbstractMecanumCalculator::getTranslation() const
         {
             //Refer to equation 22 in https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
             const double ySpeedSum{m_quadDriveData.frontLeft + m_quadDriveData.frontRight
@@ -30,7 +30,7 @@ namespace logic
 
         //Refer to equation 24
         //Positive offset values are counterclockwise
-        double BaseMecanumMotionCalculator::getRotationalOffset() const
+        double AbstractMecanumCalculator::getRotationalOffset() const
         {
             const double offsetSum{-m_quadDriveData.frontLeft + m_quadDriveData.frontRight
                             - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight};

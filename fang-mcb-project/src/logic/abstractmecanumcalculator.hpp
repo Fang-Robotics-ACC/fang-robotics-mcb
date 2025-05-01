@@ -1,5 +1,5 @@
-#ifndef MECANUM_MOTION_CALCULATOR_H_YEET_YEET_SDLFJSELKFJ
-#define MECANUM_MOTION_CALCULATOR_H_YEET_YEET_SDLFJSELKFJ
+#ifndef ABSTRACT_MECANUM_CALCULATOR_H_YEET_YEET_SDLFJSELKFJ
+#define ABSTRACT_MECANUM_CALCULATOR_H_YEET_YEET_SDLFJSELKFJ
 #include "quaddrivedata.h"
 #include "translation2d.h"
 #include "unitaliases.hpp"
@@ -26,10 +26,10 @@ namespace logic
          * This assumes the radius of the wheels are 1
          */
 
-        class BaseMecanumMotionCalculator
+        class AbstractMecanumCalculator
         {
         public:
-            BaseMecanumMotionCalculator(){}
+            AbstractMecanumCalculator(){}
             void setQuadDriveData(const QuadDriveData& quadDriveData);
             /**
              * Returns the movement of the robot relative to the robot.

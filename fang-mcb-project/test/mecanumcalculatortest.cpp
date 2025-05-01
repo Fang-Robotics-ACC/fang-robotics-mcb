@@ -4,7 +4,7 @@
 #include "chassislogicaliases.h"
 #include <iostream>
 
-using Calculator = logic::chassis::BaseMecanumMotionCalculator;
+using Calculator = logic::chassis::AbstractMecanumCalculator;
 Calculator calc{};
 using QuadDriveData = data::chassis::QuadDriveData<double>;
 using Translation2D = logic::chassis::Translation2D;
