@@ -12,6 +12,9 @@ namespace logic
         {
         public:
         /**
+         * This is called RobotMecanumLogic because the frame
+         * of reference is relative to the robot. It will always strafe
+         * relative to the robot and not the field.
          * Translation is the percentage of the maximum speed 
          * Positive rotation is counterclockwise it a percentage
          * of the maximum speed that will be applied to offset
