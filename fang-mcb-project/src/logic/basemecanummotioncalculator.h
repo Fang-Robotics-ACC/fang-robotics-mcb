@@ -40,7 +40,12 @@ namespace logic
             /**
              * If the mecanum drive is to be assumed to be a tank
              * drive, there would be a difference between the overrall
-             * left and right speeds of the left and right tank tracks.
+             * left and right speeds of the left and right tank tracks divided by two
+             * (Because this offset will be applied to each side)
+             * Imagine the left and right tank at 0 speed.
+             * To apply a counterclockwise rotation, a lateral offset
+             * of 0.25 is appllied to each side. The left track will be -0.25
+             * The right track will be 0.25. The difference is 0.50. 
              */
             double getLateralDifference() const;
         private:
