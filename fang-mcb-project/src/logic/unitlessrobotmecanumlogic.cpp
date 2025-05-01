@@ -4,10 +4,10 @@ namespace logic
 {
     namespace chassis
     {
-        void UnitlessRobotMecanumLogic::setMotion(const Translation2D& translation, double lateralOffset)
+        void UnitlessRobotMecanumLogic::setMotion(const Translation2D& translation, double rotationalOffset)
         {
             m_translation = translation;
-            m_lateralOffset = m_lateralOffset;
+            m_rotationalOffset = rotationalOffset;
         }
     }
 }
