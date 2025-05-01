@@ -9,5 +9,10 @@ namespace logic
             m_translation = translation;
             m_rotationalOffset = rotationalOffset;
         }
+
+        double AbstractRobotMecanumLogic::getFrontLeftWheelSpeed() const
+        {
+            return m_translation.y + m_translation.x + m_rotationalOffset;
+        }
     }
 }
