@@ -14,5 +14,20 @@ namespace logic
         {
             return m_translation.y + m_translation.x + m_rotationalOffset;
         }
+
+        double AbstractRobotMecanumLogic::getFrontRightWheelSpeed() const
+        {
+            return m_translation.y - m_translation.x + m_rotationalOffset;
+        }
+
+        double AbstractRobotMecanumLogic::getRearLeftWheelSpeed() const
+        {
+            return m_translation.y - m_translation.x - m_rotationalOffset;
+        }
+
+        double AbstractRobotMecanumLogic::getRearRightWheelSpeed() const
+        {
+            return m_translation.y + m_translation.x - m_rotationalOffset;
+        }
     }
 }
