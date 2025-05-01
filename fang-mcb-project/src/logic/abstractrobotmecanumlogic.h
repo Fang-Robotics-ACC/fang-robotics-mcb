@@ -20,6 +20,8 @@ namespace logic
          * that the difference between the overall motion of the left
          * and right sides of the drive will be by 50 f/s. A positive value
          * will mean the robot will rotate counterclockwise.)
+         * 
+         * Refer to https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
          */
         void setMotion(const Translation2D& translation, double rotationalOffset);
         QuadDriveData getWheelSpeeds() const;
