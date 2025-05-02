@@ -17,7 +17,7 @@ namespace logic
 
         double Vortex80AEscLogic::calculateDutyCycle (double speedRangePercentage)
         {
-            double dutyCycle;
+            double dutyCycle{0};
             switch (m_directionality)
             {
                 case Directionality::BIDIRECTIONAL:
