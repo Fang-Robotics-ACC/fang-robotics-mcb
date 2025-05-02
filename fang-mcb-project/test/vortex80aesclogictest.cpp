@@ -32,8 +32,8 @@ TEST(fullRangeTest, Vortex80AEscLogic)
 TEST(oddRangeTest, Vortex80AEscLogic)
 {
     //4 ms period
-    const Hertz standardFrequency{250};
+    const Hertz nonStandardFrequency{250};
     logic::motors::Vortex80AEscLogic vortex {};
 
-    EXPECT_DOUBLE_EQ(vortex.adaptedDutyCycle(1, standardFrequency), 0.5);
+    EXPECT_DOUBLE_EQ(vortex.adaptedDutyCycle(1, nonStandardFrequency), 0.5);
 }
