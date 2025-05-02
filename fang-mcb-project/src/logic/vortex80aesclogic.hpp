@@ -26,6 +26,10 @@ namespace logic
              * In bidirectional, the range is [-1,1]
              * Therefore, 0.5 would correspond to a motor being still.
              * 0 would correspond to a motor running at full speed in reverse
+             * Frequencies with a period lower than 2ms will not work on this
+             * controller. The required duty cycle would be greater than 1.
+             * In other words, anything greater than 500 Hz since you need to
+             * have a pulse at least 2ms long.
              */
             double adaptedDutyCycle(double rangePercentage, Hertz pinFrequency);
         private:
