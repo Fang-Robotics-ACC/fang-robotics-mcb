@@ -8,6 +8,7 @@ namespace logic
     {
         class Vortex80AEscLogic
         {
+        public:
             /**
              * Returns a duty cycle from
              * [0,1] (percentage in decimal form)
@@ -27,6 +28,12 @@ namespace logic
              * 0 would correspond to a motor running at full speed in reverse
              */
             double adaptedDutyCycle(double rangePercentage, Hertz pinFrequency);
+        private:
+            // Note that in bidirectional mode, the minimum period would
+            // correspond to the motor going in full speed reverse
+            // But in unidirectional mode, it would mean a still motor
+            const Milliseconds mk_maxRangePeriod {2};
+            const Milliseconds mk_minRangePeriod {1};
         };
     }
 }
