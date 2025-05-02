@@ -7,6 +7,17 @@ namespace logic
 {
     namespace motors
     {
+
+        void Vortex80AEscLogic::setDirectionality(const Directionality& directionality)
+        {
+            m_directionality = directionality;
+        }
+
+        Vortex80AEscLogic::Directionality Vortex80AEscLogic::getDirectionality() const
+        {
+            return m_directionality;
+        }
+
         double Vortex80AEscLogic::adaptedDutyCycle(double rangePercentage, Hertz pinFrequency)
         {
             // rawDutyCycle will range between 0 and 1

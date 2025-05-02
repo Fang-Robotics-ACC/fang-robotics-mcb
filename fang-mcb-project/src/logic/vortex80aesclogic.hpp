@@ -1,6 +1,7 @@
 #ifndef VORTEX_80A_ESC_LOGIC_H_LSDJKFLSKEFJF_YEET
 #define VORTEX_80A_ESC_LOGIC_H_LSDJKFLSKEFJF_YEET
 #include "unitaliases.hpp"
+#include "directionality.hpp"
 
 namespace logic
 {
@@ -9,7 +10,9 @@ namespace logic
         class Vortex80AEscLogic
         {
         public:
+            using Directionality = data::motors::Directionality;
             /**
+             * 
              * Returns a duty cycle from
              * [0,1] (percentage in decimal form)
              * 
@@ -33,6 +36,8 @@ namespace logic
              */
             double adaptedDutyCycle(double rangePercentage, Hertz pinFrequency);
             double adaptedDutyCycle(double rangePercentage);
+            void setDirectionality(const Directionality& directionality);
+            Directionality getDirectionality() const;
             void setPinFrequency(const Hertz& pinFrequency);
             Hertz getPinFrequency() const;
         private:
@@ -42,6 +47,7 @@ namespace logic
             const Milliseconds mk_maxRangePeriod {2.0};
             const Milliseconds mk_minRangePeriod {1.0};
             Hertz m_pinFrequency;
+            Directionality m_directionality;
         };
     }
 }
