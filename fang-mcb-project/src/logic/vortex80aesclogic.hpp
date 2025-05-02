@@ -11,6 +11,7 @@ namespace logic
         {
         public:
             using Directionality = data::motors::Directionality;
+            Vortex80AEscLogic(const Directionality& directionality = Directionality::BIDIRECTIONAL, const Hertz& pinFrequency = Hertz{500});
             /**
              * 
              * Returns a duty cycle from
