@@ -4,6 +4,7 @@
 #include "modm/math/interpolation/linear.hpp"
 #include "modm/container/pair.hpp"
 #include "cassert"
+#include <iostream>
 
 namespace logic 
 {
@@ -44,8 +45,11 @@ namespace logic
             //The maximum is 1 and the minimum is -1, I'm just being pedantic to overly document stuff
             const double bidirectionalRange {mk_bidirectionalMax - mk_bidirectionalMin};
             // The minimum value is -1, but if we shift it up by one, the new minimum is 0
-            const double offsettedPercentage{speedRangePercentage + mk_bidirectionalMin};
+            // We subtract by the min because it is less than 0 and must be for bidirectional controls
+            const double offsettedPercentage{speedRangePercentage - mk_bidirectionalMin};
+            assert(bidirectionalRange == 2.0);
             const double rangePercentage{offsettedPercentage / bidirectionalRange};
+            std::cout << rangePercentage;
 
             //Santiy check. This should never be violated. If it does, then someone messed with the code wrong...
             assert(config::pwm::k_pwmDutyMin <= rangePercentage && rangePercentage <= config::pwm::k_pwmDutyMax && "rangePercentage out of bounds");
