@@ -10,9 +10,8 @@ namespace logic
     namespace motors
     {
 
-        Vortex80AEscLogic::Vortex80AEscLogic(const Directionality& directionality = Directionality::BIDIRECTIONAL,
-                                             const Hertz& pinFrequency = Hertz{500}):
-                                             m_directionality{directionality} , m_pinFrequency{pinFrequency}
+        Vortex80AEscLogic::Vortex80AEscLogic(const Directionality& directionality, const Hertz& pinFrequency):
+                                             m_directionality{directionality}, m_pinFrequency{pinFrequency}
         {
         }
 
