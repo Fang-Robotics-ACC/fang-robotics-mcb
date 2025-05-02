@@ -4,8 +4,8 @@ namespace config
 {
     namespace pwm
     {
-        const double k_pwmDutyMax{0.0};
-        const double k_pwmDutyMin{1.0};
+        const double k_pwmDutyMax{1.0};
+        const double k_pwmDutyMin{0.0};
     }
 }
 #endif
