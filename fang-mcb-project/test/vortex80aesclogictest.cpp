@@ -37,3 +37,12 @@ TEST(oddRangeTest, Vortex80AEscLogic)
 
     EXPECT_DOUBLE_EQ(vortex.adaptedDutyCycle(1, nonStandardFrequency), 0.5);
 }
+
+TEST(bidirectionalTest, Vortex80AEscLogic)
+{
+    logic::motors::Vortex80AEscLogic vortex {data::motors::Directionality::BIDIRECTIONAL};
+
+    EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(-1.0), 0.5);
+    EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(0.0), 0.75);
+    EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(1.0), 1.0);
+}
