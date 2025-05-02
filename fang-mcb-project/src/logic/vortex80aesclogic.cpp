@@ -20,5 +20,20 @@ namespace logic
 
             return std::lerp(minDutyCycle, maxDutyCycle, rangePercentage);
         }
+
+        double Vortex80AEscLogic::adaptedDutyCycle(double rangePercentage)
+        {
+            return adaptedDutyCycle(rangePercentage, m_pinFrequency);
+        }
+
+        void Vortex80AEscLogic::setPinFrequency(const Hertz& pinFrequency)
+        {
+            m_pinFrequency = pinFrequency;
+        }
+
+        Hertz Vortex80AEscLogic::getPinFrequency() const
+        {
+            return m_pinFrequency;
+        }
     }
 }

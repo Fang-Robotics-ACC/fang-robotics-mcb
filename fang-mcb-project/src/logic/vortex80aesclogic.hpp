@@ -34,7 +34,7 @@ namespace logic
             double adaptedDutyCycle(double rangePercentage, Hertz pinFrequency);
             double adaptedDutyCycle(double rangePercentage);
             void setPinFrequency(const Hertz& pinFrequency);
-            Hertz getpinFrequency() const;
+            Hertz getPinFrequency() const;
         private:
             // Note that in bidirectional mode, the minimum period would
             // correspond to the motor going in full speed reverse
