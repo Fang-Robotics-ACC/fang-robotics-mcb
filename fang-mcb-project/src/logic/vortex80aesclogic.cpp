@@ -1,7 +1,9 @@
 #include "vortex80aesclogic.hpp"
+#include "pwmconstants.hpp"
 #include <cmath>
 #include "modm/math/interpolation/linear.hpp"
 #include "modm/container/pair.hpp"
+#include "cassert"
 
 namespace logic 
 {
@@ -12,6 +14,45 @@ namespace logic
                                              const Hertz& pinFrequency = Hertz{500}):
                                              m_directionality{directionality} , m_pinFrequency{pinFrequency}
         {
+        }
+
+        double Vortex80AEscLogic::calculateDutyCycle (double speedRangePercentage)
+        {
+            double dutyCycle;
+            switch (m_directionality)
+            {
+                case Directionality::BIDIRECTIONAL:
+                    dutyCycle = calculateBidirectionalDutyCycle(speedRangePercentage);
+                    break;
+                
+                case Directionality::UNIDIRECTIONAL:
+                    dutyCycle = calculateUnidirectionalDutyCycle(speedRangePercentage); 
+            }
+            return dutyCycle;
+        }
+
+        double Vortex80AEscLogic::calculateUnidirectionalDutyCycle(double speedRangePercentage)
+        {
+            assert(0.0 <= speedRangePercentage && speedRangePercentage <= 1.0 && "Unidirectional limit is [0,1]");
+            return adaptedDutyCycle(speedRangePercentage);
+        }
+
+        double Vortex80AEscLogic::calculateBidirectionalDutyCycle(double speedRangePercentage)
+        {
+            assert(mk_bidirectionalMin <= speedRangePercentage && speedRangePercentage <= mk_bidirectionalMax && "Unidirectional limit is [-1,1]");
+            // Manual lerp, todo: figure out modm's Linear class
+            // -1 needs to be mapped to 0, 1 needs to be mapped to -1
+            //The maximum is 1 and the minimum is -1, I'm just being pedantic to overly document stuff
+            const double bidirectionalRange {mk_bidirectionalMax - mk_bidirectionalMin};
+            // The minimum value is -1, but if we shift it up by one, the new minimum is 0
+            const double offsettedPercentage{speedRangePercentage + mk_bidirectionalMin};
+            const double rangePercentage{offsettedPercentage / bidirectionalRange};
+
+            //Santiy check. This should never be violated. If it does, then someone messed with the code wrong...
+            assert(config::pwm::k_pwmDutyMin <= rangePercentage && rangePercentage <= config::pwm::k_pwmDutyMax && "rangePercentage out of bounds");
+            
+            
+            return adaptedDutyCycle(rangePercentage);
         }
 
         void Vortex80AEscLogic::setDirectionality(const Directionality& directionality)
