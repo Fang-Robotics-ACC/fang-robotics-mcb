@@ -12,6 +12,7 @@ namespace logic
         public:
             using Directionality = data::motors::Directionality;
             Vortex80AEscLogic(const Directionality& directionality = Directionality::BIDIRECTIONAL, const Hertz& pinFrequency = Hertz{500});
+            double calculateDutyCycle (double speedRangePercentage);
             /**
              * 
              * Returns a duty cycle from
@@ -47,8 +48,17 @@ namespace logic
             // But in unidirectional mode, it would mean a still motor
             const Milliseconds mk_maxRangePeriod {2.0};
             const Milliseconds mk_minRangePeriod {1.0};
+            const double mk_bidirectionalMin {-1.0};
+            const double mk_bidirectionalMax {-1.0};
+
+            const double mk_uniDirectionalMin {0.0};
+            const double mk_uniDirectionalMax {1.0};
+
             Hertz m_pinFrequency;
             Directionality m_directionality;
+
+            double calculateUnidirectionalDutyCycle(double speedRangePercentage);
+            double calculateBidirectionalDutyCycle(double speedRangePercentage);
         };
     }
 }
