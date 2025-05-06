@@ -55,7 +55,7 @@ namespace logic
 
         double AbstractFieldMecanumLogic::getRotationOffset() const
         {
-            return m_rotationOffset;
+            return m_robotMecanumLogic.getRotationOffset();
         }
 
 
