@@ -15,6 +15,17 @@ namespace logic
         {
         public:
         /**
+         * Refer to: https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
+         * in equation 24
+         * The horizontalWheelDistance refers to twice as lx
+         * The verticalWheelDistance refers to twice as ly
+         * The vertical distance is parallel to the forward direction of the robot
+         * The horizontal distance is parallel to the sideways direction of the robot 
+         */
+        FieldMecanumLogic(const Meters& horizontalWheelDistance,
+                          const Meters& verticalWheelDistance,
+                          const Meters& wheelRadius);
+        /**
          * This is called Field Mecanum Logic because the frame
          * of refernce is relative to the field
          * Translation is the percentage of the maximum speed 
