@@ -55,6 +55,7 @@ namespace motors
         bool  m_overbudgetStatus{false};
         const bool mk_estimateModeAllowed{false};
 
+        const RPM mk_maxTheoreticalSpeed;
         RPM m_speed{0};
         RPM m_maxSpeed{0};
         RPM m_minSpeed{0};

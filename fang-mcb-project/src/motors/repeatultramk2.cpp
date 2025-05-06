@@ -2,6 +2,8 @@
 #include "brushlessutils.hpp"
 #include "units.h"
 
+#include <cassert>
+
 namespace motors
 {
 
@@ -12,7 +14,8 @@ namespace motors
                       data::motors::Directionality directionality):
                       m_drivers{drivers}, m_pwmPin{pwmPin},
                       mk_controllerInputVoltage{controllerInputVoltage},
-                      m_vortexLogic{directionality, pinFrequency}
+                      m_vortexLogic{directionality, pinFrequency},
+                      mk_maxTheoreticalSpeed{controllerInputVoltage * mk_kv}
     {}
 
     //Watt budget setters and getters
@@ -29,17 +32,9 @@ namespace motors
     //Speed setters and getters
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
-        m_speed = speed;
-        const Volts outputVoltage = util::brushless::speedToControllerVoltage(speed, mk_kv);
-        //The ratio between the desired output voltage the intput voltage
-        //The range of inputs
-        const float rawDutyCycle = outputVoltage / mk_controllerInputVoltage;
-        const float squeezedDutyCycle = rawDutyCycle / 2.0f;
-        const float offset = 0.5f;
-        // Adding the result to 0.5f will shift the minimum to 0.5 and the maximum to 1
-        //TODO: Figure out how to use mod::interpolation::Linear
-        //TODO: Make this testable
-        setPWM(squeezedDutyCycle + offset);
+        const double rangePercentage{speed / mk_maxTheoreticalSpeed};
+        assert(-1.0 < rangePercentage && rangePercentage < 1.0 && "Precentage out off bounds");
+        setPWM(m_vortexLogic.calculateDutyCycle(rangePercentage));
     }
 
 	RPM RepeatUltraMk2::getSpeed() const
