@@ -35,6 +35,8 @@ namespace logic
          */
         void setMotion(const Translation2D& translation, double rotationalOffset);
 
+        void setFieldMotion(const Translation2D& translation, double rotationalOffset, const Radians& fieldAngle);
+
         /**
          * If the robot is facing forward at the field, that is 0 degrees. 
          * If the robot is facing left from the forward field direction, that is +90 degrees
