@@ -46,3 +46,12 @@ TEST(bidirectionalTest, Vortex80AEscLogic)
     EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(0.0), 0.75);
     EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(1.0), 1.0);
 }
+
+TEST(unidirectionalTest, Vortex80AEscLogic)
+{
+    logic::motors::Vortex80AEscLogic vortex {data::motors::Directionality::UNIDIRECTIONAL};
+
+    EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(0.0), 0.5);
+    EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(0.50), 0.75);
+    EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(1.0), 1.0);
+}
