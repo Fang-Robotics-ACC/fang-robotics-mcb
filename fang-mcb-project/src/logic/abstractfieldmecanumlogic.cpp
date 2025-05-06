@@ -1,4 +1,5 @@
 #include "abstractfieldmecanumlogic.hpp"
+#include "rotatevector2d.hpp"
 
 #include <cmath>
 
@@ -64,7 +65,7 @@ namespace logic
             //If the robot is facing left and needs to move forward relative to the field,
             //Then the motion vector that is relative to the robot facing forwward needs to be rotated
             //in the opposite angle
-            return rotateVector(translation, -m_robotAngle);
+            return util::math::rotateVector2D(translation, -m_robotAngle);
         }
 
         Translation2D AbstractFieldMecanumLogic::robotToFieldTranslation(const Translation2D& translation) const
@@ -72,22 +73,7 @@ namespace logic
             //If the robot is facing left and needs to move forward relative to the field,
             //Then the motion vector that is relative to the robot facing forwward needs to be rotated
             //in the opposite angle
-            return rotateVector(translation, m_robotAngle);
-        }
-
-        Translation2D AbstractFieldMecanumLogic::rotateVector(const Translation2D& vector, const Radians& rotationAngle) const
-        {
-            //Rotation matrix
-            //https://www.youtube.com/watch?v=1oYEo7PNIBQ
-            //I know it's Wikipedia but it's will help wwith the youtube video
-            //In general, Wikipedia is pretty good as a math reference, too.
-            //https://en.wikipedia.org/wiki/Rotation_matrix
-
-            const double angle{rotationAngle.to<double>()};
-            const double rotatedx{vector.x * (std::cos(angle)) - vector.y * (std::sin(angle))};
-            const double rotatedy{vector.x * (std::sin(angle)) + vector.y * (std::cos(angle))};
-
-            return Translation2D{rotatedx, rotatedy};
+            return util::math::rotateVector2D(translation, m_robotAngle);
         }
 
         double AbstractFieldMecanumLogic::getFrontRightWheelSpeed() const

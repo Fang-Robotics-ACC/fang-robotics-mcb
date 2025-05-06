@@ -59,8 +59,6 @@ namespace logic
         double getRearRightWheelSpeed() const;
 
         private:
-        //More precise rotation algorithm.
-        Translation2D rotateVector(const Translation2D& vector, const Radians& rotationAngle) const;
         Translation2D fieldToRobotTranslation(const Translation2D& translation) const;
         Translation2D robotToFieldTranslation(const Translation2D& translation) const;
         
