@@ -7,6 +7,8 @@
 #include "tap/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
 #include "unitaliases.hpp"
+#include "vortex80aesclogic.hpp"
+#include "data/directionality.hpp"
 #include "units.h"
 
 namespace motors
@@ -17,7 +19,11 @@ namespace motors
     class RepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM>, virtual public rail::IWattBudgeter<Watts>
     {
     public:
-        RepeatUltraMk2(tap::Drivers& drivers, tap::gpio::Pwm::Pin pwmPin, const Volts& controllerInputVoltage);
+        RepeatUltraMk2(tap::Drivers& drivers,
+                      const Volts& controllerInputVoltage,
+                      tap::gpio::Pwm::Pin pwmPin,
+                      const Hertz& pinFrequency,
+                      data::motors::Directionality directionality = data::motors::Directionality::BIDIRECTIONAL);
 
         /// @brief Does not limit anything yet
         /// @param wattage 
@@ -57,6 +63,8 @@ namespace motors
         const Volts mk_controllerInputVoltage;
         // This was the Repeat Robotics provided value for the ratio between the rpm and the voltage associated with i
         const RPMPerVolt mk_kv{1450.0};
+
+        logic::motors::Vortex80AEscLogic m_vortexLogic;
 
         /*!
             PWM should be between 0 and 1

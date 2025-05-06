@@ -5,8 +5,14 @@
 namespace motors
 {
 
-    RepeatUltraMk2::RepeatUltraMk2(tap::Drivers& drivers, tap::gpio::Pwm::Pin pwmPin, const Volts& controllerInputVoltage):
-        m_drivers{drivers}, m_pwmPin{pwmPin}, mk_controllerInputVoltage {controllerInputVoltage}
+    RepeatUltraMk2::RepeatUltraMk2(tap::Drivers& drivers,
+                      const Volts& controllerInputVoltage,
+                      tap::gpio::Pwm::Pin pwmPin,
+                      const Hertz& pinFrequency,
+                      data::motors::Directionality directionality):
+                      m_drivers{drivers}, m_pwmPin{pwmPin},
+                      mk_controllerInputVoltage{controllerInputVoltage},
+                      m_vortexLogic{directionality, pinFrequency}
     {}
 
     //Watt budget setters and getters
@@ -30,10 +36,6 @@ namespace motors
         const float rawDutyCycle = outputVoltage / mk_controllerInputVoltage;
         const float squeezedDutyCycle = rawDutyCycle / 2.0f;
         const float offset = 0.5f;
-        // rawDutyCycle will range between 0 and 1
-        // 0.50 will correspond to a 1ms pulse (minimum) assuming the pin is set to a frequency of 2ms
-        // 1 will correspond to a 2ms pulse.
-        // By dividing the total by 2. It results in the maximum being 0.5
         // Adding the result to 0.5f will shift the minimum to 0.5 and the maximum to 1
         //TODO: Figure out how to use mod::interpolation::Linear
         //TODO: Make this testable
