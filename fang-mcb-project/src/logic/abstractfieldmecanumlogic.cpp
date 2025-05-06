@@ -21,9 +21,13 @@ namespace logic
 
         void AbstractFieldMecanumLogic::setRobotAngle(const Radians& robotAngle)
         {
+            //This must be obtained beforehand or else the new angle will result
+            //in bogus being returned (the old field translation is relative to the old angle
+            //not the new one.)
+            const Translation2D fieldTranslation{getTranslation()};
             m_robotAngle = robotAngle;
             //Update robot-centric translation to new angle
-            setTranslation(m_fieldTranslation);
+            setTranslation(fieldTranslation);
         }
 
         void AbstractFieldMecanumLogic::setTranslation(const Translation2D& translation)
