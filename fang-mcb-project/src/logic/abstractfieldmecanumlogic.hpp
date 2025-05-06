@@ -48,6 +48,7 @@ namespace logic
         void setTranslation(const Translation2D& translation);
         void setRotationOffset(double rotationalOffset);
 
+        Radians getRobotAngle() const;
         Translation2D getTranslation() const;
         double getRotationOffset() const;
 
