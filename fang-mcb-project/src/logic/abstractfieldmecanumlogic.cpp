@@ -1,5 +1,7 @@
 #include "abstractfieldmecanumlogic.hpp"
 
+#include <cmath>
+
 namespace logic
 {
     namespace chassis
@@ -55,5 +57,17 @@ namespace logic
             return m_rotationOffset;
         }
 
+
+        Translation2D AbstractFieldMecanumLogic::rotateVector(const Translation2D& vector, const Radians& rotationAngle)
+        {
+            //Rotation matrix
+            //https://www.youtube.com/watch?v=1oYEo7PNIBQ
+
+            const double angle{rotationAngle.to<double>()};
+            const double rotatedx{vector.x * (std::cos(angle)) - vector.y * (std::sin(angle))};
+            const double rotatedy{vector.x * (std::sin(angle)) - vector.y * (std::cos(angle))};
+
+            return Translation2D{rotatedx, rotatedy};
+        }
     }
 }
