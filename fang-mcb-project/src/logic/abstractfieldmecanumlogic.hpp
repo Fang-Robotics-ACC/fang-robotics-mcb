@@ -2,8 +2,10 @@
 #define ABSTRACT_FIELD_CENTRIC_MECANUM_LOGIC_H
 #include "unitaliases.hpp"
 #include "quaddrivedata.hpp"
+#include "abstractrobotmecanumlogic.hpp"
 #include "chassislogicaliases.hpp"
 #include "quaddrivedata.hpp"
+
 
 namespace logic
 {
@@ -35,7 +37,7 @@ namespace logic
          */
         void setMotion(const Translation2D& translation, double rotationalOffset);
 
-        void setTotalMotion(const Translation2D& translation, double rotationalOffset, const Radians& robotAngle);
+        void setTotalMotion(const Translation2D& translation, double rotationOffset, const Radians& robotAngle);
 
         /**
          * If the robot is facing forward at the field, that is 0 degrees. 
@@ -56,9 +58,15 @@ namespace logic
         double getRearRightWheelSpeed() const;
 
         private:
+        
         Translation2D m_translation{0,0};
+        //This is relative to the field but must be rotated to counter
+        //The offset when fed into the robot
+        Translation2D m_fieldTranslation{0,0};
         double m_rotationOffset{0};
         Radians m_robotAngle{0.0};
+
+        AbstractRobotMecanumLogic m_robotMecanumLogic{};
         };
     }
 }
