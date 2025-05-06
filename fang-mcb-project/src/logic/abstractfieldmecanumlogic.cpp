@@ -28,10 +28,8 @@ namespace logic
 
         void AbstractFieldMecanumLogic::setTranslation(const Translation2D& translation)
         {
-            m_fieldTranslation = translation;
-            Translation2D robotTranslation = m_fieldTranslation;
             //Counteract the robot's angle relative to the field
-            m_robotMecanumLogic.setTranslation(robotTranslation.rotate(-m_robotAngle.to<double>()));
+            m_robotMecanumLogic.setTranslation(fieldToRobotTranslation(translation));
         }
 
         void AbstractFieldMecanumLogic::setRotationOffset(double rotationOffset)
@@ -46,10 +44,9 @@ namespace logic
 
         Translation2D AbstractFieldMecanumLogic::getTranslation() const
         {
-            Translation2D robotTranslation = m_robotMecanumLogic.getTranslation();
             //Reverse the rotation that had been appied to make the translation to
             //Be relative to the field and not the robot
-            return robotTranslation.rotate(m_robotAngle.to<double>());
+            return robotToFieldTranslation(m_robotMecanumLogic.getTranslation());
         }
 
         double AbstractFieldMecanumLogic::getRotationOffset() const
