@@ -82,7 +82,7 @@ int main()
 
     while (1)
     {
-        motors::RepeatUltraMk2 test {*drivers, tap::gpio::Pwm::Pin::C1, Volts{24.0}};
+        motors::RepeatUltraMk2 test {*drivers, Volts{24}, tap::gpio::Pwm::Pin::C1, Hertz{500}};
         // do this as fast as you can
         PROFILE(drivers->profiler, updateIo, (drivers));
 
