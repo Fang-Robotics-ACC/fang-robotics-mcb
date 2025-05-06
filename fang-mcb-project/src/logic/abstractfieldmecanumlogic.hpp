@@ -35,14 +35,14 @@ namespace logic
          */
         void setMotion(const Translation2D& translation, double rotationalOffset);
 
-        void setFieldMotion(const Translation2D& translation, double rotationalOffset, const Radians& fieldAngle);
+        void setFieldMotion(const Translation2D& translation, double rotationalOffset, const Radians& robotAngle);
 
         /**
          * If the robot is facing forward at the field, that is 0 degrees. 
          * If the robot is facing left from the forward field direction, that is +90 degrees
          * If the robot is racing right from the forward field direction that is -90 degrees
          */
-        void setAngle(const Radians& angle);
+        void setRobotAngle(const Radians& robotAngle);
         void setTranslation(const Translation2D& translation);
         void setRotationOffset(double rotationalOffset);
 
@@ -58,7 +58,7 @@ namespace logic
         private:
         Translation2D m_translation{0,0};
         double m_rotationOffset{0};
-        Radians m_angle{0.0};
+        Radians m_robotAngle{0.0};
         };
     }
 }
