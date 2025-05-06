@@ -59,6 +59,8 @@ namespace logic
         double getRearRightWheelSpeed() const;
 
         private:
+        Translation2D fieldToRobotTranslation(const Translation2D& translation);
+        Translation2D robotToFieldTranslation(const Translation2D& translation);
         
         Translation2D m_translation{0,0};
         //This is relative to the field but must be rotated to counter
