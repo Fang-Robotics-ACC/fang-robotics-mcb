@@ -58,7 +58,7 @@ namespace logic
         }
 
 
-        Translation2D AbstractFieldMecanumLogic::fieldToRobotTranslation(const Translation2D& translation)
+        Translation2D AbstractFieldMecanumLogic::fieldToRobotTranslation(const Translation2D& translation) const
         {
             //If the robot is facing left and needs to move forward relative to the field,
             //Then the motion vector that is relative to the robot facing forwward needs to be rotated
@@ -66,18 +66,15 @@ namespace logic
             return rotateVector(translation, -m_robotAngle);
         }
 
-        Translation2D AbstractFieldMecanumLogic::robotToFieldTranslation(const Translation2D& translation)
+        Translation2D AbstractFieldMecanumLogic::robotToFieldTranslation(Translation2D& translation) const
         {
             //If the robot is facing left and needs to move forward relative to the field,
             //Then the motion vector that is relative to the robot facing forwward needs to be rotated
             //in the opposite angle
-
-            //This reverses the translation which had been moved opposite to the field angle, is now rotated back
-            //So that it is a motion vector relative to the field
             return rotateVector(translation, m_robotAngle);
         }
 
-        Translation2D AbstractFieldMecanumLogic::rotateVector(const Translation2D& vector, const Radians& rotationAngle)
+        Translation2D AbstractFieldMecanumLogic::rotateVector(const Translation2D& vector, const Radians& rotationAngle) const
         {
             //Rotation matrix
             //https://www.youtube.com/watch?v=1oYEo7PNIBQ
