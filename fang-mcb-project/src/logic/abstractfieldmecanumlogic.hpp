@@ -64,11 +64,6 @@ namespace logic
         Translation2D fieldToRobotTranslation(const Translation2D& translation) const;
         Translation2D robotToFieldTranslation(const Translation2D& translation) const;
         
-        Translation2D m_translation{0,0};
-        //This is relative to the field but must be rotated to counter
-        //The offset when fed into the robot
-        Translation2D m_fieldTranslation{0,0};
-        double m_rotationOffset{0};
         Radians m_robotAngle{0.0};
 
         AbstractRobotMecanumLogic m_robotMecanumLogic{};
