@@ -6,6 +6,7 @@
 
 #include <cmath>
 
+//The general error is 6e-15, which is 15 decimal places. This is inconsequential for the application
 const double k_tolerance{1e-14};
 
 TEST(RotateVector2D, counterClockwise)
