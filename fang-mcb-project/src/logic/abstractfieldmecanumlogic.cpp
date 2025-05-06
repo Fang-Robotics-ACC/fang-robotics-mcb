@@ -89,5 +89,31 @@ namespace logic
 
             return Translation2D{rotatedx, rotatedy};
         }
+
+        double AbstractFieldMecanumLogic::getFrontRightWheelSpeed() const
+        {
+            return m_robotMecanumLogic.getFrontRightWheelSpeed();
+        }
+
+        double AbstractFieldMecanumLogic::getFrontLeftWheelSpeed() const
+        {
+            return m_robotMecanumLogic.getFrontLeftWheelSpeed();
+        }
+
+        double AbstractFieldMecanumLogic::getRearLeftWheelSpeed() const
+        {
+            return m_robotMecanumLogic.getRearLeftWheelSpeed();
+        }
+
+        double AbstractFieldMecanumLogic::getRearRightWheelSpeed() const
+        {
+            return m_robotMecanumLogic.getRearRightWheelSpeed();
+        }
+
+        QuadDriveData AbstractFieldMecanumLogic::getWheelSpeeds() const
+        {
+            return m_robotMecanumLogic.getWheelSpeeds();
+        }
+
     }
 }
