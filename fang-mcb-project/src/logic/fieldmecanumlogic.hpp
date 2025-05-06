@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_FIELD_MECANUM_LOGIC_HPP
 #include "unitaliases.hpp"
 #include "quaddrivedata.hpp"
-#include "abstractrobotmecanumlogic.hpp"
+#include "abstractfieldmecanumlogic.hpp"
 #include "chassislogicaliases.hpp"
 #include "quaddrivedata.hpp"
 
@@ -64,7 +64,7 @@ namespace logic
         
         Radians m_robotAngle{0.0};
 
-        AbstractRobotMecanumLogic m_robotMecanumLogic{};
+        AbstractFieldMecanumLogic m_abstractFieldLogic{};
         };
     }
 }
