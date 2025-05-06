@@ -64,6 +64,12 @@ namespace logic
         
         Radians m_robotAngle{0.0};
 
+        const Meters mk_wheelRadius;
+        const Meters mk_horizontalWheelDistance;
+        const Meters mk_halfHorizontalWheelDistance{horizontalWheelDistance / 2.0};
+        const Meters mk_verticalWheelDistance;
+        const Meters mk_halfVerticalWheelDistance{verticalWheelDistance / 2.0};
+
         AbstractFieldMecanumLogic m_abstractFieldLogic{};
         };
     }
