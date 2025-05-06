@@ -24,6 +24,4 @@ TEST(translationSetterGetterTest, AbstractFieldMecanumLogic)
 
     EXPECT_DOUBLE_EQ(result.x, forward.x);
     EXPECT_DOUBLE_EQ(result.y, forward.y);
-    
-
 }
