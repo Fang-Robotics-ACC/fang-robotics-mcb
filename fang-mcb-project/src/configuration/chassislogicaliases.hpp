@@ -15,7 +15,6 @@ namespace logic
 
         //Messy for backward compatibility. Will be refactored during the next refactor cycle
         //Oof.
-        template <typename Velocity>
         using Velocity2D = modm::Vector<MetersPerSecond, 2>;
 
         using WheelDirection = modm::Vector<double, 2>;
