@@ -37,5 +37,23 @@ namespace logic
             m_robotMecanumLogic.setRotationOffset(rotationOffset);
         }
 
+        Radians AbstractFieldMecanumLogic::getRobotAngle() const
+        {
+            return m_robotAngle;
+        }
+
+        Translation2D AbstractFieldMecanumLogic::getTranslation() const
+        {
+            Translation2D robotTranslation = m_robotMecanumLogic.getTranslation();
+            //Reverse the rotation that had been appied to make the translation to
+            //Be relative to the field and not the robot
+            return robotTranslation.rotate(m_robotAngle.to<double>());
+        }
+
+        double AbstractFieldMecanumLogic::getRotationOffset() const
+        {
+            return m_rotationOffset;
+        }
+
     }
 }
