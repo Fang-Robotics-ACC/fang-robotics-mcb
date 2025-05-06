@@ -75,10 +75,13 @@ namespace logic
         {
             //Rotation matrix
             //https://www.youtube.com/watch?v=1oYEo7PNIBQ
+            //I know it's Wikipedia but it's will help wwith the youtube video
+            //In general, Wikipedia is pretty good as a math reference, too.
+            //https://en.wikipedia.org/wiki/Rotation_matrix
 
             const double angle{rotationAngle.to<double>()};
             const double rotatedx{vector.x * (std::cos(angle)) - vector.y * (std::sin(angle))};
-            const double rotatedy{vector.x * (std::sin(angle)) - vector.y * (std::cos(angle))};
+            const double rotatedy{vector.x * (std::sin(angle)) + vector.y * (std::cos(angle))};
 
             return Translation2D{rotatedx, rotatedy};
         }
