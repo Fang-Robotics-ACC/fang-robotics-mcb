@@ -4,7 +4,7 @@ namespace util
 {
     namespace math
     {
-        mathAliases::AbstractVector2D rotateVector(const mathAliases::AbstractVector2D& vector, const Radians& rotationAngle)
+        mathAliases::AbstractVector2D rotateVector2D(const mathAliases::AbstractVector2D& vector, const Radians& rotationAngle)
         {
             //Rotation matrix
             //https://www.youtube.com/watch?v=1oYEo7PNIBQ
