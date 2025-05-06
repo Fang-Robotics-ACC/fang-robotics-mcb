@@ -40,3 +40,60 @@ TEST(translationSetterGetterTest, AbstractFieldMecanumLogic)
     EXPECT_DOUBLE_EQ(result.x, right.x);
     EXPECT_DOUBLE_EQ(result.y, right.y);
 }
+
+TEST(harderTranslationSetterGetterTest, AbstractFieldMecanumLogic)
+{
+    //The field translation should be consistent even though
+    //AbstractFieldMecanumLogic rotates it relative to the robot
+    //It is supposed to translate the offset consistently
+    logic::chassis::AbstractFieldMecanumLogic fieldMecanumLogic{};
+    
+    //Relative to field
+    Degrees angle{43.2342};
+    //Lovely degree to radian conversion
+    fieldMecanumLogic.setRobotAngle(angle);
+
+    logic::chassis::Translation2D movement{0.0, 0.0};
+
+    fieldMecanumLogic.setTranslation(movement);
+
+    logic::chassis::Translation2D result{fieldMecanumLogic.getTranslation()};
+
+    EXPECT_DOUBLE_EQ(result.x, movement.x);
+    EXPECT_DOUBLE_EQ(result.y, movement.y);
+
+    angle = Degrees{0.0};
+    fieldMecanumLogic.setRobotAngle(angle);
+
+    result = fieldMecanumLogic.getTranslation();
+    EXPECT_DOUBLE_EQ(result.x, movement.x);
+    EXPECT_DOUBLE_EQ(result.y, movement.y);
+
+
+    angle = Degrees{0.05};
+    movement = logic::chassis::Translation2D{-23, -34};
+    fieldMecanumLogic.setRobotAngle(angle);
+    fieldMecanumLogic.setTranslation(movement);
+
+    result = fieldMecanumLogic.getTranslation();
+    EXPECT_DOUBLE_EQ(result.x, movement.x);
+    EXPECT_DOUBLE_EQ(result.y, movement.y);
+
+    angle = Degrees{-270};
+    movement = logic::chassis::Translation2D{34.034, -34};
+    fieldMecanumLogic.setRobotAngle(angle);
+    fieldMecanumLogic.setTranslation(movement);
+
+    result = fieldMecanumLogic.getTranslation();
+    EXPECT_DOUBLE_EQ(result.x, movement.x);
+    EXPECT_DOUBLE_EQ(result.y, movement.y);
+
+    angle = Degrees{7056};
+    movement = logic::chassis::Translation2D{-23, -34};
+    fieldMecanumLogic.setRobotAngle(angle);
+    fieldMecanumLogic.setTranslation(movement);
+
+    result = fieldMecanumLogic.getTranslation();
+    EXPECT_DOUBLE_EQ(result.x, movement.x);
+    EXPECT_DOUBLE_EQ(result.y, movement.y);
+}
