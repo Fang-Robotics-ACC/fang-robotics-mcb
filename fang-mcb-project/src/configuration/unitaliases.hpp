@@ -16,4 +16,5 @@ using Hertz = units::frequency::hertz_t;
 using Seconds = units::time::second_t;
 using Milliseconds = units::time::millisecond_t;
 using RadiansPerSecond = units::angular_velocity::radians_per_second_t;
+using Radians = units::angle::radian_t;
 #endif
