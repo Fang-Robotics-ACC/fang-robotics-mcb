@@ -5,6 +5,7 @@
 #include "unitaliases.hpp"
 #include "modm/math/geometry/vector.hpp"
 #include "chassislogicaliases.hpp"
+#include "abstractmecanumcalculator.hpp"
 
 namespace logic
 {
@@ -19,7 +20,7 @@ namespace logic
         class MecanumCalculator
         {
         public:
-            MecanumCalculator(){}
+            MecanumCalculator(const Meters& horizontalWheelDistance, const Meters& verticalWheelDistance);
             void setWheelSpeeds(const QuadDriveData& quadDriveData);
 
             /**
@@ -33,6 +34,9 @@ namespace logic
             RPM getRotation() const;
         private:
             QuadDriveData m_quadDriveData{RPM{0}, RPM{0}, RPM{0}, RPM{0}};
+            AbstractMecanumCalculator m_abstractCalc{};
+            //l_x + l_y
+            const Meters mk_wheelDistanceConstant;
         };
     }
 }
