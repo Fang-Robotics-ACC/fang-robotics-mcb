@@ -69,6 +69,8 @@ namespace logic
         Velocity2D fieldToRobotTranslation(const Velocity2D& translation) const;
         Velocity2D robotToFieldTranslation(const Velocity2D& translation) const;
         
+        Velocity2D m_translation{MetersPerSecond{0.0}, MetersPerSecond{0.0}};
+        RPM m_rotation{0};
         Radians m_robotAngle{0.0};
 
         const Meters mk_wheelRadius;
