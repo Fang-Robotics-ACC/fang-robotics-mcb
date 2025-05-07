@@ -96,7 +96,7 @@ namespace logic
             return m_robotMecanumLogic.getRearRightWheelSpeed();
         }
 
-        QuadDriveData AbstractFieldMecanumLogic::getWheelSpeeds() const
+        AbstractQuadDriveData AbstractFieldMecanumLogic::getWheelSpeeds() const
         {
             return m_robotMecanumLogic.getWheelSpeeds();
         }

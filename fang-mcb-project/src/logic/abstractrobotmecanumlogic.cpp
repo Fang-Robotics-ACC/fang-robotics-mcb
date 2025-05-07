@@ -30,9 +30,9 @@ namespace logic
             return m_rotationOffset;
         }
 
-        QuadDriveData AbstractRobotMecanumLogic::getWheelSpeeds() const
+        AbstractQuadDriveData AbstractRobotMecanumLogic::getWheelSpeeds() const
         {
-            return QuadDriveData{getFrontLeftWheelSpeed(), getFrontRightWheelSpeed(),
+            return AbstractQuadDriveData{getFrontLeftWheelSpeed(), getFrontRightWheelSpeed(),
                                  getRearLeftWheelSpeed(),  getRearRightWheelSpeed()};
         }
 

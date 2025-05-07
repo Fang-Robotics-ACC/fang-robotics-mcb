@@ -52,7 +52,7 @@ namespace logic
         Translation2D getTranslation() const;
         double getRotationOffset() const;
 
-        QuadDriveData getWheelSpeeds() const;
+        AbstractQuadDriveData getWheelSpeeds() const;
         double getFrontRightWheelSpeed() const;
         double getFrontLeftWheelSpeed() const;
         double getRearLeftWheelSpeed() const;

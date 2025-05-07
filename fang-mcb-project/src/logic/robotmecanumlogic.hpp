@@ -79,7 +79,7 @@ namespace logic
         const Meters mk_verticalWheelDistance;
         const Meters mk_halfVerticalWheelDistance{verticalWheelDistance / 2.0};
         //l_x + l_y
-        const Meters mk_wheelDistanceConstant{mk_halflVerticalWheelDistance + mk_halfHorizontalWheelDistance};
+        const Meters mk_wheelDistanceConstant{mk_halfVerticalWheelDistance + mk_halfHorizontalWheelDistance};
 
         AbstractFieldMecanumLogic m_abstractFieldLogic{};
         };
