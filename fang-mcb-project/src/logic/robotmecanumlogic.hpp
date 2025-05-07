@@ -11,7 +11,7 @@ namespace logic
 {
     namespace chassis
     {
-        class FieldMecanumLogic 
+        class RobotMecanumLogic 
         {
         public:
         using QuadDriveData = data::chassis::QuadDriveData<RPM>;
@@ -23,7 +23,7 @@ namespace logic
          * The vertical distance is parallel to the forward direction of the robot
          * The horizontal distance is parallel to the sideways direction of the robot 
          */
-        FieldMecanumLogic(const Meters& horizontalWheelDistance,
+        RobotMecanumLogic(const Meters& horizontalWheelDistance,
                           const Meters& verticalWheelDistance,
                           const Meters& wheelRadius);
         /**
