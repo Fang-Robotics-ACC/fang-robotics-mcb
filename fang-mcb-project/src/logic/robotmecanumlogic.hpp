@@ -52,6 +52,9 @@ namespace logic
         Velocity2D getTranslation() const;
         RPM getRotation() const;
 
+        /**https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
+         * This uses equation 20
+         */
         QuadDriveData getWheelSpeeds() const;
         double getFrontRightWheelSpeed() const;
         double getFrontLeftWheelSpeed() const;
