@@ -1,7 +1,5 @@
 #include "robotmecanumlogic.hpp"
 
-/*
-
 namespace logic
 {
     namespace chassis
@@ -15,10 +13,10 @@ namespace logic
             //direction. It is desired for this to be positive
             //w_1
             const MetersPerSecond translationFactor{m_translation.y - m_translation.x};
-            const MetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
-            return RPM{(1.0 / mk_wheelRadius) * (translationFactor - rotationFactor)};
+            const MetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation * k_antiRadians};
+            return (1.0 / mk_wheelRadius) * (translationFactor - rotationFactor) * k_addRadians;
         }
-
+        /*
         RPM RobotMecanumLogic::getFrontRightWheelSpeed() const
         {
             //https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
@@ -56,7 +54,7 @@ namespace logic
             const MetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
             return RPM{(1.0 / mk_wheelRadius) * (translationFactor + rotationFactor)};
         }
+        */
 
     }
 }
-*/
