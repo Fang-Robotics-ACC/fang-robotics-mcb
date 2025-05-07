@@ -75,9 +75,9 @@ namespace logic
 
         const Meters mk_wheelRadius;
         const Meters mk_horizontalWheelDistance;
-        const Meters mk_halfHorizontalWheelDistance{horizontalWheelDistance / 2.0};
+        const Meters mk_halfHorizontalWheelDistance{mk_horizontalWheelDistance / 2.0};
         const Meters mk_verticalWheelDistance;
-        const Meters mk_halfVerticalWheelDistance{verticalWheelDistance / 2.0};
+        const Meters mk_halfVerticalWheelDistance{mk_verticalWheelDistance / 2.0};
         //l_x + l_y
         const Meters mk_wheelDistanceConstant{mk_halfVerticalWheelDistance + mk_halfHorizontalWheelDistance};
 
