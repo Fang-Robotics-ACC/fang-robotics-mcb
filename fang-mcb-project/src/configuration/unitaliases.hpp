@@ -21,4 +21,5 @@ using Degrees = units::angle::degree_t;
 
 //One of the few moments that I would use auto
 auto const k_antiRadians{1.0 / Radians{1.0}};
+const Radians k_addRadians{1.0};
 #endif
