@@ -25,7 +25,7 @@ namespace logic
 
             return Velocity2D{xVelocity, yVelocity};
         }
-/*
+
         RPM MecanumCalculator::getRotation() const
         {
 
@@ -35,8 +35,8 @@ namespace logic
                               - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight};
         const auto rotationConstant{mk_wheelRadius / (4.0 * mk_wheelDistanceConstant)};
 
-        return rotationConstant * rotationSum * k_antiRadians; 
+        return rotationConstant * rotationSum; 
         }
-        */
+        
     }
 }
