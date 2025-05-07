@@ -16,7 +16,7 @@ namespace logic
             const MetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation * k_antiRadians};
             return (1.0 / mk_wheelRadius) * (translationFactor - rotationFactor) * k_addRadians;
         }
-        /*
+
         RPM RobotMecanumLogic::getFrontRightWheelSpeed() const
         {
             //https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
@@ -26,9 +26,10 @@ namespace logic
             //w_2
             const MetersPerSecond translationFactor{m_translation.y + m_translation.x};
             const auto rotationFactor{mk_wheelDistanceConstant * m_rotation};
-            return RPM{(1.0 / mk_wheelRadius) * (translationFactor + rotationFactor)};
+            return (1.0 / mk_wheelRadius) * (translationFactor + rotationFactor) * k_addRadians;
         }
 
+        /*
         RPM RobotMecanumLogic::getRearLeftWheelSpeed() const
         {
             //https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
