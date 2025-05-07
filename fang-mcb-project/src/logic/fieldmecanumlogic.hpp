@@ -46,9 +46,9 @@ namespace logic
          * rotational convention is used. And it is recommended that the mathematical ones
          * would be the choice.
          */
-        void setMotion(const Velocity2D& translation, double rotationalOffset);
+        void setMotion(const Velocity2D& translation, const RPM& rotation);
 
-        void setTotalMotion(const Velocity2D& translation, double rotationOffset, const Radians& robotAngle);
+        void setTotalMotion(const Velocity2D& translation, const RPM& rotation, const Radians& robotAngle);
 
         /**
          * If the robot is facing forward at the field, that is 0 degrees. 
@@ -57,11 +57,11 @@ namespace logic
          */
         void setRobotAngle(const Radians& robotAngle);
         void setTranslation(const Velocity2D& translation);
-        void setRotationOffset(double rotationalOffset);
+        void setRotationOffset(const RPM& rotation);
 
         Radians getRobotAngle() const;
         Velocity2D getTranslation() const;
-        double getRotationOffset() const;
+        RPM getRotationOffset() const;
 
         QuadDriveData getWheelSpeeds() const;
         double getFrontRightWheelSpeed() const;
