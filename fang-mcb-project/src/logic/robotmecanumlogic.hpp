@@ -59,6 +59,10 @@ namespace logic
         double getRearRightWheelSpeed() const;
 
         private:
+        //This will not update translation. It can be dangerous because the user can expect
+        //However, this can remove redundancy in internal implementation
+        void rawSetRobotAngle(Radians robotAngle);
+        
         Velocity2D fieldToRobotTranslation(const Velocity2D& translation) const;
         Velocity2D robotToFieldTranslation(const Velocity2D& translation) const;
         
