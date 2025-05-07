@@ -25,5 +25,17 @@ namespace logic
 
             return Velocity2D{xVelocity, yVelocity};
         }
+
+        RPM MecanumCalculator::getRotation() const
+        {
+
+        //https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
+        //Equation 26
+        const RPM rotationSum{- m_quadDriveData.frontLeft + m_quadDriveData.frontRight
+                              - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight};
+        const auto rotationConstant{mk_wheelRadius / (4.0 * mk_wheelDistanceConstant)};
+
+        return rotationConstant * rotationSum; 
+        }
     }
 }
