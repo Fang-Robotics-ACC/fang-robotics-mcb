@@ -20,7 +20,10 @@ namespace logic
         class MecanumCalculator
         {
         public:
-            MecanumCalculator(const Meters& horizontalWheelDistance, const Meters& verticalWheelDistance);
+            MecanumCalculator(const Meters& horizontalWheelDistance,
+                              const Meters& verticalWheelDistance,
+                              const Meters& wheelRadius);
+
             void setWheelSpeeds(const QuadDriveData& quadDriveData);
 
             /**
@@ -37,6 +40,7 @@ namespace logic
             AbstractMecanumCalculator m_abstractCalc{};
             //l_x + l_y
             const Meters mk_wheelDistanceConstant;
+            const Meters mk_wheelRadius;
         };
     }
 }

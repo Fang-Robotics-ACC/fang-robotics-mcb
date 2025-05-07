@@ -6,8 +6,11 @@ namespace logic
 
         //lx is half of the total horizontal distance between the wheels
         //ly is half of the total vertical distance between the wheels
-        MecanumCalculator::MecanumCalculator(const Meters& horizontalWheelDistance, const Meters& verticalWheelDistance):
-            mk_wheelDistanceConstant{horizontalWheelDistance / 2.0 + verticalWheelDistance / 2.0}
+        MecanumCalculator::MecanumCalculator(const Meters& horizontalWheelDistance,
+                                             const Meters& verticalWheelDistance,
+                                             const Meters& wheelRadius):
+            mk_wheelDistanceConstant{horizontalWheelDistance / 2.0 + verticalWheelDistance / 2.0},
+            mk_wheelRadius{wheelRadius}
         {}
     }
 }
