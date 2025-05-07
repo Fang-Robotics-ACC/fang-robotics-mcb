@@ -56,10 +56,10 @@ namespace logic
          * This uses equation 20
          */
         QuadDriveData getWheelSpeeds() const;
-        double getFrontRightWheelSpeed() const;
-        double getFrontLeftWheelSpeed() const;
-        double getRearLeftWheelSpeed() const;
-        double getRearRightWheelSpeed() const;
+        RPM getFrontRightWheelSpeed() const;
+        RPM getFrontLeftWheelSpeed() const;
+        RPM getRearLeftWheelSpeed() const;
+        RPM getRearRightWheelSpeed() const;
 
         private:
         //This will not update translation. It can be dangerous because the user can expect
