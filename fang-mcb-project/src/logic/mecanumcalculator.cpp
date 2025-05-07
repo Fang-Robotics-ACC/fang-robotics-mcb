@@ -12,5 +12,18 @@ namespace logic
             mk_wheelDistanceConstant{horizontalWheelDistance / 2.0 + verticalWheelDistance / 2.0},
             mk_wheelRadius{wheelRadius}
         {}
+        
+        Velocity2D MecanumCalculator::getTranslation() const
+        {
+            MetersPerSecond xVelocity{(mk_wheelRadius / 4.0) 
+                                    * (m_quadDriveData.frontLeft - m_quadDriveData.frontRight
+                                     - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight)};
+
+            MetersPerSecond yVelocity{(mk_wheelRadius / 4.0) 
+                                    * (+ m_quadDriveData.frontLeft + m_quadDriveData.frontRight
+                                       + m_quadDriveData.rearLeft  + m_quadDriveData.rearRight)};
+
+            return Velocity2D{xVelocity, yVelocity};
+        }
     }
 }
