@@ -1,5 +1,4 @@
 #include "mecanumcalculator.hpp"
-/*
 namespace logic
 {
     namespace chassis
@@ -18,15 +17,15 @@ namespace logic
         {
             MetersPerSecond xVelocity{(mk_wheelRadius / 4.0) 
                                     * (m_quadDriveData.frontLeft - m_quadDriveData.frontRight
-                                     - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight)};
+                                     - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight) * k_antiRadians};
 
             MetersPerSecond yVelocity{(mk_wheelRadius / 4.0) 
                                     * (+ m_quadDriveData.frontLeft + m_quadDriveData.frontRight
-                                       + m_quadDriveData.rearLeft  + m_quadDriveData.rearRight)};
+                                       + m_quadDriveData.rearLeft  + m_quadDriveData.rearRight) * k_antiRadians};
 
             return Velocity2D{xVelocity, yVelocity};
         }
-
+/*
         RPM MecanumCalculator::getRotation() const
         {
 
@@ -36,8 +35,8 @@ namespace logic
                               - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight};
         const auto rotationConstant{mk_wheelRadius / (4.0 * mk_wheelDistanceConstant)};
 
-        return rotationConstant * rotationSum; 
+        return rotationConstant * rotationSum * k_antiRadians; 
         }
+        */
     }
 }
-*/
