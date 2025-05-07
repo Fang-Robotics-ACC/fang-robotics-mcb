@@ -43,6 +43,7 @@
 /* control includes ---------------------------------------------------------*/
 #include "tap/architecture/clock.hpp"
 #include "units.h"
+#include <cassert>
 
 #include "repeatultramk2.hpp"
 /* define timers here -------------------------------------------------------*/
@@ -60,6 +61,13 @@ static void updateIo(Drivers *drivers);
 
 int main()
 {
+    constexpr RadiansPerSecond anglularVelocity{1.0};
+    constexpr Meters radius{10.0};
+    constexpr auto radianRemover{1.0 / Radians{1.0}};
+    constexpr MetersPerSecond speed{radius * anglularVelocity * radianRemover};
+    constexpr MetersPerSecond expected{10.0};
+    static_assert(expected == speed); 
+
 #ifdef PLATFORM_HOSTED
     std::cout << "Simulation starting..." << std::endl;
 #endif
