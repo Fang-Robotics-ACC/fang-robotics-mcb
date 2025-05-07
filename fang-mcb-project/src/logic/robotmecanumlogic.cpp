@@ -1,5 +1,6 @@
 #include "robotmecanumlogic.hpp"
 
+/*
 
 namespace logic
 {
@@ -15,7 +16,7 @@ namespace logic
             //w_1
             const MetersPerSecond translationFactor{m_translation.y - m_translation.x};
             const MetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
-            return (1.0 / mk_wheelRadius) * (translationFactor - rotationFactor);
+            return RPM{(1.0 / mk_wheelRadius) * (translationFactor - rotationFactor)};
         }
 
         RPM RobotMecanumLogic::getFrontRightWheelSpeed() const
@@ -26,8 +27,8 @@ namespace logic
             //direction. It is desired for this to be positive
             //w_2
             const MetersPerSecond translationFactor{m_translation.y + m_translation.x};
-            const MetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
-            return (1.0 / mk_wheelRadius) * (translationFactor + rotationFactor);
+            const auto rotationFactor{mk_wheelDistanceConstant * m_rotation};
+            return RPM{(1.0 / mk_wheelRadius) * (translationFactor + rotationFactor)};
         }
 
         RPM RobotMecanumLogic::getRearLeftWheelSpeed() const
@@ -39,7 +40,7 @@ namespace logic
             //w_3
             const MetersPerSecond translationFactor{m_translation.y + m_translation.x};
             const MetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
-            return (1.0 / mk_wheelRadius) * (translationFactor - rotationFactor);
+            return RPM{(1.0 / mk_wheelRadius) * (translationFactor - rotationFactor)};
         }
 
         RPM RobotMecanumLogic::getRearRightWheelSpeed() const
@@ -53,8 +54,9 @@ namespace logic
             //w_4
             const MetersPerSecond translationFactor{m_translation.y - m_translation.x};
             const MetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
-            return (1.0 / mk_wheelRadius) * (translationFactor + rotationFactor);
+            return RPM{(1.0 / mk_wheelRadius) * (translationFactor + rotationFactor)};
         }
 
     }
 }
+*/

@@ -1,4 +1,5 @@
 #include "mecanumcalculator.hpp"
+/*
 namespace logic
 {
     namespace chassis
@@ -9,7 +10,7 @@ namespace logic
         MecanumCalculator::MecanumCalculator(const Meters& horizontalWheelDistance,
                                              const Meters& verticalWheelDistance,
                                              const Meters& wheelRadius):
-            mk_wheelDistanceConstant{(horizontalWheelDistance / 2.0) + (verticalWheelDistance / 2.0)},
+            mk_wheelDistanceConstant{(horizontalWheelDistance)},
             mk_wheelRadius{wheelRadius}
         {}
         
@@ -39,3 +40,4 @@ namespace logic
         }
     }
 }
+*/
