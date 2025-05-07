@@ -1,5 +1,5 @@
-#ifndef FANG_ROBOTICS_MCB_FIELD_MECANUM_LOGIC_HPP
-#define FANG_ROBOTICS_MCB_FIELD_MECANUM_LOGIC_HPP
+#ifndef FANG_ROBOTICS_MCB_ROBOT_MECANUM_LOGIC_HPP
+#define FANG_ROBOTICS_MCB_ROBOT_MECANUM_LOGIC_HPP
 #include "unitaliases.hpp"
 #include "quaddrivedata.hpp"
 #include "abstractfieldmecanumlogic.hpp"
