@@ -18,4 +18,7 @@ using Milliseconds = units::time::millisecond_t;
 using RadiansPerSecond = units::angular_velocity::radians_per_second_t;
 using Radians = units::angle::radian_t;
 using Degrees = units::angle::degree_t;
+
+//One of the few moments that I would use auto
+auto const k_antiRadians{1.0 / Radians{1.0}};
 #endif
