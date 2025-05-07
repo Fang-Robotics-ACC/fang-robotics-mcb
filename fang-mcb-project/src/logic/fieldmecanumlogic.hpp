@@ -14,6 +14,7 @@ namespace logic
         class FieldMecanumLogic 
         {
         public:
+        using QuadDriveData = data::chassis::QuadDriveData<RPM>;
         /**
          * Refer to: https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
          * in equation 24
@@ -26,18 +27,6 @@ namespace logic
                           const Meters& verticalWheelDistance,
                           const Meters& wheelRadius);
         /**
-         * This is called Field Mecanum Logic because the frame
-         * of refernce is relative to the field
-         * Translation is the percentage of the maximum speed 
-         * Positive rotation is counterclockwise it a percentage
-         * of the maximum speed that will be applied to offset
-         * left and right sides to produce a rotation
-         * (i.e. if the max speed is 100 f/s, then 0.5 will mean
-         * that the difference between the overall motion of the left
-         * and right sides of the drive will be by 50 f/s. A positive value
-         * will mean the robot will rotate counterclockwise.)
-         * 
-         * 
          * Refer to https://gm0.org/en/latest/docs/software/tutorials/mecanum-drive.html
          * The formula has been adapted so that the positive rotation is counter-clockwise.
          * Although this is does not smoothly translate joystick movements, it is mathematically
@@ -57,11 +46,11 @@ namespace logic
          */
         void setRobotAngle(const Radians& robotAngle);
         void setTranslation(const Velocity2D& translation);
-        void setRotationOffset(const RPM& rotation);
+        void setRotation(const RPM& rotation);
 
         Radians getRobotAngle() const;
         Velocity2D getTranslation() const;
-        RPM getRotationOffset() const;
+        RPM getRotation() const;
 
         QuadDriveData getWheelSpeeds() const;
         double getFrontRightWheelSpeed() const;
