@@ -5,7 +5,7 @@
 #include "chassislogicaliases.hpp"
 #include <iostream>
 
-TEST(mecanumCalculator, MecanumMotionCalculator )
+TEST(mecanumCalculator, forwardsTest)
 {
     using namespace units::literals;
     {
