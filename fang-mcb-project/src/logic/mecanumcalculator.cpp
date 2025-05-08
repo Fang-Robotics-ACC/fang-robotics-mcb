@@ -4,6 +4,11 @@ namespace logic
     namespace chassis
     {
 
+        void MecanumCalculator::setWheelSpeeds(const QuadDriveData& quadDriveData)
+        {
+            m_quadDriveData = quadDriveData;
+        }
+
         //lx is half of the total horizontal distance between the wheels
         //ly is half of the total vertical distance between the wheels
         MecanumCalculator::MecanumCalculator(const Meters& horizontalWheelDistance,
