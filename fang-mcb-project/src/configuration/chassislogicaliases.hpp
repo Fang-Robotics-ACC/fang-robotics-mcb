@@ -12,6 +12,7 @@ namespace logic
     namespace chassis
     {
         using AbstractQuadDriveData = data::chassis::QuadDriveData<double>;
+        using QuadDriveData = data::chassis::QuadDriveData<RPM>;
         using Translation2D = mathAliases::AbstractVector2D;
 
         //Messy for backward compatibility. Will be refactored during the next refactor cycle
