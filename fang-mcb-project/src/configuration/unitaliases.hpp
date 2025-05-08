@@ -18,6 +18,8 @@ using Milliseconds = units::time::millisecond_t;
 using RadiansPerSecond = units::angular_velocity::radians_per_second_t;
 using Radians = units::angle::radian_t;
 using Degrees = units::angle::degree_t;
+using RawRadianMeters = units::compound_unit<units::angle::radians, units::length::meters>;
+using RadianMeters = units::unit_t<RawRadianMeters>;
 
 //One of the few moments that I would use auto
 //These constants do not alter anything numerically, but are useful when
