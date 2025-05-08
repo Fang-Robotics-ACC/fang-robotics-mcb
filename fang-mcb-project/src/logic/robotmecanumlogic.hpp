@@ -73,7 +73,7 @@ namespace logic
         RadiansPerSecond m_rotation{0};
         Radians m_robotAngle{0.0};
 
-        const Meters mk_wheelRadius;
+        const RadianMeters mk_wheelRadius;
         const Meters mk_horizontalWheelDistance;
         const Meters mk_halfHorizontalWheelDistance{mk_horizontalWheelDistance / 2.0};
         const Meters mk_verticalWheelDistance;
