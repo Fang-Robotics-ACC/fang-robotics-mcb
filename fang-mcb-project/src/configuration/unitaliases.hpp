@@ -20,6 +20,8 @@ using Radians = units::angle::radian_t;
 using Degrees = units::angle::degree_t;
 using RawRadianMeters = units::compound_unit<units::angle::radians, units::length::meters>;
 using RadianMeters = units::unit_t<RawRadianMeters>;
+using RawRadianMetersPerSecond = units::compound_unit<RawRadianMeters, units::inverse<units::time::seconds>>;
+using RadianMetersPerSecond = units::unit_t<RawRadianMetersPerSecond>;
 
 //One of the few moments that I would use auto
 //These constants do not alter anything numerically, but are useful when
