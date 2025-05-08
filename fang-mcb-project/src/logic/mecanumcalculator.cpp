@@ -1,4 +1,6 @@
 #include "mecanumcalculator.hpp"
+#include "unitaliases.hpp"
+#include <iostream>
 namespace logic
 {
     namespace chassis
@@ -20,13 +22,13 @@ namespace logic
         
         Velocity2D MecanumCalculator::getTranslation() const
         {
-            MetersPerSecond xVelocity{(mk_wheelRadius / 4.0) 
+            MetersPerSecond xVelocity{((mk_wheelRadius / 4.0) 
                                     * (m_quadDriveData.frontLeft - m_quadDriveData.frontRight
-                                     - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight) * k_antiRadians};
+                                     - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight)).to<double>()};
 
-            MetersPerSecond yVelocity{(mk_wheelRadius / 4.0) 
-                                    * (+ m_quadDriveData.frontLeft + m_quadDriveData.frontRight
-                                       + m_quadDriveData.rearLeft  + m_quadDriveData.rearRight) * k_antiRadians};
+            MetersPerSecond yVelocity{((mk_wheelRadius / 4.0) 
+                                    * (  m_quadDriveData.frontLeft + m_quadDriveData.frontRight
+                                       + m_quadDriveData.rearLeft  + m_quadDriveData.rearRight)).to<double>()};
 
             return Velocity2D{xVelocity, yVelocity};
         }
