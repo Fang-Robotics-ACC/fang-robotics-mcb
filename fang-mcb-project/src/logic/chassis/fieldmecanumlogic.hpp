@@ -58,6 +58,9 @@ namespace logic
         double getRearRightWheelSpeed() const;
 
         private:
+        //This does not update the translation when changed.
+        //It is useful in certain cases to speed stuff up.
+        void setRawRotation(const RPM& rotation);
         Velocity2D fieldToRobotTranslation(const Velocity2D& translation) const;
         Velocity2D robotToFieldTranslation(const Velocity2D& translation) const;
         
