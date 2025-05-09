@@ -3,6 +3,13 @@ namespace logic
 {
     namespace chassis
     {
+        RobotMecanumLogic::RobotMecanumLogic(const Meters& horizontalWheelDistance,
+                                             const Meters& verticalWheelDistance,
+                                             const Meters& wheelRadius):
+        mk_horizontalWheelDistance{horizontalWheelDistance},
+        mk_verticalWheelDistance{verticalWheelDistance},
+        mk_wheelRadius{wheelRadius}
+        {}
 
         void RobotMecanumLogic::setMotion(const Velocity2D& translation, const RPM& rotation)
         {
