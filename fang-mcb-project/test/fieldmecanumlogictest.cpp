@@ -31,7 +31,7 @@ TEST_P(FieldMecanumParameterTest, translationRotationTests)
     logic::chassis::FieldMecanumLogic mecanumLogic{horizontalDistance, verticalDistance, wheelRadius};
     mathAliases::AbstractVector2D strippedTranslation{translation.x.to<double>(), translation.y.to<double>()};
     //Transform velocity relative to robot
-    mathAliases::AbstractVector2D strippedRobotTranslation{util::math::rotateVector2D(strippedTranslation, robotAngle)};
+    mathAliases::AbstractVector2D strippedRobotTranslation{util::math::rotateVector2D(strippedTranslation, -robotAngle)};
     logic::chassis::Velocity2D expectedRobotTranslation{MetersPerSecond{strippedRobotTranslation.x}, MetersPerSecond{strippedRobotTranslation.y}};
 
     mecanumLogic.setTotalMotion(translation, rotation, robotAngle);
@@ -63,4 +63,10 @@ INSTANTIATE_TEST_SUITE_P(rotationTest, FieldMecanumParameterTest,
                          testing::Values(std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 0.0_mps}, 4_rpm, 0_rad, 1_m, 1_m, 1_m),
                                          std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 0.0_mps}, -234_rpm, 0_rad, 1_m, 1_m, 1_m),
                                          std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 0.0_mps}, 1.23_rpm, 0_rad, 2_m, 1_m, 4_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 0.0_mps}, 235_rpm, 0_rad, 1_m, 3_m, 5.5_m)));
+                                         std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 0.0_mps}, 5_rpm, 0_rad, 1_m, 3_m, 5.5_m)));
+
+INSTANTIATE_TEST_SUITE_P(fieldAngleTest, FieldMecanumParameterTest,
+                         testing::Values(std::make_tuple(logic::chassis::Velocity2D{1.0_mps, 0.0_mps}, 0.0_rpm, 90_deg, 1_m, 1_m, 1_m),
+                                         std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 1.0_mps}, 0.0_rpm, 10_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(logic::chassis::Velocity2D{-23.0_mps, -2340.0_mps}, 0.0_rpm, 4353_rad, 2_m, 1_m, 4_m),
+                                         std::make_tuple(logic::chassis::Velocity2D{34.0_mps, 0.0_mps}, 0.0_rpm, -234_rad, 1_m, 3_m, 5.5_m)));
