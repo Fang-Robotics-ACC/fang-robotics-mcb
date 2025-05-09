@@ -3,6 +3,22 @@ namespace logic
 {
     namespace chassis
     {
+
+        void RobotMecanumLogic::setMotion(const Velocity2D& translation, const RPM& rotation)
+        {
+            setTranslation(translation);
+            setRotation(rotation);
+        }
+
+        void RobotMecanumLogic::setTranslation(const Velocity2D& translation)
+        {
+            m_translation = translation;
+        }
+
+        void RobotMecanumLogic::setRotation(const RPM& rotation)
+        {
+            m_rotation = rotation;
+        }
         
         RPM RobotMecanumLogic::getFrontLeftWheelSpeed() const
         {
