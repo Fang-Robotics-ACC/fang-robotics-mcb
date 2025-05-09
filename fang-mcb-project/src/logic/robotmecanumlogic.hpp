@@ -36,15 +36,6 @@ namespace logic
          * would be the choice.
          */
         void setMotion(const Velocity2D& translation, const RPM& rotation);
-
-        void setTotalMotion(const Velocity2D& translation, const RPM& rotation, const Radians& robotAngle);
-
-        /**
-         * If the robot is facing forward at the field, that is 0 degrees. 
-         * If the robot is facing left from the forward field direction, that is +90 degrees
-         * If the robot is racing right from the forward field direction that is -90 degrees
-         */
-        void setRobotAngle(const Radians& robotAngle);
         void setTranslation(const Velocity2D& translation);
         void setRotation(const RPM& rotation);
 
@@ -62,16 +53,8 @@ namespace logic
         RPM getRearRightWheelSpeed() const;
 
         private:
-        //This will not update translation. It can be dangerous because the user can expect
-        //However, this can remove redundancy in internal implementation
-        void rawSetRobotAngle(Radians robotAngle);
-        
-        Velocity2D fieldToRobotTranslation(const Velocity2D& translation) const;
-        Velocity2D robotToFieldTranslation(const Velocity2D& translation) const;
-        
         Velocity2D m_translation{MetersPerSecond{0.0}, MetersPerSecond{0.0}};
         RadiansPerSecond m_rotation{0};
-        Radians m_robotAngle{0.0};
 
         const Meters mk_wheelRadius;
         const Meters mk_horizontalWheelDistance;
@@ -80,8 +63,6 @@ namespace logic
         const Meters mk_halfVerticalWheelDistance{mk_verticalWheelDistance / 2.0};
         //l_x + l_y
         const Meters mk_wheelDistanceConstant{mk_halfVerticalWheelDistance + mk_halfHorizontalWheelDistance};
-
-        AbstractFieldMecanumLogic m_abstractFieldLogic{};
         };
     }
 }
