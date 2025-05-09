@@ -4,6 +4,8 @@
 #include "robotmecanumlogic.hpp"
 #include "mecanumcalculator.hpp"
 
+#include <iostream>
+
 TEST(zeroTest, robotMecanumLogic)
 {
     {
@@ -55,6 +57,8 @@ TEST(forwardTest, robotMecanumLogic)
         const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
+        std::cout << mecanumLogic.getFrontLeftWheelSpeed();
+        std::cout << mecanumLogic.getFrontLeftWheelSpeed().name();
         EXPECT_DOUBLE_EQ(translation.x.to<double>(), outputTranslation.x.to<double>());
         EXPECT_DOUBLE_EQ(translation.y.to<double>(), outputTranslation.y.to<double>());
         EXPECT_DOUBLE_EQ(rotation.to<double>(), outputRotation.to<double>());
