@@ -202,7 +202,6 @@ TEST(clockwiseTest, MecanumMotionCalculator)
     const logic::chassis::Velocity2D expected{0.0_mps, 0.0_mps};
     const RPM expectedRotation{-1.0_rad_per_s};
     calc.setWheelSpeeds(test);
-    std::cout << calc.getRotation();
     EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
     EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
     EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
