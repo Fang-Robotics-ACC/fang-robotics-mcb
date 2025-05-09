@@ -19,6 +19,12 @@ namespace logic
         {
             m_rotation = rotation;
         }
+
+        QuadDriveData RobotMecanumLogic::getWheelSpeeds() const
+        {
+            return QuadDriveData{getFrontLeftWheelSpeed(), getFrontRightWheelSpeed(),
+                                 getRearLeftWheelSpeed(),  getRearRightWheelSpeed()};
+        }
         
         RPM RobotMecanumLogic::getFrontLeftWheelSpeed() const
         {
