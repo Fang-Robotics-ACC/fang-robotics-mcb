@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_FIELD_MECANUM_LOGIC_HPP
 #include "unitaliases.hpp"
 #include "quaddrivedata.hpp"
-#include "abstractfieldmecanumlogic.hpp"
+#include "robotmecanumlogic.hpp"
 #include "chassislogicaliases.hpp"
 #include "quaddrivedata.hpp"
 
@@ -14,7 +14,6 @@ namespace logic
         class FieldMecanumLogic 
         {
         public:
-        using QuadDriveData = data::chassis::QuadDriveData<RPM>;
         /**
          * Refer to: https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
          * in equation 24
@@ -64,13 +63,7 @@ namespace logic
         
         Radians m_robotAngle{0.0};
 
-        const Meters mk_wheelRadius;
-        const Meters mk_horizontalWheelDistance;
-        const Meters mk_halfHorizontalWheelDistance{horizontalWheelDistance / 2.0};
-        const Meters mk_verticalWheelDistance;
-        const Meters mk_halfVerticalWheelDistance{verticalWheelDistance / 2.0};
-
-        AbstractFieldMecanumLogic m_abstractFieldLogic{};
+        RobotMecanumLogic m_robotMecanumLogic;
         };
     }
 }
