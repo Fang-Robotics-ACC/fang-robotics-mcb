@@ -52,10 +52,10 @@ namespace logic
         RPM getRotation() const;
 
         QuadDriveData getWheelSpeeds() const;
-        double getFrontRightWheelSpeed() const;
-        double getFrontLeftWheelSpeed() const;
-        double getRearLeftWheelSpeed() const;
-        double getRearRightWheelSpeed() const;
+        RPM getFrontRightWheelSpeed() const;
+        RPM getFrontLeftWheelSpeed() const;
+        RPM getRearLeftWheelSpeed() const;
+        RPM getRearRightWheelSpeed() const;
 
         private:
         //This does not update the translation when the robot angle is changed.
@@ -65,7 +65,6 @@ namespace logic
         Velocity2D robotToFieldTranslation(const Velocity2D& translation) const;
         
         Radians m_robotAngle{0.0};
-
         RobotMecanumLogic m_robotMecanumLogic;
         };
     }
