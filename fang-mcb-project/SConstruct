@@ -71,6 +71,7 @@ env.AppendUnique(CPPPATH=[
     abspath(r"src"),
     abspath(r"src/motors"),
     abspath(r"src/logic"),
+    abspath(r"src/logic/chassis"),
     abspath(r"src/data"),
     abspath(r"src/subsystem/chassis"),
     abspath(r"src/configuration"),
