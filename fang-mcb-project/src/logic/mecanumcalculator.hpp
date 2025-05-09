@@ -6,6 +6,7 @@
 #include "modm/math/geometry/vector.hpp"
 #include "chassislogicaliases.hpp"
 #include "abstractmecanumcalculator.hpp"
+#include "quaddrivedata.hpp"
 
 namespace logic
 {
@@ -36,7 +37,7 @@ namespace logic
              */
             RPM getRotation() const;
         private:
-            QuadDriveData m_quadDriveData{RPM{0}, RPM{0}, RPM{0}, RPM{0}};
+            data::chassis::QuadDriveData<RadiansPerSecond> m_quadDriveData{RPM{0}, RPM{0}, RPM{0}, RPM{0}};
             AbstractMecanumCalculator m_abstractCalc{};
             //l_x + l_y
             const Meters mk_wheelDistanceConstant;

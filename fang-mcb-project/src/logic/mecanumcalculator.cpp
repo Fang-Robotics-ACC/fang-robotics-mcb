@@ -8,7 +8,12 @@ namespace logic
 
         void MecanumCalculator::setWheelSpeeds(const QuadDriveData& quadDriveData)
         {
-            m_quadDriveData = quadDriveData;
+            //The input is in RPM; however, the implementation needs the angular velocity in radians
+            //This is a quick fix. A more proper way to do this is to add operator overloads for the templates
+            m_quadDriveData.frontLeft = quadDriveData.frontLeft;
+            m_quadDriveData.frontRight = quadDriveData.frontRight;
+            m_quadDriveData.rearLeft = quadDriveData.rearLeft;
+            m_quadDriveData.rearRight = quadDriveData.rearRight;
         }
 
         //lx is half of the total horizontal distance between the wheels
