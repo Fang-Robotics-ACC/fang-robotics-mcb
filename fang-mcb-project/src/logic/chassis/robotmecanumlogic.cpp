@@ -46,7 +46,7 @@ namespace logic
             //direction. It is desired for this to be positive
             //How many radius's per second? i.e. radians persecond
             //w_1
-            const RadianMetersPerSecond translationFactor{(m_translation.y - m_translation.x).to<double>()};
+            const RadianMetersPerSecond translationFactor{(m_translation.y + m_translation.x).to<double>()};
             const RadianMetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
             return ((1.0 / mk_wheelRadius) * (translationFactor - rotationFactor));
         }
@@ -57,7 +57,7 @@ namespace logic
             //If all of v_x is positive, then the wheels are pushing in the same
             //direction. It is desired for this to be positive
             //w_2
-            const RadianMetersPerSecond translationFactor{(m_translation.y + m_translation.x).to<double>()};
+            const RadianMetersPerSecond translationFactor{(m_translation.y - m_translation.x).to<double>()};
             const RadianMetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
             return ((1.0 / mk_wheelRadius) * (translationFactor + rotationFactor));
         }
@@ -70,7 +70,7 @@ namespace logic
             //direction. It is desired for this to be positive
             //w_3
 
-            const RadianMetersPerSecond translationFactor{(m_translation.y + m_translation.x).to<double>()};
+            const RadianMetersPerSecond translationFactor{(m_translation.y - m_translation.x).to<double>()};
             const RadianMetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
             return ((1.0 / mk_wheelRadius) * (translationFactor - rotationFactor));
         }
@@ -85,7 +85,7 @@ namespace logic
             //direction. It is desired for this to be positive
             //w_4
 
-            const RadianMetersPerSecond translationFactor{(m_translation.y - m_translation.x).to<double>()};
+            const RadianMetersPerSecond translationFactor{(m_translation.y + m_translation.x).to<double>()};
             const RadianMetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
             return ((1.0 / mk_wheelRadius) * (translationFactor + rotationFactor));
         }
