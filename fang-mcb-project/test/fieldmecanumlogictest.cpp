@@ -46,3 +46,21 @@ TEST_P(FieldMecanumParameterTest, translationRotationTests)
 
 INSTANTIATE_TEST_SUITE_P(zeroTest, FieldMecanumParameterTest,
                          testing::Values(std::make_tuple(logic::chassis::Velocity2D{0_mps, 0_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m)));
+
+INSTANTIATE_TEST_SUITE_P(yTranslationTest, FieldMecanumParameterTest,
+                         testing::Values(std::make_tuple(logic::chassis::Velocity2D{0_mps, 234.23_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(logic::chassis::Velocity2D{0_mps, -234_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(logic::chassis::Velocity2D{0_mps, 12_mps}, 0_rpm, 0_rad, 1_m, 2_m, 4_m),
+                                         std::make_tuple(logic::chassis::Velocity2D{0_mps, -235.45_mps}, 0_rpm, 0_rad, 2_m, 1_m, 5.5_m)));
+
+INSTANTIATE_TEST_SUITE_P(xTranslationTest, FieldMecanumParameterTest,
+                         testing::Values(std::make_tuple(logic::chassis::Velocity2D{234.23_mps, 0.0_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(logic::chassis::Velocity2D{12.23_mps, 0.0_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(logic::chassis::Velocity2D{234_mps, 0.0_mps}, 0_rpm, 0_rad, 2_m, 1_m, 4_m),
+                                         std::make_tuple(logic::chassis::Velocity2D{123.2_mps, 0.0_mps}, 0_rpm, 0_rad, 1_m, 3_m, 5.5_m)));
+
+INSTANTIATE_TEST_SUITE_P(rotationTest, FieldMecanumParameterTest,
+                         testing::Values(std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 0.0_mps}, 4_rpm, 0_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 0.0_mps}, -234_rpm, 0_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 0.0_mps}, 1.23_rpm, 0_rad, 2_m, 1_m, 4_m),
+                                         std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 0.0_mps}, 235_rpm, 0_rad, 1_m, 3_m, 5.5_m)));
