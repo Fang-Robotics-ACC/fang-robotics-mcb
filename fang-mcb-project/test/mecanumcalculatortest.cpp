@@ -230,6 +230,17 @@ TEST(clockwiseTest, MecanumMotionCalculator)
     EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
     EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
     }
+    //Different chassis size test
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 3.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {1.0_rad_per_s, -1.0_rad_per_s, 1.0_rad_per_s, -1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, 0.0_mps};
+    const RPM expectedRotation{-0.5_rad_per_s};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
 }
 
 TEST(zeroTest, MecanumMotionCalculator)
