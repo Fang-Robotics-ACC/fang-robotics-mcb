@@ -32,6 +32,7 @@ TEST_P(FieldMecanumParameterTest, translationRotationTests)
     const Meters horizontalDistance{std::get<3>(GetParam())};
     const Meters verticalDistance{std::get<4>(GetParam())};
     const Meters wheelRadius{std::get<5>(GetParam())};
+    
 
     logic::chassis::MecanumCalculator mecanumCalc{horizontalDistance, verticalDistance, wheelRadius};
     logic::chassis::FieldMecanumLogic mecanumLogic{horizontalDistance, verticalDistance, wheelRadius};
@@ -42,8 +43,36 @@ TEST_P(FieldMecanumParameterTest, translationRotationTests)
 
     mecanumLogic.setTotalMotion(translation, rotation, robotAngle);
     mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
-    const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
-    const RPM outputRotation{mecanumCalc.getRotation()};
+    logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+    RPM outputRotation{mecanumCalc.getRotation()};
+
+    EXPECT_NEAR(outputTranslation.x.to<double>(), expectedRobotTranslation.x.to<double>(), k_tolerance);
+    EXPECT_NEAR(outputTranslation.y.to<double>(), expectedRobotTranslation.y.to<double>(), k_tolerance);
+    EXPECT_NEAR(outputRotation.to<double>(), rotation.to<double>(), k_tolerance);
+
+    //The implementation of setting the angle with setRobotAngle versus total motion is different
+    //It calls setTranslation to reset the translation stored in the robot centric logic to the new angle
+    //setTotalMotion calls a private function rawSetRobotAngle which does not adjust the translation; however,
+    //in setTotalMotion, the translation is set immediately afterwards.
+    //Because of the dangers of the user not properly utilizing rawSetRobotAngle, it is private
+    //Although the extra call to reset the translation in setRotation adds a couple of instruction
+    //The logic should render accurate numbers consistently.
+
+    constexpr logic::chassis::Velocity2D zeroTranslation{0_mps, 0_mps};
+    constexpr RPM zeroRotation{0.0};
+    //Reset the translation
+    mecanumLogic.setTotalMotion(zeroTranslation, zeroRotation, 0.0_rad);
+
+    //Set translation then rotation, then apply new robot angle
+    mecanumLogic.setTranslation(translation);
+    mecanumLogic.setRotation(rotation);
+
+    //This is to test if the new robot angle actually properly converts the field translation
+    mecanumLogic.setRobotAngle(robotAngle);
+
+    mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
+    outputTranslation = mecanumCalc.getTranslation();
+    outputRotation = mecanumCalc.getRotation();
 
     EXPECT_NEAR(outputTranslation.x.to<double>(), expectedRobotTranslation.x.to<double>(), k_tolerance);
     EXPECT_NEAR(outputTranslation.y.to<double>(), expectedRobotTranslation.y.to<double>(), k_tolerance);
@@ -73,6 +102,6 @@ INSTANTIATE_TEST_SUITE_P(rotationTest, FieldMecanumParameterTest,
 
 INSTANTIATE_TEST_SUITE_P(fieldAngleTest, FieldMecanumParameterTest,
                          testing::Values(std::make_tuple(logic::chassis::Velocity2D{1.0_mps, 0.0_mps}, 0.0_rpm, 90_deg, 1_m, 1_m, 1_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 1.0_mps}, 0.0_rpm, 10_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 1.0_mps}, 0.0_rpm, -90_deg, 1_m, 1_m, 1_m),
                                          std::make_tuple(logic::chassis::Velocity2D{-23.0_mps, -2340.0_mps}, 0.0_rpm, 4353_rad, 1_m, 1_m, 4_m),
                                          std::make_tuple(logic::chassis::Velocity2D{34.0_mps, 0.0_mps}, 0.0_rpm, -270_deg, 1_m, 1_m, 1_m)));
