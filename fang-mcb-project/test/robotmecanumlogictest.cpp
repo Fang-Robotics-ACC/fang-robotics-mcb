@@ -150,8 +150,8 @@ TEST(backwardsTest, robotMecanumLogic)
     //Different wheel radius case
     {
         using namespace units::literals;
-        const Meters horizontalWheelDistance{1};
-        const Meters verticalWheelDistance{1};
+        const Meters horizontalWheelDistance{234.3};
+        const Meters verticalWheelDistance{23.43};
         const Meters wheelRadius{4};
 
         const logic::chassis::Velocity2D translation{0.0_mps, -1.0_mps};
@@ -425,8 +425,8 @@ TEST(rotationTest, robotMecanumLogic)
     //Random number case
     {
         using namespace units::literals;
-        const Meters horizontalWheelDistance{1};
-        const Meters verticalWheelDistance{1};
+        const Meters horizontalWheelDistance{0.3453};
+        const Meters verticalWheelDistance{0.234};
         const Meters wheelRadius{4};
 
         const logic::chassis::Velocity2D translation{0.0_mps, 0.0_mps};
