@@ -21,7 +21,7 @@ namespace logic
         MecanumCalculator::MecanumCalculator(const Meters& horizontalWheelDistance,
                                              const Meters& verticalWheelDistance,
                                              const Meters& wheelRadius):
-            mk_wheelDistanceConstant{(horizontalWheelDistance)},
+            mk_wheelDistanceConstant{(horizontalWheelDistance + verticalWheelDistance) / 2.0},
             mk_wheelRadius{wheelRadius}
         {}
         
