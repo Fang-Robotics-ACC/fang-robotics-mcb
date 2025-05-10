@@ -88,7 +88,6 @@ namespace logic
 
         RPM RobotMecanumLogic::getRearRightWheelSpeed() const
         {
-
             //https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
             //Equation 20, but v_x is v_y and v_y is v_x
             //Equation 20, but v_x is v_y and v_y is v_x
