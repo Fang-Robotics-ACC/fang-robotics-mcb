@@ -8,6 +8,10 @@ namespace util
 {
     namespace math
     {
+        /**
+         * This algorithm has an accuracy of within 1e-14; however, rotating the vector back will produce accuracy to only within
+         * 1e-10
+         */
         mathAliases::AbstractVector2D rotateVector2D(const mathAliases::AbstractVector2D& vector, const Radians& rotationAngle);
     }
 }
