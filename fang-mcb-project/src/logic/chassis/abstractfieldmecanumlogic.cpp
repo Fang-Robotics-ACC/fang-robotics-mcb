@@ -25,10 +25,9 @@ namespace logic
             //This must be obtained beforehand or else the new angle will result
             //in bogus being returned (the old field translation is relative to the old angle
             //not the new one.)
-            const Translation2D fieldTranslation{getTranslation()};
             m_robotAngle = robotAngle;
             //Update robot-centric translation to new angle
-            setTranslation(fieldTranslation);
+            setTranslation(m_fieldTranslation);
         }
 
         void AbstractFieldMecanumLogic::setTranslation(const Translation2D& translation)
@@ -49,9 +48,7 @@ namespace logic
 
         Translation2D AbstractFieldMecanumLogic::getTranslation() const
         {
-            //Reverse the rotation that had been appied to make the translation to
-            //Be relative to the field and not the robot
-            return robotToFieldTranslation(m_robotMecanumLogic.getTranslation());
+            return m_fieldTranslation;
         }
 
         double AbstractFieldMecanumLogic::getRotationOffset() const

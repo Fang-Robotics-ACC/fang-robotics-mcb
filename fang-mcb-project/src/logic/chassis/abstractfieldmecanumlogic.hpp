@@ -63,6 +63,7 @@ namespace logic
         Translation2D robotToFieldTranslation(const Translation2D& translation) const;
         
         Radians m_robotAngle{0.0};
+        Translation2D m_fieldTranslation{0.0,0.0};
 
         AbstractRobotMecanumLogic m_robotMecanumLogic{};
         };
