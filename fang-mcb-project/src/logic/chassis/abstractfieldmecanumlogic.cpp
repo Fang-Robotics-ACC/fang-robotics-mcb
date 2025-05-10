@@ -97,6 +97,5 @@ namespace logic
         {
             return m_robotMecanumLogic.getWheelSpeeds();
         }
-
     }
 }
