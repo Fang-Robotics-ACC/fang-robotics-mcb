@@ -6,6 +6,7 @@
 #include "chassislogicaliases.hpp"
 #include "quaddrivedata.hpp"
 
+using namespace units::literals;
 
 namespace logic
 {
@@ -66,6 +67,7 @@ namespace logic
         
         Radians m_robotAngle{0.0};
         RobotMecanumLogic m_robotMecanumLogic;
+        Velocity2D m_fieldTranslation{0_mps, 0_mps};
         };
     }
 }

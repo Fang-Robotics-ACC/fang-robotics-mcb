@@ -31,14 +31,14 @@ namespace logic
         void FieldMecanumLogic::setRobotAngle(const Radians& robotAngle)
         {
             rawSetRobotAngle(robotAngle);
-            Velocity2D fieldTranslation{getTranslation()};
             //The translation relative to the robot must be updated since the robot is facing along a 
             //difference direction
-            setTranslation(fieldTranslation);
+            setTranslation(m_fieldTranslation);
         }
 
         void FieldMecanumLogic::setTranslation(const Velocity2D& translation)
         {
+            m_fieldTranslation = translation;
             m_robotMecanumLogic.setTranslation(fieldToRobotTranslation(translation));
         }
 
