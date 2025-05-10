@@ -7,6 +7,12 @@
 #include "unitaliases.hpp"
 #include <tuple>
 
+//The vector rotaiton function is within an accuracy of 1e-14 (14 decimal places)
+//The error tends to be at around 1e-13, which is still reasonable (13 decimal places)
+constexpr double k_tolerance{1e-12};
+
+//The error was detected in the field angle tests when despite 0 rotation being specified, the resulting rotation was arou
+
 using namespace units::literals;
 //Input velocity, expected velocigty
 //Input angular velocity, expected angular velocity,
@@ -39,9 +45,9 @@ TEST_P(FieldMecanumParameterTest, translationRotationTests)
     const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
     const RPM outputRotation{mecanumCalc.getRotation()};
 
-    EXPECT_DOUBLE_EQ(outputTranslation.x.to<double>(), expectedRobotTranslation.x.to<double>());
-    EXPECT_DOUBLE_EQ(outputTranslation.y.to<double>(), expectedRobotTranslation.y.to<double>());
-    EXPECT_DOUBLE_EQ(outputRotation.to<double>(), rotation.to<double>());
+    EXPECT_NEAR(outputTranslation.x.to<double>(), expectedRobotTranslation.x.to<double>(), k_tolerance);
+    EXPECT_NEAR(outputTranslation.y.to<double>(), expectedRobotTranslation.y.to<double>(), k_tolerance);
+    EXPECT_NEAR(outputRotation.to<double>(), rotation.to<double>(), k_tolerance);
 }
 
 INSTANTIATE_TEST_SUITE_P(zeroTest, FieldMecanumParameterTest,
