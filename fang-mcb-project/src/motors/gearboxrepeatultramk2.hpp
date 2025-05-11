@@ -21,7 +21,7 @@ namespace motors
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motors::Directionality directionality = data::motors::Directionality::BIDIRECTIONAL,
+                      data::motors::Directionality directionality,
                       double gearRatio);
 
 		void setSpeed(const RPM& speed) override;

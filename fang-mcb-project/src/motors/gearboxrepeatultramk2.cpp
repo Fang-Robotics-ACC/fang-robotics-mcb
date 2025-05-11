@@ -5,7 +5,7 @@ namespace motors
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motors::Directionality directionality = data::motors::Directionality::BIDIRECTIONAL,
+                      data::motors::Directionality directionality,
                       double gearRatio):
                       m_repeatUltraMk2{drivers, controllerInputVoltage, pwmPin, pinFrequency, directionality},
                       m_gearRatio{gearRatio}
@@ -38,7 +38,7 @@ namespace motors
 
 	RPM GearboxRepeatUltraMk2::getMinSpeed() const
     {
-        motorToShaftSpeed(m_repeatUltraMk2.getMinSpeed());
+        return motorToShaftSpeed(m_repeatUltraMk2.getMinSpeed());
     }
 
     RPM GearboxRepeatUltraMk2::motorToShaftSpeed(const RPM& motorSpeed) const
