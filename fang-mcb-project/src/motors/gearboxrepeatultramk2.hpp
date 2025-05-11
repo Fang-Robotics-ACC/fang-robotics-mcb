@@ -37,7 +37,6 @@ namespace motors
         RepeatUltraMk2 m_repeatUltraMk2;
         double m_gearRatio;
         RPM m_speed{0};
-        tap::Drivers& m_drivers;
 
         void initialize();
    };
