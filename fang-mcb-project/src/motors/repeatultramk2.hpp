@@ -33,7 +33,6 @@ namespace motors
 		void setMinSpeed(const RPM& minSpeed) override;
 		RPM getMinSpeed() const override;
     private:
-
         RPM m_speed{0};
         RPM m_maxSpeed{mk_maxTheoreticalSpeed};
         RPM m_minSpeed{0};
