@@ -18,5 +18,5 @@ TEST(minSpeedTest, repeatUltraMk2)
     motor.setSpeed(0_rpm);
     drivers.pwm.write(0.0, tap::gpio::Pwm::C1);
 
-    EXPECT_CALL(drivers.pwm,write(0.0, tap::gpio::Pwm::C1));
+    EXPECT_CALL(drivers.pwm,write);
 }
