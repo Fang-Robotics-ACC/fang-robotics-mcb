@@ -7,6 +7,7 @@ namespace data
         template <typename Unit>
         struct Vector2D
         {
+            using unit = Unit;
         public:
             Unit x;
             Unit y; 

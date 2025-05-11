@@ -1,52 +1,260 @@
 #include "gtest/gtest.h"
-#include "abstractmecanumcalculator.hpp"
+#include "mecanumcalculator.hpp"
+#include "unitaliases.hpp"
 #include "quaddrivedata.hpp"
 #include "chassislogicaliases.hpp"
 #include <iostream>
 
-using Calculator = logic::chassis::AbstractMecanumCalculator;
-using QuadDriveData = data::chassis::QuadDriveData<double>;
-using Translation2D = logic::chassis::Translation2D;
-
-TEST(forwardTest, baseMecanumMotionCalculator )
+TEST(mecanumCalculator, forwardsTest)
 {
-    Calculator calc{};
-    const QuadDriveData test{1.0,1.0,1.0,1.0};
-    const Translation2D forwardTestExpectedMotion{0.0, 1.0};
+    using namespace units::literals;
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {1.0_rad_per_s, 1.0_rad_per_s, 1.0_rad_per_s, 1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, 1.0_mps};
+    const RPM expectedRotation{0.0};
     calc.setWheelSpeeds(test);
-    std::cout << calc.getTranslation().x;
-    EXPECT_DOUBLE_EQ(calc.getTranslation().x, forwardTestExpectedMotion.x);
-    EXPECT_DOUBLE_EQ(calc.getTranslation().y, forwardTestExpectedMotion.y);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 4.0_m};
+    const logic::chassis::QuadDriveData test {1.0_rad_per_s, 1.0_rad_per_s, 1.0_rad_per_s, 1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, 4.0_mps};
+    const RPM expectedRotation{0.0};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {1.5_rad_per_s, 1.5_rad_per_s, 1.5_rad_per_s, 1.5_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, 1.5_mps};
+    const RPM expectedRotation{0.0};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
 }
 
-TEST(leftTest, baseMecanumMotionCalculator )
+TEST(backwardsTest, MecanumMotionCalculator )
 {
-    Calculator calc{};
-    const QuadDriveData test{1.0,-1.0,-1.0,1.0};
-    const Translation2D expectedMotion{1.0, 0.0};
+    using namespace units::literals;
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {-1.0_rad_per_s, -1.0_rad_per_s, -1.0_rad_per_s, -1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, -1.0_mps};
+    const RPM expectedRotation{0.0};
     calc.setWheelSpeeds(test);
-    EXPECT_DOUBLE_EQ(calc.getTranslation().x, expectedMotion.x);
-    EXPECT_DOUBLE_EQ(calc.getTranslation().y, expectedMotion.y);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 4.0_m};
+    const logic::chassis::QuadDriveData test {-1.0_rad_per_s, -1.0_rad_per_s, -1.0_rad_per_s, -1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, -4.0_mps};
+    const RPM expectedRotation{0.0};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+    //Decimal test
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {-1000.534_rad_per_s, -1000.534_rad_per_s, -1000.534_rad_per_s, -1000.534_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, -1000.534_mps};
+    const RPM expectedRotation{0.0};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
 }
 
-TEST(zeroTest, baseMecanumMotionCalculator )
+TEST(rightTesst, MecanumMotionCalculator )
 {
-
-    Calculator calc{};
-
-    const QuadDriveData test{0,0,0,0};
-    const Translation2D expectedMotion{0.0, 0.0};
+    using namespace units::literals;
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {1.0_rad_per_s, -1.0_rad_per_s, -1.0_rad_per_s, 1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{1.0_mps, 0.0_mps};
+    const RPM expectedRotation{0.0};
     calc.setWheelSpeeds(test);
-    EXPECT_DOUBLE_EQ(calc.getTranslation().x, expectedMotion.x);
-    EXPECT_DOUBLE_EQ(calc.getTranslation().y, expectedMotion.y);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+
+    //Wheel size test
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 4.0_m};
+    const logic::chassis::QuadDriveData test {1.0_rad_per_s, -1.0_rad_per_s, -1.0_rad_per_s, 1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{4.0_mps, 0.0_mps};
+    const RPM expectedRotation{0.0};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+    //Decimal test
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {1000.534_rad_per_s, -1000.534_rad_per_s, -1000.534_rad_per_s, 1000.534_rad_per_s};
+    const logic::chassis::Velocity2D expected{1000.534_mps, 0.0_mps};
+    const RPM expectedRotation{0.0};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
 }
 
-TEST(clockwiseOffset, baseMecanumMotionCalculator )
+TEST(leftTest, MecanumMotionCalculator)
 {
-    Calculator calc{};
-
-    const QuadDriveData test{-1,1,-1,1};
-    const double expectedOffset{1};
+    using namespace units::literals;
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {-1.0_rad_per_s, 1.0_rad_per_s, 1.0_rad_per_s, -1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{-1.0_mps, 0.0_mps};
+    const RPM expectedRotation{0.0};
     calc.setWheelSpeeds(test);
-    EXPECT_DOUBLE_EQ(calc.getRotationOffset(), expectedOffset);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+
+    //Wheel size test
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 4.0_m};
+    const logic::chassis::QuadDriveData test {-1.0_rad_per_s, 1.0_rad_per_s, 1.0_rad_per_s, -1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{-4.0_mps, 0.0_mps};
+    const RPM expectedRotation{0.0};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+    //Decimal test
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {-1000.534_rad_per_s, 1000.534_rad_per_s, 1000.534_rad_per_s, -1000.534_rad_per_s};
+    const logic::chassis::Velocity2D expected{-1000.534_mps, 0.0_mps};
+    const RPM expectedRotation{0.0};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
 }
+
+TEST(counterClockwiseTest, MecanumMotionCalculator)
+{
+    using namespace units::literals;
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {-1.0_rad_per_s, 1.0_rad_per_s, -1.0_rad_per_s, 1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, 0.0_mps};
+    const RPM expectedRotation{1.0_rad_per_s};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+
+    //Wheel size test
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 4.0_m};
+    const logic::chassis::QuadDriveData test {-1.0_rad_per_s, 1.0_rad_per_s, -1.0_rad_per_s, 1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, 0.0_mps};
+    const RPM expectedRotation{4.0_rad_per_s};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+    //Different chassis size test
+     {
+    logic::chassis::MecanumCalculator calc{2.0_m, 2.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {-1.0_rad_per_s, 1.0_rad_per_s, -1.0_rad_per_s, 1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, 0.0_mps};
+    const RPM expectedRotation{0.5_rad_per_s};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+}
+
+TEST(clockwiseTest, MecanumMotionCalculator)
+{
+    using namespace units::literals;
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {1.0_rad_per_s, -1.0_rad_per_s, 1.0_rad_per_s, -1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, 0.0_mps};
+    const RPM expectedRotation{-1.0_rad_per_s};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+
+    //Wheel size test
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 4.0_m};
+    const logic::chassis::QuadDriveData test {1.0_rad_per_s, -1.0_rad_per_s, 1.0_rad_per_s, -1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, 0.0_mps};
+    const RPM expectedRotation{-4.0_rad_per_s};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+
+    //Different chassis size test
+    {
+    logic::chassis::MecanumCalculator calc{2.0_m, 2.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {1.0_rad_per_s, -1.0_rad_per_s, 1.0_rad_per_s, -1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, 0.0_mps};
+    const RPM expectedRotation{-0.5_rad_per_s};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+    //Different chassis size test
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 3.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {1.0_rad_per_s, -1.0_rad_per_s, 1.0_rad_per_s, -1.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, 0.0_mps};
+    const RPM expectedRotation{-0.5_rad_per_s};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+}
+
+TEST(zeroTest, MecanumMotionCalculator)
+{
+    using namespace units::literals;
+    {
+    logic::chassis::MecanumCalculator calc{1.0_m, 1.0_m, 1.0_m};
+    const logic::chassis::QuadDriveData test {0.0_rad_per_s, 0.0_rad_per_s, 0.0_rad_per_s, 0.0_rad_per_s};
+    const logic::chassis::Velocity2D expected{0.0_mps, 0.0_mps};
+    const RPM expectedRotation{0.0_rad_per_s};
+    calc.setWheelSpeeds(test);
+    EXPECT_DOUBLE_EQ(calc.getTranslation().x.to<double>(), expected.x.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getTranslation().y.to<double>(), expected.y.to<double>());
+    EXPECT_DOUBLE_EQ(calc.getRotation().to<double>(), expectedRotation.to<double>());
+    }
+}
+

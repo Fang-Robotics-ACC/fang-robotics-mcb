@@ -13,9 +13,11 @@
                 "fang-mcb-project/src/motors",
                 "fang-mcb-project/src/control",
                 "fang-mcb-project/src/logic",
+                "fang-mcb-project/src/logic/chassis",
                 "fang-mcb-project/src/data",
                 "fang-mcb-project/src/subsystem/chassis",
-                "fang-mcb-project/src/configuration"
+                "fang-mcb-project/src/configuration",
+                "fang-mcb-project/src/util"
             ],
             "compilerPath": "g++",
             "intelliSenseMode": "gcc-x64",
@@ -45,9 +47,11 @@
                 "fang-mcb-project/src/control",
                 "fang-mcb-project/src/motors",
                 "fang-mcb-project/src/logic",
+                "fang-mcb-project/src/logic/chassis",
                 "fang-mcb-project/src/data",
                 "fang-mcb-project/src/subsystem/chassis",
-                "fang-mcb-project/src/configuration"
+                "fang-mcb-project/src/configuration",
+                "fang-mcb-project/src/util"
             ],
             "compilerPath": "arm-none-eabi-g++",
             "intelliSenseMode": "gcc-arm",
