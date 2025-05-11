@@ -16,7 +16,7 @@ namespace motors
     /*!
     RPM is positive according to the right hand rule when the motor is the shaft pointing up. This is the the gearbox detached!!!
     */
-    class RepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM>, virtual public rail::IWattBudgeter<Watts>
+    class RepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM>
     {
     public:
         RepeatUltraMk2(tap::Drivers& drivers,
@@ -24,21 +24,6 @@ namespace motors
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
                       data::motors::Directionality directionality = data::motors::Directionality::BIDIRECTIONAL);
-
-        /// @brief Does not limit anything yet
-        /// @param wattage 
-        void setWattBudget(const Watts& wattage) override;
-
-        /// Does not limit anything yet
-		Watts getWattBudget() const override;
-        
-        //Does not do anything
-		virtual void setWattEstimateMode(bool mode) override;
-		virtual bool estimateModeAllowed() const override {return mk_estimateModeAllowed;}
-		virtual bool getWattOverbudgetStatus() const override;
-		virtual void resetWattOverbudgetStatus() override;
-        //Does not do anything
-		virtual Watts getWattOverbudgetAmount() const override;
 
 		void setSpeed(const RPM& speed) override;
 		RPM getSpeed() const override;
@@ -48,12 +33,6 @@ namespace motors
 		void setMinSpeed(const RPM& minSpeed) override;
 		RPM getMinSpeed() const override;
     private:
-        Watts m_wattBudget{0};
-        Watts m_maxWattBudget{0};
-        Watts m_minWattBudget{0};
-        bool  m_estimateMode{0};
-        bool  m_overbudgetStatus{false};
-        const bool mk_estimateModeAllowed{false};
 
         const RPM mk_maxTheoreticalSpeed;
         RPM m_speed{0};

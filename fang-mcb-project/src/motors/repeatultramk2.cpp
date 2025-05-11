@@ -18,18 +18,6 @@ namespace motors
                       mk_maxTheoreticalSpeed{controllerInputVoltage * mk_kv}
     {}
 
-    //Watt budget setters and getters
-    void RepeatUltraMk2::setWattBudget(const Watts& wattage)
-    {
-        m_wattBudget = wattage;
-    }
-
-	Watts RepeatUltraMk2::getWattBudget() const
-    {
-        return m_wattBudget;
-    }
-
-    //Speed setters and getters
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
         const double rangePercentage{speed / mk_maxTheoreticalSpeed};
@@ -74,22 +62,4 @@ namespace motors
         //m_drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, mk_vortexPWMFrequency.to<int>());
     }
 
-	void RepeatUltraMk2::setWattEstimateMode(bool mode)
-    {
-        m_estimateMode = mode;
-    }
-
-	bool RepeatUltraMk2::getWattOverbudgetStatus() const
-    {
-        return m_overbudgetStatus;
-    }
-
-	void RepeatUltraMk2::resetWattOverbudgetStatus()
-    {
-        m_overbudgetStatus = false;
-    }
-    Watts RepeatUltraMk2::getWattOverbudgetAmount() const
-    {
-        return Watts{0};
-    }
 }//namespace motors
