@@ -15,8 +15,8 @@ TEST(minSpeedTest, repeatUltraMk2)
     
     tap::Drivers drivers{};
     motors::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motors::Directionality::UNIDIRECTIONAL, gearRatio};
-    motor.setSpeed(0_rpm);
-    drivers.pwm.write(0.0, tap::gpio::Pwm::C1);
 
-    EXPECT_CALL(drivers.pwm,write);
+    EXPECT_CALL(drivers.pwm,write(0.5, tap::gpio::Pwm::C1));
+
+    motor.setSpeed(0_rpm);
 }
