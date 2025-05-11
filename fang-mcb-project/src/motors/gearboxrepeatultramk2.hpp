@@ -38,6 +38,8 @@ namespace motors
         double m_gearRatio;
         RPM m_speed{0};
 
+        RPM motorToShaftSpeed(const RPM& motorSpeed) const;
+        RPM shaftToMotorSpeed(const RPM& shaftSpeed) const;
         void initialize();
    };
 }
