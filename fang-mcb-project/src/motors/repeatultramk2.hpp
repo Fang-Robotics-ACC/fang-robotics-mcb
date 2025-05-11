@@ -43,7 +43,7 @@ namespace motors
         //kv value is ration of rpm per voltage applied to a brushless dc motor
         const RPMPerVolt mk_kv{1450.0};
         //The voltage of the controller should not be exceeded by its output
-        const RPM mk_maxTheoreticalSpeed{mk_kv * controllerInputVoltage};
+        const RPM mk_maxTheoreticalSpeed{mk_kv * mk_controllerInputVoltage};
 
         logic::motors::Vortex80AEscLogic m_vortexLogic;
 
