@@ -33,6 +33,7 @@ namespace logic
         void AbstractFieldMecanumLogic::setTranslation(const Translation2D& translation)
         {
             //Counteract the robot's angle relative to the field
+            m_fieldTranslation = translation;
             m_robotMecanumLogic.setTranslation(fieldToRobotTranslation(translation));
         }
 
