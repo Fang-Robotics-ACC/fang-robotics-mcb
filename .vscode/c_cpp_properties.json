@@ -18,7 +18,8 @@
                 "fang-mcb-project/src/subsystem/chassis",
                 "fang-mcb-project/src/configuration",
                 "fang-mcb-project/src/util",
-                "fang-mcb-project/taproot/modm/ext/cmsis/dsp"
+                "fang-mcb-project/taproot/modm/ext/cmsis/dsp",
+                "fang-mcb-project/taproot/src/tap/algorithms"
             ],
             "compilerPath": "g++",
             "intelliSenseMode": "gcc-x64",
