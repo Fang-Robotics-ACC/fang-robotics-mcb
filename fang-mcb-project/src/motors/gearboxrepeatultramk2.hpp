@@ -2,6 +2,7 @@
 #define FANG_ROBOTICS_MCB_GEARED_REPEAT_ULTRA_MK2_HPP
 #include "unitaliases.hpp"
 #include "directionality.hpp"
+#include "repeatultramk2.hpp"
 
 #include "ispeedmotor.h"
 #include "tap/drivers.hpp"
@@ -33,7 +34,8 @@ namespace motors
         
         double getGearRatio() const;
     private:
-        double gearRatio;
+        RepeatUltraMk2 m_repeatUltraMk2;
+        double m_gearRatio;
         RPM m_speed{0};
         tap::Drivers& m_drivers;
 
