@@ -14,8 +14,7 @@ namespace motors
                       data::motors::Directionality directionality):
                       m_drivers{drivers}, m_pwmPin{pwmPin},
                       mk_controllerInputVoltage{controllerInputVoltage},
-                      m_vortexLogic{directionality, pinFrequency},
-                      mk_maxTheoreticalSpeed{controllerInputVoltage * mk_kv}
+                      m_vortexLogic{directionality, pinFrequency}
     {}
 
 	void RepeatUltraMk2::setSpeed(const RPM& speed)

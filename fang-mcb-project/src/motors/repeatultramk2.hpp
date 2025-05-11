@@ -34,15 +34,17 @@ namespace motors
 		RPM getMinSpeed() const override;
     private:
 
-        const RPM mk_maxTheoreticalSpeed;
         RPM m_speed{0};
-        RPM m_maxSpeed{0};
+        RPM m_maxSpeed{mk_maxTheoreticalSpeed};
         RPM m_minSpeed{0};
         tap::Drivers& m_drivers;
         tap::gpio::Pwm::Pin m_pwmPin;
         const Volts mk_controllerInputVoltage;
         // This was the Repeat Robotics provided value for the ratio between the rpm and the voltage associated with i
+        //kv value is ration of rpm per voltage applied to a brushless dc motor
         const RPMPerVolt mk_kv{1450.0};
+        //The voltage of the controller should not be exceeded by its output
+        const RPM mk_maxTheoreticalSpeed{mk_kv * controllerInputVoltage};
 
         logic::motors::Vortex80AEscLogic m_vortexLogic;
 
