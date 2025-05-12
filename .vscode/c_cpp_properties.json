@@ -7,6 +7,7 @@
                 "${default}",
                 "fang-mcb-project/taproot/sim-modm/hosted-linux/modm/src",
                 "fang-mcb-project/taproot/test",
+                "fang-mcb-project/taproot/modm/ext/cmsis/core",
                 "fang-mcb-project/lib/RAIL-Robomaster-Abstraction-Interface-Library/include",
                 "fang-mcb-project/lib/units/include",
                 "fang-mcb-project/test",
