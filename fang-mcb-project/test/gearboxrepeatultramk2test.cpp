@@ -8,6 +8,9 @@
 using namespace units::literals;
 TEST(minSpeedTest, repeatUltraMk2)
 {
+    {
+    //The speed at the minimum range coresponds to a 1ms pulse to the vortex controller
+    //For a unidirectional configuration, this is 0 rpm
     constexpr Volts controllerVoltage{24};
     constexpr Hertz frequency{500};
     constexpr double gearRatio{14.0};
@@ -19,4 +22,22 @@ TEST(minSpeedTest, repeatUltraMk2)
     EXPECT_CALL(drivers.pwm,write(0.5, tap::gpio::Pwm::C1));
 
     motor.setSpeed(0_rpm);
+    }
+
+    {
+    //The speed at the minimum range coresponds to a 1ms pulse to the vortex controller
+    //The default max speed is the maximum theoretical speed
+    //For a bidirectional configuration, the minimum speed is the negative of the maximum theoretical speed
+    constexpr Volts controllerVoltage{24};
+    constexpr Hertz frequency{500};
+    constexpr RPMPerVolt kv{1450};
+    constexpr double gearRatio{14.0};
+
+    
+    tap::Drivers drivers{};
+    motors::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motors::Directionality::BIDIRECTIONAL, gearRatio};
+
+    EXPECT_CALL(drivers.pwm,write(0.5, tap::gpio::Pwm::C1));
+    motor.setSpeed(-motor.getMinSpeed());
+    }
 }
