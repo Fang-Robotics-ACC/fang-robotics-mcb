@@ -48,8 +48,8 @@ namespace logic
         void setTranslation(const Velocity2D& translation);
         void setRotation(const RPM& rotation);
 
-        Radians getRobotAngle() const;
-        Velocity2D getTranslation() const;
+        const Radians&getRobotAngle() const;
+        const Velocity2D& getTranslation() const;
         RPM getRotation() const;
 
         QuadDriveData getWheelSpeeds() const;
