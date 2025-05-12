@@ -1,6 +1,9 @@
 #ifndef FANG_ROBOTICS_MCB_CHASSIS_SUBSYSTEM_HPP
 #define FANG_ROBOTICS_MCB_CHASSIS_SUBSYSTEM_HPP
 #include "drivers.hpp"
+#include "unitaliases.hpp"
+#include "physicsaliases.hpp"
+
 #include "tap/control/subsystem.hpp"
 #include "motors/gearboxrepeatultramk2.hpp"
 
@@ -21,7 +24,28 @@ namespace control
             DriveMotor& rearRightMotor;
         };
 
+        /**
+         * The chassis config passes all of the relevant motor information.
+         */
         ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig);
+
+        /**
+         * Simultaneously set the translation and rotation
+         */
+        void setMotion(const physics::Velocity2D& translation, const RPM& rotation);
+        /**
+         * This is relative to the field - the axis are basically wherever the robot
+         * faces forward at the start of the round
+         */
+        void setTranslation(const physics::Velocity2D& translation);
+
+        /**
+         * Set the angular velocity of the chassis. Counterclockwise is positive.
+         * This is due to ensuring consistency within mathematical convention. 
+         * If you are taking the horizontal joystick position, you will likely need to
+         * multiply it by -1.
+         */
+        void setRotation(const RPM& rotation);
         private:
             DriveMotor& m_frontLeftMotor;
             DriveMotor& m_frontRightMotor;
