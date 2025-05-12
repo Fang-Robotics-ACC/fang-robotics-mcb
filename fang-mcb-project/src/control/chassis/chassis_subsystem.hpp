@@ -33,11 +33,18 @@ namespace control
          * Simultaneously set the translation and rotation
          */
         void setMotion(const physics::Velocity2D& translation, const RPM& rotation);
+
         /**
          * This is relative to the field - the axis are basically wherever the robot
          * faces forward at the start of the round
          */
         void setTranslation(const physics::Velocity2D& translation);
+
+        /**
+         * This is relative to the field - the axis are basically wherever the robot
+         * faces forward at the start of the round
+         */
+        const physics::Velocity2D& getTranslation() const;
 
         /**
          * Set the angular velocity of the chassis. Counterclockwise is positive.
@@ -46,6 +53,13 @@ namespace control
          * multiply it by -1.
          */
         void setRotation(const RPM& rotation);
+
+        /**
+         * Returns the angular velocity. Counterclockwise is positive in order to
+         * match mathematical convention.
+         */
+        RPM getRotation() const;
+
         private:
             DriveMotor& m_frontLeftMotor;
             DriveMotor& m_frontRightMotor;
