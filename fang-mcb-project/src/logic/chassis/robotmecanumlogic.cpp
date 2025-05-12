@@ -38,7 +38,7 @@ namespace logic
             return m_translation;
         }
 
-        const RPM& RobotMecanumLogic::getRotation() const
+        RPM RobotMecanumLogic::getRotation() const
         {
             return m_rotation;
         }

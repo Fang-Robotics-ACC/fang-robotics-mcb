@@ -40,7 +40,7 @@ namespace logic
         void setRotation(const RPM& rotation);
 
         const Velocity2D& getTranslation() const;
-        const RPM& getRotation() const;
+        RPM getRotation() const;
 
         /**https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
          * This uses equation 20
