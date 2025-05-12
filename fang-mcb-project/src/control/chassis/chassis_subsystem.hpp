@@ -23,7 +23,10 @@ namespace control
 
         ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig);
         private:
-
+            DriveMotor& m_frontLeftMotor;
+            DriveMotor& m_frontRightMotor;
+            DriveMotor& m_rearLeftMotor;
+            DriveMotor& m_rearRightMotor;
         };
     }//namespace chassis
 }//namespace control
