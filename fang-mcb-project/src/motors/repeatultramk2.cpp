@@ -2,6 +2,7 @@
 #include "brushlessutils.hpp"
 #include "units.h"
 
+#include <algorithm>
 #include <cassert>
 
 using namespace units::literals;
@@ -29,8 +30,8 @@ namespace motors
 
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
-        const double rangePercentage{speed / mk_maxTheoreticalSpeed};
-        assert(-1.0 < rangePercentage && rangePercentage < 1.0 && "Precentage out off bounds");
+        const RPM clampedSpeed{std::clamp<RPM>(speed, m_minSpeed, m_maxSpeed)};
+        const double rangePercentage{clampedSpeed / mk_maxTheoreticalSpeed};
         setPWM(m_vortexLogic.calculateDutyCycle(rangePercentage));
     }
 
