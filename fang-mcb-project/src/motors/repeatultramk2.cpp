@@ -4,9 +4,10 @@
 
 #include <cassert>
 
+using namespace units::literals;
+
 namespace motors
 {
-
     RepeatUltraMk2::RepeatUltraMk2(tap::Drivers& drivers,
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
@@ -15,7 +16,16 @@ namespace motors
                       m_drivers{drivers}, m_pwmPin{pwmPin},
                       mk_controllerInputVoltage{controllerInputVoltage},
                       m_vortexLogic{directionality, pinFrequency}
-    {}
+    {
+        switch(directionality)
+        {
+        case(data::motors::Directionality::BIDIRECTIONAL):
+            m_minSpeed = -mk_maxTheoreticalSpeed;
+        break;
+        case(data::motors::Directionality::UNIDIRECTIONAL):
+            m_minSpeed = 0_rpm;
+        }
+    }
 
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
