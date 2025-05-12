@@ -2,11 +2,13 @@
 #include "brushlessutils.hpp"
 #include "units.h"
 
+#include <algorithm>
 #include <cassert>
+
+using namespace units::literals;
 
 namespace motors
 {
-
     RepeatUltraMk2::RepeatUltraMk2(tap::Drivers& drivers,
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
@@ -14,26 +16,22 @@ namespace motors
                       data::motors::Directionality directionality):
                       m_drivers{drivers}, m_pwmPin{pwmPin},
                       mk_controllerInputVoltage{controllerInputVoltage},
-                      m_vortexLogic{directionality, pinFrequency},
-                      mk_maxTheoreticalSpeed{controllerInputVoltage * mk_kv}
-    {}
-
-    //Watt budget setters and getters
-    void RepeatUltraMk2::setWattBudget(const Watts& wattage)
+                      m_vortexLogic{directionality, pinFrequency}
     {
-        m_wattBudget = wattage;
+        switch(directionality)
+        {
+        case(data::motors::Directionality::BIDIRECTIONAL):
+            m_minSpeed = -mk_maxTheoreticalSpeed;
+        break;
+        case(data::motors::Directionality::UNIDIRECTIONAL):
+            m_minSpeed = 0_rpm;
+        }
     }
 
-	Watts RepeatUltraMk2::getWattBudget() const
-    {
-        return m_wattBudget;
-    }
-
-    //Speed setters and getters
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
-        const double rangePercentage{speed / mk_maxTheoreticalSpeed};
-        assert(-1.0 < rangePercentage && rangePercentage < 1.0 && "Precentage out off bounds");
+        const RPM clampedSpeed{std::clamp<RPM>(speed, m_minSpeed, m_maxSpeed)};
+        const double rangePercentage{clampedSpeed / mk_maxTheoreticalSpeed};
         setPWM(m_vortexLogic.calculateDutyCycle(rangePercentage));
     }
 
@@ -74,22 +72,4 @@ namespace motors
         //m_drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, mk_vortexPWMFrequency.to<int>());
     }
 
-	void RepeatUltraMk2::setWattEstimateMode(bool mode)
-    {
-        m_estimateMode = mode;
-    }
-
-	bool RepeatUltraMk2::getWattOverbudgetStatus() const
-    {
-        return m_overbudgetStatus;
-    }
-
-	void RepeatUltraMk2::resetWattOverbudgetStatus()
-    {
-        m_overbudgetStatus = false;
-    }
-    Watts RepeatUltraMk2::getWattOverbudgetAmount() const
-    {
-        return Watts{0};
-    }
 }//namespace motors
