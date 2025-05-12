@@ -15,10 +15,10 @@ namespace control
         using DriveMotor = motors::GearboxRepeatUltraMk2;
         struct ChassisConfig
         {
-            DriveMotor& frontLeft;
-            DriveMotor& frontRight;
-            DriveMotor& rearLeft;
-            DriveMotor& rearRight;
+            DriveMotor& frontLeftMotor;
+            DriveMotor& frontRightMotor;
+            DriveMotor& rearLeftMotor;
+            DriveMotor& rearRightMotor;
         };
 
         ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig);
