@@ -25,12 +25,48 @@ namespace motors
                       const Hertz& pinFrequency,
                       data::motors::Directionality directionality = data::motors::Directionality::BIDIRECTIONAL);
 
+        /**
+         * Since this motor does not use feedback to control its speed, this is the
+         * value that it uses to estimate the required voltage and thus the duty cycle.
+         * 
+         * Currently, this code assumes that the speed controller interpolates the speed linearly
+         * from minimum to maximum speed. The maximum speed is assumed to be the kv constant
+         * multiplied by the nominal voltage.
+         * 
+         * This will likely be changed after testing.
+         * 
+         * This is motivated by the fact that a motor controller with only 10 volts
+         * can at most provide a bdlc motor 10 volts. Given the kv value, the maximum
+         * theoretical speed would be that.
+         */
 		void setSpeed(const RPM& speed) override;
+        
+        /**
+         * This returns the desired speed, not the actual speed.
+         */
 		RPM getSpeed() const override;
 
+        /**
+         * All requests will be clamped to this bound. The default is the maximum
+         * theoretical speed which is the motor kv (1450) multiplied by the nominal
+         * controller input voltage.
+         */
 		void setMaxSpeed(const RPM& maxSpeed) override;
+
+        /**
+         * Get the maximum speed which all setSpeed() requests are clamped to
+         */
 		RPM getMaxSpeed() const override;
+
+        /**
+         * All requests will be clamped to this bound. The default for unidirectional is 0 rpm.
+         * The default for bidirectional is the negative of the maximum theoretical speed.
+         */
 		void setMinSpeed(const RPM& minSpeed) override;
+
+        /**
+         * Get the minimum speed which all setSpeed requests are clamped to
+         */
 		RPM getMinSpeed() const override;
     private:
         RPM m_speed{0};
