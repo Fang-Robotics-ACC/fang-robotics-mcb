@@ -39,8 +39,8 @@ namespace logic
         void setTranslation(const Velocity2D& translation);
         void setRotation(const RPM& rotation);
 
-        Velocity2D getTranslation() const;
-        RPM getRotation() const;
+        const Velocity2D& getTranslation() const;
+        const RPM& getRotation() const;
 
         /**https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
          * This uses equation 20

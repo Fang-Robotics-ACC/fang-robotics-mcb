@@ -33,12 +33,12 @@ namespace logic
         }
 
 
-        Velocity2D RobotMecanumLogic::getTranslation() const
+        const Velocity2D& RobotMecanumLogic::getTranslation() const
         {
             return m_translation;
         }
 
-        RPM RobotMecanumLogic::getRotation() const
+        const RPM& RobotMecanumLogic::getRotation() const
         {
             return m_rotation;
         }
