@@ -18,17 +18,28 @@ namespace control
         {
         public:
         using DriveMotor = motors::GearboxRepeatUltraMk2;
-        struct ChassisConfig
+
+        struct ChassisMotors
         {
-            Meters wheelRadius;
-            Meters verticalWheelDistance;
-            Meters horizontalWheelDistance;
             Volts nominalControllerVoltage;
             Hertz controllerPinFrequency;
             tap::gpio::Pwm::Pin frontLeftMotorPin;
             tap::gpio::Pwm::Pin frontRightMotorPin;
             tap::gpio::Pwm::Pin rearLeftMotorPin;
             tap::gpio::Pwm::Pin rearRightMotorPin;
+        };
+
+        struct ChassisDimensions
+        {
+            Meters wheelRadius;
+            Meters verticalWheelDistance;
+            Meters horizontalWheelDistance;
+        };
+
+        struct ChassisConfig
+        {
+            ChassisDimensions chassisDimensions;
+            ChassisMotors chassisMotors;
         };
 
         /**
