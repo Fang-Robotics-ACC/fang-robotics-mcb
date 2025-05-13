@@ -65,10 +65,10 @@ namespace control
         RPM getRotation() const;
 
         private:
-            DriveMotor& m_frontLeftMotor;
-            DriveMotor& m_frontRightMotor;
-            DriveMotor& m_rearLeftMotor;
-            DriveMotor& m_rearRightMotor;
+            DriveMotor m_frontLeftMotor;
+            DriveMotor m_frontRightMotor;
+            DriveMotor m_rearLeftMotor;
+            DriveMotor m_rearRightMotor;
         };
     }//namespace chassis
 }//namespace control
