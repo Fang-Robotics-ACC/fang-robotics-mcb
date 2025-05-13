@@ -20,6 +20,9 @@ namespace control
         using DriveMotor = motors::GearboxRepeatUltraMk2;
         struct ChassisConfig
         {
+            Meters wheelRadius;
+            Meters verticalWheelDistance;
+            Meters horizontalWheelDistance;
             Volts nominalControllerVoltage;
             Hertz controllerPinFrequency;
             tap::gpio::Pwm::Pin frontLeftMotorPin;
