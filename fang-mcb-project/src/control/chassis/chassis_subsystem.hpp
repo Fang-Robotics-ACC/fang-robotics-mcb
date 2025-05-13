@@ -3,6 +3,7 @@
 #include "drivers.hpp"
 #include "unitaliases.hpp"
 #include "physicsaliases.hpp"
+#include "logic/chassis/fieldmecanumlogic.hpp"
 
 #include "tap/communication/gpio/pwm.hpp"
 #include "tap/control/subsystem.hpp"
@@ -69,6 +70,8 @@ namespace control
             DriveMotor m_frontRightMotor;
             DriveMotor m_rearLeftMotor;
             DriveMotor m_rearRightMotor;
+
+            logic::chassis::FieldMecanumLogic mecanumLogic;
         };
     }//namespace chassis
 }//namespace control
