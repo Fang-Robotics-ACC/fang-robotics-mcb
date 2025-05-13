@@ -4,6 +4,7 @@
 #include "unitaliases.hpp"
 #include "physicsaliases.hpp"
 
+#include "tap/communication/gpio/pwm.hpp"
 #include "tap/control/subsystem.hpp"
 #include "motors/gearboxrepeatultramk2.hpp"
 
@@ -18,14 +19,17 @@ namespace control
         using DriveMotor = motors::GearboxRepeatUltraMk2;
         struct ChassisConfig
         {
-            DriveMotor& frontLeftMotor;
-            DriveMotor& frontRightMotor;
-            DriveMotor& rearLeftMotor;
-            DriveMotor& rearRightMotor;
+            Volts nominalControllerVoltage;
+            Hertz controllerPinFrequency;
+            tap::gpio::Pwm::Pin frontLeftMotorPin;
+            tap::gpio::Pwm::Pin frontRightMotorPin;
+            tap::gpio::Pwm::Pin rearLeftMotorPin;
+            tap::gpio::Pwm::Pin rearRightMotorPin;
         };
 
         /**
          * The chassis config passes all of the relevant motor information.
+         * This assumes that all pins are set to a single frequency
          */
         ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig);
 
