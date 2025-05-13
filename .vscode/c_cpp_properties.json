@@ -18,6 +18,7 @@
                 "fang-mcb-project/src/data",
                 "fang-mcb-project/src/subsystem/chassis",
                 "fang-mcb-project/src/configuration",
+                "fang-mcb-project/src/sensors",
                 "fang-mcb-project/src/util",
                 "fang-mcb-project/taproot/modm/ext/cmsis/dsp",
                 "fang-mcb-project/taproot/src/tap/algorithms"
@@ -53,6 +54,7 @@
                 "fang-mcb-project/src/logic/chassis",
                 "fang-mcb-project/src/data",
                 "fang-mcb-project/src/subsystem/chassis",
+                "fang-mcb-project/src/sensors",
                 "fang-mcb-project/src/configuration",
                 "fang-mcb-project/src/util"
             ],
