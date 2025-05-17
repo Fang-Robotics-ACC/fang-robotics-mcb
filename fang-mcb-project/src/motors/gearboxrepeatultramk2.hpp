@@ -41,41 +41,41 @@ namespace motors
          * can at most provide a bdlc motor 10 volts. Given the kv value, the maximum
          * theoretical speed would be that.
          */
-		void setSpeed(const RPM& speed) override;
+		mockable void setSpeed(const RPM& speed) override;
 
         /**
          * This returns the desired speed, not the actual speed.
          */
 
-		void setMaxSpeed(const RPM& maxSpeed) override;
+		mockable void setMaxSpeed(const RPM& maxSpeed) override;
 
         /**
          * All requests will be clamped to this bound. The default is the maximum
          * theoretical speed which is the motor kv (1450) multiplied by the nominal
          * controller input voltage.
          */
-		RPM getSpeed() const override;
+		mockable RPM getSpeed() const override;
 
         /**
          * Get the maximum speed which all setSpeed() requests are clamped to
          */
-		RPM getMaxSpeed() const override;
+		mockable RPM getMaxSpeed() const override;
 
         /**
          * All requests will be clamped to this bound. The default for unidirectional is 0 rpm.
          * The default for bidirectional is the negative of the maximum theoretical speed.
          */
-		void setMinSpeed(const RPM& minSpeed) override;
+		mockable void setMinSpeed(const RPM& minSpeed) override;
 
         /**
          * Get the minimum speed which all setSpeed requests are clamped to
          */
-		RPM getMinSpeed() const override;
+		mockable RPM getMinSpeed() const override;
         
         /**
          * Returns the gear ratio: the amount of turns a motor makes per shaft rotation.
          */
-        double getGearRatio() const;
+        mockable double getGearRatio() const;
     private:
         RepeatUltraMk2 m_repeatUltraMk2;
         double m_gearRatio;
