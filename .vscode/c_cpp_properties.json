@@ -11,6 +11,8 @@
                 "fang-mcb-project/lib/RAIL-Robomaster-Abstraction-Interface-Library/include",
                 "fang-mcb-project/lib/units/include",
                 "fang-mcb-project/test",
+                "fang-mcb-project/test/mock",
+                "fang-mcb-project/test/mock/motors",
                 "fang-mcb-project/src/motors",
                 "fang-mcb-project/src/control",
                 "fang-mcb-project/src/logic",
