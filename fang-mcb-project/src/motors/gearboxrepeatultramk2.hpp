@@ -6,6 +6,7 @@
 
 #include "ispeedmotor.h"
 #include "tap/drivers.hpp"
+#include "tap/util_macros.hpp"
 
 namespace motors
 {
@@ -23,6 +24,8 @@ namespace motors
                       const Hertz& pinFrequency,
                       data::motors::Directionality directionality,
                       double gearRatio);
+
+        mockable ~GearboxRepeatUltraMk2() = default;
 
         /**
          * Since this motor does not use feedback to control its speed, this is the
