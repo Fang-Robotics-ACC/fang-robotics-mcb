@@ -57,4 +57,8 @@ namespace motors
         return shaftSpeed * m_gearRatio;
     }
 
+    double GearboxRepeatUltraMk2::getGearRatio() const
+    {
+        return m_gearRatio;
+    }
 }//namespace motors
