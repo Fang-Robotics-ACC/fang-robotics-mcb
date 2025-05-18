@@ -18,7 +18,7 @@ namespace motors
                       m_drivers{drivers}, m_pwmPin{pwmPin},
                       mk_controllerInputVoltage{controllerInputVoltage},
                       m_vortexLogic{directionality, pinFrequency},
-                      m_inversionMultiplier{!inverted && (directionality == data::motors::Directionality::BIDIRECTIONAL)? 1: -1}
+                      m_inversionMultiplier{inverted && (directionality == data::motors::Directionality::BIDIRECTIONAL)? -1: 1}
     {
         switch(directionality)
         {
@@ -32,7 +32,7 @@ namespace motors
 
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
-        const RPM clampedSpeed{std::clamp<RPM>(speed, m_minSpeed, m_maxSpeed)};
+        const RPM clampedSpeed{std::clamp<RPM>(speed * m_inversionMultiplier, m_minSpeed, m_maxSpeed)};
         const double rangePercentage{clampedSpeed / mk_maxTheoreticalSpeed};
         setPWM(m_vortexLogic.calculateDutyCycle(rangePercentage));
     }
