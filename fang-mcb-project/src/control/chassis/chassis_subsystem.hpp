@@ -24,6 +24,7 @@ namespace control
         {
             Volts nominalControllerVoltage;
             Hertz controllerPinFrequency;
+            double uniformGearRatio;
             tap::gpio::Pwm::Pin frontLeftMotorPin;
             tap::gpio::Pwm::Pin frontRightMotorPin;
             tap::gpio::Pwm::Pin rearLeftMotorPin;
@@ -45,7 +46,8 @@ namespace control
 
         /**
          * The chassis config passes all of the relevant motor information.
-         * This assumes that all pins are set to a single frequency
+         * This assumes that all pins are set to a single frequency.
+         * This assumes all motors have the same gear ratio.
          */
         ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig);
 
