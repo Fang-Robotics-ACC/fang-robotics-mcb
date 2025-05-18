@@ -6,8 +6,9 @@ namespace motors
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
                       data::motors::Directionality directionality,
+                      bool inverted,
                       double gearRatio):
-                      m_repeatUltraMk2{drivers, controllerInputVoltage, pwmPin, pinFrequency, directionality},
+                      m_repeatUltraMk2{drivers, controllerInputVoltage, pwmPin, pinFrequency, directionality, inverted},
                       m_gearRatio{gearRatio}
     {}
 

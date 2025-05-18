@@ -23,6 +23,7 @@ namespace motors
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
                       data::motors::Directionality directionality,
+                      bool inverted,
                       double gearRatio);
 
         mockable ~GearboxRepeatUltraMk2() = default;
