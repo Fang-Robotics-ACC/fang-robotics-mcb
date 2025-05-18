@@ -23,7 +23,8 @@ namespace motors
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motors::Directionality directionality);
+                      data::motors::Directionality directionality,
+                      bool inverted = false);
 
         /**
          * Since this motor does not use feedback to control its speed, this is the
@@ -69,6 +70,7 @@ namespace motors
          */
 		RPM getMinSpeed() const override;
     private:
+        int8_t m_inversionMultiplier;
         RPM m_speed{0};
         RPM m_maxSpeed{mk_maxTheoreticalSpeed};
         RPM m_minSpeed{0};
