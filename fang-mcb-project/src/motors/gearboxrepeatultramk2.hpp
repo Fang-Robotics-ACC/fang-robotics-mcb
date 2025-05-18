@@ -16,7 +16,7 @@ namespace motors
     *The gear ratio is motor turns : shaft turns, so a 14:1 gearbox would mean that the motor shaft rotates 14 times in order for the
     *output shaft to rotate once.
     */
-    class GearboxRepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM>
+    class GearboxRepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM>, public RepeatUltraMk2
     {
     public:
         /**
@@ -94,7 +94,6 @@ namespace motors
          */
         mockable double getGearRatio() const;
     private:
-        RepeatUltraMk2 m_repeatUltraMk2;
         double m_gearRatio;
         RPM m_speed{0};
 
