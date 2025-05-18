@@ -18,6 +18,12 @@ namespace motors
     class GearboxRepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM>
     {
     public:
+        struct MotorProperties
+        {
+            const Volts controllerInputVoltage;
+            data::motors::Directionality directionality;
+            double gearRatio;
+        };
         GearboxRepeatUltraMk2(tap::Drivers& drivers,
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
