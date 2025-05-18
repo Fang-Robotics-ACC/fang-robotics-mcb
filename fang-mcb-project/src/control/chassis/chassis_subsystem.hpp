@@ -88,7 +88,7 @@ namespace control
             DriveMotor m_rearLeftMotor;
             DriveMotor m_rearRightMotor;
 
-            logic::chassis::FieldMecanumLogic mecanumLogic;
+            logic::chassis::FieldMecanumLogic m_mecanumLogic;
 
             const ChassisMotorConfig mk_motorConfig;
             const ChassisDimensionConfig mk_dimensionConfig; 
