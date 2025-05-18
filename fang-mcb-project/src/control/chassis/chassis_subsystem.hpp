@@ -93,6 +93,8 @@ namespace control
         void initialize() override;
 
         private:
+        void syncWheelsToLogic();
+
             const ChassisMotorConfig mk_motorConfig;
             const ChassisDimensionConfig mk_dimensionConfig; 
 
