@@ -38,7 +38,7 @@ TEST(minSpeedTest, repeatUltraMk2)
     motors::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motors::Directionality::BIDIRECTIONAL, false, gearRatio};
 
     EXPECT_CALL(drivers.pwm,write(0.5, tap::gpio::Pwm::C1));
-    motor.setSpeed(-motor.getMinSpeed());
+    motor.setSpeed(motor.getMinSpeed());
     }
 }
 
@@ -76,7 +76,7 @@ TEST(minClampSpeedtest, repeatUltraMk2)
 
     EXPECT_CALL(drivers.pwm,write(0.5, tap::gpio::Pwm::C1));
     //Attempt to set it below the minimum speed
-    motor.setSpeed(-motor.getMinSpeed() - 100_rpm);
+    motor.setSpeed(motor.getMinSpeed() - 100_rpm);
     }
 }
 
