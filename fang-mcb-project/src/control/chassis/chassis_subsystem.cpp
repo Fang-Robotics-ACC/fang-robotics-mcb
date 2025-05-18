@@ -15,6 +15,31 @@ namespace control
             m_mecanumLogic{mk_dimensionConfig.horizontalWheelDistance, mk_dimensionConfig.verticalWheelDistance, mk_dimensionConfig.wheelRadius}
         {}
 
+        void ChassisSubsystem::setMotion(const physics::Velocity2D& translation, const RPM& rotation)
+        {
+            m_mecanumLogic.setMotion(translation, rotation);
+        }
+
+        void ChassisSubsystem::setTranslation(const physics::Velocity2D& translation)
+        {
+            m_mecanumLogic.setTranslation(translation);
+        }
+
+        const physics::Velocity2D& ChassisSubsystem::getTranslation() const
+        {
+            return m_mecanumLogic.getTranslation();
+        }
+
+        void ChassisSubsystem::setRotation(const RPM& rotation)
+        {
+            m_mecanumLogic.setRotation(rotation);
+        }
+
+        RPM ChassisSubsystem::getRotation() const
+        {
+            return m_mecanumLogic.getRotation();
+        }
+
         void ChassisSubsystem::initialize()
         {
             m_frontLeftMotor.initialize();
