@@ -28,8 +28,6 @@ namespace motors
         case(data::motors::Directionality::UNIDIRECTIONAL):
             m_minSpeed = 0_rpm;
         }
-
-        
     }
 
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
