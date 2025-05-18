@@ -92,6 +92,14 @@ namespace control
 
             const ChassisMotorConfig mk_motorConfig;
             const ChassisDimensionConfig mk_dimensionConfig; 
+
+            ///If you are facing forward, and the platform moves forward,
+            ///Then the left wheels will rotate counterclockwise, (when you are looking at the shaft)
+            static const bool mk_leftInversion{false};
+
+            ///If you are facing forward, and the platform moves forward,
+            ///Then the right wheels will rotate clockwise, (when you are looking at the shaft)
+            static const bool mk_rightInversion{true};
         };
     }//namespace chassis
 }//namespace control
