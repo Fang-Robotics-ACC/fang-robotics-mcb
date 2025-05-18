@@ -69,10 +69,14 @@ namespace motors
         m_drivers.pwm.write(dutyCycle, m_pwmPin); 
     }
 
+    /**
+     * The initialization needs to have a 0 signal sent for
+     * 1-2 seconds. It will be left up to the caller on how to 
+     * ensure the delay.
+     */
     void RepeatUltraMk2::initialize()
     {
-        //Proper timer channel has not been verified
-        //m_drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, mk_vortexPWMFrequency.to<int>());
+        setSpeed(0_rpm);
     }
 
 }//namespace motors
