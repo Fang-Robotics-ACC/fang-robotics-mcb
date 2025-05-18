@@ -99,7 +99,6 @@ namespace motors
 
         RPM motorToShaftSpeed(const RPM& motorSpeed) const;
         RPM shaftToMotorSpeed(const RPM& shaftSpeed) const;
-        void initialize();
    };
 }
 #endif
