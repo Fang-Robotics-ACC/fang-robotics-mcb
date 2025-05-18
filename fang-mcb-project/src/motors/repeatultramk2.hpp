@@ -23,7 +23,7 @@ namespace motors
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motors::Directionality directionality = data::motors::Directionality::BIDIRECTIONAL);
+                      data::motors::Directionality directionality);
 
         /**
          * Since this motor does not use feedback to control its speed, this is the
