@@ -45,6 +45,7 @@ namespace motors
 	void RepeatUltraMk2::setMaxSpeed(const RPM& maxSpeed)
     {
         m_maxSpeed = maxSpeed;
+        setSpeed(getSpeed());
     }
 
 	RPM RepeatUltraMk2::getMaxSpeed() const
@@ -55,7 +56,7 @@ namespace motors
 	void RepeatUltraMk2::setMinSpeed(const RPM& minSpeed)
     {
         m_minSpeed = minSpeed;
-        
+        setSpeed(getSpeed()); 
     }
 
 	RPM RepeatUltraMk2::getMinSpeed() const
