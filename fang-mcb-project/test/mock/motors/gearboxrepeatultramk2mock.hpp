@@ -21,6 +21,7 @@ namespace mock
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
                       data::motors::Directionality directionality,
+                      bool inverted,
                       double gearRatio);
             virtual ~GearboxRepeatUltraMk2Mock() = default;
 
