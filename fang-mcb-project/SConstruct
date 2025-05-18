@@ -81,6 +81,9 @@ env.AppendUnique(CPPPATH=[
     abspath(r"lib/RAIL-Robomaster-Abstraction-Interface-Library/include"),
     abspath(r"test"),
     abspath(r"test/mock/motors"),
+    abspath(r"fang-mcb-project/src/wrap"),
+    abspath(r"fang-mcb-project/src/wrap/trap"),
+    abspath(r"fang-mcb-project/src/wrap/trap/communication")
 ])
 
 

@@ -22,7 +22,10 @@
                 "fang-mcb-project/src/configuration",
                 "fang-mcb-project/src/util",
                 "fang-mcb-project/taproot/modm/ext/cmsis/dsp",
-                "fang-mcb-project/taproot/src/tap/algorithms"
+                "fang-mcb-project/taproot/src/tap/algorithms",
+                "fang-mcb-project/src/wrap",
+                "fang-mcb-project/src/wrap/trap",
+                "fang-mcb-project/src/wrap/trap/communication"
             ],
             "compilerPath": "g++",
             "intelliSenseMode": "gcc-x64",
@@ -56,7 +59,10 @@
                 "fang-mcb-project/src/data",
                 "fang-mcb-project/src/subsystem/chassis",
                 "fang-mcb-project/src/configuration",
-                "fang-mcb-project/src/util"
+                "fang-mcb-project/src/util",
+                "fang-mcb-project/src/wrap",
+                "fang-mcb-project/src/wrap/trap",
+                "fang-mcb-project/src/wrap/trap/communication"
             ],
             "compilerPath": "arm-none-eabi-g++",
             "intelliSenseMode": "gcc-arm",
