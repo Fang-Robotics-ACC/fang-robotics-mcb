@@ -6,6 +6,7 @@ namespace control
     {
         ChassisSubsystem::ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig)
             :
+            m_drivers{drivers},
             mk_motorConfig{chassisConfig.chassisMotors},
             mk_dimensionConfig{chassisConfig.chassisDimensions},
             m_frontLeftMotor{mk_motorConfig.unifiedProperties, mk_motorConfig.frontLeftPwmData, mk_leftInversion},
