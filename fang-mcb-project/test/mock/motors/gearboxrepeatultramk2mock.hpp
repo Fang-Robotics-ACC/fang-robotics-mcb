@@ -16,13 +16,7 @@ namespace mock
         class GearboxRepeatUltraMk2Mock : virtual public ::motors::GearboxRepeatUltraMk2
         {
         public:
-            GearboxRepeatUltraMk2Mock(tap::Drivers& drivers,
-                      const Volts& controllerInputVoltage,
-                      tap::gpio::Pwm::Pin pwmPin,
-                      const Hertz& pinFrequency,
-                      data::motors::Directionality directionality,
-                      bool inverted,
-                      double gearRatio);
+            using ::motors::GearboxRepeatUltraMk2::GearboxRepeatUltraMk2;
             virtual ~GearboxRepeatUltraMk2Mock() = default;
 
     		MOCK_METHOD(void, setSpeed, (const RPM& speed), (override));
