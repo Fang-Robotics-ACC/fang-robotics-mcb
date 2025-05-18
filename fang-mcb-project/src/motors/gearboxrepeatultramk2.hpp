@@ -6,7 +6,7 @@
 #include "wrap/trap/communication/pwm_data.hpp"
 
 #include "ispeedmotor.h"
-#include "tap/drivers.hpp"
+#include "drivers.hpp"
 #include "tap/util_macros.hpp"
 
 namespace motors
@@ -19,8 +19,14 @@ namespace motors
     class GearboxRepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM>
     {
     public:
-        struct MotorProperties
+        /**
+         * These properties are the most common in being duplicate
+         * across multiple instances. For your convenience, a struct
+         * bundle has been provided.
+         */
+        struct UnifiedMotorProperties
         {
+            Drivers& drivers;
             const Volts controllerInputVoltage;
             data::motors::Directionality directionality;
             double gearRatio;
