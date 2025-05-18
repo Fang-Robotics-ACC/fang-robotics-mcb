@@ -13,10 +13,12 @@ namespace motors
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motors::Directionality directionality):
+                      data::motors::Directionality directionality,
+                      bool inverted):
                       m_drivers{drivers}, m_pwmPin{pwmPin},
                       mk_controllerInputVoltage{controllerInputVoltage},
-                      m_vortexLogic{directionality, pinFrequency}
+                      m_vortexLogic{directionality, pinFrequency},
+                      m_inversionMultiplier{inverted ? -1: 1}
     {
         switch(directionality)
         {
@@ -26,6 +28,8 @@ namespace motors
         case(data::motors::Directionality::UNIDIRECTIONAL):
             m_minSpeed = 0_rpm;
         }
+
+        
     }
 
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
