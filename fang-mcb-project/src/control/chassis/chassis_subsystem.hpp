@@ -26,8 +26,8 @@ namespace control
             DriveMotor::UnifiedProperties unifiedProperties;
             trap::gpio::PwmData frontLeftPwmData;
             trap::gpio::PwmData frontRightPwmData;
-            trap::gpio::PwmData rearLeftPinPwmData;
-            trap::gpio::PwmData rearRightPinPwmdta;
+            trap::gpio::PwmData rearLeftPwmData;
+            trap::gpio::PwmData rearRightPwmdta;
         };
 
         struct ChassisDimensionConfig
