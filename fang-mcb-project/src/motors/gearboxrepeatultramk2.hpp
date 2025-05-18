@@ -24,7 +24,7 @@ namespace motors
          * across multiple instances. For your convenience, a struct
          * bundle has been provided.
          */
-        struct UnifiedMotorProperties
+        struct UnifiedProperties
         {
             Drivers& drivers;
             const Volts controllerInputVoltage;
