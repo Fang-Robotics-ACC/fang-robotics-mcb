@@ -9,7 +9,12 @@
 
 #include "tap/communication/gpio/pwm.hpp"
 #include "tap/control/subsystem.hpp"
+
+#if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
+#include "gearboxrepeatultramk2mock.hpp"
+#else
 #include "motors/gearboxrepeatultramk2.hpp"
+#endif
 
 namespace control
 {
@@ -19,7 +24,11 @@ namespace control
         class ChassisSubsystem : public tap::control::Subsystem
         {
         public:
+#if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
+        using DriveMotor = mock::motors::GearboxRepeatUltraMk2Mock;
+#else
         using DriveMotor = motors::GearboxRepeatUltraMk2;
+#endif
 
         struct ChassisMotorConfig
         {
@@ -80,6 +89,8 @@ namespace control
          * match mathematical convention.
          */
         RPM getRotation() const;
+
+
 
         private:
             const data::motors::Directionality mk_defaultDirectionality{data::motors::Directionality::BIDIRECTIONAL};
