@@ -61,7 +61,7 @@ namespace motors
 
 	RPM RepeatUltraMk2::getMinSpeed() const
     {
-        return m_maxSpeed;
+        return m_minSpeed;
     }
 
     void RepeatUltraMk2::setPWM(float dutyCycle)
