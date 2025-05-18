@@ -2,6 +2,7 @@
 #define FANG_ROBOTICS_MCB_CHASSIS_SUBSYSTEM_HPP
 #include "drivers.hpp"
 #include "unitaliases.hpp"
+#include "data/directionality.hpp"
 #include "physicsaliases.hpp"
 #include "logic/chassis/fieldmecanumlogic.hpp"
 
@@ -80,6 +81,7 @@ namespace control
         RPM getRotation() const;
 
         private:
+            const data::motors::Directionality mk_defaultDirectionality{data::motors::Directionality::BIDIRECTIONAL};
             DriveMotor m_frontLeftMotor;
             DriveMotor m_frontRightMotor;
             DriveMotor m_rearLeftMotor;
