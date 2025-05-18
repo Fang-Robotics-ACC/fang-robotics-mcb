@@ -5,6 +5,7 @@
 #include "data/directionality.hpp"
 #include "physicsaliases.hpp"
 #include "logic/chassis/fieldmecanumlogic.hpp"
+#include "wrap/trap/communication/pwm_data.hpp"
 
 #include "tap/communication/gpio/pwm.hpp"
 #include "tap/control/subsystem.hpp"
@@ -22,13 +23,11 @@ namespace control
 
         struct ChassisMotorConfig
         {
-            Volts nominalControllerVoltage;
-            Hertz controllerPinFrequency;
-            double uniformGearRatio;
-            tap::gpio::Pwm::Pin frontLeftMotorPin;
-            tap::gpio::Pwm::Pin frontRightMotorPin;
-            tap::gpio::Pwm::Pin rearLeftMotorPin;
-            tap::gpio::Pwm::Pin rearRightMotorPin;
+            DriveMotor::UnifiedProperties unifiedProperties;
+            trap::gpio::PwmData frontLeftPwmData;
+            trap::gpio::PwmData frontRightPwmData;
+            trap::gpio::PwmData rearLeftPinPwmData;
+            trap::gpio::PwmData rearRightPinPwmdta;
         };
 
         struct ChassisDimensionConfig
