@@ -14,38 +14,38 @@ namespace motors
                       data::motors::Directionality directionality,
                       bool inverted,
                       double gearRatio):
-                      m_repeatUltraMk2{drivers, controllerInputVoltage, pwmPin, pinFrequency, directionality, inverted},
+                      RepeatUltraMk2{drivers, controllerInputVoltage, pwmPin, pinFrequency, directionality, inverted},
                       m_gearRatio{gearRatio}
     {}
 
 	void GearboxRepeatUltraMk2::setSpeed(const RPM& speed)
     {
-        m_repeatUltraMk2.setSpeed(shaftToMotorSpeed(speed));
+        RepeatUltraMk2::setSpeed(shaftToMotorSpeed(speed));
     }
 
 	RPM GearboxRepeatUltraMk2::getSpeed() const
     {
-        return motorToShaftSpeed(m_repeatUltraMk2.getSpeed());
+        return motorToShaftSpeed(RepeatUltraMk2::getSpeed());
     }
 
 	void GearboxRepeatUltraMk2::setMaxSpeed(const RPM& maxSpeed)
     {
-        m_repeatUltraMk2.setMaxSpeed(shaftToMotorSpeed(maxSpeed));
+        RepeatUltraMk2::setMaxSpeed(shaftToMotorSpeed(maxSpeed));
     }
 
 	RPM GearboxRepeatUltraMk2::getMaxSpeed() const
     {
-        return motorToShaftSpeed(m_repeatUltraMk2.getMaxSpeed());
+        return motorToShaftSpeed(RepeatUltraMk2::getMaxSpeed());
     }
 
 	void GearboxRepeatUltraMk2::setMinSpeed(const RPM& minSpeed)
     {
-        m_repeatUltraMk2.setMinSpeed(shaftToMotorSpeed(minSpeed));
+        RepeatUltraMk2::setMinSpeed(shaftToMotorSpeed(minSpeed));
     }
 
 	RPM GearboxRepeatUltraMk2::getMinSpeed() const
     {
-        return motorToShaftSpeed(m_repeatUltraMk2.getMinSpeed());
+        return motorToShaftSpeed(RepeatUltraMk2::getMinSpeed());
     }
 
     RPM GearboxRepeatUltraMk2::motorToShaftSpeed(const RPM& motorSpeed) const
