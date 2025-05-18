@@ -47,8 +47,6 @@ namespace control
          * This assumes that all pins are set to a single frequency
          */
         ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig);
-        ChassisSubsystem(Drivers& drivers);
-        ChassisSubsystem(const ChassisConfig& chassisConfig);
 
         /**
          * Simultaneously set the translation and rotation
