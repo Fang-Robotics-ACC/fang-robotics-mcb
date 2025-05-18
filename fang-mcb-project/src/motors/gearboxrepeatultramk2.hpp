@@ -3,6 +3,7 @@
 #include "unitaliases.hpp"
 #include "directionality.hpp"
 #include "repeatultramk2.hpp"
+#include "wrap/trap/communication/pwm_data.hpp"
 
 #include "ispeedmotor.h"
 #include "tap/drivers.hpp"
@@ -24,6 +25,7 @@ namespace motors
             data::motors::Directionality directionality;
             double gearRatio;
         };
+
         GearboxRepeatUltraMk2(tap::Drivers& drivers,
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
