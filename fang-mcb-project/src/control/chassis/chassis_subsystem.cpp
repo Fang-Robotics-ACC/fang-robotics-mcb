@@ -48,6 +48,11 @@ namespace control
             m_rearRightMotor.initialize();
         }
 
+        void ChassisSubsystem::refresh()
+        {
+            syncWheelsToLogic();
+        }
+
         void ChassisSubsystem::syncWheelsToLogic()
         {
             m_frontLeftMotor.setSpeed(m_mecanumLogic.getFrontLeftWheelSpeed());

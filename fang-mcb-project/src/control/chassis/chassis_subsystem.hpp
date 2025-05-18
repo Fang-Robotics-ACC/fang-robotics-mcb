@@ -91,6 +91,10 @@ namespace control
         RPM getRotation() const;
 
         void initialize() override;
+        /**
+         * Called regularly
+         */
+        void refresh() override;
 
         private:
         void syncWheelsToLogic();
