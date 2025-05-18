@@ -14,5 +14,13 @@ namespace control
             m_rearRightMotor{mk_motorConfig.unifiedProperties, mk_motorConfig.rearRightPwmdta, mk_rightInversion},
             m_mecanumLogic{mk_dimensionConfig.horizontalWheelDistance, mk_dimensionConfig.verticalWheelDistance, mk_dimensionConfig.wheelRadius}
         {}
+
+        void ChassisSubsystem::initialize()
+        {
+            m_frontLeftMotor.initialize();
+            m_frontRightMotor.initialize();
+            m_rearLeftMotor.initialize();
+            m_rearRightMotor.initialize();
+        }
     }//namespace control
 }//namespace chassis

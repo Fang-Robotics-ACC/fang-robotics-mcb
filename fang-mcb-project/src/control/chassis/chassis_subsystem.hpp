@@ -90,9 +90,12 @@ namespace control
          */
         RPM getRotation() const;
 
-
+        void initialize() override;
 
         private:
+            const ChassisMotorConfig mk_motorConfig;
+            const ChassisDimensionConfig mk_dimensionConfig; 
+
             const data::motors::Directionality mk_defaultDirectionality{data::motors::Directionality::BIDIRECTIONAL};
             DriveMotor m_frontLeftMotor;
             DriveMotor m_frontRightMotor;
@@ -101,8 +104,6 @@ namespace control
 
             logic::chassis::FieldMecanumLogic m_mecanumLogic;
 
-            const ChassisMotorConfig mk_motorConfig;
-            const ChassisDimensionConfig mk_dimensionConfig; 
 
             ///If you are facing forward, and the platform moves forward,
             ///Then the left wheels will rotate counterclockwise, (when you are looking at the shaft)
