@@ -10,7 +10,7 @@ namespace trap
     {
         struct PwmData
         {
-            tap::gpio::Pwm pwmPin;
+            tap::gpio::Pwm::Pin pwmPin;
             Hertz pinFrequency;
         };
     }//namespace gpio
