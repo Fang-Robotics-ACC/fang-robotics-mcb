@@ -70,7 +70,6 @@ namespace motors
          */
 		RPM getMinSpeed() const override;
     private:
-        int8_t m_inversionMultiplier;
         RPM m_speed{0};
         RPM m_maxSpeed{mk_maxTheoreticalSpeed};
         RPM m_minSpeed{0};
@@ -82,6 +81,7 @@ namespace motors
         const RPMPerVolt mk_kv{1450.0};
         //The voltage of the controller should not be exceeded by its output
         const RPM mk_maxTheoreticalSpeed{mk_kv * mk_controllerInputVoltage};
+        int8_t m_inversionMultiplier;
 
         logic::motors::Vortex80AEscLogic m_vortexLogic;
 
