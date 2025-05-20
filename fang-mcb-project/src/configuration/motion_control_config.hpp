@@ -3,7 +3,7 @@
 #include "unitaliases.hpp"
 namespace config
 {
-    namespace chassis
+    namespace motion 
     {
         using namespace units::literals;
         /**
