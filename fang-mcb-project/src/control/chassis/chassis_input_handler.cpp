@@ -8,7 +8,8 @@ namespace control
     namespace chassis
     {
 
-        ChassisInputHandler::ChassisInputHandler(Remote& remote) : m_remote{remote}
+        ChassisInputHandler::ChassisInputHandler(Remote& remote, const MotionConfig& motionConfig)
+            : m_remote{remote}, mk_motionConfig{motionConfig}
         {}
     }// namespce chassis
 }// namespace control
