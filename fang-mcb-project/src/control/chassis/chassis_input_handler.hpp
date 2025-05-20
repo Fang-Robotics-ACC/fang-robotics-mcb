@@ -29,6 +29,12 @@ namespace control
              * Returns the amount that the turret should rotate
              */
             Radians getRemoteAngularDisplacement() const;
+
+            /**
+             * How fast either the chassis or the turret should
+             * be rotated
+             */
+            RPM getRemoteRotation() const;
         private:
             Remote& m_remote;
             const MotionConfig mk_motionConfig;
