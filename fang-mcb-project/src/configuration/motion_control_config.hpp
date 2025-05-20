@@ -9,20 +9,26 @@ namespace config
         /**
          * These are the values that are scaled
          * 
-         * They should be positive.
+         * They should be positive
+         * 
+         * Translation is relative to either the chassis, the field, or the turret
+         * Rotation is either for the chassis or the turret
+         * angularDisplacementMax is how much the turret is told to turn
          */
         struct MotionConfig
         {
             MetersPerSecond xTranslationMax;
             MetersPerSecond yTranslationMax;
             RPM rotationMax;
+            Degrees angularDisplacementMax;
         };
 
         static const MotionConfig k_defaultMotionConfig
         {
             xTranslationMax = 5_mph,
             yTranslationMax = 10_mph,
-            rotationMax = 60_rpm
+            rotationMax = 60_rpm,
+            angularDisplacementMax = 0.5_deg
         };
     }
 }
