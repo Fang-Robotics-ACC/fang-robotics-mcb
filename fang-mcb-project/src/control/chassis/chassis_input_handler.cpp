@@ -23,6 +23,16 @@ namespace control
             return logic::chassis::Velocity2D{xTranslation, yTranslation};
         }
 
+        Radians ChassisInputHandler::getRemoteAngularDisplacement() const
+        {
+            const double rightJoystickHorizontal{m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL)};
+            return mk_motionConfig.maxAngularDisplacement * rightJoystickHorizontal;
+        }
 
+        RPM ChassisInputHandler::getRemoteRotation() const
+        {
+        const double rightJoystickHorizontal{m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL)};
+        return mk_motionConfig.maxRotation * rightJoystickHorizontal;
+        }
     }// namespce chassis
 }// namespace control
