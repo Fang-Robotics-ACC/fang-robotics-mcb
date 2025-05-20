@@ -19,8 +19,9 @@
 
 #ifndef DRIVERS_HPP_
 #define DRIVERS_HPP_
-
+#include "configuration/motion_control_config.hpp"
 #include "tap/drivers.hpp"
+#include "control/input_handler.hpp"
 
 class Drivers : public tap::Drivers
 {
@@ -32,6 +33,7 @@ public:
     Drivers() : tap::Drivers{} {}
 
 public:
+    control::InputHandler inputHandler{remote, config::motion::k_defaultMotionConfig};
 
 };  // class Drivers
 #endif  // DRIVERS_HPP_
