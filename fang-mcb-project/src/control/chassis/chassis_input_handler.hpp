@@ -11,16 +11,6 @@ namespace control
         class ChassisInputHandler
         {
         public:
-        /**
-         * These are the values that ChassisInputHandler scales
-         * They should be positive
-         */
-        struct Config
-        {
-            MetersPerSecond xTranslationMax;
-            MetersPerSecond yTranslationMax;
-            RPM rotationMax;
-        };
             using Remote = tap::communication::serial::Remote;
 
             ChassisInputHandler(Remote& remote);
