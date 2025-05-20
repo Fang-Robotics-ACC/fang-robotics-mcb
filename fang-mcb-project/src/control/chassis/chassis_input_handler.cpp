@@ -11,5 +11,18 @@ namespace control
         ChassisInputHandler::ChassisInputHandler(Remote& remote, const MotionConfig& motionConfig)
             : m_remote{remote}, mk_motionConfig{motionConfig}
         {}
+
+        logic::chassis::Velocity2D ChassisInputHandler::getRemoteTranslation() const
+        {
+            const double leftJoystickHorizontal{m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
+            const MetersPerSecond xTranslation{mk_motionConfig.maxXTranslation * leftJoystickHorizontal};
+
+            const double leftJoystickVertical{m_remote.getChannel(Remote::Channel::LEFT_VERTICAL)};
+            const MetersPerSecond yTranslation{mk_motionConfig.maxYTranslation * leftJoystickVertical};
+
+            return logic::chassis::Velocity2D{xTranslation, yTranslation};
+        }
+
+
     }// namespce chassis
 }// namespace control
