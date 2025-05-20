@@ -13,9 +13,11 @@ namespace motors
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motors::Directionality directionality):
+                      data::motors::Directionality directionality,
+                      bool inverted):
                       m_drivers{drivers}, m_pwmPin{pwmPin},
                       mk_controllerInputVoltage{controllerInputVoltage},
+                      m_inversionMultiplier{inverted && (directionality == data::motors::Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}},
                       m_vortexLogic{directionality, pinFrequency}
     {
         switch(directionality)
@@ -30,7 +32,7 @@ namespace motors
 
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
-        const RPM clampedSpeed{std::clamp<RPM>(speed, m_minSpeed, m_maxSpeed)};
+        const RPM clampedSpeed{std::clamp<RPM>(speed * m_inversionMultiplier, m_minSpeed, m_maxSpeed)};
         const double rangePercentage{clampedSpeed / mk_maxTheoreticalSpeed};
         setPWM(m_vortexLogic.calculateDutyCycle(rangePercentage));
     }
@@ -43,6 +45,7 @@ namespace motors
 	void RepeatUltraMk2::setMaxSpeed(const RPM& maxSpeed)
     {
         m_maxSpeed = maxSpeed;
+        setSpeed(getSpeed());
     }
 
 	RPM RepeatUltraMk2::getMaxSpeed() const
@@ -53,12 +56,12 @@ namespace motors
 	void RepeatUltraMk2::setMinSpeed(const RPM& minSpeed)
     {
         m_minSpeed = minSpeed;
-        
+        setSpeed(getSpeed()); 
     }
 
 	RPM RepeatUltraMk2::getMinSpeed() const
     {
-        return m_maxSpeed;
+        return m_minSpeed;
     }
 
     void RepeatUltraMk2::setPWM(float dutyCycle)
@@ -66,10 +69,14 @@ namespace motors
         m_drivers.pwm.write(dutyCycle, m_pwmPin); 
     }
 
+    /**
+     * The initialization needs to have a 0 signal sent for
+     * 1-2 seconds. It will be left up to the caller on how to 
+     * ensure the delay.
+     */
     void RepeatUltraMk2::initialize()
     {
-        //Proper timer channel has not been verified
-        //m_drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, mk_vortexPWMFrequency.to<int>());
+        setSpeed(0_rpm);
     }
 
 }//namespace motors

@@ -23,7 +23,8 @@ namespace motors
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motors::Directionality directionality = data::motors::Directionality::BIDIRECTIONAL);
+                      data::motors::Directionality directionality,
+                      bool inverted = false);
 
         /**
          * Since this motor does not use feedback to control its speed, this is the
@@ -68,6 +69,7 @@ namespace motors
          * Get the minimum speed which all setSpeed requests are clamped to
          */
 		RPM getMinSpeed() const override;
+        void initialize();
     private:
         RPM m_speed{0};
         RPM m_maxSpeed{mk_maxTheoreticalSpeed};
@@ -80,6 +82,7 @@ namespace motors
         const RPMPerVolt mk_kv{1450.0};
         //The voltage of the controller should not be exceeded by its output
         const RPM mk_maxTheoreticalSpeed{mk_kv * mk_controllerInputVoltage};
+        int8_t m_inversionMultiplier;
 
         logic::motors::Vortex80AEscLogic m_vortexLogic;
 
@@ -89,7 +92,6 @@ namespace motors
             Therefore the if the pwm is 0.5 the motor should be still.
         */
         void setPWM(float dutyCycle);
-        void initialize();
    };
 }
 #endif 

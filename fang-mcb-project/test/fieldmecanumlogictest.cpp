@@ -42,6 +42,12 @@ TEST_P(FieldMecanumParameterTest, translationRotationTests)
     logic::chassis::Velocity2D expectedRobotTranslation{MetersPerSecond{strippedRobotTranslation.x}, MetersPerSecond{strippedRobotTranslation.y}};
 
     mecanumLogic.setTotalMotion(translation, rotation, robotAngle);
+    //Ensure getters work properly
+    EXPECT_TRUE(mecanumLogic.getTranslation().x == translation.x);
+    EXPECT_TRUE(mecanumLogic.getTranslation().y == translation.y);
+    //RPM to Radians Per Second conversion introduces floating point errors
+    EXPECT_NEAR(mecanumLogic.getRotation().to<double>(), rotation.to<double>(), k_tolerance);
+
     mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
     logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
     RPM outputRotation{mecanumCalc.getRotation()};

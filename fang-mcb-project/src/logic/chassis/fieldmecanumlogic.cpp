@@ -47,15 +47,15 @@ namespace logic
             m_robotMecanumLogic.setRotation(rotation);
         }
 
-        Radians FieldMecanumLogic::getRobotAngle() const
+        const Radians& FieldMecanumLogic::getRobotAngle() const
         {
             return m_robotAngle;
         }
 
-        Velocity2D FieldMecanumLogic::getTranslation() const
+        const Velocity2D& FieldMecanumLogic::getTranslation() const
         {
             //The robot mecanum logic stores the translation relative to the robot, not the field
-            return robotToFieldTranslation(m_robotMecanumLogic.getTranslation());
+            return m_fieldTranslation;
         }
 
         RPM FieldMecanumLogic::getRotation() const
