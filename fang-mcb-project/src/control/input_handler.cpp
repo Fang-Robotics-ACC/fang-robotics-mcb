@@ -6,5 +6,8 @@ namespace control
     {
     }
 
-    
+    control::chassis::ChassisInputHandler& InputHandler::getChassisInputs()
+    {
+        return m_chassisInputHandler;
+    }
 }

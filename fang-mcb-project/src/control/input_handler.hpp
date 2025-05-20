@@ -15,6 +15,8 @@ namespace control
     public:
     InputHandler(tap::communication::serial::Remote& remote, const config::motion::MotionConfig& motionConfig);
 
+    control::chassis::ChassisInputHandler& getChassisInputs();
+
     private:
     tap::communication::serial::Remote& m_remote;
     control::chassis::ChassisInputHandler m_chassisInputHandler;
