@@ -17,18 +17,18 @@ namespace config
          */
         struct MotionConfig
         {
-            MetersPerSecond xTranslationMax;
-            MetersPerSecond yTranslationMax;
-            RPM rotationMax;
-            Degrees angularDisplacementMax;
+            MetersPerSecond maxXTranslation;
+            MetersPerSecond maxYTranslation;
+            RPM maxRotation;
+            Degrees maxAngularDisplacement;
         };
 
         static const MotionConfig k_defaultMotionConfig
         {
-            xTranslationMax = 5_mph,
-            yTranslationMax = 10_mph,
-            rotationMax = 60_rpm,
-            angularDisplacementMax = 0.5_deg
+            5_mph, //maxXtranslation
+            10_mph, //maxYTranslatioon
+            60_rpm, //maxRotation
+            0.5_deg //maxAngularDisplacement
         };
     }
 }
