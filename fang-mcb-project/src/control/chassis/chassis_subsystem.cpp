@@ -6,6 +6,7 @@ namespace control
     {
         ChassisSubsystem::ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig)
             :
+            tap::control::Subsystem::Subsystem{&drivers},
             m_drivers{drivers},
             mk_motorConfig{chassisConfig.chassisMotors},
             mk_dimensionConfig{chassisConfig.chassisDimensions},
