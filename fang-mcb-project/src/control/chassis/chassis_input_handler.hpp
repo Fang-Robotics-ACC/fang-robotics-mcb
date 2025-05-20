@@ -26,9 +26,9 @@ namespace control
             logic::chassis::Velocity2D getRemoteTranslation() const;
 
             /**
-             * Returns the speed that the turret should rotate
+             * Returns the amount that the turret should rotate
              */
-            Radians getRemoteTurretDisplacement() const;
+            Radians getRemoteAngularDisplacement() const;
         private:
             Remote& m_remote;
             const MotionConfig mk_motionConfig;
