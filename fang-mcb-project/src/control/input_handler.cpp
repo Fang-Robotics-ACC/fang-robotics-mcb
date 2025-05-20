@@ -1,8 +1,8 @@
 #include "input_handler.hpp"
 namespace control
 {
-    InputHandler::InputHandler(tap::communication::serial::Remote& remote):
-        m_remote{remote}
+    InputHandler::InputHandler(tap::communication::serial::Remote& remote, const config::motion::MotionConfig& motionConfig):
+        m_remote{remote}, m_chassisInputHandler{remote, motionConfig} 
     {
     }
 
