@@ -12,6 +12,9 @@
 
 using Velocity2D = logic::chassis::Velocity2D;
 using ::testing::Return;
+using namespace units::literals;
+
+const config::motion::MotionConfig& k_defaultConfig{config::motion::k_defaultMotionConfig};
 class ChassisInputHandlerTest :  public ::testing::TestWithParam<std::tuple<double, double, double, Velocity2D, RPM, Radians>>
 {
 protected:
@@ -47,7 +50,16 @@ TEST_P(ChassisInputHandlerTest, inputHandlingTest)
     const RPM rotationOutput{m_chassisInputHandler.getRemoteRotation()};
     const Radians angularDisplacementOutput{m_chassisInputHandler.getRemoteAngularDisplacement()};
 
-    EXPECT_EQ(translationOutput, m_expectedTranslation);
-    EXPECT_EQ(rotationOutput, m_expectedRPM);
-    EXPECT_EQ(angularDisplacementOutput, m_expectedDisplacement);
+    EXPECT_DOUBLE_EQ(translationOutput.x.to<double>(), m_expectedTranslation.x.to<double>());
+    EXPECT_DOUBLE_EQ(translationOutput.y.to<double>(), m_expectedTranslation.y.to<double>());
+    EXPECT_DOUBLE_EQ(rotationOutput.to<double>(), m_expectedRPM.to<double>());
+    EXPECT_DOUBLE_EQ(angularDisplacementOutput.to<double>(), m_expectedDisplacement.to<double>());
 }
+
+INSTANTIATE_TEST_SUITE_P(zeroTest, ChassisInputHandlerTest, testing::Values(std::make_tuple(0.0, 0.0, 0.0, Velocity2D{0.0_mps, 0.0_mps}, 0_rpm, 0_rad)));
+
+/*
+INSTANTIATE_TEST_SUITE_P(maxTest, ChassisInputHandlerTest,
+    testing::Values(std::make_tuple(1.0, 1.0, 1.0, Velocity2D{k_defaultConfig.maxXTranslation, k_defaultConfig.maxYTranslation},
+                    k_defaultConfig.maxRotation, k_defaultConfig.maxAngularDisplacement)));
+                    */
