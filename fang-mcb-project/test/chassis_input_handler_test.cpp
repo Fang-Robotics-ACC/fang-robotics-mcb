@@ -58,8 +58,10 @@ TEST_P(ChassisInputHandlerTest, inputHandlingTest)
 
 INSTANTIATE_TEST_SUITE_P(zeroTest, ChassisInputHandlerTest, testing::Values(std::make_tuple(0.0, 0.0, 0.0, Velocity2D{0.0_mps, 0.0_mps}, 0_rpm, 0_rad)));
 
-/*
 INSTANTIATE_TEST_SUITE_P(maxTest, ChassisInputHandlerTest,
     testing::Values(std::make_tuple(1.0, 1.0, 1.0, Velocity2D{k_defaultConfig.maxXTranslation, k_defaultConfig.maxYTranslation},
                     k_defaultConfig.maxRotation, k_defaultConfig.maxAngularDisplacement)));
-                    */
+
+INSTANTIATE_TEST_SUITE_P(negativeMaxTest, ChassisInputHandlerTest,
+    testing::Values(std::make_tuple(-1.0, -1.0, -1.0, Velocity2D{-k_defaultConfig.maxXTranslation, -k_defaultConfig.maxYTranslation},
+                    -k_defaultConfig.maxRotation, -k_defaultConfig.maxAngularDisplacement)));
