@@ -54,6 +54,7 @@ namespace control
         void ChassisSubsystem::refresh()
         {
             syncWheelsToLogic();
+            updateFieldAngle();
         }
 
         void ChassisSubsystem::syncWheelsToLogic()
