@@ -1,4 +1,5 @@
 #include "control/chassis/chassis_subsystem.hpp"
+#include "unitaliases.hpp"
 
 namespace control
 {
@@ -61,6 +62,12 @@ namespace control
             m_frontRightMotor.setSpeed(m_mecanumLogic.getFrontRightWheelSpeed());
             m_rearLeftMotor.setSpeed(m_mecanumLogic.getRearLeftWheelSpeed());
             m_rearRightMotor.setSpeed(m_mecanumLogic.getRearRightWheelSpeed());
+        }
+
+        void ChassisSubsystem::updateFieldAngle()
+        {
+            const Radians currentFieldAngle{m_drivers.bmi088.getGz()};
+            m_mecanumLogic.setRobotAngle(currentFieldAngle);
         }
     }//namespace control
 }//namespace chassis

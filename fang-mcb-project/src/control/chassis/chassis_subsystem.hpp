@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_CHASSIS_SUBSYSTEM_HPP
 #define FANG_ROBOTICS_MCB_CHASSIS_SUBSYSTEM_HPP
 #include "drivers.hpp"
-#include "unitaliases.hpp"
+#include "configuration/unitaliases.hpp"
 #include "data/directionality.hpp"
 #include "physicsaliases.hpp"
 #include "logic/chassis/fieldmecanumlogic.hpp"
@@ -98,6 +98,7 @@ namespace control
 
         private:
         void syncWheelsToLogic();
+        void updateFieldAngle();
             Drivers& m_drivers;
             const ChassisMotorConfig mk_motorConfig;
             const ChassisDimensionConfig mk_dimensionConfig; 
