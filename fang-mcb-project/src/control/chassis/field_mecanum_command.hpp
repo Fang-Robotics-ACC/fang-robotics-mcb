@@ -39,10 +39,14 @@ namespace control
             void end(bool interrupted) override;
             bool isFinished() const;
         private:
+            void executeRemoteTestFieldRotate();
+            void executeRemoteTestStrafeTurret();
+            void executeKeyboardTestFieldRotate();
+            void executeKeyboardTestStrafeTurret();
             static constexpr char* mk_name{"Chassis tank drive"};
             ChassisSubsystem& m_chassisSubsystem;
             InputHandler& m_inputHandler;
-            ControlMode m_controlMode{ControlMode::TEST_FIELD_ROTATE};
+            ControlMode m_controlMode{ControlMode::REMOTE_TEST_FIELD_ROTATE};
         };
     }//namespace control
 }//namespace chassis

@@ -33,5 +33,17 @@ namespace control
         {
             return false;
         }
+
+        void FieldMecanumCommand::executeRemoteTestFieldRotate()
+        {}
+
+        void FieldMecanumCommand::executeRemoteTestStrafeTurret()
+        {}
+
+        void FieldMecanumCommand::executeKeyboardTestFieldRotate()
+        {}
+
+        void FieldMecanumCommand::executeKeyboardTestStrafeTurret()
+        {}
     }//namespace control
 }//namespace chassis
