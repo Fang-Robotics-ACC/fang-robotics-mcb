@@ -71,6 +71,7 @@ int main()
      */
     Drivers *drivers = DoNotUse_getDrivers();
     Robot robot{*drivers};
+    robot.initializeSubsystemCommands();
 
     Board::initialize();
     initializeIo(drivers);
