@@ -3,7 +3,10 @@
 
 namespace control
 {
-    Pierce::Pierce(Drivers& drivers) : m_drivers{drivers}
+    Pierce::Pierce(Drivers& drivers, const Config& config)
+        : m_drivers{drivers},
+          m_chassis{drivers, config.chassisConfig},
+          m_fieldMecanumCommand{m_chassis, drivers.inputHandler}
     {
     }
     
