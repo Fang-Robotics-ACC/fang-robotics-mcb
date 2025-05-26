@@ -25,7 +25,8 @@
                 "fang-mcb-project/taproot/src/tap/algorithms",
                 "fang-mcb-project/src/wrap",
                 "fang-mcb-project/src/wrap/trap",
-                "fang-mcb-project/src/wrap/trap/communication"
+                "fang-mcb-project/src/wrap/trap/communication",
+                "fang-mcb_project/robot-type"
             ],
             "compilerPath": "g++",
             "intelliSenseMode": "gcc-x64",
@@ -62,7 +63,8 @@
                 "fang-mcb-project/src/util",
                 "fang-mcb-project/src/wrap",
                 "fang-mcb-project/src/wrap/trap",
-                "fang-mcb-project/src/wrap/trap/communication"
+                "fang-mcb-project/src/wrap/trap/communication",
+                "fang-mcb_project/robot-type"
             ],
             "compilerPath": "arm-none-eabi-g++",
             "intelliSenseMode": "gcc-arm",
