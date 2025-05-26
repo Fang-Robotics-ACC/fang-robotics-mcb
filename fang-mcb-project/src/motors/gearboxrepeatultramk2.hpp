@@ -26,13 +26,12 @@ namespace motors
          */
         struct UnifiedProperties
         {
-            Drivers& drivers;
             const Volts controllerInputVoltage;
             data::motors::Directionality directionality;
             double gearRatio;
         };
 
-        GearboxRepeatUltraMk2(const UnifiedProperties& unifiedProperties, const trap::gpio::PwmData& pwmData, bool inverted);
+        GearboxRepeatUltraMk2(tap::Drivers& drivers, const UnifiedProperties& unifiedProperties, const trap::gpio::PwmData& pwmData, bool inverted);
 
         GearboxRepeatUltraMk2(tap::Drivers& drivers,
                       const Volts& controllerInputVoltage,

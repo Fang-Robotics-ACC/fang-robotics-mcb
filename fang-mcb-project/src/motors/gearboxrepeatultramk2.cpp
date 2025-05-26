@@ -2,8 +2,8 @@
 namespace motors
 {
 
-    GearboxRepeatUltraMk2::GearboxRepeatUltraMk2(const UnifiedProperties& unifiedProperties, const trap::gpio::PwmData& pwmData, bool inverted)
-        : GearboxRepeatUltraMk2(unifiedProperties.drivers, unifiedProperties.controllerInputVoltage,
+    GearboxRepeatUltraMk2::GearboxRepeatUltraMk2(tap::Drivers& drivers, const UnifiedProperties& unifiedProperties, const trap::gpio::PwmData& pwmData, bool inverted)
+        : GearboxRepeatUltraMk2(drivers, unifiedProperties.controllerInputVoltage,
                                 pwmData.pwmPin, pwmData.pinFrequency, unifiedProperties.directionality, inverted, unifiedProperties.gearRatio)
     {}
 
