@@ -14,6 +14,21 @@ namespace control
          */
         class FieldMecanumCommand: public tap::control::Command
         {
+        public:
+        /**
+         * Remote uses the dji controller.
+         * Keyboard uses the keyboard inputs.
+         * TEST_FIELD_ROTATE = The horizontal right joystick or mouse causes the chassis to rotate.
+         * TEST_STAFE_TURRET = The chassis will only translate, leaving the horizontal mouse or right joystick
+         * input for the turret.
+         */
+        enum class ControlMode
+        {
+            REMOTE_TEST_FIELD_ROTATE,
+            REMOTE_TEST_STRAFE_TURRET,
+            KEYBOARD_TEST_FIELD_ROTATE,
+            KEYBOARD_TEST_STRAFE_TURRET
+        };
             /**
              * This takes a chassis subsystem and the respective inputHandler
              */
@@ -24,9 +39,14 @@ namespace control
             void end(bool interrupted) override;
             bool isFinished() const;
         private:
+            void executeRemoteTestFieldRotate();
+            void executeRemoteTestStrafeTurret();
+            void executeKeyboardTestFieldRotate();
+            void executeKeyboardTestStrafeTurret();
             static constexpr char* mk_name{"Chassis tank drive"};
             ChassisSubsystem& m_chassisSubsystem;
             InputHandler& m_inputHandler;
+            ControlMode m_controlMode{ControlMode::REMOTE_TEST_FIELD_ROTATE};
         };
     }//namespace control
 }//namespace chassis
