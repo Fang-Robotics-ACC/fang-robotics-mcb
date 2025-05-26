@@ -30,6 +30,8 @@ namespace control
         {}
 
         bool FieldMecanumCommand::isFinished() const
-        {}
+        {
+            return false;
+        }
     }//namespace control
 }//namespace chassis
