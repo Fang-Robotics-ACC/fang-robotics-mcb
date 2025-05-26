@@ -43,10 +43,8 @@
 /* control includes ---------------------------------------------------------*/
 #include "tap/architecture/clock.hpp"
 #include "units.h"
-#include <cassert>
 #include "control/robot.hpp"
 
-#include "repeatultramk2.hpp"
 /* define timers here -------------------------------------------------------*/
 static constexpr float MAIN_LOOP_FREQUENCY = 500.0f;
 tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / MAIN_LOOP_FREQUENCY);
