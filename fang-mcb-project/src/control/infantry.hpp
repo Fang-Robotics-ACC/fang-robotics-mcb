@@ -3,10 +3,14 @@
 #include "drivers.hpp"
 namespace control
 {
-    class Infantry
+    /**
+     * First Fang: Pierce
+     * The first robot in Fang Robotics est. 2025
+     */
+    class Pierce
     {
     public:
-        Infantry(Drivers& drivers);
+        Pierce(Drivers& drivers);
         void initializeSubsystemCommands();
     private:
         void initializeSubsystems();

@@ -4,7 +4,7 @@ namespace control
 {
 #if defined(TARGET_INFANTRY)
 #include "infantry.hpp"
-using Robot = Infantry;
+using Robot = Pierce;
 #endif
 }
 #endif
