@@ -14,6 +14,7 @@ namespace control
          */
         class FieldMecanumCommand: public tap::control::Command
         {
+        public:
             /**
              * This takes a chassis subsystem and the respective inputHandler
              */
