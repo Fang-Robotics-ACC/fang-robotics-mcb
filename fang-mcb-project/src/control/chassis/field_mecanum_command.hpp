@@ -15,6 +15,11 @@ namespace control
         class FieldMecanumCommand: public tap::control::Command
         {
         public:
+        enum class ControlMode
+        {
+            TEST_FIELD_ROTATE,
+            TEST_STRAFE_TURRET
+        };
             /**
              * This takes a chassis subsystem and the respective inputHandler
              */
@@ -28,6 +33,7 @@ namespace control
             static constexpr char* mk_name{"Chassis tank drive"};
             ChassisSubsystem& m_chassisSubsystem;
             InputHandler& m_inputHandler;
+            ControlMode m_controlMode{ControlMode::TEST_FIELD_ROTATE};
         };
     }//namespace control
 }//namespace chassis
