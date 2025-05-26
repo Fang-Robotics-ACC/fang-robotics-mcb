@@ -44,6 +44,7 @@
 #include "tap/architecture/clock.hpp"
 #include "units.h"
 #include <cassert>
+#include "control/robot.hpp"
 
 #include "repeatultramk2.hpp"
 /* define timers here -------------------------------------------------------*/
@@ -71,6 +72,7 @@ int main()
      *      IO states and run the scheduler.
      */
     Drivers *drivers = DoNotUse_getDrivers();
+    Robot robot{*drivers};
 
     Board::initialize();
     initializeIo(drivers);
