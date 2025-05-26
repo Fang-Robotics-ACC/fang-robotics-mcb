@@ -12,7 +12,11 @@ namespace control
     class Pierce
     {
     public:
-        Pierce(Drivers& drivers);
+    struct Config
+    {
+        chassis::ChassisSubsystem::ChassisConfig chassisConfig;
+    };
+        Pierce(Drivers& drivers, const Config& config);
         void initializeSubsystemCommands();
     private:
         void initializeSubsystems();
