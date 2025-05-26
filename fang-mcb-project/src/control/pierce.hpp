@@ -1,6 +1,8 @@
 #ifndef FANG_ROBOTICS_MCB_INFANTRY_HPP
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "drivers.hpp"
+#include "control/chassis/chassis_subsystem.hpp"
+#include "control/chassis/field_mecanum_command.hpp"
 namespace control
 {
     /**
@@ -19,6 +21,9 @@ namespace control
         void registerIoMappings();
 
         Drivers& m_drivers;
+        chassis::ChassisSubsystem m_chassis;
+        chassis::FieldMecanumCommand m_fieldMecanumCommand;
+
     };//class Robot
 }//namspace control
 #endif
