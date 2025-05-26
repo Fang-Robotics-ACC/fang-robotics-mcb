@@ -3,6 +3,7 @@
 #include "drivers.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/field_mecanum_command.hpp"
+#include "configuration/chassis_config.hpp"
 namespace control
 {
     /**
@@ -16,7 +17,7 @@ namespace control
     {
         chassis::ChassisSubsystem::ChassisConfig chassisConfig;
     };
-        Pierce(Drivers& drivers, const Config& config);
+        Pierce(Drivers& drivers);
         void initializeSubsystemCommands();
     private:
         void initializeSubsystems();
@@ -27,6 +28,7 @@ namespace control
         Drivers& m_drivers;
         chassis::ChassisSubsystem m_chassis;
         chassis::FieldMecanumCommand m_fieldMecanumCommand;
+        const Config mk_config{config::chassis::k_defaultConfig};
 
     };//class Robot
 }//namspace control
