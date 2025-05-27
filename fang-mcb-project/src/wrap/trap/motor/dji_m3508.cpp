@@ -12,5 +12,10 @@ namespace trap
                            const char* name, bool inverted, bool currentControl, double gearRatio)
         : m_djiMotor{&drivers, motorId, canBus, inverted, name, currentControl, gearRatio}
         {}
+
+        void DjiM3508::initialize()
+        {
+            m_djiMotor.initialize();
+        }
     }
 }
