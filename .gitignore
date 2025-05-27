@@ -2,7 +2,6 @@
 
 fang-mcb-project/build
 fang-mcb-project/Pipfile.lock
-fang-mcb-project/Pipfile
 project.xml.log
 
 .vscode/.cortex-debug.peripherals.state.json
