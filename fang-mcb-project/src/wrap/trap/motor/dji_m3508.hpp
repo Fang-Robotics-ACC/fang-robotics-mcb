@@ -26,9 +26,23 @@ namespace trap
                 double gearRatio;
             };
             DjiM3508(Drivers& drivers, const Config& config);
+            /**
+             * drivers - the drivers struct
+             * motorId - the motor controller id
+             * canBus - the can bus the motor controller is on
+             * name - the name of the motor for the controller menu
+             * gearRatio - the ratio of input revolutions per output revolution 
+             */
             DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                      const char* name, bool inverted, bool currentControl, double gearRatio);
+            /**
+             * It must be called for the motor to properly function.
+             */
             void initialize();
+
+            /**
+             * The desired motor output. It must be limited to a 16 bit int.
+             */
             void setDesiredOutput(int16_t desiredOutput);
         private:
             tap::motor::DjiMotor m_djiMotor;
