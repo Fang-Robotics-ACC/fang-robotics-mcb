@@ -44,6 +44,12 @@ namespace trap
              * The desired motor output. It must be limited to a 16 bit int.
              */
             void setDesiredOutput(int16_t desiredOutput);
+
+            /**
+             * true if a can message has been received within the last
+             * MOTOR_DISCONNECT_TIME.
+             */
+            bool isMotorOnline() const;
         private:
             tap::motor::DjiMotor m_djiMotor;
         };

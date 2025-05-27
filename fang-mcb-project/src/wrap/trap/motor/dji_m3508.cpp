@@ -22,5 +22,10 @@ namespace trap
         {
             m_djiMotor.setDesiredOutput(desiredOutput);
         }
+
+        bool DjiM3508::isMotorOnline() const
+        {
+            return m_djiMotor.isMotorOnline();
+        }
     }
 }
