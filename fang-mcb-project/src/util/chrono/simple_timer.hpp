@@ -2,6 +2,8 @@
 #define FANG_ROBOTICS_MCB_TIME_SIMPLER_TIMER_HPP
 #include "configuration/unitaliases.hpp"
 
+#include "modm/architecture/interface/clock.hpp"
+
 namespace chrono
 {
     /**
@@ -9,12 +11,16 @@ namespace chrono
      */
     class SimpleTimer
     {
+        //Microseconds
+        using TimePoint = modm::chrono::micro_clock::time_point;
+        using RawDuration = modm::PreciseClock::duration;
+        using Clock = modm::PreciseClock;
     public:
-        SimpleTimer() = default;
+        SimpleTimer();
         /**
          * Resets the count and returns the duration
          */
-        Milliseconds getDurationAndReset();
+        Microseconds getDurationAndReset();
 
         /**
          * Resets the count
@@ -24,7 +30,10 @@ namespace chrono
         /**
          * Returns the duration
          */
-        Milliseconds getDuration() const;
+        Microseconds getDuration() const;
+    private:
+        Clock m_clock;
+        TimePoint m_epoch;
     };
 }
 #endif
