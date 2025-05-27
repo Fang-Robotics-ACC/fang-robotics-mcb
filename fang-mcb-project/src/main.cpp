@@ -76,7 +76,8 @@ int main()
 
     Board::initialize();
     initializeIo(drivers);
-    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<float>()};
+    //RepatUltraMk2 driver require a specific frequency to pwm have a pulse between 1ms to 2ms
+    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<float>());
 
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
