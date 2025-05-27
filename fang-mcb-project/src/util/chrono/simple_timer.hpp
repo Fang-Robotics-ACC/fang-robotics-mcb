@@ -18,7 +18,8 @@ namespace chrono
     public:
         SimpleTimer();
         /**
-         * Resets the count and returns the duration
+         * Resets the count and returns the duration.
+         * Slightly more accurate.
          */
         Microseconds getDurationAndReset();
 
