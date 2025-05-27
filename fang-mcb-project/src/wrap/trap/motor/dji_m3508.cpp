@@ -27,5 +27,10 @@ namespace trap
         {
             return m_djiMotor.isMotorOnline();
         }
+
+        Celsius DjiM3508::getTemperature() const
+        {
+            return Celsius{m_djiMotor.getTemperature()};
+        }
     }
 }

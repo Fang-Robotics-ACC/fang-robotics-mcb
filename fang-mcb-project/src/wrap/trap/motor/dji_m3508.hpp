@@ -50,6 +50,12 @@ namespace trap
              * MOTOR_DISCONNECT_TIME.
              */
             bool isMotorOnline() const;
+
+            /**
+             * Returns the reported temperature in degrees.
+             * The temperature was provided in an int8_t
+             */
+            Celsius getTemperature() const;
         private:
             tap::motor::DjiMotor m_djiMotor;
         };
