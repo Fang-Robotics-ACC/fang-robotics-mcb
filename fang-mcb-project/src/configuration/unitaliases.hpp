@@ -23,6 +23,7 @@ using RadianMeters = units::unit_t<RawRadianMeters>;
 using RawRadianMetersPerSecond = units::compound_unit<RawRadianMeters, units::inverse<units::time::seconds>>;
 using RadianMetersPerSecond = units::unit_t<RawRadianMetersPerSecond>;
 using Celsius = units::temperature::celsius_t;
+using Microseconds = units::time::microsecond_t;
 
 //One of the few moments that I would use auto
 //These constants do not alter anything numerically, but are useful when
