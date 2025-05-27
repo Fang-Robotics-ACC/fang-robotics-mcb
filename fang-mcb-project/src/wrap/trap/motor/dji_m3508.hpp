@@ -56,6 +56,8 @@ namespace trap
              * The temperature was provided in an int8_t
              */
             Celsius getTemperature() const;
+
+            tap::can::CanBus getCanBus() const;
         private:
             tap::motor::DjiMotor m_djiMotor;
         };

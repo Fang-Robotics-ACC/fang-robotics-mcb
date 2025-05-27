@@ -32,5 +32,10 @@ namespace trap
         {
             return Celsius{m_djiMotor.getTemperature()};
         }
+
+        tap::can::CanBus DjiM3508::getCanBus() const
+        {
+            return m_djiMotor.getCanBus();
+        }
     }
 }
