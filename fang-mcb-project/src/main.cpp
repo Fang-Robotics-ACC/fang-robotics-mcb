@@ -79,6 +79,9 @@ int main()
     //RepatUltraMk2 driver require a specific frequency to pwm have a pulse between 1ms to 2ms
     drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<float>());
 
+    //Buzzz
+    drivers->pwm.write(0.5, tap::gpio::Pwm::Buzzer);
+
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
     // Blocking call, waits until Windows Simulator connects.
