@@ -58,6 +58,8 @@ namespace trap
             Celsius getTemperature() const;
 
             tap::can::CanBus getCanBus() const;
+
+            const char* getName() const;
         private:
             tap::motor::DjiMotor m_djiMotor;
         };

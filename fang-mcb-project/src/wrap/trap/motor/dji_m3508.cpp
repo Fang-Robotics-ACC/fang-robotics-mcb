@@ -37,5 +37,10 @@ namespace trap
         {
             return m_djiMotor.getCanBus();
         }
+
+        const char* DjiM3508::getName() const
+        {
+            return m_djiMotor.getName();
+        }
     }
 }
