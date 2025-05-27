@@ -29,6 +29,7 @@ namespace trap
             DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                      const char* name, bool inverted, bool currentControl, double gearRatio);
             void initialize();
+            void setDesiredOutput(int16_t desiredOutput);
         private:
             tap::motor::DjiMotor m_djiMotor;
         };
