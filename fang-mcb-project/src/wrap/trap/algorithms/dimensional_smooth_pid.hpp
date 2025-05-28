@@ -82,13 +82,16 @@ namespace trap
                 float tQDerivativeKalman = 1.0f;
                 float tRDerivativeKalman = 0.0f;
                 float tQProportionalKalman = 1.0f;
-                float tQProportionalKalman = 0.0f;
+                float tRProportionalKalman = 0.0f;
 
                 /**
                  * Mercy constructor
                  */
                 Config(double p, double i, double d, double maxIntegralAccumulation, double maxOutput, double errorDerivativeFloor,
-                       double errorDeadzone = 0.0, double tQDerivativeKalman = 1.0, double tRDerivativeKalman = 0.0, double tQProportionalKalman = 1.0);
+                       double errorDeadzone = 0.0, double tQDerivativeKalman = 1.0, double tRDerivativeKalman = 0.0, tRProportionalKalman = 1.0)
+                : Config{PUnit{p} IUnit{i}, DUnit{d}, IntegralAccumulationUnit{maxIntegralAccumulation}, ControlUnit{maxOutput}, ErrorUnit{errorDerivativeFloor},
+                  ErrorUnit{errorDeadzone}, tQDerivativeKalman, tRDerivativeKalman, tQProportionalKalman, tRProportionalKalman}
+                {}
             }
 
             DimensionalSmoothPid(const Config& config);
