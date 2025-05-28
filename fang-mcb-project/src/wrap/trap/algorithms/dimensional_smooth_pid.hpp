@@ -71,6 +71,7 @@ namespace trap
              */
             struct Config
             {
+            public:
                 PUnit p;
                 IUnit i;
                 DUnit d;
@@ -82,6 +83,8 @@ namespace trap
                 float tRDerivativeKalman = 0.0f;
                 float tQProportionalKalman = 1.0f;
                 float tQProportionalKalman = 0.0f;
+                Config(double p, double i, double d, double maxIntegralAccumulation, double maxOutput, double errorDerivativeFloor,
+                       double errorDeadzone = 0.0, double tQDerivativeKalman = 1.0, double tRDerivativeKalman = 0.0, double tQProportionalKalman = 1.0);
             }
 
             DimensionalSmoothPid(const Config& config);
