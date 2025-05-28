@@ -9,6 +9,7 @@ namespace trap
     namespace algorithms
     {
         /**
+         * DO NOT USE
          * This will require the use of units::lenth::meters instead of units::length::meter_t
          * The control unit is the unit that is used to change the system
          * The error unit is the unit that the system takes as an input
