@@ -34,6 +34,9 @@ namespace trap
              * canBus - the can bus the motor controller is on
              * name - the name of the motor for the controller menu
              * gearRatio - the ratio of input revolutions per output revolution 
+             * pid config: make sure the maxOutput does not exceed DjiM3508 k_maxOutput.
+             * This would lead to undefined behavior. An assertion has been placed to prevent
+             * the code from continuing.
              */
             DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                      const char* name, bool inverted, bool currentControl, double gearRatio, const DjiSpeedPid::Config& speedConfig);
@@ -78,6 +81,8 @@ namespace trap
             tap::can::CanBus getCanBus() const;
 
             const char* getName() const;
+
+        static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_C620};
         private:
             tap::motor::DjiMotor m_djiMotor;
             DjiSpeedPid m_speedPid;

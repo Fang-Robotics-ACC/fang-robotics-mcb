@@ -1,4 +1,7 @@
 #include "dji_m3508.hpp"
+
+#include <cassert>
+
 namespace trap
 {
     namespace motor
@@ -6,13 +9,16 @@ namespace trap
         DjiM3508::DjiM3508(Drivers& drivers, const Config& config)
         : DjiM3508{drivers, config.motorId, config.canBus, config.name,
                    config.inverted, config.currentControl, config.gearRatio, config.speedPidConfig}
-        {}
+        {
+        }
 
         DjiM3508::DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                            const char* name, bool inverted, bool currentControl, double gearRatio, const DjiSpeedPid::Config& speedPidConfig)
         : m_djiMotor{&drivers, motorId, canBus, inverted, name, currentControl, gearRatio},
           m_speedPid{speedPidConfig}
-        {}
+        {
+            assert(static_cast<DjiMotorOutput>(speedPidConfig.maxOutput) <= k_maxOutput && "pid can exceed max output!!!");
+        }
 
         void DjiM3508::update()
         {
@@ -37,6 +43,7 @@ namespace trap
 
         void DjiM3508::setDesiredOutput(DjiMotorOutput desiredOutput)
         {
+            assert(-k_maxOutput <= desiredOutput && desiredOutput <= k_maxOutput && "Max output exceeded");
             m_djiMotor.setDesiredOutput(desiredOutput);
         }
 
