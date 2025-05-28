@@ -16,6 +16,10 @@ namespace chrono
         using RawDuration = modm::PreciseClock::duration;
         using Clock = modm::PreciseClock;
     public:
+        /**
+         * Automatically sets current moment to that of its creation :)
+         * Sounds a bit mystical imo
+         */
         SimpleTimer();
         /**
          * Resets the count and returns the duration.
