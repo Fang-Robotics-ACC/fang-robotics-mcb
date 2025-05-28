@@ -36,6 +36,11 @@ namespace trap
              */
             DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                      const char* name, bool inverted, bool currentControl, double gearRatio);
+
+            /**
+             * Returns the last reported RPM from CAN
+             */
+            RPM getSpeed() const;
             /**
              * It must be called for the motor to properly function.
              */
