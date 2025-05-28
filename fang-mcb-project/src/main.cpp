@@ -78,6 +78,7 @@ int main()
     initializeIo(drivers);
     //RepatUltraMk2 driver require a specific frequency to pwm have a pulse between 1ms to 2ms
     drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<float>());
+    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER4, Hertz{440}.to<float>());
 
     //Buzzz
     drivers->pwm.write(0.5, tap::gpio::Pwm::Buzzer);
@@ -87,6 +88,16 @@ int main()
     tap::communication::TCPServer::MainServer()->getConnection();
 #endif
     drivers->leds.set(tap::gpio::Leds::Green, true);
+    bool aSet = true;
+
+    while (1)
+    {
+        modm::delay_ms(1000/ 2);
+        drivers->leds.set(tap::gpio::Leds::Red, !aSet);
+        aSet = !aSet;
+    }
+    return 0;
+
 
     while (1)
     {
