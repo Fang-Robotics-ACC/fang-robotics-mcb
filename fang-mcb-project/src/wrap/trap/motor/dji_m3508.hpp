@@ -39,6 +39,11 @@ namespace trap
 
 
             /**
+             * Must be called regularly to update the motor pid
+             */
+            void update();
+
+            /**
              * Sets the desired speed for the pid to target
              */
             void setTargetSpeed(const RPM& targetSpeed);
