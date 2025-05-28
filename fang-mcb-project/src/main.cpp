@@ -81,12 +81,12 @@ int main()
 
     //Buzzz
     drivers->pwm.write(0.5, tap::gpio::Pwm::Buzzer);
-
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
     // Blocking call, waits until Windows Simulator connects.
     tap::communication::TCPServer::MainServer()->getConnection();
 #endif
+    drivers->leds.set(tap::gpio::Leds::Green, true);
 
     while (1)
     {
