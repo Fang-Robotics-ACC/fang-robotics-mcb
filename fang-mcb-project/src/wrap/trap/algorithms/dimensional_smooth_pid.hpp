@@ -6,7 +6,7 @@
 
 namespace trap
 {
-    namespace algoritms
+    namespace algorithms
     {
         /**
          * This will require the use of units::lenth::meters instead of units::length::meter_t
@@ -83,6 +83,10 @@ namespace trap
                 float tRDerivativeKalman = 0.0f;
                 float tQProportionalKalman = 1.0f;
                 float tQProportionalKalman = 0.0f;
+
+                /**
+                 * Mercy constructor
+                 */
                 Config(double p, double i, double d, double maxIntegralAccumulation, double maxOutput, double errorDerivativeFloor,
                        double errorDeadzone = 0.0, double tQDerivativeKalman = 1.0, double tRDerivativeKalman = 0.0, double tQProportionalKalman = 1.0);
             }
@@ -94,6 +98,10 @@ namespace trap
              * and the amount of time which has passed between calls
              */
             runController(ErrorUnit error);
+            /**
+             * Manually include delta time (this is for testing purposes but may bear use to future testers)
+             */
+            runController(ErrorUnit error, ErrorDerivativeUnit errorDerivative, TimeUnit deltaTime);
         private:
             tap::algorithms::SmoothPid m_smoothPid;
         };
