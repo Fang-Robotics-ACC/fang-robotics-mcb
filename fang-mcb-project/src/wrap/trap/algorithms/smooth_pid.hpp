@@ -42,10 +42,10 @@ namespace trap
              * Manually include delta time (this is for testing purposes but may bear use to future testers)
              * For implementation purposes, the errorDerivative is stripped of any unit
              */
-            ControlType runController(ErrorUnit error, double errorDerivative, Microseconds deltaTime)
+            ControlType runController(ErrorType error, double errorDerivative, Microseconds deltaTime)
             {
-                float result {m_smoothPid.runController(static_cast<float>(error), estatic_cast<float>(errorDerivative), static_cast<float>(deltaTime))};
-                return ControlUnit{result};
+                float result {m_smoothPid.runController(static_cast<float>(error), static_cast<float>(errorDerivative), static_cast<float>(deltaTime))};
+                return static_cast<ControlType>{result};
             }
 
         private:
