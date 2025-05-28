@@ -18,7 +18,7 @@ namespace trap
             m_djiMotor.initialize();
         }
 
-        void DjiM3508::setDesiredOutput(int16_t desiredOutput)
+        void DjiM3508::setDesiredOutput(DjiMotorOutput desiredOutput)
         {
             m_djiMotor.setDesiredOutput(desiredOutput);
         }

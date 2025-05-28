@@ -1,6 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
 #define FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
 #include "unitaliases.hpp"
+#include "wrap/trap/motor/dji_motor_aliases.hpp"
 
 #include "tap/motor/dji_motor.hpp"
 #include "tap/communication/can/can_bus.hpp"
@@ -43,7 +44,7 @@ namespace trap
             /**
              * The desired motor output. It must be limited to a 16 bit int.
              */
-            void setDesiredOutput(int16_t desiredOutput);
+            void setDesiredOutput(DjiMotorOutput desiredOutput);
 
             /**
              * true if a can message has been received within the last
