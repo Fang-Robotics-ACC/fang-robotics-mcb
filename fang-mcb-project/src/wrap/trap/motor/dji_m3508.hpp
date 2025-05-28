@@ -25,6 +25,7 @@ namespace trap
                 bool inverted;
                 bool currentControl;
                 double gearRatio;
+                DjiSpeedPid::Config speedPidConfig;
             };
             DjiM3508(Drivers& drivers, const Config& config);
             /**
@@ -35,7 +36,7 @@ namespace trap
              * gearRatio - the ratio of input revolutions per output revolution 
              */
             DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
-                     const char* name, bool inverted, bool currentControl, double gearRatio);
+                     const char* name, bool inverted, bool currentControl, double gearRatio, const DjiSpeedPid::Config& speedConfig);
 
 
             /**
@@ -79,6 +80,7 @@ namespace trap
             const char* getName() const;
         private:
             tap::motor::DjiMotor m_djiMotor;
+            DjiSpeedPid m_speedPid;
             RPM m_targetSpeed{0.0};
         };
     }

@@ -5,12 +5,13 @@ namespace trap
     {
         DjiM3508::DjiM3508(Drivers& drivers, const Config& config)
         : DjiM3508{drivers, config.motorId, config.canBus, config.name,
-                   config.inverted, config.currentControl, config.gearRatio}
+                   config.inverted, config.currentControl, config.gearRatio, config.speedPidConfig}
         {}
 
         DjiM3508::DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
-                           const char* name, bool inverted, bool currentControl, double gearRatio)
-        : m_djiMotor{&drivers, motorId, canBus, inverted, name, currentControl, gearRatio}
+                           const char* name, bool inverted, bool currentControl, double gearRatio, const DjiSpeedPid::Config& speedPidConfig)
+        : m_djiMotor{&drivers, motorId, canBus, inverted, name, currentControl, gearRatio},
+          m_speedPid{speedPidConfig}
         {}
 
         void DjiM3508::update()
