@@ -13,6 +13,11 @@ namespace trap
         : m_djiMotor{&drivers, motorId, canBus, inverted, name, currentControl, gearRatio}
         {}
 
+        void DjiM3508::setTargetSpeed(const RPM& targetSpeed)
+        {
+            m_targetSpeed = targetSpeed;
+        }
+
         RPM DjiM3508::getSpeed() const
         {
             RPM{m_djiMotor.getShaftRPM()};

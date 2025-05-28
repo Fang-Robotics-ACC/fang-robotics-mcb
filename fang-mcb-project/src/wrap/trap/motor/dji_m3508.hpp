@@ -37,6 +37,12 @@ namespace trap
             DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                      const char* name, bool inverted, bool currentControl, double gearRatio);
 
+
+            /**
+             * Sets the desired speed for the pid to target
+             */
+            void setTargetSpeed(const RPM& targetSpeed);
+
             /**
              * Returns the last reported RPM from CAN
              */
@@ -68,6 +74,7 @@ namespace trap
             const char* getName() const;
         private:
             tap::motor::DjiMotor m_djiMotor;
+            RPM m_targetSpeed{0.0};
         };
     }
 }
