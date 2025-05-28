@@ -40,7 +40,7 @@ namespace trap
 
 
             /**
-             * Must be called regularly to update the motor pid
+             * Must be called regularly to update the motor pid and set the motor output
              */
             void update();
 
