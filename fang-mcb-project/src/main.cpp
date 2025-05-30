@@ -32,6 +32,7 @@
 /* arch includes ------------------------------------------------------------*/
 #include "tap/architecture/periodic_timer.hpp"
 #include "tap/architecture/profiler.hpp"
+#include "tap/motor/dji_motor.hpp"
 
 /* communication includes ---------------------------------------------------*/
 #include "drivers.hpp"
@@ -67,7 +68,6 @@ int main()
 #ifdef PLATFORM_HOSTED
     std::cout << "Simulation starting..." << std::endl;
 #endif
-    std::cerr<< "fuck";
 
     /*
      * NOTE: We are using DoNotUse_getDrivers here because in the main
@@ -78,11 +78,12 @@ int main()
     //Robot robot{*drivers};
     //robot.initializeSubsystemCommands();
 
+
     Board::initialize();
+    tap::motor::DjiMotor motor{drivers, tap::motor::MotorId::MOTOR1, tap::can::CanBus::CAN_BUS1, false, "cool", true};
     initializeIo(drivers);
 
-
-
+    motor.initialize();
 
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
@@ -90,28 +91,21 @@ int main()
     tap::communication::TCPServer::MainServer()->getConnection();
 #endif
 
-    bool aSet = true;
-    while (1)
-    {
-        modm::delay_ms(1000/ 2);
-        drivers->leds.set(tap::gpio::Leds::Red, aSet);
-        aSet = !aSet;
-    }
-
-    return 0;
-
-
     while (1)
     {
         // do this as fast as you can
         PROFILE(drivers->profiler, updateIo, (drivers));
 
+        static int16_t speed{motor.getShaftRPM()};
         if (sendMotorTimeout.execute())
         {
+            bool ledFlash{motor.isMotorOnline()};
+            motor.setDesiredOutput(1000);
             PROFILE(drivers->profiler, drivers->bmi088.periodicIMUUpdate, ());
             PROFILE(drivers->profiler, drivers->commandScheduler.run, ());
             PROFILE(drivers->profiler, drivers->djiMotorTxHandler.encodeAndSendCanData, ());
             PROFILE(drivers->profiler, drivers->terminalSerial.update, ());
+            drivers->leds.set(tap::gpio::Leds::Green, ledFlash);
         }
         modm::delay_us(10);
     }
