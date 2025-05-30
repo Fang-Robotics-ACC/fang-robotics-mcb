@@ -23,7 +23,6 @@ namespace trap
                 tap::can::CanBus canBus;
                 const char* name;
                 bool inverted;
-                bool currentControl;
                 double gearRatio;
                 DjiSpeedPid::Config speedPidConfig;
             };
@@ -39,7 +38,7 @@ namespace trap
              * the code from continuing.
              */
             DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
-                     const char* name, bool inverted, bool currentControl, double gearRatio, const DjiSpeedPid::Config& speedConfig);
+                     const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedConfig);
 
 
             /**
@@ -87,6 +86,11 @@ namespace trap
             tap::motor::DjiMotor m_djiMotor;
             DjiSpeedPid m_speedPid;
             RPM m_targetSpeed{0.0};
+            double m_gearRatio;
+
+            //Current control in DjiMotor is for the GM6020s only
+            //Setting it to true will mean the motor does not respond
+            static const bool mk_requiredCurrentMode{false};
         };
     }
 }
