@@ -80,7 +80,7 @@ namespace trap
             tap::can::CanBus getCanBus() const;
 
             const char* getName() const;
-
+        /// @brief Maximum output that can be sent to the C620 controller
         static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_C620};
         private:
             tap::motor::DjiMotor m_djiMotor;
