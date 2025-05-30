@@ -45,6 +45,9 @@
 #include "units.h"
 #include "control/robot.hpp"
 #include "configuration/chassis_config.hpp"
+#include "motors/gearboxrepeatultramk2.hpp"
+
+#include <iostream>
 
 /* define timers here -------------------------------------------------------*/
 static constexpr float MAIN_LOOP_FREQUENCY = 500.0f;
@@ -64,6 +67,7 @@ int main()
 #ifdef PLATFORM_HOSTED
     std::cout << "Simulation starting..." << std::endl;
 #endif
+    std::cerr<< "fuck";
 
     /*
      * NOTE: We are using DoNotUse_getDrivers here because in the main
@@ -71,31 +75,34 @@ int main()
      *      IO states and run the scheduler.
      */
     Drivers *drivers = DoNotUse_getDrivers();
-    Robot robot{*drivers};
-    robot.initializeSubsystemCommands();
+    //Robot robot{*drivers};
+    //robot.initializeSubsystemCommands();
 
     Board::initialize();
     initializeIo(drivers);
     //RepatUltraMk2 driver require a specific frequency to pwm have a pulse between 1ms to 2ms
     drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<float>());
-    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER4, Hertz{440}.to<float>());
 
-    //Buzzz
-    drivers->pwm.write(0.5, tap::gpio::Pwm::Buzzer);
+    motors::GearboxRepeatUltraMk2 motor{*drivers, config::chassis::k_defaultMotorConfig.unifiedProperties, config::chassis::k_defaultConfig.chassisMotors.frontLeftPwmData, false};
+
+
+
+
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
     // Blocking call, waits until Windows Simulator connects.
     tap::communication::TCPServer::MainServer()->getConnection();
 #endif
-    drivers->leds.set(tap::gpio::Leds::Green, true);
-    bool aSet = true;
 
+    bool aSet = true;
     while (1)
     {
         modm::delay_ms(1000/ 2);
-        drivers->leds.set(tap::gpio::Leds::Red, !aSet);
+        drivers->leds.set(tap::gpio::Leds::Red, aSet);
+        motor.setSpeed(0_rpm);
         aSet = !aSet;
     }
+
     return 0;
 
 
