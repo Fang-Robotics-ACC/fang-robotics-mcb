@@ -80,7 +80,7 @@ int main()
 
 
     Board::initialize();
-    tap::motor::DjiMotor motor{drivers, tap::motor::MotorId::MOTOR1, tap::can::CanBus::CAN_BUS1, false, "cool", true};
+    tap::motor::DjiMotor motor{drivers, tap::motor::MotorId::MOTOR2, tap::can::CanBus::CAN_BUS1, false, "cool", true};
     initializeIo(drivers);
 
     motor.initialize();
