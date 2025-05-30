@@ -1,4 +1,4 @@
-#include "vortex80aesclogic.hpp"
+#include "vortex80aesc.hpp"
 #include "pwmconstants.hpp"
 #include <cmath>
 #include "modm/math/interpolation/linear.hpp"

@@ -7,7 +7,7 @@
 #include "tap/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
 #include "unitaliases.hpp"
-#include "vortex80aesclogic.hpp"
+#include "vortex80aesc.hpp"
 #include "data/directionality.hpp"
 #include "units.h"
 
