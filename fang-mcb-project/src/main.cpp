@@ -80,10 +80,6 @@ int main()
 
     Board::initialize();
     initializeIo(drivers);
-    //RepatUltraMk2 driver require a specific frequency to pwm have a pulse between 1ms to 2ms
-    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<float>());
-
-    motors::GearboxRepeatUltraMk2 motor{*drivers, config::chassis::k_defaultMotorConfig.unifiedProperties, config::chassis::k_defaultConfig.chassisMotors.frontLeftPwmData, false};
 
 
 
@@ -99,7 +95,6 @@ int main()
     {
         modm::delay_ms(1000/ 2);
         drivers->leds.set(tap::gpio::Leds::Red, aSet);
-        motor.setSpeed(0_rpm);
         aSet = !aSet;
     }
 
