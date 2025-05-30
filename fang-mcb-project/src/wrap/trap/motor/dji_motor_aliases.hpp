@@ -9,6 +9,7 @@ namespace trap
     {
         using DjiMotorOutput = int16_t;
         using DjiSpeedPid = trap::algorithms::SmoothPid<RPM, DjiMotorOutput>;
+        using DjiPositionPid = trap::algorithms::SmoothPid<Radians, DjiMotorOutput>;
     }//namespace motor
 }//namespace trap
 #endif
