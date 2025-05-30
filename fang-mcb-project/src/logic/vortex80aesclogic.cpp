@@ -49,7 +49,6 @@ namespace logic
             const double offsettedPercentage{speedRangePercentage - mk_bidirectionalMin};
             assert(bidirectionalRange == 2.0);
             const double rangePercentage{offsettedPercentage / bidirectionalRange};
-            std::cout << rangePercentage;
 
             //Santiy check. This should never be violated. If it does, then someone messed with the code wrong...
             assert(config::pwm::k_pwmDutyMin <= rangePercentage && rangePercentage <= config::pwm::k_pwmDutyMax && "rangePercentage out of bounds");
