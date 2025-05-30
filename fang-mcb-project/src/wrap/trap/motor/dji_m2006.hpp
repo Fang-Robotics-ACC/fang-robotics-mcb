@@ -82,13 +82,17 @@ namespace trap
 
             const char* getName() const;
 
+        /// @brief Maximum output for C610 controller
         static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_C610};
+
+        /// @brief gear ratio of the gearbox that usually ships with the motor.
         static const double k_factoryGearboxRatio{tap::motor::DjiMotorEncoder::GEAR_RATIO_M2006};
         private:
             tap::motor::DjiMotor m_djiMotor;
             DjiSpeedPid m_speedPid;
-            RPM m_targetSpeed{0.0};
             double m_gearRatio;
+
+            RPM m_targetSpeed{0.0};
 
             //Current control in DjiMotor is for the GM6020s only
             //Setting it to true will mean the motor does not respond
