@@ -72,7 +72,7 @@ namespace trap
             bool isMotorOnline() const;
 
             /**
-             * Returns the reported temperature in degrees.
+             * Returns the reported temperature in celsius.
              * The temperature was provided in an int8_t
              */
             Celsius getTemperature() const;
