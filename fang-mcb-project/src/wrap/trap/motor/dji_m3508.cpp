@@ -23,7 +23,7 @@ namespace trap
 
         void DjiM3508::update()
         {
-            const RPM error = m_targetSpeed - getSpeed();
+            const RPM error{m_targetSpeed - getSpeed()};
             m_speedPid.runController(error);
         }
 
