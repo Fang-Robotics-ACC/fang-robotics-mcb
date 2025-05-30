@@ -82,7 +82,7 @@ namespace trap
 
             const char* getName() const;
 
-        static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_C620};
+        static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_C610};
         static const double k_factoryGearboxRatio{tap::motor::DjiMotorEncoder::GEAR_RATIO_M2006};
         private:
             tap::motor::DjiMotor m_djiMotor;
