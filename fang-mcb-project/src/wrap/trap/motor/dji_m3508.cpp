@@ -1,4 +1,5 @@
 #include "dji_m3508.hpp"
+#include "gearbox_speed.hpp"
 
 #include <cassert>
 
@@ -28,12 +29,12 @@ namespace trap
 
         void DjiM3508::setTargetSpeed(const RPM& targetSpeed)
         {
-            m_targetSpeed = targetSpeed;
+            m_targetSpeed = motors::shaftToMotorSpeed(targetSpeed, m_gearRatio);
         }
 
         RPM DjiM3508::getSpeed() const
         {
-            RPM{m_djiMotor.getShaftRPM()};
+            return motors::motorToShaftSpeed(RPM{m_djiMotor.getShaftRPM()}, m_gearRatio);
         }
 
         void DjiM3508::initialize()
