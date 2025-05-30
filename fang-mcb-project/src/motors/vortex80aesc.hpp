@@ -7,11 +7,11 @@ namespace logic
 {
     namespace motors
     {
-        class Vortex80AEscLogic
+        class Vortex80AEsc
         {
         public:
             using Directionality = data::motors::Directionality;
-            Vortex80AEscLogic(const Directionality& directionality = Directionality::BIDIRECTIONAL, const Hertz& pinFrequency = Hertz{500});
+            Vortex80AEsc(const Directionality& directionality = Directionality::BIDIRECTIONAL, const Hertz& pinFrequency = Hertz{500});
             double calculateDutyCycle (double speedRangePercentage);
             /**
              * 

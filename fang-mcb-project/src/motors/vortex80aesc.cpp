@@ -11,12 +11,12 @@ namespace logic
     namespace motors
     {
 
-        Vortex80AEscLogic::Vortex80AEscLogic(const Directionality& directionality, const Hertz& pinFrequency):
+        Vortex80AEsc::Vortex80AEsc(const Directionality& directionality, const Hertz& pinFrequency):
                                              m_directionality{directionality}, m_pinFrequency{pinFrequency}
         {
         }
 
-        double Vortex80AEscLogic::calculateDutyCycle (double speedRangePercentage)
+        double Vortex80AEsc::calculateDutyCycle (double speedRangePercentage)
         {
             double dutyCycle{0};
             switch (m_directionality)
@@ -31,13 +31,13 @@ namespace logic
             return dutyCycle;
         }
 
-        double Vortex80AEscLogic::calculateUnidirectionalDutyCycle(double speedRangePercentage)
+        double Vortex80AEsc::calculateUnidirectionalDutyCycle(double speedRangePercentage)
         {
             assert(0.0 <= speedRangePercentage && speedRangePercentage <= 1.0 && "Unidirectional limit is [0,1]");
             return adaptedDutyCycle(speedRangePercentage);
         }
 
-        double Vortex80AEscLogic::calculateBidirectionalDutyCycle(double speedRangePercentage)
+        double Vortex80AEsc::calculateBidirectionalDutyCycle(double speedRangePercentage)
         {
             assert(mk_bidirectionalMin <= speedRangePercentage && speedRangePercentage <= mk_bidirectionalMax && "Unidirectional limit is [-1,1]");
             // Manual lerp, todo: figure out modm's Linear class
@@ -57,17 +57,17 @@ namespace logic
             return adaptedDutyCycle(rangePercentage);
         }
 
-        void Vortex80AEscLogic::setDirectionality(const Directionality& directionality)
+        void Vortex80AEsc::setDirectionality(const Directionality& directionality)
         {
             m_directionality = directionality;
         }
 
-        Vortex80AEscLogic::Directionality Vortex80AEscLogic::getDirectionality() const
+        Vortex80AEsc::Directionality Vortex80AEsc::getDirectionality() const
         {
             return m_directionality;
         }
 
-        double Vortex80AEscLogic::adaptedDutyCycle(double rangePercentage, Hertz pinFrequency)
+        double Vortex80AEsc::adaptedDutyCycle(double rangePercentage, Hertz pinFrequency)
         {
             // rawDutyCycle will range between 0 and 1
             // 0.50 will correspond to a 1ms pulse (minimum) assuming the pin is set to a period of 2ms
@@ -81,17 +81,17 @@ namespace logic
             return std::lerp(minDutyCycle, maxDutyCycle, rangePercentage);
         }
 
-        double Vortex80AEscLogic::adaptedDutyCycle(double rangePercentage)
+        double Vortex80AEsc::adaptedDutyCycle(double rangePercentage)
         {
             return adaptedDutyCycle(rangePercentage, m_pinFrequency);
         }
 
-        void Vortex80AEscLogic::setPinFrequency(const Hertz& pinFrequency)
+        void Vortex80AEsc::setPinFrequency(const Hertz& pinFrequency)
         {
             m_pinFrequency = pinFrequency;
         }
 
-        Hertz Vortex80AEscLogic::getPinFrequency() const
+        Hertz Vortex80AEsc::getPinFrequency() const
         {
             return m_pinFrequency;
         }

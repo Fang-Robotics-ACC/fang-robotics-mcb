@@ -84,7 +84,7 @@ namespace motors
         const RPM mk_maxTheoreticalSpeed{mk_kv * mk_controllerInputVoltage};
         int8_t m_inversionMultiplier;
 
-        logic::motors::Vortex80AEscLogic m_vortexLogic;
+        logic::motors::Vortex80AEsc m_vortexLogic;
 
         /*!
             PWM should be between 0 and 1

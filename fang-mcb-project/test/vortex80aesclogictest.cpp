@@ -2,54 +2,54 @@
 #include "vortex80aesclogic.hpp"
 #include "unitaliases.hpp"
 
-TEST(zeroTest, Vortex80AEscLogic)
+TEST(zeroTest, Vortex80AEsc)
 {
     //2 ms period
     const Hertz standardFrequency{500};
-    logic::motors::Vortex80AEscLogic vortex {};
+    logic::motors::Vortex80AEsc vortex {};
 
     EXPECT_DOUBLE_EQ(vortex.adaptedDutyCycle(0.0, standardFrequency), 0.5);
 }
 
-TEST(midRangeTest, Vortex80AEscLogic)
+TEST(midRangeTest, Vortex80AEsc)
 {
     //2 ms period
     const Hertz standardFrequency{500};
-    logic::motors::Vortex80AEscLogic vortex {};
+    logic::motors::Vortex80AEsc vortex {};
 
     EXPECT_DOUBLE_EQ(vortex.adaptedDutyCycle(0.5, standardFrequency), 0.75);
 }
 
-TEST(fullRangeTest, Vortex80AEscLogic)
+TEST(fullRangeTest, Vortex80AEsc)
 {
     //2 ms period
     const Hertz standardFrequency{500};
-    logic::motors::Vortex80AEscLogic vortex {};
+    logic::motors::Vortex80AEsc vortex {};
 
     EXPECT_DOUBLE_EQ(vortex.adaptedDutyCycle(1, standardFrequency), 1.0);
 }
 
-TEST(oddRangeTest, Vortex80AEscLogic)
+TEST(oddRangeTest, Vortex80AEsc)
 {
     //4 ms period
     const Hertz nonStandardFrequency{250};
-    logic::motors::Vortex80AEscLogic vortex {};
+    logic::motors::Vortex80AEsc vortex {};
 
     EXPECT_DOUBLE_EQ(vortex.adaptedDutyCycle(1, nonStandardFrequency), 0.5);
 }
 
-TEST(bidirectionalTest, Vortex80AEscLogic)
+TEST(bidirectionalTest, Vortex80AEsc)
 {
-    logic::motors::Vortex80AEscLogic vortex {data::motors::Directionality::BIDIRECTIONAL};
+    logic::motors::Vortex80AEsc vortex {data::motors::Directionality::BIDIRECTIONAL};
 
     EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(-1.0), 0.5);
     EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(0.0), 0.75);
     EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(1.0), 1.0);
 }
 
-TEST(unidirectionalTest, Vortex80AEscLogic)
+TEST(unidirectionalTest, Vortex80AEsc)
 {
-    logic::motors::Vortex80AEscLogic vortex {data::motors::Directionality::UNIDIRECTIONAL};
+    logic::motors::Vortex80AEsc vortex {data::motors::Directionality::UNIDIRECTIONAL};
 
     EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(0.0), 0.5);
     EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(0.50), 0.75);
