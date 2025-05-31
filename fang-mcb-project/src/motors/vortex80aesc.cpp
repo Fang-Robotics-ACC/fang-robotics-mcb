@@ -1,4 +1,5 @@
 #include "vortex80aesc.hpp"
+#include "trap/communication/pwm_data.hpp"
 #include "pwmconstants.hpp"
 
 #include "modm/math/interpolation/linear.hpp"
@@ -14,7 +15,7 @@ namespace logic
     namespace motors
     {
 
-        Vortex80AEsc::Vortex80AEsc(tap::gpio::Pwm& pwm, const Directionality& directionality, const Hertz& pinFrequency)
+        Vortex80AEsc::Vortex80AEsc(tap::gpio::Pwm& pwm, trap::gpio::PwmData& pwmData, const Directionality& directionality)
         : m_pwm{pwm}, m_directionality{directionality}, m_pinFrequency{pinFrequency}
         {
         }
