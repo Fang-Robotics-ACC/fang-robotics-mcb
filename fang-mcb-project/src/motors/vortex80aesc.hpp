@@ -19,6 +19,11 @@ namespace logic
         public:
             using Directionality = data::motors::Directionality;
             Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
+            /**
+             * This is how long the pwm signal stays high each cycle.
+             * You snhould not exceed the cycle period.
+             */
+            void setPulseDuration(const Microseconds& duration);
             double calculateDutyCycle (double speedRangePercentage);
             /**
              * 
@@ -50,8 +55,10 @@ namespace logic
             void setPinFrequency(const Hertz& pinFrequency);
             Hertz getPinFrequency() const;
         private:
+            void pwmWrite(double dutyCycle);
             tap::gpio::Pwm& m_pwm;
             trap::gpio::PwmData m_pwmData;
+            const Microseconds mk_maxPeriod;
             // Note that in bidirectional mode, the minimum period would
             // correspond to the motor going in full speed reverse
             // But in unidirectional mode, it would mean a still motor
