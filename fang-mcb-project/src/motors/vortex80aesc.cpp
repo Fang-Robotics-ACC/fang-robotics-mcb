@@ -15,8 +15,8 @@ namespace logic
     namespace motors
     {
 
-        Vortex80AEsc::Vortex80AEsc(tap::gpio::Pwm& pwm, trap::gpio::PwmData& pwmData, const Directionality& directionality)
-        : m_pwm{pwm}, m_directionality{directionality}, m_pinFrequency{pinFrequency}
+        Vortex80AEsc::Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality)
+        : m_pwm{pwm}, m_pwmData{pwmData}, m_directionality{directionality}
         {
         }
 
@@ -87,17 +87,17 @@ namespace logic
 
         double Vortex80AEsc::adaptedDutyCycle(double rangePercentage)
         {
-            return adaptedDutyCycle(rangePercentage, m_pinFrequency);
+            return adaptedDutyCycle(rangePercentage, m_pwmData.pinFrequency);
         }
 
         void Vortex80AEsc::setPinFrequency(const Hertz& pinFrequency)
         {
-            m_pinFrequency = pinFrequency;
+            m_pwmData.pinFrequency = pinFrequency;
         }
 
         Hertz Vortex80AEsc::getPinFrequency() const
         {
-            return m_pinFrequency;
+            return m_pwmData.pinFrequency;
         }
     }
 }

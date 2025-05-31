@@ -2,6 +2,8 @@
 #include "brushlessutils.hpp"
 #include "units.h"
 
+#include "trap/communication/pwm_data.hpp"
+
 #include <algorithm>
 #include <cassert>
 
@@ -18,7 +20,7 @@ namespace motors
                       m_drivers{drivers}, m_pwmPin{pwmPin},
                       mk_controllerInputVoltage{controllerInputVoltage},
                       m_inversionMultiplier{inverted && (directionality == data::motors::Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}},
-                      m_vortexLogic{drivers.pwm, directionality, pinFrequency}
+                      m_vortexLogic{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality}
     {
         switch(directionality)
         {

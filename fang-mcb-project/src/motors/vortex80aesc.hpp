@@ -3,7 +3,7 @@
 #include "unitaliases.hpp"
 #include "directionality.hpp"
 
-#include "trap/communication/pwm_data.hpp"
+#include "wrap/trap/communication/pwm_data.hpp"
 
 #include "tap/communication/gpio/pwm.hpp"
 
@@ -18,7 +18,7 @@ namespace logic
         {
         public:
             using Directionality = data::motors::Directionality;
-            Vortex80AEsc(tap::gpio::Pwm& pwm, trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
+            Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
             double calculateDutyCycle (double speedRangePercentage);
             /**
              * 
@@ -51,7 +51,7 @@ namespace logic
             Hertz getPinFrequency() const;
         private:
             tap::gpio::Pwm& m_pwm;
-            trap::gpio::PwmData& m_pwmData;
+            trap::gpio::PwmData m_pwmData;
             // Note that in bidirectional mode, the minimum period would
             // correspond to the motor going in full speed reverse
             // But in unidirectional mode, it would mean a still motor
@@ -63,7 +63,6 @@ namespace logic
             const double mk_uniDirectionalMin {0.0};
             const double mk_uniDirectionalMax {1.0};
 
-            Hertz m_pinFrequency;
             Directionality m_directionality;
 
             double calculateUnidirectionalDutyCycle(double speedRangePercentage);
