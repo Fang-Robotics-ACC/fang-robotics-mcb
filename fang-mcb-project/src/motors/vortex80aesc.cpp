@@ -97,16 +97,6 @@ namespace logic
             return adaptedDutyCycle(rangePercentage, m_pwmData.pinFrequency);
         }
 
-        void Vortex80AEsc::setPinFrequency(const Hertz& pinFrequency)
-        {
-            m_pwmData.pinFrequency = pinFrequency;
-        }
-
-        Hertz Vortex80AEsc::getPinFrequency() const
-        {
-            return m_pwmData.pinFrequency;
-        }
-
         void Vortex80AEsc::pwmWrite(double dutyCycle)
         {
             m_pwm.write(dutyCycle, m_pwmData.pwmPin);

@@ -52,8 +52,6 @@ namespace logic
             double adaptedDutyCycle(double rangePercentage);
             void setDirectionality(const Directionality& directionality);
             Directionality getDirectionality() const;
-            void setPinFrequency(const Hertz& pinFrequency);
-            Hertz getPinFrequency() const;
         private:
             void pwmWrite(double dutyCycle);
             tap::gpio::Pwm& m_pwm;
