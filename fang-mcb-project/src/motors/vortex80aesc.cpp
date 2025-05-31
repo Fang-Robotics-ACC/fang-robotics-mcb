@@ -1,10 +1,12 @@
 #include "vortex80aesc.hpp"
 #include "pwmconstants.hpp"
-#include <cmath>
+
 #include "modm/math/interpolation/linear.hpp"
 #include "modm/container/pair.hpp"
-#include "cassert"
 #include "tap/communication/gpio/pwm.hpp"
+
+#include <cassert>
+#include <cmath>
 #include <iostream>
 
 namespace logic 
