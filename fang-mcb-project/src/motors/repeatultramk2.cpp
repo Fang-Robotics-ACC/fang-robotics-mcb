@@ -18,7 +18,7 @@ namespace motors
                       m_drivers{drivers}, m_pwmPin{pwmPin},
                       mk_controllerInputVoltage{controllerInputVoltage},
                       m_inversionMultiplier{inverted && (directionality == data::motors::Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}},
-                      m_vortexLogic{directionality, pinFrequency}
+                      m_vortexLogic{drivers.pwm, directionality, pinFrequency}
     {
         switch(directionality)
         {

@@ -4,6 +4,7 @@
 #include "modm/math/interpolation/linear.hpp"
 #include "modm/container/pair.hpp"
 #include "cassert"
+#include "tap/communication/gpio/pwm.hpp"
 #include <iostream>
 
 namespace logic 
@@ -11,8 +12,8 @@ namespace logic
     namespace motors
     {
 
-        Vortex80AEsc::Vortex80AEsc(const Directionality& directionality, const Hertz& pinFrequency):
-                                             m_directionality{directionality}, m_pinFrequency{pinFrequency}
+        Vortex80AEsc::Vortex80AEsc(tap::gpio::Pwm& pwm, const Directionality& directionality, const Hertz& pinFrequency)
+        : m_pwm{pwm}, m_directionality{directionality}, m_pinFrequency{pinFrequency}
         {
         }
 
