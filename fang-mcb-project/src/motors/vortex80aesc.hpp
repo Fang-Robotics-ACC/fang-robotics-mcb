@@ -7,6 +7,9 @@ namespace logic
 {
     namespace motors
     {
+        /**
+         * Driver for the Vortex80AEsc involving sending various signals and speed ranges.
+         */
         class Vortex80AEsc
         {
         public:
