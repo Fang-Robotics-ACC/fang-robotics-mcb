@@ -27,19 +27,20 @@ namespace logic
             pwmWrite(dutyCycle);
         }
 
-        double Vortex80AEsc::calculateDutyCycle (double speedRangePercentage)
+        Microseconds Vortex80AEsc::calculatePeriod(double speedRangePercentage)
         {
-            double dutyCycle{0};
+            Microseconds period{0};
             switch (m_directionality)
             {
                 case Directionality::BIDIRECTIONAL:
-                    dutyCycle = calculateBidirectionalPeriod(speedRangePercentage);
+                    period = calculateBidirectionalPeriod(speedRangePercentage);
                     break;
                 
                 case Directionality::UNIDIRECTIONAL:
-                    dutyCycle = calculateUnidirectionalDutyCycle(speedRangePercentage); 
+                    period = calculateUnidirectionalPeriod(speedRangePercentage); 
+                break;
             }
-            return dutyCycle;
+            return period;
         }
 
         Microseconds Vortex80AEsc::calculateUnidirectionalPeriod(double speedRangePercentage)

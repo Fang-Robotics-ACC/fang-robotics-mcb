@@ -27,7 +27,7 @@ namespace logic
              * You snhould not exceed the cycle period.
              */
             void setPulseDuration(const Microseconds& duration);
-            double calculateDutyCycle (double speedRangePercentage);
+            Microseconds calculatePeriod (double speedRangePercentage);
             /**
              * 
              * Returns a duty cycle from
@@ -85,7 +85,7 @@ namespace logic
             const math::CoolLerp::Vector2D mk_unidirectionalPoint2{1.0, 2000.0};
             math::CoolLerp m_unidirectionalMap{mk_unidirectionalPoint1, mk_unidirectionalPoint2};
 
-            double calculateUnidirectionalDutyCycle(double speedRangePercentage);
+            Microseconds calculateUnidirectionalPeriod(double speedRangePercentage);
             Microseconds calculateBidirectionalPeriod(double speedRangePercentage);
         };
     }
