@@ -51,8 +51,6 @@ namespace logic
              * In other words, anything greater than 500 Hz since you need to
              * have a pulse at least 2ms long.
              */
-            double adaptedDutyCycle(double rangePercentage, Hertz pinFrequency);
-            double adaptedDutyCycle(double rangePercentage);
             void setDirectionality(const Directionality& directionality);
             Directionality getDirectionality() const;
         private:
