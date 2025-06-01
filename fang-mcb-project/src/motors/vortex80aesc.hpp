@@ -3,6 +3,9 @@
 #include "unitaliases.hpp"
 #include "directionality.hpp"
 
+#include "util/math/cool_lerp.hpp"
+#include "data/vector2d.hpp"
+
 #include "wrap/trap/communication/pwm_data.hpp"
 
 #include "tap/communication/gpio/pwm.hpp"
@@ -69,6 +72,12 @@ namespace logic
             const double mk_uniDirectionalMax {1.0};
 
             Directionality m_directionality;
+
+            //Map speed range percentage of -1.0 to 1000 us
+            const math::CoolLerp::Vector2D mk_bidirectionalPoint1{-1.0, 1000.0};
+            //Map speed rnage percentage of 1.0 to 2000 us
+            const math::CoolLerp::Vector2D mk_bidirectionalPoint2{1.0, 2000.0};
+            math::CoolLerp m_bidirectionalMap{mk_bidirectionalPoint1, mk_bidirectionalPoint2};
 
             double calculateUnidirectionalDutyCycle(double speedRangePercentage);
             double calculateBidirectionalDutyCycle(double speedRangePercentage);
