@@ -20,6 +20,11 @@ namespace logic
         {
         }
 
+        void Vortex80AEsc::setSpeed(double speedRangePercentage)
+        {
+            setPulseDuration(calculatePeriod(speedRangePercentage));
+        }
+
         void Vortex80AEsc::setPulseDuration(const Microseconds& duration)
         {
             assert(duration >= mk_cyclePeriod && "The pulse duration exceeds cycle period");

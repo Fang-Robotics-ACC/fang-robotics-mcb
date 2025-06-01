@@ -23,6 +23,8 @@ namespace logic
             using Directionality = data::motors::Directionality;
             Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
 
+            void setSpeed(double speedRangePercentage);
+
             /**
              * This is how long the pwm signal stays high each cycle.
              * You snhould not exceed the cycle period.
