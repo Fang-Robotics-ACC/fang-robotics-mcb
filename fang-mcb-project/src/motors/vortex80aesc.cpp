@@ -16,14 +16,14 @@ namespace logic
     {
 
         Vortex80AEsc::Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality)
-        : m_pwm{pwm}, m_pwmData{pwmData}, m_directionality{directionality}, mk_maxPeriod{1.0 / pwmData.pinFrequency}
+        : m_pwm{pwm}, m_pwmData{pwmData}, m_directionality{directionality}, mk_cyclePeriod{1.0 / pwmData.pinFrequency}
         {
         }
 
         void Vortex80AEsc::setPulseDuration(const Microseconds& duration)
         {
-            assert(duration >= mk_maxPeriod && "The duration exceeds cycle period");
-            const double dutyCycle{duration / mk_maxPeriod}; //Self explanatory if you know pwm lol
+            assert(duration >= mk_cyclePeriod && "The pulse duration exceeds cycle period");
+            const double dutyCycle{duration / mk_cyclePeriod}; //Self explanatory if you know pwm lol
             pwmWrite(dutyCycle);
         }
 

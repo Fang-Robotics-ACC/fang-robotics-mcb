@@ -56,7 +56,7 @@ namespace logic
             void pwmWrite(double dutyCycle);
             tap::gpio::Pwm& m_pwm;
             trap::gpio::PwmData m_pwmData;
-            const Microseconds mk_maxPeriod;
+            const Microseconds mk_cyclePeriod;
             // Note that in bidirectional mode, the minimum period would
             // correspond to the motor going in full speed reverse
             // But in unidirectional mode, it would mean a still motor
