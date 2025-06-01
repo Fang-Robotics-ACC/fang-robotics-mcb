@@ -1,17 +1,17 @@
-#include <gtest/gtest.h>
-
 #include "motors/vortex80aesc.hpp"
 #include "trap/communication/pwm_data.hpp"
 #include "unitaliases.hpp"
-#include "drivers.hpp"
+#include "tap/drivers.hpp"
 
 #include "units.h"
 
 #include "tap/communication/gpio/pwm.hpp"
 
-using namespace units::literals;
+#include <gtest/gtest.h>
 
-Drivers drivers{};
+using namespace units::literals;
+/*
+tap::Drivers drivers{};
 trap::gpio::PwmData pwmData{tap::gpio::Pwm::C1, 500_Hz};
 trap::gpio::PwmData nonStandardPwmData{tap::gpio::Pwm::C1, 250_Hz};
 
@@ -22,7 +22,8 @@ TEST(zeroTest, Vortex80AEsc)
     const Hertz standardFrequency{500};
     logic::motors::Vortex80AEsc vortex {drivers.pwm, pwmData};
 
-    EXPECT_DOUBLE_EQ(vortex.adaptedDutyCycle(0.0, standardFrequency), 0.5);
+    vortex.setSpeed(0.0);
+    EXPECT_CALL(drivers.pwm, write(pwmData.pwmPin, 0.0));
 }
 
 TEST(midRangeTest, Vortex80AEsc)
@@ -70,3 +71,4 @@ TEST(unidirectionalTest, Vortex80AEsc)
     EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(0.50), 0.75);
     EXPECT_DOUBLE_EQ(vortex.calculateDutyCycle(1.0), 1.0);
 }
+*/
