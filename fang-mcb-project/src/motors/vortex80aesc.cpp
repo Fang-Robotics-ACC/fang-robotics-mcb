@@ -45,7 +45,7 @@ namespace logic
 
         Microseconds Vortex80AEsc::calculateUnidirectionalPeriod(double speedRangePercentage)
         {
-            assert(0.0 <= speedRangePercentage && speedRangePercentage <= 1.0 && "Unidirectional limit is [0,1]");
+            assert(mk_unidirectionalMin <= speedRangePercentage && speedRangePercentage <= mk_unidirectionalMax && "Unidirectional limit is [0,1]");
             return Microseconds{m_unidirectionalMap.interpolate(speedRangePercentage)};
         }
 
