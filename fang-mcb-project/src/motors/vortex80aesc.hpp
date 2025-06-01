@@ -30,8 +30,6 @@ namespace logic
             void setDirectionality(const Directionality& directionality);
             Directionality getDirectionality() const;
         private:
-            Microseconds calculatePeriod (double speedRangePercentage);
-            void pwmWrite(double dutyCycle);
             tap::gpio::Pwm& m_pwm;
             trap::gpio::PwmData m_pwmData;
             const Microseconds mk_cyclePeriod;
@@ -60,8 +58,11 @@ namespace logic
             const math::CoolLerp::Vector2D mk_unidirectionalPoint2{1.0, 2000.0};
             math::CoolLerp m_unidirectionalMap{mk_unidirectionalPoint1, mk_unidirectionalPoint2};
 
-            Microseconds calculateUnidirectionalPeriod(double speedRangePercentage);
-            Microseconds calculateBidirectionalPeriod(double speedRangePercentage);
+            Microseconds calculateUnidirectionalPeriod(double speedRangePercentage) const;
+            Microseconds calculateBidirectionalPeriod(double speedRangePercentage) const;
+            Microseconds calculatePeriod (double speedRangePercentage) const;
+
+            void pwmWrite(double dutyCycle);
         };
     }
 }
