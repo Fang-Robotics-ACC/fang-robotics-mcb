@@ -33,7 +33,7 @@ namespace logic
             switch (m_directionality)
             {
                 case Directionality::BIDIRECTIONAL:
-                    dutyCycle = calculateBidirectionalDutyCycle(speedRangePercentage);
+                    dutyCycle = calculateBidirectionalPeriod(speedRangePercentage);
                     break;
                 
                 case Directionality::UNIDIRECTIONAL:
@@ -48,24 +48,9 @@ namespace logic
             return adaptedDutyCycle(speedRangePercentage);
         }
 
-        double Vortex80AEsc::calculateBidirectionalDutyCycle(double speedRangePercentage)
+        Microseconds Vortex80AEsc::calculateBidirectionalPeriod(double speedRangePercentage)
         {
-            assert(mk_bidirectionalMin <= speedRangePercentage && speedRangePercentage <= mk_bidirectionalMax && "Unidirectional limit is [-1,1]");
-            // Manual lerp, todo: figure out modm's Linear class
-            // -1 needs to be mapped to 0, 1 needs to be mapped to -1
-            //The maximum is 1 and the minimum is -1, I'm just being pedantic to overly document stuff
-            const double bidirectionalRange {mk_bidirectionalMax - mk_bidirectionalMin};
-            // The minimum value is -1, but if we shift it up by one, the new minimum is 0
-            // We subtract by the min because it is less than 0 and must be for bidirectional controls
-            const double offsettedPercentage{speedRangePercentage - mk_bidirectionalMin};
-            assert(bidirectionalRange == 2.0);
-            const double rangePercentage{offsettedPercentage / bidirectionalRange};
-
-            //Santiy check. This should never be violated. If it does, then someone messed with the code wrong...
-            assert(config::pwm::k_pwmDutyMin <= rangePercentage && rangePercentage <= config::pwm::k_pwmDutyMax && "rangePercentage out of bounds");
-            
-            
-            return adaptedDutyCycle(rangePercentage);
+            return Microseconds{m_bidirectionalMap.interpolate(speedRangePercentage)};
         }
 
         void Vortex80AEsc::setDirectionality(const Directionality& directionality)

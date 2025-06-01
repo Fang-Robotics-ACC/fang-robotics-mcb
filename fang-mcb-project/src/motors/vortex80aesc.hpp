@@ -86,7 +86,7 @@ namespace logic
             math::CoolLerp m_unidirectionalMap{mk_unidirectionalPoint1, mk_unidirectionalPoint2};
 
             double calculateUnidirectionalDutyCycle(double speedRangePercentage);
-            double calculateBidirectionalDutyCycle(double speedRangePercentage);
+            Microseconds calculateBidirectionalPeriod(double speedRangePercentage);
         };
     }
 }
