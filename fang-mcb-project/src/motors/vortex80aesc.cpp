@@ -42,10 +42,10 @@ namespace logic
             return dutyCycle;
         }
 
-        double Vortex80AEsc::calculateUnidirectionalDutyCycle(double speedRangePercentage)
+        Microseconds Vortex80AEsc::calculateUnidirectionalPeriod(double speedRangePercentage)
         {
             assert(0.0 <= speedRangePercentage && speedRangePercentage <= 1.0 && "Unidirectional limit is [0,1]");
-            return adaptedDutyCycle(speedRangePercentage);
+            return Microseconds{m_unidirectionalMap.interpolate(speedRangePercentage)};
         }
 
         Microseconds Vortex80AEsc::calculateBidirectionalPeriod(double speedRangePercentage)
