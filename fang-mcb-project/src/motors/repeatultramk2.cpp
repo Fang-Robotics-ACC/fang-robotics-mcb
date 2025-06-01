@@ -3,6 +3,7 @@
 #include "units.h"
 
 #include "trap/communication/pwm_data.hpp"
+#include "tap/algorithms/math_user_utils.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -36,7 +37,8 @@ namespace motors
 
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
-        const double speedPercentage{speed / mk_maxTheoreticalSpeed};
+        const RPM clampedSpeed{tap::algorithms::limitVal<RPM> (speed, m_minSpeed, m_maxSpeed)};
+        const double speedPercentage{clampedSpeed * m_inversionMultiplier / mk_maxTheoreticalSpeed};
         m_vortex.setSpeed(speedPercentage);
     }
 
