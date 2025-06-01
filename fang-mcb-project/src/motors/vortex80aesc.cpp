@@ -47,7 +47,7 @@ namespace logic
 
         void Vortex80AEsc::setPulseDuration(const Microseconds& duration)
         {
-            assert(duration >= mk_cyclePeriod && "The pulse duration exceeds cycle period");
+            assert(duration <= mk_cyclePeriod && "The pulse duration exceeds cycle period");
             const double dutyCycle{duration / mk_cyclePeriod}; //Self explanatory if you know pwm lol
             pwmWrite(dutyCycle);
         }
