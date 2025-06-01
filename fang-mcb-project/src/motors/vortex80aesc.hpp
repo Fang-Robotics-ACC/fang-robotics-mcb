@@ -68,8 +68,8 @@ namespace logic
             const double mk_bidirectionalMin {-1.0};
             const double mk_bidirectionalMax {1.0};
 
-            const double mk_uniDirectionalMin {0.0};
-            const double mk_uniDirectionalMax {1.0};
+            const double mk_unidirectionalMin {0.0};
+            const double mk_unidirectionalMax {1.0};
 
             Directionality m_directionality;
 
