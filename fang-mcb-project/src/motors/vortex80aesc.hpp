@@ -27,10 +27,10 @@ namespace logic
              * You snhould not exceed the cycle period.
              */
             void setPulseDuration(const Microseconds& duration);
-            Microseconds calculatePeriod (double speedRangePercentage);
             void setDirectionality(const Directionality& directionality);
             Directionality getDirectionality() const;
         private:
+            Microseconds calculatePeriod (double speedRangePercentage);
             void pwmWrite(double dutyCycle);
             tap::gpio::Pwm& m_pwm;
             trap::gpio::PwmData m_pwmData;
