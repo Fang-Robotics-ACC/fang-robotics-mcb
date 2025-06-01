@@ -2,6 +2,7 @@
 #include "trap/communication/pwm_data.hpp"
 #include "pwmconstants.hpp"
 
+#include "modm/architecture/interface/delay.hpp"
 #include "modm/math/interpolation/linear.hpp"
 #include "modm/container/pair.hpp"
 #include "tap/communication/gpio/pwm.hpp"
@@ -18,6 +19,25 @@ namespace logic
         Vortex80AEsc::Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality)
         : m_pwm{pwm}, m_pwmData{pwmData}, m_directionality{directionality}, mk_cyclePeriod{1.0 / pwmData.pinFrequency}
         {
+        }
+
+        void Vortex80AEsc::sendArmingSignal()
+        {
+            switch(m_directionality)
+            {
+                case Directionality::BIDIRECTIONAL:
+                    setPulseDuration(mk_bidirectionalArmingSignal);
+                    break;
+                case Directionality::UNIDIRECTIONAL:
+                    setPulseDuration(mk_unidirectionalArmingSignal);
+                    break;
+            }
+        }
+
+        void Vortex80AEsc::armingRoutine()
+        {
+            sendArmingSignal();
+            modm::delay_ms(mk_armingPeriod.to<double>());
         }
 
         void Vortex80AEsc::setSpeed(double speedRangePercentage)

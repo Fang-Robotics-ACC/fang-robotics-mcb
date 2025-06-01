@@ -23,6 +23,16 @@ namespace logic
             using Directionality = data::motors::Directionality;
             Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
 
+            /**
+             * Sends the appropriate arming signal
+             */
+            void sendArmingSignal();
+            /**
+             * This will lock the code for half a second, sending the armin signal
+             * This is mainly used for tests. If you have a lot of motors,
+             * the code will lock up for that given period.
+             */
+            void armingRoutine();
             void setSpeed(double speedRangePercentage);
 
             /**
@@ -46,6 +56,10 @@ namespace logic
 
             Directionality m_directionality;
 
+            const Microseconds mk_bidirectionalArmingSignal{1500};
+            const Microseconds mk_unidirectionalArmingSignal{1000};
+            const Milliseconds mk_armingPeriod{500};
+
             //Map speed range percentage of -1.0 to 1000 us
             const math::CoolLerp::Vector2D mk_bidirectionalPoint1{-1.0, 1000.0};
             //Map speed rnage percentage of 1.0 to 2000 us
@@ -61,6 +75,7 @@ namespace logic
             Microseconds calculateUnidirectionalPeriod(double speedRangePercentage) const;
             Microseconds calculateBidirectionalPeriod(double speedRangePercentage) const;
             Microseconds calculatePeriod (double speedRangePercentage) const;
+
 
             void pwmWrite(double dutyCycle);
         };
