@@ -11,16 +11,18 @@ using namespace units::literals;
 
 namespace motors
 {
-    RepeatUltraMk2::RepeatUltraMk2(tap::Drivers& drivers,
-                      const Volts& controllerInputVoltage,
-                      tap::gpio::Pwm::Pin pwmPin,
-                      const Hertz& pinFrequency,
-                      data::motors::Directionality directionality,
-                      bool inverted):
-                      m_drivers{drivers}, m_pwmPin{pwmPin},
-                      mk_controllerInputVoltage{controllerInputVoltage},
-                      m_inversionMultiplier{inverted && (directionality == data::motors::Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}},
-                      m_vortexLogic{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality}
+    RepeatUltraMk2::RepeatUltraMk2(
+        tap::Drivers& drivers,
+        const Volts& controllerInputVoltage,
+        tap::gpio::Pwm::Pin pwmPin,
+        const Hertz& pinFrequency,
+        data::motors::Directionality directionality,
+        bool inverted)
+        :
+        m_drivers{drivers}, m_pwmPin{pwmPin},
+        mk_controllerInputVoltage{controllerInputVoltage},
+        m_inversionMultiplier{inverted && (directionality == data::motors::Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}},
+        m_vortex{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality}
     {
         switch(directionality)
         {
@@ -34,9 +36,8 @@ namespace motors
 
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
-        const RPM clampedSpeed{std::clamp<RPM>(speed * m_inversionMultiplier, m_minSpeed, m_maxSpeed)};
-        const double rangePercentage{clampedSpeed / mk_maxTheoreticalSpeed};
-        setPWM(m_vortexLogic.calculateDutyCycle(rangePercentage));
+        const double speedPercentage{speed / mk_maxTheoreticalSpeed};
+        m_vortex.setSpeed(speedPercentage);
     }
 
 	RPM RepeatUltraMk2::getSpeed() const
@@ -72,13 +73,13 @@ namespace motors
     }
 
     /**
-     * The initialization needs to have a 0 signal sent for
+     * The initialization needs to have an arming signal sent for
      * 1-2 seconds. It will be left up to the caller on how to 
      * ensure the delay.
      */
     void RepeatUltraMk2::initialize()
     {
-        setSpeed(0_rpm);
+        m_vortex.sendArmingSignal();
     }
 
 }//namespace motors
