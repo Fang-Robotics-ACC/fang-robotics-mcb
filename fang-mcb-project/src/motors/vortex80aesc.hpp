@@ -79,6 +79,12 @@ namespace logic
             const math::CoolLerp::Vector2D mk_bidirectionalPoint2{1.0, 2000.0};
             math::CoolLerp m_bidirectionalMap{mk_bidirectionalPoint1, mk_bidirectionalPoint2};
 
+            //Map speed range percentage of 0.0 to 1000 us
+            const math::CoolLerp::Vector2D mk_unidirectionalPoint1{0.0, 1000.0};
+            //Map speed rnage percentage of 1.0 to 2000 us
+            const math::CoolLerp::Vector2D mk_unidirectionalPoint2{1.0, 2000.0};
+            math::CoolLerp m_unidirectionalMap{mk_unidirectionalPoint1, mk_unidirectionalPoint2};
+
             double calculateUnidirectionalDutyCycle(double speedRangePercentage);
             double calculateBidirectionalDutyCycle(double speedRangePercentage);
         };
