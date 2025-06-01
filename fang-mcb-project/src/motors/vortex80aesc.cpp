@@ -51,6 +51,7 @@ namespace logic
 
         Microseconds Vortex80AEsc::calculateBidirectionalPeriod(double speedRangePercentage)
         {
+            assert(mk_bidirectionalMin <= speedRangePercentage && speedRangePercentage <= mk_bidirectionalMax && "Bidirectional limit is [-1,1]");
             return Microseconds{m_bidirectionalMap.interpolate(speedRangePercentage)};
         }
 
