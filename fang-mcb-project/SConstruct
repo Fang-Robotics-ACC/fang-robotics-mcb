@@ -82,8 +82,8 @@ env.AppendUnique(CPPPATH=[
     abspath(r"test"),
     abspath(r"control"),
     abspath(r"test/mock/motors"),
-    abspath(r"fang-mcb-project/src/wrap"),
-    abspath(r"fang-mcb-project/src/wrap/trap"),
+    abspath(r"src/wrap"),
+    abspath(r"src/wrap/trap"),
     abspath(r"fang-mcb-project/src/wrap/trap/communication"),
     abspath(r"robot-type")
 ])
