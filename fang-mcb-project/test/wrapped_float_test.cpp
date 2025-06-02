@@ -112,3 +112,97 @@ TEST(minDifferenceRaw, wrappedFloat)
 
     EXPECT_DOUBLE_EQ(tapDiff, wrappedDiff.to<double>());
 }
+
+TEST(shiftBounds, wrappedFloat)
+{
+    float value{189};
+    float shift{187};
+    TappedFloat tapped{value, 0, 360};
+    WrappedFloat wrapped{Degrees{value}, 0_deg, 360_deg};
+
+    tapped.shiftBounds(shift);
+    wrapped.shiftBounds(Degrees{shift});
+
+    EXPECT_EQ(wrapped, WrappedFloat{tapped});
+
+}
+
+TEST(limitValue, wrappedFloat)
+{
+    float value1{3450};
+    float value2{187};
+    float value3{340};
+    TappedFloat tapped1{value1, 0, 360};
+    TappedFloat tapped2{value2, 0, 360};
+    TappedFloat tapped3{value3, 0, 360};
+    WrappedFloat wrapped1{Degrees{value1}, 0_deg, 360_deg};
+    WrappedFloat wrapped2{Degrees{value2}, 0_deg, 360_deg};
+    WrappedFloat wrapped3{Degrees{value3}, 0_deg, 360_deg};
+
+    int tapStatus{0};
+    int trapStatus{0};
+
+    double resultTap{TappedFloat::limitValue(tapped1, tapped2, tapped3, &tapStatus)};
+    Degrees resultWrap{WrappedFloat::limitValue(wrapped1, wrapped2, wrapped3, &trapStatus)};
+
+    EXPECT_EQ(tapStatus, trapStatus);
+    EXPECT_DOUBLE_EQ(resultTap, resultWrap.to<double>());
+}
+
+TEST(setterGetterUnwrapped, wrappedFloat)
+{
+    float value{189};
+    float newValue{370};
+    TappedFloat tapped{value, 0, 360};
+    WrappedFloat wrapped{Degrees{value}, 0_deg, 360_deg};
+
+
+    tapped.setUnwrappedValue(newValue);
+    wrapped.setUnwrappedValue(Degrees{newValue});
+
+    TappedFloat expectedTapped{newValue, 0, 360};
+    WrappedFloat expectedWrapped{Degrees{newValue}, 0_deg, 360_deg};
+
+    EXPECT_EQ(tapped, expectedTapped);
+    EXPECT_EQ(wrapped, expectedWrapped);
+
+    EXPECT_EQ(wrapped, WrappedFloat{tapped});
+}
+
+TEST(setterGetterWrapped, wrappedFloat)
+{
+    float value{189};
+    float newValue{370};
+    TappedFloat tapped{value, 0, 360};
+    WrappedFloat wrapped{Degrees{value}, 0_deg, 360_deg};
+
+
+    tapped.setWrappedValue(newValue);
+    wrapped.setWrappedValue(Degrees{newValue});
+
+    TappedFloat expectedTapped{newValue, 0, 360};
+    WrappedFloat expectedWrapped{Degrees{newValue}, 0_deg, 360_deg};
+
+    EXPECT_EQ(tapped, expectedTapped);
+    EXPECT_EQ(wrapped, expectedWrapped);
+
+    EXPECT_EQ(wrapped, WrappedFloat{tapped});
+}
+
+TEST(normalizedGetter, wrappedFloat)
+{
+    float value{189};
+    TappedFloat tapped{value, 0, 360};
+    WrappedFloat wrapped{Degrees{value}, 0_deg, 360_deg};
+
+    EXPECT_EQ(wrapped.getNormalized(), WrappedFloat{tapped.getNormalized()});
+}
+
+TEST(revolutionsGetter, wrappedFloat)
+{
+    float value{3089};
+    TappedFloat tapped{value, 0, 360};
+    WrappedFloat wrapped{Degrees{value}, 0_deg, 360_deg};
+
+    EXPECT_EQ(wrapped.getRevolutions(), tapped.getRevolutions());
+}
