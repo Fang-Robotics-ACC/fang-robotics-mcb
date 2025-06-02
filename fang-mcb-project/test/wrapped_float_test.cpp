@@ -149,6 +149,29 @@ TEST(limitValue, wrappedFloat)
     EXPECT_DOUBLE_EQ(resultTap, resultWrap.to<double>());
 }
 
+TEST(rangeOverlap, wrappedFloat)
+{
+    float value1{3450};
+    float value2{187};
+    float value3{340};
+    float value4{340};
+    TappedFloat tapped1{value1, 0, 360};
+    TappedFloat tapped2{value2, 0, 360};
+    TappedFloat tapped3{value3, 0, 360};
+    TappedFloat tapped4{value4, 0, 360};
+    WrappedFloat wrapped1{Degrees{value1}, 0_deg, 360_deg};
+    WrappedFloat wrapped2{Degrees{value2}, 0_deg, 360_deg};
+    WrappedFloat wrapped3{Degrees{value3}, 0_deg, 360_deg};
+    WrappedFloat wrapped4{Degrees{value4}, 0_deg, 360_deg};
+
+
+
+    const float resultTap{TappedFloat::rangeOverlap(tapped1, tapped2, tapped3, tapped4)};
+    Degrees resultWrap{WrappedFloat::rangeOverlap(wrapped1, wrapped2, wrapped3, wrapped4)};
+
+    EXPECT_DOUBLE_EQ(resultTap, resultWrap.to<double>());
+}
+
 TEST(setterGetterUnwrapped, wrappedFloat)
 {
     float value{189};
