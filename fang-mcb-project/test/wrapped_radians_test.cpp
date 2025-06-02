@@ -9,17 +9,19 @@ TEST(counterClockwiseTargetTest, wrappedRadians)
     const WrappedRadians target{Radians{k_pi * (3.0 / 2.0)}};
     const WrappedRadians current{Radians{k_pi * (0.0)}};
     //The result is that we need to move 90 degrees counterclockwise
-    const WrappedRadians expected{Radians{k_pi * (1.0 / 2.0)}};
+    const Radians expected{-k_pi * (1.0 / 2.0)};
 
-    const WrappedRadians requiredMotion{current - target};
+    const Radians requiredMotion{current.minDifference(target)};
+    EXPECT_FLOAT_EQ(expected.to<float>(), requiredMotion.to<float>());
 }
 
 TEST(clockwiseTargetTest, wrappedRadians)
 {
-    const WrappedRadians target{Radians{k_pi * (3.0 / 2.0)}};
+    const WrappedRadians target{Radians{k_pi * (0.0 / 2.0)}};
     const WrappedRadians current{Radians{k_pi * (1.0 / 2.0)}};
     //The result is that we need to move 90 degrees counterclockwise
-    const WrappedRadians expected{Radians{k_pi * (1.0 / 2.0)}};
+    const WrappedRadians expected{Radians{-k_pi * (1.0 / 2.0)}};
 
-    const WrappedRadians requiredMotion{current - target};
+    const WrappedRadians requiredMotion{current.minDifference(target)};
+    EXPECT_FLOAT_EQ(expected.getWrappedValue().to<float>(), requiredMotion.getWrappedValue().to<float>());
 }
