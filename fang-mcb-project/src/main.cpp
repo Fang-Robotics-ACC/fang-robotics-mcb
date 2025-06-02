@@ -80,10 +80,13 @@ int main()
 
 
     Board::initialize();
-    tap::motor::DjiMotor motor{drivers, tap::motor::MotorId::MOTOR2, tap::can::CanBus::CAN_BUS1, false, "cool", true};
     initializeIo(drivers);
+    tap::motor::DjiMotor motor{drivers, tap::motor::MotorId::MOTOR5, tap::can::CanBus::CAN_BUS1, false, "cool", false};
 
     motor.initialize();
+
+    bool ledFlash{motor.isMotorOnline()};
+    motor.setDesiredOutput(-50000);
 
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
@@ -96,11 +99,8 @@ int main()
         // do this as fast as you can
         PROFILE(drivers->profiler, updateIo, (drivers));
 
-        static int16_t speed{motor.getShaftRPM()};
         if (sendMotorTimeout.execute())
         {
-            bool ledFlash{motor.isMotorOnline()};
-            motor.setDesiredOutput(1000);
             PROFILE(drivers->profiler, drivers->bmi088.periodicIMUUpdate, ());
             PROFILE(drivers->profiler, drivers->commandScheduler.run, ());
             PROFILE(drivers->profiler, drivers->djiMotorTxHandler.encodeAndSendCanData, ());
