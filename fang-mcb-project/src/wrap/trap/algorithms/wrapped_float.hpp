@@ -54,9 +54,9 @@ namespace trap
                 return Unit{m_wrappedFloat.minDifference(other.m_wrappedFloat.getWrappedValue())};
             }
 
-            Unit minDifference(float unwrappedValue) const
+            Unit minDifference(const Unit& unwrappedValue) const
             {
-                return Unit{m_wrappedFloat.minDifference(unwrappedValue)};
+                return Unit{m_wrappedFloat.minDifference(static_cast<float>(unwrappedValue))};
             }
 
             void shiftBounds(Unit shiftMagnitude)
