@@ -5,11 +5,11 @@ namespace trap
 {
     namespace algorithms
     {
-        template<typename Unit>
         /**
          * This is a wrappedFloat but uses units instead
          * https://aruw.gitlab.io/controls/taproot/api/classtap_1_1algorithms_1_1_wrapped_float.html#exhale-class-classtap-1-1algorithms-1-1-wrapped-float
          */
+        template<typename Unit>
         class WrappedFloat
         {
         public:
