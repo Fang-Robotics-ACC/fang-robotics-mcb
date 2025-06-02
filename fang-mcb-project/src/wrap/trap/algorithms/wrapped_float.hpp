@@ -14,13 +14,13 @@ namespace trap
         {
         public:
             using TappedFloat = tap::algorithms::WrappedFloat;
-            using WrappedFloat = WrappedFloat<Unit>;
-            WrappedFloat(Unit value, Unit lowerBound, Unit upperBound) : m_wrappedFloat{std::static_cast<float>(value)}
+            WrappedFloat(Unit value, Unit lowerBound, Unit upperBound)
+            : m_wrappedFloat{static_cast<float>(value),static_cast<float>(lowerBound), static_cast<float>(upperBound)}
             { 
             }
 
             WrappedFloat(const tap::algorithms::WrappedFloat& wrappedFloat)
-            : WrappedFloat(wrappedFloat.getWrappedValue(), wrappedFloat.getLowerBound(), wrappedFloat.getUpperBound())
+            : m_wrappedFloat(wrappedFloat.getWrappedValue(), wrappedFloat.getLowerBound(), wrappedFloat.getUpperBound())
             {
             }
 
@@ -31,7 +31,7 @@ namespace trap
 
             void operator+=(const WrappedFloat& other)
             {
-                m_wrappedFloat += wrappedFloat.m_wrappedFloat;
+                m_wrappedFloat += other.m_wrappedFloat;
             }
 
             void operator-=(const WrappedFloat& other) 
@@ -67,7 +67,7 @@ namespace trap
 
             static Unit limitValue(const WrappedFloat& valueToLimit, const Unit min, const Unit max, int* status)
             {
-                const floatValue{TappedFloat::limitValue(valueToLimit.m_wrappedFloat,
+                const float floatValue{TappedFloat::limitValue(valueToLimit.m_wrappedFloat,
                                                          static_cast<float>(min),
                                                          static_cast<float>(max),
                                                         status)};
@@ -76,7 +76,7 @@ namespace trap
 
             static Unit limitValue(const WrappedFloat& valueToLimit, const WrappedFloat& min, const WrappedFloat& max, int* status)
             {
-                const floatValue{TappedFloat::limitValue(valueToLimit.m_wrappedFloat,
+                const float floatValue{TappedFloat::limitValue(valueToLimit.m_wrappedFloat,
                                                          min.m_wrappedFloat,
                                                          max.m_wrappedFloat,
                                                         status)};
@@ -91,7 +91,7 @@ namespace trap
             static Unit rangeOverlap(const WrappedFloat& lowerA, const WrappedFloat& upperA,
                                       const WrappedFloat& lowerB, const WrappedFloat& upperB)
             {
-                const floatResult(lowerA.m_wrappedFloat, upperA.m_wrappedFloat, lowerB.m_wrappedFloat, upperB.m_wrappedFloat);
+                const float floatResult{TappedFloat::rangeOverlap(lowerA.m_wrappedFloat, upperA.m_wrappedFloat, lowerB.m_wrappedFloat, upperB.m_wrappedFloat)};
                 return Unit{floatResult};
             }
 
@@ -132,7 +132,7 @@ namespace trap
 
             inline Unit getLowerBound() const
             {
-                return Unit{m_wrappedFloat.getLowerBoun()};
+                return Unit{m_wrappedFloat.getLowerBound()};
             }
 
         private:
