@@ -30,7 +30,7 @@ namespace trap
         void DjiGM6020::update()
         {
             const RPM error{m_targetSpeed - getSpeed()};
-            m_speedPid.runController(error);
+            setDesiredOutput(m_speedPid.runController(error));
         }
 
         void DjiGM6020::setTargetSpeed(const RPM& targetSpeed)
