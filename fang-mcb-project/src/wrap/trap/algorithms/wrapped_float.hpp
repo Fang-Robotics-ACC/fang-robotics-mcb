@@ -46,7 +46,7 @@ namespace trap
 
             WrappedFloat operator-(const WrappedFloat& other) const
             {
-                return WrappedFloat {m_wrappedFloat + other.m_wrappedFloat};
+                return WrappedFloat {m_wrappedFloat - other.m_wrappedFloat};
             }
 
             Unit minDifference(const WrappedFloat& other) const
