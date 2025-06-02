@@ -80,7 +80,17 @@ int main()
 
     Board::initialize();
     initializeIo(drivers);
+    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, 400);
 
+
+    motors::GearboxRepeatUltraMk2 motor{*drivers, 24_V, tap::gpio::Pwm::C1, 400_Hz, data::motors::Directionality::BIDIRECTIONAL, false, 14.0};
+    motors::RepeatUltraMk2 repeat{*drivers, 24_V, tap::gpio::Pwm::C1, 400_Hz, data::motors::Directionality::BIDIRECTIONAL, false};
+    logic::motors::Vortex80AEsc vortex{drivers->pwm, trap::gpio::PwmData{tap::gpio::Pwm::C1, 400_Hz}, data::motors::Directionality::BIDIRECTIONAL};
+    vortex.sendArmingSignal();
+    modm::delay_ms(3000);
+    //vortex.setSpeed(0.25);
+    repeat.setSpeed(4000_rpm);
+    //motor.setSpeed(100_rpm);
 
 
 
