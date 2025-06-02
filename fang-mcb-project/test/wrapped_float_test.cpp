@@ -229,3 +229,22 @@ TEST(revolutionsGetter, wrappedFloat)
 
     EXPECT_EQ(wrapped.getRevolutions(), tapped.getRevolutions());
 }
+
+TEST(lowerBoundGetter, wrappedFloat)
+{
+    float value{3089};
+    TappedFloat tapped{value, 0, 360};
+    WrappedFloat wrapped{Degrees{value}, 0_deg, 360_deg};
+
+    EXPECT_DOUBLE_EQ(wrapped.getLowerBound().to<double>(), tapped.getLowerBound());
+}
+
+TEST(upperBoundGetter, wrappedFloat)
+{
+    float value{3089};
+    TappedFloat tapped{value, 0, 360};
+    WrappedFloat wrapped{Degrees{value}, 0_deg, 360_deg};
+
+    EXPECT_DOUBLE_EQ(wrapped.getUpperBound().to<double>(), tapped.getUpperBound());
+}
+
