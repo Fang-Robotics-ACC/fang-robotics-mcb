@@ -137,7 +137,6 @@ namespace trap
 
         private:
         TappedFloat m_wrappedFloat;
-
         };
     }
 }
