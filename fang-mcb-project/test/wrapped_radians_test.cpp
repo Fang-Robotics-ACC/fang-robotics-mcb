@@ -13,3 +13,13 @@ TEST(counterClockwiseTargetTest, wrappedRadians)
 
     const WrappedRadians requiredMotion{current - target};
 }
+
+TEST(clockwiseTargetTest, wrappedRadians)
+{
+    const WrappedRadians target{Radians{k_pi * (3.0 / 2.0)}};
+    const WrappedRadians current{Radians{k_pi * (1.0 / 2.0)}};
+    //The result is that we need to move 90 degrees counterclockwise
+    const WrappedRadians expected{Radians{k_pi * (1.0 / 2.0)}};
+
+    const WrappedRadians requiredMotion{current - target};
+}
