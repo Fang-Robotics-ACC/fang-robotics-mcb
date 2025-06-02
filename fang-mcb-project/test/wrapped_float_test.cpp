@@ -81,3 +81,19 @@ TEST(minus, wrappedFloat)
 
     EXPECT_EQ(wrapped, WrappedFloat{tapped});
 }
+
+TEST(minDifference, wrappedFloat)
+{
+    float value1{189};
+    float value2{187};
+    TappedFloat tapped1{value1, 0, 360};
+    TappedFloat tapped2{value2, 0, 360};
+    WrappedFloat wrapped1{Degrees{value1}, 0_deg, 360_deg};
+    WrappedFloat wrapped2{Degrees{value2}, 0_deg, 360_deg};
+
+    float tapDiff{tapped1.minDifference(tapped2)};
+    EXPECT_LT(tapDiff, 0);
+    Degrees wrappedDiff{wrapped1.minDifference(wrapped2)};
+
+    EXPECT_DOUBLE_EQ(tapDiff, wrappedDiff.to<double>());
+}
