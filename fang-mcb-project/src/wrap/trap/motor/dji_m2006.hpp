@@ -90,7 +90,7 @@ namespace trap
         private:
             tap::motor::DjiMotor m_djiMotor;
             DjiSpeedPid m_speedPid;
-            double m_gearRatio;
+            const double m_gearRatio;
 
             RPM m_targetSpeed{0.0};
 
