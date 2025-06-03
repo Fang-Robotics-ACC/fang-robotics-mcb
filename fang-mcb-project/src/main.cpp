@@ -48,6 +48,7 @@
 #include "configuration/chassis_config.hpp"
 #include "motors/gearboxrepeatultramk2.hpp"
 #include "trap/motor/dji_gm6020.hpp"
+#include "trap/motor/dji_m3508.hpp"
 
 #include <iostream>
 
@@ -82,9 +83,13 @@ int main()
 
     Board::initialize();
     initializeIo(drivers);
-    trap::motor::DjiSpeedPid::Config motorPidConfig{0, 10, 0 ,50000, trap::motor::DjiGM6020::k_maxOutput};
-    trap::motor::DjiGM6020::Config config{static_cast<tap::motor::MotorId>(tap::motor::MOTOR1), tap::can::CanBus::CAN_BUS1, "epic", false,  1.0, motorPidConfig, false};
-    trap::motor::DjiGM6020 motor{*drivers, config};
+    //trap::motor::DjiSpeedPid::Config motorPidConfig{0, 10, 0 ,50000, trap::motor::DjiGM6020::k_maxOutput};
+    //trap::motor::DjiGM6020::Config config{static_cast<tap::motor::MotorId>(tap::motor::MOTOR1), tap::can::CanBus::CAN_BUS1, "epic", false,  1.0, motorPidConfig, false};
+    //trap::motor::DjiGM6020 motor{*drivers, config};
+
+    trap::motor::DjiSpeedPid::Config motorPidConfig{10, 0, 0 ,50000, trap::motor::DjiM3508::k_maxOutput};
+    trap::motor::DjiM3508::Config config{static_cast<tap::motor::MotorId>(tap::motor::MOTOR1), tap::can::CanBus::CAN_BUS1, "epic", true, trap::motor::DjiM3508::k_factoryGearboxRatio, motorPidConfig};
+    trap::motor::DjiM3508 motor{*drivers, config};
 
     //tap::motor::DjiMotor djiDriver{drivers, tap::motor::MOTOR5, tap::can::CanBus::CAN_BUS1, false, "cool"};
 
@@ -93,8 +98,7 @@ int main()
 
     //bool ledFlash{djiDriver.isMotorOnline()};
     motor.initialize();
-
-    motor.setTargetSpeed(2000_rpm);
+    motor.setTargetSpeed(60_rpm);
     //motor.setDesiredOutput(1000);
 
 #ifdef PLATFORM_HOSTED
