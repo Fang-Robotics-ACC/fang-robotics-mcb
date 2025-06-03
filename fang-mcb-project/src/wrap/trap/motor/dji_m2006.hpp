@@ -1,5 +1,5 @@
-#ifndef FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
-#define FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
+#ifndef FANG_ROBOTICS_MCB_TRAP_DJI_M2006_HPP
+#define FANG_ROBOTICS_MCB_TRAP_DJI_M2006_HPP
 #include "unitaliases.hpp"
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
 
