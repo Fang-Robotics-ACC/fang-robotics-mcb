@@ -2,6 +2,7 @@
 #define FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
 #include "unitaliases.hpp"
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
+#include "trap/algorithms/wrapped_radians.hpp"
 
 #include "tap/motor/dji_motor.hpp"
 #include "tap/communication/can/can_bus.hpp"
@@ -65,12 +66,13 @@ namespace trap
             /**
              * Sets the desired speed for the pid to target
              */
-            void setTargetSpeed(const RPM& targetSpeed);
+            void setTargetPosition(const Radians& targetPosition);
 
             /**
              * Returns the last reported RPM from CAN
              */
-            RPM getSpeed() const;
+            Radians getPosition() const;
+
             /**
              * It must be called for the motor to properly function.
              */
@@ -103,9 +105,8 @@ namespace trap
             DjiSpeedPid m_speedPid;
             double m_gearRatio;
 
-            RPM m_targetSpeed{0.0};
-
-            static constexpr int mk_GM6020CANAddressOffset{4}; //DJI... why?
+            trap::algorithms::WrappedRadians m_targetPosition{Radians{0.0}};
+            static constexpr int mk_GM6020CANAddressOffset{4};
         };
     }
 }

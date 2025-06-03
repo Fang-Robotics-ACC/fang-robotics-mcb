@@ -30,18 +30,19 @@ namespace trap
 
         void DjiGM6020::update()
         {
-            const RPM error{m_targetSpeed - getSpeed()};
-            setDesiredOutput(m_speedPid.runController(error));
+            trap::algorithms::WrappedRadians current{getPosition()};
+            const Radians error{current.minDifference(m_targetPosition)};
+            m_speedPid.runController(error);
         }
 
-        void DjiGM6020::setTargetSpeed(const RPM& targetSpeed)
+        void DjiGM6020::setTargetPosition(const Radians& targetPosition)
         {
-            m_targetSpeed = motors::shaftToMotorSpeed(targetSpeed, m_gearRatio);
+            m_targetPosition = targetPosition;
         }
 
-        RPM DjiGM6020::getSpeed() const
+        Radians DjiGM6020::getPosition() const
         {
-            return motors::motorToShaftSpeed(RPM{m_djiMotor.getShaftRPM()}, m_gearRatio);
+            return Radians{m_djiMotor.getEncoder()->getPosition().getWrappedValue()};
         }
 
         void DjiGM6020::initialize()
