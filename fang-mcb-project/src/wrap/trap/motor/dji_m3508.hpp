@@ -4,6 +4,7 @@
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
 
 #include "tap/motor/dji_motor.hpp"
+#include "tap/motor/dji_motor_encoder.hpp"
 #include "tap/communication/can/can_bus.hpp"
 #include "drivers.hpp"
 
@@ -80,8 +81,10 @@ namespace trap
             tap::can::CanBus getCanBus() const;
 
             const char* getName() const;
-
+        /// @brief Maximum output that can be sent to the C620 controller
         static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_C620};
+        /// @brief The gear ratio for the gearbox that the m3508 ships with.
+        static const double k_factoryGearboxRatio{tap::motor::DjiMotorEncoder::GEAR_RATIO_M3508};
         private:
             tap::motor::DjiMotor m_djiMotor;
             DjiSpeedPid m_speedPid;
