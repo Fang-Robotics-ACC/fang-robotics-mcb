@@ -97,7 +97,16 @@ int main()
                                                                         trap::gpio::PwmData{tap::gpio::Pwm::C3, k_pwmFrequency},
                                                                         trap::gpio::PwmData{tap::gpio::Pwm::C4, k_pwmFrequency}};
     constexpr ChassisSubsystem::ChassisConfig k_chassisConfig{k_chassisDimensionConfig, k_chassisMotorConfig};
-    control::chassis::ChassisSubsystem ChassisSubsystem{*drivers, k_chassisConfig};
+    control::chassis::ChassisSubsystem chassisSubsystem{*drivers, k_chassisConfig};
+
+    //Test forward movement
+    chassisSubsystem.setTranslation(physics::Velocity2D{0_mph, 1_mph});
+
+    ////Test strafe movement
+    //chassisSubsystem.setTranslation(physics::Velocity2D{1_mph, 0_mph});
+
+    ////Test rotational movement
+    //chassisSubsystem.setRotation(10_rpm);
 
 
 
