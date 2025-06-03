@@ -35,6 +35,7 @@ namespace trap
                 const TimeUnit deltaTime{m_runControllerTimer.getDurationAndReset()};
                 const ErrorType deltaError{error - m_lastError};
                 const double errorDerivative{static_cast<double>(error) / deltaTime};
+                m_lastError = error;
                 return runController(error, errorDerivative, deltaTime);
             }
 
