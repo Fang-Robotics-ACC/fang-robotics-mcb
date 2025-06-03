@@ -44,6 +44,7 @@
 #include "tap/architecture/clock.hpp"
 #include "units.h"
 #include "control/robot.hpp"
+#include "configuration/chassis_config.hpp"
 
 /* define timers here -------------------------------------------------------*/
 static constexpr float MAIN_LOOP_FREQUENCY = 500.0f;
@@ -75,6 +76,8 @@ int main()
 
     Board::initialize();
     initializeIo(drivers);
+    //RepatUltraMk2 driver require a specific frequency to pwm have a pulse between 1ms to 2ms
+    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<float>());
 
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();

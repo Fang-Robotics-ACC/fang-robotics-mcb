@@ -50,6 +50,7 @@
             "preLaunchTask": "Program - Debug",
             "executable": "./fang-mcb-project/build/hardware/scons-debug/fang-mcb-project.elf",
             "device": "STM32F427II",
+            "showDevDebugOutput": "raw",
             "configFiles": [
                 "./fang-mcb-project/openocd.cfg"
             ]
