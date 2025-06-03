@@ -13,7 +13,7 @@ namespace trap
          * The error unit is the unit that the system takes as an input
          * The time unit is unit for the passage of time
          */
-        template<typename ErrorType, typename ControlType>
+        template<typename ErrorType, typename ControlType, typename TimeUnit>
         class SmoothPid
         {
         public:
@@ -32,7 +32,7 @@ namespace trap
              */
             ControlType runController(ErrorType error)
             {
-                const Microseconds deltaTime{m_runControllerTimer.getDurationAndReset()};
+                const TimeUnit deltaTime{m_runControllerTimer.getDurationAndReset()};
                 const ErrorType deltaError{error - m_lastError};
                 const double errorDerivative{static_cast<double>(error) / deltaTime};
                 return runController(error, errorDerivative, deltaTime);
@@ -42,7 +42,7 @@ namespace trap
              * Manually include delta time (this is for testing purposes but may bear use to future testers)
              * For implementation purposes, the errorDerivative is stripped of any unit
              */
-            ControlType runController(ErrorType error, double errorDerivative, Microseconds deltaTime)
+            ControlType runController(ErrorType error, double errorDerivative, TimeUnit deltaTime)
             {
                 float result {m_smoothPid.runController(static_cast<float>(error), static_cast<float>(errorDerivative), static_cast<float>(deltaTime))};
                 return static_cast<ControlType>(result);
