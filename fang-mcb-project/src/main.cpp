@@ -46,6 +46,8 @@
 #include "control/robot.hpp"
 #include "configuration/chassis_config.hpp"
 #include "motors/gearboxrepeatultramk2.hpp"
+#include "control/chassis/chassis_subsystem.hpp"
+#include "data/directionality.hpp"
 
 #include <iostream>
 
@@ -80,6 +82,23 @@ int main()
 
     Board::initialize();
     initializeIo(drivers);
+    using namespace units::literals;
+
+    constexpr Hertz k_pwmFrequency{400};
+    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, k_pwmFrequency.to<float>());
+    using ChassisSubsystem = control::chassis::ChassisSubsystem;
+    using ChassisDriveMotor = ChassisSubsystem::DriveMotor;
+    constexpr ChassisDriveMotor::UnifiedProperties k_chassisUnifiedMotorProperties{24_V, data::motors::Directionality::BIDIRECTIONAL, 14};
+    constexpr ChassisSubsystem::ChassisDimensionConfig k_chassisDimensionConfig{150_mm, 15_in, 13.5_in};
+    constexpr ChassisSubsystem::ChassisMotorConfig k_chassisMotorConfig{
+                                                                        k_chassisUnifiedMotorProperties,
+                                                                        trap::gpio::PwmData{tap::gpio::Pwm::C1, k_pwmFrequency},
+                                                                        trap::gpio::PwmData{tap::gpio::Pwm::C2, k_pwmFrequency},
+                                                                        trap::gpio::PwmData{tap::gpio::Pwm::C3, k_pwmFrequency},
+                                                                        trap::gpio::PwmData{tap::gpio::Pwm::C4, k_pwmFrequency}};
+    constexpr ChassisSubsystem::ChassisConfig k_chassisConfig{k_chassisDimensionConfig, k_chassisMotorConfig};
+    control::chassis::ChassisSubsystem ChassisSubsystem{*drivers, k_chassisConfig};
+
 
 
 
@@ -89,17 +108,6 @@ int main()
     // Blocking call, waits until Windows Simulator connects.
     tap::communication::TCPServer::MainServer()->getConnection();
 #endif
-
-    bool aSet = true;
-    while (1)
-    {
-        modm::delay_ms(1000/ 2);
-        drivers->leds.set(tap::gpio::Leds::Red, aSet);
-        aSet = !aSet;
-    }
-
-    return 0;
-
 
     while (1)
     {
