@@ -22,6 +22,7 @@ namespace trap
                      name, 
                      currentControl, 
                      gearRatio},
+          m_gearRatio{gearRatio},
           m_speedPid{speedPidConfig}
         {
             assert(static_cast<DjiMotorOutput>(speedPidConfig.maxOutput) <= k_maxOutput && "pid can exceed max output!!!");
