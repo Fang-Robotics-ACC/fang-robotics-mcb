@@ -89,7 +89,6 @@ int main()
     vortex.sendArmingSignal();
     modm::delay_ms(3000);
     //vortex.setSpeed(0.25);
-    repeat.setSpeed(4000_rpm);
     //motor.setSpeed(100_rpm);
 
 
@@ -100,21 +99,21 @@ int main()
     tap::communication::TCPServer::MainServer()->getConnection();
 #endif
 
-    bool aSet = true;
-    while (1)
-    {
-        modm::delay_ms(1000/ 2);
-        drivers->leds.set(tap::gpio::Leds::Red, aSet);
-        aSet = !aSet;
-    }
 
     return 0;
 
 
     while (1)
     {
+
+    const float rightVertical{drivers->remote.getChannel(tap::communication::serial::Remote::Channel::RIGHT_VERTICAL)};
+    repeat.setSpeed(repeat.getMaxSpeed() * rightVertical);
         // do this as fast as you can
         PROFILE(drivers->profiler, updateIo, (drivers));
+        if(rightVertical > 0.5)
+        {
+            drivers->leds.set(tap::gpio::Leds::Green, true);
+        }
 
         if (sendMotorTimeout.execute())
         {
