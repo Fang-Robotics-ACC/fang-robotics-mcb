@@ -102,7 +102,7 @@ namespace trap
         static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_GM6020};
         private:
             tap::motor::DjiMotor m_djiMotor;
-            DjiSpeedPid m_speedPid;
+            DjiPositionPid m_speedPid;
             double m_gearRatio;
 
             trap::algorithms::WrappedRadians m_targetPosition{Radians{0.0}};
