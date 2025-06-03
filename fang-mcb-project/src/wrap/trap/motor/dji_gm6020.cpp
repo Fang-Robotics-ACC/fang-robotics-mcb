@@ -32,7 +32,7 @@ namespace trap
         {
             trap::algorithms::WrappedRadians current{getPosition()};
             const Radians error{current.minDifference(m_targetPosition)};
-            m_speedPid.runController(error);
+            setDesiredOutput(m_speedPid.runController(error));
         }
 
         void DjiGM6020::setTargetPosition(const Radians& targetPosition)
