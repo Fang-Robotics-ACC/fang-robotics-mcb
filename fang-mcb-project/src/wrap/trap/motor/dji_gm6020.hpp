@@ -106,6 +106,7 @@ namespace trap
             double m_gearRatio;
 
             trap::algorithms::WrappedRadians m_targetPosition{Radians{0.0}};
+            static constexpr int mk_GM6020CANAddressOffset{4};
         };
     }
 }
