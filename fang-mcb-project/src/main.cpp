@@ -47,6 +47,7 @@
 #include "control/robot.hpp"
 #include "configuration/chassis_config.hpp"
 #include "motors/gearboxrepeatultramk2.hpp"
+#include "trap/motor/dji_gm6020.hpp"
 
 #include <iostream>
 
@@ -81,12 +82,20 @@ int main()
 
     Board::initialize();
     initializeIo(drivers);
-    tap::motor::DjiMotor motor{drivers, tap::motor::MotorId::MOTOR5, tap::can::CanBus::CAN_BUS1, false, "cool", false};
+    trap::motor::DjiSpeedPid::Config motorPidConfig{0, 10, 0 ,50000, trap::motor::DjiGM6020::k_maxOutput};
+    trap::motor::DjiGM6020::Config config{static_cast<tap::motor::MotorId>(tap::motor::MOTOR1), tap::can::CanBus::CAN_BUS1, "epic", false,  1.0, motorPidConfig, false};
+    trap::motor::DjiGM6020 motor{*drivers, config};
 
+    //tap::motor::DjiMotor djiDriver{drivers, tap::motor::MOTOR5, tap::can::CanBus::CAN_BUS1, false, "cool"};
+
+    //djiDriver.initialize();
+    //djiDriver.setDesiredOutput(10000);
+
+    //bool ledFlash{djiDriver.isMotorOnline()};
     motor.initialize();
 
-    bool ledFlash{motor.isMotorOnline()};
-    motor.setDesiredOutput(-50000);
+    motor.setTargetSpeed(2000_rpm);
+    //motor.setDesiredOutput(1000);
 
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
@@ -96,6 +105,7 @@ int main()
 
     while (1)
     {
+        motor.update();
         // do this as fast as you can
         PROFILE(drivers->profiler, updateIo, (drivers));
 
@@ -105,7 +115,6 @@ int main()
             PROFILE(drivers->profiler, drivers->commandScheduler.run, ());
             PROFILE(drivers->profiler, drivers->djiMotorTxHandler.encodeAndSendCanData, ());
             PROFILE(drivers->profiler, drivers->terminalSerial.update, ());
-            drivers->leds.set(tap::gpio::Leds::Green, ledFlash);
         }
         modm::delay_us(10);
     }
