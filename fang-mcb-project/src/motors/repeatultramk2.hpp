@@ -7,7 +7,7 @@
 #include "tap/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
 #include "unitaliases.hpp"
-#include "vortex80aesclogic.hpp"
+#include "vortex80aesc.hpp"
 #include "data/directionality.hpp"
 #include "units.h"
 
@@ -69,6 +69,10 @@ namespace motors
          * Get the minimum speed which all setSpeed requests are clamped to
          */
 		RPM getMinSpeed() const override;
+        /**
+         * This needs to have a delay of around half a second. It will be up to the caller
+         * to figure out how to insure this.
+         */
         void initialize();
     private:
         RPM m_speed{0};
@@ -84,7 +88,7 @@ namespace motors
         const RPM mk_maxTheoreticalSpeed{mk_kv * mk_controllerInputVoltage};
         int8_t m_inversionMultiplier;
 
-        logic::motors::Vortex80AEscLogic m_vortexLogic;
+        logic::motors::Vortex80AEsc m_vortex;
 
         /*!
             PWM should be between 0 and 1
