@@ -84,7 +84,7 @@ namespace trap
         /// @brief Maximum output that can be sent to the C620 controller
         static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_C620};
         /// @brief The gear ratio for the gearbox that the m3508 ships with.
-        static const double k_factoryGearboxRatio{tap::motor::DjiMotorEncoder::GEAR_RATIO_M3508};
+        static constexpr double k_factoryGearboxRatio{tap::motor::DjiMotorEncoder::GEAR_RATIO_M3508};
         private:
             tap::motor::DjiMotor m_djiMotor;
             DjiSpeedPid m_speedPid;
