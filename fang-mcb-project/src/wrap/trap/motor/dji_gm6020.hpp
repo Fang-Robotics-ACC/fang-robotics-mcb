@@ -105,7 +105,7 @@ namespace trap
 
             RPM m_targetSpeed{0.0};
 
-            int mk_GM6020CANAddressOffset{4}; //DJI... why?
+            static constexpr int mk_GM6020CANAddressOffset{4}; //DJI... why?
         };
     }
 }
