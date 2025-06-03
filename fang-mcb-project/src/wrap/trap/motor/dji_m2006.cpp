@@ -25,7 +25,7 @@ namespace trap
         void DjiM2006::update()
         {
             const RPM error{m_targetSpeed - getSpeed()};
-            m_speedPid.runController(error);
+            setDesiredOutput(m_speedPid.runController(error));
         }
 
         void DjiM2006::setTargetSpeed(const RPM& targetSpeed)
