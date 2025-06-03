@@ -6,7 +6,7 @@
 
 #include <tuple>
 
-using SmoothPid = trap::algorithms::SmoothPid<RPM, int32_t>;
+using SmoothPid = trap::algorithms::SmoothPid<RPM, int32_t, Microseconds>;
 using namespace units::literals;
 class SmoothPidTest :  public ::testing::TestWithParam<std::tuple<SmoothPid::Config, RPM, double, double>>
 {

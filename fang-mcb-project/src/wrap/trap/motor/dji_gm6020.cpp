@@ -15,7 +15,14 @@ namespace trap
 
         DjiGM6020::DjiGM6020(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                            const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedPidConfig, bool currentControl)
-        : m_djiMotor{&drivers, motorId, canBus, inverted, name, currentControl, gearRatio},
+        : m_djiMotor{&drivers, 
+                     static_cast<tap::motor::MotorId>(static_cast<int>(motorId) + mk_GM6020CANAddressOffset),//Hack of hacks
+                     canBus, 
+                     inverted,
+                     name, 
+                     currentControl, 
+                     gearRatio},
+          m_gearRatio{gearRatio},
           m_speedPid{speedPidConfig}
         {
             assert(static_cast<DjiMotorOutput>(speedPidConfig.maxOutput) <= k_maxOutput && "pid can exceed max output!!!");
