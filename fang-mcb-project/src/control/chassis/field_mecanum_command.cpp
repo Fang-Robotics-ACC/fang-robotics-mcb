@@ -10,7 +10,7 @@ namespace control
     namespace chassis
     {
         FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, InputHandler& inputHandler, const config::motion::MotionConfig& motionConfig)
-        : m_chassisSubsystem{chassisSubsystem}, m_inputHandler{inputHandler}, mk_motionConfig{motionConfig};
+        : m_chassisSubsystem{chassisSubsystem}, m_inputHandler{inputHandler}, mk_motionConfig{motionConfig}
         {}
 
         const char* FieldMecanumCommand::getName() const
@@ -20,7 +20,6 @@ namespace control
 
         void FieldMecanumCommand::initialize()
         {
-
         }
 
         void FieldMecanumCommand::execute()
