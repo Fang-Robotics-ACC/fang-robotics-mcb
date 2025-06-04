@@ -10,3 +10,6 @@
 [submodule "fang-mcb-project/lib/units"]
 	path = fang-mcb-project/lib/units
 	url = https://github.com/nholthaus/units.git
+[submodule "fang-mcb-project/lib/Vector3D"]
+	path = fang-mcb-project/lib/Vector3D
+	url = https://github.com/cdelv/Vector3D

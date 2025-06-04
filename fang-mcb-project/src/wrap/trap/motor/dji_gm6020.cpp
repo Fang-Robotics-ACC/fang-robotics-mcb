@@ -15,7 +15,14 @@ namespace trap
 
         DjiGM6020::DjiGM6020(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                            const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedPidConfig, bool currentControl)
-        : m_djiMotor{&drivers, motorId, canBus, inverted, name, currentControl, gearRatio},
+        : m_djiMotor{&drivers, 
+                     static_cast<tap::motor::MotorId>(static_cast<int>(motorId) + mk_GM6020CANAddressOffset),//Hack of hacks
+                     canBus, 
+                     inverted,
+                     name, 
+                     currentControl, 
+                     gearRatio},
+          m_gearRatio{gearRatio},
           m_speedPid{speedPidConfig}
         {
             assert(static_cast<DjiMotorOutput>(speedPidConfig.maxOutput) <= k_maxOutput && "pid can exceed max output!!!");
@@ -23,18 +30,19 @@ namespace trap
 
         void DjiGM6020::update()
         {
-            const RPM error{m_targetSpeed - getSpeed()};
-            m_speedPid.runController(error);
+            trap::algorithms::WrappedRadians current{getPosition()};
+            const Radians error{current.minDifference(m_targetPosition)};
+            setDesiredOutput(m_speedPid.runController(error));
         }
 
-        void DjiGM6020::setTargetSpeed(const RPM& targetSpeed)
+        void DjiGM6020::setTargetPosition(const Radians& targetPosition)
         {
-            m_targetSpeed = motors::shaftToMotorSpeed(targetSpeed, m_gearRatio);
+            m_targetPosition = targetPosition;
         }
 
-        RPM DjiGM6020::getSpeed() const
+        Radians DjiGM6020::getPosition() const
         {
-            return motors::motorToShaftSpeed(RPM{m_djiMotor.getShaftRPM()}, m_gearRatio);
+            return Radians{m_djiMotor.getEncoder()->getPosition().getWrappedValue()};
         }
 
         void DjiGM6020::initialize()

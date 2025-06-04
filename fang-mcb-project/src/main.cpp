@@ -90,7 +90,6 @@ int main()
     modm::delay_ms(5000);
     motors.setSpeed(3000_rpm);
 
-
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
     // Blocking call, waits until Windows Simulator connects.
