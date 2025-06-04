@@ -84,10 +84,10 @@ int main()
 
 
     drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, 400.0);
-    motors::GearboxRepeatUltraMk2 motors{*drivers, 24_V, tap::gpio::Pwm::C1, 400_Hz, data::motors::Directionality::BIDIRECTIONAL, false, 1.0};
+    motors::GearboxRepeatUltraMk2 motors{*drivers, 24_V, tap::gpio::Pwm::C4, 400_Hz, data::motors::Directionality::BIDIRECTIONAL, false, 1.0};
 
     motors.initialize();
-    modm::delay_ms(5000);
+    modm::delay_ms(2000);
     motors.setSpeed(3000_rpm);
 
 #ifdef PLATFORM_HOSTED
