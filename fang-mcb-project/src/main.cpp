@@ -88,7 +88,7 @@ int main()
 
     motors.initialize();
     modm::delay_ms(5000);
-    motors.setSpeed(-3000_rpm);
+    motors.setSpeed(3000_rpm);
 
 
 #ifdef PLATFORM_HOSTED
