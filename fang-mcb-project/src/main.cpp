@@ -77,13 +77,15 @@ int main()
      */
 
     Drivers *drivers = DoNotUse_getDrivers();
-    Robot robot{*drivers};
 
     Board::initialize();
     initializeIo(drivers);
-    //drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
-    control::chassis::ChassisSubsystem subsystem{*drivers, config::chassis::k_defaultConfig};
-    subsystem.initialize();
+    Robot robot{drivers};
+    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
+    //control::chassis::ChassisSubsystem subsystem{*drivers, config::chassis::k_defaultConfig};
+
+    robot.initializeSubsystemCommands();
+    //subsystem.initialize();
     modm::delay_ms(2000);
     //robot.initializeSubsystemCommands();
 
@@ -93,12 +95,6 @@ int main()
     tap::communication::TCPServer::MainServer()->getConnection();
 #endif
     while (1)
-    {
-        drivers->leds.set(tap::gpio::Leds::Blue, true);
-        modm::delay_us(10);
-    }
-
-    while (0)
     {
         // do this as fast as you can
         PROFILE(drivers->profiler, updateIo, (drivers));
