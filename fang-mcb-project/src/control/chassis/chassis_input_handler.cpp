@@ -10,7 +10,8 @@ namespace control
 
         ChassisInputHandler::ChassisInputHandler(Remote& remote)
             : m_remote{remote}
-        {}
+        {
+        }
 
         math::AbstractVector2D ChassisInputHandler::getRemoteTranslation() const
         {
