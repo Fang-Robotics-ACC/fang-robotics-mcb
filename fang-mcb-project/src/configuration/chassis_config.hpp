@@ -8,7 +8,7 @@ namespace config
     {
         using ChassisSubsystem = control::chassis::ChassisSubsystem;
         using namespace units::literals;
-        static const Hertz k_chassisPwmFreq{500};
+        static const Hertz k_chassisPwmFreq{400};
         
         static const ChassisSubsystem::ChassisDimensionConfig k_defaultDimensionConfig
         {
