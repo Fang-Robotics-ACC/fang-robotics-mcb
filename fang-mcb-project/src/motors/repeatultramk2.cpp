@@ -38,6 +38,7 @@ namespace motors
 	void RepeatUltraMk2::setSpeed(const RPM& speed)
     {
         const RPM clampedSpeed{tap::algorithms::limitVal<RPM> (speed, m_minSpeed, m_maxSpeed)};
+        m_speed = clampedSpeed;
         const double speedPercentage{clampedSpeed * m_inversionMultiplier / mk_maxTheoreticalSpeed};
         m_vortex.setSpeed(speedPercentage);
     }
