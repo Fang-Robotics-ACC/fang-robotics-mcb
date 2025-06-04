@@ -15,9 +15,8 @@ namespace control
 
         math::AbstractVector2D ChassisInputHandler::getRemoteTranslation() const
         {
-            const double xTranslationScale{m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
-
-            const double yTranslationScale{m_remote.getChannel(Remote::Channel::LEFT_VERTICAL)};
+            const double xTranslationScale{m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL)};
+            const double yTranslationScale{m_remote.getChannel(Remote::Channel::RIGHT_VERTICAL)};
 
             return math::AbstractVector2D{xTranslationScale, yTranslationScale};
         }
