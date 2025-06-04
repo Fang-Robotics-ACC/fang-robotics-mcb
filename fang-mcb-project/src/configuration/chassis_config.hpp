@@ -13,8 +13,8 @@ namespace config
         static const ChassisSubsystem::ChassisDimensionConfig k_defaultDimensionConfig
         {
             150_mm, //Wheel Radius
-            0.5_m,  //Vertical Wheel Distance
-            0.5_m   //Horizontal Wheel Distance
+            15_in,  //Vertical Wheel Distance
+            13.5_in   //Horizontal Wheel Distance
         };
 
         static const ChassisSubsystem::DriveMotor::UnifiedProperties k_unifiedMotorProperties
