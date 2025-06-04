@@ -69,7 +69,6 @@ int main()
 #ifdef PLATFORM_HOSTED
     std::cout << "Simulation starting..." << std::endl;
 #endif
-    std::cerr<< "fuck";
 
     /*
      * NOTE: We are using DoNotUse_getDrivers here because in the main
@@ -82,8 +81,11 @@ int main()
 
     Board::initialize();
     initializeIo(drivers);
-    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
-    robot.initializeSubsystemCommands();
+    //drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
+    control::chassis::ChassisSubsystem subsystem{*drivers, config::chassis::k_defaultConfig};
+    subsystem.initialize();
+    modm::delay_ms(2000);
+    //robot.initializeSubsystemCommands();
 
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
@@ -92,7 +94,8 @@ int main()
 #endif
     while (1)
     {
-
+        drivers->leds.set(tap::gpio::Leds::Blue, true);
+        modm::delay_us(10);
     }
 
     while (0)
