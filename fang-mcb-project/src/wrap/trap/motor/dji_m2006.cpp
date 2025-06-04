@@ -1,4 +1,4 @@
-#include "dji_m3508.hpp"
+#include "dji_m2006.hpp"
 #include "gearbox_speed.hpp"
 
 #include <cassert>
@@ -7,13 +7,13 @@ namespace trap
 {
     namespace motor
     {
-        DjiM3508::DjiM3508(Drivers& drivers, const Config& config)
-        : DjiM3508{drivers, config.motorId, config.canBus, config.name,
+        DjiM2006::DjiM2006(Drivers& drivers, const Config& config)
+        : DjiM2006{drivers, config.motorId, config.canBus, config.name,
                    config.inverted, config.gearRatio, config.speedPidConfig}
         {
         }
 
-        DjiM3508::DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
+        DjiM2006::DjiM2006(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                            const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedPidConfig)
         : m_djiMotor{&drivers, motorId, canBus, inverted, name, mk_requiredCurrentMode, gearRatio},
           m_gearRatio{gearRatio},
@@ -22,49 +22,49 @@ namespace trap
             assert(static_cast<DjiMotorOutput>(speedPidConfig.maxOutput) <= k_maxOutput && "pid can exceed max output!!!");
         }
 
-        void DjiM3508::update()
+        void DjiM2006::update()
         {
             const RPM error{m_targetSpeed - getSpeed()};
             setDesiredOutput(m_speedPid.runController(error));
         }
 
-        void DjiM3508::setTargetSpeed(const RPM& targetSpeed)
+        void DjiM2006::setTargetSpeed(const RPM& targetSpeed)
         {
             m_targetSpeed = motors::shaftToMotorSpeed(targetSpeed, m_gearRatio);
         }
 
-        RPM DjiM3508::getSpeed() const
+        RPM DjiM2006::getSpeed() const
         {
             return motors::motorToShaftSpeed(RPM{m_djiMotor.getShaftRPM()}, m_gearRatio);
         }
 
-        void DjiM3508::initialize()
+        void DjiM2006::initialize()
         {
             m_djiMotor.initialize();
         }
 
-        void DjiM3508::setDesiredOutput(DjiMotorOutput desiredOutput)
+        void DjiM2006::setDesiredOutput(DjiMotorOutput desiredOutput)
         {
             assert(-k_maxOutput <= desiredOutput && desiredOutput <= k_maxOutput && "Max output exceeded");
             m_djiMotor.setDesiredOutput(desiredOutput);
         }
 
-        bool DjiM3508::isMotorOnline() const
+        bool DjiM2006::isMotorOnline() const
         {
             return m_djiMotor.isMotorOnline();
         }
 
-        Celsius DjiM3508::getTemperature() const
+        Celsius DjiM2006::getTemperature() const
         {
             return Celsius{m_djiMotor.getTemperature()};
         }
 
-        tap::can::CanBus DjiM3508::getCanBus() const
+        tap::can::CanBus DjiM2006::getCanBus() const
         {
             return m_djiMotor.getCanBus();
         }
 
-        const char* DjiM3508::getName() const
+        const char* DjiM2006::getName() const
         {
             return m_djiMotor.getName();
         }
