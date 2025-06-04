@@ -76,25 +76,26 @@ int main()
      *      robot loop we must access the singleton drivers to update
      *      IO states and run the scheduler.
      */
+
     Drivers *drivers = DoNotUse_getDrivers();
     Robot robot{*drivers};
-    robot.initializeSubsystemCommands();
 
     Board::initialize();
     initializeIo(drivers);
-    using namespace units::literals;
-
-
-
-
+    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
+    robot.initializeSubsystemCommands();
 
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
     // Blocking call, waits until Windows Simulator connects.
     tap::communication::TCPServer::MainServer()->getConnection();
 #endif
-
     while (1)
+    {
+
+    }
+
+    while (0)
     {
         // do this as fast as you can
         PROFILE(drivers->profiler, updateIo, (drivers));
