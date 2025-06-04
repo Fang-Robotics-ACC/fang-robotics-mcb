@@ -103,7 +103,6 @@ int main()
     modm::delay_ms(2000);
     //Test forward movement
     chassisSubsystem.setTranslation(physics::Velocity2D{0_mph, 10_mph});
-    chassisSubsystem.refresh();
 
     ////Test strafe movement
     //chassisSubsystem.setTranslation(physics::Velocity2D{1_mph, 0_mph});
@@ -113,11 +112,16 @@ int main()
 
 
 
-
+    while(1)
     {
         // do this as fast as you can
         PROFILE(drivers->profiler, updateIo, (drivers));
 
+        math::AbstractVector2D abstractTranslation{drivers->inputHandler.getChassisInputs().getRemoteTranslation()};
+        physics::Velocity2D translation{abstractTranslation.x * 10_mph, abstractTranslation.y * 10_mph};
+        chassisSubsystem.setTranslation(translation);
+
+        chassisSubsystem.refresh();
         if (sendMotorTimeout.execute())
         {
             PROFILE(drivers->profiler, drivers->bmi088.periodicIMUUpdate, ());
