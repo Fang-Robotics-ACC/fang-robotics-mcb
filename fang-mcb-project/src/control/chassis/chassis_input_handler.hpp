@@ -12,7 +12,6 @@ namespace control
         {
         public:
             using Remote = tap::communication::serial::Remote;
-            using MotionConfig = config::motion::MotionConfig;
 
             ChassisInputHandler(Remote& remote);
             /**
