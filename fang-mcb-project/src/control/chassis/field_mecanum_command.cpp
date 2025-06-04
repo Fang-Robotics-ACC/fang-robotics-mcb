@@ -11,7 +11,8 @@ namespace control
     {
         FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, InputHandler& inputHandler, const config::motion::MotionConfig& motionConfig)
         : m_chassisSubsystem{chassisSubsystem}, m_inputHandler{inputHandler}, mk_motionConfig{motionConfig}
-        {}
+        {
+        }
 
         const char* FieldMecanumCommand::getName() const
         {
@@ -53,16 +54,16 @@ namespace control
 
         void FieldMecanumCommand::executeRemoteTestFieldRotate()
         {
-            const logic::chassis::Velocity2D translation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
-            const RPM rotation{m_inputHandler.getChassisInputs().getRemoteRotation()};
-            m_chassisSubsystem.setMotion(translation, rotation);
+            //const logic::chassis::Velocity2D translation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
+            //const RPM rotation{m_inputHandler.getChassisInputs().getRemoteRotation()};
+            //m_chassisSubsystem.setMotion(translation, rotation);
         }
 
         void FieldMecanumCommand::executeRemoteTestStrafeTurret()
         {
-            const logic::chassis::Velocity2D translation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
-            const RPM rotation{0};
-            m_chassisSubsystem.setMotion(translation, rotation);
+            //const logic::chassis::Velocity2D translation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
+            //const RPM rotation{0};
+            //m_chassisSubsystem.setMotion(translation, rotation);
         }
 
         void FieldMecanumCommand::executeKeyboardTestFieldRotate()
