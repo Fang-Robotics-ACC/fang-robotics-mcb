@@ -22,13 +22,15 @@ namespace motors
         :
         m_drivers{drivers}, m_pwmPin{pwmPin},
         mk_controllerInputVoltage{controllerInputVoltage},
-        m_inversionMultiplier{inverted && (directionality == data::motors::Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}},
-        m_vortex{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality}
+        mk_maxTheoreticalSpeed{mk_kv * mk_controllerInputVoltage},
+        m_maxSpeed{mk_maxTheoreticalSpeed},
+        m_vortex{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality},
+        m_inversionMultiplier{inverted && (directionality == data::motors::Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}}
     {
         switch(directionality)
         {
         case(data::motors::Directionality::BIDIRECTIONAL):
-            m_minSpeed = -mk_maxTheoreticalSpeed;
+            m_minSpeed = -m_maxSpeed;
         break;
         case(data::motors::Directionality::UNIDIRECTIONAL):
             m_minSpeed = 0_rpm;

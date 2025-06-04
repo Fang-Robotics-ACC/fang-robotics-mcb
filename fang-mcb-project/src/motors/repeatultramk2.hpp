@@ -76,17 +76,17 @@ namespace motors
         void initialize();
     private:
         RPM m_speed{0};
-        RPM m_maxSpeed{mk_maxTheoreticalSpeed};
         RPM m_minSpeed{0};
         tap::Drivers& m_drivers;
         tap::gpio::Pwm::Pin m_pwmPin;
         const Volts mk_controllerInputVoltage;
+        const RPM mk_maxTheoreticalSpeed;
+        RPM m_maxSpeed;
+        int8_t m_inversionMultiplier;
         // This was the Repeat Robotics provided value for the ratio between the rpm and the voltage associated with i
         //kv value is ration of rpm per voltage applied to a brushless dc motor
-        const RPMPerVolt mk_kv{1450.0};
+        static constexpr RPMPerVolt mk_kv{1450.0};
         //The voltage of the controller should not be exceeded by its output
-        const RPM mk_maxTheoreticalSpeed{mk_kv * mk_controllerInputVoltage};
-        int8_t m_inversionMultiplier;
 
         logic::motors::Vortex80AEsc m_vortex;
 
