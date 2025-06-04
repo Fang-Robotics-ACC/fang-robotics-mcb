@@ -15,7 +15,7 @@ namespace control
             using Remote = tap::communication::serial::Remote;
             using MotionConfig = config::motion::MotionConfig;
 
-            ChassisInputHandler(Remote& remote, const MotionConfig& motionConfig);
+            ChassisInputHandler(Remote& remote);
             /**
              * Returns the desired translation motion
              * Depending on which mode is used, this could be relative to the robot chassis,
@@ -37,7 +37,6 @@ namespace control
             RPM getRemoteRotation() const;
         private:
             Remote& m_remote;
-            const MotionConfig mk_motionConfig;
         };
     }// namespace chassis
 }//namespace control

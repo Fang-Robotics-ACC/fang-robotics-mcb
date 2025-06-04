@@ -8,8 +8,8 @@ namespace control
     namespace chassis
     {
 
-        ChassisInputHandler::ChassisInputHandler(Remote& remote, const MotionConfig& motionConfig)
-            : m_remote{remote}, mk_motionConfig{motionConfig}
+        ChassisInputHandler::ChassisInputHandler(Remote& remote)
+            : m_remote{remote}
         {}
 
         logic::chassis::Velocity2D ChassisInputHandler::getRemoteTranslation() const
