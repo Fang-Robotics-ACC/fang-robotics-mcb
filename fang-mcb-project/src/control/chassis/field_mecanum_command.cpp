@@ -54,9 +54,12 @@ namespace control
 
         void FieldMecanumCommand::executeRemoteTestFieldRotate()
         {
-            //const logic::chassis::Velocity2D translation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
-            //const RPM rotation{m_inputHandler.getChassisInputs().getRemoteRotation()};
-            //m_chassisSubsystem.setMotion(translation, rotation);
+            const math::AbstractVector2D abstractTranslation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
+            const double abstractRotation{m_inputHandler.getChassisInputs().getRemoteRotation()};
+
+            const physics::Velocity2D translation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
+            const RPM rotation{abstractRotation * mk_motionConfig.maxRotation};
+            m_chassisSubsystem.setMotion(translation, rotation);
         }
 
         void FieldMecanumCommand::executeRemoteTestStrafeTurret()
