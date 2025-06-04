@@ -21,18 +21,18 @@ namespace control
              * The barrel facing forward is the positive y direciton.
              * This interpets the dji remote inputs
              */
-            logic::chassis::Velocity2D getRemoteTranslation() const;
+            math::AbstractVector2D getRemoteTranslation() const;
 
             /**
              * Returns the amount that the turret should rotate
              */
-            Radians getRemoteAngularDisplacement() const;
+            double getRemoteAngularDisplacement() const;
 
             /**
              * How fast either the chassis or the turret should
              * be rotated
              */
-            RPM getRemoteRotation() const;
+            double getRemoteRotation() const;
         private:
             Remote& m_remote;
         };
