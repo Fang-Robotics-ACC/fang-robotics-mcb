@@ -103,6 +103,7 @@ int main()
     modm::delay_ms(5000);
     //Test forward movement
     chassisSubsystem.setTranslation(physics::Velocity2D{0_mph, 10_mph});
+    chassisSubsystem.refresh();
 
     ////Test strafe movement
     //chassisSubsystem.setTranslation(physics::Velocity2D{1_mph, 0_mph});
