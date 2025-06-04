@@ -97,7 +97,7 @@ int main()
                                                                         trap::gpio::PwmData{tap::gpio::Pwm::C3, k_pwmFrequency},
                                                                         trap::gpio::PwmData{tap::gpio::Pwm::C4, k_pwmFrequency}};
     constexpr ChassisSubsystem::ChassisConfig k_chassisConfig{k_chassisDimensionConfig, k_chassisMotorConfig};
-    control::chassis::ChassisSubsystem chassisSubsystem{*drivers, k_chassisConfig};
+    control::chassis::ChassisSubsystem chassisSubsystem{*drivers, config::chassis::k_defaultConfig};
 
     chassisSubsystem.initialize();
     modm::delay_ms(2000);
