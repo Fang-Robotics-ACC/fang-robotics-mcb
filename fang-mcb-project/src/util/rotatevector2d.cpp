@@ -4,7 +4,7 @@ namespace util
 {
     namespace math
     {
-        mathAliases::AbstractVector2D rotateVector2D(const mathAliases::AbstractVector2D& vector, const Radians& rotationAngle)
+        math::AbstractVector2D rotateVector2D(const math::AbstractVector2D& vector, const Radians& rotationAngle)
         {
             //Rotation matrix
             //https://www.youtube.com/watch?v=1oYEo7PNIBQ
@@ -16,7 +16,7 @@ namespace util
             const double rotatedx{vector.x * (std::cos(angle)) - vector.y * (std::sin(angle))};
             const double rotatedy{vector.x * (std::sin(angle)) + vector.y * (std::cos(angle))};
 
-            return mathAliases::AbstractVector2D{rotatedx, rotatedy};
+            return math::AbstractVector2D{rotatedx, rotatedy};
         }
     }
 }

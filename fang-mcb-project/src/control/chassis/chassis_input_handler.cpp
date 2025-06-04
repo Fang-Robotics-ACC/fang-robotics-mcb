@@ -1,6 +1,7 @@
 #include "chassis_input_handler.hpp"
 
 #include "unitaliases.hpp"
+#include "mathaliases.hpp"
 #include "chassislogicaliases.hpp"
 
 namespace control

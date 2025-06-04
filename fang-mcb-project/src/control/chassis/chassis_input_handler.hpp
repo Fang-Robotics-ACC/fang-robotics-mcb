@@ -1,8 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_CHASSIS_INPUT_HANDLER_HPP
 #define FANG_ROBOTICS_MCB_CHASSIS_INPUT_HANDLER_HPP
 #include "configuration/unitaliases.hpp"
-#include "configuration/motion_control_config.hpp"
-#include "configuration/chassislogicaliases.hpp"
+#include "configuration/mathaliases.hpp"
 #include "tap/communication/serial/remote.hpp"
 
 namespace control
