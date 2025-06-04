@@ -100,7 +100,7 @@ int main()
     control::chassis::ChassisSubsystem chassisSubsystem{*drivers, k_chassisConfig};
 
     chassisSubsystem.initialize();
-    modm::delay_ms(5000);
+    modm::delay_ms(2000);
     //Test forward movement
     chassisSubsystem.setTranslation(physics::Velocity2D{0_mph, 10_mph});
     chassisSubsystem.refresh();
