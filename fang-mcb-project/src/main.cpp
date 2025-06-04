@@ -114,14 +114,6 @@ int main()
 
 
 
-
-#ifdef PLATFORM_HOSTED
-    tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
-    // Blocking call, waits until Windows Simulator connects.
-    tap::communication::TCPServer::MainServer()->getConnection();
-#endif
-
-    while (1)
     {
         // do this as fast as you can
         PROFILE(drivers->profiler, updateIo, (drivers));
