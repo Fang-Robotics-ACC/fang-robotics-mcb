@@ -1,14 +1,16 @@
 #include "field_mecanum_command.hpp"
+#include "configuration/motion_control_config.hpp"
 #include "chassislogicaliases.hpp"
 #include "unitaliases.hpp"
+
 #include <cassert>
 
 namespace control
 {
     namespace chassis
     {
-        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, InputHandler& inputHandler)
-        : m_chassisSubsystem{chassisSubsystem}, m_inputHandler{inputHandler}
+        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, InputHandler& inputHandler, const config::motion::MotionConfig& motionConfig)
+        : m_chassisSubsystem{chassisSubsystem}, m_inputHandler{inputHandler}, mk_motionConfig{motionConfig};
         {}
 
         const char* FieldMecanumCommand::getName() const
