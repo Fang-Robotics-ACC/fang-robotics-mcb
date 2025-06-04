@@ -2,7 +2,6 @@
 
 #include "unitaliases.hpp"
 #include "mathaliases.hpp"
-#include "chassislogicaliases.hpp"
 
 namespace control
 {
@@ -13,27 +12,25 @@ namespace control
             : m_remote{remote}
         {}
 
-        logic::chassis::Velocity2D ChassisInputHandler::getRemoteTranslation() const
+        math::AbstractVector2D ChassisInputHandler::getRemoteTranslation() const
         {
-            const double leftJoystickHorizontal{m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
-            const MetersPerSecond xTranslation{mk_motionConfig.maxXTranslation * leftJoystickHorizontal};
+            const double xTranslationScale{m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
 
-            const double leftJoystickVertical{m_remote.getChannel(Remote::Channel::LEFT_VERTICAL)};
-            const MetersPerSecond yTranslation{mk_motionConfig.maxYTranslation * leftJoystickVertical};
+            const double yTranslationScale{m_remote.getChannel(Remote::Channel::LEFT_VERTICAL)};
 
-            return logic::chassis::Velocity2D{xTranslation, yTranslation};
+            return math::AbstractVector2D{xTranslationScale, yTranslationScale};
         }
 
-        Radians ChassisInputHandler::getRemoteAngularDisplacement() const
+        double ChassisInputHandler::getRemoteAngularDisplacement() const
         {
-            const double rightJoystickHorizontal{m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL)};
-            return mk_motionConfig.maxAngularDisplacement * rightJoystickHorizontal;
+            const double angularDisplacementScale{m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL)};
+            return angularDisplacementScale;
         }
 
-        RPM ChassisInputHandler::getRemoteRotation() const
+        double ChassisInputHandler::getRemoteRotation() const
         {
-        const double rightJoystickHorizontal{m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL)};
-        return mk_motionConfig.maxRotation * rightJoystickHorizontal;
+        const double rotationScale{m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL)};
+        return rotationScale;
         }
     }// namespce chassis
 }// namespace control
