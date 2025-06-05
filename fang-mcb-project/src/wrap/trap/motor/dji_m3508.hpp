@@ -82,6 +82,8 @@ namespace trap
             mockable tap::can::CanBus getCanBus() const;
 
             mockable const char* getName() const;
+
+            mockable ~DjiM3508() = default;
         /// @brief Maximum output that can be sent to the C620 controller
         static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_C620};
         /// @brief The gear ratio for the gearbox that the m3508 ships with.
