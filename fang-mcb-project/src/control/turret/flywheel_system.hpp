@@ -21,7 +21,7 @@ namespace control
         {
         public:
             using DriveMotor = trap::motor::DjiM3508;
-            class Config
+            struct Config
             {
                 Meters radius;
                 DriveMotor::Config motorConfig;
