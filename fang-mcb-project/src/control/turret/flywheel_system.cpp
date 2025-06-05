@@ -12,7 +12,7 @@ namespace control
         {
         }
 
-        void FlywheelSystem::setDesiredRimSpeed(const RPM& rimSpeed)
+        void FlywheelSystem::setTargetRimSpeed(const RPM& rimSpeed)
         {
             m_motor.setTargetSpeed(RimSpeedToMotorSpeed(rimSpeed));
         }
