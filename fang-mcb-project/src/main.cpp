@@ -81,7 +81,7 @@ int main()
 
     Board::initialize();
     initializeIo(drivers_ptr);
-    Robot robot{drivers_ptr};
+    Robot robot{drivers};
     drivers_ptr->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
     //control::chassis::ChassisSubsystem subsystem{*drivers_ptr, config::chassis::k_defaultConfig};
 
