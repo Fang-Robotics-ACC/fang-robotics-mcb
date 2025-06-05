@@ -44,22 +44,6 @@ namespace motors
         mockable ~GearboxRepeatUltraMk2() = default;
 
         /**
-         * Since this motor does not use feedback to control its speed, this is the
-         * value that it uses to estimate the required voltage and thus the duty cycle.
-         * 
-         * Currently, this code assumes that the speed controller interpolates the speed linearly
-         * from minimum to maximum speed. The maximum speed is assumed to be the kv constant
-         * multiplied by the nominal voltage.
-         * 
-         * This will likely be changed after testing.
-         * 
-         * This is motivated by the fact that a motor controller with only 10 volts
-         * can at most provide a bdlc motor 10 volts. Given the kv value, the maximum
-         * theoretical speed would be that.
-         */
-		mockable void setSpeed(const RPM& speed) override;
-
-        /**
          * This returns the desired speed, not the actual speed.
          */
 
