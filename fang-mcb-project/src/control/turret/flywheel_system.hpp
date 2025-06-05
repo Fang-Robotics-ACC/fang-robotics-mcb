@@ -30,7 +30,7 @@ namespace control
             FlywheelSystem(Drivers& drivers, const Config& config);
 
             void setDesiredRimSpeed(const RPM& rimSpeed);
-            void update();
+            void update() const;
         private:
             MetersPerRadians m_radius;
             DriveMotor m_motor;
