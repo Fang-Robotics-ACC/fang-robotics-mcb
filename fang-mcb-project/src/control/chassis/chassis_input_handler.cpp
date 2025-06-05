@@ -23,14 +23,15 @@ namespace control
 
         double ChassisInputHandler::getRemoteAngularDisplacement() const
         {
-            const double angularDisplacementScale{m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
+            //Counterclockwise is positiev
+            const double angularDisplacementScale{-m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
             return angularDisplacementScale;
         }
 
         double ChassisInputHandler::getRemoteRotation() const
         {
-        const double rotationScale{-m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
-        return rotationScale;
+            const double rotationScale{-m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
+            return rotationScale;
         }
     }// namespce chassis
 }// namespace control
