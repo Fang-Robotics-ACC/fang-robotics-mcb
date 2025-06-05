@@ -25,9 +25,9 @@ namespace config
 
         static const MotionConfig k_defaultMotionConfig
         {
-            20_mph, //maxXtranslation
-            20_mph, //maxYTranslatioon
-            150_rpm, //maxRotation
+            10_mph, //maxXtranslation
+            10_mph, //maxYTranslatioon
+            100_rpm, //maxRotation
             0.5_deg //maxAngularDisplacement
         };
     }
