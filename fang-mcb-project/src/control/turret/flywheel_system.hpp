@@ -7,6 +7,11 @@ namespace control
 {
     namespace turret
     {
+        /**
+         * This is meant to abstract a single flywheel of a given radius.
+         * It's update function must be periodically called in order for the
+         * motors to be called
+         */
         class Flywheel
         {
         public:
