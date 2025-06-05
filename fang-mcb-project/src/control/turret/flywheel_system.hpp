@@ -32,6 +32,7 @@ namespace control
             void setDesiredRimSpeed(const RPM& rimSpeed);
             void update() const;
         private:
+            RPM RimSpeedToMotorSpeed(const MetersPerSecond& rimSpeed) const;
             MetersPerRadians m_radius;
             DriveMotor m_motor;
         };
