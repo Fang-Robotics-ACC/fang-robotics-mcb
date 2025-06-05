@@ -45,7 +45,7 @@ namespace control
             FlywheelSystem(Drivers& drivers, const Config& config);
 
             void setTargetRimSpeed(const MetersPerSecond& rimSpeed);
-            void update() const;
+            void update();
         private:
             RPM RimSpeedToMotorSpeed(const MetersPerSecond& rimSpeed) const;
             MetersPerRadians m_radius;

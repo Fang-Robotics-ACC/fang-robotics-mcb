@@ -21,5 +21,10 @@ namespace control
         {
             return rimSpeed / m_radius;
         }
+
+        void FlywheelSystem::update()
+        {
+            m_motor.update();
+        }
     }
 }
