@@ -25,9 +25,9 @@ namespace control
         void setDefaultCommands();
         void registerIoMappings();
 
-        Drivers& m_drivers;
+        Drivers* m_drivers;
         chassis::ChassisSubsystem m_chassis;
-        //chassis::FieldMecanumCommand m_fieldMecanumCommand;
+        chassis::FieldMecanumCommand m_fieldMecanumCommand;
     };//class Robot
 }//namspace control
 #endif
