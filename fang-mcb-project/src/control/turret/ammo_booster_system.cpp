@@ -4,7 +4,7 @@
 namespace control::turret
 {
     AmmoBoosterSystem::AmmoBoosterSystem(Drivers& drivers, const Config& config)
-    :  m_leftFlywheel{drivers, config.leftFlywheelConfig}, m_rightFlywheel{drivers, config.rightFlywheelConfig}
+    :  m_ammoVelocity{config.ammoVelocity}, m_leftFlywheel{drivers, config.leftFlywheelConfig}, m_rightFlywheel{drivers, config.rightFlywheelConfig}
     {
         setAmmoVelocity(config.ammoVelocity);
     }
