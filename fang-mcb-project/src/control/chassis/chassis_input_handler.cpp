@@ -1,38 +1,36 @@
 #include "chassis_input_handler.hpp"
 
 #include "unitaliases.hpp"
-#include "chassislogicaliases.hpp"
+#include "mathaliases.hpp"
 
 namespace control
 {
     namespace chassis
     {
 
-        ChassisInputHandler::ChassisInputHandler(Remote& remote, const MotionConfig& motionConfig)
-            : m_remote{remote}, mk_motionConfig{motionConfig}
-        {}
-
-        logic::chassis::Velocity2D ChassisInputHandler::getRemoteTranslation() const
+        ChassisInputHandler::ChassisInputHandler(Remote& remote)
+            : m_remote{remote}
         {
-            const double leftJoystickHorizontal{m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
-            const MetersPerSecond xTranslation{mk_motionConfig.maxXTranslation * leftJoystickHorizontal};
-
-            const double leftJoystickVertical{m_remote.getChannel(Remote::Channel::LEFT_VERTICAL)};
-            const MetersPerSecond yTranslation{mk_motionConfig.maxYTranslation * leftJoystickVertical};
-
-            return logic::chassis::Velocity2D{xTranslation, yTranslation};
         }
 
-        Radians ChassisInputHandler::getRemoteAngularDisplacement() const
+        math::AbstractVector2D ChassisInputHandler::getRemoteTranslation() const
         {
-            const double rightJoystickHorizontal{m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL)};
-            return mk_motionConfig.maxAngularDisplacement * rightJoystickHorizontal;
+            const double xTranslationScale{m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL)};
+            const double yTranslationScale{m_remote.getChannel(Remote::Channel::RIGHT_VERTICAL)};
+
+            return math::AbstractVector2D{xTranslationScale, yTranslationScale};
         }
 
-        RPM ChassisInputHandler::getRemoteRotation() const
+        double ChassisInputHandler::getRemoteAngularDisplacement() const
         {
-        const double rightJoystickHorizontal{m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL)};
-        return mk_motionConfig.maxRotation * rightJoystickHorizontal;
+            const double angularDisplacementScale{m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
+            return angularDisplacementScale;
+        }
+
+        double ChassisInputHandler::getRemoteRotation() const
+        {
+        const double rotationScale{-m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
+        return rotationScale;
         }
     }// namespce chassis
 }// namespace control

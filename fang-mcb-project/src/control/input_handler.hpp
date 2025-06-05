@@ -2,7 +2,6 @@
 #define INPUT_HANDLER_LSDFKJLJLJKZKLJSLKDJFLKJSEFLJ
 #include "configuration/unitaliases.hpp"
 #include "configuration/chassislogicaliases.hpp"
-#include "configuration/motion_control_config.hpp"
 
 #include "control/chassis/chassis_input_handler.hpp"
 
@@ -13,7 +12,7 @@ namespace control
     class InputHandler
     {
     public:
-    InputHandler(tap::communication::serial::Remote& remote, const config::motion::MotionConfig& motionConfig);
+    InputHandler(tap::communication::serial::Remote& remote);
 
     control::chassis::ChassisInputHandler& getChassisInputs();
 

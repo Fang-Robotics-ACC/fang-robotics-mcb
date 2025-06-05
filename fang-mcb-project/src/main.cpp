@@ -69,57 +69,31 @@ int main()
 #ifdef PLATFORM_HOSTED
     std::cout << "Simulation starting..." << std::endl;
 #endif
-    std::cerr<< "fuck";
 
     /*
      * NOTE: We are using DoNotUse_getDrivers here because in the main
      *      robot loop we must access the singleton drivers to update
      *      IO states and run the scheduler.
      */
+
     Drivers *drivers = DoNotUse_getDrivers();
-    //Robot robot{*drivers};
-    //robot.initializeSubsystemCommands();
 
     Board::initialize();
     initializeIo(drivers);
-    using namespace units::literals;
+    Robot robot{drivers};
+    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
+    //control::chassis::ChassisSubsystem subsystem{*drivers, config::chassis::k_defaultConfig};
 
-    constexpr Hertz k_pwmFrequency{400};
-    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, k_pwmFrequency.to<float>());
-    using ChassisSubsystem = control::chassis::ChassisSubsystem;
-    using ChassisDriveMotor = ChassisSubsystem::DriveMotor;
-    constexpr ChassisDriveMotor::UnifiedProperties k_chassisUnifiedMotorProperties{24_V, data::motors::Directionality::BIDIRECTIONAL, 14};
-    constexpr ChassisSubsystem::ChassisDimensionConfig k_chassisDimensionConfig{150_mm, 15_in, 13.5_in};
-    constexpr ChassisSubsystem::ChassisMotorConfig k_chassisMotorConfig{
-                                                                        k_chassisUnifiedMotorProperties,
-                                                                        trap::gpio::PwmData{tap::gpio::Pwm::C1, k_pwmFrequency},
-                                                                        trap::gpio::PwmData{tap::gpio::Pwm::C2, k_pwmFrequency},
-                                                                        trap::gpio::PwmData{tap::gpio::Pwm::C3, k_pwmFrequency},
-                                                                        trap::gpio::PwmData{tap::gpio::Pwm::C4, k_pwmFrequency}};
-    constexpr ChassisSubsystem::ChassisConfig k_chassisConfig{k_chassisDimensionConfig, k_chassisMotorConfig};
-    control::chassis::ChassisSubsystem chassisSubsystem{*drivers, k_chassisConfig};
-
-    //Test forward movement
-    chassisSubsystem.initialize();
-    modm::delay_ms(5000);
-    chassisSubsystem.setTranslation(physics::Velocity2D{0_mph, 100_mph});
-
-    ///Test strafe movement
-    //chassisSubsystem.setTranslation(physics::Velocity2D{1_mph, 0_mph});
-
-    ////Test rotational movement
-    //chassisSubsystem.setRotation(10_rpm);
-
-
-
-
+    robot.initializeSubsystemCommands();
+    //subsystem.initialize();
+    modm::delay_ms(2000);
+    //robot.initializeSubsystemCommands();
 
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
     // Blocking call, waits until Windows Simulator connects.
     tap::communication::TCPServer::MainServer()->getConnection();
 #endif
-
     while (1)
     {
         // do this as fast as you can

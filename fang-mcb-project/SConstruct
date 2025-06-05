@@ -86,7 +86,8 @@ env.AppendUnique(CPPPATH=[
     abspath(r"src/wrap/trap"),
     abspath(r"fang-mcb-project/src/wrap/trap/communication"),
     abspath(r"robot-type"),
-    abspath(r"src/wrap")
+    abspath(r"src/wrap"),
+    abspath(r"lib/Vector3D")
 ])
 
 
