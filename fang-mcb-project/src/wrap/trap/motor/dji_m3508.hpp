@@ -6,6 +6,7 @@
 #include "tap/motor/dji_motor.hpp"
 #include "tap/motor/dji_motor_encoder.hpp"
 #include "tap/communication/can/can_bus.hpp"
+#include "tap/util_macros.hpp"
 #include "drivers.hpp"
 
 namespace trap
@@ -45,42 +46,42 @@ namespace trap
             /**
              * Must be called regularly to update the motor pid and set the motor output
              */
-            void update();
+            mockable void update();
 
             /**
              * Sets the desired speed for the pid to target
              */
-            void setTargetSpeed(const RPM& targetSpeed);
+            mockable void setTargetSpeed(const RPM& targetSpeed);
 
             /**
              * Returns the last reported RPM from CAN
              */
-            RPM getSpeed() const;
+            mockable RPM getSpeed() const;
             /**
              * It must be called for the motor to properly function.
              */
-            void initialize();
+            mockable void initialize();
 
             /**
              * The desired motor output. It must be limited to a 16 bit int.
              */
-            void setDesiredOutput(DjiMotorOutput desiredOutput);
+            mockable void setDesiredOutput(DjiMotorOutput desiredOutput);
 
             /**
              * true if a can message has been received within the last
              * MOTOR_DISCONNECT_TIME.
              */
-            bool isMotorOnline() const;
+            mockable bool isMotorOnline() const;
 
             /**
              * Returns the reported temperature in celsius.
              * The temperature was provided in an int8_t
              */
-            Celsius getTemperature() const;
+            mockable Celsius getTemperature() const;
 
-            tap::can::CanBus getCanBus() const;
+            mockable tap::can::CanBus getCanBus() const;
 
-            const char* getName() const;
+            mockable const char* getName() const;
         /// @brief Maximum output that can be sent to the C620 controller
         static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_C620};
         /// @brief The gear ratio for the gearbox that the m3508 ships with.
