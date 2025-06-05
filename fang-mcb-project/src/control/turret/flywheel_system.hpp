@@ -1,9 +1,12 @@
 #ifndef FANG_ROBOTICS_MCB_FLYWHEEL_SYSTEM_HPP
 #define FANG_ROBOTICS_MCB_FLYWHEEL_SYSTEM_HPP
 #include "unitaliases.hpp"
+#include "test/control/turret/flywheel_system_test.hpp"
+
 #include "tap/motor/dji_motor.hpp"
 #include "trap/motor/dji_m3508.hpp"
 #include "mock/trap/motor/dji_m3508_mock.hpp"
+
 #include "drivers.hpp"
 
 namespace control
@@ -21,6 +24,7 @@ namespace control
         class FlywheelSystem
         {
         public:
+        friend test::FlywheelSpeedTest;
         #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
 
         using DriveMotor = trap::mock::motor::DjiM3508Mock;
