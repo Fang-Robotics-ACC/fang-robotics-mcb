@@ -52,7 +52,9 @@ TEST_P(ChassisInputHandlerTest, inputHandlingTest)
     EXPECT_DOUBLE_EQ(translationOutput.x, m_expectedTranslation.x);
     EXPECT_DOUBLE_EQ(translationOutput.y, m_expectedTranslation.y);
     EXPECT_DOUBLE_EQ(rotationOutput, m_expectedRPM);
-    EXPECT_DOUBLE_EQ(angularDisplacementOutput, m_expectedDisplacement);
+    //Counterclockwise must be positive. The joystick moves in the direction that the top of the wheel
+    //moves
+    EXPECT_DOUBLE_EQ(angularDisplacementOutput, -m_expectedDisplacement);
 }
 
 INSTANTIATE_TEST_SUITE_P(zeroTest, ChassisInputHandlerTest, testing::Values(std::make_tuple(0.0, 0.0, 0.0, AbstractVector2D{0.0, 0.0}, 0_rpm, 0_rad)));
