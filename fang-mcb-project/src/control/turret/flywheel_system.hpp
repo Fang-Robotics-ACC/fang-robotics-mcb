@@ -14,7 +14,7 @@ namespace control
          * It's update function must be periodically called in order for the
          * motors to be called
          */
-        class Flywheel
+        class FlywheelSystem
         {
         public:
             using DriveMotor = trap::motor::DjiM3508;
@@ -24,7 +24,7 @@ namespace control
                 DriveMotor::Config motorConfig;
             };
 
-            Flywheel(Drivers& drivers, const Config& config);
+            FlywheelSystem(Drivers& drivers, const Config& config);
 
             void setDesiredRimSpeed(const RPM& rimSpeed);
             void update();
