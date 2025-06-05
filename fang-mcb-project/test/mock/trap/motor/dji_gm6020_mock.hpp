@@ -13,15 +13,6 @@ namespace trap
             public:
                 using DjiSpeedPid = trap::motor::DjiSpeedPid;
                 using DjiMotorOutput = trap::motor::DjiMotorOutput;
-                struct Config
-                {
-                    tap::motor::MotorId motorId;
-                    tap::can::CanBus canBus;
-                    const char* name;
-                    bool inverted;
-                    double gearRatio;
-                    DjiSpeedPid speedPidConfig;
-                };
                 using trap::motor::DjiGM6020::DjiGM6020;
                 virtual ~DjiGM6020Mock() = default;
                 MOCK_METHOD(void, update, (), (override));
