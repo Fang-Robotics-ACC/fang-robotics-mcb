@@ -32,4 +32,10 @@ namespace control::turret
         
     }
 
+    void AmmoBoosterSystem::update()
+    {
+        m_leftFlywheel.update();
+        m_rightFlywheel.update();
+    }
+
 }
