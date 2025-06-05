@@ -76,7 +76,7 @@ int main()
      *      IO states and run the scheduler.
      */
 
-    //Drivers& drivers_ptr{DoNotUse_getDriversReference()};
+    Drivers& drivers{DoNotUse_getDriversReference()};
     Drivers *drivers_ptr = DoNotUse_getDrivers();
 
     Board::initialize();
