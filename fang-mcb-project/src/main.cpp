@@ -87,6 +87,10 @@ int main()
 
     robot.initializeSubsystemCommands();
     //subsystem.initialize();
+    //Crash detection hack of hacks
+    //If the code crashes, the blue light will stay on for 2 seconds
+    //Crashes tend to result in the code rebooting
+    drivers_ptr->leds.set(tap::gpio::Leds::Blue, true);
     modm::delay_ms(2000);
     //robot.initializeSubsystemCommands();
 
