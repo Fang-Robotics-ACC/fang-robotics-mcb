@@ -12,8 +12,14 @@ namespace control::turret
 
     void AmmoBoosterSystem::setAmmoVelocity(const MetersPerSecond& velocity)
     {
-        m_leftFlywheel.setTargetRimSpeed(velocity);
-        m_rightFlywheel.setTargetRimSpeed(-velocity);
+        m_ammoVelocity = velocity;
+    }
+
+    void AmmoBoosterSystem::setRimSpeeds(const MetersPerSecond& speed)
+    {
+        m_leftFlywheel.setTargetRimSpeed(speed);
+        m_rightFlywheel.setTargetRimSpeed(speed);
+        
     }
 
 }

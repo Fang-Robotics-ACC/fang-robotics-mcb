@@ -8,7 +8,6 @@ namespace control::turret
 {
     /**
      * Manages two flywheels. Update must been called periodically.
-     * Assumes no motors are inverted.
      */
     class AmmoBoosterSystem
     {
@@ -26,6 +25,7 @@ namespace control::turret
         void setAmmoVelocity(const MetersPerSecond& velocity);
         void update();
     private:
+        void setRimSpeeds(const MetersPerSecond& velocity);
         MetersPerSecond m_ammoVelocity;
         FlywheelSystem m_leftFlywheel;
         FlywheelSystem m_rightFlywheel;
