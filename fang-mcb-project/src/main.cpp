@@ -77,7 +77,6 @@ int main()
      */
 
     Drivers& drivers{DoNotUse_getDriversReference()};
-    Drivers *drivers_ptr = DoNotUse_getDrivers();
 
     Board::initialize();
     initializeIo(drivers);
