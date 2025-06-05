@@ -35,13 +35,13 @@ protected:
 TEST_P(ChassisInputHandlerTest, inputHandlingTest)
 {
     using Channel = tap::communication::serial::Remote::Channel;
-    ON_CALL(m_drivers.remote, getChannel(Channel::LEFT_HORIZONTAL))
+    ON_CALL(m_drivers.remote, getChannel(Channel::RIGHT_HORIZONTAL))
         .WillByDefault(Return(m_leftJoystickHorizontal));
 
-    ON_CALL(m_drivers.remote, getChannel(Channel::LEFT_VERTICAL))
+    ON_CALL(m_drivers.remote, getChannel(Channel::RIGHT_VERTICAL))
         .WillByDefault(Return(m_leftJoystickVertical));
 
-    ON_CALL(m_drivers.remote, getChannel(Channel::RIGHT_HORIZONTAL))
+    ON_CALL(m_drivers.remote, getChannel(Channel::LEFT_HORIZONTAL))
         .WillByDefault(Return(m_rightJoystickHorizontal));
 
     //Check answers
@@ -51,7 +51,7 @@ TEST_P(ChassisInputHandlerTest, inputHandlingTest)
 
     EXPECT_DOUBLE_EQ(translationOutput.x, m_expectedTranslation.x);
     EXPECT_DOUBLE_EQ(translationOutput.y, m_expectedTranslation.y);
-    EXPECT_DOUBLE_EQ(rotationOutput, m_expectedRPM);
+    EXPECT_DOUBLE_EQ(rotationOutput, -m_expectedRPM);
     //Counterclockwise must be positive. The joystick moves in the direction that the top of the wheel
     //moves
     EXPECT_DOUBLE_EQ(angularDisplacementOutput, -m_expectedDisplacement);
