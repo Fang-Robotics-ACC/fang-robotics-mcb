@@ -29,7 +29,7 @@ namespace control
 
             FlywheelSystem(Drivers& drivers, const Config& config);
 
-            void setTargetRimSpeed(const RPM& rimSpeed);
+            void setTargetRimSpeed(const MetersPerSecond& rimSpeed);
             void update() const;
         private:
             RPM RimSpeedToMotorSpeed(const MetersPerSecond& rimSpeed) const;
