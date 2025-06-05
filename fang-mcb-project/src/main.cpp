@@ -57,12 +57,12 @@ tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / MAIN_LOOP_FREQUENCY);
 
 // Place any sort of input/output initialization here. For example, place
 // serial init stuff here.
-static void initializeIo(Drivers *drivers);
+static void initializeIo(Drivers& drivers);
 
 // Anything that you would like to be called place here. It will be called
 // very frequently. Use PeriodicMilliTimers if you don't want something to be
 // called as frequently.
-static void updateIo(Drivers *drivers);
+static void updateIo(Drivers& drivers);
 
 int main()
 {
@@ -72,20 +72,24 @@ int main()
 
     /*
      * NOTE: We are using DoNotUse_getDrivers here because in the main
-     *      robot loop we must access the singleton drivers to update
+     *      robot loop we must access the singleton drivers_ptr to update
      *      IO states and run the scheduler.
      */
 
-    Drivers *drivers = DoNotUse_getDrivers();
+    Drivers& drivers{DoNotUse_getDriversReference()};
 
     Board::initialize();
     initializeIo(drivers);
     Robot robot{drivers};
-    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
-    //control::chassis::ChassisSubsystem subsystem{*drivers, config::chassis::k_defaultConfig};
+    drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
+    //control::chassis::ChassisSubsystem subsystem{*drivers_ptr, config::chassis::k_defaultConfig};
 
     robot.initializeSubsystemCommands();
     //subsystem.initialize();
+    //Crash detection hack of hacks
+    //If the code crashes, the blue light will stay on for 2 seconds
+    //Crashes tend to result in the code rebooting
+    drivers.leds.set(tap::gpio::Leds::Blue, true);
     modm::delay_ms(2000);
     //robot.initializeSubsystemCommands();
 
@@ -97,44 +101,44 @@ int main()
     while (1)
     {
         // do this as fast as you can
-        PROFILE(drivers->profiler, updateIo, (drivers));
+        PROFILE(drivers.profiler, updateIo, (drivers));
 
         if (sendMotorTimeout.execute())
         {
-            PROFILE(drivers->profiler, drivers->bmi088.periodicIMUUpdate, ());
-            PROFILE(drivers->profiler, drivers->commandScheduler.run, ());
-            PROFILE(drivers->profiler, drivers->djiMotorTxHandler.encodeAndSendCanData, ());
-            PROFILE(drivers->profiler, drivers->terminalSerial.update, ());
+            PROFILE(drivers.profiler, drivers.bmi088.periodicIMUUpdate, ());
+            PROFILE(drivers.profiler, drivers.commandScheduler.run, ());
+            PROFILE(drivers.profiler, drivers.djiMotorTxHandler.encodeAndSendCanData, ());
+            PROFILE(drivers.profiler, drivers.terminalSerial.update, ());
         }
         modm::delay_us(10);
     }
     return 0;
 }
 
-static void initializeIo(Drivers *drivers)
+static void initializeIo(Drivers& drivers)
 {
-    drivers->analog.init();
-    drivers->pwm.init();
-    drivers->digital.init();
-    drivers->leds.init();
-    drivers->can.initialize();
-    drivers->errorController.init();
-    drivers->remote.initialize();
-    drivers->bmi088.initialize(MAIN_LOOP_FREQUENCY, 0.1, 0);
-    drivers->refSerial.initialize();
-    drivers->terminalSerial.initialize();
-    drivers->schedulerTerminalHandler.init();
-    drivers->djiMotorTerminalSerialHandler.init();
+    drivers.analog.init();
+    drivers.pwm.init();
+    drivers.digital.init();
+    drivers.leds.init();
+    drivers.can.initialize();
+    drivers.errorController.init();
+    drivers.remote.initialize();
+    drivers.bmi088.initialize(MAIN_LOOP_FREQUENCY, 0.1, 0);
+    drivers.refSerial.initialize();
+    drivers.terminalSerial.initialize();
+    drivers.schedulerTerminalHandler.init();
+    drivers.djiMotorTerminalSerialHandler.init();
 }
 
-static void updateIo(Drivers *drivers)
+static void updateIo(Drivers& drivers)
 {
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->updateSims();
 #endif
 
-    drivers->canRxHandler.pollCanData();
-    drivers->refSerial.updateSerial();
-    drivers->remote.read();
-    drivers->bmi088.read();
+    drivers.canRxHandler.pollCanData();
+    drivers.refSerial.updateSerial();
+    drivers.remote.read();
+    drivers.bmi088.read();
 }
