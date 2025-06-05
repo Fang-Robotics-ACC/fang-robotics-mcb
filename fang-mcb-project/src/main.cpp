@@ -82,18 +82,19 @@ int main()
 
     Board::initialize();
     initializeIo(drivers);
-    trap::motor::DjiSpeedPid::Config motorPidConfig{2500, 100, 0 ,500, trap::motor::DjiGM6020::k_maxOutput};
+    trap::motor::DjiSpeedPid::Config motorPidConfig{10000, 1000, 0 ,100, trap::motor::DjiGM6020::k_maxOutput};
     trap::motor::DjiGM6020::Config config{static_cast<tap::motor::MotorId>(tap::motor::MOTOR1), tap::can::CanBus::CAN_BUS1, "epic", false,  1.0, motorPidConfig, false};
     trap::motor::DjiGM6020 motor{*drivers, config};
 
-    //tap::motor::DjiMotor djiDriver{drivers, tap::motor::MOTOR5, tap::can::CanBus::CAN_BUS1, false, "cool"};
+    tap::motor::DjiMotor djiDriver{drivers, tap::motor::MOTOR5, tap::can::CanBus::CAN_BUS1, false, "cool"};
 
     //djiDriver.initialize();
     //djiDriver.setDesiredOutput(10000);
 
-    //bool ledFlash{djiDriver.isMotorOnline()};
     motor.initialize();
 
+    bool ledFlash{motor.isMotorOnline()};
+    drivers->leds.set(tap::gpio::Leds::Blue, ledFlash);
     motor.setTargetPosition(0.0_rad);
     //motor.setDesiredOutput(1000);
 
