@@ -3,6 +3,7 @@
 #include "unitaliases.hpp"
 #include "tap/motor/dji_motor.hpp"
 #include "trap/motor/dji_m3508.hpp"
+#include "drivers.hpp"
 
 namespace control
 {
@@ -22,8 +23,13 @@ namespace control
                 Meters radius;
                 DriveMotor::Config motorConfig;
             };
+
+            Flywheel(Drivers* drivers, const Config& config);
+
             void setDesiredRimSpeed(const RPM& rimSpeed);
             void update();
+        private:
+            DriveMotor m_motor;
         };
     }
 }
