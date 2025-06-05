@@ -1,6 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_FLYWHEEL_SYSTEM_HPP
 #define FANG_ROBOTICS_MCB_FLYWHEEL_SYSTEM_HPP
 #include "unitaliases.hpp"
+#include "tap/motor/dji_motor.hpp"
 #include "trap/motor/dji_m3508.hpp"
 
 namespace control
@@ -16,6 +17,11 @@ namespace control
         {
         public:
             using DriveMotor = trap::motor::DjiM3508;
+            class Config
+            {
+                Meters radius;
+                DriveMotor::Config motorConfig;
+            };
             void setDesiredRimSpeed(const RPM& rimSpeed);
             void update();
         };
