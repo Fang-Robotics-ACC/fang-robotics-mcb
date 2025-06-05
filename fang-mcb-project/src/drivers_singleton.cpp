@@ -33,4 +33,9 @@ public:
 Drivers DriversSingleton::drivers;
 
 Drivers *DoNotUse_getDrivers() { return &DriversSingleton::drivers; }
+
+Drivers& DoNotUse_getDriversReference()
+{
+    return DriversSingleton::drivers;
+}
 #endif
