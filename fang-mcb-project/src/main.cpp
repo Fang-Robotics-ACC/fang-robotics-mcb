@@ -48,6 +48,8 @@
 #include "configuration/chassis_config.hpp"
 #include "motors/gearboxrepeatultramk2.hpp"
 #include "trap/motor/dji_gm6020.hpp"
+#include "control/chassis/chassis_subsystem.hpp"
+#include "data/directionality.hpp"
 
 #include <iostream>
 
@@ -103,7 +105,6 @@ int main()
     // Blocking call, waits until Windows Simulator connects.
     tap::communication::TCPServer::MainServer()->getConnection();
 #endif
-
     while (1)
     {
         motor.update();
