@@ -57,7 +57,7 @@ tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / MAIN_LOOP_FREQUENCY);
 
 // Place any sort of input/output initialization here. For example, place
 // serial init stuff here.
-static void initializeIo(Drivers *drivers_ptr);
+static void initializeIo(Drivers& drivers);
 
 // Anything that you would like to be called place here. It will be called
 // very frequently. Use PeriodicMilliTimers if you don't want something to be
@@ -80,7 +80,7 @@ int main()
     Drivers *drivers_ptr = DoNotUse_getDrivers();
 
     Board::initialize();
-    initializeIo(drivers_ptr);
+    initializeIo(drivers);
     Robot robot{drivers};
     drivers_ptr->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
     //control::chassis::ChassisSubsystem subsystem{*drivers_ptr, config::chassis::k_defaultConfig};
@@ -116,20 +116,20 @@ int main()
     return 0;
 }
 
-static void initializeIo(Drivers *drivers_ptr)
+static void initializeIo(Drivers& drivers)
 {
-    drivers_ptr->analog.init();
-    drivers_ptr->pwm.init();
-    drivers_ptr->digital.init();
-    drivers_ptr->leds.init();
-    drivers_ptr->can.initialize();
-    drivers_ptr->errorController.init();
-    drivers_ptr->remote.initialize();
-    drivers_ptr->bmi088.initialize(MAIN_LOOP_FREQUENCY, 0.1, 0);
-    drivers_ptr->refSerial.initialize();
-    drivers_ptr->terminalSerial.initialize();
-    drivers_ptr->schedulerTerminalHandler.init();
-    drivers_ptr->djiMotorTerminalSerialHandler.init();
+    drivers.analog.init();
+    drivers.pwm.init();
+    drivers.digital.init();
+    drivers.leds.init();
+    drivers.can.initialize();
+    drivers.errorController.init();
+    drivers.remote.initialize();
+    drivers.bmi088.initialize(MAIN_LOOP_FREQUENCY, 0.1, 0);
+    drivers.refSerial.initialize();
+    drivers.terminalSerial.initialize();
+    drivers.schedulerTerminalHandler.init();
+    drivers.djiMotorTerminalSerialHandler.init();
 }
 
 static void updateIo(Drivers *drivers_ptr)
