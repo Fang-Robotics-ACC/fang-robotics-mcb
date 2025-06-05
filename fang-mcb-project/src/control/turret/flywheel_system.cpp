@@ -11,5 +11,15 @@ namespace control
         :   m_radius{config.radius / 1_rad}, m_motor{drivers, config.motorConfig}
         {
         }
+
+        void FlywheelSystem::setDesiredRimSpeed(const RPM& rimSpeed)
+        {
+            m_motor.setTargetSpeed(RimSpeedToMotorSpeed(rimSpeed));
+        }
+
+        RPM FlywheelSystem::RimSpeedToMotorSpeed(const MetersPerSecond& rimSpeed) const
+        {
+            return rimSpeed / m_radius;
+        }
     }
 }
