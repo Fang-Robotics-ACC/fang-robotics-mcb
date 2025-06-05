@@ -27,7 +27,8 @@
                 "fang-mcb-project/src/wrap",
                 "fang-mcb-project/src/wrap/trap",
                 "fang-mcb-project/src/wrap/trap/communication",
-                "fang-mcb-project/robot-type"
+                "fang-mcb-project/robot-type",
+                "fang-mcb-project/"
             ],
             "compilerPath": "g++",
             "intelliSenseMode": "gcc-x64",
@@ -66,7 +67,8 @@
                 "fang-mcb-project/src/wrap",
                 "fang-mcb-project/src/wrap/trap",
                 "fang-mcb-project/src/wrap/trap/communication",
-                "fang-mcb-project/robot-type"
+                "fang-mcb-project/robot-type",
+                "fang-mcb-project/"
             ],
             "compilerPath": "arm-none-eabi-g++",
             "intelliSenseMode": "gcc-arm",

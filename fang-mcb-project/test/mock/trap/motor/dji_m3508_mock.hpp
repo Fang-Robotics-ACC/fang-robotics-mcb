@@ -1,30 +1,21 @@
-#ifndef FANG_ROBOTICS_MCB_TRAP_MOCK_DJI_M2006_MOCK_HPP
-#define FANG_ROBOTICS_MCB_TRAP_MOCK_DJI_M2006_MOCK_HPP
+#ifndef FANG_ROBOTICS_MCB_TRAP_MOCk_DJI_M3508_MOCK_HPP
+#define FANG_ROBOTICS_MCB_TRAP_MOCk_DJI_M3508_MOCK_HPP
 
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
-#include "trap/motor/dji_m2006.hpp"
+#include "trap/motor/dji_m3508.hpp"
 namespace trap
 {
     namespace mock
     {
         namespace motor
         {
-            class DjiM2006Mock : virtual public trap::motor::DjiM2006
+            class DjiM3508Mock : virtual public trap::motor::DjiM3508
             {
             public:
                 using DjiSpeedPid = trap::motor::DjiSpeedPid;
                 using DjiMotorOutput = trap::motor::DjiMotorOutput;
-                struct Config
-                {
-                    tap::motor::MotorId motorId;
-                    tap::can::CanBus canBus;
-                    const char* name;
-                    bool inverted;
-                    double gearRatio;
-                    DjiSpeedPid speedPidConfig;
-                };
-                using trap::motor::DjiM2006::DjiM2006;
-                virtual ~DjiM2006Mock() = default;
+                using trap::motor::DjiM3508::DjiM3508;
+                virtual ~DjiM3508Mock() = default;
                 MOCK_METHOD(void, update, (), (override));
     		    MOCK_METHOD(void, setTargetSpeed, (const RPM& speed), (override));
                 MOCK_METHOD(RPM, getSpeed, (), (const, override));
