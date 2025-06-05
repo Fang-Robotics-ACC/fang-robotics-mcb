@@ -24,7 +24,7 @@ namespace control
         class FlywheelSystem
         {
         public:
-        friend test::FlywheelSpeedTest;
+        friend class test::FlywheelSpeedTest;
         #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
 
         using DriveMotor = trap::mock::motor::DjiM3508Mock;
