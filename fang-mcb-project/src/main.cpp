@@ -62,7 +62,7 @@ static void initializeIo(Drivers& drivers);
 // Anything that you would like to be called place here. It will be called
 // very frequently. Use PeriodicMilliTimers if you don't want something to be
 // called as frequently.
-static void updateIo(Drivers *drivers_ptr);
+static void updateIo(Drivers& drivers);
 
 int main()
 {
@@ -102,14 +102,14 @@ int main()
     while (1)
     {
         // do this as fast as you can
-        PROFILE(drivers_ptr->profiler, updateIo, (drivers_ptr));
+        PROFILE(drivers.profiler, updateIo, (drivers));
 
         if (sendMotorTimeout.execute())
         {
-            PROFILE(drivers_ptr->profiler, drivers_ptr->bmi088.periodicIMUUpdate, ());
-            PROFILE(drivers_ptr->profiler, drivers_ptr->commandScheduler.run, ());
-            PROFILE(drivers_ptr->profiler, drivers_ptr->djiMotorTxHandler.encodeAndSendCanData, ());
-            PROFILE(drivers_ptr->profiler, drivers_ptr->terminalSerial.update, ());
+            PROFILE(drivers.profiler, drivers.bmi088.periodicIMUUpdate, ());
+            PROFILE(drivers.profiler, drivers.commandScheduler.run, ());
+            PROFILE(drivers.profiler, drivers.djiMotorTxHandler.encodeAndSendCanData, ());
+            PROFILE(drivers.profiler, drivers.terminalSerial.update, ());
         }
         modm::delay_us(10);
     }
@@ -132,14 +132,14 @@ static void initializeIo(Drivers& drivers)
     drivers.djiMotorTerminalSerialHandler.init();
 }
 
-static void updateIo(Drivers *drivers_ptr)
+static void updateIo(Drivers& drivers)
 {
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->updateSims();
 #endif
 
-    drivers_ptr->canRxHandler.pollCanData();
-    drivers_ptr->refSerial.updateSerial();
-    drivers_ptr->remote.read();
-    drivers_ptr->bmi088.read();
+    drivers.canRxHandler.pollCanData();
+    drivers.refSerial.updateSerial();
+    drivers.remote.read();
+    drivers.bmi088.read();
 }
