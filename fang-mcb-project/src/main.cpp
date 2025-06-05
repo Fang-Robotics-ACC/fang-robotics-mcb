@@ -82,7 +82,7 @@ int main()
     Board::initialize();
     initializeIo(drivers);
     Robot robot{drivers};
-    drivers_ptr->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
+    drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
     //control::chassis::ChassisSubsystem subsystem{*drivers_ptr, config::chassis::k_defaultConfig};
 
     robot.initializeSubsystemCommands();
@@ -90,7 +90,7 @@ int main()
     //Crash detection hack of hacks
     //If the code crashes, the blue light will stay on for 2 seconds
     //Crashes tend to result in the code rebooting
-    drivers_ptr->leds.set(tap::gpio::Leds::Blue, true);
+    drivers.leds.set(tap::gpio::Leds::Blue, true);
     modm::delay_ms(2000);
     //robot.initializeSubsystemCommands();
 
