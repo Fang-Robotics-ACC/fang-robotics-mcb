@@ -30,6 +30,8 @@ namespace control::turret
         FlywheelSystem m_leftFlywheel;
         FlywheelSystem m_rightFlywheel;
 
+        static constexpr MetersPerSecond k_stillSpeed{0};
+
     };
 }
 #endif

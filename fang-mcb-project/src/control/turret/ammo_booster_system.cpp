@@ -9,6 +9,16 @@ namespace control::turret
         setAmmoVelocity(config.ammoVelocity);
     }
 
+    void AmmoBoosterSystem::autoFireOn()
+    {
+        setRimSpeeds(m_ammoVelocity);
+    }
+
+    void AmmoBoosterSystem::autoFireOff()
+    {
+        setRimSpeeds(k_stillSpeed);
+    }
+
 
     void AmmoBoosterSystem::setAmmoVelocity(const MetersPerSecond& velocity)
     {
