@@ -23,7 +23,8 @@ namespace control
 
         double ChassisInputHandler::getRemoteAngularDisplacement() const
         {
-            const double angularDisplacementScale{m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
+            //Counterclockwise is positiev
+            const double angularDisplacementScale{-m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
             return angularDisplacementScale;
         }
 
