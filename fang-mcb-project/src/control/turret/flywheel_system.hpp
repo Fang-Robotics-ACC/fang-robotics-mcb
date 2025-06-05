@@ -3,6 +3,7 @@
 #include "unitaliases.hpp"
 #include "tap/motor/dji_motor.hpp"
 #include "trap/motor/dji_m3508.hpp"
+#include "mock/trap/motor/dji_m3508_mock.hpp"
 #include "drivers.hpp"
 
 namespace control
@@ -20,7 +21,12 @@ namespace control
         class FlywheelSystem
         {
         public:
-            using DriveMotor = trap::motor::DjiM3508;
+        #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
+
+        using DriveMotor = trap::mock::motor::DjiM3508Mock;
+        #else
+        using DriveMotor = trap::motor::DjiM3508;
+        #endif
             struct Config
             {
                 Meters radius;
