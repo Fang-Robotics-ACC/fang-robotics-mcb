@@ -29,7 +29,7 @@ namespace control
 
         double ChassisInputHandler::getRemoteRotation() const
         {
-        const double rotationScale{m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
+        const double rotationScale{-m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
         return rotationScale;
         }
     }// namespce chassis
