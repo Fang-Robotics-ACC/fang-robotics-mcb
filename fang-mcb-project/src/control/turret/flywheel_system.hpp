@@ -4,13 +4,17 @@
 
 #include "tap/motor/dji_motor.hpp"
 #include "trap/motor/dji_m3508.hpp"
-#include "mock/trap/motor/dji_m3508_mock.hpp"
 
 #include "drivers.hpp"
 
 namespace test 
 {
     class FlywheelSpeedTest; //Declare associated test class without having to include the file to prevent gtest errors
+}
+
+namespace trap::mock
+{
+ class DjiM3508Mock;
 }
 
 
