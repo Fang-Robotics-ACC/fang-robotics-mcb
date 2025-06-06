@@ -3,18 +3,19 @@
 #include "unitaliases.hpp"
 
 #include "tap/motor/dji_motor.hpp"
+
+#if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
+#include "mock/trap/motor/dji_m2006_mock.hpp"
+#else
 #include "trap/motor/dji_m2006.hpp"
+#endif
+
 
 #include "drivers.hpp"
 
 namespace test 
 {
     class FlywheelSpeedTest; //Declare associated test class without having to include the file to prevent gtest errors
-}
-
-namespace trap::mock::motor
-{
- class DjiM2006Mock;
 }
 
 
