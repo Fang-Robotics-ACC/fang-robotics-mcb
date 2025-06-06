@@ -17,7 +17,7 @@ namespace test
 
         const int roundsPerRevolution{std::get<0>(GetParam())};
         const Meters feedRate{std::get<1>(GetParam())};
-        const MetersPerSecond expectedRPMCall{std::get<1>(GetParam())};
+        const RPM expectedRPMCall{std::get<1>(GetParam())};
 
         Drivers drivers;
         const control::turret::FeederSystem::DriveMotor::DjiSpeedPid::Config defaultConfig 
