@@ -19,7 +19,6 @@ namespace control::turret
         setRimSpeeds(k_stillSpeed);
     }
 
-
     void AmmoBoosterSystem::setAmmoVelocity(const MetersPerSecond& velocity)
     {
         m_ammoVelocity = velocity;
@@ -37,5 +36,4 @@ namespace control::turret
         m_leftFlywheel.update();
         m_rightFlywheel.update();
     }
-
 }
