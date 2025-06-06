@@ -12,7 +12,7 @@ namespace test
     class FlywheelSpeedTest; //Declare associated test class without having to include the file to prevent gtest errors
 }
 
-namespace trap::mock
+namespace trap::mock::motor
 {
  class DjiM2006Mock;
 }
