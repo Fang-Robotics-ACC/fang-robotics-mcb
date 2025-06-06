@@ -61,7 +61,7 @@ namespace control
             void update();
         private:
             RPM feedRateToRPM();
-            const int mk_roundsPerCycle;
+            const int mk_roundsPerRevolution;
             Hertz m_feedRate;
             DriveMotor m_motor;
 
