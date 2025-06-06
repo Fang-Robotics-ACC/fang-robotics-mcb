@@ -6,18 +6,13 @@
 
 #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
 #include "mock/trap/motor/dji_m2006_mock.hpp"
+#include "test/control/turret/feeder_system_test.hpp"
 #else
 #include "trap/motor/dji_m2006.hpp"
 #endif
 
 
 #include "drivers.hpp"
-
-namespace test 
-{
-    class FlywheelSpeedTest; //Declare associated test class without having to include the file to prevent gtest errors
-}
-
 
 namespace control
 {
@@ -30,7 +25,7 @@ namespace control
         class FeederSystem
         {
         public:
-        friend class test::FlywheelSpeedTest;
+        friend class test::FeederSystemTest;
         #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
 
         using DriveMotor = trap::mock::motor::DjiM2006Mock;
