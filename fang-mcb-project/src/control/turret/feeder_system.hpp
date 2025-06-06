@@ -66,6 +66,8 @@ namespace control
             DriveMotor m_motor;
 
             bool m_activeStatus{false};
+
+            static constexpr RPM mk_stillSpeed{0.0};
         };
     }
 }
