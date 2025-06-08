@@ -16,8 +16,8 @@ namespace test
     public:
 
         const int roundsPerRevolution{std::get<0>(GetParam())};
-        const Meters feedRate{std::get<1>(GetParam())};
-        const RPM expectedRPMCall{std::get<1>(GetParam())};
+        const Hertz feedRate{std::get<1>(GetParam())};
+        const RPM expectedRPMCall{std::get<2>(GetParam())};
 
         Drivers drivers;
         const control::turret::FeederSystem::DriveMotor::DjiSpeedPid::Config defaultConfig 
@@ -37,7 +37,7 @@ namespace test
         };
         const control::turret::FeederSystem::Config feederConfig{roundsPerRevolution, feedRate, motorConfig};
 
-        control::turret::FeederSystem feederSystem{drivers, flywheelConfig};
+        control::turret::FeederSystem feederSystem{drivers, feederConfig};
         control::turret::FeederSystem::DriveMotor& motor{feederSystem.m_motor};
     };
 }
