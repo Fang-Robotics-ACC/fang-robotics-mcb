@@ -40,5 +40,10 @@ namespace control
             return m_yawMotor.getPosition();
         }
 
+        void GimbalSystem::update()
+        {
+            m_pitchMotor.update();
+            m_yawMotor.update();
+        }
     }
 }
