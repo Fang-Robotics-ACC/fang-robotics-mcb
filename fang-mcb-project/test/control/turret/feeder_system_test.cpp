@@ -43,6 +43,8 @@ using namespace test;
 
 TEST_P(FeederSystemTest, basicTest)
 {
+    //This tests whether or not the desired speed sent into the motor given
+    //how many rounds per rotation of the feeder gear and the desired fire rate
     EXPECT_CALL(motor, setTargetSpeed(expectedRPMCall));
 
     feederSystem.feedOn();
