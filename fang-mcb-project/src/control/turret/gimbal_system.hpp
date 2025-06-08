@@ -1,6 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_GIMBAL_SYSTEM_HPP
 #define FANG_ROBOTICS_MCB_GIMBAL_SYSTEM_HPP
 #include "unitaliases.hpp"
+#include "drivers.hpp"
 
 #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
 #include "test/mock/trap/motor/dji_gm6020_mock.hpp"
@@ -8,12 +9,15 @@
 #include "trap/motor/dji_gm6020.hpp"
 #endif
 
-
 namespace control
 {
     namespace turret
     {
-        class GimbalSystemClass
+        /**
+         * This is designed to set a given pitch and yaw.
+         * The yaw is relative to the motor mount.
+         */
+        class GimbalSystem
         {
         public:
         #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
@@ -21,9 +25,22 @@ namespace control
         #else
         using PositionMotor = trap::motor::DjiGM6020;
         #endif
+            /**
+             * minPitch - the lowest that the pitch motor will turn
+             * maxPitch - the highest that the pitch motor will turn
+             */
+            struct Config
+            {
+                Degrees minPitch;
+                Degrees maxPitch;
+                PositionMotor::Config pitchMotorConfig;
+                PositionMotor::Config YawMotorConfig;
+            };
+
+            GimbalSystem(Drivers& drivers, const Config& config);
             
             /**
-             * The pitch assumes 0 being the perfect horizontal angle relative to the ground
+             * The pitch assumes 0 being the perfect horizontal angle relative to mount 
              * Negative is downward, positive is upwards. This is clamped to whatever
              * min pitch and max pitch is set to.
              */
