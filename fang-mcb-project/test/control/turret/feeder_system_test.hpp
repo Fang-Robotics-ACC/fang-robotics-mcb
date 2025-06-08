@@ -10,6 +10,8 @@
 
 namespace test
 {
+    //Since the classes must mutualy be aware of each other, the delcaration must suffice.
+    //I find it better to have the declaration out of the class definition
     class FeederSystemTest;
 }
 #endif
