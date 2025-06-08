@@ -8,37 +8,8 @@
 #include <gtest/gtest.h>
 #include <tuple>
 
-
 namespace test
 {
-    class FeederSystemTest: public ::testing::TestWithParam<std::tuple<int, Hertz,RPM>>
-    {
-    public:
-
-        const int roundsPerRevolution{std::get<0>(GetParam())};
-        const Hertz feedRate{std::get<1>(GetParam())};
-        const RPM expectedRPMCall{std::get<2>(GetParam())};
-
-        Drivers drivers;
-        const control::turret::FeederSystem::DriveMotor::DjiSpeedPid::Config defaultConfig 
-        {
-            1,
-            1,
-            1
-        };
-        const control::turret::FeederSystem::DriveMotor::Config motorConfig
-        {
-            tap::motor::MOTOR1,
-            tap::can::CanBus::CAN_BUS1,
-            "test motor",
-            false,
-            1.0,
-            defaultConfig
-        };
-        const control::turret::FeederSystem::Config feederConfig{roundsPerRevolution, feedRate, motorConfig};
-
-        control::turret::FeederSystem feederSystem{drivers, feederConfig};
-        control::turret::FeederSystem::DriveMotor& motor{feederSystem.m_motor};
-    };
+    class FeederSystemTest;
 }
 #endif
