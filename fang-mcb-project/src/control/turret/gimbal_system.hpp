@@ -49,7 +49,7 @@ namespace control
             /**
              * This adds a pitch amount to the current pitch
              */
-            void addPitch(const Radians& pitchAmount);
+            void addPitch(const Radians& angle);
             Radians getPitch() const;
 
             /**
@@ -59,7 +59,7 @@ namespace control
             /**
              * Adds an amount to the current yaw
              */
-            void addYaw(const Radians yawAmount);
+            void addYaw(const Radians angle);
             Radians getYaw() const;
 
             /**
