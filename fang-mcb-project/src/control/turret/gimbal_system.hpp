@@ -55,11 +55,11 @@ namespace control
             /**
              * Positive is counterclockwise from above.
              */
-            void setYaw(const Radians yaw);
+            void setYaw(const Radians& yaw);
             /**
              * Adds an amount to the current yaw
              */
-            void addYaw(const Radians angle);
+            void addYaw(const Radians& angle);
             Radians getYaw() const;
 
             /**
