@@ -25,5 +25,20 @@ namespace control
             return m_pitchMotor.getPosition();
         }
 
+        void GimbalSystem::setYaw(const Radians& yaw)
+        {
+            m_yawMotor.setTargetPosition(yaw);
+        }
+
+        void GimbalSystem::addYaw(const Radians& angle)
+        {
+            setYaw(getYaw() + angle);
+        }
+
+        Radians GimbalSystem::getYaw() const
+        {
+            return m_yawMotor.getPosition();
+        }
+
     }
 }
