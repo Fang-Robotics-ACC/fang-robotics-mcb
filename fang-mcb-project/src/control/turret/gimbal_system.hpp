@@ -68,10 +68,10 @@ namespace control
              */
             void update();
         private:
-            PositionMotor m_pitchMotor;
-            PositionMotor m_yawMotor;
             Radians m_minPitch;
             Radians m_maxPitch;
+            PositionMotor m_pitchMotor;
+            PositionMotor m_yawMotor;
         };
     }
 }
