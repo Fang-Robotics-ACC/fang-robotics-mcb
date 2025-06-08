@@ -5,14 +5,18 @@
 #include "tap/motor/dji_motor.hpp"
 
 #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
-#include "mock/trap/motor/dji_m2006_mock.hpp"
-#include "test/control/turret/feeder_system_test.hpp"
+#include "test/mock/trap/motor/dji_m2006_mock.hpp"
 #else
 #include "trap/motor/dji_m2006.hpp"
 #endif
 
 
 #include "drivers.hpp"
+
+namespace test
+{
+    class FeederSystemTest;
+}
 
 namespace control
 {
