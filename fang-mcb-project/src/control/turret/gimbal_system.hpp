@@ -34,7 +34,7 @@ namespace control
                 Degrees minPitch;
                 Degrees maxPitch;
                 PositionMotor::Config pitchMotorConfig;
-                PositionMotor::Config YawMotorConfig;
+                PositionMotor::Config yawMotorConfig;
             };
 
             GimbalSystem(Drivers& drivers, const Config& config);
