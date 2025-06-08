@@ -40,7 +40,7 @@ namespace control
             GimbalSystem(Drivers& drivers, const Config& config);
             
             /**
-             * The pitch assumes 0 being the perfect horizontal angle relative to mount 
+             * The pitch assumes 0 being the perfect horizontal angle relative to mount.
              * Negative is downward, positive is upwards. This is clamped to whatever
              * min pitch and max pitch is set to.
              */
@@ -61,6 +61,12 @@ namespace control
              */
             void addYaw(const Radians yawAmount);
             Radians getYaw() const;
+
+            /**
+             * Must be periodically called to keep motor pids
+             * updated.
+             */
+            void update();
         private:
             PositionMotor m_pitchMotor;
             PositionMotor m_yawMotor;
