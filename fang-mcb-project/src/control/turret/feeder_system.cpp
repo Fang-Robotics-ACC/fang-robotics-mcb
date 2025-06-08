@@ -19,7 +19,7 @@ namespace control
 
         void FeederSystem::setFeedRate(const Hertz& feedRate)
         {
-            assert(feedRate > 0_Hz && "Motor cannot be told to move backwards, this might cause damage");
+            assert(feedRate >= 0_Hz && "Motor cannot be told to move backwards, this might cause damage");
             m_feedRate = feedRate;
         }
 

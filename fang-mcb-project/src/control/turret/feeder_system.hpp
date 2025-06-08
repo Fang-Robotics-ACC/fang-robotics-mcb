@@ -20,6 +20,8 @@ namespace control
         /**
          * This controls the Feeder Motor. update() must be periodically called
          * to update the motor's associated PID.
+         * 
+         * This assumes that there is one feeder motor.
          */
         class FeederSystem
         {
@@ -30,6 +32,11 @@ namespace control
         #else
         using DriveMotor = trap::motor::DjiM2006;
         #endif
+            /**
+             * roundsPerRevolution cannot be negative or zero which would cause corruption.
+             * feedRate - this is the starting rounds per second
+             * motorConfig - this is the configuration of the feeder motor
+             */
             struct Config
             {
                 int roundsPerRevolution;
@@ -41,6 +48,7 @@ namespace control
 
             /**
              * How many rounds per second the system feed when turned on.
+             * This cannot be negative in order to prevent damage.
              */
             void setFeedRate(const Hertz& FeedRate);
 
