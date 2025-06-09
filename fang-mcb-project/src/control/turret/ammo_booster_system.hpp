@@ -21,6 +21,10 @@ namespace control::turret
         AmmoBoosterSystem(Drivers& drivers, const Config& config);
         void flywheelsOn();
         void flywheelsOff();
+        /**
+         * If the flywheels are on, then it returns true
+         */
+        bool flywheelStatus() const;
 
         void setAmmoVelocity(const MetersPerSecond& velocity);
         void update();
@@ -29,6 +33,8 @@ namespace control::turret
         MetersPerSecond m_ammoVelocity;
         FlywheelSystem m_leftFlywheel;
         FlywheelSystem m_rightFlywheel;
+        
+        bool m_flywheelStatus{false};
 
         static constexpr MetersPerSecond k_stillSpeed{0};
 

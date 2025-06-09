@@ -11,12 +11,19 @@ namespace control::turret
 
     void AmmoBoosterSystem::flywheelsOn()
     {
+        m_flywheelStatus = true;
         setRimSpeeds(m_ammoVelocity);
     }
 
     void AmmoBoosterSystem::flywheelsOff()
     {
+        m_flywheelStatus = false;
         setRimSpeeds(k_stillSpeed);
+    }
+
+    bool AmmoBoosterSystem::flywheelStatus() const
+    {
+        return m_flywheelStatus;
     }
 
     void AmmoBoosterSystem::setAmmoVelocity(const MetersPerSecond& velocity)
