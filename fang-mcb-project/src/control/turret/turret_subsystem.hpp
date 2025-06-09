@@ -5,6 +5,8 @@
 #include "control/turret/feeder_system.hpp"
 #include "control/turret/gimbal_system.hpp"
 
+#include "drivers.hpp"
+
 namespace control
 {
     namespace turret
@@ -18,6 +20,7 @@ namespace control
                 FeederSystem::Config feederConfig;
                 GimbalSystem::Config gimbalConfig;
             };
+            TurretSubsystem(Drivers& drivers, const Config& config);
             void flywheelsOn();
             void flywheelsOff();
             void autoFireOn();
