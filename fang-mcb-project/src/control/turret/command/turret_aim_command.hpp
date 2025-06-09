@@ -5,6 +5,8 @@
 
 #include "tap/control/command.hpp"
 
+#include "unitaliases.hpp"
+
 namespace control
 {
     namespace turret
@@ -22,8 +24,8 @@ namespace control
             void end(bool interrupted) override;
             bool isFinished() const;
         private:
-            void aimPitch();
-            void aimYaw();
+            void aimPitch(const Seconds& delta);
+            void aimYaw(const Seconds& delta);
             static constexpr char* mk_name{"Turret Aim Command"};
             TurretSubsystem& m_turret;
             TurretInputHandler& m_input;
