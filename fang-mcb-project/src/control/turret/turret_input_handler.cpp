@@ -13,5 +13,27 @@ namespace control
         {
             m_inputType = inputType;
         }
+
+        
+        double TurretInputHandler::getPitch() const
+        {
+            switch(m_inputType)
+            {
+                case InputType::REMOTE:
+                return getRemotePitch();
+                break;
+            }
+        }
+
+        double TurretInputHandler::getYaw() const
+        {
+            switch(m_inputType)
+            {
+                case InputType::REMOTE:
+                return getRemoteYaw();
+                break;
+            }
+        }
+
     }
 }
