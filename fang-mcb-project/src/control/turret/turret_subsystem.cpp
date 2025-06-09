@@ -32,5 +32,10 @@ namespace control
         {
             m_feeder.feedOff();
         }
+
+        void TurretSubsystem::setPitch(const Radians& pitch)
+        {
+            m_gimbal.setPitch(pitch);
+        }
     }
 }
