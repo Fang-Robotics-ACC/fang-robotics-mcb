@@ -75,3 +75,7 @@ INSTANTIATE_TEST_SUITE_P(zeroTest, GimbalPitchTest, testing::Values(std::make_tu
 INSTANTIATE_TEST_SUITE_P(positiveTest, GimbalPitchTest, testing::Values(std::make_tuple(1_deg, 1_deg, -10_deg, 109_deg),
                                                                         std::make_tuple(10_deg, 10_deg, -10_deg, 109_deg),
                                                                         std::make_tuple(100_deg, 100_deg, -200_deg, 109_deg)));
+
+INSTANTIATE_TEST_SUITE_P(negativeTest, GimbalPitchTest, testing::Values(std::make_tuple(-1_deg, -1_deg, -10_deg, 109_deg),
+                                                                        std::make_tuple(-10_deg, -10_deg, -10_deg, 109_deg),
+                                                                        std::make_tuple(-100.234_deg, -100.234_deg, -200_deg, 109_deg)));
