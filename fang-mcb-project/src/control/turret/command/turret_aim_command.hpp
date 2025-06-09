@@ -15,6 +15,7 @@ namespace control
         class TurretAimCommand : public tap::control::Command
         {
         public:
+            TurretAimCommand(TurretSubsystem& turret, TurretInputHandler& input);
             const char* getName() const override;
             void initialize() override;
             void execute() override;
@@ -24,6 +25,8 @@ namespace control
             void aimPitch();
             void aimYaw();
             static constexpr char* mk_name{"Turret Aim Command"};
+            TurretSubsystem& m_turret;
+            TurretInputHandler& m_input;
         };
     }
 }
