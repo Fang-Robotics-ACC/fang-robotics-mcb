@@ -4,7 +4,7 @@ namespace control
 {
     enum class InputType
     {
-        KEYBOARD,
+        COMPUTER,
         REMOTE
     };
 }
