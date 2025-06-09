@@ -9,5 +9,15 @@ namespace control
             m_gimbal{drivers, config.gimbalConfig}
         {
         }
+
+        void TurretSubsystem::flywheelsOn()
+        {
+            m_ammoBooster.flywheelsOn();
+        }
+
+        void TurretSubsystem::flywheelsOff()
+        {
+            m_ammoBooster.flywheelsOff();
+        }
     }
 }
