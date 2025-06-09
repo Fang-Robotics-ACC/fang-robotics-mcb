@@ -25,8 +25,10 @@ namespace control
             void end(bool interrupted) override;
             bool isFinished() const;
         private:
-            void aimPitch(const Seconds& delta);
-            void aimYaw(const Seconds& delta);
+            void setPitchSpeed(const Seconds& delta);
+            void setYawSpeed(const Seconds& delta);
+
+            Radians rpmToDisplacement(const RPM& speed, const Seconds& time) const;
             static constexpr char* mk_name{"Turret Aim Command"};
             TurretSubsystem& m_turret;
             TurretInputHandler& m_input;

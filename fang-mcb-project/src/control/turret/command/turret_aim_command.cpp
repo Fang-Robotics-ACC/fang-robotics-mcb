@@ -31,5 +31,18 @@ namespace control
             //This is meant to be a default command
             return false;
         }
+
+        void TurretAimCommand::setPitchSpeed(const Seconds& delta)
+        {
+        }
+
+        void TurretAimCommand::setYawSpeed(const Seconds& delta)
+        {
+        }
+
+        Radians TurretAimCommand::rpmToDisplacement(const RPM& speed, const Seconds& time) const
+        {
+            return speed * time;
+        }
     }
 }
