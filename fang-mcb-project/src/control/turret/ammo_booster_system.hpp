@@ -24,7 +24,7 @@ namespace control::turret
         /**
          * If the flywheels are on, then it returns true
          */
-        bool flywheelStatus() const;
+        bool getFlywheelStatus() const;
 
         void setAmmoVelocity(const MetersPerSecond& velocity);
         void update();

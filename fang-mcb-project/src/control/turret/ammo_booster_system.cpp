@@ -21,7 +21,7 @@ namespace control::turret
         setRimSpeeds(k_stillSpeed);
     }
 
-    bool AmmoBoosterSystem::flywheelStatus() const
+    bool AmmoBoosterSystem::getFlywheelStatus() const
     {
         return m_flywheelStatus;
     }
