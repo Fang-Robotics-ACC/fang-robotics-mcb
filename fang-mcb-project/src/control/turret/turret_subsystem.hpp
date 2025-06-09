@@ -12,6 +12,12 @@ namespace control
         class TurretSubsystem : public tap::control::Subsystem
         {
         public:
+            struct Config
+            {
+                AmmoBoosterSystem::Config ammoBoosterConfig;
+                FeederSystem::Config feederConfig;
+                GimbalSystem::Config gimbalConfig;
+            };
             void flywheelsOn();
             void flywheelsOff();
             void autoFireOn();
