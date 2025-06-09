@@ -12,6 +12,7 @@ using namespace units::literals;
 
 
 using namespace test;
+using namespace testing;
 
 TEST_P(GimbalPitchTest, basicPitchTest)
 {
@@ -88,3 +89,27 @@ TEST(updateTest, GimbalSystem)
     EXPECT_CALL(test.pitchMotor, update());
     test.gimbalSystem.update();
 }
+
+TEST_P(GimbalAddPitchTest, basicPitchTest)
+{
+    const GimbalSystemTest::GimbalSystem::Config gimbalConfig
+    {
+        //Allow full range
+        -360_deg,
+        360_deg,
+        GimbalSystemTest::k_defaultMotorConfig,
+        GimbalSystemTest::k_defaultMotorConfig
+    };
+
+    GimbalSystemTest test{gimbalConfig};
+    GimbalSystemTest::GimbalSystem& gimbal{test.gimbalSystem};
+
+    //This tests the pitch clamping functionality
+    ON_CALL(test.pitchMotor, getPosition()).WillByDefault(Return(startAngle));
+    EXPECT_CALL(test.pitchMotor, setTargetPosition((expectedAngle, testing::UnitEq(expectedAngle))));
+    gimbal.addPitch(addAngle);
+}
+
+INSTANTIATE_TEST_SUITE_P(positiveTest, GimbalAddPitchTest, testing::Values(std::make_tuple(1_deg, 10_deg, 11_deg),
+                                                                           std::make_tuple(10_deg, 10_deg, 20_deg),
+                                                                           std::make_tuple(100_deg, 200_deg, 300_deg)));
