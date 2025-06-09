@@ -77,7 +77,17 @@
         "stop_token": "cpp",
         "cfenv": "cpp",
         "numbers": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "strstream": "cpp",
+        "charconv": "cpp",
+        "codecvt": "cpp",
+        "source_location": "cpp",
+        "format": "cpp",
+        "semaphore": "cpp",
+        "shared_mutex": "cpp",
+        "stdfloat": "cpp",
+        "text_encoding": "cpp",
+        "typeindex": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled",
     "C_Cpp.default.includePath": [
