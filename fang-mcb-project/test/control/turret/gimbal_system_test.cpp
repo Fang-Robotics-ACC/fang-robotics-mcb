@@ -51,6 +51,12 @@ namespace test
         Radians minPitch{std::get<2>(GetParam())};
         Radians maxPitch{std::get<3>(GetParam())};
     };
+
+    class GimbalYawTest: public ::testing::TestWithParam<std::tuple<Radians, Radians, Radians, Radians>>
+    {
+    public:
+        const Radians yawAngle{std::get<0>(GetParam())};
+    };
 }
 
 
@@ -72,6 +78,25 @@ TEST_P(GimbalPitchTest, basicPitchTest)
     //This tests the pitch clamping functionality
     EXPECT_CALL(test.pitchMotor, setTargetPosition((expectedPitchCall, testing::UnitEq(expectedPitchCall))));
     gimbal.setPitch(pitchAngle);
+}
+
+TEST_P(GimbalYawTest, basicPitchTest)
+{
+    const GimbalSystemTest::GimbalSystem::Config gimbalConfig
+    {
+        //Allow full range
+        -360_deg,
+        360_deg,
+        GimbalSystemTest::k_defaultMotorConfig,
+        GimbalSystemTest::k_defaultMotorConfig
+    };
+
+    GimbalSystemTest test{gimbalConfig};
+    GimbalSystemTest::GimbalSystem& gimbal{test.gimbalSystem};
+
+    //This tests the pitch clamping functionality
+    EXPECT_CALL(test.yawMotor, setTargetPosition((yawAngle, testing::UnitEq(yawAngle))));
+    gimbal.setPitch(yawAngle);
 }
 
 INSTANTIATE_TEST_SUITE_P(zeroTest, GimbalPitchTest, testing::Values(std::make_tuple(0_deg, 0_deg, -10_deg, 10_deg)));
