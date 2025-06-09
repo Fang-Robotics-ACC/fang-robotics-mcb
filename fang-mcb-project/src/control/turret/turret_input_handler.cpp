@@ -35,5 +35,16 @@ namespace control
             }
         }
 
+        double TurretInputHandler::getPitch() const
+        {
+            return m_remote.getChannel(Remote::Channel::LEFT_VERTICAL);
+        }
+
+        double TurretInputHandler::getRemoteYaw() const
+        {
+            //Left should be clounterclockwise, but that needs to be positive
+            return -m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL);
+        }
+
     }
 }
