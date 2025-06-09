@@ -4,6 +4,7 @@
 
 #include <gtest/gtest.h>
 #include <tuple>
+#include "test/unit_matcher.h"
 
 using namespace units::literals;
 namespace test
@@ -67,7 +68,7 @@ using namespace test;
 TEST_P(GimbalPitchTest, basicPitchTest)
 {
     //This tests the pitch clamping functionality
-    EXPECT_CALL(pitchMotor, setTargetPosition(expectedPitchCall));
+    EXPECT_CALL(pitchMotor, setTargetPosition((expectedPitchCall, testing::UnitEq(expectedPitchCall))));
     gimbalSystem.setPitch(pitchAngle);
 }
 
