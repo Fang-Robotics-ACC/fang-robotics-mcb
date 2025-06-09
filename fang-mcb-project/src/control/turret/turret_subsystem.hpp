@@ -40,6 +40,7 @@ namespace control
              * This is relative to the field.
              */
             void setFieldYaw(const Radians& yaw);
+            Radians getFieldYaw() const;
 
             void initialize() override;
             void refresh() override;
@@ -48,8 +49,8 @@ namespace control
              * The difference between the home yaw motor 
              * and the robot forward angle must be taken into consideration
              */
-            void setRobotwiseYaw(const Radians& angle) ;
-            Radians getRobotwiseYaw();
+            void setRobotwiseYaw(const Radians& angle);
+            Radians getRobotwiseYaw() const;
 
             Radians getChassisFieldRotation() const;
             /**

@@ -48,6 +48,11 @@ namespace control
             setRobotwiseYaw(yaw - getChassisFieldRotation());
         }
 
+        Radians TurretSubsystem::getFieldYaw() const
+        {
+            return getRobotwiseYaw() + getChassisFieldRotation();
+        }
+
         void TurretSubsystem::setRobotwiseYaw(const Radians& yaw)
         {
             //The desired robotwise yaw is 90 degrees
@@ -57,7 +62,7 @@ namespace control
             m_gimbal.setYaw(yaw - m_yawHomeOffset);
         }
 
-        Radians TurretSubsystem::getRobotwiseYaw()
+        Radians TurretSubsystem::getRobotwiseYaw() const
         {
             //If the motor's yaw is 30 degrees
             //And the offset to the forward direction is 40 degree
