@@ -43,6 +43,11 @@ namespace control
              */
             void setFieldYaw(const Radians& yaw);
             Radians getFieldYaw() const;
+            /**
+             * Adds the angle to the current yaw position
+            */
+            void addFieldYaw(const Radians& angle);
+
 
             void initialize() override;
             void refresh() override;
