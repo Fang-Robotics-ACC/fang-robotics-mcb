@@ -87,6 +87,10 @@ INSTANTIATE_TEST_SUITE_P(positiveClampingTest, GimbalPitchTest, testing::Values(
                                                                                 std::make_tuple(103_deg, 10_deg, -10_deg, 10_deg),
                                                                                 std::make_tuple(104_deg, 100_deg, -200_deg, 100_deg)));
 
+INSTANTIATE_TEST_SUITE_P(negativeClampingTest, GimbalPitchTest, testing::Values(std::make_tuple(-12_deg, -1_deg, -1_deg, 1_deg),
+                                                                                std::make_tuple(-103_deg, -10_deg, -10_deg, 10_deg),
+                                                                                std::make_tuple(-150_deg, -120_deg, -120_deg, 100_deg)));
+
 //INSTANTIATE_TEST_SUITE_P(positiveClampingTest, GimbalPitchTest, testing::Values(std::make_tuple(1_deg, 0.5_deg, -10_deg, 0.5_deg)));
 
 //INSTANTIATE_TEST_SUITE_P(negativeTest, GimbalPitchTest, testing::Values(std::make_tuple(-1_deg, -1_deg, -10_deg, 109_deg),
