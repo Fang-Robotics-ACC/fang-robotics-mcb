@@ -53,7 +53,7 @@ namespace test
             k_defaultMotorConfig,
             k_defaultMotorConfig
         };
-        const Radians setAngle{std::get<0>(GetParam())};
+        const Radians pitchAngle{std::get<0>(GetParam())};
         const Radians expectedPitchCall{std::get<1>(GetParam())};
         const Radians minPitch{std::get<2>(GetParam())};
         const Radians maxPitch{std::get<3>(GetParam())};
@@ -68,6 +68,8 @@ TEST_P(GimbalPitchTest, basicPitchTest)
 {
     //This tests the pitch clamping functionality
     EXPECT_CALL(pitchMotor, setTargetPosition(expectedPitchCall));
+    gimbalSystem.setPitch(pitchAngle);
+
 }
 
-INSTANTIATE_TEST_SUITE_P(zeroTest, GimbalPitchTest, testing::Values(std::make_tuple(0_deg, 0_deg, 10_deg, -10_deg)));
+INSTANTIATE_TEST_SUITE_P(zeroTest, GimbalPitchTest, testing::Values(std::make_tuple(0_deg, 0_deg, -10_deg, 10_deg)));
