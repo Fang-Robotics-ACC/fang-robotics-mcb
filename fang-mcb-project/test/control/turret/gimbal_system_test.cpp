@@ -24,7 +24,7 @@ namespace test
     public:
         GimbalSystem gimbalSystem;
         PositionMotor& pitchMotor{gimbalSystem.m_pitchMotor};
-        PositionMotor& yawMotor{gimbalSystem.m_pitchMotor};
+        PositionMotor& yawMotor{gimbalSystem.m_yawMotor};
 
     static constexpr GimbalSystem::PositionMotor::DjiSpeedPid::Config k_defaultPidConfig 
     {
@@ -50,8 +50,8 @@ namespace test
         
         const Radians pitchAngle{std::get<0>(GetParam())};
         const Radians expectedPitchCall{std::get<1>(GetParam())};
-        const Radians minPitch{std::get<2>(GetParam())};
-        const Radians maxPitch{std::get<3>(GetParam())};
+        Radians minPitch{std::get<2>(GetParam())};
+        Radians maxPitch{std::get<3>(GetParam())};
         GimbalSystem::Config gimbalConfig
         {
             minPitch,
@@ -80,6 +80,8 @@ INSTANTIATE_TEST_SUITE_P(positiveTest, GimbalPitchTest, testing::Values(std::mak
 INSTANTIATE_TEST_SUITE_P(negativeTest, GimbalPitchTest, testing::Values(std::make_tuple(-1_deg, -1_deg, -10_deg, 109_deg),
                                                                         std::make_tuple(-10_deg, -10_deg, -100_deg, 109_deg),
                                                                         std::make_tuple(-100_deg, -100_deg, -200_deg, 109_deg)));
+
+INSTANTIATE_TEST_SUITE_P(positiveClampingTest, GimbalPitchTest, testing::Values(std::make_tuple(1_deg, 0.5_deg, -10_deg, 0.5_deg)));
 
 //INSTANTIATE_TEST_SUITE_P(negativeTest, GimbalPitchTest, testing::Values(std::make_tuple(-1_deg, -1_deg, -10_deg, 109_deg),
 //                                                                        std::make_tuple(-10_deg, -10_deg, -12_deg, 109_deg),
