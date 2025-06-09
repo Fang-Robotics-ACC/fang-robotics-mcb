@@ -39,6 +39,7 @@ namespace control
             void initialize() override;
             void refresh() override;
         private:
+            Radians getChassisFieldRotation() const;
             tap::communication::sensors::imu::bmi088::Bmi088& m_imu;
             AmmoBoosterSystem m_ammoBooster;
             FeederSystem m_feeder;

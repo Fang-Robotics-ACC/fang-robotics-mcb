@@ -38,5 +38,14 @@ namespace control
         {
             m_gimbal.setPitch(pitch);
         }
+
+        void TurretSubsystem::setFieldYaw(const Radians& yaw)
+        {
+        }
+
+        Radians TurretSubsystem::getChassisFieldRotation() const
+        {
+            return Radians{m_imu.getYaw()};
+        }
     }
 }
