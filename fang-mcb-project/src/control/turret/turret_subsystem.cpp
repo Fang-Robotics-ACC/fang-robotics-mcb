@@ -74,5 +74,16 @@ namespace control
         {
             return Radians{m_imu.getYaw()};
         }
+
+        void TurretSubsystem::initialize()
+        {
+        }
+
+        void TurretSubsystem::refresh()
+        {
+            m_ammoBooster.update();
+            m_feeder.update();
+            m_gimbal.update();
+        }
     }
 }
