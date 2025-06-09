@@ -35,7 +35,7 @@ namespace control
             }
         }
 
-        double TurretInputHandler::getPitch() const
+        double TurretInputHandler::getRemotePitch() const
         {
             return m_remote.getChannel(Remote::Channel::LEFT_VERTICAL);
         }
