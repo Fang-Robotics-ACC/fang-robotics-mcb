@@ -19,8 +19,8 @@ namespace control::turret
         FlywheelSystem::Config rightFlywheelConfig;
     };
         AmmoBoosterSystem(Drivers& drivers, const Config& config);
-        void autoFireOn();
-        void autoFireOff();
+        void flywheelsOn();
+        void flywheelsOff();
 
         void setAmmoVelocity(const MetersPerSecond& velocity);
         void update();

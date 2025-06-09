@@ -9,12 +9,12 @@ namespace control::turret
         setAmmoVelocity(config.ammoVelocity);
     }
 
-    void AmmoBoosterSystem::autoFireOn()
+    void AmmoBoosterSystem::flywheelsOn()
     {
         setRimSpeeds(m_ammoVelocity);
     }
 
-    void AmmoBoosterSystem::autoFireOff()
+    void AmmoBoosterSystem::flywheelsOff()
     {
         setRimSpeeds(k_stillSpeed);
     }
