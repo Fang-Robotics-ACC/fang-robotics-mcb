@@ -52,7 +52,7 @@ namespace test
         Radians maxPitch{std::get<3>(GetParam())};
     };
 
-    class GimbalYawTest: public ::testing::TestWithParam<std::tuple<Radians, Radians, Radians, Radians>>
+    class GimbalYawTest: public ::testing::TestWithParam<std::tuple<Radians>>
     {
     public:
         const Radians yawAngle{std::get<0>(GetParam())};
@@ -96,7 +96,7 @@ TEST_P(GimbalYawTest, basicPitchTest)
 
     //This tests the pitch clamping functionality
     EXPECT_CALL(test.yawMotor, setTargetPosition((yawAngle, testing::UnitEq(yawAngle))));
-    gimbal.setPitch(yawAngle);
+    gimbal.setYaw(yawAngle);
 }
 
 INSTANTIATE_TEST_SUITE_P(zeroTest, GimbalPitchTest, testing::Values(std::make_tuple(0_deg, 0_deg, -10_deg, 10_deg)));
@@ -115,3 +115,7 @@ INSTANTIATE_TEST_SUITE_P(positiveClampingTest, GimbalPitchTest, testing::Values(
 INSTANTIATE_TEST_SUITE_P(negativeClampingTest, GimbalPitchTest, testing::Values(std::make_tuple(-12_deg, -1_deg, -1_deg, 1_deg),
                                                                                 std::make_tuple(-103_deg, -10_deg, -10_deg, 10_deg),
                                                                                 std::make_tuple(-150_deg, -120_deg, -120_deg, 100_deg)));
+
+INSTANTIATE_TEST_SUITE_P(zeroTest, GimbalYawTest, testing::Values(std::make_tuple(0_deg)));
+INSTANTIATE_TEST_SUITE_P(positiveTest, GimbalYawTest, testing::Values(std::make_tuple(103_deg)));
+INSTANTIATE_TEST_SUITE_P(negativeTest, GimbalYawTest, testing::Values(std::make_tuple(-10_deg)));
