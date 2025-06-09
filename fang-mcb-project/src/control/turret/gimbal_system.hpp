@@ -5,6 +5,7 @@
 
 #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
 #include "test/mock/trap/motor/dji_gm6020_mock.hpp"
+#include "test/control/turret/gimbal_system_test.hpp"
 #else
 #include "trap/motor/dji_gm6020.hpp"
 #endif
@@ -20,11 +21,12 @@ namespace control
         class GimbalSystem
         {
         public:
-        #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
-        using PositionMotor = trap::mock::motor::DjiGM6020Mock;
-        #else
-        using PositionMotor = trap::motor::DjiGM6020;
-        #endif
+            #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
+            using PositionMotor = trap::mock::motor::DjiGM6020Mock;
+                friend class test::GimbalSystemTest;
+            #else
+            using PositionMotor = trap::motor::DjiGM6020;
+            #endif
             /**
              * minPitch - the lowest that the pitch motor will turn
              * maxPitch - the highest that the pitch motor will turn
