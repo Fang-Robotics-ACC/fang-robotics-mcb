@@ -43,22 +43,13 @@ namespace test
     };
     };
 
-    class GimbalPitchTest: public GimbalSystemTest, public ::testing::TestWithParam<std::tuple<Radians, Radians, Radians, Radians>>
+    class GimbalPitchTest: public ::testing::TestWithParam<std::tuple<Radians, Radians, Radians, Radians>>
     {
     public:
-        GimbalPitchTest() : GimbalSystemTest(gimbalConfig){}
-        
         const Radians pitchAngle{std::get<0>(GetParam())};
         const Radians expectedPitchCall{std::get<1>(GetParam())};
         Radians minPitch{std::get<2>(GetParam())};
         Radians maxPitch{std::get<3>(GetParam())};
-        GimbalSystem::Config gimbalConfig
-        {
-            minPitch,
-            maxPitch,
-            k_defaultMotorConfig,
-            k_defaultMotorConfig
-        };
     };
 }
 
@@ -67,9 +58,20 @@ using namespace test;
 
 TEST_P(GimbalPitchTest, basicPitchTest)
 {
+    const GimbalSystemTest::GimbalSystem::Config gimbalConfig
+    {
+        minPitch,
+        maxPitch,
+        GimbalSystemTest::k_defaultMotorConfig,
+        GimbalSystemTest::k_defaultMotorConfig
+    };
+
+    GimbalSystemTest test{gimbalConfig};
+    GimbalSystemTest::GimbalSystem& gimbal{test.gimbalSystem};
+
     //This tests the pitch clamping functionality
-    EXPECT_CALL(pitchMotor, setTargetPosition((expectedPitchCall, testing::UnitEq(expectedPitchCall))));
-    gimbalSystem.setPitch(pitchAngle);
+    EXPECT_CALL(test.pitchMotor, setTargetPosition((expectedPitchCall, testing::UnitEq(expectedPitchCall))));
+    gimbal.setPitch(pitchAngle);
 }
 
 INSTANTIATE_TEST_SUITE_P(zeroTest, GimbalPitchTest, testing::Values(std::make_tuple(0_deg, 0_deg, -10_deg, 10_deg)));
@@ -81,7 +83,11 @@ INSTANTIATE_TEST_SUITE_P(negativeTest, GimbalPitchTest, testing::Values(std::mak
                                                                         std::make_tuple(-10_deg, -10_deg, -100_deg, 109_deg),
                                                                         std::make_tuple(-100_deg, -100_deg, -200_deg, 109_deg)));
 
-INSTANTIATE_TEST_SUITE_P(positiveClampingTest, GimbalPitchTest, testing::Values(std::make_tuple(1_deg, 0.5_deg, -10_deg, 0.5_deg)));
+INSTANTIATE_TEST_SUITE_P(positiveClampingTest, GimbalPitchTest, testing::Values(std::make_tuple(12_deg, 1_deg, -10_deg, 1_deg),
+                                                                                std::make_tuple(103_deg, 10_deg, -10_deg, 10_deg),
+                                                                                std::make_tuple(104_deg, 100_deg, -200_deg, 100_deg)));
+
+//INSTANTIATE_TEST_SUITE_P(positiveClampingTest, GimbalPitchTest, testing::Values(std::make_tuple(1_deg, 0.5_deg, -10_deg, 0.5_deg)));
 
 //INSTANTIATE_TEST_SUITE_P(negativeTest, GimbalPitchTest, testing::Values(std::make_tuple(-1_deg, -1_deg, -10_deg, 109_deg),
 //                                                                        std::make_tuple(-10_deg, -10_deg, -12_deg, 109_deg),
