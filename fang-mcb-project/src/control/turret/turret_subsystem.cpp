@@ -42,6 +42,10 @@ namespace control
 
         void TurretSubsystem::setFieldYaw(const Radians& yaw)
         {
+            //If the chassis field yaw is 90 degrees
+            //and the desired turret field yaw is 45 degrees
+            //the robotwise yaw must be -45 degrees
+            setRobotwiseYaw(yaw - getChassisFieldRotation());
         }
 
         void TurretSubsystem::setRobotwiseYaw(const Radians& yaw)
