@@ -113,3 +113,7 @@ TEST_P(GimbalAddPitchTest, basicPitchTest)
 INSTANTIATE_TEST_SUITE_P(positiveTest, GimbalAddPitchTest, testing::Values(std::make_tuple(1_deg, 10_deg, 11_deg),
                                                                            std::make_tuple(10_deg, 10_deg, 20_deg),
                                                                            std::make_tuple(100_deg, 200_deg, 300_deg)));
+
+INSTANTIATE_TEST_SUITE_P(negativeTest, GimbalAddPitchTest, testing::Values(std::make_tuple(1_deg, -10_deg, -9_deg),
+                                                                           std::make_tuple(10_deg, -10_deg, 0_deg),
+                                                                           std::make_tuple(100_deg, -200_deg, -100_deg)));
