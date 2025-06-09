@@ -8,6 +8,10 @@
 using namespace units::literals;
 namespace test
 {
+    /**
+     * This class is to simply provide private member access to multiple test classes
+     * So that we can have variants
+     */
     class GimbalSystemTest
     {
     public:
@@ -62,8 +66,7 @@ using namespace test;
 
 TEST_P(GimbalPitchTest, basicPitchTest)
 {
-    //This tests whether or not the desired speed sent into the motor given
-    //how many rounds per rotation of the feeder gear and the desired fire rate
+    //This tests the pitch clamping functionality
     EXPECT_CALL(pitchMotor, setTargetPosition(expectedPitchCall));
 }
 
