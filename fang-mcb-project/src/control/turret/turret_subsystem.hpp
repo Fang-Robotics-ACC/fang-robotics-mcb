@@ -23,6 +23,9 @@ namespace control
             TurretSubsystem(Drivers& drivers, const Config& config);
             void flywheelsOn();
             void flywheelsOff();
+            /**
+             * This will only be activated if the flywheels are on
+             */
             void autoFireOn();
             void autoFireOff();
             void setPitch();

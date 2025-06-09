@@ -19,5 +19,18 @@ namespace control
         {
             m_ammoBooster.flywheelsOff();
         }
+
+        void TurretSubsystem::autoFireOn()
+        {
+            if(m_ammoBooster.getFlywheelStatus())
+            {
+                m_feeder.feedOn();
+            }
+        }
+
+        void TurretSubsystem::autoFireOff()
+        {
+            m_feeder.feedOff();
+        }
     }
 }
