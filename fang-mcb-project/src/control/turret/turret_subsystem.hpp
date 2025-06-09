@@ -28,11 +28,11 @@ namespace control
              */
             void autoFireOn();
             void autoFireOff();
-            void setPitch();
+            void setPitch(const Radians& pitch);
             /**
              * This is relative to the field.
              */
-            void setFieldYaw();
+            void setFieldYaw(const Radians& yaw);
 
             void initialize() override;
             void refresh() override;
