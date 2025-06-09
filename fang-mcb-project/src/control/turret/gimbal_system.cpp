@@ -1,4 +1,5 @@
 #include "control/turret/gimbal_system.hpp"
+#include "tap/algorithms/math_user_utils.hpp"
 namespace control
 {
     namespace turret
@@ -12,7 +13,8 @@ namespace control
 
         void GimbalSystem::setPitch(const Radians& pitch)
         {
-            m_pitchMotor.setTargetPosition(pitch);
+            const Radians limitedPitch{tap::algorithms::limitVal<Radians>(pitch, m_minPitch, m_maxPitch)};
+            m_pitchMotor.setTargetPosition(limitedPitch);
         }
 
         void GimbalSystem::addPitch(const Radians& angle)
