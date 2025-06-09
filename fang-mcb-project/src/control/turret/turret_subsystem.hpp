@@ -33,6 +33,10 @@ namespace control
 
             void initialize() override;
             void refresh() override;
+        private:
+            AmmoBoosterSystem& m_ammoBooster;
+            FeederSystem& m_feeder;
+            GimbalSystem& m_gimbal;
         };
     }
 }
