@@ -59,5 +59,13 @@ namespace test
         const Radians addAngle{std::get<1>(GetParam())};
         const Radians expectedAngle{std::get<2>(GetParam())};
     };
+
+    class GimbalAddYawTest : public ::testing::TestWithParam<std::tuple<Radians, Radians, Radians>>
+    {
+    public:
+        const Radians startAngle{std::get<0>(GetParam())};
+        const Radians addAngle{std::get<1>(GetParam())};
+        const Radians expectedAngle{std::get<2>(GetParam())};
+    };
 }
 #endif
