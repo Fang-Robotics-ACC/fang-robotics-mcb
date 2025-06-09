@@ -4,8 +4,8 @@ namespace control
 {
     namespace turret
     {
-        TurretAimCommand::TurretAimCommand(TurretSubsystem& turret, TurretInputHandler& input)
-        :   m_turret{turret}, m_input{input}
+        TurretAimCommand::TurretAimCommand(TurretSubsystem& turret, TurretInputHandler& input, const config::motion::TurretConfig& motionConfig)
+        :   m_turret{turret}, m_input{input}, mk_motionConfig{motionConfig}
         {
         }
 
