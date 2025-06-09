@@ -45,18 +45,25 @@ namespace test
     class GimbalPitchTest: public GimbalSystemTest, public ::testing::TestWithParam<std::tuple<Radians, Radians, Radians, Radians>>
     {
     public:
-        GimbalPitchTest() : GimbalSystemTest(gimbalConfig){}
-        GimbalSystem::Config gimbalConfig
-        {
-            minPitch,
-            maxPitch,
-            k_defaultMotorConfig,
-            k_defaultMotorConfig
-        };
-        const Radians pitchAngle{std::get<0>(GetParam())};
-        const Radians expectedPitchCall{std::get<1>(GetParam())};
-        const Radians minPitch{std::get<2>(GetParam())};
-        const Radians maxPitch{std::get<3>(GetParam())};
+        GimbalPitchTest() 
+        :   pitchAngle{std::get<0>(GetParam())},
+            expectedPitchCall{std::get<1>(GetParam())},
+            minPitch{std::get<2>(GetParam())},
+            maxPitch{std::get<3>(GetParam())},
+            gimbalConfig
+            {
+                minPitch,
+                maxPitch,
+                k_defaultMotorConfig,
+                k_defaultMotorConfig
+            },
+            GimbalSystemTest(gimbalConfig){}
+
+        const Radians pitchAngle;
+        const Radians expectedPitchCall;
+        const Radians minPitch;
+        const Radians maxPitch;
+        const GimbalSystem::Config gimbalConfig;
         
     };
 }
@@ -69,7 +76,7 @@ TEST_P(GimbalPitchTest, basicPitchTest)
     //This tests the pitch clamping functionality
     EXPECT_CALL(pitchMotor, setTargetPosition(expectedPitchCall));
     gimbalSystem.setPitch(pitchAngle);
-
 }
 
 INSTANTIATE_TEST_SUITE_P(zeroTest, GimbalPitchTest, testing::Values(std::make_tuple(0_deg, 0_deg, -10_deg, 10_deg)));
+INSTANTIATE_TEST_SUITE_P(positiveTest, GimbalPitchTest, testing::Values(std::make_tuple(1_deg, 1_deg, -10_deg, 109_deg)));
