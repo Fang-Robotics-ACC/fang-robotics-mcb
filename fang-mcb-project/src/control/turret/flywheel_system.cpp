@@ -26,5 +26,10 @@ namespace control
         {
             m_motor.update();
         }
+
+        void FlywheelSystem::initialize()
+        {
+            m_motor.initialize();
+        }
     }
 }

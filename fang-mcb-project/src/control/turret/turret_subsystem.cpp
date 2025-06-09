@@ -19,6 +19,8 @@ namespace control
 
         void TurretSubsystem::flywheelsOff()
         {
+            //Prevent the feeder from jamming balls into still flywheels
+            autoFireOff();
             m_ammoBooster.flywheelsOff();
         }
 

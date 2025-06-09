@@ -43,4 +43,10 @@ namespace control::turret
         m_leftFlywheel.update();
         m_rightFlywheel.update();
     }
+
+    void AmmoBoosterSystem::initialize()
+    {
+        m_leftFlywheel.initialize();
+        m_rightFlywheel.initialize();
+    }
 }

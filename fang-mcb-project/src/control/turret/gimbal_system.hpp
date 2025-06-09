@@ -69,6 +69,7 @@ namespace control
              * updated.
              */
             void update();
+            void initialize();
         private:
             Radians m_minPitch;
             Radians m_maxPitch;

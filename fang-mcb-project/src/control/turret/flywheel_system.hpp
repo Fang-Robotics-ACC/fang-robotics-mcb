@@ -48,6 +48,7 @@ namespace control
 
             void setTargetRimSpeed(const MetersPerSecond& rimSpeed);
             void update();
+            void initialize();
         private:
             RPM RimSpeedToMotorSpeed(const MetersPerSecond& rimSpeed) const;
             MetersPerRadians m_radius;
