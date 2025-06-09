@@ -5,6 +5,7 @@ namespace control
     {
         TurretSubsystem::TurretSubsystem(Drivers& drivers, const Config& config)
         :   m_imu{drivers.bmi088},
+            m_yawHomeOffset{config.yawHomeOffset},
             m_ammoBooster{drivers, config.ammoBoosterConfig},
             m_feeder{drivers, config.feederConfig},
             m_gimbal{drivers, config.gimbalConfig}
@@ -41,6 +42,23 @@ namespace control
 
         void TurretSubsystem::setFieldYaw(const Radians& yaw)
         {
+        }
+
+        void TurretSubsystem::setRobotwiseYaw(const Radians& yaw)
+        {
+            //The desired robotwise yaw is 90 degrees
+            //The difference between the yaw motor zero position
+            //and the robot forward position is 45
+            //The motor most be told to have a position of 45
+            m_gimbal.setYaw(yaw - m_yawHomeOffset);
+        }
+
+        Radians TurretSubsystem::getRobotwiseYaw()
+        {
+            //If the motor's yaw is 30 degrees
+            //And the offset to the forward direction is 40 degree
+            //The motor is 70 degrees relative to the forward direction
+            return m_gimbal.getYaw()  + m_yawHomeOffset;
         }
 
         Radians TurretSubsystem::getChassisFieldRotation() const

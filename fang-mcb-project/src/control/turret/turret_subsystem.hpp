@@ -16,8 +16,13 @@ namespace control
         class TurretSubsystem : public tap::control::Subsystem
         {
         public:
+            /**
+             * yawHomeOffset - yawMotorZeroPosition minus forwardDirection
+             * counterclockwise from above is positive. 
+             */
             struct Config
             {
+                Radians yawHomeOffset;
                 AmmoBoosterSystem::Config ammoBoosterConfig;
                 FeederSystem::Config feederConfig;
                 GimbalSystem::Config gimbalConfig;
@@ -39,8 +44,20 @@ namespace control
             void initialize() override;
             void refresh() override;
         private:
+            /**
+             * The difference between the home yaw motor 
+             * and the robot forward angle must be taken into consideration
+             */
+            void setRobotwiseYaw(const Radians& angle) ;
+            Radians getRobotwiseYaw();
+
             Radians getChassisFieldRotation() const;
+            /**
+             * Returns the turrets rotation relative to the robot. 0 should be forward.
+             */
+
             tap::communication::sensors::imu::bmi088::Bmi088& m_imu;
+            const Radians m_yawHomeOffset;
             AmmoBoosterSystem m_ammoBooster;
             FeederSystem m_feeder;
             GimbalSystem m_gimbal;
