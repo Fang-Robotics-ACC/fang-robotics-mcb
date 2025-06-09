@@ -30,12 +30,14 @@ namespace control
             TurretSubsystem(Drivers& drivers, const Config& config);
             void flywheelsOn();
             void flywheelsOff();
+
             /**
              * This will only be activated if the flywheels are on
              */
             void autoFireOn();
             void autoFireOff();
             void setPitch(const Radians& pitch);
+
             /**
              * This is relative to the field.
              */
@@ -53,10 +55,6 @@ namespace control
             Radians getRobotwiseYaw() const;
 
             Radians getChassisFieldRotation() const;
-            /**
-             * Returns the turrets rotation relative to the robot. 0 should be forward.
-             */
-
             tap::communication::sensors::imu::bmi088::Bmi088& m_imu;
             const Radians m_yawHomeOffset;
             AmmoBoosterSystem m_ammoBooster;
