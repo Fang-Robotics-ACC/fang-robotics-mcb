@@ -70,3 +70,21 @@ INSTANTIATE_TEST_SUITE_P(negativeClampingTest, GimbalPitchTest, testing::Values(
 INSTANTIATE_TEST_SUITE_P(zeroTest, GimbalYawTest, testing::Values(std::make_tuple(0_deg)));
 INSTANTIATE_TEST_SUITE_P(positiveTest, GimbalYawTest, testing::Values(std::make_tuple(103_deg)));
 INSTANTIATE_TEST_SUITE_P(negativeTest, GimbalYawTest, testing::Values(std::make_tuple(-10_deg)));
+
+TEST(updateTest, GimbalSystem)
+{
+    //Make sure that all associated motors are updated
+    const GimbalSystemTest::GimbalSystem::Config gimbalConfig
+    {
+        //Allow full range
+        -360_deg,
+        360_deg,
+        GimbalSystemTest::k_defaultMotorConfig,
+        GimbalSystemTest::k_defaultMotorConfig
+    };
+
+    GimbalSystemTest test{gimbalConfig};
+    EXPECT_CALL(test.yawMotor, update());
+    EXPECT_CALL(test.pitchMotor, update());
+    test.gimbalSystem.update();
+}
