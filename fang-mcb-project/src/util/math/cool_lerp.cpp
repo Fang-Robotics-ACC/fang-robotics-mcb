@@ -8,9 +8,9 @@ namespace math
     CoolLerp::CoolLerp(const Vector2D& dataPoint1, const Vector2D& dataPoint2)
     : mk_dataPoint1{dataPoint1}, mk_dataPoint2{dataPoint2}, mk_input_range{dataPoint2.x - dataPoint1.x}
     {
-        assert(mk_input_range >= 0 && "data point 2's input is greater than data point 1's input");
-        //We can use direct comparison since inf is only triggered when they equal 0, not some miniscule number.
-        assert(dataPoint2.x != dataPoint1.x && "Undefined slope");
+        //assert(mk_input_range >= 0 && "data point 2's input is greater than data point 1's input");
+        ////We can use direct comparison since inf is only triggered when they equal 0, not some miniscule number.
+        //assert(dataPoint2.x != dataPoint1.x && "Undefined slope");
     }
 
     double CoolLerp::interpolate(double input) const

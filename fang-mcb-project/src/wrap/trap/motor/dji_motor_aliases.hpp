@@ -8,8 +8,8 @@ namespace trap
     namespace motor
     {
         using DjiMotorOutput = int16_t;
-        using DjiSpeedPid = trap::algorithms::SmoothPid<RPM, DjiMotorOutput, Seconds>;
-        using DjiPositionPid = trap::algorithms::SmoothPid<Radians, DjiMotorOutput, Seconds>;
+        using DjiSpeedPid = trap::algorithms::SmoothPid<RPM, DjiMotorOutput, Microseconds>;
+        using DjiPositionPid = trap::algorithms::SmoothPid<Radians, DjiMotorOutput, Microseconds>;
     }//namespace motor
 }//namespace trap
 #endif

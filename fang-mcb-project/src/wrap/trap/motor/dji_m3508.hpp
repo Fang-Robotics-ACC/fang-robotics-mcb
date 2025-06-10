@@ -85,10 +85,11 @@ namespace trap
 
             mockable ~DjiM3508() = default;
         /// @brief Maximum output that can be sent to the C620 controller
-        static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_C620};
+        static constexpr DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_C620};
         /// @brief The gear ratio for the gearbox that the m3508 ships with.
         static constexpr double k_factoryGearboxRatio{tap::motor::DjiMotorEncoder::GEAR_RATIO_M3508};
         private:
+            Drivers& m_drivers;
             tap::motor::DjiMotor m_djiMotor;
             DjiSpeedPid m_speedPid;
             RPM m_targetSpeed{0.0};

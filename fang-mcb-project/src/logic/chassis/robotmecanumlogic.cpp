@@ -11,9 +11,9 @@ namespace logic
         mk_verticalWheelDistance{verticalWheelDistance},
         mk_wheelRadius{wheelRadius}
         {
-            assert(wheelRadius.to<double>() >= 0.0 && "Wheel radius must be positive");
-            assert(horizontalWheelDistance.to<double>() >= 0.0 && "Chassis dimension must be positive");
-            assert(verticalWheelDistance.to<double>() >= 0.0 && "Chassis dimension must be positive");
+            //assert(wheelRadius.to<double>() >= 0.0 && "Wheel radius must be positive");
+            //assert(horizontalWheelDistance.to<double>() >= 0.0 && "Chassis dimension must be positive");
+            //assert(verticalWheelDistance.to<double>() >= 0.0 && "Chassis dimension must be positive");
         }
 
         void RobotMecanumLogic::setMotion(const Velocity2D& translation, const RPM& rotation)

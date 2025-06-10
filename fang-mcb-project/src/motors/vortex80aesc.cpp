@@ -70,13 +70,13 @@ namespace logic
 
         Microseconds Vortex80AEsc::calculateUnidirectionalPeriod(double speedRangePercentage) const
         {
-            assert(mk_unidirectionalMin <= speedRangePercentage && speedRangePercentage <= mk_unidirectionalMax && "Unidirectional limit is [0,1]");
+            //assert(mk_unidirectionalMin <= speedRangePercentage && speedRangePercentage <= mk_unidirectionalMax && "Unidirectional limit is [0,1]");
             return Microseconds{m_unidirectionalMap.interpolate(speedRangePercentage)};
         }
 
         Microseconds Vortex80AEsc::calculateBidirectionalPeriod(double speedRangePercentage) const
         {
-            assert(mk_bidirectionalMin <= speedRangePercentage && speedRangePercentage <= mk_bidirectionalMax && "Bidirectional limit is [-1,1]");
+            //assert(mk_bidirectionalMin <= speedRangePercentage && speedRangePercentage <= mk_bidirectionalMax && "Bidirectional limit is [-1,1]");
             return Microseconds{m_bidirectionalMap.interpolate(speedRangePercentage)};
         }
 

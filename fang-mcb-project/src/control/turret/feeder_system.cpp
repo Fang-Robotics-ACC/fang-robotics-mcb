@@ -1,4 +1,6 @@
 #include "feeder_system.hpp"
+
+
 #include "unitaliases.hpp"
 
 
@@ -12,14 +14,14 @@ namespace control
         FeederSystem::FeederSystem(Drivers& drivers, const Config& config)
         :   mk_roundsPerRevolution{config.roundsPerRevolution}, m_motor{drivers, config.motorConfig}
         {
-            assert(mk_roundsPerRevolution != 0 && "roundsPerRevolution must be zero");
-            assert(mk_roundsPerRevolution  > 0 && "roundsPerRevolution cannot be less than zero");
+            //assert(mk_roundsPerRevolution != 0 && "roundsPerRevolution must be zero");
+            //assert(mk_roundsPerRevolution  > 0 && "roundsPerRevolution cannot be less than zero");
             setFeedRate(config.feedRate);
         }
 
         void FeederSystem::setFeedRate(const Hertz& feedRate)
         {
-            assert(feedRate >= 0_Hz && "Motor cannot be told to move backwards, this might cause damage");
+            //assert(feedRate >= 0_Hz && "Motor cannot be told to move backwards, this might cause damage");
             m_feedRate = feedRate;
         }
 

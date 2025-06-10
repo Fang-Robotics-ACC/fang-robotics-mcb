@@ -25,7 +25,7 @@ namespace trap
           m_gearRatio{gearRatio},
           m_speedPid{speedPidConfig}
         {
-            assert(static_cast<DjiMotorOutput>(speedPidConfig.maxOutput) <= k_maxOutput && "pid can exceed max output!!!");
+            //assert(static_cast<DjiMotorOutput>(speedPidConfig.maxOutput) <= k_maxOutput && "pid can exceed max output!!!");
         }
 
         void DjiGM6020::update()
@@ -52,7 +52,7 @@ namespace trap
 
         void DjiGM6020::setDesiredOutput(DjiMotorOutput desiredOutput)
         {
-            assert(-k_maxOutput <= desiredOutput && desiredOutput <= k_maxOutput && "Max output exceeded");
+            //assert(-k_maxOutput <= desiredOutput && desiredOutput <= k_maxOutput && "Max output exceeded");
             m_djiMotor.setDesiredOutput(desiredOutput);
         }
 

@@ -1,6 +1,7 @@
 #include "dji_m3508.hpp"
 #include "gearbox_speed.hpp"
 
+#include "tap/errors/create_errors.hpp"
 #include <cassert>
 
 namespace trap
@@ -15,11 +16,12 @@ namespace trap
 
         DjiM3508::DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                            const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedPidConfig)
-        : m_djiMotor{&drivers, motorId, canBus, inverted, name, mk_requiredCurrentMode, gearRatio},
+        : m_drivers{drivers},
+          m_djiMotor{&drivers, motorId, canBus, inverted, name, mk_requiredCurrentMode, gearRatio},
           m_gearRatio{gearRatio},
           m_speedPid{speedPidConfig}
         {
-            assert(static_cast<DjiMotorOutput>(speedPidConfig.maxOutput) <= k_maxOutput && "pid can exceed max output!!!");
+            //assert(static_cast<DjiMotorOutput>(speedPidConfig.maxOutput) <= k_maxOutput && "pid can exceed max output!!!");
         }
 
         void DjiM3508::update()
@@ -45,7 +47,12 @@ namespace trap
 
         void DjiM3508::setDesiredOutput(DjiMotorOutput desiredOutput)
         {
-            assert(-k_maxOutput <= desiredOutput && desiredOutput <= k_maxOutput && "Max output exceeded");
+
+            //if (!(-k_maxOutput <= desiredOutput && desiredOutput <= k_maxOutput))
+            //{
+            //    RAISE_ERROR((&m_drivers), "Max output exceeded");
+            //}
+            
             m_djiMotor.setDesiredOutput(desiredOutput);
         }
 

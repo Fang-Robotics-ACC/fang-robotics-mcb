@@ -24,6 +24,7 @@ namespace control::turret
 
         void setAmmoVelocity(const MetersPerSecond& velocity);
         void update();
+        void initialize();
     private:
         void setRimSpeeds(const MetersPerSecond& velocity);
         MetersPerSecond m_ammoVelocity;
