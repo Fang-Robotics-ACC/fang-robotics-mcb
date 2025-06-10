@@ -61,6 +61,7 @@ namespace control
             bool getActiveStatus();
 
             void update();
+            void initialize();
         private:
             RPM feedRateToRPM();
             const int mk_roundsPerRevolution;

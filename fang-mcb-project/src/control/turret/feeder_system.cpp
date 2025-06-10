@@ -38,6 +38,11 @@ namespace control
             m_motor.update();
         }
 
+        void FeederSystem::initialize()
+        {
+            m_motor.initialize();
+        }
+
         RPM FeederSystem::feedRateToRPM()
         {
             //If there are two rounds per revolution,
