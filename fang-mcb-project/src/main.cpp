@@ -47,12 +47,9 @@
 #include "control/robot.hpp"
 #include "configuration/chassis_config.hpp"
 #include "motors/gearboxrepeatultramk2.hpp"
-<<<<<<< HEAD
 #include "trap/motor/dji_gm6020.hpp"
-=======
 #include "control/chassis/chassis_subsystem.hpp"
 #include "data/directionality.hpp"
->>>>>>> dev
 
 #include <iostream>
 
@@ -80,15 +77,16 @@ int main()
      *      robot loop we must access the singleton drivers_ptr to update
      *      IO states and run the scheduler.
      */
-    Drivers *drivers = DoNotUse_getDrivers();
-    //Robot robot{*drivers};
-    //robot.initializeSubsystemCommands();
-
 
     Drivers& drivers{DoNotUse_getDriversReference()};
+    Robot robot{drivers};
+
+
     Board::initialize();
     initializeIo(drivers);
-    trap::motor::DjiSpeedPid::Config motorPidConfig{50000, 1000, 0 ,100, trap::motor::DjiGM6020::k_maxOutput};
+
+    robot.initializeSubsystemCommands();
+    trap::motor::DjiSpeedPid::Config motorPidConfig{50000, 1000, 20 ,100, trap::motor::DjiGM6020::k_maxOutput};
     trap::motor::DjiGM6020::Config config{static_cast<tap::motor::MotorId>(tap::motor::MOTOR2), tap::can::CanBus::CAN_BUS1, "epic", true,  1.0, motorPidConfig, false};
     trap::motor::DjiGM6020 motor{drivers, config};
 
@@ -119,8 +117,8 @@ int main()
     {
         motor.update();
         motor2.update();
-        motor.setTargetPosition(30_deg * drivers->remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_VERTICAL));
-        motor2.setTargetPosition(300_deg * drivers->remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_HORIZONTAL));
+        motor.setTargetPosition(30_deg * drivers.remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_VERTICAL));
+        motor2.setTargetPosition(300_deg * drivers.remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_HORIZONTAL));
         // do this as fast as you can
         PROFILE(drivers.profiler, updateIo, (drivers));
 
