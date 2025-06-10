@@ -47,5 +47,11 @@ namespace control
             m_pitchMotor.update();
             m_yawMotor.update();
         }
+
+        void GimbalSystem::initialize()
+        {
+            m_pitchMotor.initialize();
+            m_yawMotor.initialize();
+        }
     }
 }

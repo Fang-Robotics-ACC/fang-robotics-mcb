@@ -50,6 +50,7 @@
 #include "trap/motor/dji_gm6020.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "data/directionality.hpp"
+#include "control/turret/gimbal_system.hpp"
 
 #include <iostream>
 
@@ -86,25 +87,32 @@ int main()
     initializeIo(drivers);
 
     //robot.initializeSubsystemCommands();
-    trap::motor::DjiSpeedPid::Config motorPidConfig{50000, 1000, 20 ,100, trap::motor::DjiGM6020::k_maxOutput};
-    trap::motor::DjiGM6020::Config config{static_cast<tap::motor::MotorId>(tap::motor::MOTOR2), tap::can::CanBus::CAN_BUS1, "epic", true,  1.0, motorPidConfig, false};
-    trap::motor::DjiGM6020 motor{drivers, config};
+    const trap::motor::DjiSpeedPid::Config pitchPidConfig{50000, 1000, 20 ,100, trap::motor::DjiGM6020::k_maxOutput};
+    const trap::motor::DjiGM6020::Config pitchConfig{static_cast<tap::motor::MotorId>(tap::motor::MOTOR2), tap::can::CanBus::CAN_BUS1, "epic", true,  1.0, pitchPidConfig, false};
+    //trap::motor::DjiGM6020 motor{drivers, config};
 
 
-    trap::motor::DjiSpeedPid::Config motorPidConfig2{50000, 1000, 0 ,100, trap::motor::DjiGM6020::k_maxOutput};
-    trap::motor::DjiGM6020::Config config2{static_cast<tap::motor::MotorId>(tap::motor::MOTOR1), tap::can::CanBus::CAN_BUS1, "epi", true,  1.0, motorPidConfig2, false};
-    trap::motor::DjiGM6020 motor2{drivers, config2};
+    const trap::motor::DjiSpeedPid::Config yawPidConfig{50000, 1000, 0 ,100, trap::motor::DjiGM6020::k_maxOutput};
+    const trap::motor::DjiGM6020::Config yawConfig{static_cast<tap::motor::MotorId>(tap::motor::MOTOR1), tap::can::CanBus::CAN_BUS1, "epi", true,  1.0, yawPidConfig, false};
+    //trap::motor::DjiGM6020 motor2{drivers, config2};
 
+
+    using GimbalSystem = control::turret::GimbalSystem;
+    const GimbalSystem::Config gimbalConfig
+    {
+        -10_deg,
+        10_deg,
+        pitchConfig,
+        yawConfig
+    };
+    GimbalSystem gimbal{drivers, gimbalConfig};
+    gimbal.initialize();
+    gimbal.setPitch(0_deg);
 
     //djiDriver.initialize();
     //djiDriver.setDesiredOutput(10000);
 
-    motor.initialize();
-    motor2.initialize();
 
-    bool ledFlash{motor.isMotorOnline()};
-    drivers.leds.set(tap::gpio::Leds::Blue, ledFlash);
-    motor.setTargetPosition(0.0_rad);
     //motor.setDesiredOutput(1000);
 
 
@@ -115,10 +123,9 @@ int main()
 #endif
     while (1)
     {
-        motor.update();
-        motor2.update();
-        motor.setTargetPosition(30_deg * drivers.remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_VERTICAL));
-        motor2.setTargetPosition(300_deg * drivers.remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_HORIZONTAL));
+        gimbal.update();
+        gimbal.setPitch(30_deg * drivers.remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_VERTICAL));
+        gimbal.setYaw(300_deg * drivers.remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_HORIZONTAL));
         // do this as fast as you can
         PROFILE(drivers.profiler, updateIo, (drivers));
 
