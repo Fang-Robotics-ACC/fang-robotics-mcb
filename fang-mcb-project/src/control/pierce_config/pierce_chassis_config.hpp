@@ -26,7 +26,7 @@ namespace control
         trap::gpio::PwmData{tap::gpio::Pwm::C3, k_chassisPwmFreq},    //Rear Left PwmData
         trap::gpio::PwmData{tap::gpio::Pwm::C4, k_chassisPwmFreq}     //Rear Right PwmData
     };
-    static const ChassisSubsystem::ChassisConfig k_pierce_chassis_config
+    static const ChassisSubsystem::ChassisConfig k_pierceChassisConfig 
     {
         k_defaultDimensionConfig,
         k_defaultMotorConfig
