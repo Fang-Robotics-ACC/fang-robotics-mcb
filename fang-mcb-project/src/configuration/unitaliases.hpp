@@ -24,6 +24,12 @@ using RawRadianMetersPerSecond = units::compound_unit<RawRadianMeters, units::in
 using RadianMetersPerSecond = units::unit_t<RawRadianMetersPerSecond>;
 using Celsius = units::temperature::celsius_t;
 using Microseconds = units::time::microsecond_t;
+//Must be used when doing calculations involving translating between linear and rotational kinematics
+// "How many meters per radians" (meters/radians) * (radins / second) = meters/second
+using RawRadians = units::angle::radians;
+using RawMeters = units::length::meters;
+using RawMetersPerRadians = units::compound_unit<RawMeters, units::inverse<RawRadians>>;
+using MetersPerRadians = units::unit_t<RawMetersPerRadians>;
 
 //One of the few moments that I would use auto
 //These constants do not alter anything numerically, but are useful when
