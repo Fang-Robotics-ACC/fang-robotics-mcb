@@ -31,7 +31,7 @@ namespace trap
                 DjiPositionPid::Config positionPidConfig;
                 bool currentControl = true;
             };
-            DjiGM6020(Drivers& drivers, const Config& config);
+            DjiGM6020(Drivers* drivers, const Config& config);
             /**
              * drivers - the drivers struct
              * motorId - the motor controller id
@@ -57,7 +57,7 @@ namespace trap
              * 
              * However, taproot ended up keeping the regular motorID
              */
-            DjiGM6020(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
+            DjiGM6020(Drivers* drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                      const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedConfig, bool currentControl);
 
             mockable ~DjiGM6020() = default;

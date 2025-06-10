@@ -108,9 +108,9 @@ namespace control
 
         const GimbalMotor::DjiPositionPid::Config k_pitchMotorPidConfig
         {
-            100,
+            1000,
             1,
-            10,
+            1,
             20,
             GimbalMotor::k_maxOutput
         };
@@ -138,7 +138,7 @@ namespace control
         {
             tap::motor::MOTOR1,
             k_turretCanBus,
-            "pitchMotor",
+            "yawMotor",
             false,
             1.0,
             k_yawMotorPidConfig 

@@ -44,7 +44,7 @@ namespace control
                 DriveMotor::Config motorConfig;
             };
 
-            FlywheelSystem(Drivers& drivers, const Config& config);
+            FlywheelSystem(Drivers* drivers, const Config& config);
 
             void setTargetRimSpeed(const MetersPerSecond& rimSpeed);
             void update();

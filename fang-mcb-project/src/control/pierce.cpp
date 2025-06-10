@@ -7,8 +7,8 @@ namespace control
     Pierce::Pierce(Drivers* drivers)
         :
             m_drivers{drivers},
-          m_chassis{*drivers, k_config.chassisConfig},
-          m_turret{*drivers, k_config.turretConfig},
+          m_chassis{drivers, k_config.chassisConfig},
+          m_turret{drivers, k_config.turretConfig},
           m_fieldMecanumCommand{m_chassis, drivers->inputHandler, config::motion::k_defaultMotionConfig},
           m_turretAimCommand{m_turret, drivers->inputHandler.getTurretInputs(), k_config.turretMotionConfig}
     {

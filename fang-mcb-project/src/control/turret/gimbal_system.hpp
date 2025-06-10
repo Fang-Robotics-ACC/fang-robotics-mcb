@@ -39,7 +39,7 @@ namespace control
                 PositionMotor::Config yawMotorConfig;
             };
 
-            GimbalSystem(Drivers& drivers, const Config& config);
+            GimbalSystem(Drivers* drivers, const Config& config);
             
             /**
              * The pitch assumes 0 being the perfect horizontal angle relative to mount.

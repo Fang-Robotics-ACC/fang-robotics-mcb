@@ -30,7 +30,7 @@ namespace trap
                 double gearRatio;
                 DjiSpeedPid::Config speedPidConfig;
             };
-            DjiM3508(Drivers& drivers, const Config& config);
+            DjiM3508(Drivers* drivers, const Config& config);
             /**
              * drivers - the drivers struct
              * motorId - the motor controller id
@@ -41,7 +41,7 @@ namespace trap
              * This would lead to undefined behavior. An assertion has been placed to prevent
              * the code from continuing.
              */
-            DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
+            DjiM3508(Drivers* drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                      const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedConfig);
 
 

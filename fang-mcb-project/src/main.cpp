@@ -86,8 +86,19 @@ int main()
 
     drivers->leds.set(tap::gpio::Leds::Blue, true);
     modm::delay_ms(2000);
-    Robot robot{drivers};
-    drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
+    //Robot robot{drivers};
+    //control::turret::TurretSubsystem turret{drivers, control::pierceConfig::k_turretConfig};
+    trap::motor::DjiGM6020 pitch{drivers, control::pierceConfig::k_pitchMotorConfig};
+    pitch.initialize();
+
+    drivers->leds.set(tap::gpio::Leds::Green, pitch.isMotorOnline());
+    pitch.setTargetPosition(0_deg);
+
+
+
+    //turret.initialize();
+    //turret.setPitch(0_deg);
+    //drivers->pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, Hertz{config::chassis::k_chassisPwmFreq}.to<double>());
     //control::chassis::ChassisSubsystem subsystem{*drivers_ptr, config::chassis::k_defaultConfig};
 
     //robot.initializeSubsystemCommands();
@@ -104,6 +115,8 @@ int main()
 #endif
     while (1)
     {
+        pitch.update();
+        //turret.refresh();
         // do this as fast as you can
         PROFILE(drivers->profiler, updateIo, (drivers));
 

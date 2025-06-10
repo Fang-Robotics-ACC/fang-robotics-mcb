@@ -27,7 +27,7 @@ namespace control
                 FeederSystem::Config feederConfig;
                 GimbalSystem::Config gimbalConfig;
             };
-            TurretSubsystem(Drivers& drivers, const Config& config);
+            TurretSubsystem(Drivers* drivers, const Config& config);
             void flywheelsOn();
             void flywheelsOff();
 

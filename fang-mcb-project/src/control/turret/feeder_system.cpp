@@ -9,7 +9,7 @@ namespace control
     {
         using namespace units::literals;
 
-        FeederSystem::FeederSystem(Drivers& drivers, const Config& config)
+        FeederSystem::FeederSystem(Drivers* drivers, const Config& config)
         :   mk_roundsPerRevolution{config.roundsPerRevolution}, m_motor{drivers, config.motorConfig}
         {
             assert(mk_roundsPerRevolution != 0 && "roundsPerRevolution must be zero");

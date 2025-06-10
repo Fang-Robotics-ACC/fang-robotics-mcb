@@ -7,15 +7,15 @@ namespace trap
 {
     namespace motor
     {
-        DjiGM6020::DjiGM6020(Drivers& drivers, const Config& config)
+        DjiGM6020::DjiGM6020(Drivers* drivers, const Config& config)
         : DjiGM6020{drivers, config.motorId, config.canBus, config.name,
                    config.inverted, config.gearRatio, config.positionPidConfig, config.currentControl}
         {
         }
 
-        DjiGM6020::DjiGM6020(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
+        DjiGM6020::DjiGM6020(Drivers* drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                            const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& positionPidConfig, bool currentControl)
-        : m_djiMotor{&drivers, 
+        : m_djiMotor{drivers, 
                      static_cast<tap::motor::MotorId>(static_cast<int>(motorId) + mk_GM6020CANAddressOffset),//Hack of hacks
                      canBus, 
                      inverted,

@@ -18,7 +18,7 @@ namespace control::turret
         FlywheelSystem::Config leftFlywheelConfig;
         FlywheelSystem::Config rightFlywheelConfig;
     };
-        AmmoBoosterSystem(Drivers& drivers, const Config& config);
+        AmmoBoosterSystem(Drivers* drivers, const Config& config);
         void flywheelsOn();
         void flywheelsOff();
         /**

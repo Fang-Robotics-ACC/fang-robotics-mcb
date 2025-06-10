@@ -7,15 +7,15 @@ namespace trap
 {
     namespace motor
     {
-        DjiM2006::DjiM2006(Drivers& drivers, const Config& config)
+        DjiM2006::DjiM2006(Drivers* drivers, const Config& config)
         : DjiM2006{drivers, config.motorId, config.canBus, config.name,
                    config.inverted, config.gearRatio, config.speedPidConfig}
         {
         }
 
-        DjiM2006::DjiM2006(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
+        DjiM2006::DjiM2006(Drivers* drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                            const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedPidConfig)
-        : m_djiMotor{&drivers, motorId, canBus, inverted, name, mk_requiredCurrentMode, gearRatio},
+        : m_djiMotor{drivers, motorId, canBus, inverted, name, mk_requiredCurrentMode, gearRatio},
           m_gearRatio{gearRatio},
           m_speedPid{speedPidConfig}
         {

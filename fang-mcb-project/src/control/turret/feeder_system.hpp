@@ -44,7 +44,7 @@ namespace control
                 DriveMotor::Config motorConfig;
             };
 
-            FeederSystem(Drivers& drivers, const Config& config);
+            FeederSystem(Drivers* drivers, const Config& config);
 
             /**
              * How many rounds per second the system feed when turned on.
