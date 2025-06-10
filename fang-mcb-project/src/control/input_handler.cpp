@@ -10,4 +10,9 @@ namespace control
     {
         return m_chassisInputHandler;
     }
+
+    control::turret::TurretInputHandler& InputHandler::getTurretInputs()
+    {
+        return m_turretInputHandler;
+    }
 }

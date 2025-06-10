@@ -17,6 +17,7 @@ namespace control
     InputHandler(tap::communication::serial::Remote& remote);
 
     control::chassis::ChassisInputHandler& getChassisInputs();
+    control::turret::TurretInputHandler& getTurretInputs();
 
     private:
     tap::communication::serial::Remote& m_remote;
