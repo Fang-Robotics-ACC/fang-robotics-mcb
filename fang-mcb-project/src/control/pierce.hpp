@@ -1,10 +1,13 @@
 #ifndef FANG_ROBOTICS_MCB_INFANTRY_HPP
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "drivers.hpp"
-#include "control/chassis/chassis_subsystem.hpp"
-#include "control/chassis/field_mecanum_command.hpp"
-#include "configuration/chassis_config.hpp"
+
+#include "control/pierce_config/pierce_chassis_config.hpp"
 #include "control/pierce_config/pierce_turret_config.hpp"
+
+#include "control/chassis/chassis_subsystem.hpp"
+#include "control/turret/turret_subsystem.hpp"
+#include "control/chassis/field_mecanum_command.hpp"
 namespace control
 {
     /**
@@ -14,11 +17,11 @@ namespace control
     class Pierce
     {
     public:
-    struct Config
-    {
-        chassis::ChassisSubsystem::ChassisConfig chassisConfig;
-        config::motion::TurretConfig turretMotionConfig;
-    };
+        struct Config
+        {
+            chassis::ChassisSubsystem::ChassisConfig chassisConfig;
+            turret::TurretSubsystem::Config turretConfig;
+        };
         Pierce(Drivers& drivers);
         void initializeSubsystemCommands();
     private:
@@ -27,8 +30,15 @@ namespace control
         void setDefaultCommands();
         void registerIoMappings();
 
+        const Config k_config
+        {
+            k_pierceChassisConfig,
+            pierceConfig::k_turretConfig
+        };
+
         Drivers& m_drivers;
         chassis::ChassisSubsystem m_chassis;
+        turret::TurretSubsystem m_turret;
 
         chassis::FieldMecanumCommand m_fieldMecanumCommand;
 
