@@ -8,7 +8,8 @@ namespace control
             m_yawHomeOffset{config.yawHomeOffset},
             m_ammoBooster{drivers, config.ammoBoosterConfig},
             m_feeder{drivers, config.feederConfig},
-            m_gimbal{drivers, config.gimbalConfig}
+            m_gimbal{drivers, config.gimbalConfig},
+            Subsystem(&drivers)
         {
         }
 
