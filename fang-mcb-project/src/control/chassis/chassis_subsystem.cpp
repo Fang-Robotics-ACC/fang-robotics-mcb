@@ -5,9 +5,9 @@ namespace control
 {
     namespace chassis
     {
-        ChassisSubsystem::ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig)
+        ChassisSubsystem::ChassisSubsystem(Drivers* drivers, const ChassisConfig& chassisConfig)
             :
-            tap::control::Subsystem::Subsystem{&drivers},
+            tap::control::Subsystem::Subsystem{drivers},
             m_drivers{drivers},
             mk_motorConfig{chassisConfig.chassisMotors},
             mk_dimensionConfig{chassisConfig.chassisDimensions},
@@ -67,7 +67,7 @@ namespace control
 
         void ChassisSubsystem::updateFieldAngle()
         {
-            const Radians currentFieldAngle{m_drivers.bmi088.getYaw()};
+            const Radians currentFieldAngle{m_drivers->bmi088.getYaw()};
             m_mecanumLogic.setRobotAngle(currentFieldAngle);
         }
     }//namespace control

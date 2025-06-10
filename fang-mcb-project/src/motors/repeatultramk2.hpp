@@ -19,7 +19,7 @@ namespace motors
     class RepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM>
     {
     public:
-        RepeatUltraMk2(tap::Drivers& drivers,
+        RepeatUltraMk2(tap::Drivers* drivers,
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
@@ -77,7 +77,7 @@ namespace motors
     private:
         RPM m_speed{0};
         RPM m_minSpeed{0};
-        tap::Drivers& m_drivers;
+        tap::Drivers* m_drivers;
         tap::gpio::Pwm::Pin m_pwmPin;
         const Volts mk_controllerInputVoltage;
         const RPM mk_maxTheoreticalSpeed;

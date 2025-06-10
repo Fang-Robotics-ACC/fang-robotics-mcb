@@ -57,7 +57,7 @@ namespace control
          * This assumes that all pins are set to a single frequency.
          * This assumes all motors have the same gear ratio.
          */
-        ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig);
+        ChassisSubsystem(Drivers* drivers, const ChassisConfig& chassisConfig);
 
         /**
          * Simultaneously set the translation and rotation
@@ -99,7 +99,7 @@ namespace control
         private:
         void syncWheelsToLogic();
         void updateFieldAngle();
-            Drivers& m_drivers;
+            Drivers* m_drivers;
             const ChassisMotorConfig mk_motorConfig;
             const ChassisDimensionConfig mk_dimensionConfig; 
 

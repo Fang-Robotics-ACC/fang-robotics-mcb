@@ -13,7 +13,7 @@ using namespace units::literals;
 namespace motors
 {
     RepeatUltraMk2::RepeatUltraMk2(
-        tap::Drivers& drivers,
+        tap::Drivers* drivers,
         const Volts& controllerInputVoltage,
         tap::gpio::Pwm::Pin pwmPin,
         const Hertz& pinFrequency,
@@ -24,7 +24,7 @@ namespace motors
         mk_controllerInputVoltage{controllerInputVoltage},
         mk_maxTheoreticalSpeed{mk_kv * mk_controllerInputVoltage},
         m_maxSpeed{mk_maxTheoreticalSpeed},
-        m_vortex{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality},
+        m_vortex{drivers->pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality},
         m_inversionMultiplier{inverted && (directionality == data::motors::Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}}
     {
         switch(directionality)
@@ -74,7 +74,7 @@ namespace motors
 
     void RepeatUltraMk2::setPWM(float dutyCycle)
     {
-        m_drivers.pwm.write(dutyCycle, m_pwmPin); 
+        m_drivers->pwm.write(dutyCycle, m_pwmPin); 
     }
 
     /**
