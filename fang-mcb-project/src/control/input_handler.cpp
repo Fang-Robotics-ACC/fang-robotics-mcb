@@ -2,7 +2,7 @@
 namespace control
 {
     InputHandler::InputHandler(tap::communication::serial::Remote& remote):
-        m_remote{remote}, m_chassisInputHandler{remote} 
+        m_remote{remote}, m_chassisInputHandler{remote}, m_turretInputHandler{remote}
     {
     }
 

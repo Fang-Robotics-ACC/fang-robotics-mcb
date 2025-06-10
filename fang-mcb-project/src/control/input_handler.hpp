@@ -7,6 +7,8 @@
 
 #include "tap/communication/serial/remote.hpp"
 
+#include "control/turret/turret_input_handler.hpp"
+
 namespace control
 {
     class InputHandler
@@ -19,6 +21,7 @@ namespace control
     private:
     tap::communication::serial::Remote& m_remote;
     control::chassis::ChassisInputHandler m_chassisInputHandler;
+    control::turret::TurretInputHandler m_turretInputHandler;
     };
 }
 #endif
