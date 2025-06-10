@@ -1,5 +1,5 @@
-#ifndef FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
-#define FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
+#ifndef FANG_ROBOTICS_MCB_TRAP_DJI_M2006_HPP
+#define FANG_ROBOTICS_MCB_TRAP_DJI_M2006_HPP
 #include "unitaliases.hpp"
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
 
@@ -16,7 +16,7 @@ namespace trap
         /**
          * Wrapper for DJI motor for the DJI M3508 on a CAN bus
          */
-        class DjiM3508
+        class DjiM2006
         {
         public:
             struct Config
@@ -28,7 +28,7 @@ namespace trap
                 double gearRatio;
                 DjiSpeedPid::Config speedPidConfig;
             };
-            DjiM3508(Drivers& drivers, const Config& config);
+            DjiM2006(Drivers& drivers, const Config& config);
             /**
              * drivers - the drivers struct
              * motorId - the motor controller id
@@ -39,9 +39,11 @@ namespace trap
              * This would lead to undefined behavior. An assertion has been placed to prevent
              * the code from continuing.
              */
-            DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
+            DjiM2006(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                      const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedConfig);
 
+
+            mockable ~DjiM2006() = default;
 
             /**
              * Must be called regularly to update the motor pid and set the motor output
@@ -83,20 +85,21 @@ namespace trap
 
             mockable const char* getName() const;
 
-            mockable ~DjiM3508() = default;
-        /// @brief Maximum output that can be sent to the C620 controller
-        static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_C620};
-        /// @brief The gear ratio for the gearbox that the m3508 ships with.
-        static constexpr double k_factoryGearboxRatio{tap::motor::DjiMotorEncoder::GEAR_RATIO_M3508};
+        /// @brief Maximum output for C610 controller
+        static constexpr DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_C610};
+
+        /// @brief gear ratio of the gearbox that usually ships with the motor.
+        static constexpr double k_factoryGearboxRatio{tap::motor::DjiMotorEncoder::GEAR_RATIO_M2006};
         private:
             tap::motor::DjiMotor m_djiMotor;
             DjiSpeedPid m_speedPid;
+            const double m_gearRatio;
+
             RPM m_targetSpeed{0.0};
-            double m_gearRatio;
 
             //Current control in DjiMotor is for the GM6020s only
             //Setting it to true will mean the motor does not respond
-            static const bool mk_requiredCurrentMode{false};
+            static constexpr bool mk_requiredCurrentMode{false};
         };
     }
 }

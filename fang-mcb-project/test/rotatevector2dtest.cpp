@@ -13,23 +13,23 @@ const double k_tolerance{1e-10};
 TEST(RotateVector2D, counterClockwise)
 {
     {
-    mathAliases::AbstractVector2D testVector{0.0, 1.0};
+    math::AbstractVector2D testVector{0.0, 1.0};
     //Rotate the unit vector
-    mathAliases::AbstractVector2D expectedVector{-std::cos(Radians{Degrees{45}}.to<double>()), std::cos(Radians{Degrees{45}}.to<double>())};
+    math::AbstractVector2D expectedVector{-std::cos(Radians{Degrees{45}}.to<double>()), std::cos(Radians{Degrees{45}}.to<double>())};
     Degrees rotation{45};
 
-    mathAliases::AbstractVector2D outputVector{util::math::rotateVector2D(testVector, rotation)};
+    math::AbstractVector2D outputVector{util::math::rotateVector2D(testVector, rotation)};
 
     EXPECT_NEAR(outputVector.x, expectedVector.x, k_tolerance);
     EXPECT_NEAR(outputVector.y, expectedVector.y, k_tolerance);
     }
 
     {
-    mathAliases::AbstractVector2D testVector{0.0, 100.0};
-    mathAliases::AbstractVector2D expectedVector{-100.0, 0.0};
+    math::AbstractVector2D testVector{0.0, 100.0};
+    math::AbstractVector2D expectedVector{-100.0, 0.0};
     Degrees rotation{90};
 
-    mathAliases::AbstractVector2D outputVector{util::math::rotateVector2D(testVector, rotation)};
+    math::AbstractVector2D outputVector{util::math::rotateVector2D(testVector, rotation)};
 
     EXPECT_NEAR(outputVector.x, expectedVector.x, k_tolerance);
     EXPECT_NEAR(outputVector.y, expectedVector.y, k_tolerance);
@@ -39,23 +39,23 @@ TEST(RotateVector2D, counterClockwise)
 TEST(RotateVector2D, clockwise)
 {
     {
-    mathAliases::AbstractVector2D testVector{0.0, 1.0};
+    math::AbstractVector2D testVector{0.0, 1.0};
     //Rotate the unit vector
-    mathAliases::AbstractVector2D expectedVector{std::cos(Radians{Degrees{45}}.to<double>()), std::cos(Radians{Degrees{45}}.to<double>())};
+    math::AbstractVector2D expectedVector{std::cos(Radians{Degrees{45}}.to<double>()), std::cos(Radians{Degrees{45}}.to<double>())};
     Degrees rotation{-45};
 
-    mathAliases::AbstractVector2D outputVector{util::math::rotateVector2D(testVector, rotation)};
+    math::AbstractVector2D outputVector{util::math::rotateVector2D(testVector, rotation)};
 
     EXPECT_NEAR(outputVector.x, expectedVector.x, k_tolerance);
     EXPECT_NEAR(outputVector.y, expectedVector.y, k_tolerance);
     }
 
     {
-    mathAliases::AbstractVector2D testVector{0.0, 100.0};
-    mathAliases::AbstractVector2D expectedVector{100.0, 0.0};
+    math::AbstractVector2D testVector{0.0, 100.0};
+    math::AbstractVector2D expectedVector{100.0, 0.0};
     Degrees rotation{-90};
 
-    mathAliases::AbstractVector2D outputVector{util::math::rotateVector2D(testVector, rotation)};
+    math::AbstractVector2D outputVector{util::math::rotateVector2D(testVector, rotation)};
 
     EXPECT_NEAR(outputVector.x, expectedVector.x, k_tolerance);
     EXPECT_NEAR(outputVector.y, expectedVector.y, k_tolerance);
@@ -65,24 +65,24 @@ TEST(RotateVector2D, clockwise)
 TEST(RotateVector2D, zero)
 {
     {
-    mathAliases::AbstractVector2D testVector{0.0, 1.0};
+    math::AbstractVector2D testVector{0.0, 1.0};
     //Rotate the unit vector
-    mathAliases::AbstractVector2D expectedVector{testVector};
+    math::AbstractVector2D expectedVector{testVector};
     Degrees rotation{0};
 
-    mathAliases::AbstractVector2D outputVector{util::math::rotateVector2D(testVector, rotation)};
+    math::AbstractVector2D outputVector{util::math::rotateVector2D(testVector, rotation)};
 
     EXPECT_NEAR(outputVector.x, expectedVector.x, k_tolerance);
     EXPECT_NEAR(outputVector.y, expectedVector.y, k_tolerance);
     }
 
     {
-    mathAliases::AbstractVector2D testVector{234.2, -169589.0};
+    math::AbstractVector2D testVector{234.2, -169589.0};
     //Rotate the unit vector
-    mathAliases::AbstractVector2D expectedVector{testVector};
+    math::AbstractVector2D expectedVector{testVector};
     Degrees rotation{0};
 
-    mathAliases::AbstractVector2D outputVector{util::math::rotateVector2D(testVector, rotation)};
+    math::AbstractVector2D outputVector{util::math::rotateVector2D(testVector, rotation)};
 
     EXPECT_NEAR(outputVector.x, expectedVector.x, k_tolerance);
     EXPECT_NEAR(outputVector.y, expectedVector.y, k_tolerance);
@@ -92,26 +92,26 @@ TEST(RotateVector2D, zero)
 TEST(counterRotation, rotateVector2DTest)
 {
     {
-    mathAliases::AbstractVector2D testVector{0.0, 1.0};
+    math::AbstractVector2D testVector{0.0, 1.0};
     //Rotate the unit vector
-    mathAliases::AbstractVector2D expectedVector{testVector};
+    math::AbstractVector2D expectedVector{testVector};
     Degrees rotation{10};
 
-    mathAliases::AbstractVector2D rotated{util::math::rotateVector2D(testVector, rotation)};
-    mathAliases::AbstractVector2D outputVector{util::math::rotateVector2D(rotated, -rotation)};
+    math::AbstractVector2D rotated{util::math::rotateVector2D(testVector, rotation)};
+    math::AbstractVector2D outputVector{util::math::rotateVector2D(rotated, -rotation)};
 
     EXPECT_NEAR(outputVector.x, expectedVector.x, k_tolerance);
     EXPECT_NEAR(outputVector.y, expectedVector.y, k_tolerance);
     }
 
     {
-    mathAliases::AbstractVector2D testVector{234.2, -169589.0};
+    math::AbstractVector2D testVector{234.2, -169589.0};
     //Rotate the unit vector
-    mathAliases::AbstractVector2D expectedVector{testVector};
+    math::AbstractVector2D expectedVector{testVector};
     Degrees rotation{-100};
 
-    mathAliases::AbstractVector2D rotated{util::math::rotateVector2D(testVector, rotation)};
-    mathAliases::AbstractVector2D outputVector{util::math::rotateVector2D(rotated, -rotation)};
+    math::AbstractVector2D rotated{util::math::rotateVector2D(testVector, rotation)};
+    math::AbstractVector2D outputVector{util::math::rotateVector2D(rotated, -rotation)};
 
     EXPECT_NEAR(outputVector.x, expectedVector.x, k_tolerance);
     EXPECT_NEAR(outputVector.y, expectedVector.y, k_tolerance);

@@ -28,8 +28,6 @@ namespace control
         Drivers& m_drivers;
         chassis::ChassisSubsystem m_chassis;
         chassis::FieldMecanumCommand m_fieldMecanumCommand;
-        const Config mk_config{config::chassis::k_defaultConfig};
-
     };//class Robot
 }//namspace control
 #endif

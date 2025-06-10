@@ -47,7 +47,12 @@
 #include "control/robot.hpp"
 #include "configuration/chassis_config.hpp"
 #include "motors/gearboxrepeatultramk2.hpp"
+<<<<<<< HEAD
 #include "trap/motor/dji_gm6020.hpp"
+=======
+#include "control/chassis/chassis_subsystem.hpp"
+#include "data/directionality.hpp"
+>>>>>>> dev
 
 #include <iostream>
 
@@ -57,12 +62,12 @@ tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / MAIN_LOOP_FREQUENCY);
 
 // Place any sort of input/output initialization here. For example, place
 // serial init stuff here.
-static void initializeIo(Drivers *drivers);
+static void initializeIo(Drivers& drivers);
 
 // Anything that you would like to be called place here. It will be called
 // very frequently. Use PeriodicMilliTimers if you don't want something to be
 // called as frequently.
-static void updateIo(Drivers *drivers);
+static void updateIo(Drivers& drivers);
 
 int main()
 {
@@ -72,7 +77,7 @@ int main()
 
     /*
      * NOTE: We are using DoNotUse_getDrivers here because in the main
-     *      robot loop we must access the singleton drivers to update
+     *      robot loop we must access the singleton drivers_ptr to update
      *      IO states and run the scheduler.
      */
     Drivers *drivers = DoNotUse_getDrivers();
@@ -80,16 +85,17 @@ int main()
     //robot.initializeSubsystemCommands();
 
 
+    Drivers& drivers{DoNotUse_getDriversReference()};
     Board::initialize();
     initializeIo(drivers);
     trap::motor::DjiSpeedPid::Config motorPidConfig{50000, 1000, 0 ,100, trap::motor::DjiGM6020::k_maxOutput};
     trap::motor::DjiGM6020::Config config{static_cast<tap::motor::MotorId>(tap::motor::MOTOR2), tap::can::CanBus::CAN_BUS1, "epic", true,  1.0, motorPidConfig, false};
-    trap::motor::DjiGM6020 motor{*drivers, config};
+    trap::motor::DjiGM6020 motor{drivers, config};
 
 
     trap::motor::DjiSpeedPid::Config motorPidConfig2{50000, 1000, 0 ,100, trap::motor::DjiGM6020::k_maxOutput};
     trap::motor::DjiGM6020::Config config2{static_cast<tap::motor::MotorId>(tap::motor::MOTOR1), tap::can::CanBus::CAN_BUS1, "epi", true,  1.0, motorPidConfig2, false};
-    trap::motor::DjiGM6020 motor2{*drivers, config2};
+    trap::motor::DjiGM6020 motor2{drivers, config2};
 
 
     //djiDriver.initialize();
@@ -99,16 +105,16 @@ int main()
     motor2.initialize();
 
     bool ledFlash{motor.isMotorOnline()};
-    drivers->leds.set(tap::gpio::Leds::Blue, ledFlash);
+    drivers.leds.set(tap::gpio::Leds::Blue, ledFlash);
     motor.setTargetPosition(0.0_rad);
     //motor.setDesiredOutput(1000);
+
 
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
     // Blocking call, waits until Windows Simulator connects.
     tap::communication::TCPServer::MainServer()->getConnection();
 #endif
-
     while (1)
     {
         motor.update();
@@ -116,44 +122,44 @@ int main()
         motor.setTargetPosition(30_deg * drivers->remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_VERTICAL));
         motor2.setTargetPosition(300_deg * drivers->remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_HORIZONTAL));
         // do this as fast as you can
-        PROFILE(drivers->profiler, updateIo, (drivers));
+        PROFILE(drivers.profiler, updateIo, (drivers));
 
         if (sendMotorTimeout.execute())
         {
-            PROFILE(drivers->profiler, drivers->bmi088.periodicIMUUpdate, ());
-            PROFILE(drivers->profiler, drivers->commandScheduler.run, ());
-            PROFILE(drivers->profiler, drivers->djiMotorTxHandler.encodeAndSendCanData, ());
-            PROFILE(drivers->profiler, drivers->terminalSerial.update, ());
+            PROFILE(drivers.profiler, drivers.bmi088.periodicIMUUpdate, ());
+            PROFILE(drivers.profiler, drivers.commandScheduler.run, ());
+            PROFILE(drivers.profiler, drivers.djiMotorTxHandler.encodeAndSendCanData, ());
+            PROFILE(drivers.profiler, drivers.terminalSerial.update, ());
         }
         modm::delay_us(10);
     }
     return 0;
 }
 
-static void initializeIo(Drivers *drivers)
+static void initializeIo(Drivers& drivers)
 {
-    drivers->analog.init();
-    drivers->pwm.init();
-    drivers->digital.init();
-    drivers->leds.init();
-    drivers->can.initialize();
-    drivers->errorController.init();
-    drivers->remote.initialize();
-    drivers->bmi088.initialize(MAIN_LOOP_FREQUENCY, 0.1, 0);
-    drivers->refSerial.initialize();
-    drivers->terminalSerial.initialize();
-    drivers->schedulerTerminalHandler.init();
-    drivers->djiMotorTerminalSerialHandler.init();
+    drivers.analog.init();
+    drivers.pwm.init();
+    drivers.digital.init();
+    drivers.leds.init();
+    drivers.can.initialize();
+    drivers.errorController.init();
+    drivers.remote.initialize();
+    drivers.bmi088.initialize(MAIN_LOOP_FREQUENCY, 0.1, 0);
+    drivers.refSerial.initialize();
+    drivers.terminalSerial.initialize();
+    drivers.schedulerTerminalHandler.init();
+    drivers.djiMotorTerminalSerialHandler.init();
 }
 
-static void updateIo(Drivers *drivers)
+static void updateIo(Drivers& drivers)
 {
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->updateSims();
 #endif
 
-    drivers->canRxHandler.pollCanData();
-    drivers->refSerial.updateSerial();
-    drivers->remote.read();
-    drivers->bmi088.read();
+    drivers.canRxHandler.pollCanData();
+    drivers.refSerial.updateSerial();
+    drivers.remote.read();
+    drivers.bmi088.read();
 }

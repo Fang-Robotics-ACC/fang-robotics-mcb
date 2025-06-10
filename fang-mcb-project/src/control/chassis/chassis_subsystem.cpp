@@ -67,7 +67,7 @@ namespace control
 
         void ChassisSubsystem::updateFieldAngle()
         {
-            const Radians currentFieldAngle{m_drivers.bmi088.getGz()};
+            const Radians currentFieldAngle{m_drivers.bmi088.getYaw()};
             m_mecanumLogic.setRobotAngle(currentFieldAngle);
         }
     }//namespace control

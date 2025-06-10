@@ -1,15 +1,19 @@
 #include "field_mecanum_command.hpp"
+#include "configuration/motion_control_config.hpp"
 #include "chassislogicaliases.hpp"
 #include "unitaliases.hpp"
+
 #include <cassert>
 
 namespace control
 {
     namespace chassis
     {
-        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, InputHandler& inputHandler)
-        : m_chassisSubsystem{chassisSubsystem}, m_inputHandler{inputHandler}
-        {}
+        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, InputHandler& inputHandler, const config::motion::MotionConfig& motionConfig)
+        : m_chassisSubsystem{chassisSubsystem}, m_inputHandler{inputHandler}, mk_motionConfig{motionConfig}
+        {
+            addSubsystemRequirement(&m_chassisSubsystem);
+        }
 
         const char* FieldMecanumCommand::getName() const
         {
@@ -18,7 +22,6 @@ namespace control
 
         void FieldMecanumCommand::initialize()
         {
-
         }
 
         void FieldMecanumCommand::execute()
@@ -52,16 +55,19 @@ namespace control
 
         void FieldMecanumCommand::executeRemoteTestFieldRotate()
         {
-            const logic::chassis::Velocity2D translation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
-            const RPM rotation{m_inputHandler.getChassisInputs().getRemoteRotation()};
+            const math::AbstractVector2D abstractTranslation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
+            const double abstractRotation{m_inputHandler.getChassisInputs().getRemoteRotation()};
+
+            const physics::Velocity2D translation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
+            const RPM rotation{abstractRotation * mk_motionConfig.maxRotation};
             m_chassisSubsystem.setMotion(translation, rotation);
         }
 
         void FieldMecanumCommand::executeRemoteTestStrafeTurret()
         {
-            const logic::chassis::Velocity2D translation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
-            const RPM rotation{0};
-            m_chassisSubsystem.setMotion(translation, rotation);
+            //const logic::chassis::Velocity2D translation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
+            //const RPM rotation{0};
+            //m_chassisSubsystem.setMotion(translation, rotation);
         }
 
         void FieldMecanumCommand::executeKeyboardTestFieldRotate()

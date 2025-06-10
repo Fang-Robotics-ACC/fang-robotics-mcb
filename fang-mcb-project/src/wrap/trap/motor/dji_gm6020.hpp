@@ -1,11 +1,12 @@
-#ifndef FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
-#define FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
+#ifndef FANG_ROBOTICS_MCB_TRAP_DJI_GM6020_HPP
+#define FANG_ROBOTICS_MCB_TRAP_DJI_GM6020_HPP
 #include "unitaliases.hpp"
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
 #include "trap/algorithms/wrapped_radians.hpp"
 
 #include "tap/motor/dji_motor.hpp"
 #include "tap/communication/can/can_bus.hpp"
+#include "tap/util_macros.hpp"
 #include "drivers.hpp"
 
 namespace trap
@@ -57,47 +58,48 @@ namespace trap
             DjiGM6020(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                      const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedConfig, bool currentControl);
 
+            mockable ~DjiGM6020() = default;
 
             /**
              * Must be called regularly to update the motor pid and set the motor output
              */
-            void update();
+            mockable void update();
 
             /**
              * Sets the desired speed for the pid to target
              */
-            void setTargetPosition(const Radians& targetPosition);
+            mockable void setTargetPosition(const Radians& targetPosition);
 
             /**
              * Returns the last reported RPM from CAN
              */
-            Radians getPosition() const;
+            mockable Radians getPosition() const;
 
             /**
              * It must be called for the motor to properly function.
              */
-            void initialize();
+            mockable void initialize();
 
             /**
              * The desired motor output. It must be limited to a 16 bit int.
              */
-            void setDesiredOutput(DjiMotorOutput desiredOutput);
+            mockable void setDesiredOutput(DjiMotorOutput desiredOutput);
 
             /**
              * true if a can message has been received within the last
              * MOTOR_DISCONNECT_TIME.
              */
-            bool isMotorOnline() const;
+            mockable bool isMotorOnline() const;
 
             /**
              * Returns the reported temperature in celsius.
              * The temperature was provided in an int8_t
              */
-            Celsius getTemperature() const;
+            mockable Celsius getTemperature() const;
 
-            tap::can::CanBus getCanBus() const;
+            mockable tap::can::CanBus getCanBus() const;
 
-            const char* getName() const;
+            mockable const char* getName() const;
 
         static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_GM6020};
         private:
