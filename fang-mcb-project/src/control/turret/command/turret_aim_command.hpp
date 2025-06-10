@@ -35,7 +35,7 @@ namespace control
             TurretSubsystem& m_turret;
             TurretInputHandler& m_input;
 
-            chrono::SimpleTimer m_executeTimer();
+            chrono::SimpleTimer m_executeTimer{};
             const config::motion::TurretConfig& mk_motionConfig;
         };
     }

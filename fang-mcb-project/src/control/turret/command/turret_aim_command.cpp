@@ -7,6 +7,7 @@ namespace control
         TurretAimCommand::TurretAimCommand(TurretSubsystem& turret, TurretInputHandler& input, const config::motion::TurretConfig& motionConfig)
         :   m_turret{turret}, m_input{input}, mk_motionConfig{motionConfig}
         {
+            addSubsystemRequirement(&turret);
         }
 
         const char* TurretAimCommand::getName() const
