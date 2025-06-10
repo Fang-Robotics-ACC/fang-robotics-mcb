@@ -20,6 +20,9 @@ namespace control
 
         void TurretAimCommand::execute()
         {
+            const Seconds timeDelta{m_executeTimer.getDurationAndReset()};
+            setPitchSpeed(timeDelta);
+            setYawSpeed(timeDelta);
         }
 
         void TurretAimCommand::end(bool interrupted)

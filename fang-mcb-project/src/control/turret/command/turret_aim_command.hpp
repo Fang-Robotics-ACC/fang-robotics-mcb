@@ -4,6 +4,8 @@
 #include "control/turret/turret_subsystem.hpp"
 #include "control/turret/turret_input_handler.hpp"
 
+#include "util/chrono/simple_timer.hpp"
+
 #include "tap/control/command.hpp"
 
 #include "unitaliases.hpp"
@@ -32,6 +34,8 @@ namespace control
             static constexpr char* mk_name{"Turret Aim Command"};
             TurretSubsystem& m_turret;
             TurretInputHandler& m_input;
+
+            chrono::SimpleTimer m_executeTimer();
             const config::motion::TurretConfig& mk_motionConfig;
         };
     }
