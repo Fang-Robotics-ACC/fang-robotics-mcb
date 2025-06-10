@@ -79,13 +79,13 @@ int main()
      */
 
     Drivers& drivers{DoNotUse_getDriversReference()};
-    Robot robot{drivers};
+    //Robot robot{drivers};
 
 
     Board::initialize();
     initializeIo(drivers);
 
-    robot.initializeSubsystemCommands();
+    //robot.initializeSubsystemCommands();
     trap::motor::DjiSpeedPid::Config motorPidConfig{50000, 1000, 20 ,100, trap::motor::DjiGM6020::k_maxOutput};
     trap::motor::DjiGM6020::Config config{static_cast<tap::motor::MotorId>(tap::motor::MOTOR2), tap::can::CanBus::CAN_BUS1, "epic", true,  1.0, motorPidConfig, false};
     trap::motor::DjiGM6020 motor{drivers, config};
