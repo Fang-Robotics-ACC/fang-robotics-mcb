@@ -25,7 +25,7 @@ namespace control
             turret::TurretSubsystem::Config turretConfig;
             config::motion::TurretConfig turretMotionConfig;
         };
-        Pierce(Drivers& drivers);
+        Pierce(Drivers* drivers);
         void initializeSubsystemCommands();
     private:
         void initializeSubsystems();
@@ -40,7 +40,7 @@ namespace control
             pierceConfig::k_turretMotionConfig
         };
 
-        Drivers& m_drivers;
+        Drivers* m_drivers;
         chassis::ChassisSubsystem m_chassis;
         turret::TurretSubsystem m_turret;
 
