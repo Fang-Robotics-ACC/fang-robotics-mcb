@@ -4,6 +4,7 @@
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/field_mecanum_command.hpp"
 #include "configuration/chassis_config.hpp"
+#include "control/pierce_config/pierce_turret_config.hpp"
 namespace control
 {
     /**
@@ -16,6 +17,7 @@ namespace control
     struct Config
     {
         chassis::ChassisSubsystem::ChassisConfig chassisConfig;
+        config::motion::TurretConfig turretMotionConfig;
     };
         Pierce(Drivers& drivers);
         void initializeSubsystemCommands();
@@ -27,7 +29,9 @@ namespace control
 
         Drivers& m_drivers;
         chassis::ChassisSubsystem m_chassis;
+
         chassis::FieldMecanumCommand m_fieldMecanumCommand;
+
     };//class Robot
 }//namspace control
 #endif
