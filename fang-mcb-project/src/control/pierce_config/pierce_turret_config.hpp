@@ -6,7 +6,7 @@
 
 namespace control 
 {
-    namespace pierce
+    namespace pierceConfig
     {
         using namespace units::literals;
         const MetersPerSecond k_ammoBoosterVelocity{20_fps};
