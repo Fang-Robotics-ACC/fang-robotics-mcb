@@ -1,3 +1,6 @@
+#ifndef FANG_ROBOTICS_MCB_PIERCE_CHASSIS_CONFIG_HPP
+#define FANG_ROBOTICS_MCB_PIERCE_CHASSIS_CONFIG_HPP
+
 #include "chassis/chassis_subsystem.hpp"
 #include "unitaliases.hpp"
 namespace control
@@ -32,3 +35,4 @@ namespace control
         k_defaultMotorConfig
     };
 }
+#endif
