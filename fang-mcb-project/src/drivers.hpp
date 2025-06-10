@@ -31,6 +31,10 @@ public:
 #endif
     Drivers() : tap::Drivers{} {}
 
+    //prevent copying
+    Drivers(const Drivers&) = delete;
+    Drivers& operator=(Drivers&) = delete;
+
 public:
     control::InputHandler inputHandler{remote};
 
