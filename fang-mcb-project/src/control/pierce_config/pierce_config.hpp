@@ -7,10 +7,13 @@
 #include "configuration/chassis_config.hpp"
 namespace control
 {
-    const Pierce::Config k_defaultPierceConfig
+    namespace pierce
     {
-        k_pierceChassisConfig,
-        k_pierceTurretMotionConfig 
-    };
+    const Pierce::Config k_defaultPierceConfig
+        {
+            k_pierceChassisConfig,
+            k_pierceTurretMotionConfig 
+        };
+    }
 }
 #endif
