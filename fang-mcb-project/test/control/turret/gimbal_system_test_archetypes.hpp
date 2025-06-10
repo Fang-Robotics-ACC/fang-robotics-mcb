@@ -20,7 +20,7 @@ namespace test
         PositionMotor& pitchMotor{gimbalSystem.m_pitchMotor};
         PositionMotor& yawMotor{gimbalSystem.m_yawMotor};
 
-    static constexpr GimbalSystem::PositionMotor::DjiSpeedPid::Config k_defaultPidConfig 
+    static constexpr GimbalSystem::PositionMotor::DjiPositionPid::Config k_defaultPidConfig 
     {
         1,
         1,
