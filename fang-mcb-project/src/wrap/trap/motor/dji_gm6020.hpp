@@ -26,7 +26,7 @@ namespace trap
                 const char* name;
                 bool inverted;
                 double gearRatio;
-                DjiSpeedPid::Config speedPidConfig;
+                DjiPositionPid::Config positionPidConfig;
                 bool currentControl = true;
             };
             DjiGM6020(Drivers& drivers, const Config& config);
@@ -104,7 +104,7 @@ namespace trap
         static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_GM6020};
         private:
             tap::motor::DjiMotor m_djiMotor;
-            DjiPositionPid m_speedPid;
+            DjiPositionPid m_positionPid;
             double m_gearRatio;
 
             trap::algorithms::WrappedRadians m_targetPosition{Radians{0.0}};

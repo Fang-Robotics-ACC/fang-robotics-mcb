@@ -9,12 +9,12 @@ namespace trap
     {
         DjiGM6020::DjiGM6020(Drivers& drivers, const Config& config)
         : DjiGM6020{drivers, config.motorId, config.canBus, config.name,
-                   config.inverted, config.gearRatio, config.speedPidConfig, config.currentControl}
+                   config.inverted, config.gearRatio, config.positionPidConfig, config.currentControl}
         {
         }
 
         DjiGM6020::DjiGM6020(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
-                           const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedPidConfig, bool currentControl)
+                           const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& positionPidConfig, bool currentControl)
         : m_djiMotor{&drivers, 
                      static_cast<tap::motor::MotorId>(static_cast<int>(motorId) + mk_GM6020CANAddressOffset),//Hack of hacks
                      canBus, 
@@ -23,16 +23,16 @@ namespace trap
                      currentControl, 
                      gearRatio},
           m_gearRatio{gearRatio},
-          m_speedPid{speedPidConfig}
+          m_positionPid{positionPidConfig}
         {
-            assert(static_cast<DjiMotorOutput>(speedPidConfig.maxOutput) <= k_maxOutput && "pid can exceed max output!!!");
+            assert(static_cast<DjiMotorOutput>(positionPidConfig.maxOutput) <= k_maxOutput && "pid can exceed max output!!!");
         }
 
         void DjiGM6020::update()
         {
             trap::algorithms::WrappedRadians current{getPosition()};
             const Radians error{current.minDifference(m_targetPosition)};
-            setDesiredOutput(m_speedPid.runController(error));
+            setDesiredOutput(m_positionPid.runController(error));
         }
 
         void DjiGM6020::setTargetPosition(const Radians& targetPosition)

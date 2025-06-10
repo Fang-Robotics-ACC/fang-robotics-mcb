@@ -11,7 +11,7 @@ namespace trap
             class DjiGM6020Mock : virtual public trap::motor::DjiGM6020
             {
             public:
-                using DjiSpeedPid = trap::motor::DjiSpeedPid;
+                using DjiPositionPid = trap::motor::DjiPositionPid;
                 using DjiMotorOutput = trap::motor::DjiMotorOutput;
                 using trap::motor::DjiGM6020::DjiGM6020;
                 virtual ~DjiGM6020Mock() = default;
