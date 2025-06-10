@@ -34,10 +34,14 @@ namespace control
 
         void TurretAimCommand::setPitchSpeed(const Seconds& delta)
         {
+            const RPM speed{mk_motionConfig.maxYawSpeed * m_input.getPitch()};
+            m_turret.addFieldYaw(rpmToDisplacement(speed, delta));
         }
 
         void TurretAimCommand::setYawSpeed(const Seconds& delta)
         {
+            const RPM speed{mk_motionConfig.maxYawSpeed * m_input.getYaw()};
+            m_turret.addFieldYaw(rpmToDisplacement(speed, delta));
         }
 
         Radians TurretAimCommand::rpmToDisplacement(const RPM& speed, const Seconds& time) const

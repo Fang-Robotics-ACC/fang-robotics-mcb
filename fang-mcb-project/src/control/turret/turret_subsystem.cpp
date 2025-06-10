@@ -57,7 +57,7 @@ namespace control
 
         void TurretSubsystem::addFieldYaw(const Radians& angle)
         {
-            setFieldYaw(getFieldYaw() + yaw);
+            setFieldYaw(getFieldYaw() + angle);
         }
 
         void TurretSubsystem::setRobotwiseYaw(const Radians& yaw)
