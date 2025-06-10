@@ -4,10 +4,12 @@
 
 #include "control/pierce_config/pierce_chassis_config.hpp"
 #include "control/pierce_config/pierce_turret_config.hpp"
+#include "control/pierce_config/pierce_turret_motion_config.hpp"
 
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/turret/turret_subsystem.hpp"
 #include "control/chassis/field_mecanum_command.hpp"
+#include "control/turret/command/turret_aim_command.hpp"
 namespace control
 {
     /**
@@ -21,6 +23,7 @@ namespace control
         {
             chassis::ChassisSubsystem::ChassisConfig chassisConfig;
             turret::TurretSubsystem::Config turretConfig;
+            config::motion::TurretConfig turretMotionConfig;
         };
         Pierce(Drivers& drivers);
         void initializeSubsystemCommands();
@@ -33,7 +36,8 @@ namespace control
         const Config k_config
         {
             k_pierceChassisConfig,
-            pierceConfig::k_turretConfig
+            pierceConfig::k_turretConfig,
+            pierceConfig::k_turretMotionConfig
         };
 
         Drivers& m_drivers;
@@ -41,7 +45,7 @@ namespace control
         turret::TurretSubsystem m_turret;
 
         chassis::FieldMecanumCommand m_fieldMecanumCommand;
-
+        turret::TurretAimCommand m_turretAimCommand;
     };//class Robot
 }//namspace control
 #endif

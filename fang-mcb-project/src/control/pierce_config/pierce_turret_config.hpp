@@ -136,7 +136,7 @@ namespace control
 
         const GimbalMotor::Config k_yawMotorConfig 
         {
-            tap::motor::MOTOR2,
+            tap::motor::MOTOR1,
             k_turretCanBus,
             "pitchMotor",
             false,
