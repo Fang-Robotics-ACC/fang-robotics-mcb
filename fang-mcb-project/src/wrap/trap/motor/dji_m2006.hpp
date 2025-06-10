@@ -19,6 +19,8 @@ namespace trap
         class DjiM2006
         {
         public:
+            using DjiSpeedPid = trap::motor::DjiSpeedPid;
+            using DjiMotorOutput = trap::motor::DjiMotorOutput;
             struct Config
             {
                 tap::motor::MotorId motorId;

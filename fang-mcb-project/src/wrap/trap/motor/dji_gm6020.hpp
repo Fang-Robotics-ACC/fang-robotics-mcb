@@ -19,6 +19,8 @@ namespace trap
         class DjiGM6020 
         {
         public:
+            using DjiPositionPid = trap::motor::DjiSpeedPid;
+            using DjiMotorOutput = trap::motor::DjiMotorOutput;
             struct Config
             {
                 tap::motor::MotorId motorId;
