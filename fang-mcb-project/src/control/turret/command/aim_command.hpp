@@ -26,7 +26,7 @@ namespace control
 
 
         private:
-            void setPitch();
+            void setPitch(const Microseconds& delta);
             turret::TurretSubsystem& m_turret;
             turret::TurretInputHandler& m_input;
             const config::motion::TurretMotionConfig mk_motionConfig;

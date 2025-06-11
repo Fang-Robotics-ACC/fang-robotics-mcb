@@ -21,7 +21,7 @@ namespace control
         void AimCommand::execute()
         {
             const Seconds delta{m_executeTimer.getDurationAndReset()};
-            setPitch();
+            setPitch(delta);
         }
 
         void AimCommand::end(bool interrupted)
@@ -34,7 +34,7 @@ namespace control
             return false;
         }
 
-        void AimCommand::setPitch()
+        void AimCommand::setPitch(const Microseconds& delta)
         {
             const double k_pitchScaler{m_input.getPitch()};
             m_turret.setPitch(k_pitchScaler * 20_deg);
