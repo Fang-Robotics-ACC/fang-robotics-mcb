@@ -23,7 +23,10 @@ namespace control
 
             TurretSubsystem(Drivers& drivers, const Config& config);
             void setFieldYaw(const Radians& yaw);
+            void addFieldYaw(const Radians& angle);
+
             void setPitch(const Radians& pitch);
+            void addPitch(const Radians& pitch);
 
 
         private:

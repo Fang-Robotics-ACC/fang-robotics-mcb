@@ -25,11 +25,20 @@ namespace control
             m_gimbal.setYaw(yaw);
         }
 
+        void TurretSubsystem::addFieldYaw(const Radians& angle)
+        {
+            m_gimbal.addYaw(angle);
+        }
+
         void TurretSubsystem::setPitch(const Radians& pitch)
         {
             m_gimbal.setPitch(pitch);
         }
 
+        void TurretSubsystem::addPitch(const Radians& angle)
+        {
+            m_gimbal.addPitch(angle);
+        }
 
     }
 }
