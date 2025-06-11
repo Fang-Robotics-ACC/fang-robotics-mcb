@@ -14,6 +14,8 @@ namespace control
         public:
             AimCommand(TurretSubsystem& turret, TurretInputHandler& input);
 
+            const char* getName() const override {return "Aim Command";}
+
             void initialize() override;
             void execute() override;
             void end(bool interrupted) override;
