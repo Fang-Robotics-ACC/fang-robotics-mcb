@@ -5,9 +5,11 @@ namespace control
     namespace turret
     {
         using namespace units::literals;
-        AimCommand::AimCommand(TurretSubsystem& turret, TurretInputHandler& input)
+        AimCommand::AimCommand(TurretSubsystem& turret, TurretInputHandler& input, const config::motion::TurretMotionConfig& motionConfig)
         :   m_turret{turret},
-            m_input{input}
+            m_input{input},
+            mk_motionConfig{motionConfig}
+
         {
             addSubsystemRequirement(&m_turret);
         }
