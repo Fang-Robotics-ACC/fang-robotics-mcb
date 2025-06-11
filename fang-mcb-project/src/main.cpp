@@ -254,9 +254,9 @@ int main()
         //testFlywheelRight.update();
         booster.update();
         //feeder.update();
-        gimbal.update();
-        gimbal.setPitch(30_deg * drivers.remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_VERTICAL));
-        gimbal.setYaw(300_deg * drivers.remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_HORIZONTAL));
+        //gimbal.update();
+        //gimbal.setPitch(30_deg * drivers.remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_VERTICAL));
+        //gimbal.setYaw(300_deg * drivers.remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_HORIZONTAL));
         // do this as fast as you can
         PROFILE(drivers.profiler, updateIo, (drivers));
 
