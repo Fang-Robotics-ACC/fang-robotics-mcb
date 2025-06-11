@@ -34,7 +34,7 @@ namespace control
         void AimCommand::setPitch()
         {
             const double k_pitchScaler{m_input.getPitch()};
-            m_turret.setPitch(k_pitchScaler * 10_deg);
+            m_turret.setPitch(k_pitchScaler * 20_deg);
         }
     }
 }
