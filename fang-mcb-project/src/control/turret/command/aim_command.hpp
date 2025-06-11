@@ -4,6 +4,8 @@
 #include "control/turret/turret_subsystem.hpp"
 #include "control/turret/turret_input_handler.hpp"
 
+#include "util/chrono/simple_timer.hpp"
+
 #include "tap/control/command.hpp"
 
 namespace control
@@ -28,6 +30,7 @@ namespace control
             turret::TurretSubsystem& m_turret;
             turret::TurretInputHandler& m_input;
             const config::motion::TurretMotionConfig mk_motionConfig;
+            chrono::SimpleTimer m_executeTimer{};
         };
     }
 }

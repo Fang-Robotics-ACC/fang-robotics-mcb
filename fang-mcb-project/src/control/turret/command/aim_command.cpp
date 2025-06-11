@@ -20,6 +20,7 @@ namespace control
 
         void AimCommand::execute()
         {
+            const Seconds delta{m_executeTimer.getDurationAndReset()};
             setPitch();
         }
 
