@@ -7,6 +7,10 @@
 #include "control/turret/turret_subsystem.hpp"
 
 #include "control/robots/pierce/config/turret_config.hpp"
+
+//Commands
+#include "control/turret/command/aim_command.hpp"
+
 namespace control
 {
     /**
@@ -35,6 +39,8 @@ namespace control
 
         Drivers& m_drivers;
         turret::TurretSubsystem m_turret;
+
+        turret::AimCommand m_aimCommnd;
         //chassis::ChassisSubsystem m_chassis;
         //chassis::FieldMecanumCommand m_fieldMecanumCommand;
     };//class Robot
