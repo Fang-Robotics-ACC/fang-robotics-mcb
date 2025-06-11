@@ -33,6 +33,9 @@ namespace control
             Radians getMaxPitch() const;
             Radians getMinPitch() const;
 
+            void boosterOn();
+            void boosterOff();
+
         private:
             GimbalSystem m_gimbal;
             AmmoBoosterSystem m_booster;

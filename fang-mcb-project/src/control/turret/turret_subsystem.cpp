@@ -50,5 +50,13 @@ namespace control
             return m_gimbal.getMinPitch();
         }
 
+        void TurretSubsystem::boosterOn()
+        {
+            m_booster.autoFireOn();
+        }
+        void TurretSubsystem::boosterOff()
+        {
+            m_booster.autoFireOff();
+        }
     }
 }
