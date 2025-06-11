@@ -1,3 +1,4 @@
+/* trunk-ignore-all(clang-format) */
 #include "pierce.hpp"
 #include "drivers.hpp"
 #include "configuration/motion_control_config.hpp"
