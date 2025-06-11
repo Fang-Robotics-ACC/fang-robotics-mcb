@@ -47,8 +47,8 @@ namespace control
     using GimbalSystem = control::turret::GimbalSystem;
     static const GimbalSystem::Config k_gimbalConfig
     {
-        -30_deg,
-        40_deg,
+        -25_deg,
+        30_deg,
         k_pitchMotorConfig,
         k_yawConfig
     };
