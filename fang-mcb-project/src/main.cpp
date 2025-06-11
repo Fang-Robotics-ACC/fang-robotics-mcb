@@ -47,6 +47,7 @@
 #include "control/robot.hpp"
 #include "configuration/chassis_config.hpp"
 #include "motors/gearboxrepeatultramk2.hpp"
+#include "trap/motor/dji_m2006.hpp"
 #include "trap/motor/dji_gm6020.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "data/directionality.hpp"
@@ -82,7 +83,7 @@ int main()
      */
 
     Drivers& drivers{DoNotUse_getDriversReference()};
-    //Robot robot{drivers};
+    Robot robot{drivers};
 
 
     Board::initialize();
@@ -115,20 +116,23 @@ int main()
 
     static const trap::motor::DjiSpeedPid::Config feederMotorPidConfig 
     {
-        50,
+        5,
         100,
         0,
         100,
-        trap::motor::DjiM2006::k_maxOutput};
-    static const FeederSystem::DriveMotor::Config feederMotorConfig
+        trap::motor::DjiM2006::k_maxOutput
+    };
+
+    static const trap::motor::DjiM2006::Config feederMotorConfig
     { 
-        static_cast<tap::motor::MotorId>(tap::motor::MOTOR3),
+        tap::motor::MOTOR3,
         tap::can::CanBus::CAN_BUS1,
-        "epi",
+        "epic",
         false,
         1.0,
-        feederMotorPidConfig 
+        feederMotorPidConfig
     };
+
 
 
     static const FeederSystem::Config feederConfig
@@ -164,7 +168,7 @@ int main()
     { 
         static_cast<tap::motor::MotorId>(tap::motor::MOTOR8),
         tap::can::CanBus::CAN_BUS1,
-        "epi",
+        "leftFlywheel",
         false,
         1.0,
         flywheelMotorPidConfig 
@@ -179,7 +183,7 @@ int main()
     { 
         static_cast<tap::motor::MotorId>(tap::motor::MOTOR7),
         tap::can::CanBus::CAN_BUS1,
-        "epi",
+        "rightFlywheel",
         true,
         1.0,
         flywheelMotorPidConfigRight
@@ -203,9 +207,9 @@ int main()
     Drivers& drivers3{drivers2};
     //testmotor.initialize();
     //testmotor.setDesiredOutput(10000);
-    tap::motor::DjiMotor djiMotor{&drivers3, tap::motor::MOTOR3, tap::can::CanBus::CAN_BUS1, false, "test"};
-    djiMotor.initialize();
-    djiMotor.setDesiredOutput(50000);
+    //tap::motor::DjiMotor djiMotor{&drivers3, tap::motor::MOTOR3, tap::can::CanBus::CAN_BUS1, false, "test"};
+    //djiMotor.initialize();
+    //djiMotor.setDesiredOutput(50000);
     //testmotor.initialize();
     //testmotor.setTargetSpeed(1000_rpm);
 
@@ -221,13 +225,13 @@ int main()
     booster.initialize();
     booster.autoFireOn();
 
-    //FeederSystem feeder{drivers, feederConfig};
-    //feeder.initialize();
-    //feeder.feedOn();
+    FeederSystem feeder{drivers, feederConfig};
+    feeder.initialize();
+    feeder.feedOn();
 
-    //FeederSystem::DriveMotor testFeeder{drivers, feederMotorConfig};
+    //trap::motor::DjiM2006 testFeeder{drivers, feederMotorConfig};
     //testFeeder.initialize();
-    //testFeeder.setDesiredOutput(2000);
+    //testFeeder.setDesiredOutput(1000);
 
 
 
