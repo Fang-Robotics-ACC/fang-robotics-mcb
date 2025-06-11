@@ -9,7 +9,7 @@ namespace control
         :
             m_drivers{drivers},
             m_turret{drivers, k_turretConfig},
-            m_aimCommnd{m_turret, drivers.inputHandler.getTurretInputs()}
+            m_aimCommnd{m_turret, drivers.inputHandler.getTurretInputs(), mk_config.turretMotionConfig}
             //m_chassis{drivers, config::chassis::k_defaultConfig},
             //m_fieldMecanumCommand{m_chassis, drivers.inputHandler, config::motion::k_defaultMotionConfig}
     {

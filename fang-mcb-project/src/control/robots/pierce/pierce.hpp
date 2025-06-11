@@ -1,12 +1,16 @@
 #ifndef FANG_ROBOTICS_MCB_INFANTRY_HPP
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "drivers.hpp"
+#include "configuration/motion/turret_motion_config.hpp"
+
+
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/field_mecanum_command.hpp"
 #include "configuration/chassis_config.hpp"
 #include "control/turret/turret_subsystem.hpp"
 
 #include "control/robots/pierce/config/turret_config.hpp"
+#include "control/robots/pierce/config/turret_motion_config.hpp"
 
 //Commands
 #include "control/turret/command/aim_command.hpp"
@@ -22,6 +26,7 @@ namespace control
     public:
     struct Config
     {
+        config::motion::TurretMotionConfig turretMotionConfig;
         turret::TurretSubsystem::Config turretConfig;
     };
         Pierce(Drivers& drivers);
@@ -34,8 +39,11 @@ namespace control
 
         static constexpr Config mk_config
         {
+            k_turretMotionConfig,
             k_turretConfig
         };
+
+        config::motion::TurretMotionConfig turretMotionConfig;
 
         Drivers& m_drivers;
         turret::TurretSubsystem m_turret;
