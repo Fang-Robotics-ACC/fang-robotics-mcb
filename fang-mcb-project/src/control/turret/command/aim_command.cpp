@@ -1,5 +1,7 @@
 #include "control/turret/command/aim_command.hpp"
 
+#include "tap/algorithms/math_user_utils.hpp"
+
 namespace control
 {
     namespace turret
@@ -8,8 +10,9 @@ namespace control
         AimCommand::AimCommand(TurretSubsystem& turret, TurretInputHandler& input, const config::motion::TurretMotionConfig& motionConfig)
         :   m_turret{turret},
             m_input{input},
-            mk_motionConfig{motionConfig}
-
+            mk_motionConfig{motionConfig},
+            mk_maxPitch{m_turret.getMaxPitch()},
+            mk_MinPitch{m_turret.getMinPitch()}
         {
             addSubsystemRequirement(&m_turret);
         }
@@ -37,7 +40,12 @@ namespace control
         void AimCommand::setPitch(const Microseconds& delta)
         {
             const double k_pitchScaler{m_input.getPitch()};
-            m_turret.setPitch(k_pitchScaler * 20_deg);
+            const RPM k_speed{k_pitchScaler * mk_motionConfig.pitchSpeed};
+            const Radians k_angularDisplacement{k_speed * delta};
+
+            m_targetPitch =tap::algorithms::limitVal<Radians>(k_angularDisplacement + m_targetPitch, mk_MinPitch, mk_maxPitch);
+
+            m_turret.setPitch(m_targetPitch);
         }
     }
 }

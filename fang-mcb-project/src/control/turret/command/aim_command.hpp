@@ -29,8 +29,15 @@ namespace control
             void setPitch(const Microseconds& delta);
             turret::TurretSubsystem& m_turret;
             turret::TurretInputHandler& m_input;
+
+
             const config::motion::TurretMotionConfig mk_motionConfig;
+
+            const Degrees mk_maxPitch;
+            const Degrees mk_MinPitch;
             chrono::SimpleTimer m_executeTimer{};
+
+            Radians m_targetPitch;
         };
     }
 }
