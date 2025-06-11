@@ -14,11 +14,13 @@ namespace control
         void TurretSubsystem::initialize()
         {
             m_gimbal.initialize();
+            m_booster.initialize();
         }
 
         void TurretSubsystem::refresh()
         {
             m_gimbal.update();
+            m_booster.update();
         }
 
         void TurretSubsystem::setFieldYaw(const Radians& yaw)
