@@ -14,7 +14,9 @@ namespace control
 
             double getPitch() const;
             double getYaw() const;
+            bool getFire() const;
         private:
+            static constexpr double mk_firingWheelThreshold{750};
             Remote& m_remote;
         };
     }

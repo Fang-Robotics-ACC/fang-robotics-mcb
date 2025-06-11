@@ -18,5 +18,11 @@ namespace control
         {
             return m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL);
         }
+
+        bool TurretInputHandler::getFire() const
+        {
+            const double wheelValue{m_remote.getChannel(Remote::Channel::WHEEL)};
+            return wheelValue >= mk_firingWheelThreshold;
+        }
     }
 }
