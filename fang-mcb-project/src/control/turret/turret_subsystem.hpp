@@ -28,6 +28,8 @@ namespace control
             void setPitch(const Radians& pitch);
             void addPitch(const Radians& pitch);
 
+            Radians getMaxPitch() const;
+            Radians getMinPitch() const;
 
         private:
             GimbalSystem m_gimbal;

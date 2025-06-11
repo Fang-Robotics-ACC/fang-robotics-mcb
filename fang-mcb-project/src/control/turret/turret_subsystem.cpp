@@ -40,5 +40,14 @@ namespace control
             m_gimbal.addPitch(angle);
         }
 
+        Radians TurretSubsystem::getMaxPitch() const
+        {
+            return m_gimbal.getMaxPitch();
+        }
+        Radians TurretSubsystem::getMinPitch() const
+        {
+            return m_gimbal.getMinPitch();
+        }
+
     }
 }
