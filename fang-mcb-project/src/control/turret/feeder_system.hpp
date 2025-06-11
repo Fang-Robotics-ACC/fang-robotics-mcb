@@ -63,6 +63,8 @@ namespace control
             void update();
             void initialize();
         private:
+            static constexpr int16_t mk_firingOutput{10'000};
+            static constexpr int16_t mk_stopMotorOutput{0};
             RPM feedRateToRPM();
             const int mk_roundsPerRevolution;
             Hertz m_feedRate;

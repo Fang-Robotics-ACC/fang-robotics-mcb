@@ -27,17 +27,16 @@ namespace control
 
         void FeederSystem::feedOn()
         {
-            m_motor.setTargetSpeed(feedRateToRPM());
+            m_motor.setDesiredOutput(mk_firingOutput);
         }
 
         void FeederSystem::feedOff()
         {
-            m_motor.setTargetSpeed(mk_stillSpeed);
+            m_motor.setDesiredOutput(mk_stopMotorOutput);
         }
 
         void FeederSystem::update()
         {
-            m_motor.update();
         }
 
         void FeederSystem::initialize()
