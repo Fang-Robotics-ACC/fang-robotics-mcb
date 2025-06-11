@@ -223,9 +223,9 @@ int main()
     //testFlywheelRight.initialize();
     //testFlywheelRight.setTargetRimSpeed(10_mps);
 
-    AmmoBooster booster{drivers, ammoBoosterConfig};
-    booster.initialize();
-    booster.autoFireOn();
+    //AmmoBooster booster{drivers, ammoBoosterConfig};
+    //booster.initialize();
+    //booster.autoFireOn();
 
     FeederSystem feeder{drivers, feederConfig};
     feeder.initialize();
@@ -254,7 +254,7 @@ int main()
         //testmotor.update();
         //testFlywheel.update();
         //testFlywheelRight.update();
-        booster.update();
+        //booster.update();
         //feeder.update();
         //gimbal.update();
         //gimbal.setPitch(30_deg * drivers.remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_VERTICAL));
