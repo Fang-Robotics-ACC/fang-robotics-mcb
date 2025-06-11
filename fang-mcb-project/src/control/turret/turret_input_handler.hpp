@@ -13,6 +13,7 @@ namespace control
             TurretInputHandler(Remote& remote);
 
             double getPitch() const;
+            double getYaw() const;
         private:
             Remote& m_remote;
         };

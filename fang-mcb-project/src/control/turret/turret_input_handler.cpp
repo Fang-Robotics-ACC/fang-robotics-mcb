@@ -13,5 +13,10 @@ namespace control
         {
             return m_remote.getChannel(Remote::Channel::RIGHT_VERTICAL);
         }
+
+        double TurretInputHandler::getYaw() const
+        {
+            return m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL);
+        }
     }
 }
