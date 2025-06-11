@@ -4,7 +4,6 @@ namespace chrono
 {
     SimpleTimer::SimpleTimer()
     {
-        reset();
     }
 
     void SimpleTimer::reset()
