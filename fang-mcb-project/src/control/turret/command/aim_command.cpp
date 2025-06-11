@@ -18,6 +18,7 @@ namespace control
 
         void AimCommand::execute()
         {
+            setPitch();
         }
 
         void AimCommand::end(bool interrupted)

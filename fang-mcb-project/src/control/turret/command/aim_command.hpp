@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_AIM_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_AIM_COMMAND_HPP
-#include "turret/turret_subsystem.hpp"
-#include "turret/turret_input_handler.hpp"
+#include "control/turret/turret_subsystem.hpp"
+#include "control/turret/turret_input_handler.hpp"
 
 #include "tap/control/command.hpp"
 
