@@ -83,11 +83,13 @@ int main()
      */
 
     Drivers& drivers{DoNotUse_getDriversReference()};
-    Robot robot{drivers};
 
 
     Board::initialize();
     initializeIo(drivers);
+
+    Robot robot{drivers};
+    robot.initialize();
 
     //robot.initializeSubsystemCommands();
     const trap::motor::DjiSpeedPid::Config pitchPidConfig{50000, 1000, 20 ,100, trap::motor::DjiGM6020::k_maxOutput};
@@ -100,17 +102,17 @@ int main()
     //trap::motor::DjiGM6020 motor2{drivers, config2};
 
 
-    using GimbalSystem = control::turret::GimbalSystem;
-    const GimbalSystem::Config gimbalConfig
-    {
-        -10_deg,
-        10_deg,
-        pitchConfig,
-        yawConfig
-    };
-    GimbalSystem gimbal{drivers, gimbalConfig};
-    gimbal.initialize();
-    gimbal.setPitch(0_deg);
+    //using GimbalSystem = control::turret::GimbalSystem;
+    //const GimbalSystem::Config gimbalConfig
+    //{
+    //    -10_deg,
+    //    10_deg,
+    //    pitchConfig,
+    //    yawConfig
+    //};
+    //GimbalSystem gimbal{drivers, gimbalConfig};
+    //gimbal.initialize();
+    //gimbal.setPitch(0_deg);
 
     using FeederSystem = control::turret::FeederSystem;
 
