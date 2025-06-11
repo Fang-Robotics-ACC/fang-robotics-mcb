@@ -1,6 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_PIERCE_TURRET_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_PIERCE_TURRET_CONFIG_HPP
 #include "control/turret/gimbal_system.hpp"
+#include "control/turret/turret_subsystem.hpp"
 #include "unitaliases.hpp"
 namespace control
 {
@@ -44,12 +45,19 @@ namespace control
     };
 
     using GimbalSystem = control::turret::GimbalSystem;
-    const GimbalSystem::Config k_gimbalConfig
+    static const GimbalSystem::Config k_gimbalConfig
     {
         -10_deg,
         10_deg,
         k_pitchMotorConfig,
         k_yawConfig
     };
+
+    static const control::turret::TurretSubsystem::Config k_turretConfig
+    {
+        k_gimbalConfig
+    };
+
+
 };
 #endif
