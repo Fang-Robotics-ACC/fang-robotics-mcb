@@ -10,8 +10,8 @@ namespace control
     {
         70000,
         1000,
-        20,
-        100,
+        200,
+        1000,
         trap::motor::DjiGM6020::k_maxOutput
     };
     static const trap::motor::DjiGM6020::Config k_pitchMotorConfig
@@ -47,8 +47,8 @@ namespace control
     using GimbalSystem = control::turret::GimbalSystem;
     static const GimbalSystem::Config k_gimbalConfig
     {
-        -10_deg,
-        10_deg,
+        -30_deg,
+        40_deg,
         k_pitchMotorConfig,
         k_yawConfig
     };
