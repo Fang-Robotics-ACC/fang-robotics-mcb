@@ -41,7 +41,7 @@ namespace control
         void AimCommand::setPitch(const Microseconds& delta)
         {
             const double k_pitchScaler{m_input.getPitch()};
-            const RPM k_speed{k_pitchScaler * mk_motionConfig.pitchSpeed};
+            const RPM k_speed{k_pitchScaler * mk_motionConfig.yawSpeed};
             const Radians k_angularDisplacement{k_speed * delta};
 
             m_targetPitch =tap::algorithms::limitVal<Radians>(k_angularDisplacement + m_targetPitch, mk_MinPitch, mk_maxPitch);
