@@ -7,7 +7,7 @@ namespace control
         TurretSubsystem::TurretSubsystem(Drivers& drivers, const Config& config)
         :   Subsystem{&drivers},
             m_gimbal{drivers, config.gimbalConfig},
-            m_booster{drivers, config.ammoBoosterConfig}
+            m_booster{drivers, config.ammoConfig}
         {
         }
 
