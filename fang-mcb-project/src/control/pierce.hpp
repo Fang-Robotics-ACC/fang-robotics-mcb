@@ -18,7 +18,7 @@ namespace control
         chassis::ChassisSubsystem::ChassisConfig chassisConfig;
     };
         Pierce(Drivers& drivers);
-        void initializeSubsystemCommands();
+        void initialize();
     private:
         void initializeSubsystems();
         void registerSubsystems();
@@ -26,8 +26,8 @@ namespace control
         void registerIoMappings();
 
         Drivers& m_drivers;
-        chassis::ChassisSubsystem m_chassis;
-        chassis::FieldMecanumCommand m_fieldMecanumCommand;
+        //chassis::ChassisSubsystem m_chassis;
+        //chassis::FieldMecanumCommand m_fieldMecanumCommand;
     };//class Robot
 }//namspace control
 #endif

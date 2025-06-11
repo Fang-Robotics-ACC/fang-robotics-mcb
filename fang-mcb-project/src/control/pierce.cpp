@@ -6,28 +6,28 @@ namespace control
 {
     Pierce::Pierce(Drivers& drivers)
         :
-            m_drivers{drivers},
-            m_chassis{drivers, config::chassis::k_defaultConfig},
-            m_fieldMecanumCommand{m_chassis, drivers.inputHandler, config::motion::k_defaultMotionConfig}
+            m_drivers{drivers}
+            //m_chassis{drivers, config::chassis::k_defaultConfig},
+            //m_fieldMecanumCommand{m_chassis, drivers.inputHandler, config::motion::k_defaultMotionConfig}
     {
     }
     
-    void Pierce::initializeSubsystemCommands()
+    void Pierce::initialize()
     {
-        initializeSubsystems();
-        registerSubsystems();
-        setDefaultCommands();
-        registerIoMappings();
+        //initializeSubsystems();
+        //registerSubsystems();
+        //setDefaultCommands();
+        //registerIoMappings();
     }
     
     void Pierce::initializeSubsystems()
     {
-        m_chassis.initialize();
+        //m_chassis.initialize();
     }
     
     void Pierce::registerSubsystems()
     {
-        m_drivers.commandScheduler.registerSubsystem(&m_chassis);
+        //m_drivers.commandScheduler.registerSubsystem(&m_chassis);
     }
     
     void Pierce::setDefaultCommands()
