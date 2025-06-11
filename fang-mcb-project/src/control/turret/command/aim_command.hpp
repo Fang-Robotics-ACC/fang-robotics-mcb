@@ -21,8 +21,10 @@ namespace control
 
 
         private:
+            void setPitch();
             turret::TurretSubsystem& m_turret;
             turret::TurretInputHandler& m_input;
+
 
         };
     }
