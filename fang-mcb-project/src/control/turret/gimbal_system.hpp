@@ -53,6 +53,8 @@ namespace control
              */
             void addPitch(const Radians& angle);
             Radians getPitch() const;
+            Radians getMaxPitch() const;
+            Radians getMinPitch() const;
 
             /**
              * Positive is counterclockwise from above.

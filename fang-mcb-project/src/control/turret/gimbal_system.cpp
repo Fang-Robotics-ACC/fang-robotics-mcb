@@ -27,6 +27,16 @@ namespace control
             return m_pitchMotor.getPosition();
         }
 
+        Radians GimbalSystem::getMaxPitch() const
+        {
+            return m_maxPitch;
+        }
+
+        Radians GimbalSystem::getMinPitch() const
+        {
+            return m_minPitch;
+        }
+
         void GimbalSystem::setYaw(const Radians& yaw)
         {
             m_yawMotor.setTargetPosition(yaw);
