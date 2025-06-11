@@ -43,7 +43,7 @@ namespace control
     static const Flywheel::Config k_leftFlywheelConfig 
     {
         150_mm,
-        leftFlywheelMotorConfig
+        k_leftFlywheelMotorConfig
     };
 
     static const Flywheel::DriveMotor::Config k_rightFlywheeMotorConfig 
