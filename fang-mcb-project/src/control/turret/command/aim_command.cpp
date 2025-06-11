@@ -25,6 +25,7 @@ namespace control
         {
             const Seconds delta{m_executeTimer.getDurationAndReset()};
             setPitch(delta);
+            setYaw(delta);
         }
 
         void AimCommand::end(bool interrupted)
@@ -46,6 +47,17 @@ namespace control
             m_targetPitch =tap::algorithms::limitVal<Radians>(k_angularDisplacement + m_targetPitch, mk_MinPitch, mk_maxPitch);
 
             m_turret.setPitch(m_targetPitch);
+        }
+
+        void AimCommand::setYaw(const Microseconds& delta)
+        {
+            const double k_yawScaler{m_input.getYaw()};
+            const RPM k_speed{k_yawScaler * mk_motionConfig.pitchSpeed};
+            const Radians k_angularDisplacement{k_speed * delta};
+
+            m_targetYaw += k_angularDisplacement;
+
+            m_turret.setFieldYaw(m_targetYaw);
         }
     }
 }

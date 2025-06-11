@@ -27,6 +27,7 @@ namespace control
 
         private:
             void setPitch(const Microseconds& delta);
+            void setYaw(const Microseconds& delta);
             turret::TurretSubsystem& m_turret;
             turret::TurretInputHandler& m_input;
 
@@ -38,6 +39,7 @@ namespace control
             chrono::SimpleTimer m_executeTimer{};
 
             Radians m_targetPitch;
+            Radians m_targetYaw;
         };
     }
 }
