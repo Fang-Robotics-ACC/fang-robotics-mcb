@@ -7,8 +7,8 @@ namespace control
     using namespace units::literals;
     static const config::motion::TurretMotionConfig k_turretMotionConfig
     {
-        10_rpm,
-        10_rpm
+        40_rpm,
+        40_rpm
     };
 }
 #endif
