@@ -16,26 +16,26 @@ namespace trap
         DjiM2006::DjiM2006(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                            const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedPidConfig)
         : m_djiMotor{&drivers, motorId, canBus, inverted, name, mk_requiredCurrentMode, gearRatio},
-          m_gearRatio{gearRatio},
-          m_speedPid{speedPidConfig}
+          m_gearRatio{gearRatio}
+          //m_speedPid{speedPidConfig}
         {
             //assert(static_cast<DjiMotorOutput>(speedPidConfig.maxOutput) <= k_maxOutput && "pid can exceed max output!!!");
         }
 
         void DjiM2006::update()
         {
-            const RPM error{m_targetSpeed - getSpeed()};
-            setDesiredOutput(m_speedPid.runController(error));
+            //const RPM error{m_targetSpeed - getSpeed()};
+            //setDesiredOutput(m_speedPid.runController(error));
         }
 
         void DjiM2006::setTargetSpeed(const RPM& targetSpeed)
         {
-            m_targetSpeed = motors::shaftToMotorSpeed(targetSpeed, m_gearRatio);
+            //m_targetSpeed = motors::shaftToMotorSpeed(targetSpeed, m_gearRatio);
         }
 
         RPM DjiM2006::getSpeed() const
         {
-            return motors::motorToShaftSpeed(RPM{m_djiMotor.getShaftRPM()}, m_gearRatio);
+            //return motors::motorToShaftSpeed(RPM{m_djiMotor.getShaftRPM()}, m_gearRatio);
         }
 
         void DjiM2006::initialize()

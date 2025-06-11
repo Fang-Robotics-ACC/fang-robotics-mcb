@@ -34,7 +34,7 @@ namespace trap
             {
                 const TimeUnit deltaTime{m_runControllerTimer.getDurationAndReset()};
                 const ErrorType deltaError{error - m_lastError};
-                const double errorDerivative{static_cast<double>(deltaError) / deltaTime};
+                const double errorDerivative{static_cast<double>(deltaError) / static_cast<double>(deltaTime)};
                 m_lastError = error;
                 return runController(error, errorDerivative, deltaTime);
             }
@@ -46,7 +46,7 @@ namespace trap
             ControlType runController(ErrorType error, double errorDerivative, TimeUnit deltaTime)
             {
                 float result {m_smoothPid.runController(static_cast<float>(error), static_cast<float>(errorDerivative), static_cast<float>(deltaTime))};
-                return static_cast<ControlType>(result);
+                return ControlType{result};
             }
 
         private:

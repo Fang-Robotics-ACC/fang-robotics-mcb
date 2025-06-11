@@ -92,7 +92,7 @@ namespace trap
         static constexpr double k_factoryGearboxRatio{tap::motor::DjiMotorEncoder::GEAR_RATIO_M2006};
         private:
             tap::motor::DjiMotor m_djiMotor;
-            DjiSpeedPid m_speedPid;
+            //DjiSpeedPid m_speedPid;
             const double m_gearRatio;
 
             RPM m_targetSpeed{0.0};
