@@ -8,7 +8,7 @@ namespace control
     using namespace units::literals;
     static const trap::motor::DjiSpeedPid::Config k_pitchPidConfig
     {
-        50000,
+        70000,
         1000,
         20,
         100,
@@ -19,7 +19,7 @@ namespace control
         tap::motor::MOTOR2,
         tap::can::CanBus::CAN_BUS1,
         "pitchMotor",
-        true,
+        false,
         1.0,
         k_pitchPidConfig,
         false
