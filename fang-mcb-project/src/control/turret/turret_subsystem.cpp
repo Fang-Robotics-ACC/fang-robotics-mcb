@@ -22,7 +22,12 @@ namespace control
 
         void TurretSubsystem::setFieldYaw(const Radians& yaw)
         {
-            //m_gimbal.setYaw(yaw);
+            m_gimbal.setYaw(yaw);
+        }
+
+        void TurretSubsystem::setPitch(const Radians& pitch)
+        {
+            m_gimbal.setPitch(pitch);
         }
 
 
