@@ -17,7 +17,7 @@ namespace control
             struct Config
             {
                 GimbalSystem::Config gimbalConfig;
-                AmmoBoosterSystem::Config ammoConfig;
+                AmmoBoosterSystem::Config ammoBoosterConfig;
             };
 
             virtual void initialize() override;
