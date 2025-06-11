@@ -4,6 +4,9 @@
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/field_mecanum_command.hpp"
 #include "configuration/chassis_config.hpp"
+#include "control/turret/turret_subsystem.hpp"
+
+#include "control/robots/pierce/config/turret_config.hpp"
 namespace control
 {
     /**
@@ -15,7 +18,7 @@ namespace control
     public:
     struct Config
     {
-        chassis::ChassisSubsystem::ChassisConfig chassisConfig;
+        turret::TurretSubsystem::Config turretConfig;
     };
         Pierce(Drivers& drivers);
         void initialize();
@@ -25,7 +28,13 @@ namespace control
         void setDefaultCommands();
         void registerIoMappings();
 
+        static constexpr Config mk_config
+        {
+            k_turretConfig
+        };
+
         Drivers& m_drivers;
+        turret::TurretSubsystem m_turret;
         //chassis::ChassisSubsystem m_chassis;
         //chassis::FieldMecanumCommand m_fieldMecanumCommand;
     };//class Robot
