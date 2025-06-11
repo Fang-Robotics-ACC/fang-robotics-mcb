@@ -19,7 +19,7 @@ namespace control
     {
         initializeSubsystems();
         //registerSubsystems();
-        //setDefaultCommands();
+        setDefaultCommands();
         //registerIoMappings();
     }
     
