@@ -18,7 +18,9 @@ namespace control
                 GimbalSystem::Config gimbalConfig;
             };
 
+            virtual void initialize() override;
             virtual void refresh() override;
+
             TurretSubsystem(Drivers& drivers, const Config& config);
             void setFieldYaw(const Radians& yaw);
 

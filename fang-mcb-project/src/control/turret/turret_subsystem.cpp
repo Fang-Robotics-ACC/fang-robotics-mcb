@@ -10,14 +10,19 @@ namespace control
         {
         }
 
+        void TurretSubsystem::initialize()
+        {
+            m_gimbal.initialize();
+        }
+
         void TurretSubsystem::refresh()
         {
-            m_gimbal.update();    
+            m_gimbal.update();
         }
 
         void TurretSubsystem::setFieldYaw(const Radians& yaw)
         {
-            m_gimbal.setYaw(yaw);
+            //m_gimbal.setYaw(yaw);
         }
 
 

@@ -6,7 +6,8 @@ namespace control
 {
     Pierce::Pierce(Drivers& drivers)
         :
-            m_drivers{drivers}
+            m_drivers{drivers},
+            m_turret{drivers, k_turretConfig}
             //m_chassis{drivers, config::chassis::k_defaultConfig},
             //m_fieldMecanumCommand{m_chassis, drivers.inputHandler, config::motion::k_defaultMotionConfig}
     {
@@ -14,7 +15,7 @@ namespace control
     
     void Pierce::initialize()
     {
-        //initializeSubsystems();
+        initializeSubsystems();
         //registerSubsystems();
         //setDefaultCommands();
         //registerIoMappings();
@@ -22,7 +23,7 @@ namespace control
     
     void Pierce::initializeSubsystems()
     {
-        //m_chassis.initialize();
+        m_turret.registerAndInitialize();
     }
     
     void Pierce::registerSubsystems()
