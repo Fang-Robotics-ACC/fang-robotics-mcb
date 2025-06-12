@@ -15,19 +15,10 @@ namespace control
 
     static const trap::motor::DjiSpeedPid::Config k_flywheelMotorPidConfig 
     {
+        20,
+        1,
         10,
         10,
-        0,
-        100,
-        trap::motor::DjiM3508::k_maxOutput
-    };
-
-    static const trap::motor::DjiSpeedPid::Config k_flywheelMotorPidConfigRight
-    {
-        10,
-        10,
-        0,
-        100,
         trap::motor::DjiM3508::k_maxOutput
     };
 
@@ -42,7 +33,7 @@ namespace control
     };
     static const Flywheel::Config k_leftFlywheelConfig 
     {
-        150_mm,
+        60_mm,
         k_leftFlywheelMotorConfig
     };
 
@@ -53,7 +44,7 @@ namespace control
         "rightFlywheel",
         true,
         1.0,
-        k_flywheelMotorPidConfigRight
+        k_flywheelMotorPidConfig
     };
 
     static const Flywheel::Config k_rightFlywheelConfig
@@ -64,7 +55,7 @@ namespace control
 
     static const AmmoBooster::Config k_ammoBoosterConfig
     {
-        50_fps,
+        100_fps,
         k_leftFlywheelConfig,
         k_rightFlywheelConfig
     };
