@@ -23,9 +23,7 @@ namespace control
 
         void ActivateBoosterCommand::end(bool interrupted)
         {
-            //Hacky but will be left for testing
             m_turret.boosterOff();
-
         }
 
         bool ActivateBoosterCommand::isFinished() const

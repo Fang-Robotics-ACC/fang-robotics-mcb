@@ -1,4 +1,3 @@
-/* trunk-ignore-all(clang-format) */
 #include "pierce.hpp"
 #include "drivers.hpp"
 #include "configuration/motion_control_config.hpp"
@@ -10,7 +9,8 @@ namespace control
         :
             m_drivers{drivers},
             m_turret{drivers, mk_config.turretConfig},
-            m_aimCommnd{m_turret, drivers.inputHandler.getTurretInputs(), mk_config.turretMotionConfig}
+            m_aimCommnd{m_turret, drivers.inputHandler.getTurretInputs(), mk_config.turretMotionConfig},
+            m_activateBoosterCommand{m_turret}
             //m_chassis{drivers, config::chassis::k_defaultConfig},
             //m_fieldMecanumCommand{m_chassis, drivers.inputHandler, config::motion::k_defaultMotionConfig}
     {
@@ -38,9 +38,11 @@ namespace control
     {
         m_turret.setDefaultCommand(&m_aimCommnd);
         //m_chassis.setDefaultCommand(&m_fieldMecanumCommand);
+        //m_drivers.commandScheduler.addCommand(&m_activateBoosterCommand);
     }
     
     void Pierce::registerIoMappings()
     {
+        m_drivers.commandMapper.addMap(&m_activateBoosterCommandMapping);
     }
 }
