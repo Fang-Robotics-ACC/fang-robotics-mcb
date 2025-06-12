@@ -27,6 +27,7 @@ namespace control
     void Pierce::initializeSubsystems()
     {
         m_turret.registerAndInitialize();
+        m_turret.boosterOn();//Hardcoded until command mapper bugs are solved
     }
     
     void Pierce::registerSubsystems()
