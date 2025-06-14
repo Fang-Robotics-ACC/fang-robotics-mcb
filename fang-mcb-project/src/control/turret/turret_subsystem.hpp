@@ -6,6 +6,8 @@
 #include "drivers.hpp"
 #include "unitaliases.hpp"
 
+#include "trap/communication/sensors/imu.hpp"
+
 #include "tap/control/subsystem.hpp"
 namespace control
 {
@@ -14,6 +16,8 @@ namespace control
         class TurretSubsystem : public virtual tap::control::Subsystem
         {
         public:
+            using Imu = trap::communication::sensors::Imu;
+
             struct Config
             {
                 GimbalSystem::Config gimbalConfig;
@@ -39,6 +43,7 @@ namespace control
         private:
             GimbalSystem m_gimbal;
             AmmoBoosterSystem m_booster;
+            Imu m_imu;
         };
     }
 }
