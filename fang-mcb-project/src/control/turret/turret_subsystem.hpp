@@ -45,7 +45,7 @@ namespace control
             Radians getChassisYaw() const;
             GimbalSystem m_gimbal;
             AmmoBoosterSystem m_booster;
-            Imu m_chassisImu;
+            Imu& m_chassisImu;
 
             Radians m_targetFieldYaw{};
         };
