@@ -38,8 +38,8 @@ namespace control
             const Degrees mk_MinPitch;
             chrono::SimpleTimer m_executeTimer{};
 
-            Radians m_targetPitch;
-            Radians m_targetYaw;
+            Radians m_targetPitch{0};
+            Radians m_targetYaw{0};
         };
     }
 }

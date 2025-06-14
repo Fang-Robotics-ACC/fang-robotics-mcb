@@ -4,11 +4,12 @@ namespace control
 {
     namespace turret
     {
-        TurretSubsystem::TurretSubsystem(Drivers& drivers, const Config& config)
+        TurretSubsystem::TurretSubsystem(Drivers& drivers, Imu& imu, const Config& config)
         :   Subsystem{&drivers},
             m_gimbal{drivers, config.gimbalConfig},
             m_booster{drivers, config.ammoConfig},
-            m_feeder{drivers, config.feederConfig}
+            m_feeder{drivers, config.feederConfig},
+            m_chassisImu{imu}
         {
         }
 
@@ -20,18 +21,24 @@ namespace control
 
         void TurretSubsystem::refresh()
         {
+            syncFieldYaw();
             m_gimbal.update();
             m_booster.update();
         }
 
         void TurretSubsystem::setFieldYaw(const Radians& yaw)
         {
-            m_gimbal.setYaw(yaw);
+            m_targetFieldYaw = yaw;
         }
 
         void TurretSubsystem::addFieldYaw(const Radians& angle)
         {
-            m_gimbal.addYaw(angle);
+            m_targetFieldYaw += angle;
+        }
+
+        Radians TurretSubsystem::getTargetFieldYaw() const
+        {
+            return m_targetFieldYaw;
         }
 
         void TurretSubsystem::setPitch(const Radians& pitch)
@@ -60,6 +67,19 @@ namespace control
         void TurretSubsystem::boosterOff()
         {
             m_booster.autoFireOff();
+        }
+
+        void TurretSubsystem::syncFieldYaw()
+        {
+            //Start with the chassis field yaw, if you subtract the target field yaw
+            //that leaves the difference, which the gimbal must do
+            const Radians gimbal_yaw{getChassisYaw() - m_targetFieldYaw};
+            m_gimbal.setYaw(gimbal_yaw);
+        }
+
+        Radians TurretSubsystem::getChassisYaw() const
+        {
+            return m_chassisImu.getYaw();
         }
     }
 }

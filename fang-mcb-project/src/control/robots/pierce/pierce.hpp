@@ -17,6 +17,8 @@
 #include "control/turret/command/activate_booster_command.hpp"
 #include "control/robots/pierce/command_mapping/activate_booster_command_map.hpp"
 
+#include "trap/communication/sensors/imu.hpp"
+
 #include "tap/control/hold_command_mapping.hpp"
 
 namespace control
@@ -50,14 +52,17 @@ namespace control
         config::motion::TurretMotionConfig turretMotionConfig;
 
         Drivers& m_drivers;
+        trap::communication::sensors::Imu m_imu;
+
         turret::TurretSubsystem m_turret;
 
         turret::AimCommand m_aimCommnd;
         turret::ActivateBoosterCommand m_activateBoosterCommand;
 
         tap::control::HoldCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, tap::control::RemoteMapState{tap::communication::serial::Remote::Switch::LEFT_SWITCH, tap::communication::serial::Remote::SwitchState::UP}};
-        //chassis::ChassisSubsystem m_chassis;
-        //chassis::FieldMecanumCommand m_fieldMecanumCommand;
+        chassis::ChassisSubsystem m_chassis;
+        chassis::FieldMecanumCommand m_fieldMecanumCommand;
+
     };//class Robot
 }//namspace control
 #endif

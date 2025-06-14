@@ -30,6 +30,16 @@
     <option name="taproot:board:analog_in_pins"></option>
     <option name="taproot:board:pwm_pins">C1,C2,C3,C4,C5,C6,C7,Buzzer,ImuHeater</option>
 
+    <!-- THIS PREVENTS STACK OVERFLOW ERRORS. THIS WASTED 20 HOURS OUR FIRST YEAR AND MADE OUR LEAD DEV REALLY DEPRESSED AND OBSESSED-->
+    <!-- You can tall it's a stack error because it'll loop back to Underfined Handler and forget the call stack --> 
+    <!-- The error will only be remedied by removing variable instances (the instances do not need to do anything or have any functions called, just exist-->
+    <!-- Class size will affect "critical mass". Irrespective of class or type, their initialization will trigger it. It's odd, right.-->
+    <!-- to trigger the error. Please heed this ancient remnant - Raven Asher Raziel, 2025 founding President and Computer Department Director-->
+    <!-- IF YOUR SCONS SIZE IS REASONABLE, YOU CAN UP IT ALL THE WAY TO 65536, IT MUST EB A MULTIPLE OF 1024, or possibly 1024*3-->
+    <!-- Eli told me that you should only up it if you need to, so should you trigger this, just up it by another 1024*3-->
+    <!-- 16384:2 * 6144 = (1024*3) * 2 * 2 : Praise ELI from ARUW for immense patience and help in this baffling mystery! You should've seen everyone's faces!-->
+    <option name="taproot:modm-project.xml:modm_hal_options">modm:platform:cortex-m 16384</option-->
+
   </options>
   <modules>
     <module>taproot:core</module>

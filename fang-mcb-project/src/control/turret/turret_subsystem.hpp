@@ -7,6 +7,8 @@
 #include "drivers.hpp"
 #include "unitaliases.hpp"
 
+#include "trap/communication/sensors/imu.hpp"
+
 #include "tap/control/subsystem.hpp"
 namespace control
 {
@@ -15,6 +17,8 @@ namespace control
         class TurretSubsystem : public virtual tap::control::Subsystem
         {
         public:
+            using Imu = trap::communication::sensors::Imu;
+
             struct Config
             {
                 GimbalSystem::Config gimbalConfig;
@@ -25,9 +29,11 @@ namespace control
             virtual void initialize() override;
             virtual void refresh() override;
 
-            TurretSubsystem(Drivers& drivers, const Config& config);
+            TurretSubsystem(Drivers& drivers, Imu& imu, const Config& config);
             void setFieldYaw(const Radians& yaw);
             void addFieldYaw(const Radians& angle);
+
+            Radians getTargetFieldYaw() const;
 
             void setPitch(const Radians& pitch);
             void addPitch(const Radians& pitch);
@@ -39,9 +45,15 @@ namespace control
             void boosterOff();
 
         private:
+            void syncFieldYaw();
+            Radians getChassisYaw() const;
             GimbalSystem m_gimbal;
             AmmoBoosterSystem m_booster;
             FeederSystem m_feeder;
+
+            Imu& m_chassisImu;
+
+            Radians m_targetFieldYaw{};
         };
     }
 }

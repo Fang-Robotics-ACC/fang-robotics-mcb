@@ -88,7 +88,7 @@ int main()
     Board::initialize();
     initializeIo(drivers);
 
-    Robot robot{drivers};
+    static Robot robot{drivers};
     robot.initialize();
 
     //robot.initializeSubsystemCommands();
