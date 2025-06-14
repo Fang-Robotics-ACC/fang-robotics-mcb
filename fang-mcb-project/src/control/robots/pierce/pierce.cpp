@@ -30,6 +30,7 @@ namespace control
     {
         m_drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, config::chassis::k_chassisPwmFreq.to<double>());
         m_turret.registerAndInitialize();
+        m_turret.setPitch(m_turret.getMinPitch());
         m_chassis.registerAndInitialize();
         //m_turret.boosterOn();//Hardcoded until command mapper bugs are solved
     }
