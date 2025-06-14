@@ -15,6 +15,7 @@
 //Commands
 #include "control/turret/command/aim_command.hpp"
 #include "control/turret/command/activate_booster_command.hpp"
+#include "control/turret/command/autofire_command.hpp"
 #include "control/robots/pierce/command_mapping/activate_booster_command_map.hpp"
 
 #include "trap/communication/sensors/imu.hpp"
@@ -58,8 +59,10 @@ namespace control
 
         turret::AimCommand m_aimCommnd;
         turret::ActivateBoosterCommand m_activateBoosterCommand;
+        turret::AutofireCommand m_autofireCommand;
 
         tap::control::HoldCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, tap::control::RemoteMapState{tap::communication::serial::Remote::Switch::LEFT_SWITCH, tap::communication::serial::Remote::SwitchState::UP}};
+        tap::control::HoldCommandMapping m_activateAutofireCommandMapping{&m_drivers, {&m_autofireCommand}, tap::control::RemoteMapState{tap::communication::serial::Remote::Switch::RIGHT_SWITCH, tap::communication::serial::Remote::SwitchState::UP}};
         chassis::ChassisSubsystem m_chassis;
         chassis::FieldMecanumCommand m_fieldMecanumCommand;
 
