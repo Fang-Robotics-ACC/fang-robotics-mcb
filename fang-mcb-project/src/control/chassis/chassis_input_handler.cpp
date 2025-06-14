@@ -15,8 +15,8 @@ namespace control
 
         math::AbstractVector2D ChassisInputHandler::getRemoteTranslation() const
         {
-            const double xTranslationScale{m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL)};
-            const double yTranslationScale{m_remote.getChannel(Remote::Channel::RIGHT_VERTICAL)};
+            const double xTranslationScale{m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
+            const double yTranslationScale{m_remote.getChannel(Remote::Channel::LEFT_VERTICAL)};
 
             return math::AbstractVector2D{xTranslationScale, yTranslationScale};
         }
@@ -24,13 +24,13 @@ namespace control
         double ChassisInputHandler::getRemoteAngularDisplacement() const
         {
             //Counterclockwise is positiev
-            const double angularDisplacementScale{-m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
+            const double angularDisplacementScale{-m_remote.getChannel(Remote::Channel::WHEEL)};
             return angularDisplacementScale;
         }
 
         double ChassisInputHandler::getRemoteRotation() const
         {
-            const double rotationScale{-m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
+            const double rotationScale{-m_remote.getChannel(Remote::Channel::WHEEL)};
             return rotationScale;
         }
     }// namespce chassis
