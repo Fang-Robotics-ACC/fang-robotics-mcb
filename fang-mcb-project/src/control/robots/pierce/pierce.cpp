@@ -31,7 +31,7 @@ namespace control
         m_drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, config::chassis::k_chassisPwmFreq.to<double>());
         m_turret.registerAndInitialize();
         m_chassis.registerAndInitialize();
-        m_turret.boosterOn();//Hardcoded until command mapper bugs are solved
+        //m_turret.boosterOn();//Hardcoded until command mapper bugs are solved
     }
     
     void Pierce::registerSubsystems()

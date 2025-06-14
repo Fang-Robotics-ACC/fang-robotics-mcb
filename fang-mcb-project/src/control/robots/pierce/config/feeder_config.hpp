@@ -29,7 +29,7 @@ namespace control
     static const turret::FeederSystem::Config k_feederConfig
     {
         7,
-        25_Hz,
+        100_Hz,
         k_feederMotorConfig
     };
 }
