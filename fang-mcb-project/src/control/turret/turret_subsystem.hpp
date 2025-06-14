@@ -41,6 +41,8 @@ namespace control
             void boosterOff();
 
         private:
+            void syncFieldYaw();
+            Radians getChassisYaw() const;
             GimbalSystem m_gimbal;
             AmmoBoosterSystem m_booster;
             Imu m_chassisImu;

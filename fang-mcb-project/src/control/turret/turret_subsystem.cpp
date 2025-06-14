@@ -20,6 +20,7 @@ namespace control
 
         void TurretSubsystem::refresh()
         {
+            syncFieldYaw();
             m_gimbal.update();
             m_booster.update();
         }
@@ -60,6 +61,17 @@ namespace control
         void TurretSubsystem::boosterOff()
         {
             m_booster.autoFireOff();
+        }
+
+        void TurretSubsystem::syncFieldYaw()
+        {
+            const Radians gimbal_yaw{m_targetFieldYaw - getChassisYaw()};
+            m_gimbal.setYaw(gimbal_yaw);
+        }
+
+        Radians TurretSubsystem::getChassisYaw() const
+        {
+            m_chassisImu.getYaw();
         }
     }
 }
