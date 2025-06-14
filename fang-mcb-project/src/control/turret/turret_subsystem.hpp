@@ -31,6 +31,8 @@ namespace control
             void setFieldYaw(const Radians& yaw);
             void addFieldYaw(const Radians& angle);
 
+            Radians getTargetFieldYaw() const;
+
             void setPitch(const Radians& pitch);
             void addPitch(const Radians& pitch);
 

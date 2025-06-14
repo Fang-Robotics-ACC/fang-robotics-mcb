@@ -35,6 +35,11 @@ namespace control
             m_targetFieldYaw += angle;
         }
 
+        Radians TurretSubsystem::getTargetFieldYaw() const
+        {
+            return m_targetFieldYaw;
+        }
+
         void TurretSubsystem::setPitch(const Radians& pitch)
         {
             m_gimbal.setPitch(pitch);
