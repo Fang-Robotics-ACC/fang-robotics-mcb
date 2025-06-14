@@ -27,7 +27,7 @@ namespace control
             virtual void initialize() override;
             virtual void refresh() override;
 
-            TurretSubsystem(Drivers& drivers, const Config& config);
+            TurretSubsystem(Drivers& drivers, Imu& imu, const Config& config);
             void setFieldYaw(const Radians& yaw);
             void addFieldYaw(const Radians& angle);
 
