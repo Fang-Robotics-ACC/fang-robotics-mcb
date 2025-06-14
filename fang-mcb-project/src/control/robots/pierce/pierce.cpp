@@ -10,9 +10,9 @@ namespace control
             m_drivers{drivers},
             m_turret{drivers, mk_config.turretConfig},
             m_aimCommnd{m_turret, drivers.inputHandler.getTurretInputs(), mk_config.turretMotionConfig},
-            m_activateBoosterCommand{m_turret}
-            //m_chassis{drivers, config::chassis::k_defaultConfig},
-            //m_fieldMecanumCommand{m_chassis, drivers.inputHandler, config::motion::k_defaultMotionConfig}
+            m_activateBoosterCommand{m_turret},
+            m_chassis{drivers, config::chassis::k_defaultConfig},
+            m_fieldMecanumCommand{m_chassis, drivers.inputHandler, config::motion::k_defaultMotionConfig}
     {
     }
     
@@ -27,6 +27,7 @@ namespace control
     void Pierce::initializeSubsystems()
     {
         m_turret.registerAndInitialize();
+        m_chassis.initialize();
         m_turret.boosterOn();//Hardcoded until command mapper bugs are solved
     }
     
@@ -38,7 +39,7 @@ namespace control
     void Pierce::setDefaultCommands()
     {
         m_turret.setDefaultCommand(&m_aimCommnd);
-        //m_chassis.setDefaultCommand(&m_fieldMecanumCommand);
+        m_chassis.setDefaultCommand(&m_fieldMecanumCommand);
         //m_drivers.commandScheduler.addCommand(&m_activateBoosterCommand);
     }
     

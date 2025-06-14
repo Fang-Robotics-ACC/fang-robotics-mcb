@@ -56,8 +56,8 @@ namespace control
         turret::ActivateBoosterCommand m_activateBoosterCommand;
 
         tap::control::HoldCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, tap::control::RemoteMapState{tap::communication::serial::Remote::Switch::LEFT_SWITCH, tap::communication::serial::Remote::SwitchState::UP}};
-        //chassis::ChassisSubsystem m_chassis;
-        //chassis::FieldMecanumCommand m_fieldMecanumCommand;
+        chassis::ChassisSubsystem m_chassis;
+        chassis::FieldMecanumCommand m_fieldMecanumCommand;
     };//class Robot
 }//namspace control
 #endif
