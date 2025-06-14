@@ -227,9 +227,9 @@ int main()
     //booster.initialize();
     //booster.autoFireOn();
 
-    FeederSystem feeder{drivers, feederConfig};
-    feeder.initialize();
-    feeder.feedOn();
+    //FeederSystem feeder{drivers, feederConfig};
+    //feeder.initialize();
+    //feeder.feedOn();
 
     //trap::motor::DjiM2006 testFeeder{drivers, feederMotorConfig};
     //testFeeder.initialize();
