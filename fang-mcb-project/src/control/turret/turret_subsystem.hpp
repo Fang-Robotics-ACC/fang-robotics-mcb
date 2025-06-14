@@ -44,6 +44,8 @@ namespace control
             GimbalSystem m_gimbal;
             AmmoBoosterSystem m_booster;
             Imu m_chassisImu;
+
+            Radians m_targetFieldYaw{};
         };
     }
 }
