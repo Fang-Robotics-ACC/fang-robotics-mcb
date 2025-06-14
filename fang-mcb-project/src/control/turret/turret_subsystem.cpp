@@ -67,7 +67,7 @@ namespace control
         {
             //Start with the chassis field yaw, if you subtract the target field yaw
             //that leaves the difference, which the gimbal must do
-            const Radians gimbal_yaw{getChassisYaw() - m_targetFieldYaw };
+            const Radians gimbal_yaw{getChassisYaw() - m_targetFieldYaw};
             m_gimbal.setYaw(gimbal_yaw);
         }
 
