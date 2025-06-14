@@ -11,7 +11,7 @@ Fang Robotics Firmware for the Seven Fangs:
 
 ## License Information
 In the spirit of open source software, education, and most importantly, community,
-Fang Robotics MCB is under the much stroner copyleft AGPLv3.
+Fang Robotics MCB is under the much stronger copyleft AGPLv3.
 Essentially, thi  means that whoever you compete against, you must be able to provide
 the source code and it must be licensed under AGPLv3 (not just GPLv3).
 
@@ -37,9 +37,12 @@ Open source code also encourages your members to write good code, too, since jus
 everyone can see it. If it gets deprecated, it can disappear forever. Each repository
 has a plehtora of lessons to learn.
 
-Although it is not perfect, we do hope you, Fang Robotics member or not ^_^
+Although it is not perfect, we do hope you, Fang Robotics member or not, enjoy this code ^_^
 
-- Raven Asher Raziel, 2025 member
+"Code should be enjoyable. Code should be Readable. Code should be elegant."
+"...and if there must be hacks, the chaos must be organized, extra documented, and isolated like U-235" 
+
+- Raven Asher Raziel, 2025 Dev
 
 ## Resources
 
