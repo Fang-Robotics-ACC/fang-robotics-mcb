@@ -38,7 +38,7 @@ OUTPUT_ARCH(arm)
 ENTRY(Reset_Handler)
 
 /* the handler stack is used for main program as well as interrupts */
-MAIN_STACK_SIZE    = 6144;
+MAIN_STACK_SIZE    = 16384;
 PROCESS_STACK_SIZE = 0;
 TOTAL_STACK_SIZE   = MAIN_STACK_SIZE + PROCESS_STACK_SIZE;
 
