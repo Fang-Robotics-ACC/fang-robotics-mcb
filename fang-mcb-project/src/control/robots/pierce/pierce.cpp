@@ -23,7 +23,7 @@ namespace control
         initializeSubsystems();
         //registerSubsystems();
         setDefaultCommands();
-        //registerIoMappings();
+        registerIoMappings();
     }
     
     void Pierce::initializeSubsystems()
