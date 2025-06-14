@@ -24,6 +24,7 @@ namespace control
             syncFieldYaw();
             m_gimbal.update();
             m_booster.update();
+            m_feeder.update();
         }
 
         void TurretSubsystem::setFieldYaw(const Radians& yaw)
