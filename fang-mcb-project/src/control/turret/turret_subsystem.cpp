@@ -17,6 +17,7 @@ namespace control
         {
             m_gimbal.initialize();
             m_booster.initialize();
+            m_feeder.initialize();
         }
 
         void TurretSubsystem::refresh()
@@ -65,9 +66,20 @@ namespace control
         {
             m_booster.autoFireOn();
         }
+
         void TurretSubsystem::boosterOff()
         {
             m_booster.autoFireOff();
+        }
+
+        void TurretSubsystem::autoFireOn()
+        {
+            m_feeder.feedOn();
+        }
+
+        void TurretSubsystem::autoFireOff()
+        {
+            m_feeder.feedOff();
         }
 
         void TurretSubsystem::syncFieldYaw()

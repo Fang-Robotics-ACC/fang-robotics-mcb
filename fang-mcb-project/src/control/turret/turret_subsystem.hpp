@@ -44,6 +44,9 @@ namespace control
             void boosterOn();
             void boosterOff();
 
+            void autoFireOn();
+            void autoFireOff();
+
         private:
             void syncFieldYaw();
             Radians getChassisYaw() const;
