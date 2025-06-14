@@ -8,7 +8,7 @@ namespace control
         :   Subsystem{&drivers},
             m_gimbal{drivers, config.gimbalConfig},
             m_booster{drivers, config.ammoConfig},
-            m_imu{drivers.bmi088}
+            m_chassisImu{drivers.bmi088}
         {
         }
 
