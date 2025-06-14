@@ -5,6 +5,7 @@
 
 namespace control
 {
+    using namespace units::literals;
     Pierce::Pierce(Drivers& drivers)
         :
             m_drivers{drivers},
@@ -26,8 +27,9 @@ namespace control
     
     void Pierce::initializeSubsystems()
     {
+        m_drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, config::chassis::k_chassisPwmFreq.to<double>());
         m_turret.registerAndInitialize();
-        m_chassis.initialize();
+        m_chassis.registerAndInitialize();
         m_turret.boosterOn();//Hardcoded until command mapper bugs are solved
     }
     
