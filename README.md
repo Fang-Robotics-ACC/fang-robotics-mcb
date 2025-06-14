@@ -1,5 +1,45 @@
 [![pipeline status](https://gitlab.com/aruw/controls/fang-mcb/badges/develop/pipeline.svg)](https://gitlab.com/aruw/controls/fang-mcb/-/commits/develop)
 
+Fang Robotics Firmware for the Seven Fangs:
+* Pierce \[Infantry\]
+* Slice  \[Hero\]
+* Devour \[Sentry\]
+* Slice n' Dice \[Engineer\]
+* Crazy Cutting \[Drone\]
+* Palisade Bite \[Dart\]
+* Situational Awareness \[Radar System\]
+
+## License Information
+In the spirit of open source software, education, and most importantly, community,
+Fang Robotics MCB is under the much stroner copyleft AGPLv3.
+Essentially, thi  means that whoever you compete against, you must be able to provide
+the source code and it must be licensed under AGPLv3 (not just GPLv3).
+
+As we have spent countless hours, blood, sweat, and tears, building this, we only ask
+that you provide future teams and participants your code (should it be based of of ours)
+in order to aid them in learning about Robomasters and Programming.
+
+This codebase has uniquely applied features for its time: references for Drivers, dimensional anaysis
+and the use of nested Config structs for organization and cleaner construction.
+
+It has been designed with organization/ease of reading being the top priority.
+
+As ARUW's Sumedh has said:
+"Beyond the legal constraint, I believe there’s a moral obligation—
+if you’re benefiting from something designed to help others, you should
+try to give back. If a team values secrecy and privatization, it’s reasonable
+to expect them to develop something of their own, perhaps even better suited
+to their needs and hardware."
+
+RHIT has even open sourced their CV code and models, with full confidence for competition.
+
+Open source code also encourages your members to write good code, too, since just about
+everyone can see it. If it gets deprecated, it can disappear forever. Each repository
+has a plehtora of lessons to learn.
+
+Although it is not perfect, we do hope you, Fang Robotics member or not ^_^
+
+- Raven Asher Raziel, 2025 member
 
 ## Resources
 
