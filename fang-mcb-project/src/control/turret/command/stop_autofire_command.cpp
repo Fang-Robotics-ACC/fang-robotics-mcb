@@ -14,7 +14,7 @@ namespace control
 
         void StopAutofireCommand::initialize()
         {
-            m_turret.autoFireOn();
+            m_turret.autoFireOff();
         }
 
         void StopAutofireCommand::execute()
@@ -23,7 +23,6 @@ namespace control
 
         void StopAutofireCommand::end(bool interrupted)
         {
-            m_turret.autoFireOff();
         }
 
         bool StopAutofireCommand::isFinished() const
