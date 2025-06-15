@@ -16,7 +16,7 @@
 #include "control/turret/command/aim_command.hpp"
 #include "control/turret/command/activate_booster_command.hpp"
 #include "control/turret/command/autofire_command.hpp"
-#include "control/robots/pierce/command_mapping/activate_booster_command_map.hpp"
+#include "control/robots/pierce/command_mapping/turret_command_map.hpp"
 
 #include "trap/communication/sensors/imu.hpp"
 
