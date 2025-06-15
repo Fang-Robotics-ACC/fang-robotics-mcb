@@ -10,11 +10,10 @@ namespace control
         Remote::SwitchState::UP
     };
 
-    static const tap::control::RemoteMapState k_activateBoosterRemoteState
+    static const tap::control::RemoteMapState k_deactivateBoosterRemoteState
     {
         Remote::Switch::LEFT_SWITCH,
-        Remote::SwitchState::UP
+        Remote::SwitchState::DOWN
     };
-
 }
 #endif
