@@ -10,44 +10,56 @@ Fang Robotics Firmware for the Seven Fangs:
 * Situational Awareness \[Radar System\]
 
 ## License Information
-In the spirit of open source software, education, and most importantly, community,
-Fang Robotics MCB is under the much stronger copyleft AGPLv3.
-Essentially, thi  means that whoever you compete against, you must be able to provide
-the source code and it must be licensed under AGPLv3 (not just GPLv3).
 
-As we have spent countless hours, blood, sweat, and tears, building this, we only ask
-that you provide future teams and participants your code (should it be based of of ours)
-in order to aid them in learning about Robomasters and Programming.
+In the spirit of open‑source software, education, and—most
+importantly—community, Fang Robotics MCB is released under the
+copyleft AGPLv3 license. This means anyone competing against you
+must provide their full source code, and it must also be licensed
+under AGPLv3 (not just GPLv3).
 
-This codebase has uniquely applied features for its time: references for Drivers, dimensional anaysis
-and the use of nested Config structs for organization and cleaner construction.
+We poured countless hours, blood, sweat, and tears into building
+this project. All we ask is that future teams or participants
+who build on our work share their code openly, so everyone can
+learn more about Robomasters and embedded programming.
 
-It has been designed with organization/ease of reading being the top priority.
+This codebase introduced features that were unique for its time:
+- Clear driver references  
+- Systematic dimensional analysis  
+- Nested `Config` structs for organization and readability  
 
-As ARUW's Sumedh has said:
-"Beyond the legal constraint, I believe there’s a moral obligation—
-if you’re benefiting from something designed to help others, you should
-try to give back. If a team values secrecy and privatization, it’s reasonable
-to expect them to develop something of their own, perhaps even better suited
-to their needs and hardware."
+It was designed from the ground up with maintainability and
+ease of reading in mind.
 
-RHIT has even open sourced their CV code and models, with full confidence for competition.
+As ARUW’s Sumedh put it:
 
-Open source code also encourages your members to write good code, too, since just about
-everyone can see it. If it gets deprecated, it can disappear forever. Each repository
-has a plehtora of lessons to learn.
+> “Beyond the legal constraint, I believe there’s a moral
+> obligation—if you benefit from something designed to help
+> others, you should give back. If a team values secrecy, it’s
+> reasonable to expect them to develop their own solution,
+> perhaps even better suited to their needs and hardware.”
 
-Although it is not perfect, we do hope you, Fang Robotics member or not, enjoy this code ^_^
+Indeed, the RHIT team has open‑sourced their computer‑vision code
+and models, showing full confidence in open collaboration.
 
-"Code should be enjoyable. Code should be Readable. Code should be elegant."
-"...and if there must be hacks, the chaos must be organized, extra documented, and isolated like U-235" 
+Open source also encourages good coding practices—everyone can
+review, learn from, and improve your work. If neglected, features
+may be deprecated and lost, but by sharing widely, each repository
+becomes a treasure trove of lessons and inspiration.
 
-- Raven Asher Raziel, 2025 Dev
+Although it’s not perfect, we hope you—whether a Fang Robotics
+member or not—enjoy exploring and extending this code!  
+
+> “Code should be enjoyable. Code should be readable. Code should
+> be elegant. And if there must be hacks, let them be organized,
+> thoroughly documented, and isolated—like U‑235.”  
+>  
+> — Raven Asher Raziel, 2025 Dev
+
 
 ## Resources
 
 - **The [Taproot wiki](https://gitlab.com/aruw/controls/taproot/-/wikis/home). It has lots of content and we strongly recommend you browse through it to get a sense of
-  what's there.**
+what's there.**
 - [aruw-edu](https://gitlab.com/aruw/controls/aruw-edu): a hands-on tutorial for building robot code with Taproot
 - [aruw-mcb](https://gitlab.com/aruw/controls/aruw-mcb), ARUW's full robot code project available for reference
 - The [generated API documentation for Taproot](https://aruw.gitlab.io/controls/taproot/)
@@ -173,7 +185,7 @@ page](https://gitlab.com/aruw/controls/taproot/-/wikis/Build-Targets-Overview) f
 information). Because the build setup is different for the test, sim, and RoboMaster Development
 Board (aka MCB) environments, while working on a particular portion of code you may select an
 appropriate profile that provides optimal
-[intellisense](https://code.visualstudio.com/docs/editor/intellisense). To select a configuration,
+[IntelliSense](https://code.visualstudio.com/docs/editor/intellisense). To select a configuration,
 in VSCode, type <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>, then type "C/C++:Select a
 Configuration" and hit enter. A dropdown menu will appear where you may choose either the "Test",
 "Sim", or "Hardware" configuration.
