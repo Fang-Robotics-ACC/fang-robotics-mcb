@@ -23,13 +23,12 @@ namespace control
 
         void AutofireCommand::end(bool interrupted)
         {
-            m_turret.autoFireOff();
         }
 
         bool AutofireCommand::isFinished() const
         {
             //It will be removed by the command mapping
-            return false;
+            return true;
         }
     }
 }
