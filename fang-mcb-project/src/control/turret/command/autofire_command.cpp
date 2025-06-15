@@ -27,7 +27,7 @@ namespace control
 
         bool AutofireCommand::isFinished() const
         {
-            //It will be removed by the command mapping
+            //Only needs to switch the booster
             return true;
         }
     }
