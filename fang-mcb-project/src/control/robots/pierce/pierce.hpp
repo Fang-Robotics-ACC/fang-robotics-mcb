@@ -46,7 +46,7 @@ namespace control
         void setDefaultCommands();
         void registerIoMappings();
 
-        static constexpr Config mk_config
+        const Config mk_config
         {
             k_turretMotionConfig,
             k_turretConfig
