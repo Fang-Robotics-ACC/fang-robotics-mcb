@@ -38,13 +38,8 @@ namespace trap::control::chassis
          *
          * @note Tested with a normal four-wheel mecanum chassis and a two-wheel sentry chassis.
          */
-        float getPowerLimitRatio();
+        float getPowerLimitRatio() const;
         
-        /**
-         * Must be called regularly to get data.
-         */
-        void update();
-
     private:
         Joules getEnergyBuffer() const;
 

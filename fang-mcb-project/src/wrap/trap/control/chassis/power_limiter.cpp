@@ -12,7 +12,7 @@ namespace trap::control::chassis
     {
     }
 
-    float PowerLimiter::getPowerLimitRatio()
+    float PowerLimiter::getPowerLimitRatio() const
     {
 
         const bool refereeConnected{m_refereeSystem.getRefSerialReceivingData()};
