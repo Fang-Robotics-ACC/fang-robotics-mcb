@@ -17,7 +17,7 @@ namespace control
             m_activateBoosterCommand{m_turret},
             m_deactivateBoosterCommand{m_turret},
             m_chassis{drivers, config::chassis::k_defaultConfig},
-            m_fieldMecanumCommand{m_chassis, drivers.inputHandler, config::motion::k_defaultMotionConfig}
+            m_fieldMecanumCommand{m_chassis, m_turret, drivers.inputHandler, config::motion::k_defaultMotionConfig}
     {
     }
     
