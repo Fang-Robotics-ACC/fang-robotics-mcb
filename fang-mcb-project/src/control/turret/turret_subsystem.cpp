@@ -48,6 +48,11 @@ namespace control
             m_gimbal.setPitch(pitch);
         }
 
+        Radians TurretSubsystem::getPitch() const
+        {
+            return m_gimbal.getPitch();
+        }
+
         void TurretSubsystem::addPitch(const Radians& angle)
         {
             m_gimbal.addPitch(angle);

@@ -36,6 +36,7 @@ namespace control
             Radians getTargetFieldYaw() const;
 
             void setPitch(const Radians& pitch);
+            Radians getPitch() const;
             void addPitch(const Radians& pitch);
 
             Radians getMaxPitch() const;
