@@ -15,12 +15,14 @@
 //Commands
 #include "control/turret/command/aim_command.hpp"
 #include "control/turret/command/activate_booster_command.hpp"
+#include "control/turret/command/deactivate_booster_command.hpp"
 #include "control/turret/command/autofire_command.hpp"
+#include "control/turret/command/stop_autofire_command.hpp"
 #include "control/robots/pierce/command_mapping/turret_command_map.hpp"
 
 #include "trap/communication/sensors/imu.hpp"
 
-#include "tap/control/hold_command_mapping.hpp"
+#include "tap/control/press_command_mapping.hpp"
 
 namespace control
 {
@@ -59,10 +61,14 @@ namespace control
 
         turret::AimCommand m_aimCommnd;
         turret::ActivateBoosterCommand m_activateBoosterCommand;
+        turret::DeactivateBoosterCommand m_deactivateBoosterCommand;
         turret::AutofireCommand m_autofireCommand;
+        turret::StopAutofireCommand m_stopAutofireCommand;
 
-        tap::control::HoldCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, tap::control::RemoteMapState{tap::communication::serial::Remote::Switch::LEFT_SWITCH, tap::communication::serial::Remote::SwitchState::UP}};
-        tap::control::HoldCommandMapping m_activateAutofireCommandMapping{&m_drivers, {&m_autofireCommand}, tap::control::RemoteMapState{tap::communication::serial::Remote::Switch::RIGHT_SWITCH, tap::communication::serial::Remote::SwitchState::UP}};
+        tap::control::PressCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, k_activateBoosterRemoteState};
+        tap::control::PressCommandMapping m_deactivateBoosterCommandMapping{&m_drivers, {&m_deactivateBoosterCommand}, k_deactivateBoosterRemoteState};
+        tap::control::PressCommandMapping m_activateAutofireCommandMapping{&m_drivers, {&m_autofireCommand}, k_autofireRemoteState};
+        tap::control::PressCommandMapping m_stopAutofireCommandMapping{&m_drivers, {&m_stopAutofireCommand}, k_stopAutofireRemoteState};
         chassis::ChassisSubsystem m_chassis;
         chassis::FieldMecanumCommand m_fieldMecanumCommand;
 
