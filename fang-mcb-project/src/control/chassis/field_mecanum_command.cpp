@@ -9,8 +9,11 @@ namespace control
 {
     namespace chassis
     {
-        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, InputHandler& inputHandler, const config::motion::MotionConfig& motionConfig)
-        : m_chassisSubsystem{chassisSubsystem}, m_inputHandler{inputHandler}, mk_motionConfig{motionConfig}
+        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,InputHandler& inputHandler, const config::motion::MotionConfig& motionConfig)
+        :   m_chassisSubsystem{chassisSubsystem},
+            m_turret{turret},
+            m_inputHandler{inputHandler},
+            mk_motionConfig{motionConfig}
         {
             addSubsystemRequirement(&m_chassisSubsystem);
         }
