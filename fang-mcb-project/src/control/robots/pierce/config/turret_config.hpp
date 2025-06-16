@@ -12,6 +12,7 @@ namespace control
 
     static const control::turret::TurretSubsystem::Config k_turretConfig
     {
+        7_deg,
         k_gimbalConfig,
         k_ammoBoosterConfig,
         k_feederConfig
