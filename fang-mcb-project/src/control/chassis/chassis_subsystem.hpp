@@ -124,6 +124,7 @@ namespace control
             ///If you are facing forward, and the platform moves forward,
             ///Then the right wheels will rotate clockwise, (when you are looking at the shaft)
             static const bool mk_rightInversion{true};
+
         };
     }//namespace chassis
 }//namespace control

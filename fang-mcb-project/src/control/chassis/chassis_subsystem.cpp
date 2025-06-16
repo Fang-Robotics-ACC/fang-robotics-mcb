@@ -61,10 +61,14 @@ namespace control
 
         void ChassisSubsystem::syncWheelsToLogic()
         {
-            m_frontLeftMotor.setSpeed(m_mecanumLogic.getFrontLeftWheelSpeed());
-            m_frontRightMotor.setSpeed(m_mecanumLogic.getFrontRightWheelSpeed());
-            m_rearLeftMotor.setSpeed(m_mecanumLogic.getRearLeftWheelSpeed());
-            m_rearRightMotor.setSpeed(m_mecanumLogic.getRearRightWheelSpeed());
+            //If we are exeeding power, we should downscale it for safety
+            //Returns 0 if we are at or below the critical threshold
+            //Reutnrs 1 if we are above the limiting threshold (buffer - crit)
+            const float powerScale{m_powerLimiter.getPowerLimitRatio()};
+            m_frontLeftMotor.setSpeed(m_mecanumLogic.getFrontLeftWheelSpeed() * powerScale);
+            m_frontRightMotor.setSpeed(m_mecanumLogic.getFrontRightWheelSpeed() * powerScale);
+            m_rearLeftMotor.setSpeed(m_mecanumLogic.getRearLeftWheelSpeed() * powerScale);
+            m_rearRightMotor.setSpeed(m_mecanumLogic.getRearRightWheelSpeed() * powerScale);
         }
 
         void ChassisSubsystem::updateFieldAngle()
