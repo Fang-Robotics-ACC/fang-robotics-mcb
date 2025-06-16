@@ -4,6 +4,8 @@
 #include "control/turret/gimbal_system.hpp"
 #include "control/turret/feeder_system.hpp"
 
+#include "configuration/mathaliases.hpp"
+
 #include "drivers.hpp"
 #include "unitaliases.hpp"
 
@@ -35,6 +37,13 @@ namespace control
             virtual void refresh() override;
 
             TurretSubsystem(Drivers& drivers, Imu& imu, const Config& config);
+
+            /**
+             * Wherever the the yaw is aiming to look fieldwise, returns
+             * a unit vector.
+             */
+            math::AbstractVector2D getTargetFieldDirection() const;
+
             void setFieldYaw(const Radians& yaw);
             void addFieldYaw(const Radians& angle);
 
@@ -54,6 +63,7 @@ namespace control
             void autoFireOff();
 
         private:
+            static constexpr math::AbstractVector2D mk_forward{0.0, 1.0};
             void syncFieldYaw();
             Radians getChassisYaw() const;
 

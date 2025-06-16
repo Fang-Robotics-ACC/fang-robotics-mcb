@@ -1,4 +1,5 @@
 #include "turret_subsystem.hpp"
+#include "util/rotatevector2d.hpp"
 
 namespace control
 {
@@ -14,6 +15,7 @@ namespace control
         {
         }
 
+
         void TurretSubsystem::initialize()
         {
             m_gimbal.initialize();
@@ -27,6 +29,11 @@ namespace control
             m_gimbal.update();
             m_booster.update();
             m_feeder.update();
+        }
+
+        math::AbstractVector2D TurretSubsystem::getTargetFieldDirection() const
+        {
+            return util::math::rotateVector2D(mk_forward, m_targetFieldYaw);
         }
 
         void TurretSubsystem::setFieldYaw(const Radians& yaw)
