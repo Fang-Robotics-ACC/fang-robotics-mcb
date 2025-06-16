@@ -17,6 +17,7 @@ namespace config
          */
         struct MotionConfig
         {
+            MetersPerSecond maxTranslation;
             MetersPerSecond maxXTranslation;
             MetersPerSecond maxYTranslation;
             RPM maxRotation;
@@ -25,6 +26,7 @@ namespace config
 
         static const MotionConfig k_defaultMotionConfig
         {
+            10_mph, //max translation - for turret based strafe
             10_mph, //maxXtranslation
             10_mph, //maxYTranslatioon
             100_rpm, //maxRotation
