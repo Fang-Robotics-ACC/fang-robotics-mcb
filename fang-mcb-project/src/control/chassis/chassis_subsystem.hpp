@@ -6,6 +6,7 @@
 #include "physicsaliases.hpp"
 #include "logic/chassis/fieldmecanumlogic.hpp"
 #include "wrap/trap/communication/pwm_data.hpp"
+#include "wrap/trap/control/chassis/power_limiter.hpp"
 
 #include "tap/communication/gpio/pwm.hpp"
 #include "tap/control/subsystem.hpp"
@@ -29,6 +30,7 @@ namespace control
 #else
         using DriveMotor = motors::GearboxRepeatUltraMk2;
 #endif
+        using PowerLimiter = trap::control::chassis::PowerLimiter;
 
         struct ChassisMotorConfig
         {
@@ -50,6 +52,7 @@ namespace control
         {
             ChassisDimensionConfig chassisDimensions;
             ChassisMotorConfig chassisMotors;
+            PowerLimiter::Config powerLimiterConfig;
         };
 
         /**
@@ -110,6 +113,8 @@ namespace control
             DriveMotor m_rearRightMotor;
 
             logic::chassis::FieldMecanumLogic m_mecanumLogic;
+
+            PowerLimiter m_powerLimiter;
 
 
             ///If you are facing forward, and the platform moves forward,
