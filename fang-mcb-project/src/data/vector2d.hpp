@@ -14,14 +14,14 @@ namespace data
         };
 
 
-        template <typename Unit>
-        Vector2D<Unit> operator*(const Vector2D<Unit>& vector, double scale)
+        template <typename ScaleUnit>
+        Vector2D<ScaleUnit> operator*(const Vector2D<double>& vector, const ScaleUnit& scale)
         {
             return Vector2D{vector.x, vector.y};
         }
 
-        template <typename Unit>
-        Vector2D<Unit> operator*(double scale, const Vector2D<Unit>& vector)
+        template <typename ScaleUnit>
+        Vector2D<ScaleUnit> operator*(const ScaleUnit& scale, const Vector2D<double>& vector)
         {
             return vector * scale;
         }
