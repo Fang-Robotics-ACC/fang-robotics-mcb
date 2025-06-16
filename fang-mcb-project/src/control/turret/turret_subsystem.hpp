@@ -19,8 +19,13 @@ namespace control
         public:
             using Imu = trap::communication::sensors::Imu;
 
+            /**
+             * yawHomeOffset - how many degrees the zero yaw of the yaw motor fr
+             * the forward direction
+             */
             struct Config
             {
+                Degrees yawHomeOffset;
                 GimbalSystem::Config gimbalConfig;
                 AmmoBoosterSystem::Config ammoConfig;
                 FeederSystem::Config feederConfig;
@@ -51,6 +56,10 @@ namespace control
         private:
             void syncFieldYaw();
             Radians getChassisYaw() const;
+
+            //Robotwise yaw where zero degrees is the forward direciton on the chassis
+            void setRawTurretRobotwiseYaw(const Radians& yaw);
+            const Radians mk_homeYawOffset;
             GimbalSystem m_gimbal;
             AmmoBoosterSystem m_booster;
             FeederSystem m_feeder;

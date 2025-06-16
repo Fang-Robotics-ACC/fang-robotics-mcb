@@ -99,5 +99,14 @@ namespace control
         {
             return m_chassisImu.getYaw();
         }
+
+        void TurretSubsystem::setRawTurretRobotwiseYaw(const Radians& yaw)
+        {
+            //If on startup, the turret is 45 degrees clockwise
+            //Then the offset would be 45
+            //Thus, if the turret is told zero degrees, then
+            //the gimbal system must be tld 45 degrees counterclockwise
+            m_gimbal.setYaw(yaw - mk_homeYawOffset);
+        }
     }
 }
