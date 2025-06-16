@@ -25,6 +25,18 @@ namespace data
         {
             return vector * scale;
         }
+
+        template <typename Unit>
+        Vector2D<Unit> operator*(const Vector2D<Unit>& vector, double scale)
+        {
+            return Vector2D<Unit>{vector.x * scale, vector.y * scale};
+        }
+
+        template <typename Unit>
+        Vector2D<Unit> operator*(const double& scale, const Vector2D<Unit>& vector)
+        {
+            return vector * scale;
+        }
     }
 }
 #endif
