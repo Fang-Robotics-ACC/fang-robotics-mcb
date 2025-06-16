@@ -17,7 +17,7 @@ namespace data
         template <typename ScaleUnit>
         Vector2D<ScaleUnit> operator*(const Vector2D<double>& vector, const ScaleUnit& scale)
         {
-            return Vector2D{vector.x, vector.y};
+            return Vector2D<ScaleUnit>{vector.x * scale, vector.y * scale};
         }
 
         template <typename ScaleUnit>
