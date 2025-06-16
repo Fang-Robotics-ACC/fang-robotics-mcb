@@ -2,6 +2,7 @@
 #include "configuration/motion_control_config.hpp"
 #include "chassislogicaliases.hpp"
 #include "unitaliases.hpp"
+#include "rotatevector2d.hpp"
 
 #include <cassert>
 
@@ -71,15 +72,14 @@ namespace control
 
             const math::AbstractVector2D abstractTranslation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
             const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
-            const math::AbstractVector2D turretBearing{m_turret.getTargetFieldDirection()};
-            //Linear algebra transformation into a new basis (robot frame to world frame)
-            const physics::Velocity2D translation
-            {frameTranslation.x * turretBearing.x + frameTranslation.y * turretBearing.x,
-             frameTranslation.x * turretBearing.y + frameTranslation.y * turretBearing.y};
+            const Radians turretBearing{m_turret.getTargetFieldYaw()};
+
+            const physics::Velocity2D fieldTranslation{util::math::rotateVector2D(frameTranslation, turretBearing)};
 
             const double abstractRotation{m_inputHandler.getChassisInputs().getRemoteRotation()};
+
             const RPM rotation{abstractRotation * mk_motionConfig.maxRotation};
-            m_chassisSubsystem.setMotion(translation, rotation);
+            m_chassisSubsystem.setMotion(fieldTranslation, rotation);
         }
 
         void FieldMecanumCommand::executeKeyboardTestFieldRotate()
