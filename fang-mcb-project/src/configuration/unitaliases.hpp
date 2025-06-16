@@ -30,6 +30,7 @@ using RawRadians = units::angle::radians;
 using RawMeters = units::length::meters;
 using RawMetersPerRadians = units::compound_unit<RawMeters, units::inverse<RawRadians>>;
 using MetersPerRadians = units::unit_t<RawMetersPerRadians>;
+using Joules = units::energy::joule_t;
 
 //One of the few moments that I would use auto
 //These constants do not alter anything numerically, but are useful when
