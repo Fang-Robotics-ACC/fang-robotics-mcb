@@ -6,6 +6,7 @@ namespace control
     {
         TurretSubsystem::TurretSubsystem(Drivers& drivers, Imu& imu, const Config& config)
         :   Subsystem{&drivers},
+            mk_homeYawOffset{config.homeYawOffset},
             m_gimbal{drivers, config.gimbalConfig},
             m_booster{drivers, config.ammoConfig},
             m_feeder{drivers, config.feederConfig},

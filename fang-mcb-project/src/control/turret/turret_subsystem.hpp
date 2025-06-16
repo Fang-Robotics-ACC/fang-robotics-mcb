@@ -25,7 +25,7 @@ namespace control
              */
             struct Config
             {
-                Degrees yawHomeOffset;
+                Degrees homeYawOffset;
                 GimbalSystem::Config gimbalConfig;
                 AmmoBoosterSystem::Config ammoConfig;
                 FeederSystem::Config feederConfig;
