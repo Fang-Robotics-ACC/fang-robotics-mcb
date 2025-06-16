@@ -32,10 +32,19 @@ namespace config
             trap::gpio::PwmData{tap::gpio::Pwm::C4, k_chassisPwmFreq}     //Rear Right PwmData
         };
 
+        static const ChassisSubsystem::PowerLimiter::Config k_chassisPowerLimiterConfig
+        {
+            60_J,
+            10_J,
+            5_J
+        };
+
+
         static const ChassisSubsystem::ChassisConfig k_defaultConfig
         {
             k_defaultDimensionConfig,
-            k_defaultMotorConfig
+            k_defaultMotorConfig,
+            k_chassisPowerLimiterConfig
         };
     }//namespace chassis
 }//namespace control
