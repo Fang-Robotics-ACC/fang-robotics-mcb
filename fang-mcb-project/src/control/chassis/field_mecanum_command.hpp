@@ -49,7 +49,7 @@ namespace control
             ChassisSubsystem& m_chassisSubsystem;
             const turret::TurretSubsystem& m_turret; //We don't want the command to alter the turret state
             InputHandler& m_inputHandler;
-            ControlMode m_controlMode{ControlMode::REMOTE_TEST_FIELD_ROTATE};
+            ControlMode m_controlMode{ControlMode::REMOTE_TEST_STRAFE_TURRET};
             const config::motion::MotionConfig mk_motionConfig;
         };
     }//namespace control

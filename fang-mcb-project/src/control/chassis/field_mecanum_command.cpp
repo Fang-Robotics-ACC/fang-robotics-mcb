@@ -68,9 +68,18 @@ namespace control
 
         void FieldMecanumCommand::executeRemoteTestStrafeTurret()
         {
-            //const logic::chassis::Velocity2D translation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
-            //const RPM rotation{0};
-            //m_chassisSubsystem.setMotion(translation, rotation);
+
+            const math::AbstractVector2D abstractTranslation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
+            const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
+            const math::AbstractVector2D turretBearing{m_turret.getTargetFieldDirection()};
+            //Linear algebra transformation into a new basis (robot frame to world frame)
+            const physics::Velocity2D translation
+            {frameTranslation.x * turretBearing.x + frameTranslation.y * turretBearing.x,
+             frameTranslation.x * turretBearing.y + frameTranslation.y * turretBearing.y};
+
+            const double abstractRotation{m_inputHandler.getChassisInputs().getRemoteRotation()};
+            const RPM rotation{abstractRotation * mk_motionConfig.maxRotation};
+            m_chassisSubsystem.setMotion(translation, rotation);
         }
 
         void FieldMecanumCommand::executeKeyboardTestFieldRotate()
