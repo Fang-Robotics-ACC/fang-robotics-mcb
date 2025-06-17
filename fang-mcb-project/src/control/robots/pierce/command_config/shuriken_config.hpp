@@ -13,7 +13,7 @@ namespace control
     };
     static const chassis::ShurikenCommand::Config mk_shurikenConfig
     {
-        200_rpm,
+        125_rpm,
         mk_shurikenMotionConfig
     };
 }
