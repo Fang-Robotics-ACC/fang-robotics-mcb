@@ -20,7 +20,6 @@ namespace control
 
     private:
     tap::communication::serial::Remote& m_remote;
-    control::chassis::ChassisInputHandler m_chassisInputHandler;
     turret::TurretInputHandler m_turretInputHandler;
     };
 }
