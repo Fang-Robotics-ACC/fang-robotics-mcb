@@ -84,165 +84,11 @@ int main()
 
     Drivers& drivers{DoNotUse_getDriversReference()};
 
-
     Board::initialize();
     initializeIo(drivers);
 
     static Robot robot{drivers};
     robot.initialize();
-
-    //robot.initializeSubsystemCommands();
-    const trap::motor::DjiSpeedPid::Config pitchPidConfig{50000, 1000, 20 ,100, trap::motor::DjiGM6020::k_maxOutput};
-    const trap::motor::DjiGM6020::Config pitchConfig{static_cast<tap::motor::MotorId>(tap::motor::MOTOR2), tap::can::CanBus::CAN_BUS1, "epic", true,  1.0, pitchPidConfig, false};
-    //trap::motor::DjiGM6020 motor{drivers, config};
-
-
-    const trap::motor::DjiSpeedPid::Config yawPidConfig{50000, 1000, 0 ,100, trap::motor::DjiGM6020::k_maxOutput};
-    const trap::motor::DjiGM6020::Config yawConfig{static_cast<tap::motor::MotorId>(tap::motor::MOTOR1), tap::can::CanBus::CAN_BUS1, "epi", true,  1.0, yawPidConfig, false};
-    //trap::motor::DjiGM6020 motor2{drivers, config2};
-
-
-    //using GimbalSystem = control::turret::GimbalSystem;
-    //const GimbalSystem::Config gimbalConfig
-    //{
-    //    -10_deg,
-    //    10_deg,
-    //    pitchConfig,
-    //    yawConfig
-    //};
-    //GimbalSystem gimbal{drivers, gimbalConfig};
-    //gimbal.initialize();
-    //gimbal.setPitch(0_deg);
-
-    using FeederSystem = control::turret::FeederSystem;
-
-    static const trap::motor::DjiSpeedPid::Config feederMotorPidConfig 
-    {
-        5,
-        100,
-        0,
-        100,
-        trap::motor::DjiM2006::k_maxOutput
-    };
-
-    static const trap::motor::DjiM2006::Config feederMotorConfig
-    { 
-        tap::motor::MOTOR3,
-        tap::can::CanBus::CAN_BUS1,
-        "epic",
-        false,
-        1.0,
-        feederMotorPidConfig
-    };
-
-
-
-    static const FeederSystem::Config feederConfig
-    {
-        7,
-        25_Hz,
-        feederMotorConfig
-    };
-
-
-    using AmmoBooster = control::turret::AmmoBoosterSystem;
-    using Flywheel = control::turret::FlywheelSystem;
-
-    static const trap::motor::DjiSpeedPid::Config flywheelMotorPidConfig 
-    {
-        10,
-        10,
-        0,
-        100,
-        trap::motor::DjiM3508::k_maxOutput
-    };
-
-    static const trap::motor::DjiSpeedPid::Config flywheelMotorPidConfigRight
-    {
-        10,
-        10,
-        0,
-        100,
-        trap::motor::DjiM3508::k_maxOutput
-    };
-
-    static const Flywheel::DriveMotor::Config leftFlywheelMotorConfig
-    { 
-        static_cast<tap::motor::MotorId>(tap::motor::MOTOR8),
-        tap::can::CanBus::CAN_BUS1,
-        "leftFlywheel",
-        false,
-        1.0,
-        flywheelMotorPidConfig 
-    };
-    static const Flywheel::Config leftFlywheelConfig 
-    {
-        150_mm,
-        leftFlywheelMotorConfig
-    };
-
-    static const Flywheel::DriveMotor::Config rightFlywheeMotorConfig 
-    { 
-        static_cast<tap::motor::MotorId>(tap::motor::MOTOR7),
-        tap::can::CanBus::CAN_BUS1,
-        "rightFlywheel",
-        true,
-        1.0,
-        flywheelMotorPidConfigRight
-    };
-
-    static const Flywheel::Config rightFlywheelConfig
-    {
-        150_mm,
-        rightFlywheeMotorConfig
-    };
-
-    static const AmmoBooster::Config ammoBoosterConfig
-    {
-        50_fps,
-        leftFlywheelConfig,
-        rightFlywheelConfig
-    };
-
-    //Flywheel::DriveMotor testmotor{drivers, leftFlywheelMotorConfig};
-    Drivers& drivers2{drivers};
-    Drivers& drivers3{drivers2};
-    //testmotor.initialize();
-    //testmotor.setDesiredOutput(10000);
-    //tap::motor::DjiMotor djiMotor{&drivers3, tap::motor::MOTOR3, tap::can::CanBus::CAN_BUS1, false, "test"};
-    //djiMotor.initialize();
-    //djiMotor.setDesiredOutput(50000);
-    //testmotor.initialize();
-    //testmotor.setTargetSpeed(1000_rpm);
-
-    //Flywheel testFlywheel{drivers, leftFlywheelConfig};
-    //testFlywheel.initialize();
-    //testFlywheel.setTargetRimSpeed(10_mps);
-
-    //Flywheel testFlywheelRight{drivers, rightFlywheelConfig};
-    //testFlywheelRight.initialize();
-    //testFlywheelRight.setTargetRimSpeed(10_mps);
-
-    //AmmoBooster booster{drivers, ammoBoosterConfig};
-    //booster.initialize();
-    //booster.autoFireOn();
-
-    //FeederSystem feeder{drivers, feederConfig};
-    //feeder.initialize();
-    //feeder.feedOn();
-
-    //trap::motor::DjiM2006 testFeeder{drivers, feederMotorConfig};
-    //testFeeder.initialize();
-    //testFeeder.setDesiredOutput(1000);
-
-
-
-    //djiDriver.initialize();
-    //djiDriver.setDesiredOutput(10000);
-
-
-    //motor.setDesiredOutput(1000);
-
 
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
@@ -251,15 +97,6 @@ int main()
 #endif
     while (1)
     {
-        //testmotor.update();
-        //testFlywheel.update();
-        //testFlywheelRight.update();
-        //booster.update();
-        //feeder.update();
-        //gimbal.update();
-        //gimbal.setPitch(30_deg * drivers.remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_VERTICAL));
-        //gimbal.setYaw(300_deg * drivers.remote.getChannel(tap::communication::serial::Remote::Channel::LEFT_HORIZONTAL));
-        // do this as fast as you can
         PROFILE(drivers.profiler, updateIo, (drivers));
 
         if (sendMotorTimeout.execute())
