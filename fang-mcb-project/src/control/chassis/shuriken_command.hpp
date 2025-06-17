@@ -1,5 +1,5 @@
-#ifndef FANG_ROBOTICS_MCB_FIELD_MECANUM_COMMAND_HPP
-#define FANG_ROBOTICS_MCB_FIELD_MECANUM_COMMAND_HPP
+#ifndef FANG_ROBOTICS_MCB_SHURIKEN_COMMAND_HPP
+#define FANG_ROBOTICS_MCB_SHURIKEN_COMMAND_HPP
 #include "control/input_handler.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/turret/turret_subsystem.hpp"
