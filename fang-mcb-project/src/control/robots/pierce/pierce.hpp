@@ -1,6 +1,8 @@
 #ifndef FANG_ROBOTICS_MCB_INFANTRY_HPP
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "drivers.hpp"
+#include "input_handler.hpp"
+
 #include "configuration/motion/turret_motion_config.hpp"
 
 
@@ -53,15 +55,14 @@ namespace control
         void setDefaultCommands();
         void registerIoMappings();
 
-        const Config mk_config
-        {
-            k_turretMotionConfig,
-            k_turretConfig
-        };
+        static constexpr Config mk_config; //defined in pierce_config.cpp
 
         config::motion::TurretMotionConfig turretMotionConfig;
 
+        chassis::ChassisInputHandler m_chassisInput;
+
         Drivers& m_drivers;
+
         trap::communication::sensors::Imu m_imu;
 
         turret::TurretSubsystem m_turret;
