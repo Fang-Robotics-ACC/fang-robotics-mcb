@@ -48,7 +48,7 @@ namespace control
     void Pierce::setDefaultCommands()
     {
         m_turret.setDefaultCommand(&m_aimCommnd);
-        m_chassis.setDefaultCommand(&m_fieldMecanumCommand);
+        //m_chassis.setDefaultCommand(&m_fieldMecanumCommand);
         //m_drivers.commandScheduler.addCommand(&m_activateBoosterCommand);
     }
     
