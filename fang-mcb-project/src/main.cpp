@@ -43,6 +43,8 @@
 
 /* control includes ---------------------------------------------------------*/
 #include "tap/architecture/clock.hpp"
+
+#include "io.hpp"
 #include "units.h"
 #include "control/robot.hpp"
 
@@ -52,14 +54,6 @@
 static constexpr float MAIN_LOOP_FREQUENCY = 500.0f;
 tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / MAIN_LOOP_FREQUENCY);
 
-// Place any sort of input/output initialization here. For example, place
-// serial init stuff here.
-static void initializeIo(Drivers& drivers);
-
-// Anything that you would like to be called place here. It will be called
-// very frequently. Use PeriodicMilliTimers if you don't want something to be
-// called as frequently.
-static void updateIo(Drivers& drivers);
 
 int main()
 {
@@ -105,7 +99,7 @@ int main()
     return 0;
 }
 
-static void initializeIo(Drivers& drivers)
+void initializeIo(Drivers& drivers)
 {
     drivers.analog.init();
     drivers.pwm.init();
@@ -121,7 +115,7 @@ static void initializeIo(Drivers& drivers)
     drivers.djiMotorTerminalSerialHandler.init();
 }
 
-static void updateIo(Drivers& drivers)
+void updateIo(Drivers& drivers)
 {
 #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->updateSims();
