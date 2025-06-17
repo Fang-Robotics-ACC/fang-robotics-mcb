@@ -78,7 +78,7 @@ int main()
 
     /*
      * NOTE: We are using DoNotUse_getDrivers here because in the main
-     *      robot loop we must access the singleton drivers_ptr to update
+     *      robot loop we must access the singleton drivers to update
      *      IO states and run the scheduler.
      */
 
