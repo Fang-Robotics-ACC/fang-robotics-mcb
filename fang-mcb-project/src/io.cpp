@@ -18,9 +18,9 @@ void initializeIo(Drivers& drivers)
 
 void updateIo(Drivers& drivers)
 {
-#ifdef PLATFORM_HOSTED
+    #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->updateSims();
-#endif
+    #endif
 
     drivers.canRxHandler.pollCanData();
     drivers.refSerial.updateSerial();

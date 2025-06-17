@@ -56,9 +56,9 @@ tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / MAIN_LOOP_FREQUENCY);
 
 int main()
 {
-#ifdef PLATFORM_HOSTED
+    #ifdef PLATFORM_HOSTED
     std::cout << "Simulation starting..." << std::endl;
-#endif
+    #endif
 
     /*
      * NOTE: We are using DoNotUse_getDrivers here because in the main
@@ -77,11 +77,11 @@ int main()
     static Robot robot{drivers};
     robot.initialize();
 
-#ifdef PLATFORM_HOSTED
+    #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
     // Blocking call, waits until Windows Simulator connects.
     tap::communication::TCPServer::MainServer()->getConnection();
-#endif
+    #endif
     while (1)
     {
         PROFILE(drivers.profiler, updateIo, (drivers));
