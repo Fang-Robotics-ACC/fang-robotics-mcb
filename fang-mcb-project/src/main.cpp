@@ -87,6 +87,9 @@ int main()
     Board::initialize();
     initializeIo(drivers);
 
+    //This prevents the large size of the robot class from hoarding the stack
+    //which causes annoying stack overflow issues
+    //static classes are in static memory instead of stack memory
     static Robot robot{drivers};
     robot.initialize();
 
