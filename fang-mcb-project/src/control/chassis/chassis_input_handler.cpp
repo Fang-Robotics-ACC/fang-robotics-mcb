@@ -15,6 +15,30 @@ namespace control
         {
         }
 
+        math::AbstractVector2D ChassisInputHandler::getKeyboardTranslation() const
+        {
+            if (m_remote.keyPressed(mk_keyboardConfig.forwardKey))
+            {
+                return mk_forward;
+            }
+            else if(m_remote.keyPressed(mk_keyboardConfig.backwardKey))
+            {
+                return mk_backward;
+            }
+            else if(m_remote.keyPressed(mk_keyboardConfig.leftKey))
+            {
+                return mk_left;
+            }
+            else if(m_remote.keyPressed(mk_keyboardConfig.rightKey))
+            {
+                return mk_right;
+            }
+            else
+            {
+                return mk_still;
+            }
+        }
+
         math::AbstractVector2D ChassisInputHandler::getRemoteTranslation() const
         {
             const double xTranslationScale{m_remote.getChannel(mk_remoteConfig.xTranslationChannel)};

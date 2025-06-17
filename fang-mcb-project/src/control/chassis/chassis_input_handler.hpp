@@ -45,6 +45,12 @@ namespace control
             math::AbstractVector2D getRemoteTranslation() const;
 
             /**
+             * Returns the key pressed. if multiple are pressed, the priority is
+             * forward, backward, left right.
+             */
+            math::AbstractVector2D getKeyboardTranslation() const;
+
+            /**
              * Returns the amount that the turret should rotate
              */
             double getRemoteAngularDisplacement() const;
@@ -55,10 +61,19 @@ namespace control
              */
             double getRemoteRotation() const;
         private:
+
+            static constexpr math::AbstractVector2D mk_forward{0.0, 1.0};
+            static constexpr math::AbstractVector2D mk_backward{0.0, -1.0};
+
+            static constexpr math::AbstractVector2D mk_left{-1.0, 0.0};
+            static constexpr math::AbstractVector2D mk_right{1.0, 0.0};
+            static constexpr math::AbstractVector2D mk_still{0.0, 0.0};
+
             Remote& m_remote;
 
             const RemoteConfig mk_remoteConfig;
             const KeyboardConfig mk_keyboardConfig;
+
         };
     }// namespace chassis
 }//namespace control
