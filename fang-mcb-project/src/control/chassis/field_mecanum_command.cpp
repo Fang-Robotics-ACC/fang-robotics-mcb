@@ -10,10 +10,10 @@ namespace control
 {
     namespace chassis
     {
-        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,InputHandler& inputHandler, const config::motion::MotionConfig& motionConfig)
+        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,ChassisInputHandler& inputHandler, const config::motion::MotionConfig& motionConfig)
         :   m_chassisSubsystem{chassisSubsystem},
             m_turret{turret},
-            m_inputHandler{inputHandler},
+            m_input{inputHandler},
             mk_motionConfig{motionConfig}
         {
             addSubsystemRequirement(&m_chassisSubsystem);
@@ -59,8 +59,8 @@ namespace control
 
         void FieldMecanumCommand::executeRemoteTestFieldRotate()
         {
-            const math::AbstractVector2D abstractTranslation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
-            const double abstractRotation{m_inputHandler.getChassisInputs().getRemoteRotation()};
+            const math::AbstractVector2D abstractTranslation{m_input.getRemoteTranslation()};
+            const double abstractRotation{m_input.getRemoteRotation()};
 
             const physics::Velocity2D translation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
             const RPM rotation{abstractRotation * mk_motionConfig.maxRotation};
@@ -70,13 +70,13 @@ namespace control
         void FieldMecanumCommand::executeRemoteTestStrafeTurret()
         {
 
-            const math::AbstractVector2D abstractTranslation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
+            const math::AbstractVector2D abstractTranslation{m_input.getRemoteTranslation()};
             const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
             const Radians turretBearing{m_turret.getTargetFieldYaw()};
 
             const physics::Velocity2D fieldTranslation{util::math::rotateVector2D(frameTranslation, turretBearing)};
 
-            const double abstractRotation{m_inputHandler.getChassisInputs().getRemoteRotation()};
+            const double abstractRotation{m_input.getRemoteRotation()};
 
             const RPM rotation{abstractRotation * mk_motionConfig.maxRotation};
             m_chassisSubsystem.setMotion(fieldTranslation, rotation);
