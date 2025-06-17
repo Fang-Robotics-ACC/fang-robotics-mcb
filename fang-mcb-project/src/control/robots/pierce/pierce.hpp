@@ -41,6 +41,7 @@ namespace control
     public:
     struct Config
     {
+        chassis::ChassisInputHandler::Config chassisInputConfig;
         config::motion::TurretMotionConfig turretMotionConfig;
         turret::TurretSubsystem::Config turretConfig;
     };
