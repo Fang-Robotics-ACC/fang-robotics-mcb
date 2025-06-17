@@ -23,13 +23,11 @@ namespace control
 
         void ActivateBoosterCommand::end(bool interrupted)
         {
-            m_turret.boosterOff();
         }
 
         bool ActivateBoosterCommand::isFinished() const
         {
-            //It will be removed by the command mapping
-            return false;
+            return true;
         }
     }
 }

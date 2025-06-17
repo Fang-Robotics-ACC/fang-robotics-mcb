@@ -2,6 +2,7 @@
 #include "configuration/motion_control_config.hpp"
 #include "chassislogicaliases.hpp"
 #include "unitaliases.hpp"
+#include "rotatevector2d.hpp"
 
 #include <cassert>
 
@@ -9,8 +10,11 @@ namespace control
 {
     namespace chassis
     {
-        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, InputHandler& inputHandler, const config::motion::MotionConfig& motionConfig)
-        : m_chassisSubsystem{chassisSubsystem}, m_inputHandler{inputHandler}, mk_motionConfig{motionConfig}
+        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,InputHandler& inputHandler, const config::motion::MotionConfig& motionConfig)
+        :   m_chassisSubsystem{chassisSubsystem},
+            m_turret{turret},
+            m_inputHandler{inputHandler},
+            mk_motionConfig{motionConfig}
         {
             addSubsystemRequirement(&m_chassisSubsystem);
         }
@@ -65,9 +69,17 @@ namespace control
 
         void FieldMecanumCommand::executeRemoteTestStrafeTurret()
         {
-            //const logic::chassis::Velocity2D translation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
-            //const RPM rotation{0};
-            //m_chassisSubsystem.setMotion(translation, rotation);
+
+            const math::AbstractVector2D abstractTranslation{m_inputHandler.getChassisInputs().getRemoteTranslation()};
+            const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
+            const Radians turretBearing{m_turret.getTargetFieldYaw()};
+
+            const physics::Velocity2D fieldTranslation{util::math::rotateVector2D(frameTranslation, turretBearing)};
+
+            const double abstractRotation{m_inputHandler.getChassisInputs().getRemoteRotation()};
+
+            const RPM rotation{abstractRotation * mk_motionConfig.maxRotation};
+            m_chassisSubsystem.setMotion(fieldTranslation, rotation);
         }
 
         void FieldMecanumCommand::executeKeyboardTestFieldRotate()

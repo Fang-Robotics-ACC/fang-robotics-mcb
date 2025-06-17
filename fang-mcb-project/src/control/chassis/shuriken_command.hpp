@@ -1,5 +1,5 @@
-#ifndef FANG_ROBOTICS_MCB_FIELD_MECANUM_COMMAND_HPP
-#define FANG_ROBOTICS_MCB_FIELD_MECANUM_COMMAND_HPP
+#ifndef FANG_ROBOTICS_MCB_SHURIKEN_COMMAND_HPP
+#define FANG_ROBOTICS_MCB_SHURIKEN_COMMAND_HPP
 #include "control/input_handler.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/turret/turret_subsystem.hpp"
@@ -12,11 +12,12 @@ namespace control
     namespace chassis
     {
         /**
-         * This intermediates the inputs and the mecanum drive 
+         * The chassis will spin in the desired direction. It will use turret oriented strafe.
          */
-        class FieldMecanumCommand: public tap::control::Command
+        class ShurikenCommand: public tap::control::Command
         {
         public:
+        using MotionConfig = config::motion::MotionConfig;
         /**
          * Remote uses the dji controller.
          * Keyboard uses the keyboard inputs.
@@ -24,9 +25,16 @@ namespace control
          * TEST_STAFE_TURRET = The chassis will only translate, leaving the horizontal mouse or right joystick
          * input for the turret.
          */
+        /**
+         * Positive shuriken speed is counterclockwise
+         */
+        struct Config
+        {
+            RPM shurikenSpeed;
+            MotionConfig motionConfig;
+        };
         enum class ControlMode
         {
-            REMOTE_TEST_FIELD_ROTATE,
             REMOTE_TEST_STRAFE_TURRET,
             KEYBOARD_TEST_FIELD_ROTATE,
             KEYBOARD_TEST_STRAFE_TURRET
@@ -34,7 +42,7 @@ namespace control
             /**
              * This takes a chassis subsystem and the respective inputHandler
              */
-            FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,InputHandler& inputHandler, const config::motion::MotionConfig& motionConfig);
+            ShurikenCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,ChassisInputHandler& input, const Config& config);
             const char* getName() const override;
             void initialize() override;
             void execute() override;
@@ -45,11 +53,12 @@ namespace control
             void executeRemoteTestStrafeTurret();
             void executeKeyboardTestFieldRotate();
             void executeKeyboardTestStrafeTurret();
-            static constexpr char* mk_name{"Chassis tank drive"};
+            static constexpr char* mk_name{"Shuriken Mode"};
             ChassisSubsystem& m_chassisSubsystem;
             const turret::TurretSubsystem& m_turret; //We don't want the command to alter the turret state
-            InputHandler& m_inputHandler;
+            ChassisInputHandler& m_input;
             ControlMode m_controlMode{ControlMode::REMOTE_TEST_STRAFE_TURRET};
+            const Config mk_config;
             const config::motion::MotionConfig mk_motionConfig;
         };
     }//namespace control
