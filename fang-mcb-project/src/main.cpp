@@ -45,15 +45,6 @@
 #include "tap/architecture/clock.hpp"
 #include "units.h"
 #include "control/robot.hpp"
-#include "configuration/chassis_config.hpp"
-#include "motors/gearboxrepeatultramk2.hpp"
-#include "trap/motor/dji_m2006.hpp"
-#include "trap/motor/dji_gm6020.hpp"
-#include "control/chassis/chassis_subsystem.hpp"
-#include "data/directionality.hpp"
-#include "control/turret/gimbal_system.hpp"
-#include "control/turret/feeder_system.hpp"
-#include "control/turret/ammo_booster_system.hpp"
 
 #include <iostream>
 
