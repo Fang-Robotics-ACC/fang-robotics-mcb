@@ -1,6 +1,7 @@
 #include "pierce.hpp"
 #include "drivers.hpp"
 #include "configuration/motion_control_config.hpp"
+#include "control/robots/pierce/command_config/shuriken_config.hpp"
 
 
 namespace control
@@ -17,7 +18,8 @@ namespace control
             m_activateBoosterCommand{m_turret},
             m_deactivateBoosterCommand{m_turret},
             m_chassis{drivers, config::chassis::k_defaultConfig},
-            m_fieldMecanumCommand{m_chassis, m_turret, drivers.inputHandler, config::motion::k_defaultMotionConfig}
+            m_fieldMecanumCommand{m_chassis, m_turret, drivers.inputHandler, config::motion::k_defaultMotionConfig},
+            m_shurikenCommand{m_chassis, m_turret, drivers.inputHandler.getChassisInputs(), mk_shurikenConfig}
     {
     }
     

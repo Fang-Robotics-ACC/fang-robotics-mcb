@@ -6,6 +6,7 @@
 
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/field_mecanum_command.hpp"
+#include "control/chassis/shuriken_command.hpp"
 #include "configuration/chassis_config.hpp"
 #include "control/turret/turret_subsystem.hpp"
 
@@ -71,6 +72,7 @@ namespace control
         tap::control::PressCommandMapping m_stopAutofireCommandMapping{&m_drivers, {&m_stopAutofireCommand}, k_stopAutofireRemoteState};
         chassis::ChassisSubsystem m_chassis;
         chassis::FieldMecanumCommand m_fieldMecanumCommand;
+        chassis::ShurikenCommand m_shurikenCommand;
 
     };//class Robot
 }//namspace control
