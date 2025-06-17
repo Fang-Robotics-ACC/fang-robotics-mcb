@@ -19,8 +19,8 @@ namespace control
             m_activateBoosterCommand{m_turret},
             m_deactivateBoosterCommand{m_turret},
             m_chassis{drivers, config::chassis::k_defaultConfig},
-            m_fieldMecanumCommand{m_chassis, m_turret, drivers.inputHandler, config::motion::k_defaultMotionConfig},
-            m_shurikenCommand{m_chassis, m_turret, drivers.inputHandler.getChassisInputs(), mk_shurikenConfig}
+            m_fieldMecanumCommand{m_chassis, m_turret, m_chassisInput, config::motion::k_defaultMotionConfig},
+            m_shurikenCommand{m_chassis, m_turret, m_chassisInput, mk_shurikenConfig}
     {
     }
     

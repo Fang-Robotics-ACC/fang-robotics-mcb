@@ -1,7 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_INFANTRY_HPP
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "drivers.hpp"
-#include "input_handler.hpp"
 
 #include "control/robots/pierce/config/chassis_input_config.hpp"
 #include "configuration/motion/turret_motion_config.hpp"
