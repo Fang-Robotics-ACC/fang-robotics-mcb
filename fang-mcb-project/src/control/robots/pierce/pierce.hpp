@@ -10,6 +10,8 @@
 #include "configuration/chassis_config.hpp"
 #include "control/turret/turret_subsystem.hpp"
 
+#include "control/robots/pierce/command_mapping/turret_command_map.hpp"
+
 #include "control/robots/pierce/config/turret_config.hpp"
 #include "control/robots/pierce/config/turret_motion_config.hpp"
 
@@ -19,7 +21,10 @@
 #include "control/turret/command/deactivate_booster_command.hpp"
 #include "control/turret/command/autofire_command.hpp"
 #include "control/turret/command/stop_autofire_command.hpp"
+
+//Command Maps
 #include "control/robots/pierce/command_mapping/turret_command_map.hpp"
+#include "control/robots/pierce/command_mapping/chassis_command_map.hpp"
 
 #include "trap/communication/sensors/imu.hpp"
 
@@ -70,10 +75,13 @@ namespace control
         tap::control::PressCommandMapping m_deactivateBoosterCommandMapping{&m_drivers, {&m_deactivateBoosterCommand}, k_deactivateBoosterRemoteState};
         tap::control::PressCommandMapping m_activateAutofireCommandMapping{&m_drivers, {&m_autofireCommand}, k_autofireRemoteState};
         tap::control::PressCommandMapping m_stopAutofireCommandMapping{&m_drivers, {&m_stopAutofireCommand}, k_stopAutofireRemoteState};
+
         chassis::ChassisSubsystem m_chassis;
         chassis::FieldMecanumCommand m_fieldMecanumCommand;
         chassis::ShurikenCommand m_shurikenCommand;
 
+        tap::control::PressCommandMapping m_fieldMecanumCommandMapping{&m_drivers, {&m_fieldMecanumCommand}, k_fieldMecanumRemoteState};
+        tap::control::PressCommandMapping m_shurikenCommandMapping{&m_drivers, {&m_shurikenCommand}, k_shurikenModeRemoteState};
     };//class Robot
 }//namspace control
 #endif
