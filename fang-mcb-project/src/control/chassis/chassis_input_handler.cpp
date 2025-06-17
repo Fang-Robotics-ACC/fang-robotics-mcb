@@ -8,15 +8,17 @@ namespace control
     namespace chassis
     {
 
-        ChassisInputHandler::ChassisInputHandler(Remote& remote)
-            : m_remote{remote}
+        ChassisInputHandler::ChassisInputHandler(Remote& remote, const Config& config)
+        :   m_remote{remote},
+            mk_remoteConfig{config.remoteConfig},
+            mk_keyboardConfig{config.keyboardConfig}
         {
         }
 
         math::AbstractVector2D ChassisInputHandler::getRemoteTranslation() const
         {
-            const double xTranslationScale{m_remote.getChannel(Remote::Channel::LEFT_HORIZONTAL)};
-            const double yTranslationScale{m_remote.getChannel(Remote::Channel::LEFT_VERTICAL)};
+            const double xTranslationScale{m_remote.getChannel(mk_remoteConfig.xTranslationChannel)};
+            const double yTranslationScale{m_remote.getChannel(mk_remoteConfig.yTranslationChannel)};
 
             return math::AbstractVector2D{xTranslationScale, yTranslationScale};
         }
@@ -24,13 +26,13 @@ namespace control
         double ChassisInputHandler::getRemoteAngularDisplacement() const
         {
             //Counterclockwise is positiev
-            const double angularDisplacementScale{-m_remote.getChannel(Remote::Channel::WHEEL)};
+            const double angularDisplacementScale{-m_remote.getChannel(mk_remoteConfig.rotationChannel)};
             return angularDisplacementScale;
         }
 
         double ChassisInputHandler::getRemoteRotation() const
         {
-            const double rotationScale{-m_remote.getChannel(Remote::Channel::WHEEL)};
+            const double rotationScale{-m_remote.getChannel(mk_remoteConfig.rotationChannel)};
             return rotationScale;
         }
     }// namespce chassis

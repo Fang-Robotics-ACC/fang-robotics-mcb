@@ -8,12 +8,33 @@ namespace control
 {
     namespace chassis
     {
+        using Remote = tap::communication::serial::Remote;
+
         class ChassisInputHandler
         {
         public:
-            using Remote = tap::communication::serial::Remote;
+        struct RemoteConfig
+        {
+            Remote::Channel xTranslationChannel;
+            Remote::Channel yTranslationChannel;
+            Remote::Channel rotationChannel;
+        };
 
-            ChassisInputHandler(Remote& remote);
+        struct KeyboardConfig
+        {
+            Remote::Key forwardKey;
+            Remote::Key backwardKey;
+            Remote::Key leftKey;
+            Remote::Key rightKey;
+        };
+
+        struct Config
+        {
+            RemoteConfig remoteConfig;
+            KeyboardConfig keyboardConfig;
+        };
+
+            ChassisInputHandler(Remote& remote, const Config& config);
             /**
              * Returns the desired translation motion
              * Depending on which mode is used, this could be relative to the robot chassis,
@@ -35,6 +56,9 @@ namespace control
             double getRemoteRotation() const;
         private:
             Remote& m_remote;
+
+            const RemoteConfig mk_remoteConfig;
+            const KeyboardConfig mk_keyboardConfig;
         };
     }// namespace chassis
 }//namespace control
