@@ -10,6 +10,7 @@ namespace control
     Pierce::Pierce(Drivers& drivers)
         :
             m_drivers{drivers},
+            m_chassisInput{drivers.remote, mk_config.chassisInputConfig},
             m_imu{drivers.bmi088},
             m_turret{drivers, m_imu, mk_config.turretConfig},
             m_aimCommnd{m_turret, drivers.inputHandler.getTurretInputs(), mk_config.turretMotionConfig},

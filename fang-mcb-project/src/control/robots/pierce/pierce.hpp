@@ -3,6 +3,7 @@
 #include "drivers.hpp"
 #include "input_handler.hpp"
 
+#include "control/robots/pierce/config/chassis_input_config.hpp"
 #include "configuration/motion/turret_motion_config.hpp"
 
 
@@ -55,13 +56,19 @@ namespace control
         void setDefaultCommands();
         void registerIoMappings();
 
-        static constexpr Config mk_config; //defined in pierce_config.cpp
+        const Config mk_config
+        {
+            k_chassisInputConfig,
+            k_turretMotionConfig,
+            k_turretConfig
+        };
 
         config::motion::TurretMotionConfig turretMotionConfig;
 
-        chassis::ChassisInputHandler m_chassisInput;
 
         Drivers& m_drivers;
+
+        chassis::ChassisInputHandler m_chassisInput;
 
         trap::communication::sensors::Imu m_imu;
 
