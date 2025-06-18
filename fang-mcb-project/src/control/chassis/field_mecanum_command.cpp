@@ -10,11 +10,11 @@ namespace control
 {
     namespace chassis
     {
-        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,ChassisInputHandler& inputHandler, const config::motion::MotionConfig& motionConfig)
+        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config)
         :   m_chassisSubsystem{chassisSubsystem},
             m_turret{turret},
             m_input{inputHandler},
-            mk_motionConfig{motionConfig}
+            mk_config{config}
         {
             addSubsystemRequirement(&m_chassisSubsystem);
         }
@@ -62,8 +62,8 @@ namespace control
             const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
             const double abstractRotation{m_input.getRotation()};
 
-            const physics::Velocity2D translation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
-            const RPM rotation{abstractRotation * mk_motionConfig.maxRotation};
+            const physics::Velocity2D translation{abstractTranslation.x * mk_config.maxXTranslation, abstractTranslation.y * mk_config.maxYTranslation};
+            const RPM rotation{abstractRotation * mk_config.maxRotation};
             m_chassisSubsystem.setMotion(translation, rotation);
         }
 
@@ -71,14 +71,14 @@ namespace control
         {
 
             const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
-            const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
+            const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_config.maxXTranslation, abstractTranslation.y * mk_config.maxYTranslation};
             const Radians turretBearing{m_turret.getTargetFieldYaw()};
 
             const physics::Velocity2D fieldTranslation{util::math::rotateVector2D(frameTranslation, turretBearing)};
 
             const double abstractRotation{m_input.getRotation()};
 
-            const RPM rotation{abstractRotation * mk_motionConfig.maxRotation};
+            const RPM rotation{abstractRotation * mk_config.maxRotation};
             m_chassisSubsystem.setMotion(fieldTranslation, rotation);
         }
 

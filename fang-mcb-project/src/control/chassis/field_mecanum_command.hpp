@@ -17,6 +17,14 @@ namespace control
         class FieldMecanumCommand: public tap::control::Command
         {
         public:
+        struct Config
+        {
+            MetersPerSecond maxTranslation;
+            MetersPerSecond maxXTranslation;
+            MetersPerSecond maxYTranslation;
+            RPM maxRotation;
+            Degrees maxAngularDisplacement;
+        };
         /**
          * Remote uses the dji controller.
          * Keyboard uses the keyboard inputs.
@@ -34,7 +42,7 @@ namespace control
             /**
              * This takes a chassis subsystem and the respective inputHandler
              */
-            FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,ChassisInputHandler& inputHandler, const config::motion::MotionConfig& motionConfig);
+            FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config);
             const char* getName() const override;
             void initialize() override;
             void execute() override;
@@ -50,7 +58,7 @@ namespace control
             const turret::TurretSubsystem& m_turret; //We don't want the command to alter the turret state
             ChassisInputHandler& m_input;
             ControlMode m_controlMode{ControlMode::REMOTE_TEST_STRAFE_TURRET};
-            const config::motion::MotionConfig mk_motionConfig;
+            const Config& mk_config;
         };
     }//namespace control
 }//namespace chassis
