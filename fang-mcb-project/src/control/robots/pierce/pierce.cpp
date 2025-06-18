@@ -39,19 +39,12 @@ namespace control
         m_turret.registerAndInitialize();
         m_turret.setPitch(m_turret.getMinPitch());
         m_chassis.registerAndInitialize();
-        //m_turret.boosterOn();//Hardcoded until command mapper bugs are solved
     }
     
-    void Pierce::registerSubsystems()
-    {
-        //m_drivers.commandScheduler.registerSubsystem(&m_chassis);
-    }
     
     void Pierce::setDefaultCommands()
     {
         m_turret.setDefaultCommand(&m_aimCommnd);
-        //m_chassis.setDefaultCommand(&m_fieldMecanumCommand);
-        //m_drivers.commandScheduler.addCommand(&m_activateBoosterCommand);
     }
     
     void Pierce::registerIoMappings()
