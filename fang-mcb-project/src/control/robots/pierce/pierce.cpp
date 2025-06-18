@@ -10,11 +10,12 @@ namespace control
     Pierce::Pierce(Drivers& drivers)
         :
             m_drivers{drivers},
+            m_imu{drivers.bmi088},
             m_chassis{drivers, mk_config.chassisConfig},
             m_turret{drivers, m_imu, mk_config.turretConfig},
+            m_gimbal{drivers, m_imu, mk_config.gimbalConfig},
             m_feeder{drivers, mk_config.feederConfig},
             m_booster{drivers, mk_config.boosterConfig},
-            m_imu{drivers.bmi088},
             m_chassisInput{drivers.remote, mk_config.chassisInputConfig},
             m_turretInput{drivers.remote, mk_config.turretInputConfig}
     {

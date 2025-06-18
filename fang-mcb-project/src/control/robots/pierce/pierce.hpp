@@ -3,6 +3,7 @@
 #include "drivers.hpp"
 #include "control/turret/feeder_subsystem.hpp"
 #include "control/turret/ammo_booster_subsystem.hpp"
+#include "control/turret/gimbal_subsystem.hpp"
 
 #include "control/turret/turret_input_handler.hpp"
 #include "control/robots/pierce/config/chassis_config.hpp"
@@ -54,6 +55,7 @@ namespace control
         turret::AimCommand::Config turretMotionConfig;
         turret::TurretSubsystem::Config turretConfig;
         turret::FeederSubsystem::Config feederConfig;
+        turret::GimbalSubsystem::Config gimbalConfig;
         turret::AmmoBoosterSubsystem::Config boosterConfig;
         chassis::ChassisSubsystem::ChassisConfig chassisConfig;
         chassis::FieldMecanumCommand::Config fieldMecanumConfig;
@@ -75,6 +77,7 @@ namespace control
             k_turretAimConfig,
             k_turretConfig,
             k_feederConfig,
+            k_gimbalSubsystemConfig,
             k_ammoBoosterConfig,
             k_chassisConfig,
             k_fieldMecanumConfig,
@@ -86,12 +89,14 @@ namespace control
 
         Drivers& m_drivers;
 
+        trap::communication::sensors::Imu m_imu;
+
         turret::TurretSubsystem m_turret;
         turret::FeederSubsystem m_feeder;
         turret::AmmoBoosterSubsystem m_booster;
+        turret::GimbalSubsystem m_gimbal;
         chassis::ChassisSubsystem m_chassis;
 
-        trap::communication::sensors::Imu m_imu;
 
         chassis::ChassisInputHandler m_chassisInput;
         turret::TurretInputHandler m_turretInput;
