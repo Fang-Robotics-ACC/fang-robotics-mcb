@@ -6,15 +6,15 @@ namespace control
     namespace turret
     {
         using namespace units::literals;
-        AutofireCommand::AutofireCommand(TurretSubsystem& turret)
-        :   m_turret{turret}
+        AutofireCommand::AutofireCommand(FeederSubsystem& feeder)
+        :   m_feeder{feeder}
         {
-            addSubsystemRequirement(&m_turret);
+            addSubsystemRequirement(&m_feeder);
         }
 
         void AutofireCommand::initialize()
         {
-            m_turret.autoFireOn();
+            m_feeder.autoFireOn();
         }
 
         void AutofireCommand::execute()
@@ -23,12 +23,14 @@ namespace control
 
         void AutofireCommand::end(bool interrupted)
         {
+
+            m_feeder.autoFireOn();
         }
 
         bool AutofireCommand::isFinished() const
         {
             //Only needs to switch the booster
-            return true;
+            return false;
         }
     }
 }
