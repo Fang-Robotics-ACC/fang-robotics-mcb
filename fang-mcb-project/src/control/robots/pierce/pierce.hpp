@@ -101,7 +101,7 @@ namespace control
         chassis::ChassisInputHandler m_chassisInput;
         turret::TurretInputHandler m_turretInput;
 
-        turret::AimCommand m_aimCommnd{m_turret, m_turretInput, mk_config.turretMotionConfig};
+        turret::AimCommand m_aimCommnd{m_gimbal, m_turretInput, mk_config.turretMotionConfig};
         turret::ActivateBoosterCommand m_activateBoosterCommand{m_booster};
         turret::AutofireCommand m_autofireCommand{m_feeder};
 

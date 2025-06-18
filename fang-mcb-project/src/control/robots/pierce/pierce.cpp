@@ -40,7 +40,7 @@ namespace control
     
     void Pierce::setDefaultCommands()
     {
-        m_turret.setDefaultCommand(&m_aimCommnd);
+        m_gimbal.setDefaultCommand(&m_aimCommnd);
     }
     
     void Pierce::registerIoMappings()
