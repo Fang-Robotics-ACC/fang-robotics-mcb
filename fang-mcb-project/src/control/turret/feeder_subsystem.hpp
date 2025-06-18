@@ -1,6 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_FEEDER_SUBSYSTEM_HPP
 #define FANG_ROBOTICS_MCB_FEEDER_SUBSYSTEM_HPP
 #include "feeder_system.hpp"
+#include "drivers.hpp"
 #include "tap/control/subsystem.hpp"
 
 namespace control::turret
@@ -15,10 +16,10 @@ namespace control::turret
              */
             using Config = FeederSystem::Config;
 
+            FeederSubsystem(Drivers& drivers, const Config& config);
+
             virtual void initialize() override;
             virtual void refresh() override;
-
-            FeederSubsystem(Drivers& drivers, const Config& config);
 
             /**
              * Wherever the the yaw is aiming to look fieldwise, returns
