@@ -1,6 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_INFANTRY_HPP
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "drivers.hpp"
+#include "control/turret/feeder_subsystem.hpp"
 
 #include "control/turret/turret_input_handler.hpp"
 #include "control/robots/pierce/config/chassis_config.hpp"
@@ -53,6 +54,7 @@ namespace control
         turret::TurretInputHandler::Config turretInputConfig;
         turret::AimCommand::Config turretMotionConfig;
         turret::TurretSubsystem::Config turretConfig;
+        turret::FeederSubsystem::Config feederConfig;
         chassis::ChassisSubsystem::ChassisConfig chassisConfig;
         chassis::FieldMecanumCommand::Config fieldMecanumConfig;
         chassis::ShurikenCommand::Config shurikenConfig;
@@ -72,6 +74,7 @@ namespace control
             k_turretInputConfig,
             k_turretAimConfig,
             k_turretConfig,
+            k_feederConfig,
             k_chassisConfig,
             k_fieldMecanumConfig,
             k_shurikenConfig
@@ -83,6 +86,7 @@ namespace control
         Drivers& m_drivers;
 
         turret::TurretSubsystem m_turret;
+        turret::FeederSubsystem m_feeder;
         chassis::ChassisSubsystem m_chassis;
 
         trap::communication::sensors::Imu m_imu;
@@ -93,7 +97,7 @@ namespace control
         turret::AimCommand m_aimCommnd{m_turret, m_turretInput, mk_config.turretMotionConfig};
         turret::ActivateBoosterCommand m_activateBoosterCommand{m_turret};
         turret::DeactivateBoosterCommand m_deactivateBoosterCommand{m_turret};
-        turret::AutofireCommand m_autofireCommand{m_turret};
+        turret::AutofireCommand m_autofireCommand{m_feeder};
         turret::StopAutofireCommand m_stopAutofireCommand{m_turret};
 
         tap::control::PressCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, k_activateBoosterRemoteState};

@@ -11,6 +11,7 @@ namespace control
         :
             m_drivers{drivers},
             m_chassis{drivers, mk_config.chassisConfig},
+            m_feeder{drivers, mk_config.feederConfig},
             m_turret{drivers, m_imu, mk_config.turretConfig},
             m_imu{drivers.bmi088},
             m_chassisInput{drivers.remote, mk_config.chassisInputConfig},
