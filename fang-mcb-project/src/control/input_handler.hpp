@@ -15,11 +15,9 @@ namespace control
     public:
     InputHandler(tap::communication::serial::Remote& remote);
 
-    control::turret::TurretInputHandler& getTurretInputs();
 
     private:
     tap::communication::serial::Remote& m_remote;
-    turret::TurretInputHandler m_turretInputHandler;
     };
 }
 #endif
