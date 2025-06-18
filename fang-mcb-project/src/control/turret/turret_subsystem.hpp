@@ -56,12 +56,6 @@ namespace control
             Radians getMaxPitch() const;
             Radians getMinPitch() const;
 
-            void boosterOn();
-            void boosterOff();
-
-            void autoFireOn();
-            void autoFireOff();
-
         private:
             static constexpr math::AbstractVector2D mk_forward{0.0, 1.0};
             void syncFieldYaw();

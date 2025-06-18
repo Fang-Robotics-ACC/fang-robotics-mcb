@@ -13,7 +13,6 @@ namespace control
         {
         }
 
-
         void TurretSubsystem::initialize()
         {
             m_gimbal.initialize();
@@ -67,22 +66,6 @@ namespace control
         Radians TurretSubsystem::getMinPitch() const
         {
             return m_gimbal.getMinPitch();
-        }
-
-        void TurretSubsystem::boosterOn()
-        {
-        }
-
-        void TurretSubsystem::boosterOff()
-        {
-        }
-
-        void TurretSubsystem::autoFireOn()
-        {
-        }
-
-        void TurretSubsystem::autoFireOff()
-        {
         }
 
         void TurretSubsystem::syncFieldYaw()
