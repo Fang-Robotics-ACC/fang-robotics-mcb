@@ -37,6 +37,12 @@ namespace data
         {
             return vector * scale;
         }
+
+        template <typename Unit>
+        Vector2D<Unit> operator+(const Vector2D<Unit>& vector1, const Vector2D<Unit>& vector2)
+        {
+            return Vector2D<Unit>{vector1.x + vector2.x, vector1.y + vector2.y};
+        }
     }
 }
 #endif
