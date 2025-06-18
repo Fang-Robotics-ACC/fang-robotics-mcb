@@ -2,7 +2,10 @@
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "drivers.hpp"
 
+#include "control/turret/turret_input_handler.hpp"
+
 #include "control/robots/pierce/config/chassis_input_config.hpp"
+#include "control/robots/pierce/config/turret_input_config.hpp"
 #include "configuration/motion/turret_motion_config.hpp"
 
 
@@ -44,6 +47,7 @@ namespace control
     struct Config
     {
         chassis::ChassisInputHandler::Config chassisInputConfig;
+        turret::TurretInputHandler::Config turretInputConfig;
         config::motion::TurretMotionConfig turretMotionConfig;
         turret::TurretSubsystem::Config turretConfig;
     };
@@ -58,6 +62,7 @@ namespace control
         const Config mk_config
         {
             k_chassisInputConfig,
+            k_turretInputConfig,
             k_turretMotionConfig,
             k_turretConfig
         };
@@ -68,6 +73,7 @@ namespace control
         Drivers& m_drivers;
 
         chassis::ChassisInputHandler m_chassisInput;
+        turret::TurretInputHandler m_turretInput;
 
         trap::communication::sensors::Imu m_imu;
 

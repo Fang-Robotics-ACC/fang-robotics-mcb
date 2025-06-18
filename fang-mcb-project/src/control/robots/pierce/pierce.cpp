@@ -11,9 +11,10 @@ namespace control
         :
             m_drivers{drivers},
             m_chassisInput{drivers.remote, mk_config.chassisInputConfig},
+            m_turretInput{drivers.remote, mk_config.turretInputConfig},
             m_imu{drivers.bmi088},
             m_turret{drivers, m_imu, mk_config.turretConfig},
-            m_aimCommnd{m_turret, drivers.inputHandler.getTurretInputs(), mk_config.turretMotionConfig},
+            m_aimCommnd{m_turret, m_turretInput, mk_config.turretMotionConfig},
             m_autofireCommand{m_turret},
             m_stopAutofireCommand{m_turret},
             m_activateBoosterCommand{m_turret},
