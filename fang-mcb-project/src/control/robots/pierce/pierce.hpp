@@ -3,6 +3,7 @@
 #include "drivers.hpp"
 
 #include "control/turret/turret_input_handler.hpp"
+#include "control/robots/pierce/config/chassis_config.hpp"
 
 #include "control/robots/pierce/config/chassis_input_config.hpp"
 #include "control/robots/pierce/config/turret_input_config.hpp"
@@ -50,6 +51,7 @@ namespace control
         turret::TurretInputHandler::Config turretInputConfig;
         config::motion::TurretMotionConfig turretMotionConfig;
         turret::TurretSubsystem::Config turretConfig;
+        chassis::ChassisSubsystem::ChassisConfig chassisConfig;
     };
         Pierce(Drivers& drivers);
         void initialize();
@@ -64,7 +66,8 @@ namespace control
             k_chassisInputConfig,
             k_turretInputConfig,
             k_turretMotionConfig,
-            k_turretConfig
+            k_turretConfig,
+            k_chassisConfig
         };
 
         config::motion::TurretMotionConfig turretMotionConfig;
