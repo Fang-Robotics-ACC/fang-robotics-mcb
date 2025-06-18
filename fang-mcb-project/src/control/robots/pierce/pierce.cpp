@@ -32,8 +32,6 @@ namespace control
     
     void Pierce::initializeSubsystems()
     {
-        m_drivers.pwm.setTimerFrequency(tap::gpio::Pwm::TIMER1, config::chassis::k_chassisPwmFreq.to<double>());
-
         m_feeder.registerAndInitialize();
         m_booster.registerAndInitialize();
         m_gimbal.registerAndInitialize();

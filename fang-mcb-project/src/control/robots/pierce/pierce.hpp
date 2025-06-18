@@ -36,7 +36,6 @@ namespace control
     class Pierce
     {
     public:
-
         struct SubsystemConfig
         {
             chassis::ChassisSubsystem::ChassisConfig chassisConfig;
@@ -60,9 +59,9 @@ namespace control
 
         struct Config
         {
+            SubsystemConfig subsystemConfig;
             InputConfig inputConfig;
             CommandConfig commandConfig;
-            SubsystemConfig subsystemConfig;
         };
 
         Pierce(Drivers& drivers, const Config& config);
@@ -85,7 +84,6 @@ namespace control
         turret::FeederSubsystem m_feeder;
         turret::AmmoBoosterSubsystem m_booster;
         chassis::ChassisSubsystem m_chassis;
-
 
         chassis::ChassisInputHandler m_chassisInput;
         turret::TurretInputHandler m_turretInput;
