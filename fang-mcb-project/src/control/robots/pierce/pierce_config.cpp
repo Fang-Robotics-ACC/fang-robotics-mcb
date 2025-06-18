@@ -8,8 +8,8 @@
 #include "config/subsystem/ammo_booster_config.hpp"
 
 //Input configs 
-#include "config/turret_input_config.hpp"
-#include "config/chassis_input_config.hpp"
+#include "config/input/turret_input_config.hpp"
+#include "config/input/chassis_input_config.hpp"
 
 //Command configs
 #include "config/command/turret_aim_config.hpp"
