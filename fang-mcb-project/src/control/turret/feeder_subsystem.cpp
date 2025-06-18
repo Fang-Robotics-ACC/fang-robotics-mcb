@@ -17,4 +17,14 @@ namespace control::turret
     {
         m_feeder.update();
     }
+
+    void FeederSubsystem::autoFireOn()
+    {
+        m_feeder.feedOn();
+    }
+
+    void FeederSubsystem::autoFireOff()
+    {
+        m_feeder.feedOff();
+    }
 }
