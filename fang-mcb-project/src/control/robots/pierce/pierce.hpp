@@ -88,9 +88,9 @@ namespace control
 
         trap::communication::sensors::Imu m_imu;
 
+        turret::GimbalSubsystem m_gimbal;
         turret::FeederSubsystem m_feeder;
         turret::AmmoBoosterSubsystem m_booster;
-        turret::GimbalSubsystem m_gimbal;
         chassis::ChassisSubsystem m_chassis;
 
 
