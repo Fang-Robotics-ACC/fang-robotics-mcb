@@ -53,7 +53,6 @@ namespace control
         chassis::ChassisInputHandler::Config chassisInputConfig;
         turret::TurretInputHandler::Config turretInputConfig;
         turret::AimCommand::Config turretMotionConfig;
-        turret::TurretSubsystem::Config turretConfig;
         turret::FeederSubsystem::Config feederConfig;
         turret::GimbalSubsystem::Config gimbalConfig;
         turret::AmmoBoosterSubsystem::Config boosterConfig;
@@ -74,7 +73,6 @@ namespace control
             k_chassisInputConfig,
             k_turretInputConfig,
             k_turretAimConfig,
-            k_turretConfig,
             k_feederConfig,
             k_gimbalSubsystemConfig,
             k_ammoBoosterConfig,
@@ -90,7 +88,6 @@ namespace control
 
         trap::communication::sensors::Imu m_imu;
 
-        turret::TurretSubsystem m_turret;
         turret::FeederSubsystem m_feeder;
         turret::AmmoBoosterSubsystem m_booster;
         turret::GimbalSubsystem m_gimbal;
@@ -107,8 +104,8 @@ namespace control
         tap::control::PressCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, k_activateBoosterRemoteState};
         tap::control::PressCommandMapping m_activateAutofireCommandMapping{&m_drivers, {&m_autofireCommand}, k_autofireRemoteState};
 
-        chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_turret, m_chassisInput, mk_config.fieldMecanumConfig};
-        chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_turret, m_chassisInput, mk_config.shurikenConfig};
+        chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_gimbal, m_chassisInput, mk_config.fieldMecanumConfig};
+        chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_gimbal, m_chassisInput, mk_config.shurikenConfig};
 
         tap::control::PressCommandMapping m_fieldMecanumCommandMapping{&m_drivers, {&m_fieldMecanumCommand}, k_fieldMecanumRemoteState};
         tap::control::PressCommandMapping m_shurikenCommandMapping{&m_drivers, {&m_shurikenCommand}, k_shurikenModeRemoteState};

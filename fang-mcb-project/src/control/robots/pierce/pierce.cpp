@@ -12,7 +12,6 @@ namespace control
             m_drivers{drivers},
             m_imu{drivers.bmi088},
             m_chassis{drivers, mk_config.chassisConfig},
-            m_turret{drivers, m_imu, mk_config.turretConfig},
             m_gimbal{drivers, m_imu, mk_config.gimbalConfig},
             m_feeder{drivers, mk_config.feederConfig},
             m_booster{drivers, mk_config.boosterConfig},
@@ -24,7 +23,6 @@ namespace control
     void Pierce::initialize()
     {
         initializeSubsystems();
-        //registerSubsystems();
         setDefaultCommands();
         registerIoMappings();
     }
