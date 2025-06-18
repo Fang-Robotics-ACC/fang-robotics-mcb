@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_PIERCE_TURRET_GIMBAL_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_PIERCE_TURRET_GIMBAL_CONFIG_HPP
-#include "control/turret/gimbal_system.hpp"
+#include "control/turret/systems/gimbal_system.hpp"
 
 namespace control
 {

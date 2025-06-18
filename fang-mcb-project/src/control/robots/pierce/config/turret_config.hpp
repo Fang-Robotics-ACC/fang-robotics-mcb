@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_PIERCE_TURRET_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_PIERCE_TURRET_CONFIG_HPP
-#include "control/turret/gimbal_system.hpp"
+#include "control/turret/systems/gimbal_system.hpp"
 #include "control/turret/turret_subsystem.hpp"
 #include "control/robots/pierce/config/ammo_booster_config.hpp"
 #include "control/robots/pierce/config/turret_gimbal_config.hpp"

@@ -1,4 +1,4 @@
-#include "control/turret/gimbal_system.hpp"
+#include "gimbal_system.hpp"
 #include "tap/algorithms/math_user_utils.hpp"
 namespace control
 {
