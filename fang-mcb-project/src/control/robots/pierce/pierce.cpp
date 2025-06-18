@@ -1,7 +1,6 @@
 #include "pierce.hpp"
 #include "drivers.hpp"
 #include "configuration/motion_control_config.hpp"
-#include "control/robots/pierce/command_config/shuriken_config.hpp"
 
 
 namespace control

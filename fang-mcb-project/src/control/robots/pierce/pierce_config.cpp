@@ -12,9 +12,9 @@
 #include "config/chassis_input_config.hpp"
 
 //Command configs
-#include "command_config/turret_aim_config.hpp"
-#include "command_config/field_mecanum_config.hpp"
-#include "command_config/shuriken_config.hpp"
+#include "config/command/turret_aim_config.hpp"
+#include "config/command/field_mecanum_config.hpp"
+#include "config/command/shuriken_config.hpp"
 
 namespace control
 {
