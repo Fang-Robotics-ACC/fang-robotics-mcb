@@ -48,19 +48,36 @@ namespace control
     class Pierce
     {
     public:
-    struct Config
-    {
-        chassis::ChassisSubsystem::ChassisConfig chassisConfig;
-        turret::GimbalSubsystem::Config gimbalConfig;
-        turret::FeederSubsystem::Config feederConfig;
-        turret::AmmoBoosterSubsystem::Config boosterConfig;
-        chassis::ChassisInputHandler::Config chassisInputConfig;
-        turret::TurretInputHandler::Config turretInputConfig;
-        turret::AimCommand::Config turretMotionConfig;
-        chassis::FieldMecanumCommand::Config fieldMecanumConfig;
-        chassis::ShurikenCommand::Config shurikenConfig;
-    };
-        Pierce(Drivers& drivers);
+
+        struct SubsystemConfig
+        {
+            chassis::ChassisSubsystem::ChassisConfig chassisConfig;
+            turret::GimbalSubsystem::Config gimbalConfig;
+            turret::FeederSubsystem::Config feederConfig;
+            turret::AmmoBoosterSubsystem::Config boosterConfig;
+        };
+
+        struct InputConfig
+        {
+            chassis::ChassisInputHandler::Config chassisInputConfig;
+            turret::TurretInputHandler::Config turretInputConfig;
+        };
+
+        struct CommandConfig
+        {
+            turret::AimCommand::Config aimCommandConfig;
+            chassis::FieldMecanumCommand::Config fieldMecanumConfig;
+            chassis::ShurikenCommand::Config shurikenConfig;
+        };
+
+        struct Config
+        {
+            InputConfig inputConfig;
+            CommandConfig commandConfig;
+            SubsystemConfig subsystemConfig;
+        };
+
+        Pierce(Drivers& drivers, const Config& config);
         void initialize();
     private:
         class CommandHandler;
@@ -68,18 +85,9 @@ namespace control
         void setDefaultCommands();
         void registerIoMappings();
 
-        const Config mk_config
-        {
-            k_chassisConfig,
-            k_gimbalSubsystemConfig,
-            k_feederConfig,
-            k_ammoBoosterConfig,
-            k_chassisInputConfig,
-            k_turretInputConfig,
-            k_turretAimConfig,
-            k_fieldMecanumConfig,
-            k_shurikenConfig
-        };
+        const SubsystemConfig mk_subsystemConfig;
+        const InputConfig mk_inputConfig;
+        const CommandConfig mk_commandConfig;
 
         config::motion::TurretMotionConfig turretMotionConfig;
 
@@ -97,15 +105,15 @@ namespace control
         chassis::ChassisInputHandler m_chassisInput;
         turret::TurretInputHandler m_turretInput;
 
-        turret::AimCommand m_aimCommnd{m_gimbal, m_turretInput, mk_config.turretMotionConfig};
+        turret::AimCommand m_aimCommnd{m_gimbal, m_turretInput, mk_commandConfig.aimCommandConfig};
         turret::ActivateBoosterCommand m_activateBoosterCommand{m_booster};
         turret::AutofireCommand m_autofireCommand{m_feeder};
 
         tap::control::PressCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, k_activateBoosterRemoteState};
         tap::control::PressCommandMapping m_activateAutofireCommandMapping{&m_drivers, {&m_autofireCommand}, k_autofireRemoteState};
 
-        chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_gimbal, m_chassisInput, mk_config.fieldMecanumConfig};
-        chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_gimbal, m_chassisInput, mk_config.shurikenConfig};
+        chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.fieldMecanumConfig};
+        chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.shurikenConfig};
 
         tap::control::PressCommandMapping m_fieldMecanumCommandMapping{&m_drivers, {&m_fieldMecanumCommand}, k_fieldMecanumRemoteState};
         tap::control::PressCommandMapping m_shurikenCommandMapping{&m_drivers, {&m_shurikenCommand}, k_shurikenModeRemoteState};

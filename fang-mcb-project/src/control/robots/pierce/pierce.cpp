@@ -7,16 +7,19 @@
 namespace control
 {
     using namespace units::literals;
-    Pierce::Pierce(Drivers& drivers)
+    Pierce::Pierce(Drivers& drivers, const Config& config)
         :
             m_drivers{drivers},
+            mk_subsystemConfig{config.subsystemConfig},
+            mk_inputConfig{config.inputConfig},
+            mk_commandConfig{config.commandConfig},
             m_imu{drivers.bmi088},
-            m_chassis{drivers, mk_config.chassisConfig},
-            m_gimbal{drivers, m_imu, mk_config.gimbalConfig},
-            m_feeder{drivers, mk_config.feederConfig},
-            m_booster{drivers, mk_config.boosterConfig},
-            m_chassisInput{drivers.remote, mk_config.chassisInputConfig},
-            m_turretInput{drivers.remote, mk_config.turretInputConfig}
+            m_chassis{drivers, mk_subsystemConfig.chassisConfig},
+            m_gimbal{drivers, m_imu, mk_subsystemConfig.gimbalConfig},
+            m_feeder{drivers, mk_subsystemConfig.feederConfig},
+            m_booster{drivers, mk_subsystemConfig.boosterConfig},
+            m_chassisInput{drivers.remote, mk_inputConfig.chassisInputConfig},
+            m_turretInput{drivers.remote, mk_inputConfig.turretInputConfig}
     {
     }
     
