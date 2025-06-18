@@ -7,10 +7,10 @@ namespace control
     namespace turret
     {
         using namespace units::literals;
-        AimCommand::AimCommand(TurretSubsystem& turret, TurretInputHandler& input, const config::motion::TurretMotionConfig& motionConfig)
+        AimCommand::AimCommand(TurretSubsystem& turret, TurretInputHandler& input, const Config& config)
         :   m_turret{turret},
             m_input{input},
-            mk_motionConfig{motionConfig},
+            mk_config{config},
             mk_maxPitch{m_turret.getMaxPitch()},
             mk_MinPitch{m_turret.getMinPitch()}
         {
@@ -41,7 +41,7 @@ namespace control
         void AimCommand::setPitch(const Microseconds& delta)
         {
             const double k_pitchScaler{m_input.getPitch()};
-            const RPM k_speed{k_pitchScaler * mk_motionConfig.pitchSpeed};
+            const RPM k_speed{k_pitchScaler * mk_config.maxPitchSpeed};
             const Radians k_angularDisplacement{k_speed * delta};
 
             m_targetPitch =tap::algorithms::limitVal<Radians>(k_angularDisplacement + m_targetPitch, mk_MinPitch, mk_maxPitch);
@@ -52,7 +52,7 @@ namespace control
         void AimCommand::setYaw(const Microseconds& delta)
         {
             const double k_yawScaler{m_input.getYaw()};
-            const RPM k_speed{k_yawScaler * mk_motionConfig.yawSpeed};
+            const RPM k_speed{k_yawScaler * mk_config.maxYawSpeed};
             const Radians k_angularDisplacement{k_speed * delta};
 
             m_targetYaw += k_angularDisplacement;

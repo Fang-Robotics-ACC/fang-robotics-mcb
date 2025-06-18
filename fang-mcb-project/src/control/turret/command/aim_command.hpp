@@ -15,7 +15,13 @@ namespace control
         class AimCommand : public tap::control::Command
         {
         public:
-            AimCommand(TurretSubsystem& turret, TurretInputHandler& input, const config::motion::TurretMotionConfig& motionConfig);
+            struct Config
+            {
+                RPM maxPitchSpeed;
+                RPM maxYawSpeed;
+
+            };
+            AimCommand(TurretSubsystem& turret, TurretInputHandler& input, const Config& config);
 
             const char* getName() const override {return "Aim Command";}
 
@@ -32,7 +38,7 @@ namespace control
             turret::TurretInputHandler& m_input;
 
 
-            const config::motion::TurretMotionConfig mk_motionConfig;
+            const Config mk_config;
 
             const Degrees mk_maxPitch;
             const Degrees mk_MinPitch;
