@@ -9,7 +9,6 @@ namespace control
         :   Subsystem{&drivers},
             mk_homeYawOffset{config.homeYawOffset},
             m_gimbal{drivers, config.gimbalConfig},
-            m_booster{drivers, config.ammoConfig},
             m_feeder{drivers, config.feederConfig},
             m_chassisImu{imu}
         {
@@ -19,7 +18,6 @@ namespace control
         void TurretSubsystem::initialize()
         {
             m_gimbal.initialize();
-            m_booster.initialize();
             m_feeder.initialize();
         }
 
@@ -27,7 +25,6 @@ namespace control
         {
             syncFieldYaw();
             m_gimbal.update();
-            m_booster.update();
             m_feeder.update();
         }
 
@@ -77,12 +74,10 @@ namespace control
 
         void TurretSubsystem::boosterOn()
         {
-            m_booster.autoFireOn();
         }
 
         void TurretSubsystem::boosterOff()
         {
-            m_booster.autoFireOff();
         }
 
         void TurretSubsystem::autoFireOn()

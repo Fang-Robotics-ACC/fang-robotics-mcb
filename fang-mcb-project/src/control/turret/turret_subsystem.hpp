@@ -71,7 +71,6 @@ namespace control
             void setRawTurretRobotwiseYaw(const Radians& yaw);
             const Radians mk_homeYawOffset;
             GimbalSystem m_gimbal;
-            AmmoBoosterSystem m_booster;
             FeederSystem m_feeder;
 
             Imu& m_chassisImu;
