@@ -20,7 +20,7 @@ namespace control
             m_activateBoosterCommand{m_turret},
             m_deactivateBoosterCommand{m_turret},
             m_chassis{drivers, mk_config.chassisConfig},
-            m_fieldMecanumCommand{m_chassis, m_turret, m_chassisInput, config::motion::k_defaultMotionConfig},
+            m_fieldMecanumCommand{m_chassis, m_turret, m_chassisInput, mk_config.fieldMecanumConfig},
             m_shurikenCommand{m_chassis, m_turret, m_chassisInput, mk_shurikenConfig}
     {
     }

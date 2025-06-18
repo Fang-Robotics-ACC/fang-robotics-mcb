@@ -4,6 +4,7 @@
 
 #include "control/turret/turret_input_handler.hpp"
 #include "control/robots/pierce/config/chassis_config.hpp"
+#include "control/robots/pierce/command_config/field_mecanum_config.hpp"
 
 #include "control/robots/pierce/config/chassis_input_config.hpp"
 #include "control/robots/pierce/config/turret_input_config.hpp"
@@ -52,6 +53,7 @@ namespace control
         turret::AimCommand::Config turretMotionConfig;
         turret::TurretSubsystem::Config turretConfig;
         chassis::ChassisSubsystem::ChassisConfig chassisConfig;
+        chassis::FieldMecanumCommand::Config fieldMecanumConfig;
     };
         Pierce(Drivers& drivers);
         void initialize();
@@ -67,7 +69,8 @@ namespace control
             k_turretInputConfig,
             k_turretAimConfig,
             k_turretConfig,
-            k_chassisConfig
+            k_chassisConfig,
+            k_fieldMecanumConfig
         };
 
         config::motion::TurretMotionConfig turretMotionConfig;
