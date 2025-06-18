@@ -103,7 +103,6 @@ namespace control
         tap::control::PressCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, k_activateBoosterRemoteState};
         tap::control::PressCommandMapping m_deactivateBoosterCommandMapping{&m_drivers, {&m_deactivateBoosterCommand}, k_deactivateBoosterRemoteState};
         tap::control::PressCommandMapping m_activateAutofireCommandMapping{&m_drivers, {&m_autofireCommand}, k_autofireRemoteState};
-        tap::control::PressCommandMapping m_stopAutofireCommandMapping{&m_drivers, {&m_stopAutofireCommand}, k_stopAutofireRemoteState};
 
         chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_turret, m_chassisInput, mk_config.fieldMecanumConfig};
         chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_turret, m_chassisInput, mk_config.shurikenConfig};

@@ -46,7 +46,6 @@ namespace control
         m_drivers.commandMapper.addMap(&m_activateBoosterCommandMapping);
         m_drivers.commandMapper.addMap(&m_deactivateBoosterCommandMapping);
         m_drivers.commandMapper.addMap(&m_activateAutofireCommandMapping);
-        m_drivers.commandMapper.addMap(&m_stopAutofireCommandMapping);
         m_drivers.commandMapper.addMap(&m_shurikenCommandMapping);
         m_drivers.commandMapper.addMap(&m_fieldMecanumCommandMapping);
     }
