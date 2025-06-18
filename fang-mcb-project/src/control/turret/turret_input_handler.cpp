@@ -9,7 +9,6 @@ namespace control
             mk_remoteConfig{config.remoteConfig},
             mk_mouseConfig{config.mouseConfig}
         {
-
         }
 
         double TurretInputHandler::getPitch() const
@@ -32,6 +31,16 @@ namespace control
         double TurretInputHandler::getRemoteYaw() const
         {
             return m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL);
+        }
+
+        double TurretInputHandler::getMousePitch() const
+        {
+            return m_remote.getMouseY() * mk_mouseConfig.pitchPercentagePerPx;
+        }
+
+        double TurretInputHandler::getMouseYaw() const
+        {
+            return m_remote.getMouseX() * mk_mouseConfig.yawPercentagePerPx;
         }
 
         bool TurretInputHandler::getFire() const

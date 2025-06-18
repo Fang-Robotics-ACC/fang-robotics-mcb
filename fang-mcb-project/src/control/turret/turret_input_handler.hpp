@@ -37,6 +37,9 @@ namespace control
 
             double getRemotePitch() const;
             double getRemoteYaw() const;
+
+            double getKeyboardPitch() const;
+            double getKeyboardYaw() const;
             static constexpr double mk_firingWheelThreshold{750};
             Remote& m_remote;
 
