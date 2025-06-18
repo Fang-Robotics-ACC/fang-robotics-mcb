@@ -10,7 +10,7 @@ namespace control
 {
     namespace chassis
     {
-        ShurikenCommand::ShurikenCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,ChassisInputHandler& input, const Config& config)
+        ShurikenCommand::ShurikenCommand(ChassisSubsystem& chassisSubsystem, const turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config)
         :   m_chassisSubsystem{chassisSubsystem},
             m_turret{turret},
             m_input{input},

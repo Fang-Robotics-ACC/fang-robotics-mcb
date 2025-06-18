@@ -3,7 +3,7 @@
 #include "control/input_handler.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/field_mecanum_command.hpp"
-#include "control/turret/turret_subsystem.hpp"
+#include "control/turret/gimbal_subsystem.hpp"
 
 #include "tap/control/command.hpp"
 
@@ -42,7 +42,7 @@ namespace control
             /**
              * This takes a chassis subsystem and the respective inputHandler
              */
-            ShurikenCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,ChassisInputHandler& input, const Config& config);
+            ShurikenCommand(ChassisSubsystem& chassisSubsystem, const turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config);
             const char* getName() const override;
             void initialize() override;
             void execute() override;
@@ -55,7 +55,7 @@ namespace control
             void executeKeyboardTestStrafeTurret();
             static constexpr char* mk_name{"Shuriken Mode"};
             ChassisSubsystem& m_chassisSubsystem;
-            const turret::TurretSubsystem& m_turret; //We don't want the command to alter the turret state
+            const turret::GimbalSubsystem& m_turret; //We don't want the command to alter the turret state
             ChassisInputHandler& m_input;
             ControlMode m_controlMode{ControlMode::REMOTE_TEST_STRAFE_TURRET};
             const Config mk_config;
