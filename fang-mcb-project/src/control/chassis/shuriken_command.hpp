@@ -2,8 +2,8 @@
 #define FANG_ROBOTICS_MCB_SHURIKEN_COMMAND_HPP
 #include "control/input_handler.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
+#include "control/chassis/field_mecanum_command.hpp"
 #include "control/turret/turret_subsystem.hpp"
-#include "configuration/motion_control_config.hpp"
 
 #include "tap/control/command.hpp"
 
@@ -17,7 +17,7 @@ namespace control
         class ShurikenCommand: public tap::control::Command
         {
         public:
-        using MotionConfig = config::motion::MotionConfig;
+        using MotionConfig = FieldMecanumCommand::Config;
         /**
          * Remote uses the dji controller.
          * Keyboard uses the keyboard inputs.
@@ -59,7 +59,7 @@ namespace control
             ChassisInputHandler& m_input;
             ControlMode m_controlMode{ControlMode::REMOTE_TEST_STRAFE_TURRET};
             const Config mk_config;
-            const config::motion::MotionConfig mk_motionConfig;
+            const MotionConfig mk_motionConfig;
         };
     }//namespace control
 }//namespace chassis
