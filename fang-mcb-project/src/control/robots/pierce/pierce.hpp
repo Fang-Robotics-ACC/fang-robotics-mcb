@@ -49,7 +49,7 @@ namespace control
     {
         chassis::ChassisInputHandler::Config chassisInputConfig;
         turret::TurretInputHandler::Config turretInputConfig;
-        config::motion::TurretMotionConfig turretMotionConfig;
+        turret::AimCommand::Config turretMotionConfig;
         turret::TurretSubsystem::Config turretConfig;
         chassis::ChassisSubsystem::ChassisConfig chassisConfig;
     };
@@ -65,7 +65,7 @@ namespace control
         {
             k_chassisInputConfig,
             k_turretInputConfig,
-            k_turretMotionConfig,
+            k_turretAimConfig,
             k_turretConfig,
             k_chassisConfig
         };
