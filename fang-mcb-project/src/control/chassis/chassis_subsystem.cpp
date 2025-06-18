@@ -9,6 +9,8 @@ namespace control
             :
             tap::control::Subsystem::Subsystem{&drivers},
             m_drivers{drivers},
+            mk_pwmFrequency{chassisConfig.pwmFrequency},
+            mk_pwmTimer{chassisConfig.pwmTimer},
             mk_motorConfig{chassisConfig.chassisMotors},
             mk_dimensionConfig{chassisConfig.chassisDimensions},
             m_frontLeftMotor{drivers, mk_motorConfig.unifiedProperties, mk_motorConfig.frontLeftPwmData, mk_leftInversion},
@@ -47,6 +49,7 @@ namespace control
 
         void ChassisSubsystem::initialize()
         {
+            setPwmFrequency();
             m_frontLeftMotor.initialize();
             m_frontRightMotor.initialize();
             m_rearLeftMotor.initialize();
@@ -75,6 +78,11 @@ namespace control
         {
             const Radians currentFieldAngle{m_drivers.bmi088.getYaw()};
             m_mecanumLogic.setRobotAngle(currentFieldAngle);
+        }
+
+        void ChassisSubsystem::setPwmFrequency()
+        {
+            m_drivers.pwm.setTimerFrequency(mk_pwmTimer, static_cast<double>(Hertz{mk_pwmFrequency}));
         }
     }//namespace control
 }//namespace chassis

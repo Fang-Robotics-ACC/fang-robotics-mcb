@@ -50,6 +50,8 @@ namespace control
 
         struct ChassisConfig
         {
+            Hertz pwmFrequency;
+            tap::gpio::Pwm::Timer pwmTimer;
             ChassisDimensionConfig chassisDimensions;
             ChassisMotorConfig chassisMotors;
             PowerLimiter::Config powerLimiterConfig;
@@ -102,7 +104,11 @@ namespace control
         private:
         void syncWheelsToLogic();
         void updateFieldAngle();
+        void setPwmFrequency();
             Drivers& m_drivers;
+
+            const Hertz mk_pwmFrequency;
+            const tap::gpio::Pwm::Timer mk_pwmTimer;
             const ChassisMotorConfig mk_motorConfig;
             const ChassisDimensionConfig mk_dimensionConfig; 
 
@@ -115,8 +121,6 @@ namespace control
             logic::chassis::FieldMecanumLogic m_mecanumLogic;
 
             PowerLimiter m_powerLimiter;
-
-
             ///If you are facing forward, and the platform moves forward,
             ///Then the left wheels will rotate counterclockwise, (when you are looking at the shaft)
             static const bool mk_leftInversion{false};
@@ -128,4 +132,5 @@ namespace control
         };
     }//namespace chassis
 }//namespace control
+
 #endif
