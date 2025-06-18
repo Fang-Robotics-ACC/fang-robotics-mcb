@@ -100,12 +100,10 @@ namespace control
 
         turret::AimCommand m_aimCommnd{m_turret, m_turretInput, mk_config.turretMotionConfig};
         turret::ActivateBoosterCommand m_activateBoosterCommand{m_booster};
-        turret::DeactivateBoosterCommand m_deactivateBoosterCommand{m_turret};
         turret::AutofireCommand m_autofireCommand{m_feeder};
         turret::StopAutofireCommand m_stopAutofireCommand{m_turret};
 
         tap::control::PressCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, k_activateBoosterRemoteState};
-        tap::control::PressCommandMapping m_deactivateBoosterCommandMapping{&m_drivers, {&m_deactivateBoosterCommand}, k_deactivateBoosterRemoteState};
         tap::control::PressCommandMapping m_activateAutofireCommandMapping{&m_drivers, {&m_autofireCommand}, k_autofireRemoteState};
 
         chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_turret, m_chassisInput, mk_config.fieldMecanumConfig};
