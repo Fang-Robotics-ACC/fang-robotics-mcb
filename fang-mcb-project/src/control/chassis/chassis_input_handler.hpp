@@ -35,6 +35,9 @@ namespace control
         };
 
             ChassisInputHandler(Remote& remote, const Config& config);
+
+            math::AbstractVector2D getTranslation() const;
+            double getRotation() const;
             /**
              * Returns the desired translation motion
              * Depending on which mode is used, this could be relative to the robot chassis,
@@ -61,6 +64,8 @@ namespace control
              */
             double getRemoteRotation() const;
         private:
+            static constexpr double mk_abstractMax{1.0};
+            static constexpr double mk_abstractMin{-1.0};
 
             static constexpr math::AbstractVector2D mk_forward{0.0, 1.0};
             static constexpr math::AbstractVector2D mk_backward{0.0, -1.0};

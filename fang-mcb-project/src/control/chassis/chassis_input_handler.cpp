@@ -3,6 +3,8 @@
 #include "unitaliases.hpp"
 #include "mathaliases.hpp"
 
+#include "tap/algorithms/math_user_utils.hpp"
+
 namespace control
 {
     namespace chassis
@@ -13,6 +15,19 @@ namespace control
             mk_remoteConfig{config.remoteConfig},
             mk_keyboardConfig{config.keyboardConfig}
         {
+        }
+
+        math::AbstractVector2D ChassisInputHandler::getTranslation() const
+        {
+            const math::AbstractVector2D translationSum{getKeyboardTranslation() + getRemoteTranslation()};
+            const double xClamped{tap::algorithms::limitVal<double>(translationSum.x, mk_abstractMin, mk_abstractMax)};
+            const double yClamped{tap::algorithms::limitVal<double>(translationSum.y, mk_abstractMin, mk_abstractMax)};
+            return math::AbstractVector2D{xClamped, yClamped};
+        }
+
+        double ChassisInputHandler::getRotation() const
+        {
+            return tap::algorithms::limitVal<double>(getRemoteRotation(), mk_abstractMin, mk_abstractMax);
         }
 
         math::AbstractVector2D ChassisInputHandler::getKeyboardTranslation() const
