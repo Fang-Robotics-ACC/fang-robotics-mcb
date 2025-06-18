@@ -1,20 +1,22 @@
 #ifndef FANG_ROBOTICS_MCB_INFANTRY_HPP
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "drivers.hpp"
+//Subsystems
+#include "control/chassis/chassis_subsystem.hpp"
+
+#include "control/turret/gimbal_subsystem.hpp"
 #include "control/turret/feeder_subsystem.hpp"
 #include "control/turret/ammo_booster_subsystem.hpp"
-#include "control/turret/gimbal_subsystem.hpp"
 
+//Input handlers
 #include "control/turret/turret_input_handler.hpp"
 
-#include "control/chassis/chassis_subsystem.hpp"
-#include "control/chassis/field_mecanum_command.hpp"
-#include "control/chassis/shuriken_command.hpp"
 #include "control/turret/turret_subsystem.hpp"
 
-#include "control/robots/pierce/command_mapping/turret_command_map.hpp"
-
 //Commands
+#include "control/chassis/field_mecanum_command.hpp"
+#include "control/chassis/shuriken_command.hpp"
+
 #include "control/turret/command/aim_command.hpp"
 #include "control/turret/command/activate_booster_command.hpp"
 #include "control/turret/command/autofire_command.hpp"
