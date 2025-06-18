@@ -10,9 +10,9 @@ namespace control
 {
     namespace chassis
     {
-        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config)
+        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config)
         :   m_chassisSubsystem{chassisSubsystem},
-            m_turret{turret},
+            m_gimbal{turret},
             m_input{inputHandler},
             mk_config{config}
         {
@@ -72,7 +72,7 @@ namespace control
 
             const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
             const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_config.maxXTranslation, abstractTranslation.y * mk_config.maxYTranslation};
-            const Radians turretBearing{m_turret.getTargetFieldYaw()};
+            const Radians turretBearing{m_gimbal.getTargetFieldYaw()};
 
             const physics::Velocity2D fieldTranslation{util::math::rotateVector2D(frameTranslation, turretBearing)};
 

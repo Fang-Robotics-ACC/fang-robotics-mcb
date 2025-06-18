@@ -2,6 +2,7 @@
 #define FANG_ROBOTICS_MCB_FIELD_MECANUM_COMMAND_HPP
 #include "control/chassis/chassis_input_handler.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
+#include "control/turret/gimbal_subsystem.hpp"
 #include "control/turret/turret_subsystem.hpp"
 #include "configuration/motion_control_config.hpp"
 
@@ -42,7 +43,7 @@ namespace control
             /**
              * This takes a chassis subsystem and the respective inputHandler
              */
-            FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::TurretSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config);
+            FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config);
             const char* getName() const override;
             void initialize() override;
             void execute() override;
@@ -55,7 +56,7 @@ namespace control
             void executeKeyboardTestStrafeTurret();
             static constexpr char* mk_name{"Chassis tank drive"};
             ChassisSubsystem& m_chassisSubsystem;
-            const turret::TurretSubsystem& m_turret; //We don't want the command to alter the turret state
+            const turret::GimbalSubsystem& m_gimbal; //We don't want the command to alter the turret state
             ChassisInputHandler& m_input;
             ControlMode m_controlMode{ControlMode::REMOTE_TEST_STRAFE_TURRET};
             const Config& mk_config;
