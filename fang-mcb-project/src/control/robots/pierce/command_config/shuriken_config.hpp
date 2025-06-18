@@ -3,7 +3,7 @@
 #include "control/chassis/shuriken_command.hpp"
 namespace control
 {
-    static const chassis::ShurikenCommand::MotionConfig mk_shurikenMotionConfig
+    static const chassis::ShurikenCommand::MotionConfig k_shurikenMotionConfig
     {
         10_mph, //max translation - for turret based strafe
         10_mph, //maxXtranslation
@@ -11,10 +11,10 @@ namespace control
         100_rpm, //maxRotation
         0.5_deg //maxAngularDisplacement
     };
-    static const chassis::ShurikenCommand::Config mk_shurikenConfig
+    static const chassis::ShurikenCommand::Config k_shurikenConfig
     {
         125_rpm,
-        mk_shurikenMotionConfig
+        k_shurikenMotionConfig
     };
 }
 #endif
