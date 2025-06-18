@@ -50,13 +50,13 @@ namespace control
     public:
     struct Config
     {
+        chassis::ChassisSubsystem::ChassisConfig chassisConfig;
+        turret::GimbalSubsystem::Config gimbalConfig;
+        turret::FeederSubsystem::Config feederConfig;
+        turret::AmmoBoosterSubsystem::Config boosterConfig;
         chassis::ChassisInputHandler::Config chassisInputConfig;
         turret::TurretInputHandler::Config turretInputConfig;
         turret::AimCommand::Config turretMotionConfig;
-        turret::FeederSubsystem::Config feederConfig;
-        turret::GimbalSubsystem::Config gimbalConfig;
-        turret::AmmoBoosterSubsystem::Config boosterConfig;
-        chassis::ChassisSubsystem::ChassisConfig chassisConfig;
         chassis::FieldMecanumCommand::Config fieldMecanumConfig;
         chassis::ShurikenCommand::Config shurikenConfig;
     };
@@ -70,13 +70,13 @@ namespace control
 
         const Config mk_config
         {
+            k_chassisConfig,
+            k_gimbalSubsystemConfig,
+            k_feederConfig,
+            k_ammoBoosterConfig,
             k_chassisInputConfig,
             k_turretInputConfig,
             k_turretAimConfig,
-            k_feederConfig,
-            k_gimbalSubsystemConfig,
-            k_ammoBoosterConfig,
-            k_chassisConfig,
             k_fieldMecanumConfig,
             k_shurikenConfig
         };
