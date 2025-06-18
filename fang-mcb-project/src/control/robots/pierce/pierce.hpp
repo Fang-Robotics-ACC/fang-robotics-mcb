@@ -6,25 +6,13 @@
 #include "control/turret/gimbal_subsystem.hpp"
 
 #include "control/turret/turret_input_handler.hpp"
-#include "control/robots/pierce/config/chassis_config.hpp"
-#include "control/robots/pierce/command_config/field_mecanum_config.hpp"
-#include "control/robots/pierce/command_config/shuriken_config.hpp"
-
-#include "control/robots/pierce/config/chassis_input_config.hpp"
-#include "control/robots/pierce/config/turret_input_config.hpp"
-#include "configuration/motion/turret_motion_config.hpp"
-
 
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/field_mecanum_command.hpp"
 #include "control/chassis/shuriken_command.hpp"
-#include "configuration/chassis_config.hpp"
 #include "control/turret/turret_subsystem.hpp"
 
 #include "control/robots/pierce/command_mapping/turret_command_map.hpp"
-
-#include "control/robots/pierce/config/turret_config.hpp"
-#include "control/robots/pierce/config/turret_motion_config.hpp"
 
 //Commands
 #include "control/turret/command/aim_command.hpp"
@@ -88,9 +76,6 @@ namespace control
         const SubsystemConfig mk_subsystemConfig;
         const InputConfig mk_inputConfig;
         const CommandConfig mk_commandConfig;
-
-        config::motion::TurretMotionConfig turretMotionConfig;
-
 
         Drivers& m_drivers;
 
