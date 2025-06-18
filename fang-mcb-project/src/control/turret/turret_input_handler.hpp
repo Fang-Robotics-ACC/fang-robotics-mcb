@@ -9,15 +9,39 @@ namespace control
         {
         public:
             using Remote = tap::communication::serial::Remote;
+            struct RemoteConfig
+            {
+                Remote::Channel pitchChannel;
+                Remote::Channel yawChannel;
+                Remote::Channel rotationChannel;
+            };
 
-            TurretInputHandler(Remote& remote);
+            struct MouseConfig
+            {
+                double pitchPercentagePerPx;
+                double yawPercentagePerPx;
+            };
+
+            struct Config
+            {
+                RemoteConfig remoteConfig;
+                MouseConfig mouseConfig;
+            };
+
+            TurretInputHandler(Remote& remote, const Config& config);
 
             double getPitch() const;
             double getYaw() const;
             bool getFire() const;
         private:
+
+            double getRemotePitch() const;
+            double getRemoteYaw() const;
             static constexpr double mk_firingWheelThreshold{750};
             Remote& m_remote;
+
+            const RemoteConfig mk_remoteConfig;
+            const MouseConfig mk_mouseConfig;
         };
     }
 }

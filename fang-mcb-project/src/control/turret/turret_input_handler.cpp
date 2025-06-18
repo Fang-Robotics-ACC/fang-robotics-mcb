@@ -4,17 +4,32 @@ namespace control
 {
     namespace turret
     {
-        TurretInputHandler::TurretInputHandler(Remote& remote)
-        :   m_remote{remote}
+        TurretInputHandler::TurretInputHandler(Remote& remote, const Config& config)
+        :   m_remote{remote},
+            mk_remoteConfig{config.remoteConfig},
+            mk_mouseConfig{config.mouseConfig}
         {
+
         }
 
         double TurretInputHandler::getPitch() const
         {
-            return m_remote.getChannel(Remote::Channel::RIGHT_VERTICAL);
+            return getRemotePitch();
         }
 
         double TurretInputHandler::getYaw() const
+        {
+            return getRemoteYaw();
+        }
+
+        double TurretInputHandler::getRemotePitch() const
+        {
+
+            return m_remote.getChannel(Remote::Channel::RIGHT_VERTICAL);
+
+        }
+
+        double TurretInputHandler::getRemoteYaw() const
         {
             return m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL);
         }
