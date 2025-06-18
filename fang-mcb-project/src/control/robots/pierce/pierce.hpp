@@ -5,6 +5,7 @@
 #include "control/turret/turret_input_handler.hpp"
 #include "control/robots/pierce/config/chassis_config.hpp"
 #include "control/robots/pierce/command_config/field_mecanum_config.hpp"
+#include "control/robots/pierce/command_config/shuriken_config.hpp"
 
 #include "control/robots/pierce/config/chassis_input_config.hpp"
 #include "control/robots/pierce/config/turret_input_config.hpp"
@@ -54,10 +55,12 @@ namespace control
         turret::TurretSubsystem::Config turretConfig;
         chassis::ChassisSubsystem::ChassisConfig chassisConfig;
         chassis::FieldMecanumCommand::Config fieldMecanumConfig;
+        chassis::ShurikenCommand::Config shurikenConfig;
     };
         Pierce(Drivers& drivers);
         void initialize();
     private:
+        class CommandHandler;
         void initializeSubsystems();
         void registerSubsystems();
         void setDefaultCommands();
@@ -70,7 +73,8 @@ namespace control
             k_turretAimConfig,
             k_turretConfig,
             k_chassisConfig,
-            k_fieldMecanumConfig
+            k_fieldMecanumConfig,
+            k_shurikenConfig
         };
 
         config::motion::TurretMotionConfig turretMotionConfig;
@@ -78,27 +82,27 @@ namespace control
 
         Drivers& m_drivers;
 
-        chassis::ChassisInputHandler m_chassisInput;
-        turret::TurretInputHandler m_turretInput;
+        turret::TurretSubsystem m_turret;
+        chassis::ChassisSubsystem m_chassis;
 
         trap::communication::sensors::Imu m_imu;
 
-        turret::TurretSubsystem m_turret;
+        chassis::ChassisInputHandler m_chassisInput;
+        turret::TurretInputHandler m_turretInput;
 
-        turret::AimCommand m_aimCommnd;
-        turret::ActivateBoosterCommand m_activateBoosterCommand;
-        turret::DeactivateBoosterCommand m_deactivateBoosterCommand;
-        turret::AutofireCommand m_autofireCommand;
-        turret::StopAutofireCommand m_stopAutofireCommand;
+        turret::AimCommand m_aimCommnd{m_turret, m_turretInput, mk_config.turretMotionConfig};
+        turret::ActivateBoosterCommand m_activateBoosterCommand{m_turret};
+        turret::DeactivateBoosterCommand m_deactivateBoosterCommand{m_turret};
+        turret::AutofireCommand m_autofireCommand{m_turret};
+        turret::StopAutofireCommand m_stopAutofireCommand{m_turret};
 
         tap::control::PressCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, k_activateBoosterRemoteState};
         tap::control::PressCommandMapping m_deactivateBoosterCommandMapping{&m_drivers, {&m_deactivateBoosterCommand}, k_deactivateBoosterRemoteState};
         tap::control::PressCommandMapping m_activateAutofireCommandMapping{&m_drivers, {&m_autofireCommand}, k_autofireRemoteState};
         tap::control::PressCommandMapping m_stopAutofireCommandMapping{&m_drivers, {&m_stopAutofireCommand}, k_stopAutofireRemoteState};
 
-        chassis::ChassisSubsystem m_chassis;
-        chassis::FieldMecanumCommand m_fieldMecanumCommand;
-        chassis::ShurikenCommand m_shurikenCommand;
+        chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_turret, m_chassisInput, mk_config.fieldMecanumConfig};
+        chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_turret, m_chassisInput, mk_config.shurikenConfig};
 
         tap::control::PressCommandMapping m_fieldMecanumCommandMapping{&m_drivers, {&m_fieldMecanumCommand}, k_fieldMecanumRemoteState};
         tap::control::PressCommandMapping m_shurikenCommandMapping{&m_drivers, {&m_shurikenCommand}, k_shurikenModeRemoteState};
