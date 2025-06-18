@@ -66,7 +66,6 @@ namespace control
     private:
         class CommandHandler;
         void initializeSubsystems();
-        void registerSubsystems();
         void setDefaultCommands();
         void registerIoMappings();
 
