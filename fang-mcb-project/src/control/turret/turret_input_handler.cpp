@@ -1,5 +1,7 @@
 #include "control/turret/turret_input_handler.hpp"
 
+#include "tap/algorithms/math_user_utils.hpp"
+
 namespace control
 {
     namespace turret
@@ -13,12 +15,12 @@ namespace control
 
         double TurretInputHandler::getPitch() const
         {
-            return getRemotePitch();
+            return tap::algorithms::limitVal<double>(getRemotePitch() + getMousePitch(), mk_abstractMin, mk_abstractMax);
         }
 
         double TurretInputHandler::getYaw() const
         {
-            return getRemoteYaw();
+            return tap::algorithms::limitVal<double>(getRemoteYaw() + getMouseYaw(), mk_abstractMin, mk_abstractMax);
         }
 
         double TurretInputHandler::getRemotePitch() const

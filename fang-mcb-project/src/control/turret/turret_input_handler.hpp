@@ -34,12 +34,14 @@ namespace control
             double getYaw() const;
             bool getFire() const;
         private:
+            static constexpr double mk_abstractMin{-1.0};
+            static constexpr double mk_abstractMax{1.0};
 
             double getRemotePitch() const;
             double getRemoteYaw() const;
 
-            double getKeyboardPitch() const;
-            double getKeyboardYaw() const;
+            double getMousePitch() const;
+            double getMouseYaw() const;
             static constexpr double mk_firingWheelThreshold{750};
             Remote& m_remote;
 
