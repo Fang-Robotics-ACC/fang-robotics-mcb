@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_ACTIVATE_BOOSTER_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_ACTIVATE_BOOSTER_COMMAND_HPP
-#include "control/turret/turret_subsystem.hpp"
+#include "control/turret/ammo_booster_subsystem.hpp"
 
 #include "util/chrono/simple_timer.hpp"
 
@@ -13,7 +13,7 @@ namespace control
         class ActivateBoosterCommand: public tap::control::Command
         {
         public:
-            ActivateBoosterCommand(TurretSubsystem& turret);
+            ActivateBoosterCommand(AmmoBoosterSubsystem& booster);
 
             const char* getName() const override {return "Activate Booster";}
 
@@ -24,7 +24,7 @@ namespace control
 
 
         private:
-            turret::TurretSubsystem& m_turret;
+            AmmoBoosterSubsystem& m_booster;
         };
     }
 }

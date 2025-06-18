@@ -6,15 +6,15 @@ namespace control
     namespace turret
     {
         using namespace units::literals;
-        ActivateBoosterCommand::ActivateBoosterCommand(TurretSubsystem& turret)
-        :   m_turret{turret}
+        ActivateBoosterCommand::ActivateBoosterCommand(AmmoBoosterSubsystem& turret)
+        :   m_booster{m_booster}
         {
-            addSubsystemRequirement(&m_turret);
+            addSubsystemRequirement(&m_booster);
         }
 
         void ActivateBoosterCommand::initialize()
         {
-            m_turret.boosterOn();
+            m_booster.autoFireOn();
         }
 
         void ActivateBoosterCommand::execute()
@@ -23,11 +23,13 @@ namespace control
 
         void ActivateBoosterCommand::end(bool interrupted)
         {
+            m_booster.autoFireOff();
         }
 
         bool ActivateBoosterCommand::isFinished() const
         {
-            return true;
+            //Will be yoinked by the hold command mapping :P
+            return false;
         }
     }
 }
