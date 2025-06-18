@@ -59,8 +59,8 @@ namespace control
 
         void FieldMecanumCommand::executeRemoteTestFieldRotate()
         {
-            const math::AbstractVector2D abstractTranslation{m_input.getRemoteTranslation()};
-            const double abstractRotation{m_input.getRemoteRotation()};
+            const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
+            const double abstractRotation{m_input.getRotation()};
 
             const physics::Velocity2D translation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
             const RPM rotation{abstractRotation * mk_motionConfig.maxRotation};
@@ -70,13 +70,13 @@ namespace control
         void FieldMecanumCommand::executeRemoteTestStrafeTurret()
         {
 
-            const math::AbstractVector2D abstractTranslation{m_input.getRemoteTranslation()};
+            const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
             const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
             const Radians turretBearing{m_turret.getTargetFieldYaw()};
 
             const physics::Velocity2D fieldTranslation{util::math::rotateVector2D(frameTranslation, turretBearing)};
 
-            const double abstractRotation{m_input.getRemoteRotation()};
+            const double abstractRotation{m_input.getRotation()};
 
             const RPM rotation{abstractRotation * mk_motionConfig.maxRotation};
             m_chassisSubsystem.setMotion(fieldTranslation, rotation);
