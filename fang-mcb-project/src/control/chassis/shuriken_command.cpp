@@ -58,7 +58,7 @@ namespace control
         void ShurikenCommand::executeRemoteTestStrafeTurret()
         {
 
-            const math::AbstractVector2D abstractTranslation{m_input.getRemoteTranslation()};
+            const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
             const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
             const Radians turretBearing{m_turret.getTargetFieldYaw()};
 
