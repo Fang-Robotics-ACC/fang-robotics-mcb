@@ -13,7 +13,7 @@ namespace control
         class AutofireCommand: public tap::control::Command
         {
         public:
-            AutofireCommand(FeederSubsystem& turret);
+            AutofireCommand(FeederSubsystem& feeder);
 
             const char* getName() const override {return "Auto Fire";}
 
