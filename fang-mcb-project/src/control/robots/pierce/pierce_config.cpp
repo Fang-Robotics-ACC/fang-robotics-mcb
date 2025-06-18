@@ -2,10 +2,10 @@
 #include "control/robots/pierce/pierce.hpp"
 
 //Subsystem configs
-#include "config/chassis_config.hpp"
-#include "config/turret_gimbal_config.hpp"
-#include "config/feeder_config.hpp"
-#include "config/ammo_booster_config.hpp"
+#include "config/subsystem/chassis_config.hpp"
+#include "config/subsystem/turret_gimbal_config.hpp"
+#include "config/subsystem/feeder_config.hpp"
+#include "config/subsystem/ammo_booster_config.hpp"
 
 //Input configs 
 #include "config/turret_input_config.hpp"
