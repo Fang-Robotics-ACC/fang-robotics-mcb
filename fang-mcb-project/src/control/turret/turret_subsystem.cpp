@@ -9,7 +9,6 @@ namespace control
         :   Subsystem{&drivers},
             mk_homeYawOffset{config.homeYawOffset},
             m_gimbal{drivers, config.gimbalConfig},
-            m_feeder{drivers, config.feederConfig},
             m_chassisImu{imu}
         {
         }
@@ -18,14 +17,12 @@ namespace control
         void TurretSubsystem::initialize()
         {
             m_gimbal.initialize();
-            m_feeder.initialize();
         }
 
         void TurretSubsystem::refresh()
         {
             syncFieldYaw();
             m_gimbal.update();
-            m_feeder.update();
         }
 
         math::AbstractVector2D TurretSubsystem::getTargetFieldDirection() const
@@ -82,12 +79,10 @@ namespace control
 
         void TurretSubsystem::autoFireOn()
         {
-            m_feeder.feedOn();
         }
 
         void TurretSubsystem::autoFireOff()
         {
-            m_feeder.feedOff();
         }
 
         void TurretSubsystem::syncFieldYaw()
