@@ -41,6 +41,8 @@ namespace control
 
     static const chassis::ChassisSubsystem::ChassisConfig k_chassisConfig 
     {
+        k_chassisPwmFreq,
+        tap::gpio::Pwm::TIMER1,
         k_defaultDimensionConfig,
         k_defaultMotorConfig,
         k_chassisPowerLimiterConfig
