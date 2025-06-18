@@ -36,7 +36,14 @@ namespace control
 
             ChassisInputHandler(Remote& remote, const Config& config);
 
+            /**
+             * Returns a clamped sum of the keyboard and mouse inputs
+             */
             math::AbstractVector2D getTranslation() const;
+
+            /**
+             * Returns a clamped sum of the keyboard and mouse inputs
+             */
             double getRotation() const;
             /**
              * Returns the desired translation motion
