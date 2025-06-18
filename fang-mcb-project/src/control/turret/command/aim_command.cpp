@@ -7,14 +7,14 @@ namespace control
     namespace turret
     {
         using namespace units::literals;
-        AimCommand::AimCommand(TurretSubsystem& turret, TurretInputHandler& input, const Config& config)
-        :   m_turret{turret},
+        AimCommand::AimCommand(GimbalSubsystem& gimbal, TurretInputHandler& input, const Config& config)
+        :   m_gimbal{gimbal},
             m_input{input},
             mk_config{config},
-            mk_maxPitch{m_turret.getMaxPitch()},
-            mk_MinPitch{m_turret.getMinPitch()}
+            mk_maxPitch{m_gimbal.getMaxPitch()},
+            mk_MinPitch{m_gimbal.getMinPitch()}
         {
-            addSubsystemRequirement(&m_turret);
+            addSubsystemRequirement(&m_gimbal);
         }
 
         void AimCommand::initialize()
@@ -46,7 +46,7 @@ namespace control
 
             m_targetPitch =tap::algorithms::limitVal<Radians>(k_angularDisplacement + m_targetPitch, mk_MinPitch, mk_maxPitch);
 
-            m_turret.setPitch(m_targetPitch);
+            m_gimbal.setPitch(m_targetPitch);
         }
 
         void AimCommand::setYaw(const Microseconds& delta)
@@ -57,7 +57,7 @@ namespace control
 
             m_targetYaw += k_angularDisplacement;
 
-            m_turret.setFieldYaw(m_targetYaw);
+            m_gimbal.setFieldYaw(m_targetYaw);
         }
     }
 }

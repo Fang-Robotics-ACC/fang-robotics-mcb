@@ -1,7 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_AIM_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_AIM_COMMAND_HPP
-#include "configuration/motion/turret_motion_config.hpp"
-#include "control/turret/turret_subsystem.hpp"
+#include "control/turret/gimbal_subsystem.hpp"
 #include "control/turret/turret_input_handler.hpp"
 
 #include "util/chrono/simple_timer.hpp"
@@ -21,7 +20,7 @@ namespace control
                 RPM maxYawSpeed;
 
             };
-            AimCommand(TurretSubsystem& turret, TurretInputHandler& input, const Config& config);
+            AimCommand(GimbalSubsystem& gimbal, TurretInputHandler& input, const Config& config);
 
             const char* getName() const override {return "Aim Command";}
 
@@ -34,8 +33,8 @@ namespace control
         private:
             void setPitch(const Microseconds& delta);
             void setYaw(const Microseconds& delta);
-            turret::TurretSubsystem& m_turret;
-            turret::TurretInputHandler& m_input;
+            GimbalSubsystem& m_gimbal;
+            TurretInputHandler& m_input;
 
 
             const Config mk_config;
