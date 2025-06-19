@@ -15,8 +15,8 @@ namespace control
 
     static const turret::TurretInputHandler::MouseConfig k_turretInputMouseConfig
     {
-        10,
-        10
+        .1,
+        .1
     };
     static const turret::TurretInputHandler::Config k_turretInputConfig
     {
