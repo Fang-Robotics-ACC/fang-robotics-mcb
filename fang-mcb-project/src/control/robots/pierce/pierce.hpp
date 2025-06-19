@@ -104,14 +104,14 @@ namespace control
         turret::ActivateBoosterCommand m_activateBoosterCommand{m_booster};
         turret::AutofireCommand m_autofireCommand{m_feeder};
 
-        tap::control::HoldCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, mk_mappingConfig.remoteActivateBooster};
-        tap::control::HoldCommandMapping m_activateAutofireCommandMapping{&m_drivers, {&m_autofireCommand}, mk_mappingConfig.remoteFire};
+        tap::control::HoldCommandMapping m_activateBoosterRemoteMap{&m_drivers, {&m_activateBoosterCommand}, mk_mappingConfig.remoteActivateBooster};
+        tap::control::HoldCommandMapping m_activateAutofireRemoteMap{&m_drivers, {&m_autofireCommand}, mk_mappingConfig.remoteFire};
 
         chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.fieldMecanumConfig};
         chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.shurikenConfig};
 
-        tap::control::PressCommandMapping m_fieldMecanumCommandMapping{&m_drivers, {&m_fieldMecanumCommand}, mk_mappingConfig.keyboardFieldMecanumMode};
-        tap::control::PressCommandMapping m_shurikenCommandMapping{&m_drivers, {&m_shurikenCommand}, mk_mappingConfig.keyboardShurikenMode};
+        tap::control::PressCommandMapping m_fieldMecanumRemoteMap{&m_drivers, {&m_fieldMecanumCommand}, mk_mappingConfig.keyboardFieldMecanumMode};
+        tap::control::PressCommandMapping m_shurikenRemoteMap{&m_drivers, {&m_shurikenCommand}, mk_mappingConfig.keyboardShurikenMode};
     };//class Robot
 }//namspace control
 #endif

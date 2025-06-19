@@ -48,9 +48,9 @@ namespace control
     
     void Pierce::registerIoMappings()
     {
-        m_drivers.commandMapper.addMap(&m_activateBoosterCommandMapping);
-        m_drivers.commandMapper.addMap(&m_activateAutofireCommandMapping);
-        m_drivers.commandMapper.addMap(&m_shurikenCommandMapping);
-        m_drivers.commandMapper.addMap(&m_fieldMecanumCommandMapping);
+        m_drivers.commandMapper.addMap(&m_activateBoosterRemoteMap);
+        m_drivers.commandMapper.addMap(&m_activateAutofireRemoteMap);
+        m_drivers.commandMapper.addMap(&m_shurikenRemoteMap);
+        m_drivers.commandMapper.addMap(&m_fieldMecanumRemoteMap);
     }
 }
