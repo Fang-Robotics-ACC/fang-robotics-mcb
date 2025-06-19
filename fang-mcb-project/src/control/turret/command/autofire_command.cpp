@@ -23,8 +23,7 @@ namespace control
 
         void AutofireCommand::end(bool interrupted)
         {
-
-            m_feeder.autoFireOn();
+            m_feeder.autoFireOff();
         }
 
         bool AutofireCommand::isFinished() const
