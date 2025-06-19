@@ -39,6 +39,7 @@ namespace control
     class Pierce
     {
     public:
+        using RemoteState = tap::control::RemoteMapState;
         struct SubsystemConfig
         {
             chassis::ChassisSubsystem::ChassisConfig chassisConfig;
@@ -58,6 +59,18 @@ namespace control
             turret::AimCommand::Config aimCommandConfig;
             chassis::FieldMecanumCommand::Config fieldMecanumConfig;
             chassis::ShurikenCommand::Config shurikenConfig;
+        };
+
+        struct MappingConfig
+        {
+            RemoteState remoteActivateBooster;
+            RemoteState remoteFire;
+            RemoteState remoteFieldMecanumMode;
+            RemoteState remoteShurikenMode;
+            RemoteState mouseFire;
+            RemoteState mouseUnjam;
+            RemoteState keyboardFieldMecanumMode;
+            RemoteState keyboardShurikenMode;
         };
 
         struct Config
