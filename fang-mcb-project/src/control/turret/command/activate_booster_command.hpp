@@ -2,8 +2,6 @@
 #define FANG_ROBOTICS_MCB_ACTIVATE_BOOSTER_COMMAND_HPP
 #include "control/turret/ammo_booster_subsystem.hpp"
 
-#include "util/chrono/simple_timer.hpp"
-
 #include "tap/control/command.hpp"
 
 namespace control

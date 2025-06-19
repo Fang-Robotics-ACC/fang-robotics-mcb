@@ -6,8 +6,8 @@ namespace control
     namespace turret
     {
         using namespace units::literals;
-        ActivateBoosterCommand::ActivateBoosterCommand(AmmoBoosterSubsystem& turret)
-        :   m_booster{m_booster}
+        ActivateBoosterCommand::ActivateBoosterCommand(AmmoBoosterSubsystem& booster)
+        :   m_booster{booster}
         {
             addSubsystemRequirement(&m_booster);
         }
@@ -23,7 +23,7 @@ namespace control
 
         void ActivateBoosterCommand::end(bool interrupted)
         {
-            //m_booster.autoFireOff();
+            m_booster.autoFireOff();
         }
 
         bool ActivateBoosterCommand::isFinished() const
