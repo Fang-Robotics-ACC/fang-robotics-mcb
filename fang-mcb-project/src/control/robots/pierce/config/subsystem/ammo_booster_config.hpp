@@ -2,6 +2,7 @@
 #define FANG_ROBOTICS_MCB_AMMO_BOOSTER_CONFIG_HPP
 #include "control/turret/systems/flywheel_system.hpp"
 #include "control/turret/systems/ammo_booster_system.hpp"
+#include "unitaliases.hpp"
 
 #include "units.h"
 
@@ -12,6 +13,7 @@ namespace control
 
     using namespace units::literals;
 
+    static const Meters k_flywheelRadius{30_mm};
 
     static const trap::motor::DjiSpeedPid::Config k_flywheelMotorPidConfig 
     {
@@ -33,7 +35,7 @@ namespace control
     };
     static const Flywheel::Config k_leftFlywheelConfig 
     {
-        60_mm,
+        k_flywheelRadius,
         k_leftFlywheelMotorConfig
     };
 
@@ -49,13 +51,13 @@ namespace control
 
     static const Flywheel::Config k_rightFlywheelConfig
     {
-        150_mm,
+        k_flywheelRadius,
         k_rightFlywheeMotorConfig
     };
 
     static const AmmoBooster::Config k_ammoBoosterConfig
     {
-        100_fps,
+        25_mps,
         k_leftFlywheelConfig,
         k_rightFlywheelConfig
     };
