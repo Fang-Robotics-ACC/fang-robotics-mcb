@@ -17,11 +17,11 @@ namespace control
 
     static const trap::motor::DjiSpeedPid::Config k_flywheelMotorPidConfig 
     {
-        10,
-        0.5,
-        10,
-        10,
-        trap::motor::DjiM3508::k_maxOutput
+        .kp             = 30,
+        .ki             = 0,
+        .kd             = 4000,
+        .maxICumulative = 0,
+        .maxOutput      = trap::motor::DjiM3508::k_maxOutput
     };
 
     static const Flywheel::DriveMotor::Config k_leftFlywheelMotorConfig
