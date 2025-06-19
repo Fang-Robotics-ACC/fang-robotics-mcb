@@ -21,7 +21,7 @@ namespace trap
                      inverted,
                      name, 
                      currentControl, 
-                     gearRatio},
+                     1.0}, //Gear ratio is for extern encoder, causes glitches if non-zero with no external encoder
           m_gearRatio{gearRatio},
           m_speedPid{speedPidConfig}
         {

@@ -17,7 +17,7 @@ namespace trap
         DjiM3508::DjiM3508(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                            const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedPidConfig)
         : m_drivers{drivers},
-          m_djiMotor{&drivers, motorId, canBus, inverted, name, mk_requiredCurrentMode, gearRatio},
+          m_djiMotor{&drivers, motorId, canBus, inverted, name, mk_requiredCurrentMode, gearRatio},//Gear ratio is for extern encoder, causes glitches if non-zero with no external encoder
           m_gearRatio{gearRatio},
           m_speedPid{speedPidConfig}
         {

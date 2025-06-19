@@ -15,7 +15,7 @@ namespace trap
 
         DjiM2006::DjiM2006(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                            const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedPidConfig)
-        : m_djiMotor{&drivers, motorId, canBus, inverted, name, mk_requiredCurrentMode, gearRatio},
+        : m_djiMotor{&drivers, motorId, canBus, inverted, name, mk_requiredCurrentMode, 1.0},//Gear ratio is for external encoder
           m_gearRatio{gearRatio},
           m_speedPid{speedPidConfig}
         {
