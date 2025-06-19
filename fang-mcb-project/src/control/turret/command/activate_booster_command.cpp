@@ -23,7 +23,7 @@ namespace control
 
         void ActivateBoosterCommand::end(bool interrupted)
         {
-            m_booster.autoFireOff();
+            //m_booster.autoFireOff();
         }
 
         bool ActivateBoosterCommand::isFinished() const
