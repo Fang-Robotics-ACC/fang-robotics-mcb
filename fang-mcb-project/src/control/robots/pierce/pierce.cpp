@@ -36,6 +36,8 @@ namespace control
         m_gimbal.registerAndInitialize();
 
         m_chassis.registerAndInitialize();
+
+        m_booster.autoFireOn(); //Hack until command is fixed//
     }
     
     
@@ -46,7 +48,7 @@ namespace control
     
     void Pierce::registerIoMappings()
     {
-        m_drivers.commandMapper.addMap(&m_activateBoosterCommandMapping);
+        //m_drivers.commandMapper.addMap(&m_activateBoosterCommandMapping);
         m_drivers.commandMapper.addMap(&m_activateAutofireCommandMapping);
         m_drivers.commandMapper.addMap(&m_shurikenCommandMapping);
         m_drivers.commandMapper.addMap(&m_fieldMecanumCommandMapping);
