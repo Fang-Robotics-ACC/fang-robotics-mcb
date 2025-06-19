@@ -101,6 +101,8 @@ namespace control
          */
         void refresh() override;
 
+        void refreshSafeDisconnect() override;
+
         private:
         void syncWheelsToLogic();
         void updateFieldAngle();

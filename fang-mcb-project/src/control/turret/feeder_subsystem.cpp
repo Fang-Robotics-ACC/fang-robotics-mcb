@@ -18,6 +18,10 @@ namespace control::turret
         m_feeder.update();
     }
 
+    void FeederSubsystem::refreshSafeDisconnect()
+    {
+        m_feeder.feedOff();
+    }
     void FeederSubsystem::autoFireOn()
     {
         m_feeder.feedOn();

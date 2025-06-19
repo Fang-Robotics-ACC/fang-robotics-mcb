@@ -18,6 +18,11 @@ namespace control::turret
         m_booster.update();
     }
 
+    void AmmoBoosterSubsystem::refreshSafeDisconnect()
+    {
+        m_booster.autoFireOff();
+    }
+
     void AmmoBoosterSubsystem::autoFireOn()
     {
         m_booster.autoFireOn();

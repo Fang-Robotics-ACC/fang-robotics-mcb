@@ -16,6 +16,8 @@ namespace control::turret
             void initialize() override;
             void refresh() override;
 
+            void refreshSafeDisconnect() override;
+
             void autoFireOn();
             void autoFireOff();
 

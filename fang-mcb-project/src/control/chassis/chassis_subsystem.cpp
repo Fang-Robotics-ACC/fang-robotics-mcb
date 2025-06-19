@@ -62,6 +62,14 @@ namespace control
             updateFieldAngle();
         }
 
+        void ChassisSubsystem::refreshSafeDisconnect()
+        {
+            m_frontLeftMotor.setSpeed(0_rpm);
+            m_frontRightMotor.setSpeed(0_rpm);
+            m_rearLeftMotor.setSpeed(0_rpm);
+            m_rearRightMotor.setSpeed(0_rpm);
+        }
+
         void ChassisSubsystem::syncWheelsToLogic()
         {
             //If we are exeeding power, we should downscale it for safety
