@@ -17,8 +17,8 @@ namespace control
 
     static const trap::motor::DjiSpeedPid::Config k_flywheelMotorPidConfig 
     {
-        20,
-        1,
+        10,
+        0.5,
         10,
         10,
         trap::motor::DjiM3508::k_maxOutput
