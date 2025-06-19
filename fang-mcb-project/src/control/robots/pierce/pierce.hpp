@@ -92,6 +92,7 @@ namespace control
         const SubsystemConfig mk_subsystemConfig;
         const InputConfig mk_inputConfig;
         const CommandConfig mk_commandConfig;
+        const MappingConfig mk_mappingConfig;
 
         Drivers& m_drivers;
 

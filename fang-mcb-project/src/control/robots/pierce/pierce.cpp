@@ -12,6 +12,7 @@ namespace control
             mk_subsystemConfig{config.subsystemConfig},
             mk_inputConfig{config.inputConfig},
             mk_commandConfig{config.commandConfig},
+            mk_mappingConfig{config.mappingConfig},
             m_imu{drivers.bmi088},
             m_chassis{drivers, mk_subsystemConfig.chassisConfig},
             m_gimbal{drivers, m_imu, mk_subsystemConfig.gimbalConfig},
