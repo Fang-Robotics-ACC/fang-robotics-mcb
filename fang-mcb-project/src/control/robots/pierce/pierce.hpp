@@ -22,8 +22,8 @@
 #include "control/turret/command/autofire_command.hpp"
 
 //Command Maps
-#include "control/robots/pierce/command_mapping/turret_command_map.hpp"
-#include "control/robots/pierce/command_mapping/chassis_command_map.hpp"
+#include "control/robots/pierce/config/mapping/chassis_command_map.hpp"
+#include "control/robots/pierce/config/mapping/turret_command_map.hpp"
 
 #include "trap/communication/sensors/imu.hpp"
 
