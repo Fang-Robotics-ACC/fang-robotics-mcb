@@ -26,13 +26,14 @@ namespace control
 
     static const Flywheel::DriveMotor::Config k_leftFlywheelMotorConfig
     { 
-        static_cast<tap::motor::MotorId>(tap::motor::MOTOR8),
-        tap::can::CanBus::CAN_BUS1,
-        "leftFlywheel",
-        false,
-        1.0,
-        k_flywheelMotorPidConfig 
+        .motorId        = tap::motor::MOTOR8,
+        .canBus         = tap::can::CanBus::CAN_BUS1,
+        .name           = "leftFlywheel",
+        .inverted       = false,
+        .gearRatio      = 1.0, //No gearbox attached
+        .speedPidConfig = k_flywheelMotorPidConfig
     };
+
     static const Flywheel::Config k_leftFlywheelConfig 
     {
         k_flywheelRadius,
@@ -41,12 +42,12 @@ namespace control
 
     static const Flywheel::DriveMotor::Config k_rightFlywheeMotorConfig 
     { 
-        static_cast<tap::motor::MotorId>(tap::motor::MOTOR7),
-        tap::can::CanBus::CAN_BUS1,
-        "rightFlywheel",
-        true,
-        1.0,
-        k_flywheelMotorPidConfig
+        .motorId        = tap::motor::MOTOR7,
+        .canBus         = tap::can::CanBus::CAN_BUS1,
+        .name           = "rightFlywheel",
+        .inverted       = true,
+        .gearRatio      = 1.0, //No gearbox attached
+        .speedPidConfig = k_flywheelMotorPidConfig
     };
 
     static const Flywheel::Config k_rightFlywheelConfig
@@ -57,10 +58,9 @@ namespace control
 
     static const AmmoBooster::Config k_ammoBoosterConfig
     {
-        25_mps,
-        k_leftFlywheelConfig,
-        k_rightFlywheelConfig
+        .ammoVelocity           = 25_mps,
+        .leftFlywheelConfig     = k_leftFlywheelConfig,
+        .rightFlywheelConfig    = k_rightFlywheelConfig
     };
-
 }
 #endif
