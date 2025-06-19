@@ -22,14 +22,14 @@ namespace control
         tap::can::CanBus::CAN_BUS1,
         "Feeder Motor",
         false,
-        1.0,
+        trap::motor::DjiM2006::k_factoryGearboxRatio,
         k_feederMotorPidConfig
     };
 
     static const turret::FeederSystem::Config k_feederConfig
     {
         7,
-        10_Hz * 30,//Gearbox glitch bypass hack
+        10_Hz,
         k_feederMotorConfig
     };
 }
