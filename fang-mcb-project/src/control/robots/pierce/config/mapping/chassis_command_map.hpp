@@ -5,6 +5,7 @@ namespace control
 {
     using Remote = tap::communication::serial::Remote;
     using SwitchState = Remote::SwitchState;
+    using Key = Remote::Key;
     //This is the state of the right switch to activate choosing a command for the chassis
     static const SwitchState k_chassisRightSwitchContext{SwitchState::DOWN};
 
@@ -21,6 +22,16 @@ namespace control
     {
         k_chassisRightSwitchContext,
         k_fieldShurikenLeftSwitchActivate
+    };
+
+    static const tap::control::RemoteMapState k_fieldMecanumKeyboardState
+    {
+        {Key::E}
+    };
+
+    static const tap::control::RemoteMapState k_shurikenModeKeyboardState
+    {
+        {Key::Q}
     };
 }
 #endif

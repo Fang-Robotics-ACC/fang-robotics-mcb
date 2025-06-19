@@ -4,6 +4,8 @@
 namespace control
 {
     using Remote = tap::communication::serial::Remote;
+    using Key = Remote::Key;
+    using MouseButton = tap::control::RemoteMapState::MouseButton;
     static const tap::control::RemoteMapState k_activateBoosterRemoteState
     {
         Remote::Switch::LEFT_SWITCH,
@@ -16,5 +18,14 @@ namespace control
         Remote::SwitchState::UP
     };
 
+    static const tap::control::RemoteMapState k_autofireMouseState
+    {
+        MouseButton::LEFT
+    };
+
+    static const tap::control::RemoteMapState k_unjamMouseState
+    {
+        MouseButton::RIGHT
+    };
 }
 #endif
