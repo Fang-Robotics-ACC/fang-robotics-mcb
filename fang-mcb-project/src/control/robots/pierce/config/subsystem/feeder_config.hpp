@@ -29,7 +29,7 @@ namespace control
     static const turret::FeederSystem::Config k_feederConfig
     {
         7,
-        100_Hz * 30,//Gearbox glitch bypass hack
+        10_Hz * 30,//Gearbox glitch bypass hack
         k_feederMotorConfig
     };
 }
