@@ -18,7 +18,7 @@ namespace control
         tap::motor::MOTOR2,
         tap::can::CanBus::CAN_BUS1,
         "pitchMotor",
-        false,
+        true,
         1.0,
         k_pitchPidConfig,
         false
@@ -37,7 +37,7 @@ namespace control
         tap::motor::MOTOR1,
         tap::can::CanBus::CAN_BUS1,
         "yawMotor",
-        true,
+        false,
         1.0,
         k_yawPidConfig,
         false
