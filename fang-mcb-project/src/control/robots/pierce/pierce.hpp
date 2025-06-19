@@ -78,6 +78,7 @@ namespace control
             SubsystemConfig subsystemConfig;
             InputConfig inputConfig;
             CommandConfig commandConfig;
+            MappingConfig mappingConfig;
         };
 
         Pierce(Drivers& drivers, const Config& config);

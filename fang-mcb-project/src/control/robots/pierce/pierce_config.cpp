@@ -16,6 +16,10 @@
 #include "config/command/field_mecanum_config.hpp"
 #include "config/command/shuriken_config.hpp"
 
+//Mapping configs
+#include "config/mapping/chassis_command_map.hpp"
+#include "config/mapping/turret_command_map.hpp"
+
 namespace control
 {
     const Pierce::SubsystemConfig k_pierceSubsytemConfig 
@@ -39,10 +43,23 @@ namespace control
         k_shurikenConfig
     };
 
+    const Pierce::MappingConfig k_pierceMappingConfig
+    {
+        k_activateBoosterRemoteState,
+        k_autofireRemoteState,
+        k_fieldMecanumRemoteState,
+        k_shurikenModeRemoteState,
+        k_autofireMouseState,
+        k_unjamMouseState,
+        k_fieldMecanumKeyboardState,
+        k_shurikenModeKeyboardState
+    };
+
     const Pierce::Config k_pierceConfig
     {
         k_pierceSubsytemConfig,
         k_pierceInputConfig,
-        k_pierceCommandConfig
+        k_pierceCommandConfig,
+        k_pierceMappingConfig
     };
 }
