@@ -7,7 +7,7 @@ namespace control
     static const tap::control::RemoteMapState k_activateBoosterRemoteState
     {
         Remote::Switch::LEFT_SWITCH,
-        Remote::SwitchState::MID
+        Remote::SwitchState::UP
     };
 
     static const tap::control::RemoteMapState k_autofireRemoteState
