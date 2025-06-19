@@ -26,13 +26,13 @@ namespace control
         double TurretInputHandler::getRemotePitch() const
         {
 
-            return m_remote.getChannel(Remote::Channel::RIGHT_VERTICAL);
+            return m_remote.getChannel(mk_remoteConfig.pitchChannel);
 
         }
 
         double TurretInputHandler::getRemoteYaw() const
         {
-            return m_remote.getChannel(Remote::Channel::RIGHT_HORIZONTAL);
+            return m_remote.getChannel(mk_remoteConfig.yawChannel);
         }
 
         double TurretInputHandler::getMousePitch() const
