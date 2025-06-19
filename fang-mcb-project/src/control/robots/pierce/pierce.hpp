@@ -28,6 +28,7 @@
 #include "trap/communication/sensors/imu.hpp"
 
 #include "tap/control/press_command_mapping.hpp"
+#include "tap/control/hold_command_mapping.hpp"
 
 namespace control
 {
@@ -94,8 +95,8 @@ namespace control
         turret::ActivateBoosterCommand m_activateBoosterCommand{m_booster};
         turret::AutofireCommand m_autofireCommand{m_feeder};
 
-        tap::control::PressCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, k_activateBoosterRemoteState};
-        tap::control::PressCommandMapping m_activateAutofireCommandMapping{&m_drivers, {&m_autofireCommand}, k_autofireRemoteState};
+        tap::control::HoldCommandMapping m_activateBoosterCommandMapping{&m_drivers, {&m_activateBoosterCommand}, k_activateBoosterRemoteState};
+        tap::control::HoldCommandMapping m_activateAutofireCommandMapping{&m_drivers, {&m_autofireCommand}, k_autofireRemoteState};
 
         chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.fieldMecanumConfig};
         chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.shurikenConfig};
