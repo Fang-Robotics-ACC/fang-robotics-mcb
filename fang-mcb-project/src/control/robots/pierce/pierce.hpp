@@ -2,6 +2,7 @@
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "drivers.hpp"
 //Subsystems
+#include "control/turret/turret_subsystem.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 
 #include "control/turret/gimbal_subsystem.hpp"
@@ -11,8 +12,6 @@
 //Input handlers
 #include "control/turret/turret_input_handler.hpp"
 
-#include "control/turret/turret_subsystem.hpp"
-
 //Commands
 #include "control/chassis/field_mecanum_command.hpp"
 #include "control/chassis/shuriken_command.hpp"
@@ -20,10 +19,6 @@
 #include "control/turret/command/aim_command.hpp"
 #include "control/turret/command/activate_booster_command.hpp"
 #include "control/turret/command/autofire_command.hpp"
-
-//Command Maps
-#include "control/robots/pierce/config/mapping/chassis_command_map.hpp"
-#include "control/robots/pierce/config/mapping/turret_command_map.hpp"
 
 #include "trap/communication/sensors/imu.hpp"
 
@@ -84,7 +79,6 @@ namespace control
         Pierce(Drivers& drivers, const Config& config);
         void initialize();
     private:
-        class CommandHandler;
         void initializeSubsystems();
         void setDefaultCommands();
         void registerIoMappings();
