@@ -15,14 +15,14 @@ namespace control
 
         double TurretInputHandler::getPitch() const
         {
-            //return tap::algorithms::limitVal<double>(getRemotePitch() + getMousePitch(), mk_abstractMin, mk_abstractMax);
-            return m_remote.getMouseY();
+            return tap::algorithms::limitVal<double>(getRemotePitch() + getMousePitch(), mk_abstractMin, mk_abstractMax);
+            //return m_remote.getMouseY();
         }
 
         double TurretInputHandler::getYaw() const
         {
-            //return tap::algorithms::limitVal<double>(getRemoteYaw() + getMouseYaw(), mk_abstractMin, mk_abstractMax);
-            return m_remote.getMouseX();
+            return tap::algorithms::limitVal<double>(getRemoteYaw() + getMouseYaw(), mk_abstractMin, mk_abstractMax);
+            //return m_remote.getMouseX();
         }
 
         double TurretInputHandler::getRemotePitch() const
