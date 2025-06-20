@@ -72,7 +72,7 @@ namespace control
         {
             //Start with the chassis field yaw, if you subtract the target field yaw
             //that leaves the difference, which the gimbal must do
-            const Radians robotwiseYaw{getChassisYaw() - m_targetFieldYaw};
+            const Radians robotwiseYaw{m_targetFieldYaw - getChassisYaw()};
             setRawTurretRobotwiseYaw(robotwiseYaw);
         }
 
