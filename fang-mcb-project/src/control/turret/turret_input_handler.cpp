@@ -40,7 +40,8 @@ namespace control
 
         double TurretInputHandler::getMousePitch() const
         {
-            return m_remote.getMouseY() * mk_mouseConfig.pitchPercentagePerPx;
+            //On mouse, down is positive
+            return -m_remote.getMouseY() * mk_mouseConfig.pitchPercentagePerPx;
         }
 
         double TurretInputHandler::getMouseYaw() const
