@@ -27,9 +27,9 @@ namespace control
     static const trap::motor::DjiSpeedPid::Config k_yawPidConfig
     {
         50000,
-        0.1,
-        2000,
-        3000,
+        0.2,
+        50'000,
+        7000,
         trap::motor::DjiGM6020::k_maxOutput
     };
     static const trap::motor::DjiGM6020::Config k_yawConfig
