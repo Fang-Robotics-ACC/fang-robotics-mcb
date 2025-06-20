@@ -19,7 +19,9 @@ namespace control
 
         void AimCommand::initialize()
         {
-            m_targetPitch = m_gimbal.getPitch();
+            const Radians startingPitch{m_gimbal.getPitch()};
+            m_targetPitch = startingPitch;
+            m_gimbal.setPitch(startingPitch);
         }
 
         void AimCommand::execute()
