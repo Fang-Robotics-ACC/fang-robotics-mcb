@@ -26,6 +26,8 @@ namespace control
     void Pierce::initialize()
     {
         initializeSubsystems();
+
+        modm::delay_ms(Milliseconds{k_startupDelay}.to<float>());
         setDefaultCommands();
         registerIoMappings();
     }
