@@ -16,13 +16,11 @@ namespace control
         double TurretInputHandler::getPitch() const
         {
             return tap::algorithms::limitVal<double>(getRemotePitch() + getMousePitch(), mk_abstractMin, mk_abstractMax);
-            //return m_remote.getMouseY();
         }
 
         double TurretInputHandler::getYaw() const
         {
             return tap::algorithms::limitVal<double>(getRemoteYaw() + getMouseYaw(), mk_abstractMin, mk_abstractMax);
-            //return m_remote.getMouseX();
         }
 
         double TurretInputHandler::getRemotePitch() const
@@ -40,7 +38,7 @@ namespace control
 
         double TurretInputHandler::getMousePitch() const
         {
-            //On mouse, down is positive
+            //On mouse, down is positive due to VGA history ahhhh
             return -m_remote.getMouseY() * mk_mouseConfig.pitchPercentagePerPx;
         }
 
