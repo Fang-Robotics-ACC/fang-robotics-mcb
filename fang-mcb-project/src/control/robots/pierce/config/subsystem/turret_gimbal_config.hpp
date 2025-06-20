@@ -54,8 +54,8 @@ namespace control
 
     static const turret::GimbalSubsystem::Config k_gimbalSubsystemConfig
     {
-        7_deg,
-        k_gimbalConfig,
+        .homeYawOffset  = -7.75_deg,
+        .gimbalConfig   = k_gimbalConfig,
     };
 }
 #endif
