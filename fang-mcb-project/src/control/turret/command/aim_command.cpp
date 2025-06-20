@@ -19,6 +19,7 @@ namespace control
 
         void AimCommand::initialize()
         {
+            m_targetPitch = m_gimbal.getPitch();
         }
 
         void AimCommand::execute()
