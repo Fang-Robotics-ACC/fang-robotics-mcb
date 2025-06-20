@@ -33,7 +33,7 @@ namespace control
     const Pierce::InputConfig k_pierceInputConfig
     {
         k_chassisInputConfig,
-        k_turretInputRemoteConfig,
+        k_turretInputConfig,
     };
 
     const Pierce::CommandConfig k_pierceCommandConfig
