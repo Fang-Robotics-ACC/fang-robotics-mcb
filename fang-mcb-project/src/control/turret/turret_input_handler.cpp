@@ -30,9 +30,10 @@ namespace control
 
         }
 
+        //Counterclockwise is positive
         double TurretInputHandler::getRemoteYaw() const
         {
-            return m_remote.getChannel(mk_remoteConfig.yawChannel);
+            return -m_remote.getChannel(mk_remoteConfig.yawChannel);
         }
 
         double TurretInputHandler::getMousePitch() const
@@ -42,7 +43,8 @@ namespace control
 
         double TurretInputHandler::getMouseYaw() const
         {
-            return m_remote.getMouseX() * mk_mouseConfig.yawPercentagePerPx;
+            //Counterclockwise is positive
+            return -m_remote.getMouseX() * mk_mouseConfig.yawPercentagePerPx;
         }
 
         bool TurretInputHandler::getFire() const

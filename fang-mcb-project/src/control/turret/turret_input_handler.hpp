@@ -31,6 +31,10 @@ namespace control
             TurretInputHandler(Remote& remote, const Config& config);
 
             double getPitch() const;
+            /**
+             * Counterclockwise is positive, clockwise is negative
+             * (Math convention.)
+             */
             double getYaw() const;
             bool getFire() const;
         private:
