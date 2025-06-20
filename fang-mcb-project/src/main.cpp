@@ -53,9 +53,6 @@
 /* define timers here -------------------------------------------------------*/
 tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / MAIN_LOOP_FREQUENCY);
 
-//Allow motors to boot up properly this prevents sudden jerking since they are unable to send
-//their true signals until after the delay
-static const Milliseconds k_startupDelay{3000};
 
 int main()
 {
@@ -79,8 +76,6 @@ int main()
     //static classes are in static memory instead of stack memory
     static Robot robot{drivers, k_robotConfig};
 
-    //Allow motors to report actual position to prevent sudden snapping
-    modm::delay_ms(Milliseconds{k_startupDelay}.to<float>());
     robot.initialize();
 
     #ifdef PLATFORM_HOSTED
