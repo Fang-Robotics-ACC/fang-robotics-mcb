@@ -16,7 +16,8 @@ namespace trap::algorithms
          * Speed should be positive
          */
         Ramp(ValueUnit initialValue, double rampSpeed)
-        :   m_ramp(static_cast<float>(initialValue))
+        :   m_ramp{static_cast<float>(initialValue)},
+            m_speed{rampSpeed}
         {
         }
 
