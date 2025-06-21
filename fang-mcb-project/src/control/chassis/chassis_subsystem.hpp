@@ -8,6 +8,9 @@
 #include "wrap/trap/communication/pwm_data.hpp"
 #include "wrap/trap/control/chassis/power_limiter.hpp"
 
+#include "wrap/trap/algorithms/ramp_2d.hpp"
+#include "wrap/trap/algorithms/ramp.hpp"
+
 #include "tap/communication/gpio/pwm.hpp"
 #include "tap/control/subsystem.hpp"
 
@@ -108,6 +111,11 @@ namespace control
         void updateFieldAngle();
         void setPwmFrequency();
             Drivers& m_drivers;
+
+            static constexpr double k_rampSpeed{1.0};
+
+            trap::algorithms::Ramp2D<MetersPerSecond, Seconds> m_translationRamp{{0_mps,0_mps}, k_rampSpeed};
+
 
             const Hertz mk_pwmFrequency;
             const tap::gpio::Pwm::Timer mk_pwmTimer;
