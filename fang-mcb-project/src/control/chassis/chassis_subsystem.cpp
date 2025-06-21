@@ -42,7 +42,7 @@ namespace control
 
         void ChassisSubsystem::setRotation(const RPM& rotation)
         {
-            m_rotationRamp.setTarget(rotation);
+            m_mecanumLogic.setRotation(rotation);
         }
 
         RPM ChassisSubsystem::getRotation() const
@@ -84,7 +84,7 @@ namespace control
         void ChassisSubsystem::syncLogicToRamps()
         {
             m_mecanumLogic.setTranslation(m_translationRamp.getValue());
-            m_mecanumLogic.setRotation(m_rotationRamp.getValue());
+            //m_mecanumLogic.setRotation(m_rotationRamp.getValue());
         }
 
         void ChassisSubsystem::syncWheelsToLogic()
