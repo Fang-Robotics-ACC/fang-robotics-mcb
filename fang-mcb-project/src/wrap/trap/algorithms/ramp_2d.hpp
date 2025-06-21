@@ -46,7 +46,6 @@ namespace trap::algorithms
         void setSpeed(double speed)
         {
             m_speed = speed;
-            
         }
 
         Vector2D getValue() const
