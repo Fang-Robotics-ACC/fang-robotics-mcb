@@ -41,11 +41,13 @@ namespace control
 
     static const chassis::ChassisSubsystem::ChassisConfig k_chassisConfig 
     {
-        k_chassisPwmFreq,
-        tap::gpio::Pwm::TIMER1,
-        k_defaultDimensionConfig,
-        k_defaultMotorConfig,
-        k_chassisPowerLimiterConfig
+        .pwmFrequency           = k_chassisPwmFreq,
+        .pwmTimer               = tap::gpio::Pwm::TIMER1,
+        .translationRampSpeed   = 10,
+        .rotationRampSpeed      = 10,
+        .chassisDimensions      = k_defaultDimensionConfig,
+        .chassisMotors          = k_defaultMotorConfig,
+        .powerLimiterConfig     = k_chassisPowerLimiterConfig
     };
 }
 #endif

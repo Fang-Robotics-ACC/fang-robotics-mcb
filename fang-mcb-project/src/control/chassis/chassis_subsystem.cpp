@@ -11,6 +11,8 @@ namespace control
             m_drivers{drivers},
             mk_pwmFrequency{chassisConfig.pwmFrequency},
             mk_pwmTimer{chassisConfig.pwmTimer},
+            k_translationRampSpeed{chassisConfig.translationRampSpeed},
+            k_rotationRampSpeed{chassisConfig.rotationRampSpeed},
             mk_motorConfig{chassisConfig.chassisMotors},
             mk_dimensionConfig{chassisConfig.chassisDimensions},
             m_frontLeftMotor{drivers, mk_motorConfig.unifiedProperties, mk_motorConfig.frontLeftPwmData, mk_leftInversion},

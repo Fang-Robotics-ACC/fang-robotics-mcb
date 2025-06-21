@@ -51,10 +51,16 @@ namespace control
             Meters horizontalWheelDistance;
         };
 
+        /**
+         * Rotation Ramp Speed - how many RPM/s
+         * Translation Ramp Speed - how how  many m/s/s
+         */
         struct ChassisConfig
         {
             Hertz pwmFrequency;
             tap::gpio::Pwm::Timer pwmTimer;
+            double translationRampSpeed;
+            double rotationRampSpeed;
             ChassisDimensionConfig chassisDimensions;
             ChassisMotorConfig chassisMotors;
             PowerLimiter::Config powerLimiterConfig;
@@ -114,14 +120,10 @@ namespace control
             void setPwmFrequency();
             Drivers& m_drivers;
 
-            static constexpr double k_rampSpeed{10};
-
-            trap::algorithms::Ramp2D<MetersPerSecond, Seconds> m_translationRamp{{0_mps,0_mps}, k_rampSpeed};
-            trap::algorithms::Ramp<RPM, Seconds> m_rotationRamp{0_rpm, k_rampSpeed};
-
-
             const Hertz mk_pwmFrequency;
             const tap::gpio::Pwm::Timer mk_pwmTimer;
+            const double k_translationRampSpeed;
+            const double k_rotationRampSpeed;
             const ChassisMotorConfig mk_motorConfig;
             const ChassisDimensionConfig mk_dimensionConfig; 
 
@@ -141,6 +143,9 @@ namespace control
             ///If you are facing forward, and the platform moves forward,
             ///Then the right wheels will rotate clockwise, (when you are looking at the shaft)
             static const bool mk_rightInversion{true};
+
+            trap::algorithms::Ramp2D<MetersPerSecond, Seconds> m_translationRamp{{0_mps,0_mps}, k_translationRampSpeed};
+            trap::algorithms::Ramp<RPM, Seconds> m_rotationRamp{0_rpm, k_rotationRampSpeed};
 
         };
     }//namespace chassis
