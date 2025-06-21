@@ -24,6 +24,11 @@ namespace trap::algorithms
             m_ramp.setTarget(static_cast<float>(target));
         }
 
+        void getTarget() const
+        {
+            return ValueUnit{m_ramp.getTarget()};
+        }
+
         /**
          * How many units per time unit the ramp moves towards the target value
          * 
