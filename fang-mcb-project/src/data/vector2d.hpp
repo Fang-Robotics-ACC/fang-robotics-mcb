@@ -54,6 +54,21 @@ namespace data
                 //We cannotuse the operators due to template shenanigans :D
                 return Vector2D<double>{raw.x / rawMagnitude, raw.y / rawMagnitude};
             }
+
+            Vector2D<Unit> operator-()
+            {
+                return Vector2D{-x, -y};
+            }
+
+            Vector2D<Unit> operator+(const Vector2D& addend)
+            {
+                return Vector2D{x + addend.x, y + addend.y};
+            }
+
+            Vector2D<Unit> operator-(const Vector2D& subtrahend)
+            {
+                return *this + (-subtrahend);
+            }
         };
 
 
