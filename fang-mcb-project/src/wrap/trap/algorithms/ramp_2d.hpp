@@ -8,6 +8,7 @@ namespace trap::algorithms
     template<typename ValueUnit, typename TimeUnit> 
     class Ramp2D
     {
+    public:
         using Vector2D = data::math::Vector2D<ValueUnit>;
 
         /**
