@@ -24,12 +24,13 @@ namespace control
 
         void ChassisSubsystem::setMotion(const physics::Velocity2D& translation, const RPM& rotation)
         {
-            m_mecanumLogic.setMotion(translation, rotation);
+            setTranslation(translation);
+            setRotation(rotation);
         }
 
         void ChassisSubsystem::setTranslation(const physics::Velocity2D& translation)
         {
-            m_mecanumLogic.setTranslation(translation);
+            m_translationRamp.setTarget(translation);
         }
 
         const physics::Velocity2D& ChassisSubsystem::getTranslation() const
@@ -39,7 +40,7 @@ namespace control
 
         void ChassisSubsystem::setRotation(const RPM& rotation)
         {
-            m_mecanumLogic.setRotation(rotation);
+            m_rotationRamp.setTarget(rotation);
         }
 
         RPM ChassisSubsystem::getRotation() const
@@ -58,6 +59,8 @@ namespace control
 
         void ChassisSubsystem::refresh()
         {
+            updateRamps();
+            syncLogicToRamps();
             syncWheelsToLogic();
             updateFieldAngle();
         }
@@ -68,6 +71,18 @@ namespace control
             m_frontRightMotor.setSpeed(0_rpm);
             m_rearLeftMotor.setSpeed(0_rpm);
             m_rearRightMotor.setSpeed(0_rpm);
+        }
+
+        void ChassisSubsystem::updateRamps()
+        {
+            m_translationRamp.update();
+            m_rotationRamp.update();
+        }
+
+        void ChassisSubsystem::syncLogicToRamps()
+        {
+            m_mecanumLogic.setTranslation(m_translationRamp.getValue());
+            m_mecanumLogic.setRotation(m_rotationRamp.getValue());
         }
 
         void ChassisSubsystem::syncWheelsToLogic()

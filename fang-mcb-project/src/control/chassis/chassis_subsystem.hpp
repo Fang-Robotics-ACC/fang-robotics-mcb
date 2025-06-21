@@ -107,15 +107,17 @@ namespace control
         void refreshSafeDisconnect() override;
 
         private:
-
+            void updateRamps();
+            void syncLogicToRamps();
             void syncWheelsToLogic();
             void updateFieldAngle();
             void setPwmFrequency();
             Drivers& m_drivers;
 
-            static constexpr double k_rampSpeed{1.0};
+            static constexpr double k_rampSpeed{10};
 
             trap::algorithms::Ramp2D<MetersPerSecond, Seconds> m_translationRamp{{0_mps,0_mps}, k_rampSpeed};
+            trap::algorithms::Ramp<RPM, Seconds> m_rotationRamp{0_rpm, k_rampSpeed};
 
 
             const Hertz mk_pwmFrequency;
