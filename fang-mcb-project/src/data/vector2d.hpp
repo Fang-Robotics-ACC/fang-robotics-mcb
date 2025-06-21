@@ -69,6 +69,11 @@ namespace data
             {
                 return *this + (-subtrahend);
             }
+
+            Vector2D<Unit> operator*(double scalar)
+            {
+                return Vector2D{x * scalar, y * scalar};
+            }
         };
 
 
@@ -85,21 +90,9 @@ namespace data
         }
 
         template <typename Unit>
-        Vector2D<Unit> operator*(const Vector2D<Unit>& vector, double scale)
-        {
-            return Vector2D<Unit>{vector.x * scale, vector.y * scale};
-        }
-
-        template <typename Unit>
         Vector2D<Unit> operator*(const double& scale, const Vector2D<Unit>& vector)
         {
             return vector * scale;
-        }
-
-        template <typename Unit>
-        Vector2D<Unit> operator+(const Vector2D<Unit>& vector1, const Vector2D<Unit>& vector2)
-        {
-            return Vector2D<Unit>{vector1.x + vector2.x, vector1.y + vector2.y};
         }
     }
 }
