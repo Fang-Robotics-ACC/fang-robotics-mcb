@@ -11,6 +11,7 @@ namespace trap::algorithms
     template <typename ValueUnit, typename TimeUnit>
     class Ramp
     {
+    public:
         /**
          * Speed should be positive
          */
