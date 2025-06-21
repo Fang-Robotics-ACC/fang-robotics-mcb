@@ -25,7 +25,7 @@ namespace trap::algorithms
             m_ramp.setTarget(static_cast<float>(target));
         }
 
-        void getTarget() const
+        ValueUnit getTarget() const
         {
             return ValueUnit{m_ramp.getTarget()};
         }

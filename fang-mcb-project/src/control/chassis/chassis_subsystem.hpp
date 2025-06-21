@@ -107,9 +107,10 @@ namespace control
         void refreshSafeDisconnect() override;
 
         private:
-        void syncWheelsToLogic();
-        void updateFieldAngle();
-        void setPwmFrequency();
+
+            void syncWheelsToLogic();
+            void updateFieldAngle();
+            void setPwmFrequency();
             Drivers& m_drivers;
 
             static constexpr double k_rampSpeed{1.0};
