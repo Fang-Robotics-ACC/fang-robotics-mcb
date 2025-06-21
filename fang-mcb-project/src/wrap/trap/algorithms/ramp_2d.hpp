@@ -13,9 +13,9 @@ namespace trap::algorithms
         /**
          * Ramp speed is how much value unit per time unit
          */
-        Ramp2D(const Vector2D& initalValue, double rampSpeed)
+        Ramp2D(const Vector2D& initialValue, double rampSpeed)
         :   m_xRamp{initialValue.x, rampSpeed},
-            m_yRamp{initalValue.y, rampSpeed},
+            m_yRamp{initialValue.y, rampSpeed},
             m_speed{rampSpeed}
         {
         }
