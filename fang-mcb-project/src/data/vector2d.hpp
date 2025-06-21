@@ -67,7 +67,7 @@ namespace data
 
             Vector2D<Unit> operator-(const Vector2D& subtrahend)
             {
-                return *this + (-subtrahend);
+                return {x - subtrahend.x, y - subtrahend.y};
             }
 
             Vector2D<Unit> operator*(double scalar)
