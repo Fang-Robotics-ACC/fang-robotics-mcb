@@ -58,7 +58,7 @@ namespace trap::algorithms
             return m_xRamp.isTargetReached() && m_yRamp.isTargetReached();
         }
 
-        void update() const
+        void update()
         {
             m_xRamp.update();
             m_yRamp.update();
