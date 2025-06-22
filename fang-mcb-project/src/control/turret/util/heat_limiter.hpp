@@ -1,5 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_TURRET_HEAT_LIMITER_HPP
 #define FANG_ROBOTICS_MCB_TURRET_HEAT_LIMITER_HPP
+#include "control/turret/data/turret_id.hpp"
+
 #include "tap/communication/serial/ref_serial.hpp"
 
 #include <inttypes.h>
@@ -10,15 +12,6 @@ namespace control::turret
     public:
         using HeatType = uint16_t;
         using Referee = tap::communication::serial::RefSerial;
-        /**
-         * Which turret to read the heat from
-         */
-        enum class TurretId
-        {
-            TURRET_17MM_1,
-            TURRET_17MM_2,
-            TURRET_42MM
-        };
 
         struct Config
         {
