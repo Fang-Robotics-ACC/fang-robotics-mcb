@@ -18,8 +18,10 @@ namespace control::turret
                 break;
             case TurretId::TURRET_17MM_2:
                 return turretData.heat17ID2;
+                break;
             case TurretId::TURRET_42MM:
                 return turretData.heat42;
+                break;
         }
     }
 
