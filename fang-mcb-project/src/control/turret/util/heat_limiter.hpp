@@ -37,6 +37,7 @@ namespace control::turret
         bool stopRecommended() const;
 
     private:
+        HeatType getTurretHeat() const;
         Referee& m_referee;
         const HeatType m_criticalHeatLimit;
         const TurretId m_turretId;
