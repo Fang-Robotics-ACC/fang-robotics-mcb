@@ -26,11 +26,24 @@ namespace control
         k_feederMotorPidConfig
     };
 
-    static const turret::FeederSystem::Config k_feederConfig
+    static const turret::FeederSystem::Config k_feederSystemConfig
     {
         7,
         10_Hz,
         k_feederMotorConfig
+    };
+
+    static const turret::FeederSubsystem::HeatLimiter::Config k_feederHeatLimiterConfig
+    {
+        .criticalHeatLimit  = 250,
+        .turretId           = turret::TurretId::TURRET_17MM_1
+
+    };
+
+    static const turret::FeederSubsystem::Config k_feederConfig
+    {
+        k_feederHeatLimiterConfig,
+        k_feederSystemConfig
     };
 }
 #endif
