@@ -4,7 +4,8 @@ namespace control::turret
 
     FeederSubsystem::FeederSubsystem(Drivers& drivers, const Config& config)
     :   Subsystem{&drivers},
-        m_feeder{drivers, config}
+        m_feeder{drivers, config.feederConfig},
+        m_heatLimiter{drivers.refSerial, {config.heatLimiterConfig}}
     {
     }
 
