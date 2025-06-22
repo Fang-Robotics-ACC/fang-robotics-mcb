@@ -8,6 +8,11 @@ namespace control::turret
     {
     }
 
+    bool HeatLimiter::stopRecommended() const
+    {
+        return getTurretHeat() < m_criticalHeatLimit;
+    }
+
     HeatLimiter::HeatType HeatLimiter::getTurretHeat() const
     {
         const Referee::Rx::TurretData turretData{m_referee.getRobotData().turret};
