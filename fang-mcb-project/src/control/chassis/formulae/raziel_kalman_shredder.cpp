@@ -23,4 +23,12 @@ namespace control::chassis
         const double scalingShredFactor{1 - biteDepth * sharpened};
         return scalingShredFactor;
     }
+
+    RazielKalmanShredder::RazielKalmanShredder(const Config& config)
+    :   m_biteDepth{config.biteDepth},
+        m_biteForce{config.biteForce},
+        m_period{config.period},
+        m_phase{config.phase}
+    {
+    }
 };
