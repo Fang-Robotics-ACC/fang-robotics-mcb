@@ -7,7 +7,7 @@ namespace control::chassis
     {
     }
 
-    double BasicDownscaler::BasicDownscale(double speed, double coefficient)
+    double BasicDownscaler::basicDownscale(double speed, double coefficient)
     {
         //https://www.desmos.com/calculator/5xqaxqilmn
         //The function is designed so that no matter what k is, if the speed is zero
@@ -19,6 +19,6 @@ namespace control::chassis
 
     double BasicDownscaler::getDownscale (const MetersPerSecond& speed)
     {
-        return BasicDownscale(static_cast<double>(speed), m_downscaleCoefficient);
+        return basicDownscale(static_cast<double>(speed), m_downscaleCoefficient);
     }
 }

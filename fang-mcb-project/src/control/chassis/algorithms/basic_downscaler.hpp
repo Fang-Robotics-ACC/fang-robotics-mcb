@@ -14,7 +14,7 @@ namespace control::chassis
          * with respect to speed
          * https://www.desmos.com/calculator/5xqaxqilmnj
          */
-        static double BasicDownscale(double speed, double coefficient);
+        static double basicDownscale(double speed, double coefficient);
 
         /**
          * The high the downscale coefficient, the less downscaling it will do
