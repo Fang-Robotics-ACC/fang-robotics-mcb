@@ -16,4 +16,9 @@ namespace control::chassis
         const double denominator{speed + coefficient};
         return  numerator / denominator;
     }
+
+    double BasicDownscaler::getDownscale (const MetersPerSecond& speed)
+    {
+        return BasicDownscale(static_cast<double>(speed), m_downscaleCoefficient);
+    }
 }
