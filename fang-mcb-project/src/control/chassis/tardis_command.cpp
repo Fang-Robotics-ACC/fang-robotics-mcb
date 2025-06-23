@@ -33,10 +33,7 @@ namespace control
 
         void TardisCommand::execute()
         {
-            const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
-            const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
-            const Radians turretBearing{m_turret.getTargetFieldYaw()};
-            const physics::Velocity2D fieldTranslation{util::math::rotateVector2D(frameTranslation, turretBearing)};
+            const physics::Velocity2D fieldTranslation{calcuateFieldTranslation()};
 
 
             const double downscale{mk_downscaler.getDownscale(fieldTranslation.getMagnitude())};
@@ -50,6 +47,16 @@ namespace control
         bool TardisCommand::isFinished() const
         {
             return false;
+        }
+
+        physics::Velocity2D TardisCommand::calcuateFieldTranslation() const
+        {
+            const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
+            const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
+            const Radians turretBearing{m_turret.getTargetFieldYaw()};
+            const physics::Velocity2D fieldTranslation{util::math::rotateVector2D(frameTranslation, turretBearing)};
+
+            return fieldTranslation;
         }
 
 

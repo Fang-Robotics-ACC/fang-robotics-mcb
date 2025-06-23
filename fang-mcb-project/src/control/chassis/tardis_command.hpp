@@ -45,6 +45,7 @@ namespace control
             void end(bool interrupted) override;
             bool isFinished() const;
         private:
+            physics::Velocity2D calcuateFieldTranslation() const;
             static constexpr char* mk_name{"T.A.R.D.I.S. Mode"};
             ChassisSubsystem& m_chassisSubsystem;
             const turret::GimbalSubsystem& m_turret; //We don't want the command to alter the turret state
