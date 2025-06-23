@@ -17,6 +17,7 @@ namespace control::chassis
      */
     class RazielKalmanShredder
     {
+    public:
         struct Config
         {
             int biteDepth;
