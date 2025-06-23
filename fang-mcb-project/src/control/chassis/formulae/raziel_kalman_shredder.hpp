@@ -30,6 +30,12 @@ namespace control::chassis
 
         RazielKalmanShredder(const Config& config);
         void getScalingFactor(double input) const;
+    private:
+        //non-const so that we can add setters for the future
+        int m_biteDepth;
+        double m_biteForce;
+        double m_period;
+        double m_phase;
     };
 }
 #endif
