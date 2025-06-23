@@ -6,4 +6,14 @@ namespace control::chassis
     :   m_downscaleCoefficient{downscaleCoefficient}
     {
     }
+
+    double BasicDownscaler::BasicDownscale(double speed, double coefficient)
+    {
+        //https://www.desmos.com/calculator/5xqaxqilmn
+        //The function is designed so that no matter what k is, if the speed is zero
+        //it returns a 1, i.e. full speed.
+        const double numerator{coefficient};
+        const double denominator{speed + coefficient};
+        return  numerator / denominator;
+    }
 }
