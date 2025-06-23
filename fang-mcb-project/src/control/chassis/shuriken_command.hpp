@@ -3,7 +3,10 @@
 #include "control/input_handler.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/field_mecanum_command.hpp"
+#include "control/chassis/algorithms/basic_downscaler.hpp"
+
 #include "control/turret/gimbal_subsystem.hpp"
+
 
 #include "tap/control/command.hpp"
 
@@ -27,11 +30,14 @@ namespace control
          */
         /**
          * Positive shuriken speed is counterclockwise
+         *
+         * The higher the downscale coefficient, the less it will downscale with respect to speed
          */
         struct Config
         {
             RPM shurikenSpeed;
             MotionConfig motionConfig;
+            double downscaleCoefficient;
         };
         enum class ControlMode
         {
@@ -60,6 +66,7 @@ namespace control
             ControlMode m_controlMode{ControlMode::REMOTE_TEST_STRAFE_TURRET};
             const Config mk_config;
             const MotionConfig mk_motionConfig;
+            const BasicDownscaler mk_downscaler;
         };
     }//namespace control
 }//namespace chassis

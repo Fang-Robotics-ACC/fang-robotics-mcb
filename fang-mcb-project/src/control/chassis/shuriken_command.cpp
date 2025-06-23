@@ -15,7 +15,8 @@ namespace control
             m_turret{turret},
             m_input{input},
             mk_config{config},
-            mk_motionConfig{config.motionConfig}
+            mk_motionConfig{config.motionConfig},
+            mk_downscaler{config.downscaleCoefficient}
         {
             addSubsystemRequirement(&m_chassisSubsystem);
         }
@@ -64,7 +65,8 @@ namespace control
 
             const physics::Velocity2D fieldTranslation{util::math::rotateVector2D(frameTranslation, turretBearing)};
 
-            const RPM rotation{mk_config.shurikenSpeed};
+            const double downscale{mk_downscaler.getDownscale(fieldTranslation.getMagnitude())};
+            const RPM rotation{mk_config.shurikenSpeed * downscale};
             m_chassisSubsystem.setMotion(fieldTranslation, rotation);
         }
 
