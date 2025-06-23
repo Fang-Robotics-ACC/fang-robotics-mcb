@@ -10,9 +10,9 @@ namespace control::chassis
      * 
      * https://www.desmos.com/calculator/e19d96ky1e 
      * input - the control value, could be time phase, or anything, really 
-     * biteDepth - how much the shredder decreases the speed in a "bite"
-     * biteForce - how steep the "bite" is
-     * period - how often a bite happens
+     * biteDepth - how much the shredder decreases the speed in a "bite" it should be within [0,1]
+     * biteForce - how steep the "bite" is, it must be a posiive integer
+     * period - how often a bite happens, it should be a positive real number
      * phase, the underlying function involves sine in radians
      */
     class RazielKalmanShredder
