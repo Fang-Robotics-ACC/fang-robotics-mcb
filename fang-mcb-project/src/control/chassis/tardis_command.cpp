@@ -34,10 +34,7 @@ namespace control
         void TardisCommand::execute()
         {
             const physics::Velocity2D fieldTranslation{calcuateFieldTranslation()};
-
-
-            const double downscale{mk_downscaler.getDownscale(fieldTranslation.getMagnitude())};
-            const RPM rotation{mk_config.shurikenSpeed * downscale};
+            const RPM rotation{calculateRotation(fieldTranslation)};
             m_chassisSubsystem.setMotion(fieldTranslation, rotation);
         }
 
@@ -57,6 +54,13 @@ namespace control
             const physics::Velocity2D fieldTranslation{util::math::rotateVector2D(frameTranslation, turretBearing)};
 
             return fieldTranslation;
+        }
+
+        RPM TardisCommand::calculateRotation(const physics::Velocity2D fieldTranslation) const
+        {
+            const double downscale{mk_downscaler.getDownscale(fieldTranslation.getMagnitude())};
+            const RPM rotation{mk_config.shurikenSpeed * downscale};
+            return rotation;
         }
 
 
