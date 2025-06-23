@@ -59,7 +59,7 @@ namespace control
 
             RazielKalmanShredder m_razielKalmanShredder;
 
-            chrono::SimpleTimer m_simpleTimer{};
+            chrono::SimpleTimer m_kalmanTimer{}; //To provide an input for the Raziel-Kalman Shredder
         };
     }//namespace control
 }//namespace chassis

@@ -19,7 +19,7 @@ namespace control
             mk_downscaler{config.downscaleCoefficient},
             m_razielKalmanShredder{config.razielKalmanShredderConfig}
         {
-            m_simpleTimer.reset();
+            m_kalmanTimer.reset();
             addSubsystemRequirement(&m_chassisSubsystem);
         }
 
@@ -59,8 +59,10 @@ namespace control
 
         RPM TardisCommand::calculateRotation(const physics::Velocity2D fieldTranslation) const
         {
+            const Seconds now{m_kalmanTimer.getDuration()};
+            const double razielShredderDownscale{m_razielKalmanShredder.getScalingFactor(static_cast<double>(now))};
             const double downscale{mk_downscaler.getDownscale(fieldTranslation.getMagnitude())};
-            const RPM rotation{mk_config.shurikenSpeed * downscale};
+            const RPM rotation{mk_config.shurikenSpeed * downscale * razielShredderDownscale};
             return rotation;
         }
 
