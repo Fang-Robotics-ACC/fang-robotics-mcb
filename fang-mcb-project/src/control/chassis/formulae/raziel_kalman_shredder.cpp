@@ -4,7 +4,7 @@
 #include <math.h>
 namespace control::chassis
 {
-    double RazielKalmanShredder::razielKalmanShredder(double input, int biteDepth, double biteForce,  double period, double phase)
+    double RazielKalmanShredder::razielKalmanShredder(double input, double biteDepth, int biteForce,  double period, double phase)
     {
         //https://www.desmos.com/calculator/e19d96ky1e
 

@@ -26,14 +26,19 @@ namespace control::chassis
             double phase = 0;
         };
 
-        static double razielKalmanShredder(double input, int biteDepth, double biteForce,  double period, double phase);
+        static double razielKalmanShredder(double input, double biteDepth, int biteForce,  double period, double phase);
 
         RazielKalmanShredder(const Config& config);
+
+        void setBiteDepth(double biteDepth);
+        void setBiteForce(int biteForce);
+        void setPeriod(double period);
+        void setPhase(double phase);
         double getScalingFactor(double input) const;
     private:
         //non-const so that we can add setters for the future
-        int m_biteDepth;
-        double m_biteForce;
+        double m_biteDepth;
+        int m_biteForce;
         double m_period;
         double m_phase;
     };
