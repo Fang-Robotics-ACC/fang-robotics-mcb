@@ -10,6 +10,12 @@ namespace control::chassis
     class BasicDownscaler
     {
     public:
+        /** The higher the downscale coefficient, the less downscaling it will do
+         * with respect to speed
+         * https://www.desmos.com/calculator/5xqaxqilmnj
+         */
+        static double BasicDownscale(double speed, double coefficient);
+
         /**
          * The high the downscale coefficient, the less downscaling it will do
          * with respect to speed
