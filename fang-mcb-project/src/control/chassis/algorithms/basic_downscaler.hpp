@@ -22,7 +22,7 @@ namespace control::chassis
          * https://www.desmos.com/calculator/5xqaxqilmnj
          */
         BasicDownscaler(double downscaleCoefficient);
-        double getDownscale (const MetersPerSecond& speed);
+        double getDownscale (const MetersPerSecond& speed) const;
 
     private:
         const double m_downscaleCoefficient;
