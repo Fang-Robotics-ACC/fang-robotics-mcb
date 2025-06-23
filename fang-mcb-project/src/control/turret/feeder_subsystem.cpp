@@ -16,6 +16,10 @@ namespace control::turret
 
     void FeederSubsystem::refresh()
     {
+        if(m_heatLimiter.stopRecommended())
+        {
+            m_feeder.feedOff();
+        }
         m_feeder.update();
     }
 
@@ -25,7 +29,11 @@ namespace control::turret
     }
     void FeederSubsystem::autoFireOn()
     {
-        m_feeder.feedOn();
+        //Prevent from new feeding sequnces from being triggered
+        if(!m_heatLimiter.stopRecommended())
+        {
+            m_feeder.feedOn();
+        }
     }
 
     void FeederSubsystem::autoFireOff()
