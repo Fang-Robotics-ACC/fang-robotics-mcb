@@ -41,6 +41,7 @@ namespace control
             {
                 int roundsPerRevolution;
                 Hertz feedRate;
+                RPM unjamSpeed;
                 DriveMotor::Config motorConfig;
             };
 
@@ -55,6 +56,9 @@ namespace control
             void feedOn();
             void feedOff();
 
+            void unjamOn();
+            void unjamOff();
+
             /**
              * Check if the feed system is feeding ammo or not.
              */
@@ -68,6 +72,7 @@ namespace control
             RPM feedRateToRPM();
             const int mk_roundsPerRevolution;
             Hertz m_feedRate;
+            const RPM m_unjamSpeed;
             DriveMotor m_motor;
 
             bool m_activeStatus{false};

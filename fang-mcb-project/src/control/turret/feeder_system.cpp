@@ -12,7 +12,9 @@ namespace control
         using namespace units::literals;
 
         FeederSystem::FeederSystem(Drivers& drivers, const Config& config)
-        :   mk_roundsPerRevolution{config.roundsPerRevolution}, m_motor{drivers, config.motorConfig}
+        :   mk_roundsPerRevolution{config.roundsPerRevolution},
+            m_unjamSpeed{config.unjamSpeed},
+            m_motor{drivers, config.motorConfig}
         {
             //assert(mk_roundsPerRevolution != 0 && "roundsPerRevolution must be zero");
             //assert(mk_roundsPerRevolution  > 0 && "roundsPerRevolution cannot be less than zero");
@@ -33,6 +35,16 @@ namespace control
         void FeederSystem::feedOff()
         {
             m_motor.setTargetSpeed(mk_stillSpeed);
+        }
+
+        void FeederSystem::unjamOn()
+        {
+            m_motor.setTargetSpeed(-m_unjamSpeed);
+        }
+
+        void FeederSystem::unjamOff()
+        {
+            feedOff();
         }
 
         void FeederSystem::update()

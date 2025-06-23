@@ -19,6 +19,7 @@
 #include "control/turret/command/aim_command.hpp"
 #include "control/turret/command/activate_booster_command.hpp"
 #include "control/turret/command/autofire_command.hpp"
+#include "control/turret/command/unjam_command.hpp"
 
 #include "trap/communication/sensors/imu.hpp"
 
@@ -105,11 +106,13 @@ namespace control
         turret::AimCommand m_aimCommnd{m_gimbal, m_turretInput, mk_commandConfig.aimCommandConfig};
         turret::ActivateBoosterCommand m_activateBoosterCommand{m_booster};
         turret::AutofireCommand m_autofireCommand{m_feeder};
+        turret::UnjamCommand m_unjamCommand{m_feeder};
 
         tap::control::HoldCommandMapping m_activateBoosterRemoteMap{&m_drivers, {&m_activateBoosterCommand}, mk_mappingConfig.remoteActivateBooster};
         tap::control::HoldCommandMapping m_activateAutofireRemoteMap{&m_drivers, {&m_autofireCommand}, mk_mappingConfig.remoteFire};
 
         tap::control::HoldCommandMapping m_activateAutofireMouseMap{&m_drivers, {&m_autofireCommand}, mk_mappingConfig.mouseFire};
+        tap::control::HoldCommandMapping m_unjamCommandMap{&m_drivers, {&m_unjamCommand}, mk_mappingConfig.mouseUnjam};
 
         chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.fieldMecanumConfig};
         chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.shurikenConfig};

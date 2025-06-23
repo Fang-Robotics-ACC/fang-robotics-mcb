@@ -28,9 +28,10 @@ namespace control
 
     static const turret::FeederSystem::Config k_feederSystemConfig
     {
-        7,
-        10_Hz,
-        k_feederMotorConfig
+        .roundsPerRevolution    = 7,
+        .feedRate               = 10_Hz,
+        .unjamSpeed             = 40_rpm,
+        .motorConfig            = k_feederMotorConfig
     };
 
     static const turret::FeederSubsystem::HeatLimiter::Config k_feederHeatLimiterConfig

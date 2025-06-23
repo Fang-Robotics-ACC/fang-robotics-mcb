@@ -40,4 +40,14 @@ namespace control::turret
     {
         m_feeder.feedOff();
     }
+
+    void FeederSubsystem::unjamOn()
+    {
+        m_feeder.unjamOn();
+    }
+
+    void FeederSubsystem::unjamOff()
+    {
+        m_feeder.unjamOff();
+    }
 }
