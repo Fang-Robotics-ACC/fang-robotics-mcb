@@ -15,7 +15,7 @@ namespace control::turret
         //If the referee sytem is not connected, do not interfere with functions for testing.
         if(refereeConnected)
         {
-            return getTurretHeat() < m_criticalHeatLimit;
+            return getTurretHeat() >= m_criticalHeatLimit;
         }
         else
         {
