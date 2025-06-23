@@ -32,6 +32,26 @@ namespace control::chassis
     {
     }
 
+    void RazielKalmanShredder::setBiteDepth(double biteDepth)
+    {
+        m_biteDepth = biteDepth;
+    }
+
+    void RazielKalmanShredder::setBiteForce(int biteForce)
+    {
+        m_biteForce = biteForce;
+    }
+
+    void RazielKalmanShredder::setPeriod(double period)
+    {
+        m_period = period;
+    }
+
+    void RazielKalmanShredder::setPhase(double phase)
+    {
+        m_phase = phase;
+    }
+
     double RazielKalmanShredder::getScalingFactor(double input) const
     {
         return razielKalmanShredder(input, m_biteDepth, m_biteForce, m_period, m_phase);
