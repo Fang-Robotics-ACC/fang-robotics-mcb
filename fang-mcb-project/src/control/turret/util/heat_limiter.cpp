@@ -25,7 +25,7 @@ namespace control::turret
 
     HeatLimiter::HeatType HeatLimiter::getTurretHeat() const
     {
-        const Referee::Rx::TurretData turretData{m_referee.getRobotData().turret};
+        const Referee::Rx::TurretData& turretData{m_referee.getRobotData().turret};
         switch(m_turretId)
         {
             case TurretId::TURRET_17MM_1:
