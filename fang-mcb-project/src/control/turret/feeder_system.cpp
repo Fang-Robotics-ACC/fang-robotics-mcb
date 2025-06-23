@@ -39,7 +39,7 @@ namespace control
 
         void FeederSystem::unjamOn()
         {
-            m_motor.setTargetSpeed(m_unjamSpeed);
+            m_motor.setTargetSpeed(-m_unjamSpeed);
         }
 
         void FeederSystem::unjamOff()
