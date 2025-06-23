@@ -25,7 +25,10 @@ namespace control::turret
         HeatLimiter(Referee& referee, const Config& config);
 
         /**
-         * If the the heat exceeds the robot, recommend stop
+         * If the the heat exceeds the robot, recommend stop.
+         *
+         * If the referee system is not connected, it will NOT
+         * recommend a stop.
          */
         bool stopRecommended() const;
 

@@ -10,7 +10,17 @@ namespace control::turret
 
     bool HeatLimiter::stopRecommended() const
     {
-        return getTurretHeat() < m_criticalHeatLimit;
+        const bool refereeConnected{m_referee.getRefSerialReceivingData()};
+
+        //If the referee sytem is not connected, do not interfere with functions for testing.
+        if(refereeConnected)
+        {
+            return getTurretHeat() < m_criticalHeatLimit;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     HeatLimiter::HeatType HeatLimiter::getTurretHeat() const
