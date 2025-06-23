@@ -15,6 +15,17 @@ namespace control::chassis
      * period - how often a bite happens
      * phase, the underlying function involves sine in radians
      */
-    double razielKalmanShredder(double input, double biteDepth, double biteForce,  double period, double phase);
+    class RazielKalmanShredder
+    {
+        struct Config
+        {
+            double biteDepth;
+            double biteForce;
+            double period;
+            double phase = 0;
+        };
+
+        static double razielKalmanShredder(double input, double biteDepth, double biteForce,  double period, double phase);
+    };
 }
 #endif
