@@ -29,7 +29,7 @@ namespace control::chassis
         static double razielKalmanShredder(double input, int biteDepth, double biteForce,  double period, double phase);
 
         RazielKalmanShredder(const Config& config);
-        void getScalingFactor(double input) const;
+        double getScalingFactor(double input) const;
     private:
         //non-const so that we can add setters for the future
         int m_biteDepth;
