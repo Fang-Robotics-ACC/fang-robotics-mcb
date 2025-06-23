@@ -28,6 +28,9 @@ namespace control::turret
             void autoFireOn();
             void autoFireOff();
 
+            void unjamOn();
+            void unjamOff();
+
         private:
             FeederSystem m_feeder;
             HeatLimiter  m_heatLimiter;
