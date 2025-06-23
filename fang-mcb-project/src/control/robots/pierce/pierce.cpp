@@ -53,6 +53,7 @@ namespace control
         m_drivers.commandMapper.addMap(&m_activateBoosterRemoteMap);
         m_drivers.commandMapper.addMap(&m_activateAutofireRemoteMap);
         m_drivers.commandMapper.addMap(&m_activateAutofireMouseMap);
+        m_drivers.commandMapper.addMap(&m_unjamCommandMap);
 
         m_drivers.commandMapper.addMap(&m_shurikenRemoteMap);
         m_drivers.commandMapper.addMap(&m_fieldMecanumRemoteMap);
