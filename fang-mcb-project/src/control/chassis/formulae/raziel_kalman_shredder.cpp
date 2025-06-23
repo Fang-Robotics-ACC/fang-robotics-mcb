@@ -31,4 +31,9 @@ namespace control::chassis
         m_phase{config.phase}
     {
     }
+
+    double RazielKalmanShredder::getScalingFactor(double input) const
+    {
+        return razielKalmanShredder(input, m_biteDepth, m_biteForce, m_period, m_phase);
+    }
 };
