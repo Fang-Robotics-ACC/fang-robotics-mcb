@@ -19,6 +19,7 @@ namespace control
             mk_downscaler{config.downscaleCoefficient},
             m_razielKalmanShredder{config.razielKalmanShredderConfig}
         {
+            m_simpleTimer.reset();
             addSubsystemRequirement(&m_chassisSubsystem);
         }
 

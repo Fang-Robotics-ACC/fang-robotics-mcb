@@ -9,6 +9,8 @@
 
 #include "control/turret/gimbal_subsystem.hpp"
 
+#include "util/chrono/simple_timer.hpp"
+
 
 #include "tap/control/command.hpp"
 
@@ -56,6 +58,8 @@ namespace control
             const BasicDownscaler mk_downscaler;
 
             RazielKalmanShredder m_razielKalmanShredder;
+
+            chrono::SimpleTimer m_simpleTimer{};
         };
     }//namespace control
 }//namespace chassis
