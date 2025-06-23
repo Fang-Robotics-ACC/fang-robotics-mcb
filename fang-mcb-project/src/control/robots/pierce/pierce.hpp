@@ -79,7 +79,7 @@ namespace control
         Pierce(Drivers& drivers, const Config& config);
         void initialize();
     private:
-        static constexpr Milliseconds k_startupDelay{5000};
+        static constexpr Milliseconds k_startupDelay{1500};
 
         void initializeSubsystems();
         void setDefaultCommands();
