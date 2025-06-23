@@ -19,13 +19,13 @@ namespace control::chassis
     {
         struct Config
         {
-            double biteDepth;
+            int biteDepth;
             double biteForce;
             double period;
             double phase = 0;
         };
 
-        static double razielKalmanShredder(double input, double biteDepth, double biteForce,  double period, double phase);
+        static double razielKalmanShredder(double input, int biteDepth, double biteForce,  double period, double phase);
     };
 }
 #endif
