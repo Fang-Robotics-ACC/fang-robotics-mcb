@@ -13,8 +13,9 @@ namespace control
     };
     static const chassis::ShurikenCommand::Config k_shurikenConfig
     {
-        125_rpm,
-        k_shurikenMotionConfig
+        .shurikenSpeed          = 125_rpm,
+        .motionConfig           = k_shurikenMotionConfig,
+        .downscaleCoefficient   = 10
     };
 }
 #endif
