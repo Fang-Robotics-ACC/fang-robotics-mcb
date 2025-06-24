@@ -4,6 +4,8 @@
 #include "util/chrono/simple_timer.hpp"
 #include "configuration/unitaliases.hpp"
 
+#include "tap/algorithms/math_user_utils.hpp"
+
 namespace trap
 {
     namespace algorithms
@@ -35,8 +37,13 @@ namespace trap
                 const TimeUnit deltaTime{m_runControllerTimer.getDurationAndReset()};
                 const ErrorType deltaError{error - m_lastError};
                 const double errorDerivative{static_cast<double>(deltaError) / static_cast<double>(deltaTime)};
+                //Prevents oscillations by filtering out higher frequencies
+                const double cleanErrorDerivative{tap::algorithms::lowPassFilter(m_lastDerivative, errorDerivative, k_lowPassAlpha)};
+
+                m_lastDerivative = errorDerivative;
                 m_lastError = error;
-                return runController(error, errorDerivative, deltaTime);
+
+                return runController(error, cleanErrorDerivative, deltaTime);
             }
 
             /**
@@ -50,8 +57,10 @@ namespace trap
             }
 
         private:
+            static constexpr double k_lowPassAlpha{0.5};
             tap::algorithms::SmoothPid m_smoothPid;
             ErrorType m_lastError{0};
+            double m_lastDerivative{0};
             chrono::SimpleTimer m_runControllerTimer{};
         };
 
