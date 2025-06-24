@@ -19,7 +19,7 @@ namespace control
     {
         .kp             = 30,
         .ki             = 0,
-        .kd             = 4000,
+        .kd             = 0,
         .maxICumulative = 0,
         .maxOutput      = trap::motor::DjiM3508::k_maxOutput
     };

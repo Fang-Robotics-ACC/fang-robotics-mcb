@@ -10,7 +10,7 @@ namespace control
     static const trap::motor::DjiSpeedPid::Config k_feederMotorPidConfig 
     {
         5,
-        100,
+        0,
         0,
         100,
         trap::motor::DjiM2006::k_maxOutput
