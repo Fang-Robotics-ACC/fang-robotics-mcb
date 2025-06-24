@@ -28,7 +28,7 @@ namespace control
     {
         70000,
         0,
-        0,
+        1000,
         7000,
         trap::motor::DjiGM6020::k_maxOutput
     };
