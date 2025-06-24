@@ -15,6 +15,7 @@
 #include "config/command/turret_aim_config.hpp"
 #include "config/command/field_mecanum_config.hpp"
 #include "config/command/shuriken_config.hpp"
+#include "config/command/tardis_config.hpp"
 
 //Mapping configs
 #include "config/mapping/chassis_command_map.hpp"
@@ -40,7 +41,8 @@ namespace control
     {
         k_turretAimConfig,
         k_fieldMecanumConfig,
-        k_shurikenConfig
+        k_shurikenConfig,
+        k_tardisConfig,
     };
 
     const Pierce::MappingConfig k_pierceMappingConfig
@@ -52,7 +54,8 @@ namespace control
         k_autofireMouseState,
         k_unjamMouseState,
         k_fieldMecanumKeyboardState,
-        k_shurikenModeKeyboardState
+        k_shurikenModeKeyboardState,
+        k_tardisModeKeyboardState
     };
 
     const Pierce::Config k_pierceConfig

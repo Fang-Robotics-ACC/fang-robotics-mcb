@@ -33,5 +33,10 @@ namespace control
     {
         {Key::Q}
     };
+
+    static const tap::control::RemoteMapState k_tardisModeKeyboardState
+    {
+        {Key::R}
+    };
 }
 #endif
