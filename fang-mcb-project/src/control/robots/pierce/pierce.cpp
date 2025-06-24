@@ -59,5 +59,6 @@ namespace control
         m_drivers.commandMapper.addMap(&m_fieldMecanumRemoteMap);
         m_drivers.commandMapper.addMap(&m_shurikenKeyboardMap);
         m_drivers.commandMapper.addMap(&m_fieldMecanumKeyboardMap);
+        m_drivers.commandMapper.addMap(&m_tardisKeyboardMap);
     }
 }
