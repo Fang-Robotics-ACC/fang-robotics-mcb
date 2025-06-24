@@ -26,11 +26,14 @@ namespace control
 
     static const trap::motor::DjiSpeedPid::Config k_yawPidConfig
     {
-        70000,
-        0,
-        1000,
-        7000,
-        trap::motor::DjiGM6020::k_maxOutput
+        .kp                 = 40'000,
+        .ki                 = 5,
+        .kd                 = 5000.0,
+        .maxICumulative     = 7000,
+        .maxOutput          = trap::motor::DjiGM6020::k_maxOutput,
+        .tQDerivativeKalman = 0.01, //Cause value to be more "sluggish to reduce oscillation"
+        .tRDerivativeKalman = 1000.0,
+        .errorDerivativeFloor = 0.10 //radians
     };
     static const trap::motor::DjiGM6020::Config k_yawConfig
     {
