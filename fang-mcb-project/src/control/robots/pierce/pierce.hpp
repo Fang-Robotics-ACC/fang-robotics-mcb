@@ -15,6 +15,7 @@
 //Commands
 #include "control/chassis/field_mecanum_command.hpp"
 #include "control/chassis/shuriken_command.hpp"
+#include "control/chassis/tardis_command.hpp"
 
 #include "control/turret/command/aim_command.hpp"
 #include "control/turret/command/activate_booster_command.hpp"
@@ -55,6 +56,7 @@ namespace control
             turret::AimCommand::Config aimCommandConfig;
             chassis::FieldMecanumCommand::Config fieldMecanumConfig;
             chassis::ShurikenCommand::Config shurikenConfig;
+            chassis::TardisCommand::Config tardisConfig;
         };
 
         struct MappingConfig
@@ -63,10 +65,12 @@ namespace control
             RemoteState remoteFire;
             RemoteState remoteFieldMecanumMode;
             RemoteState remoteShurikenMode;
+            RemoteState remoteTardisMode;
             RemoteState mouseFire;
             RemoteState mouseUnjam;
             RemoteState keyboardFieldMecanumMode;
             RemoteState keyboardShurikenMode;
+            RemoteState keyboardTardisMode;
         };
 
         struct Config
@@ -116,12 +120,15 @@ namespace control
 
         chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.fieldMecanumConfig};
         chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.shurikenConfig};
+        chassis::TardisCommand m_tardisCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.tardisConfig};
 
         tap::control::PressCommandMapping m_fieldMecanumRemoteMap{&m_drivers, {&m_fieldMecanumCommand}, mk_mappingConfig.remoteFieldMecanumMode};
         tap::control::PressCommandMapping m_shurikenRemoteMap{&m_drivers, {&m_shurikenCommand}, mk_mappingConfig.remoteShurikenMode};
+        tap::control::PressCommandMapping m_tardisRemoteMap{&m_drivers, {&m_tardisCommand}, mk_mappingConfig.remoteTardisMode};
 
         tap::control::PressCommandMapping m_fieldMecanumKeyboardMap{&m_drivers, {&m_fieldMecanumCommand}, mk_mappingConfig.keyboardFieldMecanumMode};
         tap::control::PressCommandMapping m_shurikenKeyboardMap{&m_drivers, {&m_shurikenCommand}, mk_mappingConfig.keyboardShurikenMode};
+        tap::control::PressCommandMapping m_tardisKeyboardMap{&m_drivers, {&m_tardisCommand}, mk_mappingConfig.keyboardTardisMode};
     };//class Robot
 }//namspace control
 #endif
