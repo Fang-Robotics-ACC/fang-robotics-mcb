@@ -11,6 +11,7 @@ namespace control
 
     static const SwitchState k_fieldMecanumLeftSwitchActivate{SwitchState::MID};
     static const SwitchState k_fieldShurikenLeftSwitchActivate{SwitchState::UP};
+    static const SwitchState k_tardisLeftSwitchActivate{SwitchState::DOWN};
 
     static const tap::control::RemoteMapState k_fieldMecanumRemoteState
     {
@@ -22,6 +23,12 @@ namespace control
     {
         k_chassisRightSwitchContext,
         k_fieldShurikenLeftSwitchActivate
+    };
+
+    static const tap::control::RemoteMapState k_tardisModeRemoteState
+    {
+        k_chassisRightSwitchContext,
+        k_tardisLeftSwitchActivate
     };
 
     static const tap::control::RemoteMapState k_fieldMecanumKeyboardState

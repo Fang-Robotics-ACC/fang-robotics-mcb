@@ -65,6 +65,7 @@ namespace control
             RemoteState remoteFire;
             RemoteState remoteFieldMecanumMode;
             RemoteState remoteShurikenMode;
+            RemoteState remoteTardisMode;
             RemoteState mouseFire;
             RemoteState mouseUnjam;
             RemoteState keyboardFieldMecanumMode;

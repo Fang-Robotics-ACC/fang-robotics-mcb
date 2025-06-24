@@ -51,6 +51,7 @@ namespace control
         k_autofireRemoteState,
         k_fieldMecanumRemoteState,
         k_shurikenModeRemoteState,
+        k_tardisModeRemoteState,
         k_autofireMouseState,
         k_unjamMouseState,
         k_fieldMecanumKeyboardState,
