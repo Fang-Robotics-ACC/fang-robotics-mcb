@@ -57,7 +57,7 @@ namespace trap
             }
 
         private:
-            static constexpr double k_lowPassAlpha{0.5};
+            static constexpr double k_lowPassAlpha{0.0};
             tap::algorithms::SmoothPid m_smoothPid;
             ErrorType m_lastError{0};
             double m_lastDerivative{0};
