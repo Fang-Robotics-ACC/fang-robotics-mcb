@@ -7,7 +7,7 @@ namespace control
     using namespace units::literals;
     static const trap::motor::DjiSpeedPid::Config k_pitchPidConfig
     {
-        70000,
+        100000,
         0,
         0,
         3000,
@@ -26,7 +26,7 @@ namespace control
 
     static const trap::motor::DjiSpeedPid::Config k_yawPidConfig
     {
-        50000,
+        70000,
         0,
         0,
         7000,
