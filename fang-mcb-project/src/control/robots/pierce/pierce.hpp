@@ -123,10 +123,10 @@ namespace control
 
         tap::control::PressCommandMapping m_fieldMecanumRemoteMap{&m_drivers, {&m_fieldMecanumCommand}, mk_mappingConfig.remoteFieldMecanumMode};
         tap::control::PressCommandMapping m_shurikenRemoteMap{&m_drivers, {&m_shurikenCommand}, mk_mappingConfig.remoteShurikenMode};
-        tap::control::PressCommandMapping m_tardisRemoteMap{&m_drivers, {&m_shurikenCommand}, mk_mappingConfig.keyboardTardisMode};
 
         tap::control::PressCommandMapping m_fieldMecanumKeyboardMap{&m_drivers, {&m_fieldMecanumCommand}, mk_mappingConfig.keyboardFieldMecanumMode};
         tap::control::PressCommandMapping m_shurikenKeyboardMap{&m_drivers, {&m_shurikenCommand}, mk_mappingConfig.keyboardShurikenMode};
+        tap::control::PressCommandMapping m_tardisKeyboardMap{&m_drivers, {&m_shurikenCommand}, mk_mappingConfig.keyboardTardisMode};
     };//class Robot
 }//namspace control
 #endif
