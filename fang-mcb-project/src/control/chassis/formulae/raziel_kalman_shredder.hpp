@@ -20,8 +20,8 @@ namespace control::chassis
     public:
         struct Config
         {
-            int biteDepth;
-            double biteForce;
+            double biteDepth;
+            int biteForce;
             double period;
             double phase = 0;
         };
