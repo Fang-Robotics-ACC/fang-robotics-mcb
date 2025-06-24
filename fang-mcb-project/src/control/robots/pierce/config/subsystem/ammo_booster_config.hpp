@@ -17,7 +17,7 @@ namespace control
 
     static const trap::motor::DjiSpeedPid::Config k_flywheelMotorPidConfig 
     {
-        .kp             = 30,
+        .kp             = 10,
         .ki             = 0,
         .kd             = 0,
         .maxICumulative = 0,
