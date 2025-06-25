@@ -18,6 +18,12 @@ namespace control
         Remote::SwitchState::UP
     };
 
+    static const tap::control::RemoteMapState k_unjamRemoteState
+    {
+        Remote::SwitchState::UP,
+        Remote::SwitchState::DOWN
+    };
+
     static const tap::control::RemoteMapState k_autofireMouseState
     {
         MouseButton::LEFT

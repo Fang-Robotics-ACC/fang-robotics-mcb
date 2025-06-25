@@ -9,7 +9,7 @@ namespace control
     using namespace units::literals;
     static const trap::motor::DjiSpeedPid::Config k_feederMotorPidConfig 
     {
-        5,
+        20,
         0,
         0,
         100,

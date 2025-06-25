@@ -49,6 +49,7 @@ namespace control
     {
         k_activateBoosterRemoteState,
         k_autofireRemoteState,
+        k_unjamRemoteState,
         k_fieldMecanumRemoteState,
         k_shurikenModeRemoteState,
         k_tardisModeRemoteState,
