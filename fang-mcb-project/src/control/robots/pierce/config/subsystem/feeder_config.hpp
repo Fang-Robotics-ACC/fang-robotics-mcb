@@ -22,15 +22,15 @@ namespace control
         tap::can::CanBus::CAN_BUS1,
         "Feeder Motor",
         false,
-        trap::motor::DjiM2006::k_factoryGearboxRatio,
+        10,
         k_feederMotorPidConfig
     };
 
     static const turret::FeederSystem::Config k_feederSystemConfig
     {
         .roundsPerRevolution    = 7,
-        .feedRate               = 10_Hz,
-        .unjamSpeed             = 40_rpm,
+        .feedRate               = 5_Hz,
+        .unjamSpeed             = 30_rpm,
         .motorConfig            = k_feederMotorConfig
     };
 
