@@ -43,7 +43,7 @@ namespace control
     {
         .pwmFrequency           = k_chassisPwmFreq,
         .pwmTimer               = tap::gpio::Pwm::TIMER1,
-        .translationRampSpeed   = 30,
+        .translationRampSpeed   = 10,
         .rotationRampSpeed      = 30,
         .chassisDimensions      = k_defaultDimensionConfig,
         .chassisMotors          = k_defaultMotorConfig,
