@@ -118,7 +118,7 @@ namespace control
 
         tap::control::HoldCommandMapping m_activateAutofireMouseMap{&m_drivers, {&m_autofireCommand}, mk_mappingConfig.mouseFire};
         tap::control::HoldCommandMapping m_unjamCommandMap{&m_drivers, {&m_unjamCommand}, mk_mappingConfig.mouseUnjam};
-        tap::control::HoldCommandMapping m_unjamCommandMapRemote{&m_drivers, {&m_unjamCommand}, mk_mappingConfig.mouseUnjam};
+        tap::control::HoldCommandMapping m_unjamCommandMapRemote{&m_drivers, {&m_unjamCommand}, mk_mappingConfig.remoteUnjam};
 
         chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.fieldMecanumConfig};
         chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.shurikenConfig};
