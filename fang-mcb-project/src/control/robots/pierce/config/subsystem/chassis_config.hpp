@@ -35,7 +35,7 @@ namespace control
     {
         .startingEnergyBuffer       = 80_J,
         .energyBufferLimitThreshold = 20_J,
-        .energyBufferCritThreshold  = 140_J
+        .energyBufferCritThreshold  = 70_J
     };
 
     static const chassis::ChassisSubsystem::ChassisConfig k_chassisConfig 
