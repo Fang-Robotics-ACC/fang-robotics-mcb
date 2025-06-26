@@ -6,8 +6,8 @@ namespace control
     static const chassis::ShurikenCommand::MotionConfig k_shurikenMotionConfig
     {
         10_mph, //max translation - for turret based strafe
-        10_mph, //maxXtranslation
-        10_mph, //maxYTranslatioon
+        14_mph, //maxXtranslation
+        14_mph, //maxYTranslatioon
         100_rpm, //maxRotation
         0.5_deg //maxAngularDisplacement
     };

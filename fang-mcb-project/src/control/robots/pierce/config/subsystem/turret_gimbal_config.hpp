@@ -53,7 +53,7 @@ namespace control
     static const GimbalSystem::Config k_gimbalConfig
     {
         -25_deg,
-        30_deg,
+        10_deg,
         k_pitchMotorConfig,
         k_yawConfig
     };

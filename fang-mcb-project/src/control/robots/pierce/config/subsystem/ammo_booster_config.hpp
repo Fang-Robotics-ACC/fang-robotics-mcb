@@ -58,7 +58,7 @@ namespace control
 
     static const AmmoBooster::Config k_ammoBoosterConfig
     {
-        .ammoVelocity           = 21_mps,
+        .ammoVelocity           = 20.25_mps,
         .leftFlywheelConfig     = k_leftFlywheelConfig,
         .rightFlywheelConfig    = k_rightFlywheelConfig
     };

@@ -15,8 +15,8 @@ namespace control
 
     static const turret::TurretInputHandler::MouseConfig k_turretInputMouseConfig
     {
-        .pitchPercentagePerPx   = 0.01,
-        .yawPercentagePerPx     = 0.01
+        .pitchPercentagePerPx   = 0.03,
+        .yawPercentagePerPx     = 0.03
     };
     static const turret::TurretInputHandler::Config k_turretInputConfig
     {
