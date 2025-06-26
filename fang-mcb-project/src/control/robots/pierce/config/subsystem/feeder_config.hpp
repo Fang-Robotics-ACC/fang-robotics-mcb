@@ -36,7 +36,7 @@ namespace control
 
     static const turret::FeederSubsystem::HeatLimiter::Config k_feederHeatLimiterConfig
     {
-        .criticalHeatLimit  = 250,
+        .criticalHeatLimit  = 220,
         .turretId           = turret::TurretId::TURRET_17MM_1
 
     };
