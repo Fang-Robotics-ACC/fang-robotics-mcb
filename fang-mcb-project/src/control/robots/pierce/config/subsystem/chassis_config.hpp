@@ -33,17 +33,16 @@ namespace control
 
     static const chassis::ChassisSubsystem::PowerLimiter::Config k_chassisPowerLimiterConfig
     {
-        60_J,
-        10_J,
-        5_J
+        .startingEnergyBuffer       = 80_J,
+        .energyBufferLimitThreshold = 20_J,
+        .energyBufferCritThreshold  = 140_J
     };
-
 
     static const chassis::ChassisSubsystem::ChassisConfig k_chassisConfig 
     {
         .pwmFrequency           = k_chassisPwmFreq,
         .pwmTimer               = tap::gpio::Pwm::TIMER1,
-        .translationRampSpeed   = 9,
+        .translationRampSpeed   = 15,
         .rotationRampSpeed      = 30,
         .chassisDimensions      = k_defaultDimensionConfig,
         .chassisMotors          = k_defaultMotorConfig,

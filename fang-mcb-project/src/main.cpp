@@ -87,9 +87,9 @@ int main()
     {
         //Alert that there is no ref data
         PROFILE(drivers.profiler, updateIo, (drivers));
-        if(!drivers.refSerial.getRefSerialReceivingData())
+        if(drivers.refSerial.getRefSerialReceivingData())
         {
-            drivers.pwm.write(0.5, tap::gpio::Pwm::Buzzer);
+            //drivers.pwm.write(0.05, tap::gpio::Pwm::Buzzer);
 
         }
 
