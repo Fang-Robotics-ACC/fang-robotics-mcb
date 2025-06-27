@@ -6,11 +6,11 @@ namespace control
     static const chassis::FieldMecanumCommand::Config k_fieldMecanumConfig 
     {
         10_mph, //max translation - for turret based strafe
-        8_mph, //maxXtranslation
-        8_mph, //maxYTranslatioon
+        6.5_mph, //maxXtranslation
+        6.5_mph, //maxYTranslatioon
         100_rpm, //maxRotation
         0.5_deg //maxAngularDisplacement
     };
-
 }
+
 #endif
