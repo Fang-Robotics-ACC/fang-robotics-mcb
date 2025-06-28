@@ -17,13 +17,7 @@
  * along with fang-mcb.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifdef PLATFORM_HOSTED
-/* hosted environment (simulator) includes --------------------------------- */
-#include <iostream>
 
-#include "tap/communication/tcp-server/tcp_server.hpp"
-#include "tap/motor/motorsim/dji_motor_sim_handler.hpp"
-#endif
 
 #include "tap/board/board.hpp"
 
