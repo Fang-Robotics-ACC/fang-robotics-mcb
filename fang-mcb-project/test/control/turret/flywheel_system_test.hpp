@@ -7,7 +7,7 @@
 #include <gtest/gtest.h>
 #include <tuple>
 
-#include "control/turret/flywheel_system.hpp"
+#include "control/turret/systems/flywheel_system.hpp"
 namespace control::turret
 {
     class FlywheelSystem;
