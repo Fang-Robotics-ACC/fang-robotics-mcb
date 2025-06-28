@@ -5,6 +5,7 @@ namespace music
 {
     class ISoundMaker
     {
+    public:
         virtual void playPitch(Pitch pitch) = 0;
         virtual void mute() = 0;
     };
