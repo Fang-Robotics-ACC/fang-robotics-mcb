@@ -6,6 +6,6 @@
 namespace music
 {
     static constexpr Hertz k_A5StandardFrequency{440};
-    constexpr Hertz pitchToFrequency(Pitch pitch);
+    Hertz pitchToFrequency(Pitch pitch);
 }
 #endif

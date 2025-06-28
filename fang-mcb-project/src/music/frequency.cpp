@@ -20,7 +20,7 @@ namespace music
     const
 
     //General formula
-    constexpr Hertz pitchToFrequencyBase(Pitch pitch, Hertz baseFrequency, int basePitchMidiIndex)
+    Hertz pitchToFrequencyBase(Pitch pitch, Hertz baseFrequency, int basePitchMidiIndex)
     {
         //This was pretty easy to derive
         const int k_rawPitch{static_cast<int>(pitch)};
@@ -29,7 +29,7 @@ namespace music
 
     }
 
-    constexpr Hertz pitchToFrequency(Pitch pitch)
+    Hertz pitchToFrequency(Pitch pitch)
     {
         constexpr int k_A5MidiIndex{static_cast<int>(Pitch::A5)};
         return pitchToFrequencyBase(pitch, k_A5StandardFrequency, k_A5MidiIndex);
