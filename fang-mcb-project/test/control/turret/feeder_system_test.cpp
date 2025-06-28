@@ -32,7 +32,8 @@ namespace test
             1.0,
             defaultConfig
         };
-        const control::turret::FeederSystem::Config feederConfig{roundsPerRevolution, feedRate, motorConfig};
+        //HACK hardcode unjam, unjam needs to have tests post-dependecy injection refactor
+        const control::turret::FeederSystem::Config feederConfig{roundsPerRevolution, feedRate, 100_rpm, motorConfig};
 
         control::turret::FeederSystem feederSystem{drivers, feederConfig};
         control::turret::FeederSystem::DriveMotor& motor{feederSystem.m_motor};
