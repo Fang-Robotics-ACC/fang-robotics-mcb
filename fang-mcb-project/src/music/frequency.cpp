@@ -1,8 +1,6 @@
 #include "frequency.hpp"
 namespace music
 {
-    const Hertz k_A5StandardFrequency{440};
-
     //In order to go up an octave a frequency must be doubled
     //So in Equal Temperament, there are 12 notes per octave
     //that are evenly spaced
