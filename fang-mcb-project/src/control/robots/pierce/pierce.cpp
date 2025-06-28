@@ -27,7 +27,7 @@ namespace control
     {
         initializeSubsystems();
 
-        modm::delay_ms(Milliseconds{k_startupDelay}.to<float>());
+        //modm::delay_ms(Milliseconds{k_startupDelay}.to<float>());
         setDefaultCommands();
         registerIoMappings();
     }
