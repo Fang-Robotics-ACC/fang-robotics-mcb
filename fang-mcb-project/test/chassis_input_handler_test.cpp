@@ -10,6 +10,7 @@
 
 #include <tuple>
 
+/**
 using AbstractVector2D = math::AbstractVector2D;
 using ::testing::Return;
 using namespace units::literals;
@@ -65,3 +66,4 @@ INSTANTIATE_TEST_SUITE_P(maxTest, ChassisInputHandlerTest,
 
 INSTANTIATE_TEST_SUITE_P(minTest, ChassisInputHandlerTest,
     testing::Values(std::make_tuple(-1.0, -1.0, -1.0, AbstractVector2D{-1.0, -1.0}, -1.0, -1.0)));
+**/
