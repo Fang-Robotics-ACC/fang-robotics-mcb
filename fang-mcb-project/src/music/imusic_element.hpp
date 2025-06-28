@@ -8,7 +8,7 @@ namespace music
     {
     public:
         virtual void play(ISoundMaker& soundMaker) = 0;
-        virtual double getBeatDuration() = 0;
+        virtual double getBeatDuration() const = 0;
     };
 }
 #endif
