@@ -37,10 +37,10 @@ Philosophy
 9. People are better to ask for help than computers, it helps build **community**, make **friends**, and increase self reliance.
 10. A programmer who needs to always look something up every other line or get a programmer (or AI especially) to write it is always less skilled.
 11. Take the time to learn. Once you get past the curve, you will find yourself being a god-tier dev!
-   
+12. Write as if your code has already been refactor so you don't have to spend time refactoring now.
 
 SOLID programming: https://www.geeksforgeeks.org/solid-principle-in-programming-understand-with-real-life-examples/
-Design Patterns andhttps://refactoring.guru/
+Design Patterns and refactoring: https://refactoring.guru/
 Great Book To Read: https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/
 
 Coding Style
