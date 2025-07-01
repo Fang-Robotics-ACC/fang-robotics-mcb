@@ -13,11 +13,11 @@ Fang Robotics Firmware for the Seven Fangs:
 
 In the spirit of open‑source software, education, and—most
 importantly—community, Fang Robotics MCB is released under the
-copyleft AGPLv3 license. This means anyone competing against you
-must provide their full source code, and it must also be licensed
-under AGPLv3 (not just GPLv3).
+copyleft AGPLv3 license. This means anyone you compete against in-match
+must be able to access your source code, and it must also be licensed
+under AGPLv3 (not just GPLv3) - potentially later APGL version allowed.
 
-We poured countless hours, blood, sweat, and tears into building
+We have poured countless hours, blood, sweat, and tears into building
 this project. All we ask is that future teams or participants
 who build on our work share their code openly, so everyone can
 learn more about Robomasters and embedded programming.
