@@ -28,7 +28,7 @@ namespace control::turret
         /**
          * A positive value sent to the feedMotor means that it will feed.
          */
-        BasicFeederSystem(Drivers& drivers, motor::ISpeedMotor &feedMotor, const Config& config);
+        BasicFeederSystem(motor::ISpeedMotor &feedMotor, const Config& config);
 
         void feedOn();
         void feedOff();

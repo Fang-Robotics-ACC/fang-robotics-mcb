@@ -9,7 +9,7 @@ namespace control::turret
 {
     using namespace units::literals;
 
-    BasicFeederSystem::BasicFeederSystem(Drivers& drivers, motor::ISpeedMotor& feedMotor, const Config& config)
+    BasicFeederSystem::BasicFeederSystem(motor::ISpeedMotor& feedMotor, const Config& config)
     :   kRoundsPerRevolution_{config.roundsPerRevolution},
         kFeedRate_{config.feedRate},
         kUnjamSpeed_{config.unjamSpeed},
