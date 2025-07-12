@@ -19,7 +19,7 @@ namespace trap
         /**
          * Wrapper for DJI motor for the DJI M3508 on a CAN bus
          */
-        class DjiM2006 : ::motor::ISpeedMotor
+        class DjiM2006 : virtual public ::motor::ISpeedMotor
         {
         public:
             struct Config

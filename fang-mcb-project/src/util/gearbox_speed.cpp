@@ -1,3 +1,4 @@
+#include "gearbox_speed.hpp"
 #include "configuration/unitaliases.hpp"
 
 namespace motor
