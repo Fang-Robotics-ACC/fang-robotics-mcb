@@ -8,7 +8,7 @@
 #include "drivers.hpp"
 #include "tap/util_macros.hpp"
 
-namespace motors
+namespace motor
 {
     /**
     *RPM is positive according to the right hand rule when the motor is the shaft pointing up. This is the the gearbox detached!!!
@@ -26,7 +26,7 @@ namespace motors
         struct UnifiedProperties
         {
             const Volts controllerInputVoltage;
-            data::motors::Directionality directionality;
+            data::motor::Directionality directionality;
             double gearRatio;
         };
 
@@ -36,7 +36,7 @@ namespace motors
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motors::Directionality directionality,
+                      data::motor::Directionality directionality,
                       bool inverted,
                       double gearRatio);
 

@@ -10,12 +10,12 @@
 
 namespace mock
 {
-    namespace motors
+    namespace motor
     {
-        class GearboxRepeatUltraMk2Mock : virtual public ::motors::GearboxRepeatUltraMk2
+        class GearboxRepeatUltraMk2Mock : virtual public ::motor::GearboxRepeatUltraMk2
         {
         public:
-            using ::motors::GearboxRepeatUltraMk2::GearboxRepeatUltraMk2;
+            using ::motor::GearboxRepeatUltraMk2::GearboxRepeatUltraMk2;
             virtual ~GearboxRepeatUltraMk2Mock() = default;
 
     		MOCK_METHOD(void, setSpeed, (const RPM& speed), (override));
@@ -25,6 +25,6 @@ namespace mock
     		MOCK_METHOD(void, setMinSpeed, (const RPM& minSpeed), (override));
     		MOCK_METHOD(RPM, getMinSpeed, (), (const, override));
        };//class GearboxRepeatUltraMk2Mock
-    }//namespace motors
+    }//namespace motor
 }//namespace mock
 #endif

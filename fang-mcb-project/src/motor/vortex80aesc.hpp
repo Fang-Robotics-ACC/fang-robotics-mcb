@@ -12,7 +12,7 @@
 
 namespace logic
 {
-    namespace motors
+    namespace motor
     {
         /**
          * Driver for the Vortex80AEsc involving sending various signals and speed ranges.
@@ -20,7 +20,7 @@ namespace logic
         class Vortex80AEsc
         {
         public:
-            using Directionality = data::motors::Directionality;
+            using Directionality = data::motor::Directionality;
             Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
 
             /**

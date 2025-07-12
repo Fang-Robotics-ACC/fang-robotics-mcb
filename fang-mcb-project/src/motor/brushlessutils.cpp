@@ -1,6 +1,6 @@
 #include "brushlessutils.hpp"
 
-namespace motors
+namespace motor
 {
     namespace util 
     {

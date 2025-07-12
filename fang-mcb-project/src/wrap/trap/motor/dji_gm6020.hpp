@@ -40,7 +40,7 @@ namespace trap
              * This would lead to undefined behavior. An assertion has been placed to prevent
              * the code from continuing.
              * 
-             * Why an ID not more thn 4? The GM6020 motors have their id offset by + 4 for some unholy DJI reason. (Ask their sages.)
+             * Why an ID not more thn 4? The GM6020 motor have their id offset by + 4 for some unholy DJI reason. (Ask their sages.)
              * Taproot decided to keep the regular motor ids, which meant that if you place MotorID::Motor1, it gets mapped to MotorID::Motor5
              * implicitly (irl, the GM6020 motor id needs to be set to 1, but the tapproot codewise motorId must be 5)
              * the enum does not go above Motor8, which means in order to access a Gm6020 with irl MotorId::Motor5, the codewise

@@ -33,7 +33,7 @@ namespace trap::control::chassis
          * through the constructor to compute a fraction that can be used to perform power limiting.
          *
          * @note Must be called immediately *after* setpoints are configured. This function returns a
-         * value between [0, 1] that you should then multiply the desired output of your motors by. See
+         * value between [0, 1] that you should then multiply the desired output of your motor by. See
          * class comment for more details.
          *
          * @note Tested with a normal four-wheel mecanum chassis and a two-wheel sentry chassis.

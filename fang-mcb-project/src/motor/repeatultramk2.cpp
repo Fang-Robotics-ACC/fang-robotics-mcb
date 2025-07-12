@@ -10,14 +10,14 @@
 
 using namespace units::literals;
 
-namespace motors
+namespace motor
 {
     RepeatUltraMk2::RepeatUltraMk2(
         tap::Drivers& drivers,
         const Volts& controllerInputVoltage,
         tap::gpio::Pwm::Pin pwmPin,
         const Hertz& pinFrequency,
-        data::motors::Directionality directionality,
+        data::motor::Directionality directionality,
         bool inverted)
         :
         m_drivers{drivers}, m_pwmPin{pwmPin},
@@ -25,14 +25,14 @@ namespace motors
         mk_maxTheoreticalSpeed{mk_kv * mk_controllerInputVoltage},
         m_maxSpeed{mk_maxTheoreticalSpeed},
         m_vortex{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality},
-        m_inversionMultiplier{inverted && (directionality == data::motors::Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}}
+        m_inversionMultiplier{inverted && (directionality == data::motor::Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}}
     {
         switch(directionality)
         {
-        case(data::motors::Directionality::BIDIRECTIONAL):
+        case(data::motor::Directionality::BIDIRECTIONAL):
             m_minSpeed = -m_maxSpeed;
         break;
-        case(data::motors::Directionality::UNIDIRECTIONAL):
+        case(data::motor::Directionality::UNIDIRECTIONAL):
             m_minSpeed = 0_rpm;
         }
     }
@@ -91,4 +91,4 @@ namespace motors
     {
     }
 
-}//namespace motors
+}//namespace motor

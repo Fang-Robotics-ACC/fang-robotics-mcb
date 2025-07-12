@@ -4,7 +4,7 @@
 
 namespace data
 {
-    namespace motors
+    namespace motor
     {
         //This uint8_t is used because there shouldn't be more than 256 values of motor directionality
         //Honestly consider refactoring if it goes past 25.

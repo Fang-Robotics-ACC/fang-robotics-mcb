@@ -74,7 +74,7 @@ INSTANTIATE_TEST_SUITE_P(negativeTest, GimbalYawTest, testing::Values(std::make_
 
 TEST(updateTest, GimbalSystem)
 {
-    //Make sure that all associated motors are updated
+    //Make sure that all associated motor are updated
     const GimbalSystemTest::GimbalSystem::Config gimbalConfig
     {
         //Allow full range

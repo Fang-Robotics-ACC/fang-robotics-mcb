@@ -1,5 +1,5 @@
 #include "gearboxrepeatultramk2.hpp"
-namespace motors
+namespace motor
 {
 
     GearboxRepeatUltraMk2::GearboxRepeatUltraMk2(tap::Drivers& drivers, const UnifiedProperties& unifiedProperties, const trap::gpio::PwmData& pwmData, bool inverted)
@@ -11,7 +11,7 @@ namespace motors
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motors::Directionality directionality,
+                      data::motor::Directionality directionality,
                       bool inverted,
                       double gearRatio):
                       RepeatUltraMk2{drivers, controllerInputVoltage, pwmPin, pinFrequency, directionality, inverted},
@@ -68,4 +68,4 @@ namespace motors
     {
         return m_gearRatio;
     }
-}//namespace motors
+}//namespace motor

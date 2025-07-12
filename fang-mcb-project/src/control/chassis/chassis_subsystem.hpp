@@ -29,9 +29,9 @@ namespace control
         {
         public:
 #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
-        using DriveMotor = mock::motors::GearboxRepeatUltraMk2Mock;
+        using DriveMotor = mock::motor::GearboxRepeatUltraMk2Mock;
 #else
-        using DriveMotor = motors::GearboxRepeatUltraMk2;
+        using DriveMotor = motor::GearboxRepeatUltraMk2;
 #endif
         using PowerLimiter = trap::control::chassis::PowerLimiter;
 
@@ -69,7 +69,7 @@ namespace control
         /**
          * The chassis config passes all of the relevant motor information.
          * This assumes that all pins are set to a single frequency.
-         * This assumes all motors have the same gear ratio.
+         * This assumes all motor have the same gear ratio.
          */
         ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig);
 
@@ -127,7 +127,7 @@ namespace control
             const ChassisMotorConfig mk_motorConfig;
             const ChassisDimensionConfig mk_dimensionConfig; 
 
-            const data::motors::Directionality mk_defaultDirectionality{data::motors::Directionality::BIDIRECTIONAL};
+            const data::motor::Directionality mk_defaultDirectionality{data::motor::Directionality::BIDIRECTIONAL};
             DriveMotor m_frontLeftMotor;
             DriveMotor m_frontRightMotor;
             DriveMotor m_rearLeftMotor;

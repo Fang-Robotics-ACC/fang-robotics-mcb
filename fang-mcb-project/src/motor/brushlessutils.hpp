@@ -2,7 +2,7 @@
 #define BRUSHLESS_UTILS_HPP_SEFSDFSEF
 #include "unitaliases.hpp"
 
-namespace motors
+namespace motor
 {
     namespace util 
     {

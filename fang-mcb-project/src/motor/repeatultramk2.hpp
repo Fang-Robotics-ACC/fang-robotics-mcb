@@ -8,7 +8,7 @@
 #include "tap/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
 
-namespace motors
+namespace motor
 {
     /*!
     RPM is positive according to the right hand rule when the motor is the shaft pointing up. This is the the gearbox detached!!!
@@ -20,7 +20,7 @@ namespace motors
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motors::Directionality directionality,
+                      data::motor::Directionality directionality,
                       bool inverted = false);
 
         /**
@@ -86,7 +86,7 @@ namespace motors
         static constexpr RPMPerVolt mk_kv{1450.0};
         //The voltage of the controller should not be exceeded by its output
 
-        logic::motors::Vortex80AEsc m_vortex;
+        logic::motor::Vortex80AEsc m_vortex;
 
         /*!
             PWM should be between 0 and 1

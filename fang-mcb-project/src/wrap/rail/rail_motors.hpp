@@ -5,7 +5,7 @@
 
 #include "unitaliases.hpp"
 
-namespace motors
+namespace motor
 {
     using ISpeedMotor = rail::motor::ISpeedMotor<RPM>;
     using IPositionMotor = rail::motor::IPositionMotor<RPM>;

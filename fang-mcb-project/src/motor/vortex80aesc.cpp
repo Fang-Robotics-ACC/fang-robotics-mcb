@@ -13,7 +13,7 @@
 
 namespace logic 
 {
-    namespace motors
+    namespace motor
     {
 
         Vortex80AEsc::Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality)

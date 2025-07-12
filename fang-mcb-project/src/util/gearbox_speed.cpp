@@ -1,6 +1,6 @@
 #include "configuration/unitaliases.hpp"
 
-namespace motors
+namespace motor
 {
     RPM motorToShaftSpeed(const RPM& motorSpeed, double gearRatio)
     {
