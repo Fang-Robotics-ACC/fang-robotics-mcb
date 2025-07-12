@@ -1,4 +1,5 @@
 #include "control/turret/feeder_system.hpp"
+#include "control/robots/pierce/config/subsystem/feeder_config.hpp"
 
 #include "unitaliases.hpp"
 
@@ -17,24 +18,8 @@ namespace test
         const RPM expectedRPMCall{std::get<2>(GetParam())};
 
         Drivers drivers;
-        const control::turret::FeederSystem::DriveMotor::DjiSpeedPid::Config defaultConfig 
-        {
-            1,
-            1,
-            1
-        };
-        const control::turret::FeederSystem::DriveMotor::Config motorConfig
-        {
-            tap::motor::MOTOR1,
-            tap::can::CanBus::CAN_BUS1,
-            "test motor",
-            false,
-            1.0,
-            defaultConfig
-        };
-        const control::turret::FeederSystem::Config feederConfig{roundsPerRevolution, feedRate, motorConfig};
 
-        control::turret::FeederSystem feederSystem{drivers, feederConfig};
+        control::turret::FeederSystem feederSystem{drivers, control::k_feederSystemConfig};
         control::turret::FeederSystem::DriveMotor& motor{feederSystem.m_motor};
     };
 }
