@@ -19,7 +19,7 @@
 
 #include <gtest/gtest.h>
 
-#include "brushlessutils.hpp"
+#include "motor/brushlessutils.hpp"
 #include "unitaliases.hpp"
 
 
