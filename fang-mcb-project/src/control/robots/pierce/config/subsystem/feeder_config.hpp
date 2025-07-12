@@ -1,6 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_FEEDER_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_FEEDER_CONFIG_HPP
 #include "control/turret/feeder_system.hpp"
+#include "control/turret/feeder_subsystem.hpp"
 #include "wrap/trap/motor/dji_m2006.hpp"
 
 #include "unitaliases.hpp"
