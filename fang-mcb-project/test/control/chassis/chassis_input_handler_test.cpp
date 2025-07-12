@@ -37,6 +37,7 @@ static const control::chassis::ChassisInputHandler::Config k_chassisInputConfig
     k_chassisInputKeyboardConfig
 };
 
+//TODO: change tuples into structs AHHH
 class ChassisInputHandlerTest :  public ::testing::TestWithParam<std::tuple<double, double, double, math::AbstractVector2D, double, double>>
 {
 protected:
@@ -58,13 +59,13 @@ protected:
 TEST_P(ChassisInputHandlerTest, inputHandlingTest)
 {
     using Channel = tap::communication::serial::Remote::Channel;
-    ON_CALL(m_drivers.remote, getChannel(Channel::RIGHT_HORIZONTAL))
+    ON_CALL(m_drivers.remote, getChannel(k_chassisInputConfig.remoteConfig.xTranslationChannel))
         .WillByDefault(Return(m_leftJoystickHorizontal));
 
-    ON_CALL(m_drivers.remote, getChannel(Channel::RIGHT_VERTICAL))
+    ON_CALL(m_drivers.remote, getChannel(k_chassisInputConfig.remoteConfig.yTranslationChannel))
         .WillByDefault(Return(m_leftJoystickVertical));
 
-    ON_CALL(m_drivers.remote, getChannel(Channel::LEFT_HORIZONTAL))
+    ON_CALL(m_drivers.remote, getChannel(k_chassisInputConfig.remoteConfig.rotationChannel))
         .WillByDefault(Return(m_rightJoystickHorizontal));
 
     //Check answers
