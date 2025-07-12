@@ -14,6 +14,29 @@ using AbstractVector2D = math::AbstractVector2D;
 using ::testing::Return;
 using namespace units::literals;
 
+using Remote = tap::communication::serial::Remote;
+using Channel = Remote::Channel;
+using Key = Remote::Key;
+
+static const control::chassis::ChassisInputHandler::RemoteConfig k_chassisInputRemoteConfig
+{
+    Channel::LEFT_HORIZONTAL,   //xTranslation
+    Channel::LEFT_VERTICAL,     //yTranslation
+    Channel::WHEEL              //rotation
+};
+static const control::chassis::ChassisInputHandler::KeyboardConfig k_chassisInputKeyboardConfig
+{
+    Key::W, //forward
+    Key::S, //backward
+    Key::A, //left
+    Key::D  //right
+};
+static const control::chassis::ChassisInputHandler::Config k_chassisInputConfig
+{
+    k_chassisInputRemoteConfig,
+    k_chassisInputKeyboardConfig
+};
+
 class ChassisInputHandlerTest :  public ::testing::TestWithParam<std::tuple<double, double, double, math::AbstractVector2D, double, double>>
 {
 protected:
@@ -28,7 +51,7 @@ protected:
     Drivers m_drivers{};
     tap::mock::RemoteMock& m_remote{m_drivers.remote};
 
-    control::chassis::ChassisInputHandler& m_chassisInputHandler{m_drivers.inputHandler.getChassisInputs()};
+    control::chassis::ChassisInputHandler m_chassisInputHandler{m_remote, k_chassisInputConfig};
     
 };
 
