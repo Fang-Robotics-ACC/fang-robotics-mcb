@@ -4,7 +4,6 @@
 #include "directionality.hpp"
 #include "gearboxrepeatultramk2.hpp"
 
-#include "ispeedmotor.h"
 #include "tap/drivers.hpp"
 #include "tap/util_macros.hpp"
 #include "gmock/gmock.h"

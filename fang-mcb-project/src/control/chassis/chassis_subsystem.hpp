@@ -17,7 +17,7 @@
 #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
 #include "gearboxrepeatultramk2mock.hpp"
 #else
-#include "motors/gearboxrepeatultramk2.hpp"
+#include "motor/gearboxrepeatultramk2.hpp"
 #endif
 
 namespace control
