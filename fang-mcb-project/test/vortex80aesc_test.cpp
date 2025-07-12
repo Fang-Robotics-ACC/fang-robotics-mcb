@@ -1,4 +1,4 @@
-#include "motors/vortex80aesc.hpp"
+#include "motor/vortex80aesc.hpp"
 #include "trap/communication/pwm_data.hpp"
 #include "unitaliases.hpp"
 #include "tap/drivers.hpp"
