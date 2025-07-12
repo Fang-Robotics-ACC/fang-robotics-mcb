@@ -33,6 +33,12 @@ namespace trap
             m_targetSpeed = ::motor::shaftToMotorSpeed(targetSpeed, m_gearRatio);
         }
 
+        RPM DjiM2006::getTargetSpeed() const
+        {
+            return m_targetSpeed;
+        }
+
+
         RPM DjiM2006::getSpeed() const
         {
             return ::motor::motorToShaftSpeed(RPM{m_djiMotor.getShaftRPM()}, m_gearRatio);
