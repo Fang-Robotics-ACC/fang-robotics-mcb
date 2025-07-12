@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_AMMO_BOOSTER_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_AMMO_BOOSTER_CONFIG_HPP
-#include "control/turret/systems/flywheel_system.hpp"
-#include "control/turret/systems/ammo_booster_system.hpp"
+#include "control/turret/system/flywheel_system.hpp"
+#include "control/turret/system/ammo_booster_system.hpp"
 #include "unitaliases.hpp"
 
 #include "units.h"

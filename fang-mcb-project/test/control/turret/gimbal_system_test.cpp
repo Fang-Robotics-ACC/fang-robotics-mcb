@@ -1,5 +1,5 @@
 #include "gimbal_system_test_archetypes.hpp"
-#include "control/turret/systems/gimbal_system.hpp"
+#include "control/turret/system/gimbal_system.hpp"
 
 #include "unitaliases.hpp"
 
