@@ -18,8 +18,8 @@ namespace mock
             using ::motor::GearboxRepeatUltraMk2::GearboxRepeatUltraMk2;
             virtual ~GearboxRepeatUltraMk2Mock() = default;
 
-    		MOCK_METHOD(void, setTargetSpeed, (const RPM& speed), (override));
-    		MOCK_METHOD(RPM, getTargetSpeed, (), (const, override));
+            MOCK_METHOD(void, setTargetSpeed, (const RPM& speed), (override));
+            MOCK_METHOD(RPM, getTargetSpeed, (), (const, override));
     		MOCK_METHOD(void, setMaxSpeed, (const RPM& maxSpeed), (override));
     		MOCK_METHOD(RPM, getMaxSpeed, (), (const, override));
     		MOCK_METHOD(void, setMinSpeed, (const RPM& minSpeed), (override));
