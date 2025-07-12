@@ -18,14 +18,14 @@ namespace motors
                       m_gearRatio{gearRatio}
     {}
 
-	void GearboxRepeatUltraMk2::setSpeed(const RPM& speed)
+	void GearboxRepeatUltraMk2::setTargetSpeed(const RPM& speed)
     {
-        RepeatUltraMk2::setSpeed(shaftToMotorSpeed(speed));
+        RepeatUltraMk2::setTargetSpeed(shaftToMotorSpeed(speed));
     }
 
-	RPM GearboxRepeatUltraMk2::getSpeed() const
+	RPM GearboxRepeatUltraMk2::getTargetSpeed() const
     {
-        return motorToShaftSpeed(RepeatUltraMk2::getSpeed());
+        return motorToShaftSpeed(RepeatUltraMk2::getTargetSpeed());
     }
 
 	void GearboxRepeatUltraMk2::setMaxSpeed(const RPM& maxSpeed)

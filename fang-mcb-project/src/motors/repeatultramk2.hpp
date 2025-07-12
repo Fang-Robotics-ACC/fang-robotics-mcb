@@ -1,7 +1,6 @@
 #ifndef MK2_MOTORS_HPP_ASFEFKLSJKDFJSAEFE
 #define MK2_MOTORS_HPP_ASFEFKLSJKDFJSAEFE
-#include "idcmotor.h"
-#include "iwattbudgeter.h"
+#include "rail/motor/ispeed_motor.hpp"
 #include "units.h"
 
 #include "tap/drivers.hpp"
@@ -16,7 +15,7 @@ namespace motors
     /*!
     RPM is positive according to the right hand rule when the motor is the shaft pointing up. This is the the gearbox detached!!!
     */
-    class RepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM>
+    class RepeatUltraMk2 : public virtual rail::motor::ISpeedMotor<RPM>
     {
     public:
         RepeatUltraMk2(tap::Drivers& drivers,
@@ -40,40 +39,41 @@ namespace motors
          * can at most provide a bdlc motor 10 volts. Given the kv value, the maximum
          * theoretical speed would be that.
          */
-		void setSpeed(const RPM& speed) override;
+		void setTargetSpeed(const RPM& speed) override;
         
         /**
          * This returns the desired speed, not the actual speed.
          */
-		RPM getSpeed() const override;
+		RPM getTargetSpeed() const override;
 
         /**
          * All requests will be clamped to this bound. The default is the maximum
          * theoretical speed which is the motor kv (1450) multiplied by the nominal
          * controller input voltage.
          */
-		void setMaxSpeed(const RPM& maxSpeed) override;
+		void setMaxSpeed(const RPM& maxSpeed);
 
         /**
          * Get the maximum speed which all setSpeed() requests are clamped to
          */
-		RPM getMaxSpeed() const override;
+		RPM getMaxSpeed() const;
 
         /**
          * All requests will be clamped to this bound. The default for unidirectional is 0 rpm.
          * The default for bidirectional is the negative of the maximum theoretical speed.
          */
-		void setMinSpeed(const RPM& minSpeed) override;
+		void setMinSpeed(const RPM& minSpeed);
 
         /**
          * Get the minimum speed which all setSpeed requests are clamped to
          */
-		RPM getMinSpeed() const override;
+		RPM getMinSpeed() const;
         /**
          * This needs to have a delay of around half a second. It will be up to the caller
          * to figure out how to insure this.
          */
-        void initialize();
+        void initialize() override;
+        void update() override;
     private:
         RPM m_speed{0};
         RPM m_minSpeed{0};

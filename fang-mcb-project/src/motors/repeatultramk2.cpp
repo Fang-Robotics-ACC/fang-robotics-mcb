@@ -37,7 +37,7 @@ namespace motors
         }
     }
 
-	void RepeatUltraMk2::setSpeed(const RPM& speed)
+	void RepeatUltraMk2::setTargetSpeed(const RPM& speed)
     {
         const RPM clampedSpeed{tap::algorithms::limitVal<RPM> (speed, m_minSpeed, m_maxSpeed)};
         m_speed = clampedSpeed;
@@ -45,7 +45,7 @@ namespace motors
         m_vortex.setSpeed(speedPercentage);
     }
 
-	RPM RepeatUltraMk2::getSpeed() const
+	RPM RepeatUltraMk2::getTargetSpeed() const
     {
         return m_speed;
     }
@@ -53,7 +53,7 @@ namespace motors
 	void RepeatUltraMk2::setMaxSpeed(const RPM& maxSpeed)
     {
         m_maxSpeed = maxSpeed;
-        setSpeed(getSpeed());
+        setTargetSpeed(getTargetSpeed());
     }
 
 	RPM RepeatUltraMk2::getMaxSpeed() const
@@ -64,7 +64,7 @@ namespace motors
 	void RepeatUltraMk2::setMinSpeed(const RPM& minSpeed)
     {
         m_minSpeed = minSpeed;
-        setSpeed(getSpeed()); 
+        setTargetSpeed(getTargetSpeed());
     }
 
 	RPM RepeatUltraMk2::getMinSpeed() const
@@ -85,6 +85,10 @@ namespace motors
     void RepeatUltraMk2::initialize()
     {
         m_vortex.sendArmingSignal();
+    }
+
+    void RepeatUltraMk2::update()
+    {
     }
 
 }//namespace motors

@@ -5,7 +5,6 @@
 #include "repeatultramk2.hpp"
 #include "wrap/trap/communication/pwm_data.hpp"
 
-#include "ispeedmotor.h"
 #include "drivers.hpp"
 #include "tap/util_macros.hpp"
 
@@ -16,7 +15,7 @@ namespace motors
     *The gear ratio is motor turns : shaft turns, so a 14:1 gearbox would mean that the motor shaft rotates 14 times in order for the
     *output shaft to rotate once.
     */
-    class GearboxRepeatUltraMk2 : virtual public rail::ISpeedMotor<RPM>, public RepeatUltraMk2
+    class GearboxRepeatUltraMk2 : public RepeatUltraMk2
     {
     public:
         /**
@@ -57,36 +56,36 @@ namespace motors
          * can at most provide a bdlc motor 10 volts. Given the kv value, the maximum
          * theoretical speed would be that.
          */
-		mockable void setSpeed(const RPM& speed) override;
+		mockable void setTargetSpeed(const RPM& speed);
 
         /**
          * This returns the desired speed, not the actual speed.
          */
 
-		mockable void setMaxSpeed(const RPM& maxSpeed) override;
+		mockable void setMaxSpeed(const RPM& maxSpeed);
 
         /**
          * All requests will be clamped to this bound. The default is the maximum
          * theoretical speed which is the motor kv (1450) multiplied by the nominal
          * controller input voltage.
          */
-		mockable RPM getSpeed() const override;
+		mockable RPM getTargetSpeed() const override;
 
         /**
-         * Get the maximum speed which all setSpeed() requests are clamped to
+         * Get the maximum speed which all setTargetSpeed() requests are clamped to
          */
-		mockable RPM getMaxSpeed() const override;
+		mockable RPM getMaxSpeed() const;
 
         /**
          * All requests will be clamped to this bound. The default for unidirectional is 0 rpm.
          * The default for bidirectional is the negative of the maximum theoretical speed.
          */
-		mockable void setMinSpeed(const RPM& minSpeed) override;
+		mockable void setMinSpeed(const RPM& minSpeed);
 
         /**
-         * Get the minimum speed which all setSpeed requests are clamped to
+         * Get the minimum speed which all setTargetSpeed requests are clamped to
          */
-		mockable RPM getMinSpeed() const override;
+		mockable RPM getMinSpeed() const;
         
         /**
          * Returns the gear ratio: the amount of turns a motor makes per shaft rotation.

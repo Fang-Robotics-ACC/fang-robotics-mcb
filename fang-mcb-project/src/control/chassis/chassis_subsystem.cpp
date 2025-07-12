@@ -69,10 +69,10 @@ namespace control
 
         void ChassisSubsystem::refreshSafeDisconnect()
         {
-            m_frontLeftMotor.setSpeed(0_rpm);
-            m_frontRightMotor.setSpeed(0_rpm);
-            m_rearLeftMotor.setSpeed(0_rpm);
-            m_rearRightMotor.setSpeed(0_rpm);
+            m_frontLeftMotor.setTargetSpeed(0_rpm);
+            m_frontRightMotor.setTargetSpeed(0_rpm);
+            m_rearLeftMotor.setTargetSpeed(0_rpm);
+            m_rearRightMotor.setTargetSpeed(0_rpm);
         }
 
         void ChassisSubsystem::updateRamps()
@@ -93,10 +93,10 @@ namespace control
             //Returns 0 if we are at or below the critical threshold
             //Reutnrs 1 if we are above the limiting threshold (buffer - crit)
             const float powerScale{m_powerLimiter.getPowerLimitRatio()};
-            m_frontLeftMotor.setSpeed(m_mecanumLogic.getFrontLeftWheelSpeed() * powerScale);
-            m_frontRightMotor.setSpeed(m_mecanumLogic.getFrontRightWheelSpeed() * powerScale);
-            m_rearLeftMotor.setSpeed(m_mecanumLogic.getRearLeftWheelSpeed() * powerScale);
-            m_rearRightMotor.setSpeed(m_mecanumLogic.getRearRightWheelSpeed() * powerScale);
+            m_frontLeftMotor.setTargetSpeed(m_mecanumLogic.getFrontLeftWheelSpeed() * powerScale);
+            m_frontRightMotor.setTargetSpeed(m_mecanumLogic.getFrontRightWheelSpeed() * powerScale);
+            m_rearLeftMotor.setTargetSpeed(m_mecanumLogic.getRearLeftWheelSpeed() * powerScale);
+            m_rearRightMotor.setTargetSpeed(m_mecanumLogic.getRearRightWheelSpeed() * powerScale);
         }
 
         void ChassisSubsystem::updateFieldAngle()
