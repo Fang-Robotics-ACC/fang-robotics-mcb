@@ -2,7 +2,6 @@
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "drivers.hpp"
 //Subsystems
-#include "control/turret/turret_subsystem.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 
 #include "control/turret/gimbal_subsystem.hpp"
