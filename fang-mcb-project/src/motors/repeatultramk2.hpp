@@ -1,21 +1,19 @@
 #ifndef FANG_ROBOTICS_MCB_MOTORS_REPEAT_ULTRA_MK2_HPP
 #define FANG_ROBOTICS_MCB_MOTORS_REPEAT_ULTRA_MK2_HPP
-#include "rail/motor/ispeed_motor.hpp"
-#include "units.h"
+#include "data/directionality.hpp"
+#include "unitaliases.hpp"
+#include "vortex80aesc.hpp"
+#include "wrap/rail/rail_motors.hpp"
 
 #include "tap/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
-#include "unitaliases.hpp"
-#include "vortex80aesc.hpp"
-#include "data/directionality.hpp"
-#include "units.h"
 
 namespace motors
 {
     /*!
     RPM is positive according to the right hand rule when the motor is the shaft pointing up. This is the the gearbox detached!!!
     */
-    class RepeatUltraMk2 : public virtual rail::motor::ISpeedMotor<RPM>
+    class RepeatUltraMk2 : public virtual ISpeedMotor
     {
     public:
         RepeatUltraMk2(tap::Drivers& drivers,
