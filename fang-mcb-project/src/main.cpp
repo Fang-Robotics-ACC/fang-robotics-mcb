@@ -46,7 +46,7 @@
 
 #include "io.hpp"
 #include "units.h"
-#include "control/robot.hpp"
+#include "robots/robot.hpp"
 
 #include <iostream>
 
