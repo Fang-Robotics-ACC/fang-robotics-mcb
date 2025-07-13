@@ -36,7 +36,7 @@ namespace control::turret
         }
     }
 
-    void FeederSubsystem::autoFireOff()
+    void FeederSubsystem::feedOff()
     {
         m_feeder.feedOff();
     }

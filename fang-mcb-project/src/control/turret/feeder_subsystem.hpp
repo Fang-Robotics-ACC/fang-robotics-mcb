@@ -26,7 +26,7 @@ namespace control::turret
             void refreshSafeDisconnect() override;
 
             void autoFireOn();
-            void autoFireOff();
+            void feedOff();
 
             void unjamOn();
             void unjamOff();
