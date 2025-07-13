@@ -15,7 +15,7 @@
 #include "tap/control/subsystem.hpp"
 
 #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
-#include "gearboxrepeatultramk2mock.hpp"
+#include "test/mock/motor/gearboxrepeatultramk2mock.hpp"
 #else
 #include "motor/gearboxrepeatultramk2.hpp"
 #endif

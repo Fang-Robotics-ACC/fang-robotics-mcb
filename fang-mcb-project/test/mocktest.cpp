@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
-#include "gearboxrepeatultramk2mock.hpp"
+#include "test/mock/motor/gearboxrepeatultramk2mock.hpp"
 #include "data/directionality.hpp"
 
 #include "drivers.hpp"
