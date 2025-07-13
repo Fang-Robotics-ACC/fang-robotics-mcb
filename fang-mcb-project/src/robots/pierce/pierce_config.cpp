@@ -1,5 +1,5 @@
 #include "pierce_config.hpp"
-#include "control/robots/pierce/pierce.hpp"
+#include "robots/pierce/pierce.hpp"
 
 //Subsystem configs
 #include "config/subsystem/chassis_config.hpp"
