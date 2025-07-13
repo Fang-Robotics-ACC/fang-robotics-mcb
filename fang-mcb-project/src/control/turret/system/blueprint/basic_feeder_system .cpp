@@ -58,8 +58,7 @@ namespace control::turret
         //Slightly risky use to convert to preoper unit. It is not too risky since
         //We are simply converting from the frequency into how often revolutions happen.
         //This gets implicitly converted into RPM :)
-        //The frequency is how many revolutions per second
-        const RPM revolutionsPerMinute {revolutionFrequency.to<double>() / 60};
-        return revolutionsPerMinute;
+        const units::angular_velocity::revolutions_per_second_t revolutionsPerSecond {revolutionFrequency.to<double>()};
+        return revolutionsPerSecond;
     }   
 }
