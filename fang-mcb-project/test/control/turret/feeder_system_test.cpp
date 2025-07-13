@@ -1,5 +1,5 @@
 #include "control/turret/system/feeder_system.hpp"
-#include "control/robots/pierce/config/subsystem/feeder_config.hpp"
+#include "robots/pierce/config/subsystem/feeder_config.hpp"
 
 #include "unitaliases.hpp"
 
