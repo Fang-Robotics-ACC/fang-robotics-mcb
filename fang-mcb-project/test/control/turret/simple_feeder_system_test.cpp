@@ -1,4 +1,4 @@
-#include "control/turret/system/blueprint/basic_feeder_system.hpp"
+#include "control/turret/system/blueprint/simple_feeder_system.hpp"
 #include "test/mock/rail/rail_motor_mocks.hpp"
 
 #include "unitaliases.hpp"
@@ -17,7 +17,7 @@ namespace test
         const Hertz feedRate{std::get<1>(GetParam())};
         const RPM expectedRPMCall{std::get<2>(GetParam())};
 
-        const control::turret::BasicFeederSystem::Config kFeederSystemConfig_
+        const control::turret::SimpleFeederSystem::Config kFeederSystemConfig_
         {
             .roundsPerRevolution    = roundsPerRevolution,
             .feedRate               = feedRate,
@@ -35,7 +35,7 @@ using namespace test;
 TEST_P(BasicFeederSystemTest, basicTest)
 {
     mock::motor::ISpeedMotorMock feedMotor{};
-    control::turret::BasicFeederSystem feederSystem{feedMotor, kFeederSystemConfig_};
+    control::turret::SimpleFeederSystem feederSystem{feedMotor, kFeederSystemConfig_};
     //This tests whether or not the desired speed sent into the motor given
     //how many rounds per rotation of the feeder gear and the desired fire rate
     EXPECT_CALL(feedMotor, setTargetSpeed(expectedRPMCall));

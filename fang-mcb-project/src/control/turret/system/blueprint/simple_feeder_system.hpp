@@ -10,7 +10,7 @@ namespace control::turret
     /**
      * Intermediate dependency injection based class using the deprecated feeder api
      */
-    class BasicFeederSystem
+    class SimpleFeederSystem
     {
     public:
         /**
@@ -28,7 +28,7 @@ namespace control::turret
         /**
          * A positive value sent to the feedMotor means that it will feed.
          */
-        BasicFeederSystem(motor::ISpeedMotor &feedMotor, const Config& config);
+        SimpleFeederSystem(motor::ISpeedMotor &feedMotor, const Config& config);
 
         void feedOn();
         void feedOff();
