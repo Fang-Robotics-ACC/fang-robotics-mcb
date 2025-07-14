@@ -8,7 +8,7 @@ namespace control::turret
     {
     }
 
-    BasicFeederSystem& M2006BasicFeederMaker::getBasicFeeder()
+    SimpleFeederSystem& M2006BasicFeederMaker::getSimpleFeeder()
     {
         return feeder_;
     }
