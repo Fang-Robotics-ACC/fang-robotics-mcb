@@ -4,5 +4,6 @@
 namespace control::turret
 {
     using ISimpleFeeder = rail::turret::ISimpleFeeder;
+    using ISimpleFeederControl = rail::turret::ISimpleFeederControl;
 }
 #endif
