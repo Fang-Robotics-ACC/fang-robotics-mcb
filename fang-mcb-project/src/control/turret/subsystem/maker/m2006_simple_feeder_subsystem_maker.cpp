@@ -1,15 +1,15 @@
-#include "m2006_simple_feeder_maker.hpp"
+#include "m2006_simple_feeder_subsystem_maker.hpp"
 namespace control::turret
 {
 
-    M2006SimpleFeederMaker::M2006SimpleFeederMaker(Drivers& drivers, const Config& config):
-        feedMotor_{drivers, config.feedMotorConfig},
-        feeder_{feedMotor_, config.feederConfig}
+    M2006SimpleFeederSubsystemMaker::M2006SimpleFeederSubsystemMaker(Drivers& drivers, const Config& config):
+        feederSystemMaker_{drivers, {config.feedMotorConfig, config.feederSystemConfig}},
+        feederSubsystem_{drivers, feederSystemMaker_.getMade(), config.feederSubsystemConfig}
     {
     }
 
-    SimpleFeederSystem& M2006SimpleFeederMaker::getSimpleFeeder()
+    SimpleFeederSubsystem& M2006SimpleFeederSubsystemMaker::getMade()
     {
-        return feeder_;
+        return feederSubsystem_;
     }
 }
