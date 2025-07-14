@@ -14,13 +14,18 @@ namespace control::turret
         m_feeder.initialize();
     }
 
-    void FeederSubsystem::refresh()
+    void FeederSubsystem::update()
     {
         if(m_heatLimiter.stopRecommended())
         {
             m_feeder.feedOff();
         }
         m_feeder.update();
+    }
+
+    void FeederSubsystem::refresh()
+    {
+        update();
     }
 
     void FeederSubsystem::refreshSafeDisconnect()

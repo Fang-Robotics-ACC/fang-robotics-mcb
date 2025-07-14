@@ -24,6 +24,7 @@ namespace control::turret
             FeederSubsystem(Drivers& drivers, const Config& config);
 
             void initialize() override;
+            void update() override;
             void refresh() override;
 
             void refreshSafeDisconnect() override;
@@ -31,8 +32,8 @@ namespace control::turret
             void feedOn() override;
             void feedOff() override;
 
-            void unjamOn();
-            void unjamOff();
+            void unjamOn() override;
+            void unjamOff() override;
 
         private:
             FeederSystem m_feeder;
