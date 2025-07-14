@@ -23,6 +23,7 @@ namespace control::turret
         SimpleFeederSubsystem(Drivers& drivers, ISimpleFeeder& feeder ,const Config& config);
 
         void initialize() override;
+        void update() override;
         void refresh() override;
 
         void refreshSafeDisconnect() override;
