@@ -101,8 +101,9 @@ namespace control
 
         trap::communication::sensors::Imu m_imu;
 
+        turret::M2006SimpleFeederSubsystemMaker simpleFeederMaker_;
         turret::GimbalSubsystem m_gimbal;
-        turret::FeederSubsystem m_feeder;
+        turret::SimpleFeederSubsystem& m_feeder{simpleFeederMaker_.getMade()};
         turret::AmmoBoosterSubsystem m_booster;
         chassis::ChassisSubsystem m_chassis;
 
