@@ -6,19 +6,19 @@
 namespace control::turret
 {
 
-    BasicFeederSubsystem::BasicFeederSubsystem(Drivers& drivers, ISimpleFeeder& feeder, const Config& config):
+    SimpleFeederSubsystem::SimpleFeederSubsystem(Drivers& drivers, ISimpleFeeder& feeder, const Config& config):
         Subsystem{&drivers},
         feeder_{feeder},
         heatLimiter_{drivers.refSerial, {config.heatLimiterConfig}}
     {
     }
 
-    void BasicFeederSubsystem::initialize()
+    void SimpleFeederSubsystem::initialize()
     {
         feeder_.initialize();
     }
 
-    void BasicFeederSubsystem::refresh()
+    void SimpleFeederSubsystem::refresh()
     {
         if(heatLimiter_.stopRecommended())
         {
@@ -27,11 +27,11 @@ namespace control::turret
         feeder_.update();
     }
 
-    void BasicFeederSubsystem::refreshSafeDisconnect()
+    void SimpleFeederSubsystem::refreshSafeDisconnect()
     {
         feeder_.feedOff();
     }
-    void BasicFeederSubsystem::feedOn()
+    void SimpleFeederSubsystem::feedOn()
     {
         //Prevent from new feeding sequnces from being triggered
         if(!heatLimiter_.stopRecommended())
@@ -40,17 +40,17 @@ namespace control::turret
         }
     }
 
-    void BasicFeederSubsystem::feedOff()
+    void SimpleFeederSubsystem::feedOff()
     {
         feeder_.feedOff();
     }
 
-    void BasicFeederSubsystem::unjamOn()
+    void SimpleFeederSubsystem::unjamOn()
     {
         feeder_.unjamOn();
     }
 
-    void BasicFeederSubsystem::unjamOff()
+    void SimpleFeederSubsystem::unjamOff()
     {
         feeder_.unjamOff();
     }

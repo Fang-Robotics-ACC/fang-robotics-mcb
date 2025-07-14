@@ -9,7 +9,7 @@
 
 namespace control::turret
 {
-    class BasicFeederSubsystem:
+    class SimpleFeederSubsystem:
         virtual public tap::control::Subsystem,
         virtual public ISimpleFeeder
     {
@@ -20,7 +20,7 @@ namespace control::turret
             HeatLimiter::Config heatLimiterConfig;
         };
 
-        BasicFeederSubsystem(Drivers& drivers, ISimpleFeeder& feeder ,const Config& config);
+        SimpleFeederSubsystem(Drivers& drivers, ISimpleFeeder& feeder ,const Config& config);
 
         void initialize() override;
         void refresh() override;
