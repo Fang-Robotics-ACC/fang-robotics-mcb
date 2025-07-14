@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_AUTO_FIRE_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_AUTO_FIRE_COMMAND_HPP
-#include "control/turret/feeder_subsystem.hpp"
+#include "wrap/rail/rail_turret_aliases.hpp"
 
 #include "util/chrono/simple_timer.hpp"
 
@@ -10,10 +10,11 @@ namespace control
 {
     namespace turret 
     {
-        class AutofireCommand: public tap::control::Command
+        class AutofireCommand:
+            public tap::control::Command
         {
         public:
-            AutofireCommand(FeederSubsystem& feeder);
+            AutofireCommand(ISimpleFeederSubsystemControl& feeder);
 
             const char* getName() const override {return "Auto Fire";}
 
@@ -24,7 +25,7 @@ namespace control
 
 
         private:
-            FeederSubsystem& m_feeder;
+            ISimpleFeederSubsystemControl& m_feeder;
         };
     }
 }

@@ -6,7 +6,7 @@ namespace control
     namespace turret
     {
         using namespace units::literals;
-        AutofireCommand::AutofireCommand(FeederSubsystem& feeder)
+        AutofireCommand::AutofireCommand(ISimpleFeederSubsystemControl& feeder)
         :   m_feeder{feeder}
         {
             addSubsystemRequirement(&m_feeder);
