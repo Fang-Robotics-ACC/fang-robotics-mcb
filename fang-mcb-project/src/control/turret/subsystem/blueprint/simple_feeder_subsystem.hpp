@@ -11,7 +11,8 @@ namespace control::turret
 {
     class SimpleFeederSubsystem:
         virtual public tap::control::Subsystem,
-        virtual public ISimpleFeeder
+        virtual public ISimpleFeeder,
+        virtual public ISimpleFeederSubsystemControl
     {
     public:
         using HeatLimiter = control::turret::HeatLimiter;
