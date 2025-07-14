@@ -20,7 +20,7 @@ namespace control::turret
         };
 
         M2006SimpleFeederMaker(Drivers& drivers, const Config& config);
-        SimpleFeederSystem& getSimpleFeeder();
+        SimpleFeederSystem& getMade();
 
     private:
         FeedMotor feedMotor_;
