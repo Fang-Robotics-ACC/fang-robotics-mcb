@@ -10,7 +10,7 @@ namespace control::turret
     {
         class FeederSubsystem:
             public virtual tap::control::Subsystem,
-            public virtual ISimpleFeeder
+            public virtual ISimpleFeederControl
         {
         public:
             using HeatLimiter = control::turret::HeatLimiter;
@@ -24,7 +24,6 @@ namespace control::turret
             FeederSubsystem(Drivers& drivers, const Config& config);
 
             void initialize() override;
-            void update() override;
             void refresh() override;
 
             void refreshSafeDisconnect() override;
