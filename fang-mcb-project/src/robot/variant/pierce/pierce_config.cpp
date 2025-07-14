@@ -27,7 +27,7 @@ namespace control
     {
         k_chassisConfig,
         k_gimbalSubsystemConfig,
-        k_feederConfig,
+        kFeederMakerConfig,
         k_ammoBoosterConfig
     };
 

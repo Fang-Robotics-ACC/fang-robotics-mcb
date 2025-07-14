@@ -2,6 +2,7 @@
 #define FANG_ROBOTICS_MCB_FEEDER_CONFIG_HPP
 #include "control/turret/system/feeder_system.hpp"
 #include "control/turret/feeder_subsystem.hpp"
+#include "control/turret/subsystem/maker/m2006_simple_feeder_subsystem_maker.hpp"
 #include "wrap/trap/motor/dji_m2006.hpp"
 
 #include "unitaliases.hpp"
@@ -36,6 +37,13 @@ namespace control
         .motorConfig            = k_feederMotorConfig
     };
 
+    static const turret::SimpleFeederSystem::Config kSimpleFeederSystemConfig
+    {
+        .roundsPerRevolution    = 7,
+        .feedRate               = 5_Hz,
+        .unjamSpeed             = 30_rpm,
+    };
+
     static const turret::FeederSubsystem::HeatLimiter::Config k_feederHeatLimiterConfig
     {
         .criticalHeatLimit  = 220,
@@ -47,6 +55,13 @@ namespace control
     {
         k_feederHeatLimiterConfig,
         k_feederSystemConfig
+    };
+
+    static const turret::M2006SimpleFeederSubsystemMaker::Config kFeederMakerConfig
+    {
+        .feedMotorConfig = k_feederMotorConfig,
+        .feederSubsystemConfig = {k_feederHeatLimiterConfig},
+        .feederSystemConfig =  kSimpleFeederSystemConfig
     };
 }
 #endif
