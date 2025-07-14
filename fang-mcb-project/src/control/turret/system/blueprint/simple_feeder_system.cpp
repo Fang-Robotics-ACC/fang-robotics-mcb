@@ -9,7 +9,7 @@ namespace control::turret
 {
     using namespace units::literals;
 
-    BasicFeederSystem::BasicFeederSystem(motor::ISpeedMotor& feedMotor, const Config& config)
+    SimpleFeederSystem::SimpleFeederSystem(motor::ISpeedMotor& feedMotor, const Config& config)
     :   kRoundsPerRevolution_{config.roundsPerRevolution},
         kFeedRate_{config.feedRate},
         kUnjamSpeed_{config.unjamSpeed},
@@ -19,37 +19,37 @@ namespace control::turret
         //assert(mk_roundsPerRevolution  > 0 && "roundsPerRevolution cannot be less than zero");
     }
 
-    void BasicFeederSystem::feedOn()
+    void SimpleFeederSystem::feedOn()
     {
         feedMotor_.setTargetSpeed(feedRateToRPM());
     }
 
-    void BasicFeederSystem::feedOff()
+    void SimpleFeederSystem::feedOff()
     {
         feedMotor_.setTargetSpeed(kStillSpeed_);
     }
 
-    void BasicFeederSystem::unjamOn()
+    void SimpleFeederSystem::unjamOn()
     {
         feedMotor_.setTargetSpeed(-kUnjamSpeed_);
     }
 
-    void BasicFeederSystem::unjamOff()
+    void SimpleFeederSystem::unjamOff()
     {
         feedOff();
     }
 
-    void BasicFeederSystem::update()
+    void SimpleFeederSystem::update()
     {
         feedMotor_.update();
     }
 
-    void BasicFeederSystem::initialize()
+    void SimpleFeederSystem::initialize()
     {
         feedMotor_.initialize();
     }
 
-    RPM BasicFeederSystem::feedRateToRPM()
+    RPM SimpleFeederSystem::feedRateToRPM()
     {
         //If there are two rounds per revolution,
         //The wheel only needs to rotate half as fast
