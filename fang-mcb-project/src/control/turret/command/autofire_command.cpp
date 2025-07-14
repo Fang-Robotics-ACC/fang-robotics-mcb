@@ -14,7 +14,7 @@ namespace control
 
         void AutofireCommand::initialize()
         {
-            m_feeder.autoFireOn();
+            m_feeder.feedOn();
         }
 
         void AutofireCommand::execute()

@@ -3,11 +3,14 @@
 #include "control/turret/system/feeder_system.hpp"
 #include "drivers.hpp"
 #include "control/turret/util/heat_limiter.hpp"
+#include "wrap/rail/rail_turret_aliases.hpp"
 #include "tap/control/subsystem.hpp"
 
 namespace control::turret
     {
-        class FeederSubsystem: public virtual tap::control::Subsystem
+        class FeederSubsystem:
+            public virtual tap::control::Subsystem,
+            public virtual ISimpleFeeder
         {
         public:
             using HeatLimiter = control::turret::HeatLimiter;
@@ -25,8 +28,8 @@ namespace control::turret
 
             void refreshSafeDisconnect() override;
 
-            void autoFireOn();
-            void feedOff();
+            void feedOn() override;
+            void feedOff() override;
 
             void unjamOn();
             void unjamOff();
