@@ -2,13 +2,13 @@
 namespace control::turret
 {
 
-    M2006BasicFeederMaker::M2006BasicFeederMaker(Drivers& drivers, const Config& config):
+    M2006SimpleFeederMaker::M2006SimpleFeederMaker(Drivers& drivers, const Config& config):
         feedMotor_{drivers, config.feedMotorConfig},
         feeder_{feedMotor_, config.feederConfig}
     {
     }
 
-    SimpleFeederSystem& M2006BasicFeederMaker::getSimpleFeeder()
+    SimpleFeederSystem& M2006SimpleFeederMaker::getSimpleFeeder()
     {
         return feeder_;
     }

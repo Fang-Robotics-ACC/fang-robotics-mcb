@@ -9,7 +9,7 @@ namespace control::turret
     /**
      * Gives a basic feeder that utilizes an M2006 motor
      */
-    class M2006BasicFeederMaker
+    class M2006SimpleFeederMaker
     {
     public:
         using FeedMotor = trap::motor::DjiM2006;
@@ -19,7 +19,7 @@ namespace control::turret
             SimpleFeederSystem::Config   feederConfig;
         };
 
-        M2006BasicFeederMaker(Drivers& drivers, const Config& config);
+        M2006SimpleFeederMaker(Drivers& drivers, const Config& config);
         SimpleFeederSystem& getSimpleFeeder();
 
     private:
