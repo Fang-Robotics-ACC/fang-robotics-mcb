@@ -9,7 +9,7 @@
 namespace control
 {
     using AmmoBooster = control::turret::AmmoBoosterSystem;
-    using Flywheel = control::turret::FlywheelSystem;
+    using Flywheel = control::turret::OldFlywheelSystem;
 
     using namespace units::literals;
 

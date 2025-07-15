@@ -15,8 +15,8 @@ namespace control::turret
     struct Config
     {
         MetersPerSecond ammoVelocity; 
-        FlywheelSystem::Config leftFlywheelConfig;
-        FlywheelSystem::Config rightFlywheelConfig;
+        OldFlywheelSystem::Config leftFlywheelConfig;
+        OldFlywheelSystem::Config rightFlywheelConfig;
     };
         AmmoBoosterSystem(Drivers& drivers, const Config& config);
         void autoFireOn();
@@ -28,8 +28,8 @@ namespace control::turret
     private:
         void setRimSpeeds(const MetersPerSecond& velocity);
         MetersPerSecond m_ammoVelocity;
-        FlywheelSystem m_leftFlywheel;
-        FlywheelSystem m_rightFlywheel;
+        OldFlywheelSystem m_leftFlywheel;
+        OldFlywheelSystem m_rightFlywheel;
 
         static constexpr MetersPerSecond k_stillSpeed{0};
 

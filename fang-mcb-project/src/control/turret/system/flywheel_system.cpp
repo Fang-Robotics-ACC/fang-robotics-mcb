@@ -7,28 +7,28 @@ namespace control
 {
     namespace turret
     {
-        FlywheelSystem::FlywheelSystem(Drivers& drivers, const Config& config)
+        OldFlywheelSystem::OldFlywheelSystem(Drivers& drivers, const Config& config)
         :   m_radius{config.radius / 1_rad},
             m_motor{drivers, config.motorConfig}
         {
         }
 
-        void FlywheelSystem::setTargetRimSpeed(const MetersPerSecond& rimSpeed)
+        void OldFlywheelSystem::setTargetRimSpeed(const MetersPerSecond& rimSpeed)
         {
             m_motor.setTargetSpeed(RimSpeedToMotorSpeed(rimSpeed));
         }
 
-        RPM FlywheelSystem::RimSpeedToMotorSpeed(const MetersPerSecond& rimSpeed) const
+        RPM OldFlywheelSystem::RimSpeedToMotorSpeed(const MetersPerSecond& rimSpeed) const
         {
             return rimSpeed / m_radius;
         }
 
-        void FlywheelSystem::update()
+        void OldFlywheelSystem::update()
         {
             m_motor.update();
         }
 
-        void FlywheelSystem::initialize()
+        void OldFlywheelSystem::initialize()
         {
             m_motor.initialize();
         }
