@@ -1,8 +1,10 @@
-#ifndef FANG_ROBOTICS_MCB_CONTROL_TURRET_SUBSYSTEM_MAKER_M2006_SIMPLE_FEEDER_SUBSYSTEM_MAKER_HPP
-#define FANG_ROBOTICS_MCB_CONTROL_TURRET_SUBSYSTEM_MAKER_M2006_SIMPLE_FEEDER_SUBSYSTEM_MAKER_HPP
-#include "control/turret/subsystem/blueprint/simple_feeder_subsystem.hpp"
-#include "control/turret/system/maker/m2006_simple_feeder_maker.hpp"
+#ifndef FANG_ROBOTICS_MCB_CONTROL_TURRET_FEEDER_SIMPLE_FEEDER_SUBSYSTEM_M2006_SIMPLE_FEEDER_SUBSYSTEM_MAKER_HPP
+#define FANG_ROBOTICS_MCB_CONTROL_TURRET_FEEDER_SIMPLE_FEEDER_SUBSYSTEM_M2006_SIMPLE_FEEDER_SUBSYSTEM_MAKER_HPP
+#include "simple_feeder_subsystem.hpp"
 #include "drivers.hpp"
+#include "turret/feeder/simple_feeder_system/simple_feeder_system.hpp"
+#include "turret/feeder/simple_feeder_system/m2006_simple_feeder_maker.hpp"
+
 #include "trap/motor/dji_m2006.hpp"
 
 namespace control::turret
