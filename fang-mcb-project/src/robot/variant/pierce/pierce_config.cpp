@@ -64,7 +64,7 @@ namespace control
     {
         .subsystemConfig    = k_pierceSubsytemConfig,
         .inputConfig        = k_pierceInputConfig,
-        .commandConfig      = k_pierceCommandConfig,
-        .mappingConfig      = k_pierceMappingConfig
+        .mappingConfig      = k_pierceMappingConfig,
+        .commandConfig      = k_pierceCommandConfig
     };
 }

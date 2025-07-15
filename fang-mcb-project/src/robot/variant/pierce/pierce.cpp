@@ -13,7 +13,7 @@ namespace control
             mk_subsystemConfig{config.subsystemConfig},
             mk_inputConfig{config.inputConfig},
             mk_commandConfig{config.commandConfig},
-            mk_mappingConfig{config.mappingConfig},
+            kMappingConfig_{config.mappingConfig},
             m_imu{drivers.bmi088},
             simpleFeederMaker_{drivers, config.subsystemConfig.feederConfig},
             m_chassis{drivers, mk_subsystemConfig.chassisConfig},
@@ -59,13 +59,13 @@ namespace control
         m_drivers.commandMapper.addMap(&m_unjamCommandMap);
         m_drivers.commandMapper.addMap(&m_unjamCommandMapRemote);
 
-        //m_drivers.commandMapper.addMap(&m_shurikenRemoteMap);
-        //m_drivers.commandMapper.addMap(&m_fieldMecanumRemoteMap);
+        m_drivers.commandMapper.addMap(&m_shurikenRemoteMap);
+        m_drivers.commandMapper.addMap(&m_fieldMecanumRemoteMap);
         m_drivers.commandMapper.addMap(&m_tardisRemoteMap);
 
-        //m_drivers.commandMapper.addMap(&m_shurikenKeyboardMap);
-        //m_drivers.commandMapper.addMap(&m_fieldMecanumKeyboardMap);
+        m_drivers.commandMapper.addMap(&m_shurikenKeyboardMap);
+        m_drivers.commandMapper.addMap(&m_fieldMecanumKeyboardMap);
 
-        //m_drivers.commandMapper.addMap(&m_tardisKeyboardMap);
+        m_drivers.commandMapper.addMap(&m_tardisKeyboardMap);
     }
 }

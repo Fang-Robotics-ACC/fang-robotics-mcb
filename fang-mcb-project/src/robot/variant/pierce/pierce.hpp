@@ -79,8 +79,8 @@ namespace control
         {
             SubsystemConfig subsystemConfig;
             InputConfig inputConfig;
-            CommandConfig commandConfig;
             MappingConfig mappingConfig;
+            CommandConfig commandConfig;
         };
 
         Pierce(Drivers& drivers, const Config& config);
@@ -92,12 +92,13 @@ namespace control
         void setDefaultCommands();
         void registerIoMappings();
 
+        Drivers& m_drivers;
+
         const SubsystemConfig mk_subsystemConfig;
         const InputConfig mk_inputConfig;
+        const MappingConfig kMappingConfig_;
         const CommandConfig mk_commandConfig;
-        const MappingConfig mk_mappingConfig;
 
-        Drivers& m_drivers;
 
         trap::communication::sensors::Imu m_imu;
 
@@ -115,24 +116,24 @@ namespace control
         turret::AutofireCommand m_autofireCommand{m_feeder};
         turret::UnjamCommand m_unjamCommand{m_feeder};
 
-        tap::control::HoldCommandMapping m_activateBoosterRemoteMap{&m_drivers, {&m_activateBoosterCommand}, mk_mappingConfig.remoteActivateBooster};
-        tap::control::HoldCommandMapping m_activateAutofireRemoteMap{&m_drivers, {&m_autofireCommand}, mk_mappingConfig.remoteFire};
+        tap::control::HoldCommandMapping m_activateBoosterRemoteMap{&m_drivers, {&m_activateBoosterCommand}, kMappingConfig_.remoteActivateBooster};
+        tap::control::HoldCommandMapping m_activateAutofireRemoteMap{&m_drivers, {&m_autofireCommand}, kMappingConfig_.remoteFire};
 
-        tap::control::HoldCommandMapping m_activateAutofireMouseMap{&m_drivers, {&m_autofireCommand}, mk_mappingConfig.mouseFire};
-        tap::control::HoldCommandMapping m_unjamCommandMap{&m_drivers, {&m_unjamCommand}, mk_mappingConfig.mouseUnjam};
-        tap::control::HoldCommandMapping m_unjamCommandMapRemote{&m_drivers, {&m_unjamCommand}, mk_mappingConfig.remoteUnjam};
+        tap::control::HoldCommandMapping m_activateAutofireMouseMap{&m_drivers, {&m_autofireCommand}, kMappingConfig_.mouseFire};
+        tap::control::HoldCommandMapping m_unjamCommandMap{&m_drivers, {&m_unjamCommand}, kMappingConfig_.mouseUnjam};
+        tap::control::HoldCommandMapping m_unjamCommandMapRemote{&m_drivers, {&m_unjamCommand}, kMappingConfig_.remoteUnjam};
 
         chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.fieldMecanumConfig};
         chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.shurikenConfig};
         chassis::TardisCommand m_tardisCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.tardisConfig};
 
-        tap::control::HoldCommandMapping m_fieldMecanumRemoteMap{&m_drivers, {&m_fieldMecanumCommand}, mk_mappingConfig.remoteFieldMecanumMode};
-        tap::control::PressCommandMapping m_shurikenRemoteMap{&m_drivers, {&m_shurikenCommand}, mk_mappingConfig.remoteShurikenMode};
-        tap::control::PressCommandMapping m_tardisRemoteMap{&m_drivers, {&m_tardisCommand}, mk_mappingConfig.remoteTardisMode};
+        tap::control::HoldCommandMapping m_fieldMecanumRemoteMap{&m_drivers, {&m_fieldMecanumCommand}, kMappingConfig_.remoteFieldMecanumMode};
+        tap::control::PressCommandMapping m_shurikenRemoteMap{&m_drivers, {&m_shurikenCommand}, kMappingConfig_.remoteShurikenMode};
+        tap::control::PressCommandMapping m_tardisRemoteMap{&m_drivers, {&m_tardisCommand}, kMappingConfig_.remoteTardisMode};
 
-        tap::control::PressCommandMapping m_fieldMecanumKeyboardMap{&m_drivers, {&m_fieldMecanumCommand}, mk_mappingConfig.keyboardFieldMecanumMode};
-        tap::control::PressCommandMapping m_shurikenKeyboardMap{&m_drivers, {&m_shurikenCommand}, mk_mappingConfig.keyboardShurikenMode};
-        tap::control::PressCommandMapping m_tardisKeyboardMap{&m_drivers, {&m_tardisCommand}, mk_mappingConfig.keyboardTardisMode};
+        tap::control::PressCommandMapping m_fieldMecanumKeyboardMap{&m_drivers, {&m_fieldMecanumCommand}, kMappingConfig_.keyboardFieldMecanumMode};
+        tap::control::PressCommandMapping m_shurikenKeyboardMap{&m_drivers, {&m_shurikenCommand}, kMappingConfig_.keyboardShurikenMode};
+        tap::control::PressCommandMapping m_tardisKeyboardMap{&m_drivers, {&m_tardisCommand}, kMappingConfig_.keyboardTardisMode};
     };//class Robot
 }//namspace control
 #endif
