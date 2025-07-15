@@ -9,8 +9,6 @@
 namespace control::turret
     {
         class FeederSubsystem:
-            virtual public tap::control::Subsystem,
-            virtual public ISimpleFeederControl,
             virtual public ISimpleFeederSubsystemControl
         {
         public:

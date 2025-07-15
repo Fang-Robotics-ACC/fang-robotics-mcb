@@ -1,12 +1,12 @@
 #ifndef FANG_ROBOTICS_MCB_TURRET_SUBSYSTEM_BLUEPRINT_SIMPLE_FEEDER_SUBSYSTEM_HPP
 #define FANG_ROBOTICS_MCB_TURRET_SUBSYSTEM_BLUEPRINT_SIMPLE_FEEDER_SUBSYSTEM_HPP
 #include "simple_feeder_subsystem.hpp"
-#include "wrap/rail/rail_turret_aliases.hpp"
 
 namespace control::turret
 {
 
     SimpleFeederSubsystem::SimpleFeederSubsystem(Drivers& drivers, ISimpleFeeder& feeder, const Config& config):
+        ISimpleFeederSubsystemControl{drivers},
         Subsystem{&drivers},
         feeder_{feeder},
         heatLimiter_{drivers.refSerial, {config.heatLimiterConfig}}
@@ -18,19 +18,13 @@ namespace control::turret
         feeder_.initialize();
     }
 
-    void SimpleFeederSubsystem::update()
+    void SimpleFeederSubsystem::refresh()
     {
         if(heatLimiter_.stopRecommended())
         {
             feeder_.feedOff();
         }
         feeder_.update();
-
-    }
-
-    void SimpleFeederSubsystem::refresh()
-    {
-        update();
     }
 
     void SimpleFeederSubsystem::refreshSafeDisconnect()
