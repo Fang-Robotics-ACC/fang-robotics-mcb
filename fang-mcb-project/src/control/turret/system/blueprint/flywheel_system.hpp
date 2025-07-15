@@ -39,7 +39,7 @@ namespace control::turret
         const MetersPerRadians kRadius_; //This is required for the math to smoothly work
         Motor& motor_;
 
-        const ::MetersPerSecond targetRimSpeed_{};
+        MetersPerSecond targetRimSpeed_{};
     };
 }
 #endif
