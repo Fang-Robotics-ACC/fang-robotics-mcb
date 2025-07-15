@@ -25,46 +25,46 @@ namespace control
 {
     const Pierce::SubsystemConfig k_pierceSubsytemConfig 
     {
-        k_chassisConfig,
-        k_gimbalSubsystemConfig,
-        kFeederMakerConfig,
-        k_ammoBoosterConfig
+        .chassisConfig  = k_chassisConfig,
+        .gimbalConfig   = k_gimbalSubsystemConfig,
+        .feederConfig   = kFeederMakerConfig,
+        .boosterConfig  = k_ammoBoosterConfig
     };
 
     const Pierce::InputConfig k_pierceInputConfig
     {
-        k_chassisInputConfig,
-        k_turretInputConfig,
+        .chassisInputConfig = k_chassisInputConfig,
+        .turretInputConfig  = k_turretInputConfig
     };
 
     const Pierce::CommandConfig k_pierceCommandConfig
     {
-        k_turretAimConfig,
-        k_fieldMecanumConfig,
-        k_shurikenConfig,
-        k_tardisConfig,
+        .aimCommandConfig   = k_turretAimConfig,
+        .fieldMecanumConfig = k_fieldMecanumConfig,
+        .shurikenConfig     = k_shurikenConfig,
+        .tardisConfig       = k_tardisConfig
     };
 
     const Pierce::MappingConfig k_pierceMappingConfig
     {
-        k_activateBoosterRemoteState,
-        k_autofireRemoteState,
-        k_unjamRemoteState,
-        k_fieldMecanumRemoteState,
-        k_shurikenModeRemoteState,
-        k_tardisModeRemoteState,
-        k_autofireMouseState,
-        k_unjamMouseState,
-        k_fieldMecanumKeyboardState,
-        k_shurikenModeKeyboardState,
-        k_tardisModeKeyboardState
+        .remoteActivateBooster      = k_activateBoosterRemoteState,
+        .remoteFire                 = k_autofireRemoteState,
+        .remoteUnjam                = k_unjamRemoteState,
+        .remoteFieldMecanumMode     = k_fieldMecanumRemoteState,
+        .remoteShurikenMode         = k_shurikenModeRemoteState,
+        .remoteTardisMode           = k_tardisModeRemoteState,
+        .mouseFire                  = k_autofireMouseState,
+        .mouseUnjam                 = k_unjamMouseState,
+        .keyboardFieldMecanumMode   = k_fieldMecanumKeyboardState,
+        .keyboardShurikenMode       = k_shurikenModeKeyboardState,
+        .keyboardTardisMode         = k_tardisModeKeyboardState
     };
 
     const Pierce::Config k_pierceConfig
     {
-        k_pierceSubsytemConfig,
-        k_pierceInputConfig,
-        k_pierceCommandConfig,
-        k_pierceMappingConfig
+        .subsystemConfig    = k_pierceSubsytemConfig,
+        .inputConfig        = k_pierceInputConfig,
+        .mappingConfig      = k_pierceMappingConfig,
+        .commandConfig      = k_pierceCommandConfig
     };
 }
