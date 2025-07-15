@@ -30,7 +30,7 @@ namespace control::turret
     }
     void FeederSubsystem::feedOn()
     {
-        //Prevent from new feeding sequnces from being triggered
+        //Prevent new feeding sequnces from being triggered
         if(!m_heatLimiter.stopRecommended())
         {
             m_feeder.feedOn();
