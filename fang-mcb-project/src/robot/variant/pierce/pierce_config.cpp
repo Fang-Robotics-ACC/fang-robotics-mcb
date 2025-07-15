@@ -25,24 +25,24 @@ namespace control
 {
     const Pierce::SubsystemConfig k_pierceSubsytemConfig 
     {
-        k_chassisConfig,
-        k_gimbalSubsystemConfig,
-        kFeederMakerConfig,
-        k_ammoBoosterConfig
+        .chassisConfig  = k_chassisConfig,
+        .gimbalConfig   = k_gimbalSubsystemConfig,
+        .feederConfig   = kFeederMakerConfig,
+        .boosterConfig  = k_ammoBoosterConfig
     };
 
     const Pierce::InputConfig k_pierceInputConfig
     {
-        k_chassisInputConfig,
-        k_turretInputConfig,
+        .chassisInputConfig = k_chassisInputConfig,
+        .turretInputConfig  = k_turretInputConfig
     };
 
     const Pierce::CommandConfig k_pierceCommandConfig
     {
-        k_turretAimConfig,
-        k_fieldMecanumConfig,
-        k_shurikenConfig,
-        k_tardisConfig,
+        .aimCommandConfig   = k_turretAimConfig,
+        .fieldMecanumConfig = k_fieldMecanumConfig,
+        .shurikenConfig     = k_shurikenConfig,
+        .tardisConfig       = k_tardisConfig
     };
 
     const Pierce::MappingConfig k_pierceMappingConfig
@@ -62,9 +62,9 @@ namespace control
 
     const Pierce::Config k_pierceConfig
     {
-        k_pierceSubsytemConfig,
-        k_pierceInputConfig,
-        k_pierceCommandConfig,
-        k_pierceMappingConfig
+        .subsystemConfig    = k_pierceSubsytemConfig,
+        .inputConfig        = k_pierceInputConfig,
+        .commandConfig      = k_pierceCommandConfig,
+        .mappingConfig      = k_pierceMappingConfig
     };
 }
