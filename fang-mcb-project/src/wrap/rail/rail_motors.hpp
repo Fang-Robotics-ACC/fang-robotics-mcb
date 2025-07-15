@@ -10,6 +10,6 @@ namespace motor
 {
     using ISpeedMotor = rail::motor::ISpeedMotor<RPM>;
     using IPositionMotor = rail::motor::IPositionMotor<RPM>;
-    using ISpeedWheel = rail::motor::ISpeedWheel<MetersPerSecond, RPM>;
+    using ISpeedWheel = rail::motor::ISpeedWheel<MetersPerSecond>;
 }
 #endif
