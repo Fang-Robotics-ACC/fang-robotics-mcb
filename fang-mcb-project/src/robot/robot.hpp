@@ -5,6 +5,6 @@
 #include "robot/variant/pierce/pierce_config.hpp"
 #include "robot/variant/pierce/pierce.hpp"
 using Robot = control::Pierce;
-static const Robot::Config k_robotConfig{control::k_pierceConfig};
+static const Robot::Config& k_robotConfig{control::k_pierceConfig};
 #endif
 #endif
