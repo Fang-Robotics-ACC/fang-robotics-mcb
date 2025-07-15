@@ -1,16 +1,34 @@
-#include "flywheel_system_test.hpp"
-
 #include "unitaliases.hpp"
+#include "control/turret/system/blueprint/flywheel_system.hpp"
+#include "test/mock/rail/rail_motor_mocks.hpp"
 
 #include <gtest/gtest.h>
 #include <tuple>
 
+class FlywheelSpeedTest : public ::testing::TestWithParam<std::tuple<Meters, MetersPerSecond,RPM>>
+{
+public:
+using FlywheelSystem = control::turret::FlywheelSystem;
+    const Meters radius{std::get<0>(GetParam())};
+    const MetersPerSecond targetRimSpeed{std::get<1>(GetParam())};
+    const RPM expectedRPMCall{std::get<2>(GetParam())};
 
-using namespace test;
+    const FlywheelSystem::Config flywheelConfig
+    {
+        .radius = radius
+    };
+
+    Drivers drivers;
+};
 
 using namespace units::literals;
 TEST_P(FlywheelSpeedTest, basicTest)
 {
+
+
+    mock::motor::ISpeedMotorMock motor{};
+    FlywheelSystem flywheelSystem{motor, flywheelConfig};
+
     EXPECT_CALL(motor, setTargetSpeed(expectedRPMCall));
 
     flywheelSystem.setTargetRimSpeed(targetRimSpeed);
