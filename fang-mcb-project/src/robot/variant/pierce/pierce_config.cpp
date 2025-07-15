@@ -47,17 +47,17 @@ namespace control
 
     const Pierce::MappingConfig k_pierceMappingConfig
     {
-        k_activateBoosterRemoteState,
-        k_autofireRemoteState,
-        k_unjamRemoteState,
-        k_fieldMecanumRemoteState,
-        k_shurikenModeRemoteState,
-        k_tardisModeRemoteState,
-        k_autofireMouseState,
-        k_unjamMouseState,
-        k_fieldMecanumKeyboardState,
-        k_shurikenModeKeyboardState,
-        k_tardisModeKeyboardState
+        .remoteActivateBooster      = k_activateBoosterRemoteState,
+        .remoteFire                 = k_autofireRemoteState,
+        .remoteUnjam                = k_unjamRemoteState,
+        .remoteFieldMecanumMode     = k_fieldMecanumRemoteState,
+        .remoteShurikenMode         = k_shurikenModeRemoteState,
+        .remoteTardisMode           = k_tardisModeRemoteState,
+        .mouseFire                  = k_autofireMouseState,
+        .mouseUnjam                 = k_unjamMouseState,
+        .keyboardFieldMecanumMode   = k_fieldMecanumKeyboardState,
+        .keyboardShurikenMode       = k_shurikenModeKeyboardState,
+        .keyboardTardisMode         = k_tardisModeKeyboardState
     };
 
     const Pierce::Config k_pierceConfig
