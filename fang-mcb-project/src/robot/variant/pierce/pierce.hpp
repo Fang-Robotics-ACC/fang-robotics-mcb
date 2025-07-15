@@ -6,8 +6,8 @@
 
 #include "control/turret/gimbal_subsystem.hpp"
 #include "control/turret/feeder_subsystem.hpp"
-#include "control/turret/subsystem/maker/m2006_simple_feeder_subsystem_maker.hpp"
-#include "control/turret/subsystem/blueprint/simple_feeder_subsystem.hpp"
+#include "control/turret/feeder/simple_feeder_subsystem/simple_feeder_subsystem.hpp"
+#include "control/turret/feeder/simple_feeder_subsystem/m2006_simple_feeder_subsystem_maker.hpp"
 #include "control/turret/ammo_booster_subsystem.hpp"
 
 //Input handlers
