@@ -17,7 +17,6 @@ namespace control
          * motor to be called. This is not a taproot subsystem, it is meant
          * to not be used by taproot's command scheduler. This is to provide
          * the turret subsystem a "subsubsystem", which is not supported by taproot.
-         * 
          */
         class FlywheelSystem:
             virtual public motor::ISpeedWheel
@@ -38,7 +37,7 @@ namespace control
             void update() override;
         private:
             RPM RimSpeedToMotorSpeed(const MetersPerSecond& rimSpeed) const;
-            MetersPerRadians m_radius; //This is required for the math to smoothly work
+            const MetersPerRadians kRadius_; //This is required for the math to smoothly work
             Motor& motor_;
         };
     }
