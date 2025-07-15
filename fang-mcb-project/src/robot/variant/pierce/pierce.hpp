@@ -126,7 +126,7 @@ namespace control
         chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.shurikenConfig};
         chassis::TardisCommand m_tardisCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.tardisConfig};
 
-        tap::control::PressCommandMapping m_fieldMecanumRemoteMap{&m_drivers, {&m_fieldMecanumCommand}, mk_mappingConfig.remoteFieldMecanumMode};
+        tap::control::HoldCommandMapping m_fieldMecanumRemoteMap{&m_drivers, {&m_fieldMecanumCommand}, mk_mappingConfig.remoteFieldMecanumMode};
         tap::control::PressCommandMapping m_shurikenRemoteMap{&m_drivers, {&m_shurikenCommand}, mk_mappingConfig.remoteShurikenMode};
         tap::control::PressCommandMapping m_tardisRemoteMap{&m_drivers, {&m_tardisCommand}, mk_mappingConfig.remoteTardisMode};
 

@@ -48,6 +48,7 @@ namespace control
     void Pierce::setDefaultCommands()
     {
         m_gimbal.setDefaultCommand(&m_aimCommnd);
+        m_chassis.setDefaultCommand(&m_fieldMecanumCommand);
     }
     
     void Pierce::registerIoMappings()
@@ -58,13 +59,13 @@ namespace control
         m_drivers.commandMapper.addMap(&m_unjamCommandMap);
         m_drivers.commandMapper.addMap(&m_unjamCommandMapRemote);
 
-        m_drivers.commandMapper.addMap(&m_shurikenRemoteMap);
-        m_drivers.commandMapper.addMap(&m_fieldMecanumRemoteMap);
+        //m_drivers.commandMapper.addMap(&m_shurikenRemoteMap);
+        //m_drivers.commandMapper.addMap(&m_fieldMecanumRemoteMap);
         m_drivers.commandMapper.addMap(&m_tardisRemoteMap);
 
-        m_drivers.commandMapper.addMap(&m_shurikenKeyboardMap);
-        m_drivers.commandMapper.addMap(&m_fieldMecanumKeyboardMap);
+        //m_drivers.commandMapper.addMap(&m_shurikenKeyboardMap);
+        //m_drivers.commandMapper.addMap(&m_fieldMecanumKeyboardMap);
 
-        m_drivers.commandMapper.addMap(&m_tardisKeyboardMap);
+        //m_drivers.commandMapper.addMap(&m_tardisKeyboardMap);
     }
 }
