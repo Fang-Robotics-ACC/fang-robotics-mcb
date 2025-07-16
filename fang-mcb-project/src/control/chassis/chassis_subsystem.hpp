@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_CHASSIS_SUBSYSTEM_HPP
 #include "drivers.hpp"
 #include "configuration/unitaliases.hpp"
-#include "data/directionality.hpp"
+#include "motor/data/directionality.hpp"
 #include "physicsaliases.hpp"
 #include "logic/chassis/fieldmecanumlogic.hpp"
 #include "wrap/trap/communication/pwm_data.hpp"

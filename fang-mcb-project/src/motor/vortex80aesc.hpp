@@ -1,10 +1,11 @@
 #ifndef FANG_ROBOTICS_MCB_VORTEX_80A_ESC_LOGIC_H
 #define FANG_ROBOTICS_MCB_VORTEX_80A_ESC_LOGIC_H
 #include "unitaliases.hpp"
-#include "directionality.hpp"
 
 #include "util/math/cool_lerp.hpp"
 #include "data/vector2d.hpp"
+
+#include "motor/data/directionality.hpp"
 
 #include "wrap/trap/communication/pwm_data.hpp"
 
