@@ -37,6 +37,7 @@ namespace chassis
     void setRotation(const RPM& rotation);
     const Velocity2D& getTranslation() const;
     RPM getRotation() const;
+
     /**https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
      * This uses equation 20
      */
@@ -45,11 +46,15 @@ namespace chassis
     RPM getFrontLeftWheelSpeed() const;
     RPM getRearLeftWheelSpeed() const;
     RPM getRearRightWheelSpeed() const;
+
     private:
     Velocity2D translation_{MetersPerSecond{0.0}, MetersPerSecond{0.0}};
     RadiansPerSecond rotation_{0};
     const MetersPerRadians kWheelRadius_; //Required for the math to work, "how many meters for each radius?"
     const Meters kHorizontalWheelDistance_;
+
+    //https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
+    //These are the constants used within the euqation
     const Meters kHalfHorizontalWheelDistance_{kHorizontalWheelDistance_ / 2.0};
     const Meters kVerticalWheelDistance_;
     const Meters kHalfVerticalWheelDistance_{kVerticalWheelDistance_ / 2.0};
