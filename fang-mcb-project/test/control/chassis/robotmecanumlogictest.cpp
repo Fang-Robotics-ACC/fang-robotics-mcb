@@ -14,18 +14,18 @@ TEST(zeroTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{1};
 
-        const logic::chassis::Velocity2D translation{0.0_mps, 0.0_mps};
+        const chassis::Velocity2D translation{0.0_mps, 0.0_mps};
         const RPM rotation{0.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         EXPECT_DOUBLE_EQ(translation.x.to<double>(), outputTranslation.x.to<double>());
@@ -43,18 +43,18 @@ TEST(forwardTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{1};
 
-        const logic::chassis::Velocity2D translation{0.0_mps, 1.0_mps};
+        const chassis::Velocity2D translation{0.0_mps, 1.0_mps};
         const RPM rotation{0.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         std::cout << mecanumLogic.getFrontLeftWheelSpeed();
@@ -71,18 +71,18 @@ TEST(forwardTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{4};
 
-        const logic::chassis::Velocity2D translation{0.0_mps, 1.0_mps};
+        const chassis::Velocity2D translation{0.0_mps, 1.0_mps};
         const RPM rotation{0.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         EXPECT_DOUBLE_EQ(translation.x.to<double>(), outputTranslation.x.to<double>());
@@ -97,18 +97,18 @@ TEST(forwardTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{4};
 
-        const logic::chassis::Velocity2D translation{0.0_mps, 234.28929_mps};
+        const chassis::Velocity2D translation{0.0_mps, 234.28929_mps};
         const RPM rotation{0.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         EXPECT_DOUBLE_EQ(translation.x.to<double>(), outputTranslation.x.to<double>());
@@ -126,18 +126,18 @@ TEST(backwardsTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{1};
 
-        const logic::chassis::Velocity2D translation{0.0_mps, -1.0_mps};
+        const chassis::Velocity2D translation{0.0_mps, -1.0_mps};
         const RPM rotation{0.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         std::cout << mecanumLogic.getFrontLeftWheelSpeed();
@@ -154,18 +154,18 @@ TEST(backwardsTest, robotMecanumLogic)
         const Meters verticalWheelDistance{23.43};
         const Meters wheelRadius{4};
 
-        const logic::chassis::Velocity2D translation{0.0_mps, -1.0_mps};
+        const chassis::Velocity2D translation{0.0_mps, -1.0_mps};
         const RPM rotation{0.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         EXPECT_DOUBLE_EQ(translation.x.to<double>(), outputTranslation.x.to<double>());
@@ -180,18 +180,18 @@ TEST(backwardsTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{4};
 
-        const logic::chassis::Velocity2D translation{0.0_mps, -234.28929_mps};
+        const chassis::Velocity2D translation{0.0_mps, -234.28929_mps};
         const RPM rotation{0.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         EXPECT_DOUBLE_EQ(translation.x.to<double>(), outputTranslation.x.to<double>());
@@ -209,18 +209,18 @@ TEST(leftTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{1};
 
-        const logic::chassis::Velocity2D translation{-1.0_mps, 0.0_mps};
+        const chassis::Velocity2D translation{-1.0_mps, 0.0_mps};
         const RPM rotation{0.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         std::cout << mecanumLogic.getFrontLeftWheelSpeed();
@@ -237,18 +237,18 @@ TEST(leftTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{4};
 
-        const logic::chassis::Velocity2D translation{-1.0_mps, 0.0_mps};
+        const chassis::Velocity2D translation{-1.0_mps, 0.0_mps};
         const RPM rotation{0.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         EXPECT_DOUBLE_EQ(translation.x.to<double>(), outputTranslation.x.to<double>());
@@ -263,18 +263,18 @@ TEST(leftTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{4};
 
-        const logic::chassis::Velocity2D translation{-2342.2340_mps, -0.0_mps};
+        const chassis::Velocity2D translation{-2342.2340_mps, -0.0_mps};
         const RPM rotation{0.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         EXPECT_DOUBLE_EQ(translation.x.to<double>(), outputTranslation.x.to<double>());
@@ -292,18 +292,18 @@ TEST(rightTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{1};
 
-        const logic::chassis::Velocity2D translation{1.0_mps, 0.0_mps};
+        const chassis::Velocity2D translation{1.0_mps, 0.0_mps};
         const RPM rotation{0.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         std::cout << mecanumLogic.getFrontLeftWheelSpeed();
@@ -320,18 +320,18 @@ TEST(rightTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{4};
 
-        const logic::chassis::Velocity2D translation{1.0_mps, 0.0_mps};
+        const chassis::Velocity2D translation{1.0_mps, 0.0_mps};
         const RPM rotation{0.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         EXPECT_DOUBLE_EQ(translation.x.to<double>(), outputTranslation.x.to<double>());
@@ -346,18 +346,18 @@ TEST(rightTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{4};
 
-        const logic::chassis::Velocity2D translation{2342.2340_mps, 0.0_mps};
+        const chassis::Velocity2D translation{2342.2340_mps, 0.0_mps};
         const RPM rotation{0.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         EXPECT_DOUBLE_EQ(translation.x.to<double>(), outputTranslation.x.to<double>());
@@ -375,18 +375,18 @@ TEST(rotationTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{1};
 
-        const logic::chassis::Velocity2D translation{0.0_mps, 0.0_mps};
+        const chassis::Velocity2D translation{0.0_mps, 0.0_mps};
         const RPM rotation{1.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         std::cout << mecanumLogic.getFrontLeftWheelSpeed();
@@ -403,18 +403,18 @@ TEST(rotationTest, robotMecanumLogic)
         const Meters verticalWheelDistance{1};
         const Meters wheelRadius{4};
 
-        const logic::chassis::Velocity2D translation{0.0_mps, 0.0_mps};
+        const chassis::Velocity2D translation{0.0_mps, 0.0_mps};
         const RPM rotation{-1.0};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         EXPECT_DOUBLE_EQ(translation.x.to<double>(), outputTranslation.x.to<double>());
@@ -429,18 +429,18 @@ TEST(rotationTest, robotMecanumLogic)
         const Meters verticalWheelDistance{0.234};
         const Meters wheelRadius{4};
 
-        const logic::chassis::Velocity2D translation{0.0_mps, 0.0_mps};
+        const chassis::Velocity2D translation{0.0_mps, 0.0_mps};
         const RPM rotation{12.2342};
 
-        logic::chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
-        logic::chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::RobotMecanumLogic mecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
+        chassis::MecanumCalculator mecanumCalc{horizontalWheelDistance, verticalWheelDistance, wheelRadius};
 
         mecanumLogic.setTranslation(translation);
         mecanumLogic.setRotation(rotation);
 
         mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
 
-        const logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+        const chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
         const RPM outputRotation{mecanumCalc.getRotation()};
 
         EXPECT_DOUBLE_EQ(translation.x.to<double>(), outputTranslation.x.to<double>());

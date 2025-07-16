@@ -39,7 +39,7 @@ namespace chassis
         return QuadDriveData{getFrontLeftWheelSpeed(), getFrontRightWheelSpeed(),
                              getRearLeftWheelSpeed(),  getRearRightWheelSpeed()};
     }
-    
+
     RPM RobotMecanumLogic::getFrontLeftWheelSpeed() const
     {
         //https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf

@@ -21,7 +21,7 @@ namespace chassis
         kwheelDistanceConstant_{(horizontalWheelDistance + verticalWheelDistance) / 2.0},
         kWheelRadius_{wheelRadius}
     {}
- 
+
     Velocity2D MecanumCalculator::getTranslation() const
     {
         MetersPerSecond xVelocity{((kWheelRadius_ / 4.0)
@@ -41,5 +41,4 @@ namespace chassis
     const auto rotationConstant{kWheelRadius_ / (4.0 * kwheelDistanceConstant_)};
     return rotationConstant * rotationSum;
     }
-}
 }

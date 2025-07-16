@@ -24,7 +24,7 @@ namespace chassis
     void FieldMecanumLogic::setRobotAngle(const Radians& robotAngle)
     {
         rawSetRobotAngle(robotAngle);
-        //The translation relative to the robot must be updated since the robot is facing along a 
+        //The translation relative to the robot must be updated since the robot is facing along a
         //difference direction
         setTranslation(m_fieldTranslation);
     }

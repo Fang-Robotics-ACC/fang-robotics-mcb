@@ -10,7 +10,7 @@ using namespace units::literals;
 
 namespace chassis
 {
-    class FieldMecanumLogic 
+    class FieldMecanumLogic
     {
     public:
     /**
@@ -19,7 +19,7 @@ namespace chassis
      * The horizontalWheelDistance refers to twice as lx
      * The verticalWheelDistance refers to twice as ly
      * The vertical distance is parallel to the forward direction of the robot
-     * The horizontal distance is parallel to the sideways direction of the robot 
+     * The horizontal distance is parallel to the sideways direction of the robot
      */
     FieldMecanumLogic(const Meters& horizontalWheelDistance,
                       const Meters& verticalWheelDistance,
@@ -36,7 +36,7 @@ namespace chassis
     void setMotion(const Velocity2D& translation, const RPM& rotation);
     void setTotalMotion(const Velocity2D& translation, const RPM& rotation, const Radians& robotAngle);
     /**
-     * If the robot is facing forward at the field, that is 0 degrees. 
+     * If the robot is facing forward at the field, that is 0 degrees.
      * If the robot is facing left from the forward field direction, that is +90 degrees
      * If the robot is racing right from the forward field direction that is -90 degrees
      */
@@ -57,7 +57,7 @@ namespace chassis
     void rawSetRobotAngle(const Radians& rotation);
     Velocity2D fieldToRobotTranslation(const Velocity2D& translation) const;
     Velocity2D robotToFieldTranslation(const Velocity2D& translation) const;
-    
+
     Radians m_robotAngle{0.0};
     RobotMecanumLogic m_robotMecanumLogic;
     Velocity2D m_fieldTranslation{0_mps, 0_mps};

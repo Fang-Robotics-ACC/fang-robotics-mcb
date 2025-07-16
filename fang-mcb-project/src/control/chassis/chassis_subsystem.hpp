@@ -4,7 +4,7 @@
 #include "configuration/unitaliases.hpp"
 #include "motor/data/directionality.hpp"
 #include "physicsaliases.hpp"
-#include "mecanum/logic/field_mecanum_logic.hpp"
+#include "control/chassis/mecanum/logic/field_mecanum_logic.hpp"
 #include "wrap/trap/communication/pwm_data.hpp"
 #include "wrap/trap/control/chassis/power_limiter.hpp"
 
@@ -133,7 +133,7 @@ namespace control
             DriveMotor m_rearLeftMotor;
             DriveMotor m_rearRightMotor;
 
-            logic::chassis::FieldMecanumLogic m_mecanumLogic;
+            ::chassis::FieldMecanumLogic m_mecanumLogic;
 
             PowerLimiter m_powerLimiter;
             ///If you are facing forward, and the platform moves forward,

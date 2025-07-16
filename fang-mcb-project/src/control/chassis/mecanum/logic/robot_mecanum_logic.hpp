@@ -8,7 +8,7 @@
 
 namespace chassis
 {
-    class RobotMecanumLogic 
+    class RobotMecanumLogic
     {
     public:
     using QuadDriveData = data::chassis::QuadDriveData<RPM>;
@@ -18,7 +18,7 @@ namespace chassis
      * The horizontalWheelDistance refers to twice as lx
      * The verticalWheelDistance refers to twice as ly
      * The vertical distance is parallel to the forward direction of the robot
-     * The horizontal distance is parallel to the sideways direction of the robot 
+     * The horizontal distance is parallel to the sideways direction of the robot
      */
     RobotMecanumLogic(const Meters& horizontalWheelDistance,
                       const Meters& verticalWheelDistance,
