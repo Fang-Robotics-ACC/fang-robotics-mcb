@@ -7,7 +7,7 @@ namespace chassis
     FieldMecanumLogic::FieldMecanumLogic(const Meters& horizontalWheelDistance,
                                          const Meters& verticalWheelDistance,
                                          const Meters& wheelRadius):
-    m_robotMecanumLogic{horizontalWheelDistance, verticalWheelDistance, wheelRadius}
+    robotMecanumLogic_{horizontalWheelDistance, verticalWheelDistance, wheelRadius}
     {}
     void FieldMecanumLogic::setMotion(const Velocity2D& translation, const RPM& rotation)
     {
@@ -26,53 +26,53 @@ namespace chassis
         rawSetRobotAngle(robotAngle);
         //The translation relative to the robot must be updated since the robot is facing along a
         //difference direction
-        setTranslation(m_fieldTranslation);
+        setTranslation(fieldTranslation_);
     }
     void FieldMecanumLogic::setTranslation(const Velocity2D& translation)
     {
-        m_fieldTranslation = translation;
-        m_robotMecanumLogic.setTranslation(fieldToRobotTranslation(translation));
+        fieldTranslation_ = translation;
+        robotMecanumLogic_.setTranslation(fieldToRobotTranslation(translation));
     }
     void FieldMecanumLogic::setRotation(const RPM& rotation)
     {
-        m_robotMecanumLogic.setRotation(rotation);
+        robotMecanumLogic_.setRotation(rotation);
     }
     const Radians& FieldMecanumLogic::getRobotAngle() const
     {
-        return m_robotAngle;
+        return robotAngle_;
     }
     const Velocity2D& FieldMecanumLogic::getTranslation() const
     {
         //The robot mecanum logic stores the translation relative to the robot, not the field
-        return m_fieldTranslation;
+        return fieldTranslation_;
     }
     RPM FieldMecanumLogic::getRotation() const
     {
-        return m_robotMecanumLogic.getRotation(); 
+        return robotMecanumLogic_.getRotation();
     }
     QuadDriveData FieldMecanumLogic::getWheelSpeeds() const
     {
-        return m_robotMecanumLogic.getWheelSpeeds();
+        return robotMecanumLogic_.getWheelSpeeds();
     }
     RPM FieldMecanumLogic::getFrontRightWheelSpeed() const
     {
-        return m_robotMecanumLogic.getFrontRightWheelSpeed();
+        return robotMecanumLogic_.getFrontRightWheelSpeed();
     }
     RPM FieldMecanumLogic::getFrontLeftWheelSpeed() const
     {
-        return m_robotMecanumLogic.getFrontLeftWheelSpeed();
+        return robotMecanumLogic_.getFrontLeftWheelSpeed();
     }
     RPM FieldMecanumLogic::getRearLeftWheelSpeed() const
     {
-        return m_robotMecanumLogic.getRearLeftWheelSpeed();
+        return robotMecanumLogic_.getRearLeftWheelSpeed();
     }
     RPM FieldMecanumLogic::getRearRightWheelSpeed() const
     {
-        return m_robotMecanumLogic.getRearRightWheelSpeed();
+        return robotMecanumLogic_.getRearRightWheelSpeed();
     }
     void FieldMecanumLogic::rawSetRobotAngle(const Radians& rotation)
     {
-        m_robotAngle = rotation;
+        robotAngle_ = rotation;
     }
     Velocity2D FieldMecanumLogic::fieldToRobotTranslation(const Velocity2D& translation) const
     {
@@ -83,7 +83,7 @@ namespace chassis
         //This assumes the units are in meters per second
         const math::AbstractVector2D unitlessTranslation{translation.x.to<double>(), translation.y.to<double>()};
         //Rotate stripped vector
-        const math::AbstractVector2D rotated{util::math::rotateVector2D(unitlessTranslation, -m_robotAngle)};
+        const math::AbstractVector2D rotated{util::math::rotateVector2D(unitlessTranslation, -robotAngle_)};
         //Convert stripped vector back into vector of units
         return Velocity2D{Velocity2D::unit{rotated.x},Velocity2D::unit{rotated.y}};
     }
@@ -97,7 +97,7 @@ namespace chassis
         //This assumes the units are in meters per second
         const math::AbstractVector2D unitlessTranslation{translation.x.to<double>(), translation.y.to<double>()};
         //Rotate stripped vector
-        const math::AbstractVector2D rotated{util::math::rotateVector2D(unitlessTranslation, m_robotAngle)};
+        const math::AbstractVector2D rotated{util::math::rotateVector2D(unitlessTranslation, robotAngle_)};
         //Convert stripped vector back into vector of units
         return Velocity2D{Velocity2D::unit{rotated.x},Velocity2D::unit{rotated.y}};
     }

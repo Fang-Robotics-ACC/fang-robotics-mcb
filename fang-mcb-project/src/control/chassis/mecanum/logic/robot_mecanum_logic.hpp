@@ -46,15 +46,15 @@ namespace chassis
     RPM getRearLeftWheelSpeed() const;
     RPM getRearRightWheelSpeed() const;
     private:
-    Velocity2D m_translation{MetersPerSecond{0.0}, MetersPerSecond{0.0}};
-    RadiansPerSecond m_rotation{0};
-    const Meters mk_wheelRadius;
-    const Meters mk_horizontalWheelDistance;
-    const Meters mk_halfHorizontalWheelDistance{mk_horizontalWheelDistance / 2.0};
-    const Meters mk_verticalWheelDistance;
-    const Meters mk_halfVerticalWheelDistance{mk_verticalWheelDistance / 2.0};
+    Velocity2D translation_{MetersPerSecond{0.0}, MetersPerSecond{0.0}};
+    RadiansPerSecond rotation_{0};
+    const Meters kWheelRadius_;
+    const Meters kHorizontalWheelDistance_;
+    const Meters kHalfHorizontalWheelDistance_{kHorizontalWheelDistance_ / 2.0};
+    const Meters kVerticalWheelDistance_;
+    const Meters kHalfVerticalWheelDistance_{kVerticalWheelDistance_ / 2.0};
     //l_x + l_y
-    const Meters mk_wheelDistanceConstant{mk_halfVerticalWheelDistance + mk_halfHorizontalWheelDistance};
+    const Meters kWheelDistanceConstant_{kHalfVerticalWheelDistance_ + kHalfHorizontalWheelDistance_};
     };
 }
 #endif

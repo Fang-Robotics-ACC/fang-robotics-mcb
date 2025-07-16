@@ -58,9 +58,9 @@ namespace chassis
     Velocity2D fieldToRobotTranslation(const Velocity2D& translation) const;
     Velocity2D robotToFieldTranslation(const Velocity2D& translation) const;
 
-    Radians m_robotAngle{0.0};
-    RobotMecanumLogic m_robotMecanumLogic;
-    Velocity2D m_fieldTranslation{0_mps, 0_mps};
+    Radians robotAngle_{0.0};
+    RobotMecanumLogic robotMecanumLogic_;
+    Velocity2D fieldTranslation_{0_mps, 0_mps};
     };
 }
 #endif

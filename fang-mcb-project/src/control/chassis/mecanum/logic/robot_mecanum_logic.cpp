@@ -5,9 +5,9 @@ namespace chassis
     RobotMecanumLogic::RobotMecanumLogic(const Meters& horizontalWheelDistance,
                                          const Meters& verticalWheelDistance,
                                          const Meters& wheelRadius):
-    mk_horizontalWheelDistance{horizontalWheelDistance},
-    mk_verticalWheelDistance{verticalWheelDistance},
-    mk_wheelRadius{wheelRadius}
+    kHorizontalWheelDistance_{horizontalWheelDistance},
+    kVerticalWheelDistance_{verticalWheelDistance},
+    kWheelRadius_{wheelRadius}
     {
         //assert(wheelRadius.to<double>() >= 0.0 && "Wheel radius must be positive");
         //assert(horizontalWheelDistance.to<double>() >= 0.0 && "Chassis dimension must be positive");
@@ -20,19 +20,19 @@ namespace chassis
     }
     void RobotMecanumLogic::setTranslation(const Velocity2D& translation)
     {
-        m_translation = translation;
+        translation_ = translation;
     }
     void RobotMecanumLogic::setRotation(const RPM& rotation)
     {
-        m_rotation = rotation;
+        rotation_ = rotation;
     }
     const Velocity2D& RobotMecanumLogic::getTranslation() const
     {
-        return m_translation;
+        return translation_;
     }
     RPM RobotMecanumLogic::getRotation() const
     {
-        return m_rotation;
+        return rotation_;
     }
     QuadDriveData RobotMecanumLogic::getWheelSpeeds() const
     {
@@ -48,9 +48,9 @@ namespace chassis
         //direction. It is desired for this to be positive
         //How many radius's per second? i.e. radians persecond
         //w_1
-        const RadianMetersPerSecond translationFactor{(m_translation.y + m_translation.x).to<double>()};
-        const RadianMetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
-        return ((1.0 / mk_wheelRadius) * (translationFactor - rotationFactor));
+        const RadianMetersPerSecond translationFactor{(translation_.y + translation_.x).to<double>()};
+        const RadianMetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
+        return ((1.0 / kWheelRadius_) * (translationFactor - rotationFactor));
     }
     RPM RobotMecanumLogic::getFrontRightWheelSpeed() const
     {
@@ -59,9 +59,9 @@ namespace chassis
         //If all of v_x is positive, then the wheels are pushing in the same
         //direction. It is desired for this to be positive
         //w_2
-        const RadianMetersPerSecond translationFactor{(m_translation.y - m_translation.x).to<double>()};
-        const RadianMetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
-        return ((1.0 / mk_wheelRadius) * (translationFactor + rotationFactor));
+        const RadianMetersPerSecond translationFactor{(translation_.y - translation_.x).to<double>()};
+        const RadianMetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
+        return ((1.0 / kWheelRadius_) * (translationFactor + rotationFactor));
     }
     RPM RobotMecanumLogic::getRearLeftWheelSpeed() const
     {
@@ -70,9 +70,9 @@ namespace chassis
         //If all of v_x is positive, then the wheels are pushing in the same
         //direction. It is desired for this to be positive
         //w_3
-        const RadianMetersPerSecond translationFactor{(m_translation.y - m_translation.x).to<double>()};
-        const RadianMetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
-        return ((1.0 / mk_wheelRadius) * (translationFactor - rotationFactor));
+        const RadianMetersPerSecond translationFactor{(translation_.y - translation_.x).to<double>()};
+        const RadianMetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
+        return ((1.0 / kWheelRadius_) * (translationFactor - rotationFactor));
     }
     RPM RobotMecanumLogic::getRearRightWheelSpeed() const
     {
@@ -82,8 +82,8 @@ namespace chassis
         //If all of v_x is positive, then the wheels are pushing in the same
         //direction. It is desired for this to be positive
         //w_4
-        const RadianMetersPerSecond translationFactor{(m_translation.y + m_translation.x).to<double>()};
-        const RadianMetersPerSecond rotationFactor{mk_wheelDistanceConstant * m_rotation};
-        return ((1.0 / mk_wheelRadius) * (translationFactor + rotationFactor));
+        const RadianMetersPerSecond translationFactor{(translation_.y + translation_.x).to<double>()};
+        const RadianMetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
+        return ((1.0 / kWheelRadius_) * (translationFactor + rotationFactor));
     }
 }
