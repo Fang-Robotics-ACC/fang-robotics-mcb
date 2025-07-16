@@ -88,7 +88,7 @@ namespace motor
         static constexpr RPMPerVolt mk_kv{1450.0};
         //The voltage of the controller should not be exceeded by its output
 
-        logic::motor::Vortex80AEsc m_vortex;
+        Vortex80AEsc m_vortex;
 
         /*!
             PWM should be between 0 and 1
