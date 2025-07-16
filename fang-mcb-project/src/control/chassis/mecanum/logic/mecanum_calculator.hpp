@@ -36,11 +36,11 @@ namespace logic
              */
             RPM getRotation() const;
         private:
-            data::chassis::QuadDriveData<RadiansPerSecond> m_quadDriveData{RPM{0}, RPM{0}, RPM{0}, RPM{0}};
-            ::chassis::AbstractMecanumCalculator m_abstractCalc{};
+            data::chassis::QuadDriveData<RadiansPerSecond> quadDriveData_{RPM{0}, RPM{0}, RPM{0}, RPM{0}};
+            ::chassis::AbstractMecanumCalculator abstractMecanumCalculator_{};
             //l_x + l_y
-            const Meters mk_wheelDistanceConstant;
-            const Meters mk_wheelRadius;
+            const Meters kwheelDistanceConstant_;
+            const Meters kWheelRadius_;
         };
     }
 }
