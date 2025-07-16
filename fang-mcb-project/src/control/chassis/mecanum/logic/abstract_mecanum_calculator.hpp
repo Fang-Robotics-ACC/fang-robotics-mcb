@@ -45,7 +45,7 @@ namespace chassis
          */
         double getRotationOffset() const;
     private:
-        AbstractQuadDriveData m_quadDriveData{0,0,0,0};
+        AbstractQuadDriveData quadDriveData_{0,0,0,0};
     };
 }
 #endif

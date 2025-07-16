@@ -5,18 +5,18 @@ namespace chassis
 {
     void AbstractMecanumCalculator::setWheelSpeeds(const AbstractQuadDriveData& quadDriveData)
     {
-        m_quadDriveData = quadDriveData;
+        quadDriveData_ = quadDriveData;
     }
     Translation2D AbstractMecanumCalculator::getTranslation() const
     {
         //Refer to equation 22 in https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
-        const double ySpeedSum{m_quadDriveData.frontLeft + m_quadDriveData.frontRight
-                        + m_quadDriveData.rearLeft  + m_quadDriveData.rearRight};
+        const double ySpeedSum{quadDriveData_.frontLeft + quadDriveData_.frontRight
+                        + quadDriveData_.rearLeft  + quadDriveData_.rearRight};
         const double y{ySpeedSum * 0.25}; //The formula multiplies the sum by 1/4 of the radius
         //Refer to equation 23 in https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
         //Adapted so right direction is positive
-        const double xSpeedSum{m_quadDriveData.frontLeft - m_quadDriveData.frontRight
-                        - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight};
+        const double xSpeedSum{quadDriveData_.frontLeft - quadDriveData_.frontRight
+                        - quadDriveData_.rearLeft  + quadDriveData_.rearRight};
         const double x{xSpeedSum * 0.25}; //The formula multiplies the sum by 1/4 of the radius
         return Translation2D{x, y};
     }
@@ -24,8 +24,8 @@ namespace chassis
     //Positive offset values are counterclockwise
     double AbstractMecanumCalculator::getRotationOffset() const
     {
-        const double offsetSum{-m_quadDriveData.frontLeft + m_quadDriveData.frontRight
-                        - m_quadDriveData.rearLeft  + m_quadDriveData.rearRight};
+        const double offsetSum{-quadDriveData_.frontLeft + quadDriveData_.frontRight
+                        - quadDriveData_.rearLeft  + quadDriveData_.rearRight};
         //Refer to the formula. Essentially, if you don't divide by 4, everything is 4 times as larger
         //Than expected.
         return offsetSum * 0.25;
