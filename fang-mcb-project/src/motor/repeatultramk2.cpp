@@ -1,5 +1,4 @@
 #include "repeatultramk2.hpp"
-#include "brushlessutils.hpp"
 #include "units.h"
 
 #include "trap/communication/pwm_data.hpp"
