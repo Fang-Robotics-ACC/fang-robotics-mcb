@@ -31,16 +31,4 @@ using RawMeters = units::length::meters;
 using RawMetersPerRadians = units::compound_unit<RawMeters, units::inverse<RawRadians>>;
 using MetersPerRadians = units::unit_t<RawMetersPerRadians>;
 using Joules = units::energy::joule_t;
-
-//One of the few moments that I would use auto
-//These constants do not alter anything numerically, but are useful when
-//Performing operations that convert angular to linear velocity
-//The unit resulting from multiplying radians per second and meters do
-//not result in meters per second. It results in meters radians per second
-//Which are incompatible units with velocity. This is a bit of a hack, however
-//it gets the job done without causing too much of a mess.
-//I am a bit hesitant to have it in the global namespace; however, it is limited and
-//deals with patching syntax.
-auto const k_antiRadians{1.0 / Radians{1.0}};
-const Radians k_addRadians{1.0};
 #endif
