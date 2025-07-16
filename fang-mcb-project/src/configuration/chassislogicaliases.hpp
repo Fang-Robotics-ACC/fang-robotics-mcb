@@ -21,4 +21,13 @@ namespace logic
         using WheelDirection = modm::Vector<double, 2>;
     }
 }
+
+namespace chassis
+{
+    using Translation2D = logic::chassis::Translation2D; //Patch to make refactoring more smooth
+    using AbstractQuadDriveData = logic::chassis::AbstractQuadDriveData;
+    using Velocity2D = logic::chassis::Velocity2D;
+    using WheelDirection = logic::chassis::WheelDirection;
+    using QuadDriveData = logic::chassis::QuadDriveData;
+}
 #endif
