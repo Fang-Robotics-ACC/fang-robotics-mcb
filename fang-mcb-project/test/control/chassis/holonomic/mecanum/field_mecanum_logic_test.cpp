@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "control/chassis/mecanum/logic/fieldmecanumlogic.hpp"
-#include "control/chassis/mecanum/logic/mecanumcalculator.hpp"
+#include "control/chassis/mecanum/logic/field_mecanum_logic.hpp"
+#include "control/chassis/mecanum/logic/mecanum_calculator.hpp"
 #include "chassislogicaliases.hpp"
 #include "rotatevector2d.hpp"
 #include "mathaliases.hpp"
@@ -17,7 +17,7 @@ using namespace units::literals;
 //Input velocity, expected velocigty
 //Input angular velocity, expected angular velocity,
 //robot angle Horizontal Distance, Vertical Distance, Wheel Radius
-class FieldMecanumParameterTest : public ::testing::TestWithParam<std::tuple<logic::chassis::Velocity2D, RPM, Radians, Meters, Meters, Meters>>
+class FieldMecanumParameterTest : public ::testing::TestWithParam<std::tuple<chassis::Velocity2D, RPM, Radians, Meters, Meters, Meters>>
 {
 protected:
 };
@@ -26,7 +26,7 @@ TEST_P(FieldMecanumParameterTest, translationRotationTests)
 {
     //The field mecanum logic must have it translation and rotation result in
     //Wheel speeds which conform to the inverse kinematics :)
-    const logic::chassis::Velocity2D translation{std::get<0>(GetParam())};
+    const chassis::Velocity2D translation{std::get<0>(GetParam())};
     const RPM rotation{std::get<1>(GetParam())};
     const Radians robotAngle{std::get<2>(GetParam())};
     const Meters horizontalDistance{std::get<3>(GetParam())};
@@ -34,12 +34,12 @@ TEST_P(FieldMecanumParameterTest, translationRotationTests)
     const Meters wheelRadius{std::get<5>(GetParam())};
     
 
-    logic::chassis::MecanumCalculator mecanumCalc{horizontalDistance, verticalDistance, wheelRadius};
-    logic::chassis::FieldMecanumLogic mecanumLogic{horizontalDistance, verticalDistance, wheelRadius};
+    chassis::MecanumCalculator mecanumCalc{horizontalDistance, verticalDistance, wheelRadius};
+    chassis::FieldMecanumLogic mecanumLogic{horizontalDistance, verticalDistance, wheelRadius};
     math::AbstractVector2D strippedTranslation{translation.x.to<double>(), translation.y.to<double>()};
     //Transform velocity relative to robot
     math::AbstractVector2D strippedRobotTranslation{util::math::rotateVector2D(strippedTranslation, -robotAngle)};
-    logic::chassis::Velocity2D expectedRobotTranslation{MetersPerSecond{strippedRobotTranslation.x}, MetersPerSecond{strippedRobotTranslation.y}};
+    chassis::Velocity2D expectedRobotTranslation{MetersPerSecond{strippedRobotTranslation.x}, MetersPerSecond{strippedRobotTranslation.y}};
 
     mecanumLogic.setTotalMotion(translation, rotation, robotAngle);
     //Ensure getters work properly
@@ -49,7 +49,7 @@ TEST_P(FieldMecanumParameterTest, translationRotationTests)
     EXPECT_NEAR(mecanumLogic.getRotation().to<double>(), rotation.to<double>(), k_tolerance);
 
     mecanumCalc.setWheelSpeeds(mecanumLogic.getWheelSpeeds());
-    logic::chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
+    chassis::Velocity2D outputTranslation{mecanumCalc.getTranslation()};
     RPM outputRotation{mecanumCalc.getRotation()};
 
     EXPECT_NEAR(outputTranslation.x.to<double>(), expectedRobotTranslation.x.to<double>(), k_tolerance);
@@ -64,7 +64,7 @@ TEST_P(FieldMecanumParameterTest, translationRotationTests)
     //Although the extra call to reset the translation in setRotation adds a couple of instruction
     //The logic should render accurate numbers consistently.
 
-    constexpr logic::chassis::Velocity2D zeroTranslation{0_mps, 0_mps};
+    constexpr chassis::Velocity2D zeroTranslation{0_mps, 0_mps};
     constexpr RPM zeroRotation{0.0};
     //Reset the translation
     mecanumLogic.setTotalMotion(zeroTranslation, zeroRotation, 0.0_rad);
@@ -86,28 +86,28 @@ TEST_P(FieldMecanumParameterTest, translationRotationTests)
 }
 
 INSTANTIATE_TEST_SUITE_P(zeroTest, FieldMecanumParameterTest,
-                         testing::Values(std::make_tuple(logic::chassis::Velocity2D{0_mps, 0_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m)));
+                         testing::Values(std::make_tuple(chassis::Velocity2D{0_mps, 0_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m)));
 
 INSTANTIATE_TEST_SUITE_P(yTranslationTest, FieldMecanumParameterTest,
-                         testing::Values(std::make_tuple(logic::chassis::Velocity2D{0_mps, 234.23_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{0_mps, -234_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{0_mps, 12_mps}, 0_rpm, 0_rad, 1_m, 2_m, 4_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{0_mps, -235.45_mps}, 0_rpm, 0_rad, 2_m, 1_m, 5.5_m)));
+                         testing::Values(std::make_tuple(chassis::Velocity2D{0_mps, 234.23_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(chassis::Velocity2D{0_mps, -234_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(chassis::Velocity2D{0_mps, 12_mps}, 0_rpm, 0_rad, 1_m, 2_m, 4_m),
+                                         std::make_tuple(chassis::Velocity2D{0_mps, -235.45_mps}, 0_rpm, 0_rad, 2_m, 1_m, 5.5_m)));
 
 INSTANTIATE_TEST_SUITE_P(xTranslationTest, FieldMecanumParameterTest,
-                         testing::Values(std::make_tuple(logic::chassis::Velocity2D{234.23_mps, 0.0_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{12.23_mps, 0.0_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{234_mps, 0.0_mps}, 0_rpm, 0_rad, 2_m, 1_m, 4_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{123.2_mps, 0.0_mps}, 0_rpm, 0_rad, 1_m, 3_m, 5.5_m)));
+                         testing::Values(std::make_tuple(chassis::Velocity2D{234.23_mps, 0.0_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(chassis::Velocity2D{12.23_mps, 0.0_mps}, 0_rpm, 0_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(chassis::Velocity2D{234_mps, 0.0_mps}, 0_rpm, 0_rad, 2_m, 1_m, 4_m),
+                                         std::make_tuple(chassis::Velocity2D{123.2_mps, 0.0_mps}, 0_rpm, 0_rad, 1_m, 3_m, 5.5_m)));
 
 INSTANTIATE_TEST_SUITE_P(rotationTest, FieldMecanumParameterTest,
-                         testing::Values(std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 0.0_mps}, 4_rpm, 0_rad, 1_m, 1_m, 1_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 0.0_mps}, -234_rpm, 0_rad, 1_m, 1_m, 1_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 0.0_mps}, 1.23_rpm, 0_rad, 1_m, 1_m, 1_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 0.0_mps}, 5_rpm, 0_rad, 0.842_m, 0.234_m, 0.123_m)));
+                         testing::Values(std::make_tuple(chassis::Velocity2D{0.0_mps, 0.0_mps}, 4_rpm, 0_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(chassis::Velocity2D{0.0_mps, 0.0_mps}, -234_rpm, 0_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(chassis::Velocity2D{0.0_mps, 0.0_mps}, 1.23_rpm, 0_rad, 1_m, 1_m, 1_m),
+                                         std::make_tuple(chassis::Velocity2D{0.0_mps, 0.0_mps}, 5_rpm, 0_rad, 0.842_m, 0.234_m, 0.123_m)));
 
 INSTANTIATE_TEST_SUITE_P(fieldAngleTest, FieldMecanumParameterTest,
-                         testing::Values(std::make_tuple(logic::chassis::Velocity2D{1.0_mps, 0.0_mps}, 0.0_rpm, 90_deg, 1_m, 1_m, 1_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{0.0_mps, 1.0_mps}, 0.0_rpm, -90_deg, 1_m, 1_m, 1_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{-23.0_mps, -2340.0_mps}, 0.0_rpm, 4353_rad, 1_m, 1_m, 4_m),
-                                         std::make_tuple(logic::chassis::Velocity2D{34.0_mps, 0.0_mps}, 0.0_rpm, -270_deg, 1_m, 1_m, 1_m)));
+                         testing::Values(std::make_tuple(chassis::Velocity2D{1.0_mps, 0.0_mps}, 0.0_rpm, 90_deg, 1_m, 1_m, 1_m),
+                                         std::make_tuple(chassis::Velocity2D{0.0_mps, 1.0_mps}, 0.0_rpm, -90_deg, 1_m, 1_m, 1_m),
+                                         std::make_tuple(chassis::Velocity2D{-23.0_mps, -2340.0_mps}, 0.0_rpm, 4353_rad, 1_m, 1_m, 4_m),
+                                         std::make_tuple(chassis::Velocity2D{34.0_mps, 0.0_mps}, 0.0_rpm, -270_deg, 1_m, 1_m, 1_m)));
