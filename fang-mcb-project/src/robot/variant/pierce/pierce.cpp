@@ -13,7 +13,7 @@ namespace control
             mk_subsystemConfig{config.subsystemConfig},
             mk_inputConfig{config.inputConfig},
             mk_commandConfig{config.commandConfig},
-            mk_mappingConfig{config.mappingConfig},
+            kMappingConfig_{config.mappingConfig},
             m_imu{drivers.bmi088},
             simpleFeederMaker_{drivers, config.subsystemConfig.feederConfig},
             m_chassis{drivers, mk_subsystemConfig.chassisConfig},
@@ -48,6 +48,7 @@ namespace control
     void Pierce::setDefaultCommands()
     {
         m_gimbal.setDefaultCommand(&m_aimCommnd);
+        m_chassis.setDefaultCommand(&m_fieldMecanumCommand);
     }
     
     void Pierce::registerIoMappings()
