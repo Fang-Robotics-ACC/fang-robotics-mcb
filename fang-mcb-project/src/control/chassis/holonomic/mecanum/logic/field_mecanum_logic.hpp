@@ -1,17 +1,18 @@
-#ifndef FANG_ROBOTICS_MCB_ROBOT_MECANUM_LOGIC_HPP
-#define FANG_ROBOTICS_MCB_ROBOT_MECANUM_LOGIC_HPP
+#ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_MECANUM_LOGIC_FIELD_MECANUM_LOGIC_HPP
+#define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_MECANUM_LOGIC_FIELD_MECANUM_LOGIC_HPP
 #include "unitaliases.hpp"
 #include "quaddrivedata.hpp"
-#include "abstract_field_mecanum_logic.hpp"
+#include "robot_mecanum_logic.hpp"
 #include "chassislogicaliases.hpp"
 #include "quaddrivedata.hpp"
 
+using namespace units::literals;
+
 namespace chassis
 {
-    class RobotMecanumLogic
+    class FieldMecanumLogic
     {
     public:
-    using QuadDriveData = data::chassis::QuadDriveData<RPM>;
     /**
      * Refer to: https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
      * in equation 24
@@ -20,7 +21,7 @@ namespace chassis
      * The vertical distance is parallel to the forward direction of the robot
      * The horizontal distance is parallel to the sideways direction of the robot
      */
-    RobotMecanumLogic(const Meters& horizontalWheelDistance,
+    FieldMecanumLogic(const Meters& horizontalWheelDistance,
                       const Meters& verticalWheelDistance,
                       const Meters& wheelRadius);
     /**
@@ -33,33 +34,33 @@ namespace chassis
      * would be the choice.
      */
     void setMotion(const Velocity2D& translation, const RPM& rotation);
+    void setTotalMotion(const Velocity2D& translation, const RPM& rotation, const Radians& robotAngle);
+    /**
+     * If the robot is facing forward at the field, that is 0 degrees.
+     * If the robot is facing left from the forward field direction, that is +90 degrees
+     * If the robot is racing right from the forward field direction that is -90 degrees
+     */
+    void setRobotAngle(const Radians& robotAngle);
     void setTranslation(const Velocity2D& translation);
     void setRotation(const RPM& rotation);
+    const Radians&getRobotAngle() const;
     const Velocity2D& getTranslation() const;
     RPM getRotation() const;
-
-    /**https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
-     * This uses equation 20
-     */
     QuadDriveData getWheelSpeeds() const;
     RPM getFrontRightWheelSpeed() const;
     RPM getFrontLeftWheelSpeed() const;
     RPM getRearLeftWheelSpeed() const;
     RPM getRearRightWheelSpeed() const;
-
     private:
-    Velocity2D translation_{MetersPerSecond{0.0}, MetersPerSecond{0.0}};
-    RadiansPerSecond rotation_{0};
-    const MetersPerRadians kWheelRadius_; //Required for the math to work, "how many meters for each radius?"
-    const Meters kHorizontalWheelDistance_;
+    //This does not update the translation when the robot angle is changed.
+    //It is useful in certain cases to speed stuff up.
+    void rawSetRobotAngle(const Radians& rotation);
+    Velocity2D fieldToRobotTranslation(const Velocity2D& translation) const;
+    Velocity2D robotToFieldTranslation(const Velocity2D& translation) const;
 
-    //https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
-    //These are the constants used within the euqation
-    const Meters kHalfHorizontalWheelDistance_{kHorizontalWheelDistance_ / 2.0};
-    const Meters kVerticalWheelDistance_;
-    const Meters kHalfVerticalWheelDistance_{kVerticalWheelDistance_ / 2.0};
-    //l_x + l_y
-    const MetersPerRadians kWheelDistanceConstant_{(kHalfVerticalWheelDistance_ + kHalfHorizontalWheelDistance_) / Radians{1}}; //The chassis is a larger "wheel"
+    Radians robotAngle_{0.0};
+    RobotMecanumLogic robotMecanumLogic_;
+    Velocity2D fieldTranslation_{0_mps, 0_mps};
     };
 }
 #endif
