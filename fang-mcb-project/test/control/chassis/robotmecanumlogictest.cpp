@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
 #include "unitaliases.hpp"
 #include "chassislogicaliases.hpp"
-#include "robotmecanumlogic.hpp"
-#include "mecanumcalculator.hpp"
+#include "control/chassis/mecanum/logic/robotmecanumlogic.hpp"
+#include "control/chassis/mecanum/logic/mecanumcalculator.hpp"
 
 #include <iostream>
 

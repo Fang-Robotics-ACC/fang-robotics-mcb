@@ -1,4 +1,4 @@
-#include "control/turret/system/blueprint/simple_feeder_system.hpp"
+#include "control/turret/feeder/simple_feeder_system/simple_feeder_system.hpp"
 #include "test/mock/rail/rail_motor_mocks.hpp"
 
 #include "unitaliases.hpp"

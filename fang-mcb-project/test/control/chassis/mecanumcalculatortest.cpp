@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "mecanumcalculator.hpp"
+#include "control/chassis/mecanum/logic/mecanumcalculator.hpp"
 #include "unitaliases.hpp"
 #include "quaddrivedata.hpp"
 #include "chassislogicaliases.hpp"
