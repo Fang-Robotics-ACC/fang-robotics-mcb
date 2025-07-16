@@ -49,6 +49,5 @@ namespace logic
 
         return rotationConstant * rotationSum; 
         }
-        
     }
 }

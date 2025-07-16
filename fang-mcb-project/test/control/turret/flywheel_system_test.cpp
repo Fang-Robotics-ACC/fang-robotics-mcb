@@ -1,5 +1,5 @@
 #include "unitaliases.hpp"
-#include "control/turret/system/blueprint/flywheel_system.hpp"
+#include "control/turret/ammo_booster/flywheel_system/flywheel_system.hpp"
 #include "test/mock/rail/rail_motor_mocks.hpp"
 
 #include <gtest/gtest.h>

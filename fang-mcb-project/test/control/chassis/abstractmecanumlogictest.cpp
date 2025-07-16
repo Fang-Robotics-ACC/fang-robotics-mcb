@@ -1,12 +1,12 @@
 #include "gtest/gtest.h"
-#include "abstractmecanumcalculator.hpp"
-#include "abstractrobotmecanumlogic.hpp"
+#include "control/chassis/mecanum/logic/abstractmecanumcalculator.hpp"
+#include "control/chassis/mecanum/logic/abstractrobotmecanumlogic.hpp"
 #include "quaddrivedata.hpp"
 #include "chassislogicaliases.hpp"
 #include <iostream>
 
-using Calculator = logic::chassis::AbstractMecanumCalculator;
-using Logic = logic::chassis::AbstractRobotMecanumLogic;
+using Calculator = chassis::AbstractMecanumCalculator;
+using Logic = chassis::AbstractRobotMecanumLogic;
 using QuadDriveData = data::chassis::QuadDriveData<double>;
 using Translation2D = logic::chassis::Translation2D;
 

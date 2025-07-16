@@ -19,7 +19,7 @@
 
 #include <gtest/gtest.h>
 
-#include "motor/brushlessutils.hpp"
+#include "motor/util/brushlessutils.hpp"
 #include "unitaliases.hpp"
 
 
@@ -31,9 +31,9 @@ TEST(brushlessUtils , RPMVoltageConversion)
     RPM maxUltraRPM{34800.0};
     RPMPerVolt kv {1450.0};
 
-    EXPECT_DOUBLE_EQ(motor::util::brushless::controllerVoltageToSpeed(zeroVoltage, kv).to<double>(), zeroRPM.to<double>());
-    EXPECT_DOUBLE_EQ(motor::util::brushless::controllerVoltageToSpeed(maxVoltage, kv).to<double>(), maxUltraRPM.to<double>());
+    EXPECT_DOUBLE_EQ(motor::brushless::controllerVoltageToSpeed(zeroVoltage, kv).to<double>(), zeroRPM.to<double>());
+    EXPECT_DOUBLE_EQ(motor::brushless::controllerVoltageToSpeed(maxVoltage, kv).to<double>(), maxUltraRPM.to<double>());
 
-    EXPECT_DOUBLE_EQ(motor::util::brushless::speedToControllerVoltage(zeroRPM, kv).to<double>(), zeroVoltage.to<double>());
-    EXPECT_DOUBLE_EQ(motor::util::brushless::speedToControllerVoltage(maxUltraRPM, kv).to<double>(), maxVoltage.to<double>());
+    EXPECT_DOUBLE_EQ(motor::brushless::speedToControllerVoltage(zeroRPM, kv).to<double>(), zeroVoltage.to<double>());
+    EXPECT_DOUBLE_EQ(motor::brushless::speedToControllerVoltage(maxUltraRPM, kv).to<double>(), maxVoltage.to<double>());
 }

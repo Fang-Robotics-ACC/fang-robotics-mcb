@@ -1,5 +1,4 @@
 #include "motor/gearboxrepeatultramk2.hpp"
-#include "directionality.hpp"
 #include "unitaliases.hpp"
 #include "tap/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
@@ -18,7 +17,7 @@ TEST(minSpeedTest, repeatUltraMk2)
 
     
     tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motor::Directionality::UNIDIRECTIONAL, false, gearRatio};
+    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::UNIDIRECTIONAL, false, gearRatio};
 
     EXPECT_CALL(drivers.pwm,write(0.5, tap::gpio::Pwm::C1));
 
@@ -36,7 +35,7 @@ TEST(minSpeedTest, repeatUltraMk2)
 
     
     tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motor::Directionality::BIDIRECTIONAL, false, gearRatio};
+    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::BIDIRECTIONAL, false, gearRatio};
 
     EXPECT_CALL(drivers.pwm,write(0.5, tap::gpio::Pwm::C1));
     motor.setTargetSpeed(motor.getMinSpeed());
@@ -54,7 +53,7 @@ TEST(minClampSpeedtest, repeatUltraMk2)
 
     
     tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motor::Directionality::UNIDIRECTIONAL, false, gearRatio};
+    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::UNIDIRECTIONAL, false, gearRatio};
 
     EXPECT_CALL(drivers.pwm,write(0.5, tap::gpio::Pwm::C1));
 
@@ -73,7 +72,7 @@ TEST(minClampSpeedtest, repeatUltraMk2)
 
     
     tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motor::Directionality::BIDIRECTIONAL, false, gearRatio};
+    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::BIDIRECTIONAL, false, gearRatio};
 
     EXPECT_CALL(drivers.pwm,write(0.5, tap::gpio::Pwm::C1));
     //Attempt to set it below the minimum speed
@@ -93,7 +92,7 @@ TEST(maxSpeedTest, repeatUltraMk2)
 
     
     tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motor::Directionality::UNIDIRECTIONAL, false, gearRatio};
+    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::UNIDIRECTIONAL, false, gearRatio};
 
     EXPECT_CALL(drivers.pwm,write(maxDutyCycle, tap::gpio::Pwm::C1));
 
@@ -112,7 +111,7 @@ TEST(maxSpeedTest, repeatUltraMk2)
 
     
     tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motor::Directionality::BIDIRECTIONAL, false, gearRatio};
+    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::BIDIRECTIONAL, false, gearRatio};
 
     EXPECT_CALL(drivers.pwm,write(maxDutyCycle, tap::gpio::Pwm::C1));
     motor.setTargetSpeed(motor.getMaxSpeed());
@@ -131,7 +130,7 @@ TEST(maxClampSpeedTest, repeatUltraMk2)
 
     
     tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motor::Directionality::UNIDIRECTIONAL, false, gearRatio};
+    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::UNIDIRECTIONAL, false, gearRatio};
 
     EXPECT_CALL(drivers.pwm,write(maxDutyCycle, tap::gpio::Pwm::C1));
 
@@ -150,7 +149,7 @@ TEST(maxClampSpeedTest, repeatUltraMk2)
 
     
     tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motor::Directionality::BIDIRECTIONAL, false, gearRatio};
+    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::BIDIRECTIONAL, false, gearRatio};
 
     EXPECT_CALL(drivers.pwm,write(maxDutyCycle, tap::gpio::Pwm::C1));
     motor.setTargetSpeed(motor.getMaxSpeed() + 234.5_rpm);
@@ -169,7 +168,7 @@ TEST(zeroSpeedTest, repeatUltraMk2)
 
     
     tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motor::Directionality::UNIDIRECTIONAL, false, gearRatio};
+    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::UNIDIRECTIONAL, false, gearRatio};
 
     EXPECT_CALL(drivers.pwm,write(stillDutyCycle, tap::gpio::Pwm::C1));
 
@@ -188,7 +187,7 @@ TEST(zeroSpeedTest, repeatUltraMk2)
 
     
     tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motor::Directionality::BIDIRECTIONAL, false, gearRatio};
+    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::BIDIRECTIONAL, false, gearRatio};
 
     EXPECT_CALL(drivers.pwm,write(stillDutyCycle, tap::gpio::Pwm::C1));
     motor.setTargetSpeed(0_rpm);
@@ -207,7 +206,7 @@ TEST(invertedTest, repeatUltraMk2)
 
     
     tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motor::Directionality::BIDIRECTIONAL, true, gearRatio};
+    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::BIDIRECTIONAL, true, gearRatio};
 
     EXPECT_CALL(drivers.pwm, write(minimumDutyCycle, tap::gpio::Pwm::C1));
 
@@ -229,7 +228,7 @@ TEST(invertedTest, repeatUltraMk2)
     
     tap::Drivers drivers{};
 
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motor::Directionality::BIDIRECTIONAL, true, gearRatio};
+    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::BIDIRECTIONAL, true, gearRatio};
 
     EXPECT_CALL(drivers.pwm,write(maxDutyCycle, tap::gpio::Pwm::C1));
     motor.setTargetSpeed(motor.getMinSpeed());
@@ -249,7 +248,7 @@ TEST(invertedTest, repeatUltraMk2)
     
     tap::Drivers drivers{};
 
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, data::motor::Directionality::UNIDIRECTIONAL, true, gearRatio};
+    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::UNIDIRECTIONAL, true, gearRatio};
 
     EXPECT_CALL(drivers.pwm,write(maxDutyCycle, tap::gpio::Pwm::C1));
     motor.setTargetSpeed(motor.getMaxSpeed());
