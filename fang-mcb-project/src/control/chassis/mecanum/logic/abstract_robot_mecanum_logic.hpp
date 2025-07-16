@@ -43,8 +43,8 @@ namespace chassis
     double getRearLeftWheelSpeed() const;
     double getRearRightWheelSpeed() const;
     private:
-    Translation2D m_translation{0,0};
-    double m_rotationOffset{0};
+    Translation2D translation_{0,0};
+    double rotationOffset_{0};
     };
 }
 #endif
