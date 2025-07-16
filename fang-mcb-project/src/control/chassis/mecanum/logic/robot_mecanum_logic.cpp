@@ -1,5 +1,9 @@
 #include "robot_mecanum_logic.hpp"
+#include "unitaliases.hpp"
+#include "units.h"
 #include <cassert>
+
+using namespace units::literals;
 namespace chassis
 {
     RobotMecanumLogic::RobotMecanumLogic(const Meters& horizontalWheelDistance,
@@ -7,7 +11,7 @@ namespace chassis
                                          const Meters& wheelRadius):
     kHorizontalWheelDistance_{horizontalWheelDistance},
     kVerticalWheelDistance_{verticalWheelDistance},
-    kWheelRadius_{wheelRadius}
+    kWheelRadius_{wheelRadius / 1_rad}
     {
         //assert(wheelRadius.to<double>() >= 0.0 && "Wheel radius must be positive");
         //assert(horizontalWheelDistance.to<double>() >= 0.0 && "Chassis dimension must be positive");
@@ -48,8 +52,8 @@ namespace chassis
         //direction. It is desired for this to be positive
         //How many radius's per second? i.e. radians persecond
         //w_1
-        const RadianMetersPerSecond translationFactor{(translation_.y + translation_.x).to<double>()};
-        const RadianMetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
+        const MetersPerSecond translationFactor{(translation_.y + translation_.x)};
+        const MetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
         return ((1.0 / kWheelRadius_) * (translationFactor - rotationFactor));
     }
     RPM RobotMecanumLogic::getFrontRightWheelSpeed() const
@@ -59,8 +63,8 @@ namespace chassis
         //If all of v_x is positive, then the wheels are pushing in the same
         //direction. It is desired for this to be positive
         //w_2
-        const RadianMetersPerSecond translationFactor{(translation_.y - translation_.x).to<double>()};
-        const RadianMetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
+        const MetersPerSecond translationFactor{(translation_.y - translation_.x).to<double>()};
+        const MetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
         return ((1.0 / kWheelRadius_) * (translationFactor + rotationFactor));
     }
     RPM RobotMecanumLogic::getRearLeftWheelSpeed() const
@@ -70,8 +74,8 @@ namespace chassis
         //If all of v_x is positive, then the wheels are pushing in the same
         //direction. It is desired for this to be positive
         //w_3
-        const RadianMetersPerSecond translationFactor{(translation_.y - translation_.x).to<double>()};
-        const RadianMetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
+        const MetersPerSecond translationFactor{(translation_.y - translation_.x).to<double>()};
+        const MetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
         return ((1.0 / kWheelRadius_) * (translationFactor - rotationFactor));
     }
     RPM RobotMecanumLogic::getRearRightWheelSpeed() const
@@ -82,8 +86,8 @@ namespace chassis
         //If all of v_x is positive, then the wheels are pushing in the same
         //direction. It is desired for this to be positive
         //w_4
-        const RadianMetersPerSecond translationFactor{(translation_.y + translation_.x).to<double>()};
-        const RadianMetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
+        const MetersPerSecond translationFactor{(translation_.y + translation_.x).to<double>()};
+        const MetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
         return ((1.0 / kWheelRadius_) * (translationFactor + rotationFactor));
     }
 }

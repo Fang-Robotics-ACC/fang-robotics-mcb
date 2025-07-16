@@ -48,13 +48,13 @@ namespace chassis
     private:
     Velocity2D translation_{MetersPerSecond{0.0}, MetersPerSecond{0.0}};
     RadiansPerSecond rotation_{0};
-    const Meters kWheelRadius_;
+    const MetersPerRadians kWheelRadius_; //Required for the math to work, "how many meters for each radius?"
     const Meters kHorizontalWheelDistance_;
     const Meters kHalfHorizontalWheelDistance_{kHorizontalWheelDistance_ / 2.0};
     const Meters kVerticalWheelDistance_;
     const Meters kHalfVerticalWheelDistance_{kVerticalWheelDistance_ / 2.0};
     //l_x + l_y
-    const Meters kWheelDistanceConstant_{kHalfVerticalWheelDistance_ + kHalfHorizontalWheelDistance_};
+    const MetersPerRadians kWheelDistanceConstant_{(kHalfVerticalWheelDistance_ + kHalfHorizontalWheelDistance_) / Radians{1}}; //The chassis is a larger "wheel"
     };
 }
 #endif
