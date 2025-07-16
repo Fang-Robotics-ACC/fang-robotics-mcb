@@ -1,6 +1,5 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_MECANUM_LOGIC_ABSTRACT_ROBOT_MECANUM_LOGIC_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_MECANUM_LOGIC_ABSTRACT_ROBOT_MECANUM_LOGIC_HPP
-#include "quaddrivedata.hpp"
 #include "chassislogicaliases.hpp"
 #include "quaddrivedata.hpp"
 
