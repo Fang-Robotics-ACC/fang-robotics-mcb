@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "control/chassis/mecanum/logic/fieldmecanumlogic.hpp"
+#include "../../../src/control/chassis/mecanum/logic/field_mecanum_logic.hpp"
 #include "control/chassis/mecanum/logic/mecanumcalculator.hpp"
 #include "chassislogicaliases.hpp"
 #include "rotatevector2d.hpp"
