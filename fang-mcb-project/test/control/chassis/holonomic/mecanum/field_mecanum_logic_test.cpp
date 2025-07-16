@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "control/chassis/mecanum/logic/field_mecanum_logic.hpp"
-#include "control/chassis/mecanum/logic/mecanum_calculator.hpp"
+#include "control/chassis/holonomic/mecanum/logic/field_mecanum_logic.hpp"
+#include "control/chassis/holonomic/mecanum/logic/mecanum_calculator.hpp"
 #include "chassislogicaliases.hpp"
 #include "rotatevector2d.hpp"
 #include "mathaliases.hpp"
