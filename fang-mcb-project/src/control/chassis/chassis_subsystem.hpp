@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_CHASSIS_SUBSYSTEM_HPP
 #include "drivers.hpp"
 #include "configuration/unitaliases.hpp"
-#include "data/directionality.hpp"
+#include "motor/data/directionality.hpp"
 #include "physicsaliases.hpp"
 #include "logic/chassis/fieldmecanumlogic.hpp"
 #include "wrap/trap/communication/pwm_data.hpp"
@@ -127,7 +127,7 @@ namespace control
             const ChassisMotorConfig mk_motorConfig;
             const ChassisDimensionConfig mk_dimensionConfig; 
 
-            const data::motor::Directionality mk_defaultDirectionality{data::motor::Directionality::BIDIRECTIONAL};
+            const motor::Directionality mk_defaultDirectionality{motor::Directionality::BIDIRECTIONAL};
             DriveMotor m_frontLeftMotor;
             DriveMotor m_frontRightMotor;
             DriveMotor m_rearLeftMotor;

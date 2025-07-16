@@ -1,7 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_MECANUM_CALCULATOR_HPP
 #define FANG_ROBOTICS_MCB_MECANUM_CALCULATOR_HPP
 #include "quaddrivedata.hpp"
-#include "translation2d.hpp"
 #include "unitaliases.hpp"
 #include "modm/math/geometry/vector.hpp"
 #include "chassislogicaliases.hpp"

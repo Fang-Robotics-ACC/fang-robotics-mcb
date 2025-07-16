@@ -1,8 +1,8 @@
 #ifndef FANG_ROBOTICS_MCB_GEARED_REPEAT_ULTRA_MK2_HPP
 #define FANG_ROBOTICS_MCB_GEARED_REPEAT_ULTRA_MK2_HPP
 #include "unitaliases.hpp"
-#include "directionality.hpp"
 #include "repeatultramk2.hpp"
+#include "motor/data/directionality.hpp"
 #include "wrap/trap/communication/pwm_data.hpp"
 
 #include "drivers.hpp"
@@ -26,7 +26,7 @@ namespace motor
         struct UnifiedProperties
         {
             const Volts controllerInputVoltage;
-            data::motor::Directionality directionality;
+            motor::Directionality directionality;
             double gearRatio;
         };
 
@@ -36,7 +36,7 @@ namespace motor
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motor::Directionality directionality,
+                      motor::Directionality directionality,
                       bool inverted,
                       double gearRatio);
 
