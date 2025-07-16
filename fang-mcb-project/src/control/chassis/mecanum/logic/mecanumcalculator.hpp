@@ -4,7 +4,7 @@
 #include "unitaliases.hpp"
 #include "modm/math/geometry/vector.hpp"
 #include "chassislogicaliases.hpp"
-#include "control/chassis/mecanum/logic/abstractmecanumcalculator.hpp"
+#include "control/chassis/mecanum/logic/abstract_mecanum_calculator.hpp"
 #include "quaddrivedata.hpp"
 
 namespace logic

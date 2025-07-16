@@ -1,8 +1,9 @@
-#include "gtest/gtest.h"
-#include "control/chassis/mecanum/logic/abstractmecanumcalculator.hpp"
+#include "control/chassis/mecanum/logic/abstract_mecanum_calculator.hpp"
 #include "control/chassis/mecanum/logic/abstractrobotmecanumlogic.hpp"
 #include "quaddrivedata.hpp"
 #include "chassislogicaliases.hpp"
+
+#include <gtest/gtest.h>
 #include <iostream>
 
 using Calculator = chassis::AbstractMecanumCalculator;
