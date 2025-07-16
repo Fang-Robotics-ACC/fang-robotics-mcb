@@ -52,9 +52,9 @@ namespace motor
             case Directionality::BIDIRECTIONAL:
                 period = calculateBidirectionalPeriod(speedRangePercentage);
                 break;
-            
+
             case Directionality::UNIDIRECTIONAL:
-                period = calculateUnidirectionalPeriod(speedRangePercentage); 
+                period = calculateUnidirectionalPeriod(speedRangePercentage);
             break;
         }
         return period;
