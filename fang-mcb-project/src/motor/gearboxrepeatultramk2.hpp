@@ -26,7 +26,7 @@ namespace motor
         struct UnifiedProperties
         {
             const Volts controllerInputVoltage;
-            data::motor::Directionality directionality;
+            motor::Directionality directionality;
             double gearRatio;
         };
 
@@ -36,7 +36,7 @@ namespace motor
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motor::Directionality directionality,
+                      motor::Directionality directionality,
                       bool inverted,
                       double gearRatio);
 

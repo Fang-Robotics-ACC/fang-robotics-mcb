@@ -21,7 +21,7 @@ namespace logic
         class Vortex80AEsc
         {
         public:
-            using Directionality = data::motor::Directionality;
+            using Directionality = ::motor::Directionality;
             Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
 
             /**

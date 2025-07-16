@@ -5,6 +5,8 @@
 #include "vortex80aesc.hpp"
 #include "wrap/rail/rail_motors.hpp"
 
+#include "trap/algorithms/ramp.hpp"
+
 #include "tap/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
 
@@ -20,7 +22,7 @@ namespace motor
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motor::Directionality directionality,
+                      Directionality directionality,
                       bool inverted = false);
 
         /**

@@ -11,7 +11,7 @@ namespace motor
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      data::motor::Directionality directionality,
+                      Directionality directionality,
                       bool inverted,
                       double gearRatio):
                       RepeatUltraMk2{drivers, controllerInputVoltage, pwmPin, pinFrequency, directionality, inverted},

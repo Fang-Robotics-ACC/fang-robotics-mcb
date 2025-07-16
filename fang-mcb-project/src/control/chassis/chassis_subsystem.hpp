@@ -127,7 +127,7 @@ namespace control
             const ChassisMotorConfig mk_motorConfig;
             const ChassisDimensionConfig mk_dimensionConfig; 
 
-            const data::motor::Directionality mk_defaultDirectionality{data::motor::Directionality::BIDIRECTIONAL};
+            const motor::Directionality mk_defaultDirectionality{motor::Directionality::BIDIRECTIONAL};
             DriveMotor m_frontLeftMotor;
             DriveMotor m_frontRightMotor;
             DriveMotor m_rearLeftMotor;

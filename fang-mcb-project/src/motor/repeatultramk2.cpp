@@ -17,7 +17,7 @@ namespace motor
         const Volts& controllerInputVoltage,
         tap::gpio::Pwm::Pin pwmPin,
         const Hertz& pinFrequency,
-        data::motor::Directionality directionality,
+        Directionality directionality,
         bool inverted)
         :
         m_drivers{drivers}, m_pwmPin{pwmPin},
@@ -25,14 +25,14 @@ namespace motor
         mk_maxTheoreticalSpeed{mk_kv * mk_controllerInputVoltage},
         m_maxSpeed{mk_maxTheoreticalSpeed},
         m_vortex{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality},
-        m_inversionMultiplier{inverted && (directionality == data::motor::Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}}
+        m_inversionMultiplier{inverted && (directionality == Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}}
     {
         switch(directionality)
         {
-        case(data::motor::Directionality::BIDIRECTIONAL):
+        case(Directionality::BIDIRECTIONAL):
             m_minSpeed = -m_maxSpeed;
         break;
-        case(data::motor::Directionality::UNIDIRECTIONAL):
+        case(Directionality::UNIDIRECTIONAL):
             m_minSpeed = 0_rpm;
         }
     }
