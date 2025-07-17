@@ -1,5 +1,5 @@
 #include "gimbal_subsystem.hpp"
-#include "util/rotatevector2d.hpp"
+#include "util/math/geometry/rotate_vector_2d.hpp"
 
 namespace control
 {

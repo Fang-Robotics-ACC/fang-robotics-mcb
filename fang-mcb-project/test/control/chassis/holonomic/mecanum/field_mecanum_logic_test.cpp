@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
 #include "control/chassis/holonomic/mecanum/logic/field_mecanum_logic.hpp"
 #include "control/chassis/holonomic/mecanum/logic/mecanum_calculator.hpp"
+#include "util/math/geometry/rotate_vector_2d.hpp"
 #include "chassislogicaliases.hpp"
-#include "rotatevector2d.hpp"
 #include "mathaliases.hpp"
 #include "unitaliases.hpp"
 #include <tuple>
