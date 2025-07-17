@@ -2,7 +2,6 @@
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_MECANUM_LOGIC_ROBOT_MECANUM_LOGIC_HPP
 #include "abstract_field_mecanum_logic.hpp"
 #include "chassislogicaliases.hpp"
-#include "quaddrivedata.hpp"
 #include "unitaliases.hpp"
 
 namespace chassis
@@ -10,7 +9,6 @@ namespace chassis
     class RobotMecanumLogic
     {
     public:
-        using QuadDriveData = data::chassis::QuadDriveData<RPM>;
 
         struct Config
         {
@@ -49,7 +47,7 @@ namespace chassis
         /**https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
          * This uses equation 20
          */
-        QuadDriveData getWheelSpeeds() const;
+        WheelSpeeds getWheelSpeeds() const;
 
     private:
         RPM getFrontRightWheelSpeed() const;

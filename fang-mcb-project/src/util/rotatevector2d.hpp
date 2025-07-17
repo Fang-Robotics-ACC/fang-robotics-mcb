@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_UTIL_ROTATE_VECTOR_2D
 #include "unitaliases.hpp"
 #include "mathaliases.hpp"
-#include "data/vector2d.hpp"
+#include "util/math/linear/vector_2d.hpp"
 
 namespace util
 {

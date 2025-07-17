@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_MATH_COOL_LERP_HPP
 #define FANG_ROBOTICS_MCB_MATH_COOL_LERP_HPP
-#include "vector2d.hpp"
+#include "util/math/linear/vector_2d.hpp"
 namespace math
 {
     /**

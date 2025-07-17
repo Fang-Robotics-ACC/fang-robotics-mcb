@@ -1,10 +1,8 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_MECANUM_LOGIC_FIELD_MECANUM_LOGIC_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_MECANUM_LOGIC_FIELD_MECANUM_LOGIC_HPP
 #include "unitaliases.hpp"
-#include "quaddrivedata.hpp"
 #include "robot_mecanum_logic.hpp"
 #include "chassislogicaliases.hpp"
-#include "quaddrivedata.hpp"
 
 using namespace units::literals;
 
@@ -50,7 +48,7 @@ namespace chassis
         const Radians&getRobotAngle() const;
         const Velocity2D& getTranslation() const;
         RPM getRotation() const;
-        QuadDriveData getWheelSpeeds() const;
+        WheelSpeeds getWheelSpeeds() const;
     private:
         RPM getFrontRightWheelSpeed() const;
         RPM getFrontLeftWheelSpeed() const;
