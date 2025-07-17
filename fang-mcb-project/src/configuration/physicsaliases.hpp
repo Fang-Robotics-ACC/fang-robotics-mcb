@@ -5,6 +5,6 @@
 
 namespace physics 
 {
-    using Velocity2D = data::math::Vector2D<MetersPerSecond>;
+    using Velocity2D = math::Vector2D<MetersPerSecond>;
 }//namespace physics
 #endif

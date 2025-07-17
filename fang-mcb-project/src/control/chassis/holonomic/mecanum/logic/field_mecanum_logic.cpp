@@ -1,6 +1,6 @@
 #include "field_mecanum_logic.hpp"
-#include "rotatevector2d.hpp"
 #include "mathaliases.hpp"
+#include "util/math/geometry/rotate_vector_2d.hpp"
 
 namespace chassis
 {
@@ -85,7 +85,7 @@ namespace chassis
         //This assumes the units are in meters per second
         const math::AbstractVector2D unitlessTranslation{translation.x.to<double>(), translation.y.to<double>()};
         //Rotate stripped vector
-        const math::AbstractVector2D rotated{util::math::rotateVector2D(unitlessTranslation, -robotAngle_)};
+        const math::AbstractVector2D rotated{math::rotateVector2D(unitlessTranslation, -robotAngle_)};
         //Convert stripped vector back into vector of units
         return Velocity2D{Velocity2D::unit{rotated.x},Velocity2D::unit{rotated.y}};
     }
@@ -99,7 +99,7 @@ namespace chassis
         //This assumes the units are in meters per second
         const math::AbstractVector2D unitlessTranslation{translation.x.to<double>(), translation.y.to<double>()};
         //Rotate stripped vector
-        const math::AbstractVector2D rotated{util::math::rotateVector2D(unitlessTranslation, robotAngle_)};
+        const math::AbstractVector2D rotated{math::rotateVector2D(unitlessTranslation, robotAngle_)};
         //Convert stripped vector back into vector of units
         return Velocity2D{Velocity2D::unit{rotated.x},Velocity2D::unit{rotated.y}};
     }

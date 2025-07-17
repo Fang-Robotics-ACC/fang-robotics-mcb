@@ -13,7 +13,7 @@ namespace math
     class CoolLerp
     {
     public:
-        using Vector2D = data::math::Vector2D<double>;
+        using Vector2D = math::Vector2D<double>;
         /**
          * x corresponds to the intput
          * y corresponds to the output

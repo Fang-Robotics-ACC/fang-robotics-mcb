@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
 #include "control/chassis/holonomic/mecanum/logic/field_mecanum_logic.hpp"
 #include "control/chassis/holonomic/mecanum/logic/mecanum_calculator.hpp"
+#include "util/math/geometry/rotate_vector_2d.hpp"
 #include "chassislogicaliases.hpp"
-#include "rotatevector2d.hpp"
 #include "mathaliases.hpp"
 #include "unitaliases.hpp"
 #include <tuple>
@@ -38,7 +38,7 @@ TEST_P(FieldMecanumParameterTest, translationRotationTests)
     chassis::FieldMecanumLogic mecanumLogic{horizontalDistance, verticalDistance, wheelRadius};
     math::AbstractVector2D strippedTranslation{translation.x.to<double>(), translation.y.to<double>()};
     //Transform velocity relative to robot
-    math::AbstractVector2D strippedRobotTranslation{util::math::rotateVector2D(strippedTranslation, -robotAngle)};
+    math::AbstractVector2D strippedRobotTranslation{math::rotateVector2D(strippedTranslation, -robotAngle)};
     chassis::Velocity2D expectedRobotTranslation{MetersPerSecond{strippedRobotTranslation.x}, MetersPerSecond{strippedRobotTranslation.y}};
 
     mecanumLogic.setTotalMotion(translation, rotation, robotAngle);

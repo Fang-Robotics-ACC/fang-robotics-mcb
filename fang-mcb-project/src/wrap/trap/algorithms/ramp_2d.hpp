@@ -9,7 +9,7 @@ namespace trap::algorithms
     class Ramp2D
     {
     public:
-        using Vector2D = data::math::Vector2D<ValueUnit>;
+        using Vector2D = math::Vector2D<ValueUnit>;
 
         /**
          * Ramp speed is how much value unit per time unit
