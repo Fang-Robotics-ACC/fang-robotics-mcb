@@ -38,7 +38,7 @@ TEST_P(FieldMecanumParameterTest, translationRotationTests)
     chassis::FieldMecanumLogic mecanumLogic{horizontalDistance, verticalDistance, wheelRadius};
     math::AbstractVector2D strippedTranslation{translation.x.to<double>(), translation.y.to<double>()};
     //Transform velocity relative to robot
-    math::AbstractVector2D strippedRobotTranslation{util::math::rotateVector2D(strippedTranslation, -robotAngle)};
+    math::AbstractVector2D strippedRobotTranslation{math::rotateVector2D(strippedTranslation, -robotAngle)};
     chassis::Velocity2D expectedRobotTranslation{MetersPerSecond{strippedRobotTranslation.x}, MetersPerSecond{strippedRobotTranslation.y}};
 
     mecanumLogic.setTotalMotion(translation, rotation, robotAngle);

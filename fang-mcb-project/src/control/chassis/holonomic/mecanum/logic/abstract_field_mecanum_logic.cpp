@@ -60,7 +60,7 @@ namespace chassis
         //If the robot is facing left and needs to move forward relative to the field,
         //Then the motion vector that is relative to the robot facing forwward needs to be rotated
         //in the opposite angle
-        return util::math::rotateVector2D(translation, -robotAngle_);
+        return math::rotateVector2D(translation, -robotAngle_);
     }
 
     Translation2D AbstractFieldMecanumLogic::robotToFieldTranslation(const Translation2D& translation) const
@@ -68,7 +68,7 @@ namespace chassis
         //If the robot is facing left and needs to move forward relative to the field,
         //Then the motion vector that is relative to the robot facing forwward needs to be rotated
         //in the opposite angle
-        return util::math::rotateVector2D(translation, robotAngle_);
+        return math::rotateVector2D(translation, robotAngle_);
     }
 
     AbstractQuadDriveData AbstractFieldMecanumLogic::getWheelSpeeds() const

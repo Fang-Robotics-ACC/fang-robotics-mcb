@@ -26,7 +26,7 @@ namespace control
 
         math::AbstractVector2D GimbalSubsystem::getTargetFieldDirection() const
         {
-            return util::math::rotateVector2D(mk_forward, m_targetFieldYaw);
+            return math::rotateVector2D(mk_forward, m_targetFieldYaw);
         }
 
         void GimbalSubsystem::setFieldYaw(const Radians& yaw)

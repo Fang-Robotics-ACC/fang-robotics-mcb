@@ -74,7 +74,7 @@ namespace control
             const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_config.maxXTranslation, abstractTranslation.y * mk_config.maxYTranslation};
             const Radians turretBearing{m_gimbal.getTargetFieldYaw()};
 
-            const physics::Velocity2D fieldTranslation{util::math::rotateVector2D(frameTranslation, turretBearing)};
+            const physics::Velocity2D fieldTranslation{math::rotateVector2D(frameTranslation, turretBearing)};
 
             const double abstractRotation{m_input.getRotation()};
 

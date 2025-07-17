@@ -52,7 +52,7 @@ namespace control
             const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
             const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
             const Radians turretBearing{m_turret.getTargetFieldYaw()};
-            const physics::Velocity2D fieldTranslation{util::math::rotateVector2D(frameTranslation, turretBearing)};
+            const physics::Velocity2D fieldTranslation{math::rotateVector2D(frameTranslation, turretBearing)};
 
             return fieldTranslation;
         }
