@@ -15,8 +15,5 @@ namespace chassis
     //Messy for backward compatibility. Will be refactored during the next refactor cycle
     //Oof.
     using Velocity2D = data::math::Vector2D<MetersPerSecond>;
-
-    using WheelDirection = modm::Vector<double, 2>;
 }
-
 #endif
