@@ -2,8 +2,6 @@
 #define FANG_ROBOTICS_MCB_GIMBAL_SUBSYSTEM_HPP
 #include "control/turret/system/gimbal_system.hpp"
 
-#include "configuration/mathaliases.hpp"
-
 #include "drivers.hpp"
 #include "unitaliases.hpp"
 
