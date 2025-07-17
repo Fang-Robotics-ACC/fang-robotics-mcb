@@ -9,7 +9,7 @@ namespace math
         using unit = Unit;
     public:
         Unit x;
-        Unit y; 
+        Unit y;
 
         /**
          * Provides the values free of units
