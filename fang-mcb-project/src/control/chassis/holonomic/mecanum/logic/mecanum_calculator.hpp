@@ -3,13 +3,11 @@
 
 #include "abstract_mecanum_calculator.hpp"
 #include "chassislogicaliases.hpp"
-#include "quaddrivedata.hpp"
 #include "unitaliases.hpp"
 
 #include "modm/math/geometry/vector.hpp"
 namespace chassis
 {
-    using QuadDriveData = data::chassis::QuadDriveData<RPM>;
     /**
      * This uses the equations from this paper
      * https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
@@ -20,7 +18,7 @@ namespace chassis
         MecanumCalculator(const Meters& horizontalWheelDistance,
                           const Meters& verticalWheelDistance,
                           const Meters& wheelRadius);
-        void setWheelSpeeds(const QuadDriveData& quadDriveData);
+        void setWheelSpeeds(const WheelSpeeds& quadDriveData);
         /**
          * Returns the movement of the robot relative to the robot.
          */
@@ -30,7 +28,7 @@ namespace chassis
          */
         RPM getRotation() const;
     private:
-        data::chassis::QuadDriveData<RadiansPerSecond> quadDriveData_{RPM{0}, RPM{0}, RPM{0}, RPM{0}};
+        QuadDriveWheelSpeedsRadPersec quadDriveData_{RPM{0}, RPM{0}, RPM{0}, RPM{0}};
         ::chassis::AbstractMecanumCalculator abstractMecanumCalculator_{};
         //l_x + l_y
         const Meters kwheelDistanceConstant_;

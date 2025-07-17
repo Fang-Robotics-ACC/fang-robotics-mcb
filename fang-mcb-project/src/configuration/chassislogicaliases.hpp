@@ -1,6 +1,6 @@
 #ifndef CHASSIS_LOGIC_ALISES_H_SDFSF_YEET_YEET
 #define CHASSIS_LOGIC_ALISES_H_SDFSF_YEET_YEET
-#include "quaddrivedata.hpp"
+#include "control/chassis/data/quad_drive_data.hpp"
 #include "vector2d.hpp"
 #include "unitaliases.hpp"
 #include "mathaliases.hpp"
@@ -8,8 +8,7 @@
 
 namespace chassis
 {
-    using AbstractQuadDriveData = data::chassis::QuadDriveData<double>;
-    using QuadDriveData = data::chassis::QuadDriveData<RPM>;
+    using AbstractQuadDriveData = RawQuadDriveData;
     using Translation2D = math::AbstractVector2D;
 
     //Messy for backward compatibility. Will be refactored during the next refactor cycle

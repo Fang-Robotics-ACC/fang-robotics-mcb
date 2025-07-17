@@ -45,9 +45,9 @@ namespace chassis
     {
         return rotation_;
     }
-    QuadDriveData RobotMecanumLogic::getWheelSpeeds() const
+    WheelSpeeds RobotMecanumLogic::getWheelSpeeds() const
     {
-        return QuadDriveData{getFrontLeftWheelSpeed(), getFrontRightWheelSpeed(),
+        return WheelSpeeds{getFrontLeftWheelSpeed(), getFrontRightWheelSpeed(),
                              getRearLeftWheelSpeed(),  getRearRightWheelSpeed()};
     }
 

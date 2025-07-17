@@ -67,7 +67,7 @@ namespace chassis
         return robotMecanumLogic_.getRotation();
     }
 
-    QuadDriveData FieldMecanumLogic::getWheelSpeeds() const
+    WheelSpeeds FieldMecanumLogic::getWheelSpeeds() const
     {
         return robotMecanumLogic_.getWheelSpeeds();
     }
