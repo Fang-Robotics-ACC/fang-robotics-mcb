@@ -9,7 +9,7 @@
 using Calculator = chassis::AbstractMecanumCalculator;
 using Logic = chassis::AbstractRobotMecanumLogic;
 using QuadDriveData = data::chassis::QuadDriveData<double>;
-using Translation2D = logic::chassis::Translation2D;
+using Translation2D = chassis::Translation2D;
 
 //Todo: Add intermediate test cases
 
