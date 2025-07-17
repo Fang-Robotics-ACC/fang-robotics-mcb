@@ -6,7 +6,7 @@
 
 namespace math
 {
-    using AbstractVector2D = data::math::Vector2D<double>;
+    using AbstractVector2D = math::Vector2D<double>;
 
     template <uint16_t ROWS, uint16_t COLS>
     using Matrix = tap::algorithms::CMSISMat<ROWS, COLS>;

@@ -13,7 +13,7 @@ namespace util
          * 1e-10
          */
         template<typename Unit>
-        data::math::Vector2D<Unit> rotateVector2D(const data::math::Vector2D<Unit>& vector, const Radians& rotationAngle)
+        ::math::Vector2D<Unit> rotateVector2D(const ::math::Vector2D<Unit>& vector, const Radians& rotationAngle)
         {
             //Rotation matrix
             //https://www.youtube.com/watch?v=1oYEo7PNIBQ
@@ -25,7 +25,7 @@ namespace util
             const double rotatedx{vector.x * (std::cos(angle)) - vector.y * (std::sin(angle))};
             const double rotatedy{vector.x * (std::sin(angle)) + vector.y * (std::cos(angle))};
 
-            return data::math::Vector2D<Unit>{Unit{rotatedx}, Unit{rotatedy}};
+            return ::math::Vector2D<Unit>{Unit{rotatedx}, Unit{rotatedy}};
         }
     }
 }
