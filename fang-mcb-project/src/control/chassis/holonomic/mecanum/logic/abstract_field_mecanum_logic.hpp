@@ -34,36 +34,36 @@ namespace chassis
     public:
         void setMotion(const Translation2D& translation, double rotationalOffset);
 
-    void setTotalMotion(const Translation2D& translation, double rotationOffset, const Radians& robotAngle);
+        void setTotalMotion(const Translation2D& translation, double rotationOffset, const Radians& robotAngle);
 
-    /**
-        * If the robot is facing forward at the field, that is 0 degrees.
-        * If the robot is facing left from the forward field direction, that is +90 degrees
-        * If the robot is racing right from the forward field direction that is -90 degrees
-        */
-    void setRobotAngle(const Radians& robotAngle);
-    void setTranslation(const Translation2D& translation);
-    void setRotationOffset(double rotationalOffset);
+        /**
+            * If the robot is facing forward at the field, that is 0 degrees.
+            * If the robot is facing left from the forward field direction, that is +90 degrees
+            * If the robot is racing right from the forward field direction that is -90 degrees
+            */
+        void setRobotAngle(const Radians& robotAngle);
+        void setTranslation(const Translation2D& translation);
+        void setRotationOffset(double rotationalOffset);
 
-    Radians getRobotAngle() const;
-    Translation2D getTranslation() const;
-    double getRotationOffset() const;
+        Radians getRobotAngle() const;
+        Translation2D getTranslation() const;
+        double getRotationOffset() const;
 
-    AbstractQuadDriveData getWheelSpeeds() const;
+        AbstractQuadDriveData getWheelSpeeds() const;
 
     private:
-    double getFrontRightWheelSpeed() const;
-    double getFrontLeftWheelSpeed() const;
-    double getRearLeftWheelSpeed() const;
-    double getRearRightWheelSpeed() const;
+        double getFrontRightWheelSpeed() const;
+        double getFrontLeftWheelSpeed() const;
+        double getRearLeftWheelSpeed() const;
+        double getRearRightWheelSpeed() const;
 
-    Translation2D fieldToRobotTranslation(const Translation2D& translation) const;
-    Translation2D robotToFieldTranslation(const Translation2D& translation) const;
-        
-    Radians robotAngle_{0.0};
-    Translation2D fieldTranslation_{0.0,0.0};
+        Translation2D fieldToRobotTranslation(const Translation2D& translation) const;
+        Translation2D robotToFieldTranslation(const Translation2D& translation) const;
 
-    AbstractRobotMecanumLogic robotwiseMecanumLogic_{};
+        Radians robotAngle_{0.0};
+        Translation2D fieldTranslation_{0.0,0.0};
+
+        AbstractRobotMecanumLogic robotwiseMecanumLogic_{};
     };
 }
 #endif
