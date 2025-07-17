@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_TRAP_ALGORITHMS_RAMP_2D_HPP
 #include "trap/algorithms/ramp.hpp"
 #include "mathaliases.hpp"
-#include "data/vector2d.hpp"
+#include "util/math/linear/vector_2d.hpp"
 namespace trap::algorithms
 {
     template<typename ValueUnit, typename TimeUnit> 

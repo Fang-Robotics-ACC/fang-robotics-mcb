@@ -3,7 +3,7 @@
 #include "unitaliases.hpp"
 
 #include "util/math/cool_lerp.hpp"
-#include "data/vector2d.hpp"
+#include "util/math/linear/vector_2d.hpp"
 
 #include "motor/data/directionality.hpp"
 

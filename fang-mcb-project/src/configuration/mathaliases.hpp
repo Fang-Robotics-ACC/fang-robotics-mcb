@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_MATH_ALIASES_HPP
 #include "modm/math/geometry/vector.hpp"
 #include "tap/algorithms/cmsis_mat.hpp"
-#include "data/vector2d.hpp"
+#include "util/math/linear/vector_2d.hpp"
 
 namespace math
 {
