@@ -4,11 +4,19 @@
 
 namespace chassis
 {
+    FieldMecanumLogic::FieldMecanumLogic(const Config& config):
+        FieldMecanumLogic(config.horizontalWheelDistance,
+                          config.verticalWheelDistance,
+                          config.wheelRadius)
+    {
+    }
+
     FieldMecanumLogic::FieldMecanumLogic(const Meters& horizontalWheelDistance,
                                          const Meters& verticalWheelDistance,
                                          const Meters& wheelRadius):
     robotMecanumLogic_{horizontalWheelDistance, verticalWheelDistance, wheelRadius}
-    {}
+    {
+    }
     void FieldMecanumLogic::setMotion(const Velocity2D& translation, const RPM& rotation)
     {
         setTranslation(translation);

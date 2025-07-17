@@ -13,6 +13,8 @@ namespace chassis
     class FieldMecanumLogic
     {
     public:
+    using Config = RobotMecanumLogic::Config;
+
     /**
      * Refer to: https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
      * in equation 24
@@ -21,6 +23,8 @@ namespace chassis
      * The vertical distance is parallel to the forward direction of the robot
      * The horizontal distance is parallel to the sideways direction of the robot
      */
+    FieldMecanumLogic(const Config& config);
+
     FieldMecanumLogic(const Meters& horizontalWheelDistance,
                       const Meters& verticalWheelDistance,
                       const Meters& wheelRadius);
