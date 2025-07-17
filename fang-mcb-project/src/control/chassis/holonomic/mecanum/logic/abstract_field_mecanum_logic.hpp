@@ -50,12 +50,13 @@ namespace chassis
     double getRotationOffset() const;
 
     AbstractQuadDriveData getWheelSpeeds() const;
+
+    private:
     double getFrontRightWheelSpeed() const;
     double getFrontLeftWheelSpeed() const;
     double getRearLeftWheelSpeed() const;
     double getRearRightWheelSpeed() const;
 
-    private:
     Translation2D fieldToRobotTranslation(const Translation2D& translation) const;
     Translation2D robotToFieldTranslation(const Translation2D& translation) const;
         

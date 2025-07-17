@@ -14,14 +14,16 @@ namespace chassis
     FieldMecanumLogic::FieldMecanumLogic(const Meters& horizontalWheelDistance,
                                          const Meters& verticalWheelDistance,
                                          const Meters& wheelRadius):
-    robotMecanumLogic_{horizontalWheelDistance, verticalWheelDistance, wheelRadius}
+        robotMecanumLogic_{horizontalWheelDistance, verticalWheelDistance, wheelRadius}
     {
     }
+
     void FieldMecanumLogic::setMotion(const Velocity2D& translation, const RPM& rotation)
     {
         setTranslation(translation);
         setRotation(rotation);
     }
+
     void FieldMecanumLogic::setTotalMotion(const Velocity2D& translation, const RPM& rotation, const Radians& robotAngle)
     {
         //The raw robot angle must be set so that when the translation is being updated
@@ -29,6 +31,7 @@ namespace chassis
         rawSetRobotAngle(robotAngle);
         setMotion(translation, rotation);
     }
+
     void FieldMecanumLogic::setRobotAngle(const Radians& robotAngle)
     {
         rawSetRobotAngle(robotAngle);
@@ -36,48 +39,39 @@ namespace chassis
         //difference direction
         setTranslation(fieldTranslation_);
     }
+
     void FieldMecanumLogic::setTranslation(const Velocity2D& translation)
     {
         fieldTranslation_ = translation;
         robotMecanumLogic_.setTranslation(fieldToRobotTranslation(translation));
     }
+
     void FieldMecanumLogic::setRotation(const RPM& rotation)
     {
         robotMecanumLogic_.setRotation(rotation);
     }
+
     const Radians& FieldMecanumLogic::getRobotAngle() const
     {
         return robotAngle_;
     }
+
     const Velocity2D& FieldMecanumLogic::getTranslation() const
     {
         //The robot mecanum logic stores the translation relative to the robot, not the field
         return fieldTranslation_;
     }
+
     RPM FieldMecanumLogic::getRotation() const
     {
         return robotMecanumLogic_.getRotation();
     }
+
     QuadDriveData FieldMecanumLogic::getWheelSpeeds() const
     {
         return robotMecanumLogic_.getWheelSpeeds();
     }
-    RPM FieldMecanumLogic::getFrontRightWheelSpeed() const
-    {
-        return robotMecanumLogic_.getFrontRightWheelSpeed();
-    }
-    RPM FieldMecanumLogic::getFrontLeftWheelSpeed() const
-    {
-        return robotMecanumLogic_.getFrontLeftWheelSpeed();
-    }
-    RPM FieldMecanumLogic::getRearLeftWheelSpeed() const
-    {
-        return robotMecanumLogic_.getRearLeftWheelSpeed();
-    }
-    RPM FieldMecanumLogic::getRearRightWheelSpeed() const
-    {
-        return robotMecanumLogic_.getRearRightWheelSpeed();
-    }
+
     void FieldMecanumLogic::rawSetRobotAngle(const Radians& rotation)
     {
         robotAngle_ = rotation;

@@ -20,7 +20,8 @@ namespace chassis
                                          const Meters& wheelRadius):
         kwheelDistanceConstant_{(horizontalWheelDistance + verticalWheelDistance) / 2.0},
         kWheelRadius_{wheelRadius}
-    {}
+    {
+    }
 
     Velocity2D MecanumCalculator::getTranslation() const
     {
@@ -32,13 +33,14 @@ namespace chassis
                                    + quadDriveData_.rearLeft  + quadDriveData_.rearRight)).to<double>()};
         return Velocity2D{xVelocity, yVelocity};
     }
+
     RPM MecanumCalculator::getRotation() const
     {
-    //https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
-    //Equation 26
-    const RadiansPerSecond rotationSum{- quadDriveData_.frontLeft + quadDriveData_.frontRight
-                          - quadDriveData_.rearLeft  + quadDriveData_.rearRight};
-    const auto rotationConstant{kWheelRadius_ / (4.0 * kwheelDistanceConstant_)};
-    return rotationConstant * rotationSum;
+        //https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
+        //Equation 26
+        const RadiansPerSecond rotationSum{- quadDriveData_.frontLeft + quadDriveData_.frontRight
+                              - quadDriveData_.rearLeft  + quadDriveData_.rearRight};
+        const auto rotationConstant{kWheelRadius_ / (4.0 * kwheelDistanceConstant_)};
+        return rotationConstant * rotationSum;
     }
 }
