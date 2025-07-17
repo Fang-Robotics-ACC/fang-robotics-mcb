@@ -11,7 +11,7 @@ namespace chassis
     {
     public:
         using QuadDriveData = data::chassis::QuadDriveData<RPM>;
-        
+
         struct Config
         {
             const Meters& horizontalWheelDistance;
@@ -27,7 +27,7 @@ namespace chassis
          * The horizontal distance is parallel to the sideways direction of the robot
          */
         RobotMecanumLogic(const Config& config);
-    
+
         RobotMecanumLogic(const Meters& horizontalWheelDistance,
                           const Meters& verticalWheelDistance,
                           const Meters& wheelRadius);
@@ -45,12 +45,12 @@ namespace chassis
         void setRotation(const RPM& rotation);
         const Velocity2D& getTranslation() const;
         RPM getRotation() const;
-        
+
         /**https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
          * This uses equation 20
          */
         QuadDriveData getWheelSpeeds() const;
-        
+
     private:
         RPM getFrontRightWheelSpeed() const;
         RPM getFrontLeftWheelSpeed() const;
