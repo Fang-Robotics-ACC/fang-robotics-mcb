@@ -95,10 +95,11 @@ namespace control
             //Returns 0 if we are at or below the critical threshold
             //Reutnrs 1 if we are above the limiting threshold (buffer - crit)
             const float powerScale{m_powerLimiter.getPowerLimitRatio()};
-            m_frontLeftMotor.setTargetSpeed(m_mecanumLogic.getFrontLeftWheelSpeed() * powerScale);
-            m_frontRightMotor.setTargetSpeed(m_mecanumLogic.getFrontRightWheelSpeed() * powerScale);
-            m_rearLeftMotor.setTargetSpeed(m_mecanumLogic.getRearLeftWheelSpeed() * powerScale);
-            m_rearRightMotor.setTargetSpeed(m_mecanumLogic.getRearRightWheelSpeed() * powerScale);
+            const ::chassis::QuadDriveData wheelSpeeds{m_mecanumLogic.getWheelSpeeds()};
+            m_frontLeftMotor.setTargetSpeed(wheelSpeeds.frontLeft * powerScale);
+            m_frontRightMotor.setTargetSpeed(wheelSpeeds.frontRight * powerScale);
+            m_rearLeftMotor.setTargetSpeed(wheelSpeeds.rearLeft * powerScale);
+            m_rearRightMotor.setTargetSpeed(wheelSpeeds.rearRight * powerScale);
         }
 
         void ChassisSubsystem::updateFieldAngle()
