@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_VORTEX_80A_ESC_LOGIC_H
 #include "unitaliases.hpp"
 
-#include "util/math/cool_lerp.hpp"
+#include "util/math/linear/cool_lerp.hpp"
 #include "util/math/linear/vector_2d.hpp"
 
 #include "motor/data/directionality.hpp"
