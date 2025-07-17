@@ -6,6 +6,13 @@
 using namespace units::literals;
 namespace chassis
 {
+    RobotMecanumLogic::RobotMecanumLogic(const Config& config):
+        RobotMecanumLogic(config.horizontalWheelDistance,
+                          config.verticalWheelDistance,
+                          config.wheelRadius)
+    {
+    }
+
     RobotMecanumLogic::RobotMecanumLogic(const Meters& horizontalWheelDistance,
                                          const Meters& verticalWheelDistance,
                                          const Meters& wheelRadius):
