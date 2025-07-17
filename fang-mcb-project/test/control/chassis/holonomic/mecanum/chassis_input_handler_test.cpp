@@ -2,7 +2,6 @@
 #include "gtest/gtest.h"
 #include "control/chassis/chassis_input_handler.hpp"
 #include "configuration/chassislogicaliases.hpp"
-#include "configuration/motion_control_config.hpp"
 #include "unitaliases.hpp"
 #include "drivers.hpp"
 #include "tap/mock/remote_mock.hpp"

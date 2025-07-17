@@ -1,5 +1,4 @@
 #include "field_mecanum_logic.hpp"
-#include "mathaliases.hpp"
 #include "util/math/geometry/rotate_vector_2d.hpp"
 
 namespace chassis

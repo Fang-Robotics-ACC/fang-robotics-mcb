@@ -1,5 +1,4 @@
 #include "field_mecanum_command.hpp"
-#include "configuration/motion_control_config.hpp"
 #include "chassislogicaliases.hpp"
 #include "unitaliases.hpp"
 #include "util/math/geometry/rotate_vector_2d.hpp"

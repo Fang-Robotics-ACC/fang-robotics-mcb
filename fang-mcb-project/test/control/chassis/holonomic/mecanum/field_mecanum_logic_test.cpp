@@ -3,7 +3,6 @@
 #include "control/chassis/holonomic/mecanum/logic/mecanum_calculator.hpp"
 #include "util/math/geometry/rotate_vector_2d.hpp"
 #include "chassislogicaliases.hpp"
-#include "mathaliases.hpp"
 #include "unitaliases.hpp"
 #include <tuple>
 
