@@ -28,9 +28,6 @@ BUILD_PATH           = "build"
 TAPROOT_PATH         = "taproot"
 SRC_PATH             = "src"
 TEST_PATH            = "test"
-RAIL_PATH            = "lib/RAIL-Robomaster-Abstraction-Interface-Library/include"
-UNIT_PATH            = "lib/units/include"
-
 
 TAPROOT_SCRIPTS_TOOLPATH = abspath("../taproot-scripts/scons-tools")
 
@@ -81,7 +78,7 @@ sources = []
 # Building all libraries (read from sconscript files located in provided dirs)
 # Ensure that modm is first, since Taproot depends on modm
 # Append include path to environment so both src/test environments have access to them
-env.SConscript(dirs=[TAPROOT_PATH, SRC_PATH, TEST_PATH, RAIL_PATH, UNIT_PATH], exports=["env", "args", "sources"])
+env.SConscript(dirs=[TAPROOT_PATH, SRC_PATH, TEST_PATH], exports=["env", "args", "sources"])
 
 
 # Tests must be included as sources (rather than built as a separate library) in order for
