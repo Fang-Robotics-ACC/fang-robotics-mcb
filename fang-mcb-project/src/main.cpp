@@ -53,7 +53,6 @@
 /* define timers here -------------------------------------------------------*/
 tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / kMainLoopFrequency);
 
-
 int main()
 {
     #ifdef PLATFORM_HOSTED
