@@ -9,8 +9,6 @@
 namespace chassis
 {
     using AbstractQuadDriveData = RawQuadDriveData;
-    using AbstractVelocity2D = math::AbstractVector2D;
-
     //Messy for backward compatibility. Will be refactored during the next refactor cycle
     //Oof.
     using Velocity2D = math::Vector2D<MetersPerSecond>;
