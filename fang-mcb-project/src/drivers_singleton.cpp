@@ -22,7 +22,7 @@
 
 Drivers DriversSingleton::drivers{};
 
-Drivers& DoNotUse_getDriversReference()
+Drivers& DriversSingleton::getDrivers()
 {
     return DriversSingleton::drivers;
 }
