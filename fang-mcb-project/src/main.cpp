@@ -51,8 +51,7 @@
 #include <iostream>
 
 /* define timers here -------------------------------------------------------*/
-tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / MAIN_LOOP_FREQUENCY);
-
+tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / kMainLoopFrequency);
 
 int main()
 {
@@ -87,10 +86,6 @@ int main()
     while (1)
     {
         drivers.update();
-        if(drivers.refSerial.getRefSerialReceivingData())
-        {
-            //drivers.pwm.write(0.05, tap::gpio::Pwm::Buzzer);
-        }
 
         //Prevent motor signals from being spammed
         if (sendMotorTimeout.execute())

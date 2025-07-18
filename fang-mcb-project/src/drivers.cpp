@@ -12,7 +12,7 @@ void Drivers::initializeIo()
     can.initialize();
     errorController.init();
     remote.initialize();
-    bmi088.initialize(MAIN_LOOP_FREQUENCY, 0.1, 0);
+    bmi088.initialize(kMainLoopFrequency, 0.1, 0);
     refSerial.initialize();
     terminalSerial.initialize();
     schedulerTerminalHandler.init();
