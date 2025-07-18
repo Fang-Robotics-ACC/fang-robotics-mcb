@@ -68,6 +68,7 @@ env["CONFIG_ARTIFACT_PATH"] = join(env["CONFIG_BUILD_BASE"], "artifact")
 env["CONFIG_PROFILE"] = args["BUILD_PROFILE"]
 
 env.AppendUnique(CPPPATH=[
+	abspath(r"."),
     abspath(r"src"),
     abspath(r"src/wrap"),
     abspath(r"robot-type"),
