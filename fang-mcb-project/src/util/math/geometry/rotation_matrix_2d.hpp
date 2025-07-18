@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_UTIL_MATH_2D_ROTATION_MATRIX
 #define FANG_ROBOTICS_MCB_UTIL_MATH_2D_ROTATION_MATRIX
-#include "mathaliases.hpp"
+#include "util/math/linear/matrix_alias.hpp"
 #include "wrap/units/units_alias.hpp"
 namespace math
 {
