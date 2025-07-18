@@ -51,7 +51,7 @@
 #include <iostream>
 
 /* define timers here -------------------------------------------------------*/
-tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / MAIN_LOOP_FREQUENCY);
+tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / kMainLoopFrequency);
 
 
 int main()

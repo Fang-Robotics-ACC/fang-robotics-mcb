@@ -4,7 +4,7 @@
 #include "drivers.hpp"
 
 
-static constexpr float MAIN_LOOP_FREQUENCY{500.0f}; //Hertz
+static constexpr float kMainLoopFrequency{500.0f}; //Hertz
 // Place any sort of input/output initialization here. For example, place
 // serial init stuff here.
 void initializeIo(Drivers& drivers);
