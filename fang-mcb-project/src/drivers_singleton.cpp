@@ -24,6 +24,6 @@ Drivers DriversSingleton::drivers{};
 
 Drivers& DriversSingleton::getDrivers()
 {
-    return DriversSingleton::drivers;
+    return drivers_;
 }
 #endif

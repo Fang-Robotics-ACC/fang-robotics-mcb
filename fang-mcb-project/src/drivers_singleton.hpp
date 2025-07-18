@@ -29,7 +29,6 @@
 class DriversSingleton
 {
 public:
-    static Drivers drivers;
 
     /**
      * @return The singleton instance of the Drivers class. This is the only instance of the
@@ -40,7 +39,10 @@ public:
      *      should be calling this function from -- `main.cpp` and `*_control.cpp`, either to
      *      run I/O stuff and to add a Drivers pointer to an instance of a Subsystem or Command.
      */
-    Drivers& getDrivers();
+    static Drivers& getDrivers();
+private:
+    static Drivers drivers_;
+
 };  // class DriversSingleton
 
 
