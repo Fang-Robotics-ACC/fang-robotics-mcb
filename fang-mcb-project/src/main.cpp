@@ -59,13 +59,7 @@ int main()
     std::cout << "Simulation starting..." << std::endl;
     #endif
 
-    /*
-     * NOTE: We are using DoNotUse_getDrivers here because in the main
-     *      robot loop we must access the singleton drivers to update
-     *      IO states and run the scheduler.
-     */
-
-    Drivers& drivers{DoNotUse_getDriversReference()};
+    Drivers& drivers{DriversSingleton::getDrivers()};
 
     Board::initialize();
     drivers.initializeIo();
