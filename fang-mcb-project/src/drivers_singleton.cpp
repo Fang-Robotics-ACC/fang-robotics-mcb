@@ -20,7 +20,7 @@
 #ifndef ENV_UNIT_TESTS
 #include "drivers_singleton.hpp"
 
-Drivers DriversSingleton::drivers{};
+Drivers DriversSingleton::drivers_{};
 
 Drivers& DriversSingleton::getDrivers()
 {
