@@ -31,7 +31,7 @@ namespace chassis
          * Refer to field mecanum calculator to get the translation relative
          * to a field.
          */
-        Translation2D getTranslation() const;
+        AbstractVelocity2D getTranslation() const;
         /**
          * If the mecanum drive is to be assumed to be a tank
          * drive, there would be a difference between the overrall

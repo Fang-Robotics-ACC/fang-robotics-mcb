@@ -9,7 +9,7 @@
 namespace chassis
 {
     using AbstractQuadDriveData = RawQuadDriveData;
-    using Translation2D = math::AbstractVector2D;
+    using AbstractVelocity2D = math::AbstractVector2D;
 
     //Messy for backward compatibility. Will be refactored during the next refactor cycle
     //Oof.

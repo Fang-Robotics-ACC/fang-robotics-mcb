@@ -28,11 +28,11 @@ namespace chassis
     class AbstractRobotMecanumLogic
     {
     public:
-        void setMotion(const Translation2D& translation, double rotationalOffset);
-        void setTranslation(const Translation2D& translation);
+        void setMotion(const AbstractVelocity2D& translation, double rotationalOffset);
+        void setTranslation(const AbstractVelocity2D& translation);
         void setRotationOffset(double rotationalOffset);
 
-        Translation2D getTranslation() const;
+        AbstractVelocity2D getTranslation() const;
         double getRotationOffset() const;
         AbstractQuadDriveData getWheelSpeeds() const;
 
@@ -42,7 +42,7 @@ namespace chassis
         double getRearLeftWheelSpeed() const;
         double getRearRightWheelSpeed() const;
 
-        Translation2D translation_{0,0};
+        AbstractVelocity2D translation_{0,0};
         double rotationOffset_{0};
     };
 }

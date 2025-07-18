@@ -2,13 +2,13 @@
 
 namespace chassis
 {
-    void AbstractRobotMecanumLogic::setMotion(const Translation2D& translation, double rotationalOffset)
+    void AbstractRobotMecanumLogic::setMotion(const AbstractVelocity2D& translation, double rotationalOffset)
     {
         setTranslation(translation);
         setRotationOffset(rotationalOffset);
     }
 
-    void AbstractRobotMecanumLogic::setTranslation(const Translation2D& translation)
+    void AbstractRobotMecanumLogic::setTranslation(const AbstractVelocity2D& translation)
     {
         translation_ = translation;
     }
@@ -18,7 +18,7 @@ namespace chassis
         rotationOffset_ = rotationalOffset;
     }
 
-    Translation2D AbstractRobotMecanumLogic::getTranslation() const
+    AbstractVelocity2D AbstractRobotMecanumLogic::getTranslation() const
     {
         return translation_;
     }

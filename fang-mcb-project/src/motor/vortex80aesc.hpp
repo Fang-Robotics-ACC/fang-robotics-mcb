@@ -19,7 +19,7 @@ namespace motor
     {
     public:
         using Directionality = ::motor::Directionality;
-        Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
+        Vortex80AEsc(tap::gpio::Pwm& pwmDriver, const trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
         /**
          * Sends the appropriate arming signal
          */

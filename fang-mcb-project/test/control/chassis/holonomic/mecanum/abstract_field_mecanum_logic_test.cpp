@@ -17,11 +17,11 @@ TEST(translationSetterGetterTest, AbstractFieldMecanumLogic)
     //Lovely degree to radian conversion
     fieldMecanumLogic.setRobotAngle(facingLeft);
 
-    const chassis::Translation2D forward{0.0, 1.0};
+    const chassis::AbstractVelocity2D forward{0.0, 1.0};
 
     fieldMecanumLogic.setTranslation(forward);
 
-    chassis::Translation2D result{fieldMecanumLogic.getTranslation()};
+    chassis::AbstractVelocity2D result{fieldMecanumLogic.getTranslation()};
 
     EXPECT_DOUBLE_EQ(result.x, forward.x);
     EXPECT_DOUBLE_EQ(result.y, forward.y);
@@ -34,7 +34,7 @@ TEST(translationSetterGetterTest, AbstractFieldMecanumLogic)
     EXPECT_DOUBLE_EQ(result.x, forward.x);
     EXPECT_DOUBLE_EQ(result.y, forward.y);
 
-    const chassis::Translation2D right{1.0, 0.0};
+    const chassis::AbstractVelocity2D right{1.0, 0.0};
     fieldMecanumLogic.setTranslation(right);
 
     result = fieldMecanumLogic.getTranslation();
@@ -54,11 +54,11 @@ TEST(harderTranslationSetterGetterTest, AbstractFieldMecanumLogic)
     //Lovely degree to radian conversion
     fieldMecanumLogic.setRobotAngle(angle);
 
-    chassis::Translation2D movement{0.0, 0.0};
+    chassis::AbstractVelocity2D movement{0.0, 0.0};
 
     fieldMecanumLogic.setTranslation(movement);
 
-    chassis::Translation2D result{fieldMecanumLogic.getTranslation()};
+    chassis::AbstractVelocity2D result{fieldMecanumLogic.getTranslation()};
 
     EXPECT_DOUBLE_EQ(result.x, movement.x);
     EXPECT_DOUBLE_EQ(result.y, movement.y);
@@ -72,7 +72,7 @@ TEST(harderTranslationSetterGetterTest, AbstractFieldMecanumLogic)
 
 
     angle = Degrees{0.05};
-    movement = chassis::Translation2D{-23, -34};
+    movement = chassis::AbstractVelocity2D{-23, -34};
     fieldMecanumLogic.setRobotAngle(angle);
     fieldMecanumLogic.setTranslation(movement);
 
@@ -81,7 +81,7 @@ TEST(harderTranslationSetterGetterTest, AbstractFieldMecanumLogic)
     EXPECT_DOUBLE_EQ(result.y, movement.y);
 
     angle = Degrees{-270};
-    movement = chassis::Translation2D{34.034, -34};
+    movement = chassis::AbstractVelocity2D{34.034, -34};
     fieldMecanumLogic.setRobotAngle(angle);
     fieldMecanumLogic.setTranslation(movement);
 
@@ -90,7 +90,7 @@ TEST(harderTranslationSetterGetterTest, AbstractFieldMecanumLogic)
     EXPECT_DOUBLE_EQ(result.y, movement.y);
 
     angle = Degrees{7056};
-    movement = chassis::Translation2D{-23, -34};
+    movement = chassis::AbstractVelocity2D{-23, -34};
     fieldMecanumLogic.setRobotAngle(angle);
     fieldMecanumLogic.setTranslation(movement);
 
@@ -104,7 +104,7 @@ TEST(AbstractFieldMecanumLogic, ZeroIsZero)
     //0 case
     chassis::AbstractMecanumCalculator calc{};
     chassis::AbstractFieldMecanumLogic fieldLogic{};
-    chassis::Translation2D expectedTranslation{0.0, -2.23};
+    chassis::AbstractVelocity2D expectedTranslation{0.0, -2.23};
     double expectedRotationOffset{20.0};
 
     fieldLogic.setMotion(expectedTranslation, expectedRotationOffset);
@@ -122,7 +122,7 @@ TEST(AbstractFieldMecanumLogic, ForwardCase)
 {
     chassis::AbstractMecanumCalculator calc{};
     chassis::AbstractFieldMecanumLogic fieldLogic{};
-    chassis::Translation2D expectedTranslation{0, 12.3};
+    chassis::AbstractVelocity2D expectedTranslation{0, 12.3};
     double expectedRotationOffset{0.0};
 
     fieldLogic.setMotion(expectedTranslation, expectedRotationOffset);
@@ -139,14 +139,14 @@ TEST(AbstractFieldMecanumLogic, offsetAnglePositive)
 {
     chassis::AbstractMecanumCalculator calc{};
     chassis::AbstractFieldMecanumLogic fieldLogic{};
-    chassis::Translation2D fieldTranslation{0, 1.0};
+    chassis::AbstractVelocity2D fieldTranslation{0, 1.0};
     double expectedRotationOffset{10.0};
     const Degrees robotAngle{90};
 
     fieldLogic.setMotion(fieldTranslation, expectedRotationOffset);
     fieldLogic.setRobotAngle(robotAngle);
 
-    chassis::Translation2D expectedTranslation{1.0, 0};
+    chassis::AbstractVelocity2D expectedTranslation{1.0, 0};
 
     calc.setWheelSpeeds(fieldLogic.getWheelSpeeds());
 

@@ -5,13 +5,13 @@
 
 namespace chassis
 {
-    void AbstractFieldMecanumLogic::setMotion(const Translation2D& translation, double rotationOffset)
+    void AbstractFieldMecanumLogic::setMotion(const AbstractVelocity2D& translation, double rotationOffset)
     {
         setRotationOffset(rotationOffset);
         setTranslation(translation);
     }
 
-    void AbstractFieldMecanumLogic::setTotalMotion(const Translation2D& translation, double rotationOffset, const Radians& robotAngle)
+    void AbstractFieldMecanumLogic::setTotalMotion(const AbstractVelocity2D& translation, double rotationOffset, const Radians& robotAngle)
     {
         setRobotAngle(robotAngle);
         setRotationOffset(rotationOffset);
@@ -28,7 +28,7 @@ namespace chassis
         setTranslation(fieldTranslation_);
     }
 
-    void AbstractFieldMecanumLogic::setTranslation(const Translation2D& translation)
+    void AbstractFieldMecanumLogic::setTranslation(const AbstractVelocity2D& translation)
     {
         //Counteract the robot's angle relative to the field
         fieldTranslation_ = translation;
@@ -45,7 +45,7 @@ namespace chassis
         return robotAngle_;
     }
 
-    Translation2D AbstractFieldMecanumLogic::getTranslation() const
+    AbstractVelocity2D AbstractFieldMecanumLogic::getTranslation() const
     {
         return fieldTranslation_;
     }
@@ -55,7 +55,7 @@ namespace chassis
         return robotwiseMecanumLogic_.getRotationOffset();
     }
 
-    Translation2D AbstractFieldMecanumLogic::fieldToRobotTranslation(const Translation2D& translation) const
+    AbstractVelocity2D AbstractFieldMecanumLogic::fieldToRobotTranslation(const AbstractVelocity2D& translation) const
     {
         //If the robot is facing left and needs to move forward relative to the field,
         //Then the motion vector that is relative to the robot facing forwward needs to be rotated
@@ -63,7 +63,7 @@ namespace chassis
         return math::rotateVector2D(translation, -robotAngle_);
     }
 
-    Translation2D AbstractFieldMecanumLogic::robotToFieldTranslation(const Translation2D& translation) const
+    AbstractVelocity2D AbstractFieldMecanumLogic::robotToFieldTranslation(const AbstractVelocity2D& translation) const
     {
         //If the robot is facing left and needs to move forward relative to the field,
         //Then the motion vector that is relative to the robot facing forwward needs to be rotated

@@ -7,7 +7,7 @@
 
 using Calculator = chassis::AbstractMecanumCalculator;
 using Logic = chassis::AbstractRobotMecanumLogic;
-using Translation2D = chassis::Translation2D;
+using Translation2D = chassis::AbstractVelocity2D;
 
 //Todo: Add intermediate test cases
 
