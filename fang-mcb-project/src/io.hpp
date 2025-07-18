@@ -5,12 +5,16 @@
 
 
 static constexpr float kMainLoopFrequency{500.0f}; //Hertz
-// Place any sort of input/output initialization here. For example, place
-// serial init stuff here.
+/**
+ * Place any sort of input/output initialization here. For example, place
+ * serial init stuff here.
+ */
 void initializeIo(Drivers& drivers);
 
-// Anything that you would like to be called place here. It will be called
-// very frequently. Use PeriodicMilliTimers if you don't want something to be
-// called as frequently.
+/**
+ * Anything that you would like to be called place here. It will be called
+ * very frequently. Use PeriodicMilliTimers if you don't want something to be
+ * called as frequently.
+ */
 void updateIo(Drivers& drivers);
 #endif
