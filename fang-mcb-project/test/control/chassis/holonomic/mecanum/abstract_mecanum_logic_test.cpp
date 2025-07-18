@@ -1,6 +1,5 @@
 #include "control/chassis/holonomic/mecanum/logic/abstract_mecanum_calculator.hpp"
 #include "control/chassis/holonomic/mecanum/logic/abstract_robot_mecanum_logic.hpp"
-#include "chassislogicaliases.hpp"
 
 #include <gtest/gtest.h>
 #include <iostream>

@@ -1,8 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_MECANUM_MECANUM_CALCULATOR_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_MECANUM_MECANUM_CALCULATOR_HPP
-
 #include "abstract_mecanum_calculator.hpp"
-#include "chassislogicaliases.hpp"
 #include "unitaliases.hpp"
 
 #include "modm/math/geometry/vector.hpp"

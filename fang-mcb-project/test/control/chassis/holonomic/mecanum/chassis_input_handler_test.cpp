@@ -1,7 +1,6 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include "control/chassis/chassis_input_handler.hpp"
-#include "configuration/chassislogicaliases.hpp"
 #include "unitaliases.hpp"
 #include "drivers.hpp"
 #include "tap/mock/remote_mock.hpp"
