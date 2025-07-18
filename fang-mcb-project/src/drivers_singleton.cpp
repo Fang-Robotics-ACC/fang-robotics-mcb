@@ -18,24 +18,12 @@
  */
 
 #ifndef ENV_UNIT_TESTS
-
 #include "drivers_singleton.hpp"
-/**
- * Class that allows one to construct a Drivers instance because of frienship
- * with the Drivers class.
- */
-class DriversSingleton
+
+Drivers DriversSingleton::drivers{};
+
+Drivers& DriversSingleton::getDrivers()
 {
-public:
-    static Drivers drivers;
-};  // class DriversSingleton
-
-Drivers DriversSingleton::drivers;
-
-Drivers *DoNotUse_getDrivers() { return &DriversSingleton::drivers; }
-
-Drivers& DoNotUse_getDriversReference()
-{
-    return DriversSingleton::drivers;
+    return drivers_;
 }
 #endif
