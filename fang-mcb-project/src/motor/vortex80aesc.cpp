@@ -16,29 +16,29 @@
 namespace motor
 {
 
-    const math::CoolLerp Vortex80AEsc::m_bidirectionalMap{mk_bidirectionalPoint1, mk_bidirectionalPoint2};
-    const math::CoolLerp Vortex80AEsc::m_unidirectionalMap{mk_unidirectionalPoint1, mk_unidirectionalPoint2};
+    const math::CoolLerp Vortex80AEsc::kBidirectionalMap_{kBidirectionalPoint1_, kBidirectionalPoint2_};
+    const math::CoolLerp Vortex80AEsc::kUnidirectionalMap_{kUnidirectionalPoint1_, kUnidirectionalPoint2_};
 
     Vortex80AEsc::Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality)
-    : m_pwm{pwm}, m_pwmData{pwmData}, m_directionality{directionality}, mk_cyclePeriod{1.0 / pwmData.pinFrequency}
+    : pwmDriver_{pwm}, pwmData_{pwmData}, kDirectionality_{directionality}, kCyclePeriod_{1.0 / pwmData.pinFrequency}
     {
     }
     void Vortex80AEsc::sendArmingSignal()
     {
-        switch(m_directionality)
+        switch(kDirectionality_)
         {
             case Directionality::BIDIRECTIONAL:
-                setPulseDuration(mk_bidirectionalArmingSignal);
+                setPulseDuration(kBidirectionalArmingSignal_);
                 break;
             case Directionality::UNIDIRECTIONAL:
-                setPulseDuration(mk_unidirectionalArmingSignal);
+                setPulseDuration(kUnidirectionalArmingSignal_);
                 break;
         }
     }
     void Vortex80AEsc::armingRoutine()
     {
         sendArmingSignal();
-        modm::delay_ms(mk_armingPeriod.to<double>());
+        modm::delay_ms(kArmingPeriod_.to<double>());
     }
     void Vortex80AEsc::setSpeed(double speedRangePercentage)
     {
@@ -46,14 +46,14 @@ namespace motor
     }
     void Vortex80AEsc::setPulseDuration(const Microseconds& duration)
     {
-        assert(duration <= mk_cyclePeriod && "The pulse duration exceeds cycle period");
-        const double dutyCycle{duration / mk_cyclePeriod}; //Self explanatory if you know pwm lol
+        assert(duration <= kCyclePeriod_ && "The pulse duration exceeds cycle period");
+        const double dutyCycle{duration / kCyclePeriod_}; //Self explanatory if you know pwm lol
         pwmWrite(dutyCycle);
     }
     Microseconds Vortex80AEsc::calculatePeriod(double speedRangePercentage) const
     {
         Microseconds period{0};
-        switch (m_directionality)
+        switch (kDirectionality_)
         {
             case Directionality::BIDIRECTIONAL:
                 period = calculateBidirectionalPeriod(speedRangePercentage);
@@ -67,24 +67,24 @@ namespace motor
     }
     Microseconds Vortex80AEsc::calculateUnidirectionalPeriod(double speedRangePercentage) const
     {
-        //assert(mk_unidirectionalMin <= speedRangePercentage && speedRangePercentage <= mk_unidirectionalMax && "Unidirectional limit is [0,1]");
-        return Microseconds{m_unidirectionalMap.interpolate(speedRangePercentage)};
+        //assert(kUnidirectionalMin_ <= speedRangePercentage && speedRangePercentage <= kUnidirectionalMax_ && "Unidirectional limit is [0,1]");
+        return Microseconds{kUnidirectionalMap_.interpolate(speedRangePercentage)};
     }
     Microseconds Vortex80AEsc::calculateBidirectionalPeriod(double speedRangePercentage) const
     {
-        //assert(mk_bidirectionalMin <= speedRangePercentage && speedRangePercentage <= mk_bidirectionalMax && "Bidirectional limit is [-1,1]");
-        return Microseconds{m_bidirectionalMap.interpolate(speedRangePercentage)};
+        //assert(kBidirectionalMin_ <= speedRangePercentage && speedRangePercentage <= kBidirectionalMax_ && "Bidirectional limit is [-1,1]");
+        return Microseconds{kBidirectionalMap_.interpolate(speedRangePercentage)};
     }
     void Vortex80AEsc::setDirectionality(const Directionality& directionality)
     {
-        m_directionality = directionality;
+        kDirectionality_ = directionality;
     }
     Vortex80AEsc::Directionality Vortex80AEsc::getDirectionality() const
     {
-        return m_directionality;
+        return kDirectionality_;
     }
     void Vortex80AEsc::pwmWrite(double dutyCycle)
     {
-        m_pwm.write(dutyCycle, m_pwmData.pwmPin);
+        pwmDriver_.write(dutyCycle, pwmData_.pwmPin);
     }
 }

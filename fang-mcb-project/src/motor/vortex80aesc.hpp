@@ -40,32 +40,32 @@ namespace motor
         Directionality getDirectionality() const;
     private:
         //Maximum and minimum speed range percentages
-        static constexpr double mk_bidirectionalMin {-1.0};
-        static constexpr double mk_bidirectionalMax {1.0};
-        static constexpr double mk_unidirectionalMin {0.0};
-        static constexpr double mk_unidirectionalMax {1.0};
+        static constexpr double kBidirectionalMin_ {-1.0};
+        static constexpr double kBidirectionalMax_ {1.0};
+        static constexpr double kUnidirectionalMin_ {0.0};
+        static constexpr double kUnidirectionalMax_ {1.0};
 
-        static constexpr Microseconds mk_bidirectionalArmingSignal{1500};
-        static constexpr Microseconds mk_unidirectionalArmingSignal{1000};
-        static constexpr Milliseconds mk_armingPeriod{500};
+        static constexpr Microseconds kBidirectionalArmingSignal_{1500};
+        static constexpr Microseconds kUnidirectionalArmingSignal_{1000};
+        static constexpr Milliseconds kArmingPeriod_{500};
         //Map speed range percentage of -1.0 to 1000 us
-        static constexpr math::CoolLerp::Vector2D mk_bidirectionalPoint1{-1.0, 1000.0};
+        static constexpr math::CoolLerp::Vector2D kBidirectionalPoint1_{-1.0, 1000.0};
         //Map speed rnage percentage of 1.0 to 2000 us
-        static constexpr math::CoolLerp::Vector2D mk_bidirectionalPoint2{1.0, 2000.0};
+        static constexpr math::CoolLerp::Vector2D kBidirectionalPoint2_{1.0, 2000.0};
 
         //Map speed range percentage of 0.0 to 1000 us
-        static constexpr math::CoolLerp::Vector2D mk_unidirectionalPoint1{0.0, 1000.0};
+        static constexpr math::CoolLerp::Vector2D kUnidirectionalPoint1_{0.0, 1000.0};
         //Map speed rnage percentage of 1.0 to 2000 us
-        static constexpr math::CoolLerp::Vector2D mk_unidirectionalPoint2{1.0, 2000.0};
+        static constexpr math::CoolLerp::Vector2D kUnidirectionalPoint2_{1.0, 2000.0};
 
         //Maps
-        static const math::CoolLerp m_bidirectionalMap;
-        static const math::CoolLerp m_unidirectionalMap;
+        static const math::CoolLerp kBidirectionalMap_;
+        static const math::CoolLerp kUnidirectionalMap_;
 
-        tap::gpio::Pwm& m_pwm;
-        trap::gpio::PwmData m_pwmData;
-        const Microseconds mk_cyclePeriod;
-        Directionality m_directionality;
+        tap::gpio::Pwm& pwmDriver_;
+        trap::gpio::PwmData pwmData_;
+        const Microseconds kCyclePeriod_;
+        Directionality kDirectionality_;
 
         Microseconds calculateUnidirectionalPeriod(double speedRangePercentage) const;
         Microseconds calculateBidirectionalPeriod(double speedRangePercentage) const;
