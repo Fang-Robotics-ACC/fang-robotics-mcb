@@ -39,28 +39,34 @@ namespace motor
         void setDirectionality(const Directionality& directionality);
         Directionality getDirectionality() const;
     private:
+        //Maximum and minimum speed range percentages
+        static constexpr double mk_bidirectionalMin {-1.0};
+        static constexpr double mk_bidirectionalMax {1.0};
+        static constexpr double mk_unidirectionalMin {0.0};
+        static constexpr double mk_unidirectionalMax {1.0};
+
+        static constexpr Microseconds mk_bidirectionalArmingSignal{1500};
+        static constexpr Microseconds mk_unidirectionalArmingSignal{1000};
+        static constexpr Milliseconds mk_armingPeriod{500};
+        //Map speed range percentage of -1.0 to 1000 us
+        static constexpr math::CoolLerp::Vector2D mk_bidirectionalPoint1{-1.0, 1000.0};
+        //Map speed rnage percentage of 1.0 to 2000 us
+        static constexpr math::CoolLerp::Vector2D mk_bidirectionalPoint2{1.0, 2000.0};
+
+        //Map speed range percentage of 0.0 to 1000 us
+        static constexpr math::CoolLerp::Vector2D mk_unidirectionalPoint1{0.0, 1000.0};
+        //Map speed rnage percentage of 1.0 to 2000 us
+        static constexpr math::CoolLerp::Vector2D mk_unidirectionalPoint2{1.0, 2000.0};
+
+        //Maps
+        static const math::CoolLerp m_bidirectionalMap;
+        static const math::CoolLerp m_unidirectionalMap;
+
         tap::gpio::Pwm& m_pwm;
         trap::gpio::PwmData m_pwmData;
         const Microseconds mk_cyclePeriod;
-        //Maximum and minimum speed range percentages
-        const double mk_bidirectionalMin {-1.0};
-        const double mk_bidirectionalMax {1.0};
-        const double mk_unidirectionalMin {0.0};
-        const double mk_unidirectionalMax {1.0};
         Directionality m_directionality;
-        const Microseconds mk_bidirectionalArmingSignal{1500};
-        const Microseconds mk_unidirectionalArmingSignal{1000};
-        const Milliseconds mk_armingPeriod{500};
-        //Map speed range percentage of -1.0 to 1000 us
-        const math::CoolLerp::Vector2D mk_bidirectionalPoint1{-1.0, 1000.0};
-        //Map speed rnage percentage of 1.0 to 2000 us
-        const math::CoolLerp::Vector2D mk_bidirectionalPoint2{1.0, 2000.0};
-        math::CoolLerp m_bidirectionalMap{mk_bidirectionalPoint1, mk_bidirectionalPoint2};
-        //Map speed range percentage of 0.0 to 1000 us
-        const math::CoolLerp::Vector2D mk_unidirectionalPoint1{0.0, 1000.0};
-        //Map speed rnage percentage of 1.0 to 2000 us
-        const math::CoolLerp::Vector2D mk_unidirectionalPoint2{1.0, 2000.0};
-        math::CoolLerp m_unidirectionalMap{mk_unidirectionalPoint1, mk_unidirectionalPoint2};
+
         Microseconds calculateUnidirectionalPeriod(double speedRangePercentage) const;
         Microseconds calculateBidirectionalPeriod(double speedRangePercentage) const;
         Microseconds calculatePeriod (double speedRangePercentage) const;

@@ -15,6 +15,10 @@
 
 namespace motor
 {
+
+    const math::CoolLerp Vortex80AEsc::m_bidirectionalMap{mk_bidirectionalPoint1, mk_bidirectionalPoint2};
+    const math::CoolLerp Vortex80AEsc::m_unidirectionalMap{mk_unidirectionalPoint1, mk_unidirectionalPoint2};
+
     Vortex80AEsc::Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality)
     : m_pwm{pwm}, m_pwmData{pwmData}, m_directionality{directionality}, mk_cyclePeriod{1.0 / pwmData.pinFrequency}
     {
