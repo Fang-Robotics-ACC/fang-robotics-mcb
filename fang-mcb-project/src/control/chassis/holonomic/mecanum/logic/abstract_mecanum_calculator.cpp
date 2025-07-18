@@ -3,10 +3,11 @@
 
 namespace chassis
 {
-    void AbstractMecanumCalculator::setWheelSpeeds(const AbstractQuadDriveData& quadDriveData)
+    void AbstractMecanumCalculator::setWheelSpeeds(const AbstractWheelSpeeds& quadDriveData)
     {
         quadDriveData_ = quadDriveData;
     }
+
     AbstractVelocity2D AbstractMecanumCalculator::getTranslation() const
     {
         //Refer to equation 22 in https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf

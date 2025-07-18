@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_MECANUM_LOGIC_ABSTRACT_MECANUM_CALCULATOR_HPP
 #include "unitaliases.hpp"
 #include "control/chassis/data/physics_alias.hpp"
-#include "chassislogicaliases.hpp"
+#include "control/chassis/drive/quad_drive/data/quad_drive_data.hpp"
 
 namespace chassis
 {
@@ -25,7 +25,7 @@ namespace chassis
     {
     public:
         AbstractMecanumCalculator(){}
-        void setWheelSpeeds(const AbstractQuadDriveData& quadDriveData);
+        void setWheelSpeeds(const AbstractWheelSpeeds& quadDriveData);
         /**
          * Returns the movement of the robot relative to the robot.
          * Refer to field mecanum calculator to get the translation relative
@@ -44,7 +44,7 @@ namespace chassis
          */
         double getRotationOffset() const;
     private:
-        AbstractQuadDriveData quadDriveData_{0,0,0,0};
+        AbstractWheelSpeeds quadDriveData_{0,0,0,0};
     };
 }
 #endif

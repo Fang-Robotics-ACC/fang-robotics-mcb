@@ -2,6 +2,7 @@
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_MECANUM_LOGIC_ABSTRACT_FIELD_MECANUM_LOGIC_HPP
 #include "abstract_robot_mecanum_logic.hpp"
 #include "control/chassis/data/physics_alias.hpp"
+#include "control/chassis/drive/quad_drive/data/quad_drive_data.hpp"
 #include "unitaliases.hpp"
 
 namespace chassis
@@ -29,7 +30,7 @@ namespace chassis
     class AbstractFieldMecanumLogic
     {
     public:
-        using AbstractQuadDriveData = RawQuadDriveData;
+        using AbstractQuadDriveData = AbstractWheelSpeeds;
 
         void setMotion(const AbstractVelocity2D& translation, double rotationalOffset);
 

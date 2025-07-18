@@ -1,6 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_MECANUM_LOGIC_ABSTRACT_ROBOT_MECANUM_LOGIC_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_MECANUM_LOGIC_ABSTRACT_ROBOT_MECANUM_LOGIC_HPP
 #include "control/chassis/data/physics_alias.hpp"
+#include "control/chassis/drive/quad_drive/data/quad_drive_data.hpp"
 #include "chassislogicaliases.hpp"
 
 namespace chassis
@@ -36,7 +37,7 @@ namespace chassis
 
         AbstractVelocity2D getTranslation() const;
         double getRotationOffset() const;
-        AbstractQuadDriveData getWheelSpeeds() const;
+        AbstractWheelSpeeds getWheelSpeeds() const;
 
     private:
         double getFrontRightWheelSpeed() const;

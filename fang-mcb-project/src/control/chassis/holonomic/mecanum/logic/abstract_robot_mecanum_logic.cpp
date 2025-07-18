@@ -28,10 +28,13 @@ namespace chassis
         return rotationOffset_;
     }
 
-    AbstractQuadDriveData AbstractRobotMecanumLogic::getWheelSpeeds() const
+    AbstractWheelSpeeds AbstractRobotMecanumLogic::getWheelSpeeds() const
     {
-        return AbstractQuadDriveData{getFrontLeftWheelSpeed(), getFrontRightWheelSpeed(),
-                             getRearLeftWheelSpeed(),  getRearRightWheelSpeed()};
+        return
+        {
+            getFrontLeftWheelSpeed(), getFrontRightWheelSpeed(),
+            getRearLeftWheelSpeed(),  getRearRightWheelSpeed()
+        };
     }
 
     double AbstractRobotMecanumLogic::getFrontLeftWheelSpeed() const

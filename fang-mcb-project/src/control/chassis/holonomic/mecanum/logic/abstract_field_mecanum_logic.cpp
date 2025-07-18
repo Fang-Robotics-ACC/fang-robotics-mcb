@@ -71,7 +71,7 @@ namespace chassis
         return math::rotateVector2D(translation, robotAngle_);
     }
 
-    AbstractQuadDriveData AbstractFieldMecanumLogic::getWheelSpeeds() const
+    AbstractWheelSpeeds AbstractFieldMecanumLogic::getWheelSpeeds() const
     {
         return robotwiseMecanumLogic_.getWheelSpeeds();
     }
