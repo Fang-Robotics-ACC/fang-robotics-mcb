@@ -1,10 +1,12 @@
 #include "vortex80aesc.hpp"
+#include "communication/gpio/pwm/pwm_info.hpp"
+
 #include "trap/communication/pwm_data.hpp"
-#include "pwmconstants.hpp"
 
 #include "modm/architecture/interface/delay.hpp"
 #include "modm/math/interpolation/linear.hpp"
 #include "modm/container/pair.hpp"
+
 #include "tap/communication/gpio/pwm.hpp"
 
 #include <cassert>
