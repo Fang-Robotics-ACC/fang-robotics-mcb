@@ -48,14 +48,8 @@
                 "fang-mcb-project/taproot/modm/ext/cmsis/dsp",
                 "fang-mcb-project/lib/RAIL-Robomaster-Abstraction-Interface-Library/include",
                 "fang-mcb-project/lib/units/include",
-                "fang-mcb-project/src/control",
-                "fang-mcb-project/src/motor",
-                "fang-mcb-project/src/util",
-                "fang-mcb-project/src/wrap",
-                "fang-mcb-project/src/wrap/trap",
-                "fang-mcb-project/src/wrap/trap/communication",
                 "fang-mcb-project/robot-type",
-                "fang-mcb-project/"
+                "fang-mcb-project/src/wrap"
             ],
             "compilerPath": "arm-none-eabi-g++",
             "intelliSenseMode": "gcc-arm",
