@@ -86,6 +86,7 @@ int main()
         {
             drivers.motorTimeoutUpdate();
         }
+
         modm::delay_us(10); //Any longer and refSerial will not work
     }
     return 0;
