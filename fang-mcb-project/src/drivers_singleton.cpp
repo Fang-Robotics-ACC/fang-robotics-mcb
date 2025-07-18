@@ -18,17 +18,7 @@
  */
 
 #ifndef ENV_UNIT_TESTS
-
 #include "drivers_singleton.hpp"
-/**
- * Class that allows one to construct a Drivers instance because of frienship
- * with the Drivers class.
- */
-class DriversSingleton
-{
-public:
-    static Drivers drivers;
-};  // class DriversSingleton
 
 Drivers DriversSingleton::drivers{};
 
