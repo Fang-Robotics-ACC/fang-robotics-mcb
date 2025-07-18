@@ -22,6 +22,15 @@
 #ifndef ENV_UNIT_TESTS
 
 #include "drivers.hpp"
+/**
+ * Class that allows one to construct a Drivers instance because of frienship
+ * with the Drivers class.
+ */
+class DriversSingleton
+{
+public:
+    static Drivers drivers;
+};  // class DriversSingleton
 
 /**
  * @return The singleton instance of the Drivers class. This is the only instance of the
