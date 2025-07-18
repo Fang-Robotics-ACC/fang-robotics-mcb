@@ -69,7 +69,7 @@ int main()
     Drivers& drivers{DoNotUse_getDriversReference()};
 
     Board::initialize();
-    initializeIo(drivers);
+    drivers.initializeIo();
 
     //This prevents the large size of the robot class from hoarding the stack
     //which causes annoying stack overflow issues
@@ -79,26 +79,23 @@ int main()
     robot.initialize();
 
     #ifdef PLATFORM_HOSTED
-    tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
-    // Blocking call, waits until Windows Simulator connects.
-    tap::communication::TCPServer::MainServer()->getConnection();
+        tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
+        // Blocking call, waits until Windows Simulator connects.
+        tap::communication::TCPServer::MainServer()->getConnection();
     #endif
+
     while (1)
     {
-        //Alert that there is no ref data
-        PROFILE(drivers.profiler, updateIo, (drivers));
+        drivers.update();
         if(drivers.refSerial.getRefSerialReceivingData())
         {
             //drivers.pwm.write(0.05, tap::gpio::Pwm::Buzzer);
-
         }
 
+        //Prevent motor signals from being spammed
         if (sendMotorTimeout.execute())
         {
-            PROFILE(drivers.profiler, drivers.bmi088.periodicIMUUpdate, ());
-            PROFILE(drivers.profiler, drivers.commandScheduler.run, ());
-            PROFILE(drivers.profiler, drivers.djiMotorTxHandler.encodeAndSendCanData, ());
-            PROFILE(drivers.profiler, drivers.terminalSerial.update, ());
+            drivers.motorTimeoutUpdate();
         }
         modm::delay_us(10);
     }
