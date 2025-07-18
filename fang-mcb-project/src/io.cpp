@@ -8,11 +8,11 @@
 #include "tap/motor/motorsim/dji_motor_sim_handler.hpp"
 #endif
 
-void initializeIo(Drivers& drivers)
+void initializeIo()
 {
 }
 
-void updateIo(Drivers& drivers)
+void updateIo()
 {
     #ifdef PLATFORM_HOSTED
     tap::motor::motorsim::DjiMotorSimHandler::getInstance()->updateSims();
