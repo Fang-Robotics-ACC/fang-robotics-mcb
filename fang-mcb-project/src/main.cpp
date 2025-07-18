@@ -87,10 +87,6 @@ int main()
     while (1)
     {
         drivers.update();
-        if(drivers.refSerial.getRefSerialReceivingData())
-        {
-            //drivers.pwm.write(0.05, tap::gpio::Pwm::Buzzer);
-        }
 
         //Prevent motor signals from being spammed
         if (sendMotorTimeout.execute())
