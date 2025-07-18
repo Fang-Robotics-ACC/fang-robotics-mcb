@@ -4,8 +4,7 @@
 #include "unitaliases.hpp"
 namespace chassis
 {
-    using RawQuadDriveData = QuadDriveData<double>;
-    using AbstractQuadDriveData = RawQuadDriveData; //Backwards compatibility while refactor TODO: remove
+    using AbstractWheelSpeeds = QuadDriveData<double>;
     using WheelSpeeds = QuadDriveData<RPM>;
     using QuadDriveWheelSpeedsRadPersec = QuadDriveData<RadiansPerSecond>;
 }
