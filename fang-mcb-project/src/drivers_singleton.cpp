@@ -30,9 +30,7 @@ public:
     static Drivers drivers;
 };  // class DriversSingleton
 
-Drivers DriversSingleton::drivers;
-
-Drivers *DoNotUse_getDrivers() { return &DriversSingleton::drivers; }
+Drivers DriversSingleton::drivers{};
 
 Drivers& DoNotUse_getDriversReference()
 {
