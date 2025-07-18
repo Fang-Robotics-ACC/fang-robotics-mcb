@@ -1,7 +1,8 @@
 #ifndef FANG_ROBOTICS_MCB_TRAP_CONTROL_CHASSIS_POWER_LIMITER_HPP
 #define FANG_ROBOTICS_MCB_TRAP_CONTROL_CHASSIS_POWER_LIMITER_HPP
-#include "unitaliases.hpp"
+#include "wrap/units/units_alias.hpp"
 #include "tap/communication/serial/ref_serial.hpp"
+
 namespace trap::control::chassis
 {
     class PowerLimiter

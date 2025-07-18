@@ -1,7 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_TIME_SIMPLER_TIMER_HPP
 #define FANG_ROBOTICS_MCB_TIME_SIMPLER_TIMER_HPP
-#include "configuration/unitaliases.hpp"
-
+#include "wrap/units/units_alias.hpp"
 #include "modm/architecture/interface/clock.hpp"
 
 namespace chrono

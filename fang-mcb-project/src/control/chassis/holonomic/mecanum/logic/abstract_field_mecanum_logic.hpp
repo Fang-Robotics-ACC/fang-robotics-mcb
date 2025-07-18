@@ -3,7 +3,6 @@
 #include "abstract_robot_mecanum_logic.hpp"
 #include "control/chassis/data/physics_alias.hpp"
 #include "control/chassis/drive/quad_drive/data/quad_drive_data.hpp"
-#include "unitaliases.hpp"
 
 namespace chassis
 {

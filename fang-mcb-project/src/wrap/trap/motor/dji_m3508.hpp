@@ -1,13 +1,14 @@
 #ifndef FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
 #define FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
-#include "unitaliases.hpp"
+#include "drivers.hpp"
+
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
+#include "wrap/units/units_alias.hpp"
 
 #include "tap/motor/dji_motor.hpp"
 #include "tap/motor/dji_motor_encoder.hpp"
 #include "tap/communication/can/can_bus.hpp"
 #include "tap/util_macros.hpp"
-#include "drivers.hpp"
 
 namespace trap
 {
