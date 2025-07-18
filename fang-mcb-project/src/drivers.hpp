@@ -37,6 +37,15 @@ public:
 
 public:
     control::InputHandler inputHandler{remote};
+    void initializeIo();
+    void update();
+    void updateIo();
+    /**
+     * These are assocated classes that needs to be
+     * called at the same interval as the motors are updated
+     * (command scheduler should not spam)
+     */
+    void motorTimeoutUpdate();
 
 };  // class Drivers
 #endif  // DRIVERS_HPP_
