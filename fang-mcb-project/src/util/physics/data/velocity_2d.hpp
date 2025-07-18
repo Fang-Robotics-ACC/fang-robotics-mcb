@@ -1,7 +1,7 @@
-#ifndef FANG_ROBOTICS_MCB_PHYSICS_ALIASES_HPP
-#define FANG_ROBOTICS_MCB_PHYSICS_ALIASES_HPP
-#include "unitaliases.hpp"
+#ifndef FANG_ROBOTICS_MCB_UTIL_VELOCITY_2D_HPP
+#define FANG_ROBOTICS_MCB_UTIL_VELOCITY_2D_HPP
 #include "util/math/linear/vector_2d.hpp"
+#include "wrap/units/units_alias.hpp"
 
 namespace physics 
 {

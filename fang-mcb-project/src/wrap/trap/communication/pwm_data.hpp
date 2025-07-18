@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_TRAP_PWM_DATA_HPP
 #define FANG_ROBOTICS_MCB_TRAP_PWM_DATA_HPP
-#include "unitaliases.hpp"
+#include "wrap/units/units_alias.hpp"
 
 #include "tap/communication/gpio/pwm.hpp"
 

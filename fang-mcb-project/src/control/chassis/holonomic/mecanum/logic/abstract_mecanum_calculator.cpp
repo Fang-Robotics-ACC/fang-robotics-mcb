@@ -1,13 +1,13 @@
 #include "abstract_mecanum_calculator.hpp"
-#include "chassislogicaliases.hpp"
 
 namespace chassis
 {
-    void AbstractMecanumCalculator::setWheelSpeeds(const AbstractQuadDriveData& quadDriveData)
+    void AbstractMecanumCalculator::setWheelSpeeds(const AbstractWheelSpeeds& quadDriveData)
     {
         quadDriveData_ = quadDriveData;
     }
-    Translation2D AbstractMecanumCalculator::getTranslation() const
+
+    AbstractVelocity2D AbstractMecanumCalculator::getTranslation() const
     {
         //Refer to equation 22 in https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
         const double ySpeedSum{quadDriveData_.frontLeft + quadDriveData_.frontRight
@@ -18,7 +18,7 @@ namespace chassis
         const double xSpeedSum{quadDriveData_.frontLeft - quadDriveData_.frontRight
                         - quadDriveData_.rearLeft  + quadDriveData_.rearRight};
         const double x{xSpeedSum * 0.25}; //The formula multiplies the sum by 1/4 of the radius
-        return Translation2D{x, y};
+        return AbstractVelocity2D{x, y};
     }
     //Refer to equation 24
     //Positive offset values are counterclockwise

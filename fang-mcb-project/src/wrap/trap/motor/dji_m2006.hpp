@@ -1,10 +1,8 @@
 #ifndef FANG_ROBOTICS_MCB_TRAP_DJI_M2006_HPP
 #define FANG_ROBOTICS_MCB_TRAP_DJI_M2006_HPP
-#include "unitaliases.hpp"
-
 #include "wrap/rail/rail_motors.hpp"
-
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
+#include "wrap/units/units_alias.hpp"
 
 #include "tap/motor/dji_motor.hpp"
 #include "tap/motor/dji_motor_encoder.hpp"

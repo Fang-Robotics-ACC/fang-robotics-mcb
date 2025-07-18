@@ -1,5 +1,5 @@
 #include "gearbox_speed.hpp"
-#include "configuration/unitaliases.hpp"
+#include "wrap/units/units_alias.hpp"
 
 namespace motor
 {

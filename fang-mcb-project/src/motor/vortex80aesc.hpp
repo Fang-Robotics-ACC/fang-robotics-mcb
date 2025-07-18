@@ -1,15 +1,15 @@
 #ifndef FANG_ROBOTICS_MCB_VORTEX_80A_ESC_LOGIC_H
 #define FANG_ROBOTICS_MCB_VORTEX_80A_ESC_LOGIC_H
-#include "unitaliases.hpp"
-
 #include "util/math/linear/cool_lerp.hpp"
 #include "util/math/linear/vector_2d.hpp"
 
 #include "motor/data/directionality.hpp"
 
 #include "wrap/trap/communication/pwm_data.hpp"
+#include "wrap/units/units_alias.hpp"
 
 #include "tap/communication/gpio/pwm.hpp"
+
 namespace motor
 {
     /**
@@ -19,7 +19,7 @@ namespace motor
     {
     public:
         using Directionality = ::motor::Directionality;
-        Vortex80AEsc(tap::gpio::Pwm& pwm, const trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
+        Vortex80AEsc(tap::gpio::Pwm& pwmDriver, const trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
         /**
          * Sends the appropriate arming signal
          */
@@ -39,28 +39,34 @@ namespace motor
         void setDirectionality(const Directionality& directionality);
         Directionality getDirectionality() const;
     private:
-        tap::gpio::Pwm& m_pwm;
-        trap::gpio::PwmData m_pwmData;
-        const Microseconds mk_cyclePeriod;
         //Maximum and minimum speed range percentages
-        const double mk_bidirectionalMin {-1.0};
-        const double mk_bidirectionalMax {1.0};
-        const double mk_unidirectionalMin {0.0};
-        const double mk_unidirectionalMax {1.0};
-        Directionality m_directionality;
-        const Microseconds mk_bidirectionalArmingSignal{1500};
-        const Microseconds mk_unidirectionalArmingSignal{1000};
-        const Milliseconds mk_armingPeriod{500};
+        static constexpr double kBidirectionalMin_ {-1.0};
+        static constexpr double kBidirectionalMax_ {1.0};
+        static constexpr double kUnidirectionalMin_ {0.0};
+        static constexpr double kUnidirectionalMax_ {1.0};
+
+        static constexpr Microseconds kBidirectionalArmingSignal_{1500};
+        static constexpr Microseconds kUnidirectionalArmingSignal_{1000};
+        static constexpr Milliseconds kArmingPeriod_{500};
         //Map speed range percentage of -1.0 to 1000 us
-        const math::CoolLerp::Vector2D mk_bidirectionalPoint1{-1.0, 1000.0};
+        static constexpr math::CoolLerp::Vector2D kBidirectionalPoint1_{-1.0, 1000.0};
         //Map speed rnage percentage of 1.0 to 2000 us
-        const math::CoolLerp::Vector2D mk_bidirectionalPoint2{1.0, 2000.0};
-        math::CoolLerp m_bidirectionalMap{mk_bidirectionalPoint1, mk_bidirectionalPoint2};
+        static constexpr math::CoolLerp::Vector2D kBidirectionalPoint2_{1.0, 2000.0};
+
         //Map speed range percentage of 0.0 to 1000 us
-        const math::CoolLerp::Vector2D mk_unidirectionalPoint1{0.0, 1000.0};
+        static constexpr math::CoolLerp::Vector2D kUnidirectionalPoint1_{0.0, 1000.0};
         //Map speed rnage percentage of 1.0 to 2000 us
-        const math::CoolLerp::Vector2D mk_unidirectionalPoint2{1.0, 2000.0};
-        math::CoolLerp m_unidirectionalMap{mk_unidirectionalPoint1, mk_unidirectionalPoint2};
+        static constexpr math::CoolLerp::Vector2D kUnidirectionalPoint2_{1.0, 2000.0};
+
+        //Maps
+        static const math::CoolLerp kBidirectionalMap_;
+        static const math::CoolLerp kUnidirectionalMap_;
+
+        tap::gpio::Pwm& pwmDriver_;
+        trap::gpio::PwmData pwmData_;
+        const Microseconds kCyclePeriod_;
+        Directionality kDirectionality_;
+
         Microseconds calculateUnidirectionalPeriod(double speedRangePercentage) const;
         Microseconds calculateBidirectionalPeriod(double speedRangePercentage) const;
         Microseconds calculatePeriod (double speedRangePercentage) const;

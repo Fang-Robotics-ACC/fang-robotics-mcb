@@ -1,8 +1,8 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_MECANUM_LOGIC_ABSTRACT_MECANUM_CALCULATOR_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_MECANUM_LOGIC_ABSTRACT_MECANUM_CALCULATOR_HPP
-#include "unitaliases.hpp"
-#include "modm/math/geometry/vector.hpp"
-#include "chassislogicaliases.hpp"
+#include "control/chassis/data/physics_alias.hpp"
+#include "control/chassis/drive/quad_drive/data/quad_drive_data.hpp"
+#include "wrap/units/units_alias.hpp"
 
 namespace chassis
 {
@@ -25,13 +25,13 @@ namespace chassis
     {
     public:
         AbstractMecanumCalculator(){}
-        void setWheelSpeeds(const AbstractQuadDriveData& quadDriveData);
+        void setWheelSpeeds(const AbstractWheelSpeeds& quadDriveData);
         /**
          * Returns the movement of the robot relative to the robot.
          * Refer to field mecanum calculator to get the translation relative
          * to a field.
          */
-        Translation2D getTranslation() const;
+        AbstractVelocity2D getTranslation() const;
         /**
          * If the mecanum drive is to be assumed to be a tank
          * drive, there would be a difference between the overrall
@@ -44,7 +44,7 @@ namespace chassis
          */
         double getRotationOffset() const;
     private:
-        AbstractQuadDriveData quadDriveData_{0,0,0,0};
+        AbstractWheelSpeeds quadDriveData_{0,0,0,0};
     };
 }
 #endif

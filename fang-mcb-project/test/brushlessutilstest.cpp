@@ -17,11 +17,11 @@
  * along with fang-mcb.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <gtest/gtest.h>
 
 #include "motor/util/brushlessutils.hpp"
-#include "unitaliases.hpp"
+#include "wrap/units/units_alias.hpp"
 
+#include <gtest/gtest.h>
 
 TEST(brushlessUtils , RPMVoltageConversion)
 {

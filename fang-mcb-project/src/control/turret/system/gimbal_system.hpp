@@ -1,7 +1,8 @@
 #ifndef FANG_ROBOTICS_MCB_GIMBAL_SYSTEM_HPP
 #define FANG_ROBOTICS_MCB_GIMBAL_SYSTEM_HPP
-#include "unitaliases.hpp"
 #include "drivers.hpp"
+
+#include "wrap/units/units_alias.hpp"
 
 #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
 #include "test/mock/trap/motor/dji_gm6020_mock.hpp"

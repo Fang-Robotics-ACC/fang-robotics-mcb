@@ -1,8 +1,8 @@
 #ifndef FANG_ROBOTICS_MCB_TRAP_DJI_GM6020_HPP
 #define FANG_ROBOTICS_MCB_TRAP_DJI_GM6020_HPP
-#include "unitaliases.hpp"
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
 #include "trap/algorithms/wrapped_radians.hpp"
+#include "wrap/units/units_alias.hpp"
 
 #include "tap/motor/dji_motor.hpp"
 #include "tap/communication/can/can_bus.hpp"
