@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_GEARED_REPEAT_ULTRA_MK2_HPP
 #define FANG_ROBOTICS_MCB_GEARED_REPEAT_ULTRA_MK2_HPP
 #include "repeatultramk2.hpp"
-#include "motor/data/directionality.hpp"
+#include "driver/motor/data/directionality.hpp"
 #include "wrap/trap/communication/pwm_data.hpp"
 #include "wrap/units/units_alias.hpp"
 

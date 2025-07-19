@@ -1,5 +1,5 @@
 #include "dji_m3508.hpp"
-#include "motor/util/gearbox_speed.hpp"
+#include "driver/motor/util/gearbox_speed.hpp"
 
 #include "tap/errors/create_errors.hpp"
 #include <cassert>

@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_GEARBOX_REPEAT_ULTRA_MK2_MOCK_HPP
 #define FANG_ROBOTICS_MCB_GEARBOX_REPEAT_ULTRA_MK2_MOCK_HPP
-#include "motor/gearboxrepeatultramk2.hpp"
+#include "driver/motor/gearboxrepeatultramk2.hpp"
 
 #include "wrap/units/units_alias.hpp"
 
