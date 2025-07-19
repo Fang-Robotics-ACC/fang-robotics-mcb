@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_CHASSIS_SUBSYSTEM_HPP
 #define FANG_ROBOTICS_MCB_CHASSIS_SUBSYSTEM_HPP
 #include "driver/drivers.hpp"
-#include "../../driver/motor/data/directionality.hpp"
+#include "driver/motor/data/directionality.hpp"
 #include "control/chassis/holonomic/mecanum/logic/field_mecanum_logic.hpp"
 #include "util/physics/data/velocity_2d.hpp"
 #include "wrap/units/units_alias.hpp"
