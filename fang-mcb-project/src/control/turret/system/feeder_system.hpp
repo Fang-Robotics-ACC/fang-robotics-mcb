@@ -11,7 +11,7 @@
 #include "trap/motor/dji_m2006.hpp"
 #endif
 
-#include "drivers.hpp"
+#include "driver/drivers.hpp"
 
 namespace control
 {

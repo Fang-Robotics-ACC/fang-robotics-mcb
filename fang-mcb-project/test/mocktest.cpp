@@ -2,7 +2,7 @@
 
 #include "test/mock/motor/gearboxrepeatultramk2mock.hpp"
 
-#include "drivers.hpp"
+#include "driver/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
 
 #include <gtest/gtest.h>

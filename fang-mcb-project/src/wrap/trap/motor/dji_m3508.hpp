@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
 #define FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
-#include "drivers.hpp"
+#include "driver/drivers.hpp"
 
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
 #include "wrap/units/units_alias.hpp"
