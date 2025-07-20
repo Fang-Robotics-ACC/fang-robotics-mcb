@@ -43,6 +43,46 @@ SOLID programming: https://www.geeksforgeeks.org/solid-principle-in-programming-
 Design Patterns and refactoring: https://refactoring.guru/
 Great Book To Read: https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/
 
+Version Convention
+==================
+We use a modified form of semantic versioning.
+A major version is simply that where a major addition i.e. CV, more robots
+or the start of a new competition cycle. Minor versions will keep incrementing.
+The secope of a mejor version/minor version must be defined in the release branch
+to prevent eternal release syndrome
+
+Branch Convention
+=================
+We use the One Flow standard with some modifications:
+feature branches begin with feat/ instead of feature. Due to feat
+being a standard abbrevation, this makes sense.
+
+Finally, due to this being a firmware project, there is an **important** nuance to main
+
+
+Branch rules:
+main:
+* Only commits which have been verified to work on hardware are accepted.
+	Whenever the next release has
+* Releases must be merged sequentially, if the current release branch is release/v4.8.0
+	v4.9.0 cannot be merged regardless. It is reocommended to the current lead dev that
+	multiple release branches are merely for stashing slated features not relevant to the current task.
+	When the next release is merged, then retest on hardware after updating, then merge that to main
+	if it works
+* A release is final, if a hotfix must be done, a new one with the 3rd digit incremeted
+	i.e. if the most recent tag is v4.8.1, the next tag is v4.8.2 
+	if the next release has begun work, it will be merged to main, tagged, then merged
+	to the release that is being worked on (v4.8.1 requires a hotfix and v4.9.0 is not ready, so
+	the hotfix is merged to main upon verfication on hardware, then tagged under v4.8.2, 
+release/*:
+* Only commits which compile on test and build as well as pass all unit tests are accepted.
+feat/*:
+* When these are ready for a pull request, they are pushed onto the github repo, they can **never** be
+	merged directly into main.	
+hotfix/*:
+* These must be verified with hardware, marged directly to main, tagged
+	Then merged into the next release/ branch that will be merged.
+
 Coding Style
 ===========
 We use a variant of the Google C++ style: https://google.github.io/styleguide/
