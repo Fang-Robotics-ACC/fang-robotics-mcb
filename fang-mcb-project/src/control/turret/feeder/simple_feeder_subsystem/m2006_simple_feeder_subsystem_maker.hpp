@@ -7,7 +7,7 @@
 
 #include "trap/motor/dji_m2006.hpp"
 
-namespace control::turret
+namespace fang::turret
 {
     /**
      * Gives a basic feeder that utilizes an M2006 motor

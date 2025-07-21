@@ -4,7 +4,7 @@
 
 namespace fang::turret
 {
-    SimpleFeederSystem::SimpleFeederSystem(motor::ISpeedMotor& feedMotor, const Config& config):  
+    SimpleFeederSystem::SimpleFeederSystem(motor::ISpeedMotor& feedMotor, const Config& config):
         kRoundsPerRevolution_{config.roundsPerRevolution},
         kFeedRate_{config.feedRate},
         kUnjamSpeed_{config.unjamSpeed},

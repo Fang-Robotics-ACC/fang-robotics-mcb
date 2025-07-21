@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_TURRET_SUBSYSTEM_BLUEPRINT_SIMPLE_FEEDER_SUBSYSTEM_HPP
 #include "simple_feeder_subsystem.hpp"
 
-namespace control::turret
+namespace fang::turret
 {
 
     SimpleFeederSubsystem::SimpleFeederSubsystem(Drivers& drivers, ISimpleFeeder& feeder, const Config& config):

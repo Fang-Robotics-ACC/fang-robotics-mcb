@@ -42,7 +42,7 @@ namespace control
         {
             chassis::ChassisSubsystem::ChassisConfig chassisConfig;
             turret::GimbalSubsystem::Config gimbalConfig;
-            turret::M2006SimpleFeederSubsystemMaker::Config feederConfig;
+            fang::turret::M2006SimpleFeederSubsystemMaker::Config feederConfig;
             turret::AmmoBoosterSubsystem::Config boosterConfig;
         };
 
@@ -102,9 +102,9 @@ namespace control
 
         trap::communication::sensors::Imu m_imu;
 
-        turret::M2006SimpleFeederSubsystemMaker simpleFeederMaker_;
+        fang::turret::M2006SimpleFeederSubsystemMaker simpleFeederMaker_;
         turret::GimbalSubsystem m_gimbal;
-        turret::SimpleFeederSubsystem& m_feeder{simpleFeederMaker_.getMade()};
+        fang::turret::SimpleFeederSubsystem& m_feeder{simpleFeederMaker_.getMade()};
         turret::AmmoBoosterSubsystem m_booster;
         chassis::ChassisSubsystem m_chassis;
 
@@ -113,8 +113,8 @@ namespace control
 
         turret::AimCommand m_aimCommnd{m_gimbal, m_turretInput, mk_commandConfig.aimCommandConfig};
         turret::ActivateBoosterCommand m_activateBoosterCommand{m_booster};
-        turret::AutofireCommand m_autofireCommand{m_feeder};
-        turret::UnjamCommand m_unjamCommand{m_feeder};
+        fang::turret::AutofireCommand m_autofireCommand{m_feeder};
+        fang::turret::UnjamCommand m_unjamCommand{m_feeder};
 
         tap::control::HoldCommandMapping m_activateBoosterRemoteMap{&m_drivers, {&m_activateBoosterCommand}, kMappingConfig_.remoteActivateBooster};
         tap::control::HoldCommandMapping m_activateAutofireRemoteMap{&m_drivers, {&m_autofireCommand}, kMappingConfig_.remoteFire};

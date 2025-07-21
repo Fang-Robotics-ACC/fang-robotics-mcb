@@ -1,5 +1,5 @@
 #include "m2006_simple_feeder_maker.hpp"
-namespace control::turret
+namespace fang::turret
 {
 
     M2006SimpleFeederMaker::M2006SimpleFeederMaker(Drivers& drivers, const Config& config):

@@ -9,7 +9,7 @@
 namespace control::turret
     {
         class FeederSubsystem:
-            virtual public ISimpleFeederSubsystemControl
+            virtual public fang::turret::ISimpleFeederSubsystemControl
         {
         public:
             using HeatLimiter = control::turret::HeatLimiter;

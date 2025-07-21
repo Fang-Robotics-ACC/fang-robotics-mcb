@@ -37,7 +37,7 @@ namespace control
         .motorConfig            = k_feederMotorConfig
     };
 
-    static const turret::SimpleFeederSystem::Config kSimpleFeederSystemConfig
+    static const fang::turret::SimpleFeederSystem::Config kSimpleFeederSystemConfig
     {
         .roundsPerRevolution    = 7,
         .feedRate               = 5_Hz,
@@ -57,7 +57,7 @@ namespace control
         k_feederSystemConfig
     };
 
-    static const turret::M2006SimpleFeederSubsystemMaker::Config kFeederMakerConfig
+    static const fang::turret::M2006SimpleFeederSubsystemMaker::Config kFeederMakerConfig
     {
         .feedMotorConfig = k_feederMotorConfig,
         .feederSubsystemConfig = {k_feederHeatLimiterConfig},

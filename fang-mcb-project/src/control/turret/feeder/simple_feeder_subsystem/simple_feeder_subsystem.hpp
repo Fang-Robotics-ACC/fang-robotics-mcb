@@ -5,7 +5,7 @@
 #include "control/turret/util/heat_limiter.hpp"
 #include "wrap/rail/rail_turret_aliases.hpp"
 
-namespace control::turret
+namespace fang::turret
 {
     class SimpleFeederSubsystem :
         virtual public ISimpleFeederSubsystemControl,
