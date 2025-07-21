@@ -7,7 +7,7 @@
 #include "control/turret/gimbal_subsystem.hpp"
 #include "control/turret/feeder_subsystem.hpp"
 #include "control/turret/feeder/simple_feeder_subsystem/simple_feeder_subsystem.hpp"
-#include "control/turret/feeder/simple_feeder_subsystem/m2006_simple_feeder_subsystem_maker.hpp"
+#include "control/turret/feeder/simple_feeder_subsystem/m2006_simple_feeder_subsystem_factory.hpp"
 #include "control/turret/ammo_booster_subsystem.hpp"
 
 //Input handlers
@@ -42,7 +42,7 @@ namespace control
         {
             chassis::ChassisSubsystem::ChassisConfig chassisConfig;
             turret::GimbalSubsystem::Config gimbalConfig;
-            fang::turret::M2006SimpleFeederSubsystemMaker::Config feederConfig;
+            fang::turret::M2006SimpleFeederSubsystemFactory::Config feederConfig;
             turret::AmmoBoosterSubsystem::Config boosterConfig;
         };
 

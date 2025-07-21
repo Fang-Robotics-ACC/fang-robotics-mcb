@@ -1,4 +1,5 @@
-#include "m2006_simple_feeder_maker.hpp"
+#include "m2006_simple_feeder_factory.hpp"
+
 namespace fang::turret
 {
     M2006SimpleFeederFactory::SimpleFeederSystemPtr M2006SimpleFeederFactory::Make(Drivers& drivers, const Config& config)

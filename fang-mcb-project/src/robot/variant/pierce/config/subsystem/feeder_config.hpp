@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_FEEDER_CONFIG_HPP
 #include "control/turret/system/feeder_system.hpp"
 #include "control/turret/feeder_subsystem.hpp"
-#include "control/turret/feeder/simple_feeder_subsystem/m2006_simple_feeder_subsystem_maker.hpp"
+#include "control/turret/feeder/simple_feeder_subsystem/m2006_simple_feeder_subsystem_factory.hpp"
 #include "wrap/trap/motor/dji_m2006.hpp"
 #include "wrap/units/units_alias.hpp"
 
@@ -57,7 +57,7 @@ namespace control
         k_feederSystemConfig
     };
 
-    static const fang::turret::M2006SimpleFeederSubsystemMaker::Config kFeederMakerConfig
+    static const fang::turret::M2006SimpleFeederSubsystemFactory::Config kFeederMakerConfig
     {
         .feedMotorConfig = k_feederMotorConfig,
         .feederSubsystemConfig = {k_feederHeatLimiterConfig},
