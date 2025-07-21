@@ -102,9 +102,9 @@ namespace control
 
         trap::communication::sensors::Imu m_imu;
 
-        fang::turret::M2006SimpleFeederSubsystemMaker simpleFeederMaker_;
         turret::GimbalSubsystem m_gimbal;
-        fang::turret::SimpleFeederSubsystem& m_feeder{simpleFeederMaker_.getMade()};
+        std::unique_ptr<fang::turret::SimpleFeederSubsystem> feeder_;
+        fang::turret::SimpleFeederSubsystem& m_feeder{*feeder_};
         turret::AmmoBoosterSubsystem m_booster;
         chassis::ChassisSubsystem m_chassis;
 

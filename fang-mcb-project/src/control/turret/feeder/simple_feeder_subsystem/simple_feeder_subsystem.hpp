@@ -18,7 +18,7 @@ namespace fang::turret
             HeatLimiter::Config heatLimiterConfig;
         };
 
-        SimpleFeederSubsystem(Drivers& drivers, ISimpleFeeder& feeder, const Config& config);
+        SimpleFeederSubsystem(Drivers& drivers, ISimpleFeederPtr feeder, const Config& config);
 
         void initialize() override;
         void refresh() override;
@@ -32,7 +32,7 @@ namespace fang::turret
         void unjamOff() override;
 
     private:
-        ISimpleFeeder& feeder_;
+        ISimpleFeederPtr feeder_;
         HeatLimiter  heatLimiter_;
     };
 }
