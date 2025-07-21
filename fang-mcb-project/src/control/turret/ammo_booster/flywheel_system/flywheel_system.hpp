@@ -5,7 +5,7 @@
 #include "wrap/rail/rail_motor_owner.hpp"
 #include "wrap/units/units_alias.hpp"
 
-namespace control::turret
+namespace fang::turret
 {
     /**
      * This is meant to abstract a single flywheel of a given radius.

@@ -2,40 +2,37 @@
 #include "wrap/units/units_alias.hpp"
 
 using namespace units::literals;
-namespace control
+namespace fang::turret
 {
-    namespace turret
+    FlywheelSystem::FlywheelSystem(Motor motor, const Config& config)
+    :   kRadius_{config.radius / 1_rad},
+        motor_{std::move(motor)}
     {
-        FlywheelSystem::FlywheelSystem(Motor motor, const Config& config)
-        :   kRadius_{config.radius / 1_rad},
-            motor_{std::move(motor)}
-        {
-        }
+    }
 
-        void FlywheelSystem::setTargetRimSpeed(const MetersPerSecond& rimSpeed)
-        {
-            targetRimSpeed_ = rimSpeed;
-            motor_->setTargetSpeed(RimSpeedToMotorSpeed(rimSpeed));
-        }
+    void FlywheelSystem::setTargetRimSpeed(const MetersPerSecond& rimSpeed)
+    {
+        targetRimSpeed_ = rimSpeed;
+        motor_->setTargetSpeed(RimSpeedToMotorSpeed(rimSpeed));
+    }
 
-        MetersPerSecond FlywheelSystem::getTargetRimSpeed() const
-        {
-            return targetRimSpeed_;
-        }
+    MetersPerSecond FlywheelSystem::getTargetRimSpeed() const
+    {
+        return targetRimSpeed_;
+    }
 
-        RPM FlywheelSystem::RimSpeedToMotorSpeed(const MetersPerSecond& rimSpeed) const
-        {
-            return rimSpeed / kRadius_;
-        }
+    RPM FlywheelSystem::RimSpeedToMotorSpeed(const MetersPerSecond& rimSpeed) const
+    {
+        return rimSpeed / kRadius_;
+    }
 
-        void FlywheelSystem::update()
-        {
-            motor_->update();
-        }
+    void FlywheelSystem::update()
+    {
+        motor_->update();
+    }
 
-        void FlywheelSystem::initialize()
-        {
-            motor_->initialize();
-        }
+    void FlywheelSystem::initialize()
+    {
+        motor_->initialize();
     }
 }
