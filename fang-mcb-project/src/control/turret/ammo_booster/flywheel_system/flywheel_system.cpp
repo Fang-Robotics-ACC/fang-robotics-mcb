@@ -6,16 +6,16 @@ namespace control
 {
     namespace turret
     {
-        FlywheelSystem::FlywheelSystem(Motor& motor, const Config& config)
+        FlywheelSystem::FlywheelSystem(Motor motor, const Config& config)
         :   kRadius_{config.radius / 1_rad},
-            motor_{motor}
+            motor_{std::move(motor)}
         {
         }
 
         void FlywheelSystem::setTargetRimSpeed(const MetersPerSecond& rimSpeed)
         {
             targetRimSpeed_ = rimSpeed;
-            motor_.setTargetSpeed(RimSpeedToMotorSpeed(rimSpeed));
+            motor_->setTargetSpeed(RimSpeedToMotorSpeed(rimSpeed));
         }
 
         MetersPerSecond FlywheelSystem::getTargetRimSpeed() const
@@ -30,12 +30,12 @@ namespace control
 
         void FlywheelSystem::update()
         {
-            motor_.update();
+            motor_->update();
         }
 
         void FlywheelSystem::initialize()
         {
-            motor_.initialize();
+            motor_->initialize();
         }
     }
 }
