@@ -1,6 +1,5 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_TARDIS_KS
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_TARDIS_KS
-#include "control/input_handler.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/field_mecanum_command.hpp"
 #include "control/chassis/algorithms/basic_downscaler.hpp"
