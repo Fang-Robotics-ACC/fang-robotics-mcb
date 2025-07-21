@@ -24,13 +24,12 @@ using FlywheelSystem = control::turret::FlywheelSystem;
 using namespace units::literals;
 TEST_P(FlywheelSpeedTest, basicTest)
 {
+    auto motor{std::make_unique<mock::motor::ISpeedMotorMock>()};
+    //Get access to call status
+    mock::motor::ISpeedMotorMock& motorView {*motor};
+    EXPECT_CALL(motorView, setTargetSpeed(expectedRPMCall));
 
-
-    mock::motor::ISpeedMotorMock motor{};
-    FlywheelSystem flywheelSystem{motor, flywheelConfig};
-
-    EXPECT_CALL(motor, setTargetSpeed(expectedRPMCall));
-
+    FlywheelSystem flywheelSystem{std::move(motor),flywheelConfig};
     flywheelSystem.setTargetRimSpeed(targetRimSpeed);
 }
 
