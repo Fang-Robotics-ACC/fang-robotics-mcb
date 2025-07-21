@@ -17,7 +17,7 @@ namespace test
         const Hertz feedRate{std::get<1>(GetParam())};
         const RPM expectedRPMCall{std::get<2>(GetParam())};
 
-        const control::turret::SimpleFeederSystem::Config kFeederSystemConfig_
+        const fang::turret::SimpleFeederSystem::Config kFeederSystemConfig_
         {
             .roundsPerRevolution    = roundsPerRevolution,
             .feedRate               = feedRate,
@@ -35,7 +35,7 @@ using namespace test;
 TEST_P(BasicFeederSystemTest, basicTest)
 {
     mock::motor::ISpeedMotorMock feedMotor{};
-    control::turret::SimpleFeederSystem feederSystem{feedMotor, kFeederSystemConfig_};
+    fang::turret::SimpleFeederSystem feederSystem{feedMotor, kFeederSystemConfig_};
     //This tests whether or not the desired speed sent into the motor given
     //how many rounds per rotation of the feeder gear and the desired fire rate
     EXPECT_CALL(feedMotor, setTargetSpeed(expectedRPMCall));
