@@ -20,7 +20,6 @@
 #ifndef DRIVERS_HPP_
 #define DRIVERS_HPP_
 #include "tap/drivers.hpp"
-#include "control/input_handler.hpp"
 
 class Drivers : public tap::Drivers
 {
@@ -36,7 +35,6 @@ public:
     Drivers& operator=(Drivers&) = delete;
 
 public:
-    control::InputHandler inputHandler{remote};
     void initializeIo();
     void update();
     void updateIo();
