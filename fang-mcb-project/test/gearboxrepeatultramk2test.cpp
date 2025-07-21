@@ -1,4 +1,4 @@
-#include "driver/motor/gearboxrepeatultramk2.hpp"
+#include "driver/motor/repeat_robotics/gearboxrepeatultramk2.hpp"
 #include "wrap/units/units_alias.hpp"
 
 #include "tap/drivers.hpp"
