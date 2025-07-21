@@ -2,16 +2,13 @@
 
 #include "wrap/units/units_alias.hpp"
 
-using namespace units::literals;
-namespace control::turret
+namespace fang::turret
 {
-    using namespace units::literals;
-
-    SimpleFeederSystem::SimpleFeederSystem(motor::ISpeedMotor& feedMotor, const Config& config)
-    :   kRoundsPerRevolution_{config.roundsPerRevolution},
+    SimpleFeederSystem::SimpleFeederSystem(Motor feedMotor, const Config& config):
+        feedMotor_{std::move(feedMotor)},
+        kRoundsPerRevolution_{config.roundsPerRevolution},
         kFeedRate_{config.feedRate},
-        kUnjamSpeed_{config.unjamSpeed},
-        feedMotor_{feedMotor}
+        kUnjamSpeed_{config.unjamSpeed}
     {
         //assert(mk_roundsPerRevolution != 0 && "roundsPerRevolution must be zero");
         //assert(mk_roundsPerRevolution  > 0 && "roundsPerRevolution cannot be less than zero");
@@ -19,17 +16,17 @@ namespace control::turret
 
     void SimpleFeederSystem::feedOn()
     {
-        feedMotor_.setTargetSpeed(feedRateToRPM());
+        feedMotor_->setTargetSpeed(feedRateToRPM());
     }
 
     void SimpleFeederSystem::feedOff()
     {
-        feedMotor_.setTargetSpeed(kStillSpeed_);
+        feedMotor_->setTargetSpeed(kStillSpeed_);
     }
 
     void SimpleFeederSystem::unjamOn()
     {
-        feedMotor_.setTargetSpeed(-kUnjamSpeed_);
+        feedMotor_->setTargetSpeed(-kUnjamSpeed_);
     }
 
     void SimpleFeederSystem::unjamOff()
@@ -39,12 +36,12 @@ namespace control::turret
 
     void SimpleFeederSystem::update()
     {
-        feedMotor_.update();
+        feedMotor_->update();
     }
 
     void SimpleFeederSystem::initialize()
     {
-        feedMotor_.initialize();
+        feedMotor_->initialize();
     }
 
     RPM SimpleFeederSystem::feedRateToRPM()

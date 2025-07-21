@@ -4,27 +4,24 @@
 #include "driver/drivers.hpp"
 #include "trap/motor/dji_m2006.hpp"
 
-namespace control::turret
+namespace fang::turret
 {
     /**
      * Gives a basic feeder that utilizes an M2006 motor
      */
-    class M2006SimpleFeederMaker
+    class M2006SimpleFeederFactory
     {
     public:
         using FeedMotor = trap::motor::DjiM2006;
+        using FeedMotorPtr = std::unique_ptr<FeedMotor>;
+        using SimpleFeederSystemPtr = std::unique_ptr<SimpleFeederSystem>;
         struct Config
         {
             FeedMotor::Config         feedMotorConfig;
             SimpleFeederSystem::Config   feederConfig;
         };
 
-        M2006SimpleFeederMaker(Drivers& drivers, const Config& config);
-        SimpleFeederSystem& getMade();
-
-    private:
-        FeedMotor feedMotor_;
-        SimpleFeederSystem feeder_;
+        static SimpleFeederSystemPtr Make(Drivers& drivers, const Config& config);
     };
 }
 #endif

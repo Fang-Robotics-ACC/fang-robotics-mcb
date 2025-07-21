@@ -3,7 +3,7 @@
 #include "wrap/units/units_alias.hpp"
 
 #include <rail/mock/motor/ispeed_motor_mock.hpp>
-namespace mock::motor
+namespace motor
 {
     using ISpeedMotorMock = rail::motor::ISpeedMotorMock<RPM>;
 }
