@@ -8,7 +8,7 @@
 class FlywheelSpeedTest : public ::testing::TestWithParam<std::tuple<Meters, MetersPerSecond,RPM>>
 {
 public:
-using FlywheelSystem = control::turret::FlywheelSystem;
+using FlywheelSystem = fang::turret::FlywheelSystem;
     const Meters radius{std::get<0>(GetParam())};
     const MetersPerSecond targetRimSpeed{std::get<1>(GetParam())};
     const RPM expectedRPMCall{std::get<2>(GetParam())};
