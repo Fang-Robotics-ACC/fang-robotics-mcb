@@ -24,8 +24,8 @@ using FlywheelSystem = fang::turret::FlywheelSystem;
 using namespace units::literals;
 TEST_P(FlywheelSpeedTest, basicTest)
 {
-    auto motor{std::make_unique<mock::motor::ISpeedMotorMock>()};
-    mock::motor::ISpeedMotorMock& motorView {*motor}; //Get access to call status
+    auto motor{std::make_unique<motor::ISpeedMotorMock>()};
+    motor::ISpeedMotorMock& motorView {*motor}; //Get access to call status
     EXPECT_CALL(motorView, setTargetSpeed(expectedRPMCall));
 
     FlywheelSystem flywheelSystem{std::move(motor),flywheelConfig};

@@ -34,11 +34,13 @@ using namespace test;
 
 TEST_P(BasicFeederSystemTest, basicTest)
 {
-    mock::motor::ISpeedMotorMock feedMotor{};
-    fang::turret::SimpleFeederSystem feederSystem{feedMotor, kFeederSystemConfig_};
+    auto feedMotor{std::make_unique<motor::ISpeedMotorMock>()};
+    //Get non-owning access to the feed motor
+    motor::ISpeedMotorMock& feedMotorView{*feedMotor};
     //This tests whether or not the desired speed sent into the motor given
     //how many rounds per rotation of the feeder gear and the desired fire rate
-    EXPECT_CALL(feedMotor, setTargetSpeed(expectedRPMCall));
+    EXPECT_CALL(feedMotorView, setTargetSpeed(expectedRPMCall));
+    fang::turret::SimpleFeederSystem feederSystem{std::move(feedMotor), kFeederSystemConfig_};
 
     feederSystem.feedOn();
 }
