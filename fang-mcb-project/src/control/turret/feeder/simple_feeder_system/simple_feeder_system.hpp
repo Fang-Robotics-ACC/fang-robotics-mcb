@@ -6,7 +6,7 @@
 #include "wrap/rail/rail_motors.hpp"
 #include "wrap/units/units_alias.hpp"
 
-namespace control::turret
+namespace fang::turret
 {   
     /**
      * Intermediate dependency injection based class using the deprecated feeder api

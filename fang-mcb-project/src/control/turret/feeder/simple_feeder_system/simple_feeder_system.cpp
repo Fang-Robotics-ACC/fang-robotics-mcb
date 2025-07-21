@@ -2,13 +2,10 @@
 
 #include "wrap/units/units_alias.hpp"
 
-using namespace units::literals;
-namespace control::turret
+namespace fang::turret
 {
-    using namespace units::literals;
-
-    SimpleFeederSystem::SimpleFeederSystem(motor::ISpeedMotor& feedMotor, const Config& config)
-    :   kRoundsPerRevolution_{config.roundsPerRevolution},
+    SimpleFeederSystem::SimpleFeederSystem(motor::ISpeedMotor& feedMotor, const Config& config):  
+        kRoundsPerRevolution_{config.roundsPerRevolution},
         kFeedRate_{config.feedRate},
         kUnjamSpeed_{config.unjamSpeed},
         feedMotor_{feedMotor}
