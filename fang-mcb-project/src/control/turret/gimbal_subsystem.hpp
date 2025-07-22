@@ -2,6 +2,7 @@
 #define FANG_ROBOTICS_MCB_GIMBAL_SUBSYSTEM_HPP
 #include "driver/drivers.hpp"
 #include "control/turret/system/gimbal_system.hpp"
+#include "util/math/linear/vector_alias.hpp"
 #include "wrap/units/units_alias.hpp"
 
 #include "trap/communication/sensors/imu.hpp"
