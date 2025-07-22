@@ -19,8 +19,6 @@
 #ifndef DRIVERS_SINGLETON_HPP_
 #define DRIVERS_SINGLETON_HPP_
 
-#ifndef ENV_UNIT_TESTS
-
 #include "driver/drivers.hpp"
 /**
  * Class that allows one to construct a Drivers instance because of frienship
@@ -44,7 +42,4 @@ private:
     static Drivers drivers_;
 
 };  // class DriversSingleton
-
-
-#endif  // DRIVERS_SINGLETON_HPP_
 #endif
