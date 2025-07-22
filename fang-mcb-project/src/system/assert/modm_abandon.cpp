@@ -1,5 +1,7 @@
 #include "modm_abandon.hpp"
 #include "driver/drivers_singleton.hpp"
+#include "system/error/signal/assert_failed_buzz.hpp"
+
 void modm_abandon(const modm::AssertionInfo &info)
 {
     //This forces the debugger to see it via copy constructor
@@ -8,16 +10,10 @@ void modm_abandon(const modm::AssertionInfo &info)
     //TODO: write to terminal or buzz in morse code
 
     Drivers& drivers{DriversSingleton::getDrivers()};
+    fang::error::assertFailedBuzz(drivers.pwm);
 
     //Prevent motors from flailing
     drivers.pwm.writeAllZeros();
-
-    //Create signal and preserve info
-    constexpr float kAbandonFrequency{220};
-    constexpr float kBuzzerVolume{0.005};
-    constexpr auto kBuzzerTimer{tap::gpio::Pwm::TIMER4};
-    drivers.pwm.setTimerFrequency(kBuzzerTimer, kAbandonFrequency);
-    drivers.pwm.write(kBuzzerVolume, tap::gpio::Pwm::Buzzer);
 
     //Stop execution completely
     while(true)
