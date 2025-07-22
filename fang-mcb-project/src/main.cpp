@@ -57,7 +57,6 @@ tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / kMainLoopFrequency);
 
 int main()
 {
-    modm_assert(false, "Assertion fail", "This should fail");
     #ifdef PLATFORM_HOSTED
     std::cout << "Simulation starting..." << std::endl;
     #endif
