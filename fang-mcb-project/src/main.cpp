@@ -48,6 +48,7 @@
 #include "units.h"
 #include "robot/robot.hpp"
 
+#include <cassert>
 #include <iostream>
 
 /* define timers here -------------------------------------------------------*/
@@ -55,6 +56,7 @@ tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / kMainLoopFrequency);
 
 int main()
 {
+    assert(false && "This assertion failed");
     #ifdef PLATFORM_HOSTED
     std::cout << "Simulation starting..." << std::endl;
     #endif
