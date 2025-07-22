@@ -10,6 +10,6 @@ void modm_abandon(const modm::AssertionInfo &info)
     DriversSingleton::getDrivers().pwm.write(1.0, tap::gpio::Pwm::Buzzer);
     while(true)
     {
-        //Stop executoin completely
+        //Stop execution completely
     }
 }
