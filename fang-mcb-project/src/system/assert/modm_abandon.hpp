@@ -1,3 +1,5 @@
+#ifndef FANG_ROBOTICS_MCB_SYSTEM_ASSERT_MODM_ABANDON_HPP
+#define FANG_ROBOTICS_MCB_SYSTEM_ASSERT_MODM_ABANDON_HPP
 #include "modm/architecture/interface/assert.hpp"
 /**
  * Overwriteable abandonment handler for all targets.
@@ -9,4 +11,4 @@
  */
 modm_extern_c void
 modm_abandon(const modm::AssertionInfo &info);
-
+#endif
