@@ -14,6 +14,10 @@ void modm_abandon(const modm::AssertionInfo &info)
     fang::error::assertFailedBuzz(drivers.pwm);
 
     //Stop execution completely
+    //TODO: Decide if there is a way to have a freezeSystem()
+    //Function in here without throwing away AssertionInfo
+    //without tying it t assertion info while preserving debugger
+    //access to the assertion info
     while(true)
     {
     }
