@@ -1,24 +1,24 @@
 #include "modm_abandon.hpp"
 #include "driver/drivers_singleton.hpp"
+#include "system/emergency/kill_system.hpp"
+#include "system/error/signal/assert_failed_buzz.hpp"
+
 void modm_abandon(const modm::AssertionInfo &info)
 {
-    constexpr float kAbandonFrequency{220};
-    constexpr float kBuzzerVolume{0.005};
-    constexpr auto kBuzzerTimer{tap::gpio::Pwm::TIMER4};
     //This forces the debugger to see it via copy constructor
     static modm::AssertionInfo readInfo = info; 
     //TODO: write to terminal or buzz in morse code
-
     Drivers& drivers{DriversSingleton::getDrivers()};
-    //Create signal and preserve info
-    drivers.pwm.setTimerFrequency(kBuzzerTimer, kAbandonFrequency);
-    drivers.pwm.write(kBuzzerVolume, tap::gpio::Pwm::Buzzer);
+    fang::emergency::killSystem();
 
-    //Required for buzzing to occur
+    fang::error::assertFailedBuzz(drivers.pwm);
+
+    //Stop execution completely
+    //TODO: Decide if there is a way to have a freezeSystem()
+    //Function in here without throwing away AssertionInfo
+    //without tying it t assertion info while preserving debugger
+    //access to the assertion info
     while(true)
     {
-
-        drivers.update();
-        //Stop execution completely
     }
 }

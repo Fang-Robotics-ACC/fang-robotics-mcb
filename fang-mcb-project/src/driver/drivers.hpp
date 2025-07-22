@@ -45,5 +45,9 @@ public:
      */
     void motorTimeoutUpdate();
 
+    /**
+     * @post The robot will be unable to move
+     */
+    void kill();
 };  // class Drivers
 #endif  // DRIVERS_HPP_
