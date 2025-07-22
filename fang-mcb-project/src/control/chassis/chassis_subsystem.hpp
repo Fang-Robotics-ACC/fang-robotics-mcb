@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_CHASSIS_SUBSYSTEM_HPP
 #define FANG_ROBOTICS_MCB_CHASSIS_SUBSYSTEM_HPP
-#include "drivers.hpp"
-#include "motor/data/directionality.hpp"
+#include "driver/drivers.hpp"
+#include "driver/motor/data/directionality.hpp"
 #include "control/chassis/holonomic/mecanum/logic/field_mecanum_logic.hpp"
 #include "util/physics/data/velocity_2d.hpp"
 #include "wrap/units/units_alias.hpp"
@@ -17,7 +17,7 @@
 #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
 #include "test/mock/motor/gearboxrepeatultramk2mock.hpp"
 #else
-#include "motor/gearboxrepeatultramk2.hpp"
+#include "driver/motor/repeat_robotics/gearboxrepeatultramk2.hpp"
 #endif
 
 namespace control

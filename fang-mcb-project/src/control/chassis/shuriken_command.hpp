@@ -1,6 +1,5 @@
 #ifndef FANG_ROBOTICS_MCB_SHURIKEN_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_SHURIKEN_COMMAND_HPP
-#include "control/input_handler.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/field_mecanum_command.hpp"
 #include "control/chassis/algorithms/basic_downscaler.hpp"

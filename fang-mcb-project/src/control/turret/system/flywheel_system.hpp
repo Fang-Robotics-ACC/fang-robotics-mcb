@@ -8,7 +8,7 @@
 #include "trap/motor/dji_m3508.hpp"
 #endif
 
-#include "drivers.hpp"
+#include "driver/drivers.hpp"
 
 namespace test
 {

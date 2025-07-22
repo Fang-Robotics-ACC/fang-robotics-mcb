@@ -6,27 +6,20 @@
 
 #include "tap/control/command.hpp"
 
-namespace control
+namespace fang::turret
 {
-    namespace turret 
+    class AutofireCommand:
+        public tap::control::Command
     {
-        class AutofireCommand:
-            public tap::control::Command
-        {
-        public:
-            AutofireCommand(ISimpleFeederSubsystemControl& feeder);
-
-            const char* getName() const override {return "Auto Fire";}
-
-            void initialize() override;
-            void execute() override;
-            void end(bool interrupted) override;
-            bool isFinished() const override;
-
-
-        private:
-            ISimpleFeederSubsystemControl& m_feeder;
-        };
-    }
+    public:
+        AutofireCommand(ISimpleFeederSubsystemControl& feeder);
+        const char* getName() const override {return "Auto Fire";}
+        void initialize() override;
+        void execute() override;
+        void end(bool interrupted) override;
+        bool isFinished() const override;
+    private:
+        ISimpleFeederSubsystemControl& m_feeder;
+    };
 }
 #endif

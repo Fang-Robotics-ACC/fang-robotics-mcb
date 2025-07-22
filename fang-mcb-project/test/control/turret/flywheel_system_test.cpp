@@ -8,7 +8,7 @@
 class FlywheelSpeedTest : public ::testing::TestWithParam<std::tuple<Meters, MetersPerSecond,RPM>>
 {
 public:
-using FlywheelSystem = control::turret::FlywheelSystem;
+using FlywheelSystem = fang::turret::FlywheelSystem;
     const Meters radius{std::get<0>(GetParam())};
     const MetersPerSecond targetRimSpeed{std::get<1>(GetParam())};
     const RPM expectedRPMCall{std::get<2>(GetParam())};
@@ -24,12 +24,11 @@ using FlywheelSystem = control::turret::FlywheelSystem;
 using namespace units::literals;
 TEST_P(FlywheelSpeedTest, basicTest)
 {
+    auto motor{std::make_unique<motor::ISpeedMotorMock>()};
+    motor::ISpeedMotorMock& motorView {*motor}; //Get access to call status
+    EXPECT_CALL(motorView, setTargetSpeed(expectedRPMCall));
 
-
-    mock::motor::ISpeedMotorMock motor{};
-    FlywheelSystem flywheelSystem{motor, flywheelConfig};
-
-    EXPECT_CALL(motor, setTargetSpeed(expectedRPMCall));
+    FlywheelSystem flywheelSystem{std::move(motor),flywheelConfig};
 
     flywheelSystem.setTargetRimSpeed(targetRimSpeed);
 }

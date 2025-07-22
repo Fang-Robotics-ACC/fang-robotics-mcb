@@ -35,8 +35,8 @@
 #include "tap/motor/dji_motor.hpp"
 
 /* communication includes ---------------------------------------------------*/
-#include "drivers.hpp"
-#include "drivers_singleton.hpp"
+#include "driver/drivers.hpp"
+#include "driver/drivers_singleton.hpp"
 
 /* error handling includes --------------------------------------------------*/
 #include "tap/errors/create_errors.hpp"
@@ -86,6 +86,7 @@ int main()
         {
             drivers.motorTimeoutUpdate();
         }
+
         modm::delay_us(10); //Any longer and refSerial will not work
     }
     return 0;

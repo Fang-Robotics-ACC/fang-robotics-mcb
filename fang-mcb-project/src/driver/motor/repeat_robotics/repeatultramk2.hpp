@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_MOTORS_REPEAT_ULTRA_MK2_HPP
 #define FANG_ROBOTICS_MCB_MOTORS_REPEAT_ULTRA_MK2_HPP
-#include "data/directionality.hpp"
+#include "driver/motor/data/directionality.hpp"
 #include "vortex80aesc.hpp"
 #include "wrap/rail/rail_motors.hpp"
 #include "wrap/units/units_alias.hpp"

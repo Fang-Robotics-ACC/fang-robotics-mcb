@@ -6,26 +6,23 @@
 
 #include "tap/control/command.hpp"
 
-namespace control
+namespace fang::turret
 {
-    namespace turret 
+    class UnjamCommand: public tap::control::Command
     {
-        class UnjamCommand: public tap::control::Command
-        {
-        public:
-            UnjamCommand(ISimpleFeederSubsystemControl& feeder);
+    public:
+        UnjamCommand(ISimpleFeederSubsystemControl& feeder);
 
-            const char* getName() const override {return "Unjam";}
+        const char* getName() const override {return "Unjam";}
 
-            void initialize() override;
-            void execute() override;
-            void end(bool interrupted) override;
-            bool isFinished() const override;
+        void initialize() override;
+        void execute() override;
+        void end(bool interrupted) override;
+        bool isFinished() const override;
 
 
-        private:
-           ISimpleFeederSubsystemControl& m_feeder;
-        };
-    }
+    private:
+       ISimpleFeederSubsystemControl& m_feeder;
+    };
 }
 #endif

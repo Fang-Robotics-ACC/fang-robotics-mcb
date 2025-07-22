@@ -18,7 +18,7 @@
  */
 
 
-#include "motor/util/brushlessutils.hpp"
+#include "driver/motor/util/brushlessutils.hpp"
 #include "wrap/units/units_alias.hpp"
 
 #include <gtest/gtest.h>

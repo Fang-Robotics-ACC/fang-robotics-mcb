@@ -3,7 +3,7 @@
 #include "util/math/linear/cool_lerp.hpp"
 #include "util/math/linear/vector_2d.hpp"
 
-#include "motor/data/directionality.hpp"
+#include "driver/motor/data/directionality.hpp"
 
 #include "wrap/trap/communication/pwm_data.hpp"
 #include "wrap/units/units_alias.hpp"

@@ -1,13 +1,12 @@
 #ifndef FANG_ROBOTICS_MCB_INFANTRY_HPP
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
-#include "drivers.hpp"
+#include "driver/drivers.hpp"
 //Subsystems
 #include "control/chassis/chassis_subsystem.hpp"
 
 #include "control/turret/gimbal_subsystem.hpp"
-#include "control/turret/feeder_subsystem.hpp"
 #include "control/turret/feeder/simple_feeder_subsystem/simple_feeder_subsystem.hpp"
-#include "control/turret/feeder/simple_feeder_subsystem/m2006_simple_feeder_subsystem_maker.hpp"
+#include "control/turret/feeder/simple_feeder_subsystem/m2006_simple_feeder_subsystem_factory.hpp"
 #include "control/turret/ammo_booster_subsystem.hpp"
 
 //Input handlers
@@ -42,7 +41,7 @@ namespace control
         {
             chassis::ChassisSubsystem::ChassisConfig chassisConfig;
             turret::GimbalSubsystem::Config gimbalConfig;
-            turret::M2006SimpleFeederSubsystemMaker::Config feederConfig;
+            fang::turret::M2006SimpleFeederSubsystemFactory::Config feederConfig;
             turret::AmmoBoosterSubsystem::Config boosterConfig;
         };
 
@@ -102,9 +101,9 @@ namespace control
 
         trap::communication::sensors::Imu m_imu;
 
-        turret::M2006SimpleFeederSubsystemMaker simpleFeederMaker_;
         turret::GimbalSubsystem m_gimbal;
-        turret::SimpleFeederSubsystem& m_feeder{simpleFeederMaker_.getMade()};
+        std::unique_ptr<fang::turret::SimpleFeederSubsystem> feeder_;
+        fang::turret::SimpleFeederSubsystem& m_feeder{*feeder_};
         turret::AmmoBoosterSubsystem m_booster;
         chassis::ChassisSubsystem m_chassis;
 
@@ -113,8 +112,8 @@ namespace control
 
         turret::AimCommand m_aimCommnd{m_gimbal, m_turretInput, mk_commandConfig.aimCommandConfig};
         turret::ActivateBoosterCommand m_activateBoosterCommand{m_booster};
-        turret::AutofireCommand m_autofireCommand{m_feeder};
-        turret::UnjamCommand m_unjamCommand{m_feeder};
+        fang::turret::AutofireCommand m_autofireCommand{m_feeder};
+        fang::turret::UnjamCommand m_unjamCommand{m_feeder};
 
         tap::control::HoldCommandMapping m_activateBoosterRemoteMap{&m_drivers, {&m_activateBoosterCommand}, kMappingConfig_.remoteActivateBooster};
         tap::control::HoldCommandMapping m_activateAutofireRemoteMap{&m_drivers, {&m_autofireCommand}, kMappingConfig_.remoteFire};
