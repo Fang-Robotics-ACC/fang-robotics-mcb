@@ -1,13 +1,15 @@
 #ifndef FANG_ROBOTICS_MCB_FEEDER_SUBSYSTEM_HPP
 #define FANG_ROBOTICS_MCB_FEEDER_SUBSYSTEM_HPP
-#include "feeder_system.hpp"
+#include "control/turret/system/feeder_system.hpp"
 #include "drivers.hpp"
 #include "control/turret/util/heat_limiter.hpp"
+#include "wrap/rail/rail_turret_aliases.hpp"
 #include "tap/control/subsystem.hpp"
 
 namespace control::turret
     {
-        class FeederSubsystem: public virtual tap::control::Subsystem
+        class FeederSubsystem:
+            virtual public ISimpleFeederSubsystemControl
         {
         public:
             using HeatLimiter = control::turret::HeatLimiter;
@@ -25,11 +27,11 @@ namespace control::turret
 
             void refreshSafeDisconnect() override;
 
-            void autoFireOn();
-            void autoFireOff();
+            void feedOn() override;
+            void feedOff() override;
 
-            void unjamOn();
-            void unjamOff();
+            void unjamOn() override;
+            void unjamOff() override;
 
         private:
             FeederSystem m_feeder;

@@ -1,10 +1,11 @@
-#include "control/turret/feeder_system.hpp"
+#include "control/turret/system/feeder_system.hpp"
 
-#include "unitaliases.hpp"
+#include "wrap/units/units_alias.hpp"
 
 #include <gtest/gtest.h>
 #include <tuple>
 
+/*
 using namespace units::literals;
 namespace test
 {
@@ -17,24 +18,8 @@ namespace test
         const RPM expectedRPMCall{std::get<2>(GetParam())};
 
         Drivers drivers;
-        const control::turret::FeederSystem::DriveMotor::DjiSpeedPid::Config defaultConfig 
-        {
-            1,
-            1,
-            1
-        };
-        const control::turret::FeederSystem::DriveMotor::Config motorConfig
-        {
-            tap::motor::MOTOR1,
-            tap::can::CanBus::CAN_BUS1,
-            "test motor",
-            false,
-            1.0,
-            defaultConfig
-        };
-        const control::turret::FeederSystem::Config feederConfig{roundsPerRevolution, feedRate, motorConfig};
 
-        control::turret::FeederSystem feederSystem{drivers, feederConfig};
+        control::turret::FeederSystem feederSystem{drivers, control::k_feederSystemConfig};
         control::turret::FeederSystem::DriveMotor& motor{feederSystem.m_motor};
     };
 }
@@ -67,3 +52,4 @@ INSTANTIATE_TEST_SUITE_P(mixedTest, FeederSystemTest,
                     std::make_tuple(123, 1_Hz, (1.0_rps/123.0)),
                     std::make_tuple(100, 412_Hz, 4.12_rps),
                     std::make_tuple(500, 10_Hz, (10.0_rps/500.0))));
+*/

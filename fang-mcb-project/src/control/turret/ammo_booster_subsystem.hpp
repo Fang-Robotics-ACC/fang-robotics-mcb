@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_AMMO_BOOSTER_SUBSYSTEM_HPP
 #define FANG_ROBOTICS_MCB_AMMO_BOOSTER_SUBSYSTEM_HPP
 #include "drivers.hpp"
-#include "control/turret/systems/ammo_booster_system.hpp"
+#include "control/turret/system/ammo_booster_system.hpp"
 #include "tap/control/subsystem.hpp"
 
 namespace control::turret

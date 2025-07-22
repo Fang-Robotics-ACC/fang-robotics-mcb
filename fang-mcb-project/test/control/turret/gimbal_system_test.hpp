@@ -1,12 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_TEST_GIMBAL_SYSTEM_TEST_HPP
 #define FANG_ROBOTICS_MCB_TEST_GIMBAL_SYSTEM_TEST_HPP
-#include "control/turret/gimbal_system.hpp"
-
-#include "unitaliases.hpp"
+#include "control/turret/system/gimbal_system.hpp"
 #include "drivers.hpp"
-
-#include <gtest/gtest.h>
-#include <tuple>
 
 namespace test
 {

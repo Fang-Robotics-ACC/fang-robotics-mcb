@@ -1,4 +1,4 @@
-#include "util/math/cool_lerp.hpp"
+#include "util/math/linear/cool_lerp.hpp"
 
 #include <gmock/gmock.h>
 

@@ -1,10 +1,10 @@
 #ifndef FANG_ROBOTICS_MCB_CHASSIS_SUBSYSTEM_HPP
 #define FANG_ROBOTICS_MCB_CHASSIS_SUBSYSTEM_HPP
 #include "drivers.hpp"
-#include "configuration/unitaliases.hpp"
-#include "data/directionality.hpp"
-#include "physicsaliases.hpp"
-#include "logic/chassis/fieldmecanumlogic.hpp"
+#include "motor/data/directionality.hpp"
+#include "control/chassis/holonomic/mecanum/logic/field_mecanum_logic.hpp"
+#include "util/physics/data/velocity_2d.hpp"
+#include "wrap/units/units_alias.hpp"
 #include "wrap/trap/communication/pwm_data.hpp"
 #include "wrap/trap/control/chassis/power_limiter.hpp"
 
@@ -15,9 +15,9 @@
 #include "tap/control/subsystem.hpp"
 
 #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
-#include "gearboxrepeatultramk2mock.hpp"
+#include "test/mock/motor/gearboxrepeatultramk2mock.hpp"
 #else
-#include "motors/gearboxrepeatultramk2.hpp"
+#include "motor/gearboxrepeatultramk2.hpp"
 #endif
 
 namespace control
@@ -29,9 +29,9 @@ namespace control
         {
         public:
 #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
-        using DriveMotor = mock::motors::GearboxRepeatUltraMk2Mock;
+        using DriveMotor = mock::motor::GearboxRepeatUltraMk2Mock;
 #else
-        using DriveMotor = motors::GearboxRepeatUltraMk2;
+        using DriveMotor = motor::GearboxRepeatUltraMk2;
 #endif
         using PowerLimiter = trap::control::chassis::PowerLimiter;
 
@@ -69,7 +69,7 @@ namespace control
         /**
          * The chassis config passes all of the relevant motor information.
          * This assumes that all pins are set to a single frequency.
-         * This assumes all motors have the same gear ratio.
+         * This assumes all motor have the same gear ratio.
          */
         ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig);
 
@@ -127,13 +127,13 @@ namespace control
             const ChassisMotorConfig mk_motorConfig;
             const ChassisDimensionConfig mk_dimensionConfig; 
 
-            const data::motors::Directionality mk_defaultDirectionality{data::motors::Directionality::BIDIRECTIONAL};
+            const motor::Directionality mk_defaultDirectionality{motor::Directionality::BIDIRECTIONAL};
             DriveMotor m_frontLeftMotor;
             DriveMotor m_frontRightMotor;
             DriveMotor m_rearLeftMotor;
             DriveMotor m_rearRightMotor;
 
-            logic::chassis::FieldMecanumLogic m_mecanumLogic;
+            ::chassis::FieldMecanumLogic m_mecanumLogic;
 
             PowerLimiter m_powerLimiter;
             ///If you are facing forward, and the platform moves forward,

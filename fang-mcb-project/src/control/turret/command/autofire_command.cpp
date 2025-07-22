@@ -6,7 +6,7 @@ namespace control
     namespace turret
     {
         using namespace units::literals;
-        AutofireCommand::AutofireCommand(FeederSubsystem& feeder)
+        AutofireCommand::AutofireCommand(ISimpleFeederSubsystemControl& feeder)
         :   m_feeder{feeder}
         {
             addSubsystemRequirement(&m_feeder);
@@ -14,7 +14,7 @@ namespace control
 
         void AutofireCommand::initialize()
         {
-            m_feeder.autoFireOn();
+            m_feeder.feedOn();
         }
 
         void AutofireCommand::execute()
@@ -23,7 +23,7 @@ namespace control
 
         void AutofireCommand::end(bool interrupted)
         {
-            m_feeder.autoFireOff();
+            m_feeder.feedOff();
         }
 
         bool AutofireCommand::isFinished() const

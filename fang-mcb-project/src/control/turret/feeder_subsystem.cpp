@@ -2,8 +2,9 @@
 namespace control::turret
 {
 
-    FeederSubsystem::FeederSubsystem(Drivers& drivers, const Config& config)
-    :   Subsystem{&drivers},
+    FeederSubsystem::FeederSubsystem(Drivers& drivers, const Config& config):
+        ISimpleFeederSubsystemControl{drivers},
+        Subsystem{&drivers},
         m_feeder{drivers, config.feederConfig},
         m_heatLimiter{drivers.refSerial, {config.heatLimiterConfig}}
     {
@@ -27,16 +28,16 @@ namespace control::turret
     {
         m_feeder.feedOff();
     }
-    void FeederSubsystem::autoFireOn()
+    void FeederSubsystem::feedOn()
     {
-        //Prevent from new feeding sequnces from being triggered
+        //Prevent new feeding sequnces from being triggered
         if(!m_heatLimiter.stopRecommended())
         {
             m_feeder.feedOn();
         }
     }
 
-    void FeederSubsystem::autoFireOff()
+    void FeederSubsystem::feedOff()
     {
         m_feeder.feedOff();
     }

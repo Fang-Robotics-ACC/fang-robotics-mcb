@@ -1,5 +1,5 @@
 #include "dji_m2006.hpp"
-#include "gearbox_speed.hpp"
+#include "motor/util/gearbox_speed.hpp"
 
 #include <cassert>
 
@@ -30,12 +30,18 @@ namespace trap
 
         void DjiM2006::setTargetSpeed(const RPM& targetSpeed)
         {
-            m_targetSpeed = motors::shaftToMotorSpeed(targetSpeed, m_gearRatio);
+            m_targetSpeed = ::motor::shaftToMotorSpeed(targetSpeed, m_gearRatio);
         }
+
+        RPM DjiM2006::getTargetSpeed() const
+        {
+            return m_targetSpeed;
+        }
+
 
         RPM DjiM2006::getSpeed() const
         {
-            return motors::motorToShaftSpeed(RPM{m_djiMotor.getShaftRPM()}, m_gearRatio);
+            return ::motor::motorToShaftSpeed(RPM{m_djiMotor.getShaftRPM()}, m_gearRatio);
         }
 
         void DjiM2006::initialize()

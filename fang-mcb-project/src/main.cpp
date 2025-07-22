@@ -46,13 +46,12 @@
 
 #include "io.hpp"
 #include "units.h"
-#include "control/robot.hpp"
+#include "robot/robot.hpp"
 
 #include <iostream>
 
 /* define timers here -------------------------------------------------------*/
-tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / MAIN_LOOP_FREQUENCY);
-
+tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / kMainLoopFrequency);
 
 int main()
 {
@@ -60,16 +59,10 @@ int main()
     std::cout << "Simulation starting..." << std::endl;
     #endif
 
-    /*
-     * NOTE: We are using DoNotUse_getDrivers here because in the main
-     *      robot loop we must access the singleton drivers to update
-     *      IO states and run the scheduler.
-     */
-
-    Drivers& drivers{DoNotUse_getDriversReference()};
+    Drivers& drivers{DriversSingleton::getDrivers()};
 
     Board::initialize();
-    initializeIo(drivers);
+    drivers.initializeIo();
 
     //This prevents the large size of the robot class from hoarding the stack
     //which causes annoying stack overflow issues
@@ -79,28 +72,21 @@ int main()
     robot.initialize();
 
     #ifdef PLATFORM_HOSTED
-    tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
-    // Blocking call, waits until Windows Simulator connects.
-    tap::communication::TCPServer::MainServer()->getConnection();
+        tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
+        // Blocking call, waits until Windows Simulator connects.
+        tap::communication::TCPServer::MainServer()->getConnection();
     #endif
+
     while (1)
     {
-        //Alert that there is no ref data
-        PROFILE(drivers.profiler, updateIo, (drivers));
-        if(drivers.refSerial.getRefSerialReceivingData())
-        {
-            //drivers.pwm.write(0.05, tap::gpio::Pwm::Buzzer);
+        drivers.update();
 
-        }
-
+        //Prevent motor signals from being spammed
         if (sendMotorTimeout.execute())
         {
-            PROFILE(drivers.profiler, drivers.bmi088.periodicIMUUpdate, ());
-            PROFILE(drivers.profiler, drivers.commandScheduler.run, ());
-            PROFILE(drivers.profiler, drivers.djiMotorTxHandler.encodeAndSendCanData, ());
-            PROFILE(drivers.profiler, drivers.terminalSerial.update, ());
+            drivers.motorTimeoutUpdate();
         }
-        modm::delay_us(10);
+        modm::delay_us(10); //Any longer and refSerial will not work
     }
     return 0;
 }

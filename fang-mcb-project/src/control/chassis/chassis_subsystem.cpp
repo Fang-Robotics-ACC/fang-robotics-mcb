@@ -1,5 +1,6 @@
 #include "control/chassis/chassis_subsystem.hpp"
-#include "unitaliases.hpp"
+
+#include "wrap/units/units_alias.hpp"
 
 namespace control
 {
@@ -42,7 +43,9 @@ namespace control
 
         void ChassisSubsystem::setRotation(const RPM& rotation)
         {
-            m_mecanumLogic.setRotation(rotation);
+
+            m_rotationRamp.setTarget(rotation);
+            //m_mecanumLogic.setRotation(rotation);
         }
 
         RPM ChassisSubsystem::getRotation() const
@@ -69,10 +72,10 @@ namespace control
 
         void ChassisSubsystem::refreshSafeDisconnect()
         {
-            m_frontLeftMotor.setSpeed(0_rpm);
-            m_frontRightMotor.setSpeed(0_rpm);
-            m_rearLeftMotor.setSpeed(0_rpm);
-            m_rearRightMotor.setSpeed(0_rpm);
+            m_frontLeftMotor.setTargetSpeed(0_rpm);
+            m_frontRightMotor.setTargetSpeed(0_rpm);
+            m_rearLeftMotor.setTargetSpeed(0_rpm);
+            m_rearRightMotor.setTargetSpeed(0_rpm);
         }
 
         void ChassisSubsystem::updateRamps()
@@ -84,7 +87,7 @@ namespace control
         void ChassisSubsystem::syncLogicToRamps()
         {
             m_mecanumLogic.setTranslation(m_translationRamp.getValue());
-            //m_mecanumLogic.setRotation(m_rotationRamp.getValue());
+            m_mecanumLogic.setRotation(m_rotationRamp.getValue());
         }
 
         void ChassisSubsystem::syncWheelsToLogic()
@@ -93,10 +96,11 @@ namespace control
             //Returns 0 if we are at or below the critical threshold
             //Reutnrs 1 if we are above the limiting threshold (buffer - crit)
             const float powerScale{m_powerLimiter.getPowerLimitRatio()};
-            m_frontLeftMotor.setSpeed(m_mecanumLogic.getFrontLeftWheelSpeed() * powerScale);
-            m_frontRightMotor.setSpeed(m_mecanumLogic.getFrontRightWheelSpeed() * powerScale);
-            m_rearLeftMotor.setSpeed(m_mecanumLogic.getRearLeftWheelSpeed() * powerScale);
-            m_rearRightMotor.setSpeed(m_mecanumLogic.getRearRightWheelSpeed() * powerScale);
+            const ::chassis::QuadDriveData wheelSpeeds{m_mecanumLogic.getWheelSpeeds()};
+            m_frontLeftMotor.setTargetSpeed(wheelSpeeds.frontLeft * powerScale);
+            m_frontRightMotor.setTargetSpeed(wheelSpeeds.frontRight * powerScale);
+            m_rearLeftMotor.setTargetSpeed(wheelSpeeds.rearLeft * powerScale);
+            m_rearRightMotor.setTargetSpeed(wheelSpeeds.rearRight * powerScale);
         }
 
         void ChassisSubsystem::updateFieldAngle()

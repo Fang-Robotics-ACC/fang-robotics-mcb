@@ -6,7 +6,7 @@ namespace control
     namespace turret
     {
         using namespace units::literals;
-        UnjamCommand::UnjamCommand(FeederSubsystem& feeder)
+        UnjamCommand::UnjamCommand(ISimpleFeederSubsystemControl& feeder)
         :   m_feeder{feeder}
         {
             addSubsystemRequirement(&m_feeder);

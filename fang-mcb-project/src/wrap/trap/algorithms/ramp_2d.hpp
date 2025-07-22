@@ -1,15 +1,15 @@
 #ifndef FANG_ROBOTICS_MCB_TRAP_ALGORITHMS_RAMP_2D_HPP
 #define FANG_ROBOTICS_MCB_TRAP_ALGORITHMS_RAMP_2D_HPP
 #include "trap/algorithms/ramp.hpp"
-#include "mathaliases.hpp"
-#include "data/vector2d.hpp"
+#include "util/math/linear/vector_alias.hpp"
+#include "util/math/linear/vector_2d.hpp"
 namespace trap::algorithms
 {
     template<typename ValueUnit, typename TimeUnit> 
     class Ramp2D
     {
     public:
-        using Vector2D = data::math::Vector2D<ValueUnit>;
+        using Vector2D = math::Vector2D<ValueUnit>;
 
         /**
          * Ramp speed is how much value unit per time unit
