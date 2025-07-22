@@ -28,7 +28,7 @@
 #include "tap/board/board.hpp"
 
 #include "modm/architecture/interface/delay.hpp"
-
+#include "modm/architecture/interface/assert.hpp"
 /* arch includes ------------------------------------------------------------*/
 #include "tap/architecture/periodic_timer.hpp"
 #include "tap/architecture/profiler.hpp"
@@ -44,10 +44,12 @@
 /* control includes ---------------------------------------------------------*/
 #include "tap/architecture/clock.hpp"
 
+
 #include "io.hpp"
 #include "units.h"
 #include "robot/robot.hpp"
 
+#include <cassert>
 #include <iostream>
 
 /* define timers here -------------------------------------------------------*/
@@ -55,6 +57,7 @@ tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / kMainLoopFrequency);
 
 int main()
 {
+    modm_assert(false, "Assertion fail", "This should fail");
     #ifdef PLATFORM_HOSTED
     std::cout << "Simulation starting..." << std::endl;
     #endif
