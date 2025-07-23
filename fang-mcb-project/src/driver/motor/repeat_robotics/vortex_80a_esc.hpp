@@ -1,5 +1,5 @@
-#ifndef FANG_ROBOTICS_MCB_VORTEX_80A_ESC_LOGIC_H
-#define FANG_ROBOTICS_MCB_VORTEX_80A_ESC_LOGIC_H
+#ifndef FANG_ROBOTICS_MCB_DRIVER_MOTOR_VORTEX_80A_ESC_HPP
+#define FANG_ROBOTICS_MCB_DRIVER_MOTOR_VORTEX_80A_ESC_HPP
 #include "util/math/linear/cool_lerp.hpp"
 #include "util/math/linear/vector_2d.hpp"
 
