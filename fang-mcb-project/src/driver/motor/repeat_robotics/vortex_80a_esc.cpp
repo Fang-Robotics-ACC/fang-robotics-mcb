@@ -13,7 +13,7 @@
 #include <cmath>
 #include <iostream>
 
-namespace motor
+namespace fang::motor
 {
 
     const math::CoolLerp Vortex80AEsc::kBidirectionalMap_{kBidirectionalPoint1_, kBidirectionalPoint2_};
@@ -79,7 +79,7 @@ namespace motor
     {
         kDirectionality_ = directionality;
     }
-    Vortex80AEsc::Directionality Vortex80AEsc::getDirectionality() const
+    Directionality Vortex80AEsc::getDirectionality() const
     {
         return kDirectionality_;
     }

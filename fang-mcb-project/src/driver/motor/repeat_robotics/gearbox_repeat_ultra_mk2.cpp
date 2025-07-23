@@ -1,5 +1,5 @@
 #include "gearbox_repeat_ultra_mk2.hpp"
-namespace motor
+namespace fang::motor
 {
 
     GearboxRepeatUltraMk2::GearboxRepeatUltraMk2(tap::Drivers& drivers, const UnifiedProperties& unifiedProperties, const trap::gpio::PwmData& pwmData, bool inverted)

@@ -10,7 +10,7 @@
 #include "tap/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
 
-namespace motor
+namespace fang::motor
 {
     /*!
     RPM is positive according to the right hand rule when the motor is the shaft pointing up. This is the the gearbox detached!!!

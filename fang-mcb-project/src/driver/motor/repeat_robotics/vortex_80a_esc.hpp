@@ -10,7 +10,7 @@
 
 #include "tap/communication/gpio/pwm.hpp"
 
-namespace motor
+namespace fang::motor
 {
     /**
      * Driver for the Vortex80AEsc involving sending various signals and speed ranges.
@@ -18,7 +18,6 @@ namespace motor
     class Vortex80AEsc
     {
     public:
-        using Directionality = ::motor::Directionality;
         Vortex80AEsc(tap::gpio::Pwm& pwmDriver, const trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
         /**
          * Sends the appropriate arming signal
