@@ -10,7 +10,7 @@
 
 #include "tap/communication/gpio/pwm.hpp"
 
-namespace motor
+namespace fang::motor
 {
     /**
      * Driver for the Vortex80AEsc involving sending various signals and speed ranges.
