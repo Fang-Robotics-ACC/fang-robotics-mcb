@@ -1,4 +1,4 @@
-#include "repeatultramk2.hpp"
+#include "repeat_ultra_mk2.hpp"
 #include "units.h"
 
 #include "trap/communication/pwm_data.hpp"
