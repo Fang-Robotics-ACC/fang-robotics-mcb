@@ -1,5 +1,5 @@
 #include "gimbal_subsystem.hpp"
-#include "util/rotatevector2d.hpp"
+#include "util/math/geometry/rotate_vector_2d.hpp"
 
 namespace control
 {
@@ -26,7 +26,7 @@ namespace control
 
         math::AbstractVector2D GimbalSubsystem::getTargetFieldDirection() const
         {
-            return util::math::rotateVector2D(mk_forward, m_targetFieldYaw);
+            return math::rotateVector2D(mk_forward, m_targetFieldYaw);
         }
 
         void GimbalSubsystem::setFieldYaw(const Radians& yaw)

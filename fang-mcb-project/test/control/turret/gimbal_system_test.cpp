@@ -1,7 +1,7 @@
 #include "gimbal_system_test_archetypes.hpp"
-#include "control/turret/gimbal_system.hpp"
+#include "control/turret/system/gimbal_system.hpp"
 
-#include "unitaliases.hpp"
+#include "wrap/units/units_alias.hpp"
 
 #include <gtest/gtest.h>
 #include <tuple>
@@ -74,7 +74,7 @@ INSTANTIATE_TEST_SUITE_P(negativeTest, GimbalYawTest, testing::Values(std::make_
 
 TEST(updateTest, GimbalSystem)
 {
-    //Make sure that all associated motors are updated
+    //Make sure that all associated motor are updated
     const GimbalSystemTest::GimbalSystem::Config gimbalConfig
     {
         //Allow full range

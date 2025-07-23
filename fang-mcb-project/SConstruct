@@ -28,9 +28,6 @@ BUILD_PATH           = "build"
 TAPROOT_PATH         = "taproot"
 SRC_PATH             = "src"
 TEST_PATH            = "test"
-RAIL_PATH            = "lib/RAIL-Robomaster-Abstraction-Interface-Library/include"
-UNIT_PATH            = "lib/units/include"
-
 
 TAPROOT_SCRIPTS_TOOLPATH = abspath("../taproot-scripts/scons-tools")
 
@@ -68,27 +65,12 @@ env["CONFIG_ARTIFACT_PATH"] = join(env["CONFIG_BUILD_BASE"], "artifact")
 env["CONFIG_PROFILE"] = args["BUILD_PROFILE"]
 
 env.AppendUnique(CPPPATH=[
+	abspath(r"."),
     abspath(r"src"),
-    abspath(r"src/motors"),
-    abspath(r"src/logic"),
-    abspath(r"src/logic/chassis"),
-    abspath(r"src/data"),
-    abspath(r"src/subsystem/chassis"),
-    abspath(r"src/configuration"),
-    abspath(r"src/util"),
-    abspath(r"lib/units/include"),
-    abspath(r"lib/units/control"),
-    abspath(r"lib/RAIL-Robomaster-Abstraction-Interface-Library/include"),
-    abspath(r"./"),
-    abspath(r"test/mock"),
-    abspath(r"control"),
-    abspath(r"test/mock/motors"),
     abspath(r"src/wrap"),
-    abspath(r"src/wrap/trap"),
-    abspath(r"fang-mcb-project/src/wrap/trap/communication"),
     abspath(r"robot-type"),
-    abspath(r"src/wrap"),
-    abspath(r"lib/Vector3D")
+    abspath(r"lib/units/include"),
+    abspath(r"lib/RAIL-Robomaster-Abstraction-Interface-Library/include")
 ])
 
 
@@ -96,7 +78,7 @@ sources = []
 # Building all libraries (read from sconscript files located in provided dirs)
 # Ensure that modm is first, since Taproot depends on modm
 # Append include path to environment so both src/test environments have access to them
-env.SConscript(dirs=[TAPROOT_PATH, SRC_PATH, TEST_PATH, RAIL_PATH, UNIT_PATH], exports=["env", "args", "sources"])
+env.SConscript(dirs=[TAPROOT_PATH, SRC_PATH, TEST_PATH], exports=["env", "args", "sources"])
 
 
 # Tests must be included as sources (rather than built as a separate library) in order for

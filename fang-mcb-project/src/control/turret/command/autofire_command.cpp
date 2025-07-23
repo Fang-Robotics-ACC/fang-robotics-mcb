@@ -1,35 +1,32 @@
 #include "autofire_command.hpp"
 #include "tap/algorithms/math_user_utils.hpp"
 
-namespace control
+namespace fang::turret
 {
-    namespace turret
+    using namespace units::literals;
+    AutofireCommand::AutofireCommand(ISimpleFeederSubsystemControl& feeder)
+    :   m_feeder{feeder}
     {
-        using namespace units::literals;
-        AutofireCommand::AutofireCommand(FeederSubsystem& feeder)
-        :   m_feeder{feeder}
-        {
-            addSubsystemRequirement(&m_feeder);
-        }
+        addSubsystemRequirement(&m_feeder);
+    }
 
-        void AutofireCommand::initialize()
-        {
-            m_feeder.autoFireOn();
-        }
+    void AutofireCommand::initialize()
+    {
+        m_feeder.feedOn();
+    }
 
-        void AutofireCommand::execute()
-        {
-        }
+    void AutofireCommand::execute()
+    {
+    }
 
-        void AutofireCommand::end(bool interrupted)
-        {
-            m_feeder.autoFireOff();
-        }
+    void AutofireCommand::end(bool interrupted)
+    {
+        m_feeder.feedOff();
+    }
 
-        bool AutofireCommand::isFinished() const
-        {
-            //Only needs to switch the booster
-            return false;
-        }
+    bool AutofireCommand::isFinished() const
+    {
+        //Only needs to switch the booster
+        return false;
     }
 }

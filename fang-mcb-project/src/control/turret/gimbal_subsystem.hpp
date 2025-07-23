@@ -1,15 +1,14 @@
 #ifndef FANG_ROBOTICS_MCB_GIMBAL_SUBSYSTEM_HPP
 #define FANG_ROBOTICS_MCB_GIMBAL_SUBSYSTEM_HPP
-#include "control/turret/systems/gimbal_system.hpp"
-
-#include "configuration/mathaliases.hpp"
-
-#include "drivers.hpp"
-#include "unitaliases.hpp"
+#include "driver/drivers.hpp"
+#include "control/turret/system/gimbal_system.hpp"
+#include "util/math/linear/vector_alias.hpp"
+#include "wrap/units/units_alias.hpp"
 
 #include "trap/communication/sensors/imu.hpp"
 
 #include "tap/control/subsystem.hpp"
+
 namespace control
 {
     namespace turret

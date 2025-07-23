@@ -3,8 +3,6 @@
 #include "control/chassis/chassis_input_handler.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/turret/gimbal_subsystem.hpp"
-#include "control/turret/turret_subsystem.hpp"
-#include "configuration/motion_control_config.hpp"
 
 #include "tap/control/command.hpp"
 

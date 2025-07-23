@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_TRAP_IMU_HPP_SENSORS
 #define FANG_ROBOTICS_MCB_TRAP_IMU_HPP_SENSORS
-#include "unitaliases.hpp"
+#include "wrap/units/units_alias.hpp"
 #include "tap/communication/sensors/imu/imu_interface.hpp"
 
 namespace trap::communication::sensors

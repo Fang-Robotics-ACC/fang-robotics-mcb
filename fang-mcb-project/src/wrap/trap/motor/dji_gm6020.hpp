@@ -1,13 +1,13 @@
 #ifndef FANG_ROBOTICS_MCB_TRAP_DJI_GM6020_HPP
 #define FANG_ROBOTICS_MCB_TRAP_DJI_GM6020_HPP
-#include "unitaliases.hpp"
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
 #include "trap/algorithms/wrapped_radians.hpp"
+#include "wrap/units/units_alias.hpp"
 
 #include "tap/motor/dji_motor.hpp"
 #include "tap/communication/can/can_bus.hpp"
 #include "tap/util_macros.hpp"
-#include "drivers.hpp"
+#include "driver/drivers.hpp"
 
 namespace trap
 {
@@ -40,7 +40,7 @@ namespace trap
              * This would lead to undefined behavior. An assertion has been placed to prevent
              * the code from continuing.
              * 
-             * Why an ID not more thn 4? The GM6020 motors have their id offset by + 4 for some unholy DJI reason. (Ask their sages.)
+             * Why an ID not more thn 4? The GM6020 motor have their id offset by + 4 for some unholy DJI reason. (Ask their sages.)
              * Taproot decided to keep the regular motor ids, which meant that if you place MotorID::Motor1, it gets mapped to MotorID::Motor5
              * implicitly (irl, the GM6020 motor id needs to be set to 1, but the tapproot codewise motorId must be 5)
              * the enum does not go above Motor8, which means in order to access a Gm6020 with irl MotorId::Motor5, the codewise

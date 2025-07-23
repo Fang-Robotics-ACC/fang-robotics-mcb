@@ -1,7 +1,5 @@
 #include "chassis_input_handler.hpp"
-
-#include "unitaliases.hpp"
-#include "mathaliases.hpp"
+#include "util/math/linear/vector_alias.hpp"
 
 #include "tap/algorithms/math_user_utils.hpp"
 
