@@ -16,8 +16,8 @@ namespace fang::motor
         RepeatUltraMk2
         (
             drivers,
-            config.controllerInputVoltage, 
-            config.pwmData.pwmPin, 
+            config.controllerInputVoltage,
+            config.pwmData.pwmPin,
             config.pwmData.pinFrequency,
             config.directionality,
             config.inverted

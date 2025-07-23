@@ -19,6 +19,7 @@ namespace fang::motor
     */
     class RepeatUltraMk2 : public virtual ISpeedMotor
     {
+    public:
         struct Config
         {
             const Volts& controllerInputVoltage;
@@ -26,8 +27,6 @@ namespace fang::motor
             Directionality directionality;
             bool inverted ;
         };
-
-    public:
         RepeatUltraMk2(Drivers& drivers, const Config& config);
         RepeatUltraMk2(tap::Drivers& drivers,
                       const Volts& controllerInputVoltage,

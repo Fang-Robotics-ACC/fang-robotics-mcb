@@ -34,12 +34,13 @@ namespace fang::motor
         struct Config
         {
             const Volts& controllerInputVoltage;
-            tap::gpio::Pwm::Pin pwmPin;
-            const Hertz& pinFrequency;
+            trap::gpio::PwmData pwmData;
             motor::Directionality directionality;
             bool inverted;
             double gearRatio;
         };
+
+        GearboxRepeatUltraMk2(Drivers& drivers, const Config& config);
 
         GearboxRepeatUltraMk2(tap::Drivers& drivers, const UnifiedProperties& unifiedProperties, const trap::gpio::PwmData& pwmData, bool inverted);
 
