@@ -1,4 +1,4 @@
-#include "vortex80aesc.hpp"
+#include "vortex_80a_esc.hpp"
 #include "communication/gpio/pwm/pwm_info.hpp"
 
 #include "trap/communication/pwm_data.hpp"

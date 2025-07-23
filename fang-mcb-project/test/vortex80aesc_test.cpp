@@ -1,4 +1,4 @@
-#include "driver/motor/repeat_robotics/vortex80aesc.hpp"
+#include "driver/motor/repeat_robotics/vortex_80a_esc.hpp"
 #include "trap/communication/pwm_data.hpp"
 #include "wrap/units/units_alias.hpp"
 #include "tap/drivers.hpp"
