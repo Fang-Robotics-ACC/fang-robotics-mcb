@@ -14,11 +14,7 @@
 #include "tap/communication/gpio/pwm.hpp"
 #include "tap/control/subsystem.hpp"
 
-#if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
-#include "test/mock/motor/gearboxrepeatultramk2mock.hpp"
-#else
 #include "driver/motor/repeat_robotics/gearbox_repeat_ultra_mk2.hpp"
-#endif
 
 namespace control
 {
@@ -28,11 +24,7 @@ namespace control
         class ChassisSubsystem : public tap::control::Subsystem
         {
         public:
-#if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
-        using DriveMotor = mock::motor::GearboxRepeatUltraMk2Mock;
-#else
         using DriveMotor = fang::motor::GearboxRepeatUltraMk2;
-#endif
         using PowerLimiter = trap::control::chassis::PowerLimiter;
 
         struct ChassisMotorConfig
