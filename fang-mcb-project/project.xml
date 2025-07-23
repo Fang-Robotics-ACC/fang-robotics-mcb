@@ -38,7 +38,7 @@
     <!-- IF YOUR SCONS SIZE IS REASONABLE, YOU CAN UP IT ALL THE WAY TO 65536, IT MUST EB A MULTIPLE OF 1024, or possibly 1024*3-->
     <!-- Eli told me that you should only up it if you need to, so should you trigger this, just up it by another 1024*3-->
     <!-- 16384:2 * 6144 = (1024*3) * 2 * 2 : Praise ELI from ARUW for immense patience and help in this baffling mystery! You should've seen everyone's faces!-->
-    <option name="taproot:modm-project.xml:modm_hal_options">modm:platform:cortex-m 16384</option-->
+    <option name="taproot:modm-project.xml:modm_hal_options">modm:platform:cortex-m 16384</option>
 
   </options>
   <modules>
