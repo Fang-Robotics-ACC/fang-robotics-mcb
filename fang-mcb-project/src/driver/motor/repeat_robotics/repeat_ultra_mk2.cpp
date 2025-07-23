@@ -11,6 +11,19 @@ using namespace units::literals;
 
 namespace fang::motor
 {
+
+    RepeatUltraMk2::RepeatUltraMk2(Drivers& drivers, const Config& config):
+        RepeatUltraMk2
+        (
+            drivers,
+            config.controllerInputVoltage,
+            config.pwmData.pwmPin,
+            config.pwmData.pinFrequency,
+            config.directionality,
+            config.inverted
+        )
+    {
+    }
     RepeatUltraMk2::RepeatUltraMk2(
         tap::Drivers& drivers,
         const Volts& controllerInputVoltage,

@@ -20,10 +20,6 @@ namespace mock
 
             MOCK_METHOD(void, setTargetSpeed, (const RPM& speed), (override));
             MOCK_METHOD(RPM, getTargetSpeed, (), (const, override));
-    		MOCK_METHOD(void, setMaxSpeed, (const RPM& maxSpeed), (override));
-    		MOCK_METHOD(RPM, getMaxSpeed, (), (const, override));
-    		MOCK_METHOD(void, setMinSpeed, (const RPM& minSpeed), (override));
-    		MOCK_METHOD(RPM, getMinSpeed, (), (const, override));
        };//class GearboxRepeatUltraMk2Mock
     }//namespace motor
 }//namespace mock

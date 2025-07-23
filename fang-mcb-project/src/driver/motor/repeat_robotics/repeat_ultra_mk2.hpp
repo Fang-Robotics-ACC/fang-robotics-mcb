@@ -1,5 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_DRIVER_MOTOR_REPEAT_ULTRA_MK2_HPP
 #define FANG_ROBOTICS_MCB_DRIVER_MOTOR_REPEAT_ULTRA_MK2_HPP
+#include "driver/drivers.hpp"
 #include "driver/motor/data/directionality.hpp"
 #include "vortex_80a_esc.hpp"
 #include "wrap/rail/rail_motors.hpp"
@@ -9,6 +10,7 @@
 
 #include "tap/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
+#include "trap/communication/pwm_data.hpp"
 
 namespace fang::motor
 {
@@ -18,6 +20,14 @@ namespace fang::motor
     class RepeatUltraMk2 : public virtual ISpeedMotor
     {
     public:
+        struct Config
+        {
+            const Volts& controllerInputVoltage;
+            trap::gpio::PwmData pwmData;
+            Directionality directionality;
+            bool inverted ;
+        };
+        RepeatUltraMk2(Drivers& drivers, const Config& config);
         RepeatUltraMk2(tap::Drivers& drivers,
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,

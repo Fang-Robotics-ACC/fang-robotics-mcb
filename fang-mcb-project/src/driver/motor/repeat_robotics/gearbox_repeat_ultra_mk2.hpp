@@ -19,6 +19,7 @@ namespace fang::motor
     {
     public:
         /**
+         * DEPRECATED, will be removed when the chassis code is refactored
          * These properties are the most common in being duplicate
          * across multiple instances. For your convenience, a struct
          * bundle has been provided.
@@ -29,6 +30,17 @@ namespace fang::motor
             motor::Directionality directionality;
             double gearRatio;
         };
+
+        struct Config
+        {
+            const Volts& controllerInputVoltage;
+            trap::gpio::PwmData pwmData;
+            motor::Directionality directionality;
+            bool inverted;
+            double gearRatio;
+        };
+
+        GearboxRepeatUltraMk2(Drivers& drivers, const Config& config);
 
         GearboxRepeatUltraMk2(tap::Drivers& drivers, const UnifiedProperties& unifiedProperties, const trap::gpio::PwmData& pwmData, bool inverted);
 

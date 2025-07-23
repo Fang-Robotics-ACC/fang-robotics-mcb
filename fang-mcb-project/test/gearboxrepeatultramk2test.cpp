@@ -7,6 +7,7 @@
 #include <gtest/gtest.h>
 
 using namespace units::literals;
+using namespace fang;
 TEST(minSpeedTest, repeatUltraMk2)
 {
     {
