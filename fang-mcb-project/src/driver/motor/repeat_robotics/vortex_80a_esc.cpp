@@ -79,7 +79,7 @@ namespace fang::motor
     {
         kDirectionality_ = directionality;
     }
-    Vortex80AEsc::Directionality Vortex80AEsc::getDirectionality() const
+    Directionality Vortex80AEsc::getDirectionality() const
     {
         return kDirectionality_;
     }

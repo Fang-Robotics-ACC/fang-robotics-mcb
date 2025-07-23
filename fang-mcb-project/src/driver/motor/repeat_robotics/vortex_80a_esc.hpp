@@ -18,7 +18,6 @@ namespace fang::motor
     class Vortex80AEsc
     {
     public:
-        using Directionality = ::motor::Directionality;
         Vortex80AEsc(tap::gpio::Pwm& pwmDriver, const trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
         /**
          * Sends the appropriate arming signal

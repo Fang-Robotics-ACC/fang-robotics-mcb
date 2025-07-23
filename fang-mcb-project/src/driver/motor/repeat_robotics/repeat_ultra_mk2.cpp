@@ -9,7 +9,7 @@
 
 using namespace units::literals;
 
-namespace motor
+namespace fang::motor
 {
     RepeatUltraMk2::RepeatUltraMk2(
         tap::Drivers& drivers,
