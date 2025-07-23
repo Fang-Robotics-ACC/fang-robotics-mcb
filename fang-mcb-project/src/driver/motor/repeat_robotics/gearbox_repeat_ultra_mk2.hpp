@@ -19,6 +19,7 @@ namespace fang::motor
     {
     public:
         /**
+         * DEPRECATED, will be removed when the chassis code is refactored
          * These properties are the most common in being duplicate
          * across multiple instances. For your convenience, a struct
          * bundle has been provided.
@@ -27,6 +28,16 @@ namespace fang::motor
         {
             const Volts controllerInputVoltage;
             motor::Directionality directionality;
+            double gearRatio;
+        };
+
+        struct Config
+        {
+            const Volts& controllerInputVoltage;
+            tap::gpio::Pwm::Pin pwmPin;
+            const Hertz& pinFrequency;
+            motor::Directionality directionality;
+            bool inverted;
             double gearRatio;
         };
 
