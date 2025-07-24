@@ -27,11 +27,11 @@ namespace control
 
         void ChassisSubsystem::setMotion(const physics::Velocity2D& translation, const RPM& rotation)
         {
-            setTranslation(translation);
-            setRotation(rotation);
+            setTargetTranslation(translation);
+            setTargetRotation(rotation);
         }
 
-        void ChassisSubsystem::setTranslation(const physics::Velocity2D& translation)
+        void ChassisSubsystem::setTargetTranslation(const physics::Velocity2D& translation)
         {
             m_translationRamp.setTarget(translation);
         }
@@ -41,7 +41,7 @@ namespace control
             return m_mecanumLogic.getTranslation();
         }
 
-        void ChassisSubsystem::setRotation(const RPM& rotation)
+        void ChassisSubsystem::setTargetRotation(const RPM& rotation)
         {
 
             m_rotationRamp.setTarget(rotation);

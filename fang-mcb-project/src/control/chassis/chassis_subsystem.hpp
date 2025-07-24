@@ -4,15 +4,19 @@
 #include "driver/motor/data/directionality.hpp"
 #include "control/chassis/holonomic/mecanum/logic/field_mecanum_logic.hpp"
 #include "util/physics/data/velocity_2d.hpp"
+
 #include "wrap/units/units_alias.hpp"
+
+#include "wrap/rail/chassis/iholonomic_subsystem_control.hpp"
+
 #include "wrap/trap/communication/pwm_data.hpp"
 #include "wrap/trap/control/chassis/power_limiter.hpp"
-
 #include "wrap/trap/algorithms/ramp_2d.hpp"
 #include "wrap/trap/algorithms/ramp.hpp"
 
+
 #include "tap/communication/gpio/pwm.hpp"
-#include "tap/control/subsystem.hpp"
+
 
 #include "driver/motor/repeat_robotics/gearbox_repeat_ultra_mk2.hpp"
 
@@ -74,7 +78,7 @@ namespace control
          * This is relative to the field - the axis are basically wherever the robot
          * faces forward at the start of the round
          */
-        void setTranslation(const physics::Velocity2D& translation);
+        void setTargetTranslation(const physics::Velocity2D& translation);
 
         /**
          * This is relative to the field - the axis are basically wherever the robot
@@ -88,7 +92,7 @@ namespace control
          * If you are taking the horizontal joystick position, you will likely need to
          * multiply it by -1.
          */
-        void setRotation(const RPM& rotation);
+        void setTargetRotation(const RPM& rotation);
 
         /**
          * Returns the angular velocity. Counterclockwise is positive in order to
