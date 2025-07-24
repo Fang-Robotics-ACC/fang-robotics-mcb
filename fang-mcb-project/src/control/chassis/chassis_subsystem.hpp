@@ -20,12 +20,12 @@
 
 #include "driver/motor/repeat_robotics/gearbox_repeat_ultra_mk2.hpp"
 
-namespace control
+namespace fang 
 {
     namespace chassis
     {
         
-        class ChassisSubsystem : public tap::control::Subsystem
+        class ChassisSubsystem: public tap::control::Subsystem
         {
         public:
         using DriveMotor = fang::motor::GearboxRepeatUltraMk2;
