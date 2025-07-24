@@ -5,9 +5,8 @@
 
 namespace fang::chassis
 {
-    ChassisSubsystem::ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig)
-        :
-        tap::control::Subsystem::Subsystem{&drivers},
+    ChassisSubsystem::ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig):
+        Subsystem{&drivers},
         m_drivers{drivers},
         mk_pwmFrequency{chassisConfig.pwmFrequency},
         mk_pwmTimer{chassisConfig.pwmTimer},
