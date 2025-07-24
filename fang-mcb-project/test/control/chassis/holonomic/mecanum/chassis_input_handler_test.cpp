@@ -18,20 +18,20 @@ using Remote = tap::communication::serial::Remote;
 using Channel = Remote::Channel;
 using Key = Remote::Key;
 
-static const control::chassis::ChassisInputHandler::RemoteConfig k_chassisInputRemoteConfig
+static const fang::chassis::ChassisInputHandler::RemoteConfig k_chassisInputRemoteConfig
 {
     Channel::LEFT_HORIZONTAL,   //xTranslation
     Channel::LEFT_VERTICAL,     //yTranslation
     Channel::WHEEL              //rotation
 };
-static const control::chassis::ChassisInputHandler::KeyboardConfig k_chassisInputKeyboardConfig
+static const fang::chassis::ChassisInputHandler::KeyboardConfig k_chassisInputKeyboardConfig
 {
     Key::W, //forward
     Key::S, //backward
     Key::A, //left
     Key::D  //right
 };
-static const control::chassis::ChassisInputHandler::Config k_chassisInputConfig
+static const fang::chassis::ChassisInputHandler::Config k_chassisInputConfig
 {
     k_chassisInputRemoteConfig,
     k_chassisInputKeyboardConfig
@@ -52,7 +52,7 @@ protected:
     Drivers m_drivers{};
     tap::mock::RemoteMock& m_remote{m_drivers.remote};
 
-    control::chassis::ChassisInputHandler m_chassisInputHandler{m_remote, k_chassisInputConfig};
+    fang::chassis::ChassisInputHandler m_chassisInputHandler{m_remote, k_chassisInputConfig};
     
 };
 

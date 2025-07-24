@@ -6,7 +6,7 @@
 
 #include <gtest/gtest.h>
 #include <tuple>
-
+using namespace fang;
 //The vector rotaiton function is within an accuracy of 1e-14 (14 decimal places)
 //The error tends to be at around 1e-13, which is still reasonable (13 decimal places)
 constexpr double k_tolerance{1e-12};
