@@ -22,13 +22,13 @@ jobs:
       - run: cat ~/.bashrc
       - run: ls ~/gcc-arm-none-eabi-10.3-2021.10/bin
       - run: source ~/.bashrc
-      - name: Python versoin setup
+      - name: Python Version Install
         uses: actions/setup-python@v5
         with:
           python-version: '3.8.12'
-      - name: pipenv
+      - name: Ppenv INitialize
         run: |
-          pipenv install --python 3.8.10
+          pipenv install --python 3.8.12
       - run: pipenv run pip install -U SCons
       - name: build
         run: |
