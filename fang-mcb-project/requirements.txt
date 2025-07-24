@@ -1,0 +1,11 @@
+anytree==2.12.1
+gitdb==4.0.12
+GitPython==3.1.44
+Jinja2==3.1.6
+lbuild==1.20.0
+lxml==5.4.0
+MarkupSafe==2.1.5
+pyelftools==0.32
+scons==3.1.2
+six==1.17.0
+smmap==5.0.2
