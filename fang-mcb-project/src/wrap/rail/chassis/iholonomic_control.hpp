@@ -6,6 +6,6 @@
 
 namespace fang::chassis
 {
-    using IHolnomicDrive = rail::chassis::IHolonomicControl<physics::Velocity2D, RPM>;
+    using IHolonomicControl = rail::chassis::IHolonomicControl<physics::Velocity2D, RPM>;
 }
 #endif
