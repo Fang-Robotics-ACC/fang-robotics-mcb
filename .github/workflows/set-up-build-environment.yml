@@ -4,6 +4,9 @@ on: [push]
 jobs:
   Test-And-Build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./fang-mcb-project
     steps:
       - run: sudo apt-get install python3 python3-pip scons git openocd gcc build-essential libboost-all-dev openocd stlink-tools libgtest-dev pipenv wget -y
       - run: curl -fsSL https://pyenv.run | bash
@@ -15,6 +18,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - run: cd fang-mcb-project
+      - run: pyenv install 3.8.10
       - run: pipenv install --python 3.8.10
       - run: pipenv run scons build
       - run: pipenv run scons test
