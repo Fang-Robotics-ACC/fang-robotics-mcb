@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./fang-mcb-project
+        working-directory: fang-mcb-project
     steps:
       - run: sudo apt-get install python3 python3-pip scons git openocd gcc build-essential libboost-all-dev openocd stlink-tools libgtest-dev pipenv wget -y
       - run: curl -fsSL https://pyenv.run | bash
