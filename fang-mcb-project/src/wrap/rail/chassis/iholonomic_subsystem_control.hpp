@@ -11,10 +11,6 @@ namespace fang::chassis
         virtual public tap::control::Subsystem
     {
     public:
-        IHolonomicSubsystemControl(Drivers& drivers):
-            tap::control::Subsystem(&drivers)
-        {
-        }
         virtual ~IHolonomicSubsystemControl() {};
     };
 }
