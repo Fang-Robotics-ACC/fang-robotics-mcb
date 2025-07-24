@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: Build and Test
 on: [push]
 jobs:
   Test-And-Build:
@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
-      - run: sudo apt-get install python3 python-is-python3 python3-pip git openocd gcc build-essential libboost-all-dev openocd stlink-tools libgtest-dev pipenv wget -y
+      - run: sudo apt-get install python3 python-is-python3 python3-pip git openocd gcc build-essential libboost-all-dev openocd stlink-tools libgmock-dev libgtest-dev pipenv wget -y
       - run: sudo apt-get remove scons -y
       - run: wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
       - run: tar -xf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.8.12'
-      - name: Ppenv INitialize
+      - name: Pipenv Initialize
         run: |
           pipenv install --python 3.8.12
       - run: pipenv run pip install -U SCons
