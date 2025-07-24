@@ -22,8 +22,8 @@ jobs:
       - name: Set Path
         
         run: |
-          echo "home/runner/gcc-arm-none-eabi-10.3-2021.10/bin" >> $GITHUB_PATH
-          echo 'export PATH="&{{github.workspace}}/gcc-arm-none-eabi-10.3-2021.10/bin:$HOME/.local/bin:$PATH:$PATH"' >> ~/.bashrc
+          echo "~/gcc-arm-none-eabi-10.3-2021.10/bin" >> $GITHUB_PATH
+          echo 'export PATH="&{{ github.workspace }}/gcc-arm-none-eabi-10.3-2021.10/bin:$HOME/.local/bin:$PATH:$PATH"' >> ~/.bashrc
         
       - run: cat ~/.bashrc
       - run: ls ~/gcc-arm-none-eabi-10.3-2021.10/bin
@@ -32,7 +32,7 @@ jobs:
       - run: pipenv run pip install -U SCons
       - name: build
         run: |
-          source ~/.bashrc
+          export PATH="/home/runner/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH"
           pipenv run scons build
           pipenv run scons test
  
