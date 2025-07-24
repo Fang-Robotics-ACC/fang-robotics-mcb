@@ -25,9 +25,11 @@ jobs:
       - run: ls ~/gcc-arm-none-eabi-10.3-2021.10/bin
       - run: source ~/.bashrc
       - name: Pyenv setup
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.8.10'
+      - name: pipenv
         run: |
-          curl -fsSL https://pyenv.run | bash
-          pyenv install 3.8.10
           pipenv install --python 3.8.10
       - run: pipenv run pip install -U SCons
       - name: build
