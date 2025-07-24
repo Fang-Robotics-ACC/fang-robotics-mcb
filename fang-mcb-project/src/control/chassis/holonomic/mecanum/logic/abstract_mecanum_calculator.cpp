@@ -1,6 +1,6 @@
 #include "abstract_mecanum_calculator.hpp"
 
-namespace chassis
+namespace fang::chassis
 {
     void AbstractMecanumCalculator::setWheelSpeeds(const AbstractWheelSpeeds& quadDriveData)
     {

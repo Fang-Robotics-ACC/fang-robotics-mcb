@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_CHASSIS_ALGORITHMS_BASIC_DOWNSCALERS_HPP
 #include "wrap/units/units_alias.hpp"
 
-namespace control::chassis
+namespace fang::chassis
 {
     /**
      * Small downscaler for finding an amount to downscale for the shuriken

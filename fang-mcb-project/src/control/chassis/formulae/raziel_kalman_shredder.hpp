@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_CHASSIS_FORMULAE_RAZIEL_KALMAN_SHREDDER_HPP
 #define FANG_ROBOTICS_MCB_CHASSIS_FORMULAE_RAZIEL_KALMAN_SHREDDER_HPP
-namespace control::chassis
+namespace fang::chassis
 {
     /**
      * Raven Asher Raziel's self-named anti CV algorithm!

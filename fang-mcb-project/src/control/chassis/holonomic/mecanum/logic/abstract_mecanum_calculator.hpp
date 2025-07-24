@@ -4,7 +4,7 @@
 #include "control/chassis/drive/quad_drive/data/quad_drive_data.hpp"
 #include "wrap/units/units_alias.hpp"
 
-namespace chassis
+namespace fang::chassis
 {
     /**
      * This provides values that "move" in the way that

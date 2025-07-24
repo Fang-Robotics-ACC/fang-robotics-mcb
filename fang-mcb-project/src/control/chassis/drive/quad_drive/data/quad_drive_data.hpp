@@ -3,7 +3,7 @@
 #include "wrap/rail/chassis/rail_drive_alias.hpp"
 #include "wrap/units/units_alias.hpp"
 
-namespace chassis
+namespace fang::chassis
 {
     using AbstractWheelSpeeds = QuadDriveData<double>;
     using WheelSpeeds = QuadDriveData<RPM>;

@@ -3,74 +3,70 @@
 
 #include "tap/algorithms/math_user_utils.hpp"
 
-namespace control
+namespace fang::chassis 
 {
-    namespace chassis
+    ChassisInputHandler::ChassisInputHandler(Remote& remote, const Config& config)
+    :   m_remote{remote},
+        mk_remoteConfig{config.remoteConfig},
+        mk_keyboardConfig{config.keyboardConfig}
     {
+    }
 
-        ChassisInputHandler::ChassisInputHandler(Remote& remote, const Config& config)
-        :   m_remote{remote},
-            mk_remoteConfig{config.remoteConfig},
-            mk_keyboardConfig{config.keyboardConfig}
+    math::AbstractVector2D ChassisInputHandler::getTranslation() const
+    {
+        const math::AbstractVector2D translationSum{getKeyboardTranslation() + getRemoteTranslation()};
+        const double xClamped{tap::algorithms::limitVal<double>(translationSum.x, mk_abstractMin, mk_abstractMax)};
+        const double yClamped{tap::algorithms::limitVal<double>(translationSum.y, mk_abstractMin, mk_abstractMax)};
+        return math::AbstractVector2D{xClamped, yClamped};
+    }
+
+    double ChassisInputHandler::getRotation() const
+    {
+        return tap::algorithms::limitVal<double>(getRemoteRotation(), mk_abstractMin, mk_abstractMax);
+    }
+
+    math::AbstractVector2D ChassisInputHandler::getKeyboardTranslation() const
+    {
+        if (m_remote.keyPressed(mk_keyboardConfig.forwardKey))
         {
+            return mk_forward;
         }
-
-        math::AbstractVector2D ChassisInputHandler::getTranslation() const
+        else if(m_remote.keyPressed(mk_keyboardConfig.backwardKey))
         {
-            const math::AbstractVector2D translationSum{getKeyboardTranslation() + getRemoteTranslation()};
-            const double xClamped{tap::algorithms::limitVal<double>(translationSum.x, mk_abstractMin, mk_abstractMax)};
-            const double yClamped{tap::algorithms::limitVal<double>(translationSum.y, mk_abstractMin, mk_abstractMax)};
-            return math::AbstractVector2D{xClamped, yClamped};
+            return mk_backward;
         }
-
-        double ChassisInputHandler::getRotation() const
+        else if(m_remote.keyPressed(mk_keyboardConfig.leftKey))
         {
-            return tap::algorithms::limitVal<double>(getRemoteRotation(), mk_abstractMin, mk_abstractMax);
+            return mk_left;
         }
-
-        math::AbstractVector2D ChassisInputHandler::getKeyboardTranslation() const
+        else if(m_remote.keyPressed(mk_keyboardConfig.rightKey))
         {
-            if (m_remote.keyPressed(mk_keyboardConfig.forwardKey))
-            {
-                return mk_forward;
-            }
-            else if(m_remote.keyPressed(mk_keyboardConfig.backwardKey))
-            {
-                return mk_backward;
-            }
-            else if(m_remote.keyPressed(mk_keyboardConfig.leftKey))
-            {
-                return mk_left;
-            }
-            else if(m_remote.keyPressed(mk_keyboardConfig.rightKey))
-            {
-                return mk_right;
-            }
-            else
-            {
-                return mk_still;
-            }
+            return mk_right;
         }
-
-        math::AbstractVector2D ChassisInputHandler::getRemoteTranslation() const
+        else
         {
-            const double xTranslationScale{m_remote.getChannel(mk_remoteConfig.xTranslationChannel)};
-            const double yTranslationScale{m_remote.getChannel(mk_remoteConfig.yTranslationChannel)};
-
-            return math::AbstractVector2D{xTranslationScale, yTranslationScale};
+            return mk_still;
         }
+    }
 
-        double ChassisInputHandler::getRemoteAngularDisplacement() const
-        {
-            //Counterclockwise is positiev
-            const double angularDisplacementScale{-m_remote.getChannel(mk_remoteConfig.rotationChannel)};
-            return angularDisplacementScale;
-        }
+    math::AbstractVector2D ChassisInputHandler::getRemoteTranslation() const
+    {
+        const double xTranslationScale{m_remote.getChannel(mk_remoteConfig.xTranslationChannel)};
+        const double yTranslationScale{m_remote.getChannel(mk_remoteConfig.yTranslationChannel)};
 
-        double ChassisInputHandler::getRemoteRotation() const
-        {
-            const double rotationScale{-m_remote.getChannel(mk_remoteConfig.rotationChannel)};
-            return rotationScale;
-        }
-    }// namespce chassis
-}// namespace control
+        return math::AbstractVector2D{xTranslationScale, yTranslationScale};
+    }
+
+    double ChassisInputHandler::getRemoteAngularDisplacement() const
+    {
+        //Counterclockwise is positiev
+        const double angularDisplacementScale{-m_remote.getChannel(mk_remoteConfig.rotationChannel)};
+        return angularDisplacementScale;
+    }
+
+    double ChassisInputHandler::getRemoteRotation() const
+    {
+        const double rotationScale{-m_remote.getChannel(mk_remoteConfig.rotationChannel)};
+        return rotationScale;
+    }
+}

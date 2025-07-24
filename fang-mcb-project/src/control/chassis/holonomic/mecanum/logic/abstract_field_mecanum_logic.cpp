@@ -3,7 +3,7 @@
 
 #include <cmath>
 
-namespace chassis
+namespace fang::chassis
 {
     void AbstractFieldMecanumLogic::setMotion(const AbstractVelocity2D& translation, double rotationOffset)
     {

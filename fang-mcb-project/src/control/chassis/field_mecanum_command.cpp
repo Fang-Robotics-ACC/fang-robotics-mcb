@@ -4,86 +4,83 @@
 
 #include <cassert>
 
-namespace control
+namespace fang::chassis
 {
-    namespace chassis
+    FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config)
+    :   m_chassisSubsystem{chassisSubsystem},
+        m_gimbal{turret},
+        m_input{inputHandler},
+        mk_config{config}
     {
-        FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config)
-        :   m_chassisSubsystem{chassisSubsystem},
-            m_gimbal{turret},
-            m_input{inputHandler},
-            mk_config{config}
+        addSubsystemRequirement(&m_chassisSubsystem);
+    }
+
+    const char* FieldMecanumCommand::getName() const
+    {
+        return mk_name;
+    }
+
+    void FieldMecanumCommand::initialize()
+    {
+    }
+
+    void FieldMecanumCommand::execute()
+    {
+        switch(m_controlMode)
         {
-            addSubsystemRequirement(&m_chassisSubsystem);
+            case ControlMode::REMOTE_TEST_FIELD_ROTATE:
+                executeRemoteTestFieldRotate();
+                break;
+            case ControlMode::REMOTE_TEST_STRAFE_TURRET:
+                executeRemoteTestStrafeTurret();
+                break;
+            case ControlMode::KEYBOARD_TEST_FIELD_ROTATE:
+                executeKeyboardTestFieldRotate();
+                break;
+            case ControlMode::KEYBOARD_TEST_STRAFE_TURRET:
+                executeKeyboardTestStrafeTurret();
+                break;
+            default:
+                assert(!"Unexpected or unsupported mode.");
         }
+    }
 
-        const char* FieldMecanumCommand::getName() const
-        {
-            return mk_name;
-        }
+    void FieldMecanumCommand::end(bool interrupted)
+    {}
 
-        void FieldMecanumCommand::initialize()
-        {
-        }
+    bool FieldMecanumCommand::isFinished() const
+    {
+        return false;
+    }
 
-        void FieldMecanumCommand::execute()
-        {
-            switch(m_controlMode)
-            {
-                case ControlMode::REMOTE_TEST_FIELD_ROTATE:
-                    executeRemoteTestFieldRotate();
-                    break;
-                case ControlMode::REMOTE_TEST_STRAFE_TURRET:
-                    executeRemoteTestStrafeTurret();
-                    break;
-                case ControlMode::KEYBOARD_TEST_FIELD_ROTATE:
-                    executeKeyboardTestFieldRotate();
-                    break;
-                case ControlMode::KEYBOARD_TEST_STRAFE_TURRET:
-                    executeKeyboardTestStrafeTurret();
-                    break;
-                default:
-                    assert(!"Unexpected or unsupported mode.");
-            }
-        }
+    void FieldMecanumCommand::executeRemoteTestFieldRotate()
+    {
+        const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
+        const double abstractRotation{m_input.getRotation()};
 
-        void FieldMecanumCommand::end(bool interrupted)
-        {}
+        const physics::Velocity2D translation{abstractTranslation.x * mk_config.maxXTranslation, abstractTranslation.y * mk_config.maxYTranslation};
+        const RPM rotation{abstractRotation * mk_config.maxRotation};
+        m_chassisSubsystem.setMotion(translation, rotation);
+    }
 
-        bool FieldMecanumCommand::isFinished() const
-        {
-            return false;
-        }
+    void FieldMecanumCommand::executeRemoteTestStrafeTurret()
+    {
 
-        void FieldMecanumCommand::executeRemoteTestFieldRotate()
-        {
-            const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
-            const double abstractRotation{m_input.getRotation()};
+        const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
+        const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_config.maxXTranslation, abstractTranslation.y * mk_config.maxYTranslation};
+        const Radians turretBearing{m_gimbal.getTargetFieldYaw()};
 
-            const physics::Velocity2D translation{abstractTranslation.x * mk_config.maxXTranslation, abstractTranslation.y * mk_config.maxYTranslation};
-            const RPM rotation{abstractRotation * mk_config.maxRotation};
-            m_chassisSubsystem.setMotion(translation, rotation);
-        }
+        const physics::Velocity2D fieldTranslation{math::rotateVector2D(frameTranslation, turretBearing)};
 
-        void FieldMecanumCommand::executeRemoteTestStrafeTurret()
-        {
+        const double abstractRotation{m_input.getRotation()};
 
-            const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
-            const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_config.maxXTranslation, abstractTranslation.y * mk_config.maxYTranslation};
-            const Radians turretBearing{m_gimbal.getTargetFieldYaw()};
+        const RPM rotation{abstractRotation * mk_config.maxRotation};
+        m_chassisSubsystem.setMotion(fieldTranslation, rotation);
+    }
 
-            const physics::Velocity2D fieldTranslation{math::rotateVector2D(frameTranslation, turretBearing)};
+    void FieldMecanumCommand::executeKeyboardTestFieldRotate()
+    {}
 
-            const double abstractRotation{m_input.getRotation()};
-
-            const RPM rotation{abstractRotation * mk_config.maxRotation};
-            m_chassisSubsystem.setMotion(fieldTranslation, rotation);
-        }
-
-        void FieldMecanumCommand::executeKeyboardTestFieldRotate()
-        {}
-
-        void FieldMecanumCommand::executeKeyboardTestStrafeTurret()
-        {}
-    }//namespace control
-}//namespace chassis
+    void FieldMecanumCommand::executeKeyboardTestStrafeTurret()
+    {}
+}//namespace fang::chassis
