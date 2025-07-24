@@ -54,7 +54,7 @@ namespace fang::motor
         /**
          * This returns the desired speed, not the actual speed.
          */
-		RPM getTargetSpeed() const override;
+		RPM getTargetSpeed() const;
 
         /**
          * All requests will be clamped to this bound. The default is the maximum
