@@ -21,7 +21,6 @@ jobs:
       - run: echo 'export PATH="~/gcc-arm-none-eabi-10.3-2021.10/bin:$HOME/.local/bin:$PATH:$PATH"' >> ~/.bashrc
       - run: cat ~/.bashrc
       - run: source ~/.bashrc
-      - run: ~/.pyenv install 3.8.10
       - run: pipenv install --python 3.8.10
       - run: pipenv run scons build
       - run: pipenv run scons test
