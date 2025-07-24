@@ -11,6 +11,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - run: sudo apt-get install python3 python-is-python3 python3-pip git openocd gcc build-essential libboost-all-dev openocd stlink-tools libgtest-dev pipenv wget -y
+      - run: sudo apt-get remove scons -y
       - run: curl -fsSL https://pyenv.run | bash
       - run: echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
       - run: echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
@@ -22,7 +23,7 @@ jobs:
       - run: cat ~/.bashrc
       - run: source ~/.bashrc
       - run: pipenv install --python 3.8.10
-      - run: pipenv run pip install SCons
+      - run: pipenv run pip install -U SCons
       - run: pipenv run scons build
       - run: pipenv run scons test
  
