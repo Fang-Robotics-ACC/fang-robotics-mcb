@@ -25,7 +25,7 @@ jobs:
       - name: Python versoin setup
         uses: actions/setup-python@v5
         with:
-          python-version: '3.8.10'
+          python-version: '3.8.12'
       - name: pipenv
         run: |
           pipenv install --python 3.8.10
@@ -33,5 +33,6 @@ jobs:
       - name: build
         run: |
           export PATH="/home/runner/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH"
+          pipenv run pip install -r requirements.txt
           pipenv run scons build
           pipenv run scons test
