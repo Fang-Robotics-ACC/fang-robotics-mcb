@@ -1,7 +1,7 @@
 #include "repeat_ultra_mk2.hpp"
 #include "units.h"
 
-#include "trap/communication/pwm_data.hpp"
+#include "wrap/trap/communication/pwm_data.hpp"
 #include "tap/algorithms/math_user_utils.hpp"
 
 #include <algorithm>

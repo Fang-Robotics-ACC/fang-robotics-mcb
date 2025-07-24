@@ -5,7 +5,7 @@
 #include "util/math/linear/vector_alias.hpp"
 #include "wrap/units/units_alias.hpp"
 
-#include "trap/communication/sensors/imu.hpp"
+#include "wrap/trap/communication/sensors/imu.hpp"
 
 #include "tap/control/subsystem.hpp"
 

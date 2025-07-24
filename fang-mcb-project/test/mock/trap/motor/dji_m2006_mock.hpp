@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_TRAP_MOCK_DJI_M2006_MOCK_HPP
 
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
-#include "trap/motor/dji_m2006.hpp"
+#include "wrap/trap/motor/dji_m2006.hpp"
 namespace trap
 {
     namespace mock

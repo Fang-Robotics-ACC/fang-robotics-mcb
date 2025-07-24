@@ -8,7 +8,7 @@
 #include "test/mock/trap/motor/dji_gm6020_mock.hpp"
 #include "test/control/turret/gimbal_system_test.hpp"
 #else
-#include "trap/motor/dji_gm6020.hpp"
+#include "wrap/trap/motor/dji_gm6020.hpp"
 #endif
 
 namespace control

@@ -5,7 +5,7 @@
 #if defined(PLATFORM_HOSTED) && defined(ENV_UNIT_TESTS)
 #include "test/mock/trap/motor/dji_m3508_mock.hpp"
 #else
-#include "trap/motor/dji_m3508.hpp"
+#include "wrap/trap/motor/dji_m3508.hpp"
 #endif
 
 #include "driver/drivers.hpp"

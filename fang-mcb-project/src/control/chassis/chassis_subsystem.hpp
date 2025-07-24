@@ -16,6 +16,7 @@
 
 #include "tap/communication/gpio/pwm.hpp"
 #include "tap/control/subsystem.hpp"
+#include "wrap/rail/chassis/iholonomic_subsystem_control.hpp"
 
 #include "driver/motor/repeat_robotics/gearbox_repeat_ultra_mk2.hpp"
 

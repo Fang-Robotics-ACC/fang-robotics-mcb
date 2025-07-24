@@ -5,7 +5,7 @@
 #include "control/turret/feeder/simple_feeder_system/simple_feeder_system.hpp"
 #include "control/turret/feeder/simple_feeder_system/m2006_simple_feeder_factory.hpp"
 
-#include "trap/motor/dji_m2006.hpp"
+#include "wrap/trap/motor/dji_m2006.hpp"
 
 namespace fang::turret
 {

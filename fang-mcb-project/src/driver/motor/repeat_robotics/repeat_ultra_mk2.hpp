@@ -6,11 +6,11 @@
 #include "wrap/rail/rail_motors.hpp"
 #include "wrap/units/units_alias.hpp"
 
-#include "trap/algorithms/ramp.hpp"
+#include "wrap/trap/algorithms/ramp.hpp"
 
 #include "tap/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
-#include "trap/communication/pwm_data.hpp"
+#include "wrap/trap/communication/pwm_data.hpp"
 
 namespace fang::motor
 {

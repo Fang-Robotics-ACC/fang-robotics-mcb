@@ -1,7 +1,7 @@
 #include "vortex_80a_esc.hpp"
 #include "communication/gpio/pwm/pwm_info.hpp"
 
-#include "trap/communication/pwm_data.hpp"
+#include "wrap/trap/communication/pwm_data.hpp"
 
 #include "modm/architecture/interface/delay.hpp"
 #include "modm/math/interpolation/linear.hpp"
