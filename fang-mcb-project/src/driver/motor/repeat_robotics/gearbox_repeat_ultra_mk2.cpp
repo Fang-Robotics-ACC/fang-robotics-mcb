@@ -55,11 +55,6 @@ namespace fang::motor
         RepeatUltraMk2::setTargetSpeed(shaftToMotorSpeed(speed));
     }
 
-	RPM GearboxRepeatUltraMk2::getTargetSpeed() const
-    {
-        return motorToShaftSpeed(RepeatUltraMk2::getTargetSpeed());
-    }
-
 	void GearboxRepeatUltraMk2::setMaxSpeed(const RPM& maxSpeed)
     {
         RepeatUltraMk2::setMaxSpeed(shaftToMotorSpeed(maxSpeed));
