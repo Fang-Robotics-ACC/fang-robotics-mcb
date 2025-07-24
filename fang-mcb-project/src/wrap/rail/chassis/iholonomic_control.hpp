@@ -3,9 +3,9 @@
 #include "util/physics/data/velocity_2d.hpp"
 #include "wrap/units/units_alias.hpp"
 #include "rail/chassis/iholonomic_control.hpp"
+
 namespace fang::chassis
 {
-
     using IHolnomicDrive = rail::chassis::IHolonomicControl<physics::Velocity2D, RPM>;
 }
 #endif
