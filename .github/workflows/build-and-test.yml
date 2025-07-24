@@ -1,6 +1,6 @@
-name: GitHub Actions Demo
+name: Build and Test
 run-name: Build and Test
-on: [push]
+on: [pull_request]
 jobs:
   Test-And-Build:
     runs-on: ubuntu-latest
@@ -12,18 +12,17 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
-      - run: sudo apt-get install python3 python-is-python3 python3-pip git openocd gcc build-essential libboost-all-dev openocd stlink-tools libgmock-dev libgtest-dev pipenv wget -y
-      - run: sudo apt-get remove scons -y
-      - run: wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
-      - run: tar -xf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
-      - run: mv gcc-arm-none-eabi-10.3-2021.10 ~/
+      - name: set up environment
+        run: | 
+          sudo apt-get install python3 python-is-python3 python3-pip git openocd gcc build-essential libboost-all-dev openocd stlink-tools libgmock-dev libgtest-dev pipenv wget -y
+          sudo apt-get remove scons -y
+          wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+          tar -xf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+          mv gcc-arm-none-eabi-10.3-2021.10 ~/
       - name: Set Path
         run: |
           echo "~/gcc-arm-none-eabi-10.3-2021.10/bin" >> $GITHUB_PATH
           echo 'export PATH="&{{ github.workspace }}/gcc-arm-none-eabi-10.3-2021.10/bin:$HOME/.local/bin:$PATH:$PATH"' >> ~/.bashrc
-      - run: cat ~/.bashrc
-      - run: ls ~/gcc-arm-none-eabi-10.3-2021.10/bin
-      - run: source ~/.bashrc
       - name: Python Version Install
         uses: actions/setup-python@v5
         with:
@@ -37,4 +36,10 @@ jobs:
           export PATH="/home/runner/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH"
           pipenv run pip install -r requirements.txt
           pipenv run scons build
+      - name: test
+        run: |
+          export PATH="/home/runner/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH" # Github sets path between steps
           pipenv run scons run-tests
+          
+
+      
