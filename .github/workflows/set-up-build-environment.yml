@@ -22,9 +22,10 @@ jobs:
       - run: cat ~/.bashrc
       - run: source ~/.bashrc
       - run: pipenv install --python 3.8.10
-      - run: pipenv run pip install SCons
-      - run: pipenv run scons build
-      - run: pipenv run scons test
+      - run: pipenv shell
+      - run: pip install SCons
+      - run: scons build
+      - run: scons test
  
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
