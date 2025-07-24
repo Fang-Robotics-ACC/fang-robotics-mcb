@@ -16,16 +16,14 @@ jobs:
       - run: tar -xf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
       - run: mv gcc-arm-none-eabi-10.3-2021.10 ~/
       - name: Set Path
-        
         run: |
           echo "~/gcc-arm-none-eabi-10.3-2021.10/bin" >> $GITHUB_PATH
           echo 'export PATH="&{{ github.workspace }}/gcc-arm-none-eabi-10.3-2021.10/bin:$HOME/.local/bin:$PATH:$PATH"' >> ~/.bashrc
-        
       - run: cat ~/.bashrc
       - run: ls ~/gcc-arm-none-eabi-10.3-2021.10/bin
       - run: source ~/.bashrc
-      - name: Pyenv setup
-      - uses: actions/setup-python@v5
+      - name: Python versoin setup
+        uses: actions/setup-python@v5
         with:
           python-version: '3.8.10'
       - name: pipenv
