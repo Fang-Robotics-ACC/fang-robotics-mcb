@@ -6,9 +6,8 @@ namespace fang
 {
     static const chassis::CounterStrikeCommand::Config k_fieldMecanumConfig 
     {
-        6.5_mph, //maxXtranslation
-        6.5_mph, //maxYTranslatioon
-        100_rpm, //maxRotation
+        .maxTranslation = {6.5_mph, 6.5_mph},
+        .maxRotation    = 100_rpm,
     };
 }
 

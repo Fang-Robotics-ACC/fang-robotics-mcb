@@ -3,16 +3,10 @@
 #include "control/chassis/holonomic/command/shuriken_command.hpp"
 namespace fang 
 {
-    static const chassis::ShurikenCommand::MotionConfig k_shurikenMotionConfig
-    {
-        14_mph, //maxXtranslation
-        14_mph, //maxYTranslatioon
-        100_rpm, //maxRotation
-    };
     static const chassis::ShurikenCommand::Config k_shurikenConfig
     {
+        .maxTranslation = {6.5_mph, 6.5_mph},
         .shurikenSpeed          = 125_rpm,
-        .motionConfig           = k_shurikenMotionConfig,
         .downscaleCoefficient   = 10
     };
 }

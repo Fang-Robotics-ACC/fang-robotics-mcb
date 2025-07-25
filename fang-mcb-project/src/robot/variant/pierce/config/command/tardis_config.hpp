@@ -4,13 +4,6 @@
 
 namespace fang 
 {
-    static const chassis::TardisCommand::MotionConfig k_tardisMotionConfig
-    {
-        10_mph, //maxXtranslation
-        10_mph, //maxYTranslatioon
-        100_rpm, //maxRotation
-    };
-
     static const chassis::RazielKalmanShredder::Config k_razielKalmanShredderConfig
     {
         .biteDepth  = 0.3,
@@ -21,11 +14,10 @@ namespace fang
 
     static const chassis::TardisCommand::Config k_tardisConfig
     {
-        .shurikenSpeed              = 125_rpm,
-        .motionConfig               = k_tardisMotionConfig,
+        .maxTranslation = {10_mph, 10_mph},
+        .maxRotation = 125_rpm,
         .downscaleCoefficient       = 10,
         .razielKalmanShredderConfig = k_razielKalmanShredderConfig
-
     };
 }
  
