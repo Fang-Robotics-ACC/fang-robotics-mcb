@@ -28,9 +28,7 @@
 #include "tap/control/press_command_mapping.hpp"
 #include "tap/control/hold_command_mapping.hpp"
 
-using namespace fang;
-
-namespace control
+namespace fang::robot
 {
     /**
      * First Fang: Pierce

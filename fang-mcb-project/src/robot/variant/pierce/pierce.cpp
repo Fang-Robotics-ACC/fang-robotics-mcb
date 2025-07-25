@@ -3,7 +3,7 @@
 #include "modm/platform/core/delay_impl.hpp"
 
 
-namespace control
+namespace fang::robot 
 {
     using namespace units::literals;
     Pierce::Pierce(Drivers& drivers, const Config& config)
