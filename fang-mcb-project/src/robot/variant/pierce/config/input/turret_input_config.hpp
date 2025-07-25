@@ -6,19 +6,19 @@ namespace fang::robot
     using Remote = tap::communication::serial::Remote;
     using Channel = Remote::Channel;
 
-    static const control::turret::TurretInputHandler::RemoteConfig k_turretInputRemoteConfig
+    static const turret::TurretInputHandler::RemoteConfig k_turretInputRemoteConfig
     {
         Channel::RIGHT_VERTICAL,
         Channel::RIGHT_HORIZONTAL,
         Channel::WHEEL
     };
 
-    static const control::turret::TurretInputHandler::MouseConfig k_turretInputMouseConfig
+    static const turret::TurretInputHandler::MouseConfig k_turretInputMouseConfig
     {
         .pitchPercentagePerPx   = 0.15,
         .yawPercentagePerPx     = 0.15
     };
-    static const control::turret::TurretInputHandler::Config k_turretInputConfig
+    static const turret::TurretInputHandler::Config k_turretInputConfig
     {
         k_turretInputRemoteConfig,
         k_turretInputMouseConfig
