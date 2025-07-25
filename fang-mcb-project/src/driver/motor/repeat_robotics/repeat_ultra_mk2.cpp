@@ -32,16 +32,16 @@ namespace fang::motor
         Directionality directionality,
         bool inverted)
         :
-        mk_controllerInputVoltage{controllerInputVoltage},
-        mk_maxTheoreticalSpeed{mk_kv * mk_controllerInputVoltage},
-        m_maxSpeed{mk_maxTheoreticalSpeed},
-        m_inversionMultiplier{inverted && (directionality == Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}},
-        m_vortex{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality}
+        kControllerInputVoltage_{controllerInputVoltage},
+        kMaxTheoreticalSpeed_{kKv * kControllerInputVoltage_},
+        maxSpeed_{kMaxTheoreticalSpeed_},
+        inversionMultiplier_{inverted && (directionality == Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}},
+        vortex_{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality}
     {
         switch(directionality)
         {
         case(Directionality::BIDIRECTIONAL):
-            minSpeed_ = -m_maxSpeed;
+            minSpeed_ = -maxSpeed_;
         break;
         case(Directionality::UNIDIRECTIONAL):
             minSpeed_ = 0_rpm;
@@ -50,10 +50,10 @@ namespace fang::motor
 
 	void RepeatUltraMk2::setTargetSpeed(const RPM& speed)
     {
-        const RPM clampedSpeed{tap::algorithms::limitVal<RPM> (speed, minSpeed_, m_maxSpeed)};
+        const RPM clampedSpeed{tap::algorithms::limitVal<RPM> (speed, minSpeed_, maxSpeed_)};
         speed_ = clampedSpeed;
-        const double speedPercentage{clampedSpeed * m_inversionMultiplier / mk_maxTheoreticalSpeed};
-        m_vortex.setSpeed(speedPercentage);
+        const double speedPercentage{clampedSpeed * inversionMultiplier_ / kMaxTheoreticalSpeed_};
+        vortex_.setSpeed(speedPercentage);
     }
 
 	RPM RepeatUltraMk2::getTargetSpeed() const
@@ -63,13 +63,13 @@ namespace fang::motor
 
 	void RepeatUltraMk2::setMaxSpeed(const RPM& maxSpeed)
     {
-        m_maxSpeed = maxSpeed;
+        maxSpeed_ = maxSpeed;
         setTargetSpeed(getTargetSpeed());
     }
 
 	RPM RepeatUltraMk2::getMaxSpeed() const
     {
-        return m_maxSpeed;
+        return maxSpeed_;
     }
 
 	void RepeatUltraMk2::setMinSpeed(const RPM& minSpeed)
@@ -90,7 +90,7 @@ namespace fang::motor
      */
     void RepeatUltraMk2::initialize()
     {
-        m_vortex.sendArmingSignal();
+        vortex_.sendArmingSignal();
     }
 
     void RepeatUltraMk2::update()

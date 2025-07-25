@@ -87,23 +87,16 @@ namespace fang::motor
     private:
         RPM speed_{0};
         RPM minSpeed_{0};
-        RPM m_maxSpeed{0};
-        const Volts mk_controllerInputVoltage;
-        const RPM mk_maxTheoreticalSpeed;
-        int8_t m_inversionMultiplier;
+        RPM maxSpeed_{0};
+        const Volts kControllerInputVoltage_;
+        const RPM kMaxTheoreticalSpeed_;
+        int8_t inversionMultiplier_;
         // This was the Repeat Robotics provided value for the ratio between the rpm and the voltage associated with i
         //kv value is ration of rpm per voltage applied to a brushless dc motor
-        static constexpr RPMPerVolt mk_kv{1450.0};
+        static constexpr RPMPerVolt kKv{1450.0};
         //The voltage of the controller should not be exceeded by its output
 
-        Vortex80AEsc m_vortex;
-
-        /*!
-            PWM should be between 0 and 1
-            The motor is assumed to be in a bidirectional setup
-            Therefore the if the pwm is 0.5 the motor should be still.
-        */
-        void setPWM(float dutyCycle);
+        Vortex80AEsc vortex_;
    };
 }
 #endif 
