@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_TARDIS_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_TARDIS_COMMAND_HPP
-#include "counter_strike_command.hpp"
+#include "shuriken_command.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/algorithms/basic_downscaler.hpp"
 
@@ -18,7 +18,7 @@ namespace fang::chassis
     /**
      * The chassis will spin in the desired direction. It will use turret oriented strafe.
      */
-    class TardisCommand: public tap::control::Command
+    class TardisCommand : public ShurikenCommand
     {
     public:
     using MotionConfig = CounterStrikeCommand::Config;
@@ -29,8 +29,8 @@ namespace fang::chassis
      */
     struct Config
     {
-        RPM shurikenSpeed;
-        MotionConfig motionConfig;
+        physics::Velocity2D maxTranslation;
+        RPM maxRotation;
         double downscaleCoefficient;
         RazielKalmanShredder::Config razielKalmanShredderConfig;
     };
@@ -39,23 +39,13 @@ namespace fang::chassis
          */
         TardisCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config);
         const char* getName() const override;
-        void initialize() override;
         void execute() override;
-        void end(bool interrupted) override;
-        bool isFinished() const;
+    protected:
+        RPM getFieldRotation() const;
     private:
-        physics::Velocity2D calcuateFieldTranslation() const;
-        RPM calculateRotation(const physics::Velocity2D fieldTranslation) const;
         static constexpr char* mk_name{"T.A.R.D.I.S. Mode"};
-        IHolonomicSubsystemControl& m_chassisSubsystem;
-        const control::turret::GimbalSubsystem& m_turret; //We don't want the command to alter the turret state
-        ChassisInputHandler& m_input;
         const Config mk_config;
-        const MotionConfig mk_motionConfig;
-        const BasicDownscaler mk_downscaler;
-
         RazielKalmanShredder m_razielKalmanShredder;
-
         chrono::SimpleTimer m_kalmanTimer{}; //To provide an input for the Raziel-Kalman Shredder
     };
 }
