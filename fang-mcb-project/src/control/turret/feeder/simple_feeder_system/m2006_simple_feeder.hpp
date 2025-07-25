@@ -9,19 +9,17 @@ namespace fang::turret
     /**
      * Gives a basic feeder that utilizes an M2006 motor
      */
-    class M2006SimpleFeederFactory
+    class M2006SimpleFeeder
     {
     public:
         using FeedMotor = trap::motor::DjiM2006;
-        using FeedMotorPtr = std::unique_ptr<FeedMotor>;
-        using SimpleFeederSystemPtr = std::unique_ptr<SimpleFeederSystem>;
         struct Config
         {
             FeedMotor::Config         feedMotorConfig;
             SimpleFeederSystem::Config   feederConfig;
         };
 
-        static SimpleFeederSystemPtr Make(Drivers& drivers, const Config& config);
+        static std::unique_ptr<SimpleFeederSystem> makeUnique(Drivers& drivers, const Config& config);
     };
 }
 #endif

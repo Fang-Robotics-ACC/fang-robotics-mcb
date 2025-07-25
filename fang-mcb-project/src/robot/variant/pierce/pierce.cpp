@@ -14,7 +14,7 @@ namespace fang::robot
             mk_commandConfig{config.commandConfig},
             kMappingConfig_{config.mappingConfig},
             m_imu{drivers.bmi088},
-            feeder_{std::move(fang::turret::M2006SimpleFeederSubsystemFactory::Make(drivers, config.subsystemConfig.feederConfig))},
+            feeder_{std::move(fang::turret::M2006SimpleFeederSubsystem::makeUnique(drivers, config.subsystemConfig.feederConfig))},
             m_chassis{drivers, mk_subsystemConfig.chassisConfig},
             m_gimbal{drivers, m_imu, mk_subsystemConfig.gimbalConfig},
             m_booster{drivers, mk_subsystemConfig.boosterConfig},
