@@ -12,7 +12,7 @@ namespace fang::chassis
     CounterStrikeCommand::CounterStrikeCommand
     (
         IHolonomicSubsystemControl& holonomicSubsystem,
-        const control::turret::GimbalSubsystem& turret,
+        const turret::GimbalSubsystem& turret,
         ChassisInputHandler& inputHandler,
         const Config& config
     ):   
