@@ -6,7 +6,7 @@
 
 namespace fang::chassis
 {
-    ShurikenCommand::ShurikenCommand(ChassisSubsystem& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config)
+    ShurikenCommand::ShurikenCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config)
     :   m_chassisSubsystem{chassisSubsystem},
         m_turret{turret},
         m_input{input},
@@ -63,7 +63,9 @@ namespace fang::chassis
 
         const double downscale{mk_downscaler.getDownscale(fieldTranslation.getMagnitude())};
         const RPM rotation{mk_config.shurikenSpeed * downscale};
-        m_chassisSubsystem.setMotion(fieldTranslation, rotation);
+
+        m_chassisSubsystem.setTargetTranslation(fieldTranslation);
+        m_chassisSubsystem.setTargetRotation(rotation);
     }
 
     void ShurikenCommand::executeKeyboardTestFieldRotate()

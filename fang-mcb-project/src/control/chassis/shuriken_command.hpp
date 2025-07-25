@@ -45,7 +45,7 @@ namespace fang::chassis
         /**
          * This takes a chassis subsystem and the respective inputHandler
          */
-        ShurikenCommand(ChassisSubsystem& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config);
+        ShurikenCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config);
         const char* getName() const override;
         void initialize() override;
         void execute() override;
@@ -57,7 +57,7 @@ namespace fang::chassis
         void executeKeyboardTestFieldRotate();
         void executeKeyboardTestStrafeTurret();
         static constexpr char* mk_name{"Shuriken Mode"};
-        ChassisSubsystem& m_chassisSubsystem;
+        IHolonomicSubsystemControl& m_chassisSubsystem;
         const control::turret::GimbalSubsystem& m_turret; //We don't want the command to alter the turret state
         ChassisInputHandler& m_input;
         ControlMode m_controlMode{ControlMode::REMOTE_TEST_STRAFE_TURRET};
