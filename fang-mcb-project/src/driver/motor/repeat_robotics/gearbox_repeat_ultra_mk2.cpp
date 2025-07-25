@@ -1,7 +1,11 @@
 #include "gearbox_repeat_ultra_mk2.hpp"
 namespace fang::motor
 {
-    GearboxRepeatUltraMk2::GearboxRepeatUltraMk2(Drivers& drivers, const Config& config):
+    GearboxRepeatUltraMk2::GearboxRepeatUltraMk2
+    (
+        Drivers& drivers,
+        const Config& config
+    ):
         RepeatUltraMk2
         (
             drivers,
@@ -12,7 +16,8 @@ namespace fang::motor
                 config.directionality,
                 config.inverted
             }
-        )
+        ),
+        kGearRatio_{config.gearRatio}
     {
     }
 
@@ -46,7 +51,7 @@ namespace fang::motor
         double gearRatio
     ):
         RepeatUltraMk2{drivers, controllerInputVoltage, pwmPin, pinFrequency, directionality, inverted},
-        m_gearRatio{gearRatio}
+        kGearRatio_{gearRatio}
     {
     }
 
@@ -79,7 +84,7 @@ namespace fang::motor
     {
         //The gear ratio is how many times the motor rotates per gear rotation
         //Therefore the motor speed must be divide by the gear ratio
-        return motorSpeed / m_gearRatio;
+        return motorSpeed / kGearRatio_;
     }
 
     RPM GearboxRepeatUltraMk2::shaftToMotorSpeed(const RPM& shaftSpeed) const
@@ -88,11 +93,11 @@ namespace fang::motor
         //The gear ratio is how many times the motor rotates per gear rotation
         //Therefore the shaft speed must be multiplied by the gear ratio
         //To figure out how many times to motor rotates
-        return shaftSpeed * m_gearRatio;
+        return shaftSpeed * kGearRatio_;
     }
 
     double GearboxRepeatUltraMk2::getGearRatio() const
     {
-        return m_gearRatio;
+        return kGearRatio_;
     }
 }//namespace motor
