@@ -32,7 +32,6 @@ namespace fang::motor
         Directionality directionality,
         bool inverted)
         :
-        drivers_{drivers}, m_pwmPin{pwmPin},
         mk_controllerInputVoltage{controllerInputVoltage},
         mk_maxTheoreticalSpeed{mk_kv * mk_controllerInputVoltage},
         m_maxSpeed{mk_maxTheoreticalSpeed},
