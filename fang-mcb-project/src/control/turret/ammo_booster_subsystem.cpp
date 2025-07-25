@@ -1,5 +1,5 @@
 #include "ammo_booster_subsystem.hpp"
-namespace control::turret
+namespace fang::turret
 {
 
     AmmoBoosterSubsystem::AmmoBoosterSubsystem(Drivers& drivers, const Config& config)
