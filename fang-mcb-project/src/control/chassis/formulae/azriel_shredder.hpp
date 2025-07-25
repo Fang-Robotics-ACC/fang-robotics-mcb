@@ -3,7 +3,7 @@
 namespace fang::chassis
 {
     /**
-     * Raven Asher Raziel's self-named anti CV algorithm!
+     * Raven Asher Raziel's anti CV algorithm!
      * Hopefully this is not relevant to military applications :D
      * 
      * This returns a scaling coefficient to be used in relation to rotation or even translation
@@ -15,7 +15,7 @@ namespace fang::chassis
      * period - how often a bite happens, it should be a positive real number
      * phase, the underlying function involves sine in radians
      */
-    class RazielKalmanShredder
+    class AzrielShredder
     {
     public:
         struct Config
@@ -28,7 +28,7 @@ namespace fang::chassis
 
         static double razielKalmanShredder(double input, double biteDepth, int biteForce,  double period, double phase);
 
-        RazielKalmanShredder(const Config& config);
+        AzrielShredder(const Config& config);
 
         void setBiteDepth(double biteDepth);
         void setBiteForce(int biteForce);

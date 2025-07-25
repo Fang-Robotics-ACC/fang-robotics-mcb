@@ -36,7 +36,7 @@ namespace fang::chassis
         physics::Velocity2D maxTranslation;
         RPM maxRotation;
         double downscaleCoefficient;
-        RazielKalmanShredder::Config razielKalmanShredderConfig;
+        AzrielShredder::Config razielKalmanShredderConfig;
     };
         /**
          * This takes a chassis subsystem and the respective inputHandler
@@ -50,7 +50,7 @@ namespace fang::chassis
         static constexpr char* kName{"T.A.R.D.I.S. Mode"};
 
         const Config kConfig_;
-        RazielKalmanShredder razielKalmanShredder_;
+        AzrielShredder razielKalmanShredder_;
         chrono::SimpleTimer kShredderTimer{}; //To provide an input for the Raziel-Kalman Shredder
     };
 }

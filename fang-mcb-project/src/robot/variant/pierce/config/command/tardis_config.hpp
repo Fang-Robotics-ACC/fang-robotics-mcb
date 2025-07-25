@@ -4,7 +4,7 @@
 
 namespace fang 
 {
-    static const chassis::RazielKalmanShredder::Config k_razielKalmanShredderConfig
+    static const chassis::AzrielShredder::Config k_razielKalmanShredderConfig
     {
         .biteDepth  = 0.3,
         .biteForce  = 10,
