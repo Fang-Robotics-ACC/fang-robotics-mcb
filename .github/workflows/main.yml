@@ -10,6 +10,7 @@ jobs:
       run:
         working-directory: home/ubuntu
     steps:
+      - run: ls
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
