@@ -25,7 +25,7 @@ namespace fang::turret
         };
 
         M2006SimpleFeederSubsystem(Drivers& drivers, const Config& config);
-        static SimpleFeederSubsystemPtr Make(Drivers& drivers, const Config& config);
+        static SimpleFeederSubsystemPtr makeUnique(Drivers& drivers, const Config& config);
 
     };
 }
