@@ -10,7 +10,7 @@ namespace test
     class GimbalSystemTest
     {
     public:
-        using GimbalSystem = control::turret::GimbalSystem;
+        using GimbalSystem = fang::turret::GimbalSystem;
         using PositionMotor = GimbalSystem::PositionMotor;
 
         GimbalSystemTest(const GimbalSystem::Config& config) : gimbalSystem{drivers, config} {}
