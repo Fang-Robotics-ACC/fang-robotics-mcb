@@ -1,4 +1,4 @@
-#include "m2006_simple_feeder_factory.hpp"
+#include "m2006_simple_feeder.hpp"
 
 namespace fang::turret
 {
