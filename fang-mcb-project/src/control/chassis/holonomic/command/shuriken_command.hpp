@@ -32,7 +32,13 @@ namespace fang::chassis
         /**
          * This takes a chassis subsystem and the respective inputHandler
          */
-        ShurikenCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config);
+        ShurikenCommand
+        (
+            IHolonomicSubsystemControl& chassisSubsystem,
+            const control::turret::GimbalSubsystem& gimbal,
+            ChassisInputHandler& input,
+            const Config& config
+        );
         virtual ~ShurikenCommand() = default;
         const char* getName() const override;
         void execute() override;

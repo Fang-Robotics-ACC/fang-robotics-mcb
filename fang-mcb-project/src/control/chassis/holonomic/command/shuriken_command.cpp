@@ -10,12 +10,12 @@ namespace fang::chassis
     ShurikenCommand::ShurikenCommand
     (
         IHolonomicSubsystemControl& holonomicSubsystem,
-        const control::turret::GimbalSubsystem& turret,
+        const control::turret::GimbalSubsystem& gimbal,
         ChassisInputHandler& input,
         const Config& config
     ):
         //MAYBE: Move FPS motion logic to separate class
-        CounterStrikeCommand{holonomicSubsystem, turret, input, {config.maxTranslation, 0_rpm}},
+        CounterStrikeCommand{holonomicSubsystem, gimbal, input, {config.maxTranslation, 0_rpm}},
         kConfig_{config},
         kDownscaler_{config.downscaleCoefficient}
     {
