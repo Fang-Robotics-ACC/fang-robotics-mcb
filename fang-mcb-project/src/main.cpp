@@ -61,7 +61,7 @@ int main()
     std::cout << "Simulation starting..." << std::endl;
     #endif
 
-    Drivers& drivers{DriversSingleton::getDrivers()};
+    fang::Drivers& drivers{fang::DriversSingleton::getDrivers()};
 
     Board::initialize();
     drivers.initializeIo();

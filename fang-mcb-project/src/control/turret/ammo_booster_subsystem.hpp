@@ -4,7 +4,7 @@
 #include "control/turret/system/ammo_booster_system.hpp"
 #include "tap/control/subsystem.hpp"
 
-namespace control::turret
+namespace fang::turret
     {
         class AmmoBoosterSubsystem: public virtual tap::control::Subsystem
         {

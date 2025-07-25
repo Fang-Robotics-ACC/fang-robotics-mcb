@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_PIERCE_CONFIG_COMMAND_TARDIS_CONFIG_HPP
 #include "control/chassis/holonomic/command/tardis_command.hpp"
 
-namespace fang 
+namespace fang::robot
 {
     static const chassis::AzrielShredder::Config k_razielKalmanShredderConfig
     {

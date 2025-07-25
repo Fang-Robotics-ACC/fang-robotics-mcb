@@ -3,7 +3,7 @@
 #include "control/chassis/chassis_subsystem.hpp"
 #include "wrap/units/units_alias.hpp"
 
-namespace control
+namespace fang::robot 
 {
     static const Hertz k_chassisPwmFreq{400};
 

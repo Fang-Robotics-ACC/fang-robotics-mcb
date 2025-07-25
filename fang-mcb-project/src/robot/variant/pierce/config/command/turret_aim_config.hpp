@@ -3,10 +3,10 @@
 #include "control/turret/command/aim_command.hpp"
 #include "wrap/units/units_alias.hpp"
 
-namespace fang 
+namespace fang::robot
 {
     using namespace units::literals;
-    static const control::turret::AimCommand::Config k_turretAimConfig
+    static const turret::AimCommand::Config k_turretAimConfig
     {
         40_rpm,
         120_rpm

@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_PIERCE_FIELD_MECANUM_CONFIG_HPP
 #include "control/chassis/holonomic/command/counter_strike_command.hpp"
 
-namespace fang 
+namespace fang::robot
 {
     static const chassis::CounterStrikeCommand::Config k_fieldMecanumConfig 
     {

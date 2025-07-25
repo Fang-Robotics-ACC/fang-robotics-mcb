@@ -3,7 +3,7 @@
 #include "util/math/linear/vector_2d.hpp"
 #include "wrap/units/units_alias.hpp"
 
-namespace math
+namespace fang::math
 {
     /**
      * This algorithm has an accuracy of within 1e-14; however, rotating the vector back will produce accuracy to only within

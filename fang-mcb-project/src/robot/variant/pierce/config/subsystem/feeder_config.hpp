@@ -5,10 +5,9 @@
 #include "wrap/trap/motor/dji_m2006.hpp"
 #include "wrap/units/units_alias.hpp"
 
-namespace control
+namespace fang::robot 
 {
 
-    using namespace fang;
     using namespace units::literals;
     static const trap::motor::DjiSpeedPid::Config kFeederMotorPidConfig
     {

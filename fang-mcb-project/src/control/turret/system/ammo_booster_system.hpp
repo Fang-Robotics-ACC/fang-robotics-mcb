@@ -5,7 +5,7 @@
 
 #include "wrap/units/units_alias.hpp"
 
-namespace control::turret
+namespace fang::turret
 {
     /**
      * Manages two flywheels. Update must been called periodically.

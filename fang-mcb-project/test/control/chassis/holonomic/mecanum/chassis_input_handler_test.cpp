@@ -9,8 +9,8 @@
 #include <gtest/gtest.h>
 
 #include <tuple>
-
-using AbstractVector2D = math::AbstractVector2D;
+using namespace fang;
+using AbstractVector2D = fang::math::AbstractVector2D;
 using ::testing::Return;
 using namespace units::literals;
 
@@ -38,14 +38,14 @@ static const fang::chassis::ChassisInputHandler::Config k_chassisInputConfig
 };
 
 //TODO: change tuples into structs AHHH
-class ChassisInputHandlerTest :  public ::testing::TestWithParam<std::tuple<double, double, double, math::AbstractVector2D, double, double>>
+class ChassisInputHandlerTest :  public ::testing::TestWithParam<std::tuple<double, double, double, fang::math::AbstractVector2D, double, double>>
 {
 protected:
     const double m_leftJoystickHorizontal{std::get<0>(GetParam())};
     const double m_leftJoystickVertical{std::get<1>(GetParam())};
     const double m_rightJoystickHorizontal{std::get<2>(GetParam())};
 
-    const math::AbstractVector2D m_expectedTranslation{std::get<3>(GetParam())};
+    const fang::math::AbstractVector2D m_expectedTranslation{std::get<3>(GetParam())};
     const double m_expectedRPM{std::get<4>(GetParam())};
     const double m_expectedDisplacement{std::get<5>(GetParam())};
 
@@ -69,7 +69,7 @@ TEST_P(ChassisInputHandlerTest, inputHandlingTest)
         .WillByDefault(Return(m_rightJoystickHorizontal));
 
     //Check answers
-    const math::AbstractVector2D translationOutput{m_chassisInputHandler.getRemoteTranslation()};
+    const fang::math::AbstractVector2D translationOutput{m_chassisInputHandler.getRemoteTranslation()};
     const double rotationOutput{m_chassisInputHandler.getRemoteRotation()};
     const double angularDisplacementOutput{m_chassisInputHandler.getRemoteAngularDisplacement()};
 

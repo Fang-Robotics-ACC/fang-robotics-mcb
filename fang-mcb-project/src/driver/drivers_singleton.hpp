@@ -20,26 +20,29 @@
 #define DRIVERS_SINGLETON_HPP_
 
 #include "driver/drivers.hpp"
-/**
- * Class that allows one to construct a Drivers instance because of frienship
- * with the Drivers class.
- */
-class DriversSingleton
+namespace fang
 {
-public:
-
     /**
-     * @return The singleton instance of the Drivers class. This is the only instance of the
-     *      Drivers class that should be created anywhere in the non-unit test framework.
-     * @note I don't like unecessary pointers. Derferencing the drivers pointer and passing
-     *      it as a reference twice will cause a crash for some reason.
-     *      It is likely that you will never have to use this. There are only two files you
-     *      should be calling this function from -- `main.cpp` and `*_control.cpp`, either to
-     *      run I/O stuff and to add a Drivers pointer to an instance of a Subsystem or Command.
+     * Class that allows one to construct a Drivers instance because of frienship
+     * with the Drivers class.
      */
-    static Drivers& getDrivers();
-private:
-    static Drivers drivers_;
+    class DriversSingleton
+    {
+    public:
 
-};  // class DriversSingleton
+        /**
+         * @return The singleton instance of the Drivers class. This is the only instance of the
+         *      Drivers class that should be created anywhere in the non-unit test framework.
+         * @note I don't like unecessary pointers. Derferencing the drivers pointer and passing
+         *      it as a reference twice will cause a crash for some reason.
+         *      It is likely that you will never have to use this. There are only two files you
+         *      should be calling this function from -- `main.cpp` and `*_control.cpp`, either to
+         *      run I/O stuff and to add a Drivers pointer to an instance of a Subsystem or Command.
+         */
+        static Drivers& getDrivers();
+    private:
+        static Drivers drivers_;
+
+    };  // class DriversSingleton
+}
 #endif

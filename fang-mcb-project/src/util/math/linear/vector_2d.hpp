@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_UTIL_MATH_LINEAR_VECTOR_2D_HPP
 #define FANG_ROBOTICS_MCB_UTIL_MATH_LINEAR_VECTOR_2D_HPP
 #include <cmath>
-namespace math
+namespace fang::math
 {
     template <typename Unit>
     struct Vector2D

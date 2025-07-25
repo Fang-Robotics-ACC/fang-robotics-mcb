@@ -65,7 +65,7 @@ namespace trap::algorithms
     private:
         tap::algorithms::Ramp m_ramp;
         double m_speed;
-        chrono::SimpleTimer m_updateTimer{};
+        fang::chrono::SimpleTimer m_updateTimer{};
 
     };
 }

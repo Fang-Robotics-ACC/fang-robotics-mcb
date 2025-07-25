@@ -18,9 +18,12 @@
  */
 #include "drivers_singleton.hpp"
 
-Drivers DriversSingleton::drivers_{};
-
-Drivers& DriversSingleton::getDrivers()
+namespace fang
 {
-    return drivers_;
+    Drivers DriversSingleton::drivers_{};
+    
+    Drivers& DriversSingleton::getDrivers()
+    {
+        return drivers_;
+    }
 }

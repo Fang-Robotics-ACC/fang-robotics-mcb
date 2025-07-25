@@ -1,7 +1,7 @@
 #include "ammo_booster_system.hpp"
 #include "driver/drivers.hpp"
 
-namespace control::turret
+namespace fang::turret
 {
     AmmoBoosterSystem::AmmoBoosterSystem(Drivers& drivers, const Config& config)
     :  m_ammoVelocity{config.ammoVelocity}, m_leftFlywheel{drivers, config.leftFlywheelConfig}, m_rightFlywheel{drivers, config.rightFlywheelConfig}

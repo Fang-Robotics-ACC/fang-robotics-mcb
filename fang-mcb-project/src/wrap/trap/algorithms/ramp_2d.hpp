@@ -9,7 +9,7 @@ namespace trap::algorithms
     class Ramp2D
     {
     public:
-        using Vector2D = math::Vector2D<ValueUnit>;
+        using Vector2D = fang::math::Vector2D<ValueUnit>;
 
         /**
          * Ramp speed is how much value unit per time unit
@@ -73,8 +73,8 @@ namespace trap::algorithms
         {
             //We want the x and y ramps to arrive at roughly the same time
             const Vector2D delta{getTarget() - getValue()};
-            const math::AbstractVector2D direction{delta.getUnitVector()};
-            math::AbstractVector2D speeds{direction * m_speed};
+            const fang::math::AbstractVector2D direction{delta.getUnitVector()};
+            fang::math::AbstractVector2D speeds{direction * m_speed};
 
             m_xRamp.setSpeed(speeds.x);
             m_yRamp.setSpeed(speeds.y);

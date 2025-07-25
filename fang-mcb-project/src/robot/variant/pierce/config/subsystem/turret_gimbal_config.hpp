@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_PIERCE_TURRET_GIMBAL_CONFIG_HPP
 #include "control/turret/gimbal_subsystem.hpp"
 
-namespace control
+namespace fang::robot 
 {
     using namespace units::literals;
     static const trap::motor::DjiSpeedPid::Config k_pitchPidConfig
@@ -49,7 +49,7 @@ namespace control
         false
     };
 
-    using GimbalSystem = control::turret::GimbalSystem;
+    using GimbalSystem = turret::GimbalSystem;
     static const GimbalSystem::Config k_gimbalConfig
     {
         -25_deg,

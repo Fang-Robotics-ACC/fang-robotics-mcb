@@ -3,7 +3,7 @@
 #include "util/math/linear/vector_2d.hpp"
 #include "wrap/units/units_alias.hpp"
 
-namespace physics 
+namespace fang::physics 
 {
     using Velocity2D = math::Vector2D<MetersPerSecond>;
 }//namespace physics

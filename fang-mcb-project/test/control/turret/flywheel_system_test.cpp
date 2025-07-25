@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 #include <tuple>
 
+using namespace fang;
 class FlywheelSpeedTest : public ::testing::TestWithParam<std::tuple<Meters, MetersPerSecond,RPM>>
 {
 public:
