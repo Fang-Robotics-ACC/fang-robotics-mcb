@@ -9,7 +9,7 @@ namespace fang::turret
     /**
      * Gives a basic feeder that utilizes an M2006 motor
      */
-    class M2006SimpleFeederFactory
+    class M2006SimpleFeeder
     {
     public:
         using FeedMotor = trap::motor::DjiM2006;
