@@ -11,7 +11,7 @@ jobs:
         NODE_ENV: development
     defaults:
       run:
-        working-directory: home/ubuntu
+        working-directory: fang-mcb-project
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -20,5 +20,4 @@ jobs:
       - name: Build
         run: |
           ls
-          cd fang-mcb-project
           pipenv run scons build
