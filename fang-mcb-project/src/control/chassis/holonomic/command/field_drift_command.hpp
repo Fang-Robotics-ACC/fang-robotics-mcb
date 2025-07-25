@@ -1,5 +1,5 @@
-#ifndef FANG_ROBOTICS_MCB_FIELD_MECANUM_COMMAND_HPP
-#define FANG_ROBOTICS_MCB_FIELD_MECANUM_COMMAND_HPP
+#ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_FIELD_DRIFT_COMMAND_HPP
+#define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_FIELD_DRIFT_COMMAND_HPP
 #include "control/chassis/chassis_input_handler.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/turret/gimbal_subsystem.hpp"
@@ -10,53 +10,73 @@
 namespace fang::chassis
 {
     /**
-     * This intermediates the inputs and the mecanum drive 
+     * First person shooter motion for holonomic drive. Plain and simple.
+     * 
+     * This pairs well with a mouse-supported ChassisInputHandler.
+     * 
+     * If you face forward, a forward input on the remote will make the robot move
+     * forward. Every translation input is rotated to be relative to the turret head.
      */
-    class FieldMecanumCommand: public tap::control::Command
+    class FieldDriftCommand : public tap::control::Command
     {
     public:
-    struct Config
-    {
-        MetersPerSecond maxTranslation;
-        MetersPerSecond maxXTranslation;
-        MetersPerSecond maxYTranslation;
-        RPM maxRotation;
-        Degrees maxAngularDisplacement;
-    };
-    /**
-     * Remote uses the dji controller.
-     * Keyboard uses the keyboard inputs.
-     * TEST_FIELD_ROTATE = The horizontal right joystick or mouse causes the chassis to rotate.
-     * TEST_STAFE_TURRET = The chassis will only translate, leaving the horizontal mouse or right joystick
-     * input for the turret.
-     */
-    enum class ControlMode
-    {
-        REMOTE_TEST_FIELD_ROTATE,
-        REMOTE_TEST_STRAFE_TURRET,
-        KEYBOARD_TEST_FIELD_ROTATE,
-        KEYBOARD_TEST_STRAFE_TURRET
-    };
+        /**
+         * maxVelocity: This needs to have both components greater than
+         * or equal to zero. Each component represents the maximum speed
+         * each the robot will move
+         *
+         * maxRotation is the angular velocity that will be achieved
+         * if full throttle is utilized
+         */
+        struct Config
+        {
+            physics::Velocity2D maxTranslation;
+            RPM maxRotation;
+        };
+
         /**
          * This takes a chassis subsystem and the respective inputHandler
          */
-        FieldMecanumCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config);
+        FieldDriftCommand
+        (
+            IHolonomicSubsystemControl& holonomicSubsystem,
+            ChassisInputHandler& inputHandler,
+            const Config& config
+        );
+
+        virtual ~FieldDriftCommand() = default;
+
         const char* getName() const override;
         void initialize() override;
         void execute() override;
         void end(bool interrupted) override;
         bool isFinished() const;
+
+    protected:
+        /**
+         * Scales input translation into tangible values
+         */
+        physics::Velocity2D getFieldTranslation() const;
+
+        /**
+         * Scales the rotation input on the remote into
+         * a rotation where counterclockwise is positive
+         */
+        RPM getFieldRotation() const;
+
+        static constexpr char* kName{"Field drift"};
+
+        IHolonomicSubsystemControl& holonomicSubsystem_;
+        ChassisInputHandler& chassisInput_;
+        const Config& kConfig_;
+
     private:
-        void executeRemoteTestFieldRotate();
-        void executeRemoteTestStrafeTurret();
-        void executeKeyboardTestFieldRotate();
-        void executeKeyboardTestStrafeTurret();
-        static constexpr char* mk_name{"Chassis tank drive"};
-        IHolonomicSubsystemControl& m_chassisSubsystem;
-        const control::turret::GimbalSubsystem& m_gimbal; //We don't want the command to alter the turret state
-        ChassisInputHandler& m_input;
-        ControlMode m_controlMode{ControlMode::REMOTE_TEST_STRAFE_TURRET};
-        const Config& mk_config;
+        static void assertConfigValues(const Config& config);
+        static void assertGetFieldTranslationUniformSigns
+        (
+            const math::AbstractVector2D& abstractFieldTranslation,
+            const physics::Velocity2D& fieldTranslation
+        );
     };
 }//namespace chassis
 #endif

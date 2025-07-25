@@ -2,89 +2,110 @@
 #include "util/math/geometry/rotate_vector_2d.hpp"
 #include "wrap/units/units_alias.hpp"
 
-#include <cassert>
+#include "modm/architecture/interface/assert.hpp"
+#include "system/assert/fang_assert.hpp"
+
+#include <cmath>
 
 namespace fang::chassis
 {
-    FieldMecanumCommand::FieldMecanumCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config)
-    :   m_chassisSubsystem{chassisSubsystem},
-        m_gimbal{turret},
-        m_input{inputHandler},
-        mk_config{config}
+    FieldDriftCommand::FieldDriftCommand
+    (
+        IHolonomicSubsystemControl& chassisSubsystem,
+        ChassisInputHandler& inputHandler,
+        const Config& config
+    ):   
+        holonomicSubsystem_{chassisSubsystem},
+        chassisInput_{inputHandler},
+        kConfig_{config}
     {
-        addSubsystemRequirement(&m_chassisSubsystem);
+        assertConfigValues(config);
+        addSubsystemRequirement(&holonomicSubsystem_);
     }
 
-    const char* FieldMecanumCommand::getName() const
+    const char* FieldDriftCommand::getName() const
     {
-        return mk_name;
+        return kName;
     }
 
-    void FieldMecanumCommand::initialize()
+    void FieldDriftCommand::initialize()
     {
     }
 
-    void FieldMecanumCommand::execute()
+    void FieldDriftCommand::execute()
     {
-        switch(m_controlMode)
-        {
-            case ControlMode::REMOTE_TEST_FIELD_ROTATE:
-                executeRemoteTestFieldRotate();
-                break;
-            case ControlMode::REMOTE_TEST_STRAFE_TURRET:
-                executeRemoteTestStrafeTurret();
-                break;
-            case ControlMode::KEYBOARD_TEST_FIELD_ROTATE:
-                executeKeyboardTestFieldRotate();
-                break;
-            case ControlMode::KEYBOARD_TEST_STRAFE_TURRET:
-                executeKeyboardTestStrafeTurret();
-                break;
-            default:
-                assert(!"Unexpected or unsupported mode.");
-        }
+        holonomicSubsystem_.setTargetTranslation(getFieldTranslation());
+        holonomicSubsystem_.setTargetRotation(getFieldRotation());
     }
 
-    void FieldMecanumCommand::end(bool interrupted)
-    {}
+    void FieldDriftCommand::end(bool interrupted)
+    {
+    }
 
-    bool FieldMecanumCommand::isFinished() const
+    bool FieldDriftCommand::isFinished() const
     {
         return false;
     }
 
-    void FieldMecanumCommand::executeRemoteTestFieldRotate()
+    physics::Velocity2D FieldDriftCommand::getFieldTranslation() const
     {
-        const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
-        const double abstractRotation{m_input.getRotation()};
+        //The convert from turretwise translation to fieldwise
+        const math::AbstractVector2D abstractFieldTranslation{chassisInput_.getTranslation()};
+        //It must be converted to a tangible value via scaling
+        const physics::Velocity2D fieldTranslation
+        {
+            abstractFieldTranslation.x * kConfig_.maxTranslation.x,
+            abstractFieldTranslation.y * kConfig_.maxTranslation.y
+        };
 
-        const physics::Velocity2D translation{abstractTranslation.x * mk_config.maxXTranslation, abstractTranslation.y * mk_config.maxYTranslation};
-        const RPM rotation{abstractRotation * mk_config.maxRotation};
+        assertGetFieldTranslationUniformSigns(abstractFieldTranslation, fieldTranslation);
 
-        m_chassisSubsystem.setTargetTranslation(translation);
-        m_chassisSubsystem.setTargetRotation(rotation);
+        return fieldTranslation;
     }
 
-    void FieldMecanumCommand::executeRemoteTestStrafeTurret()
+    void FieldDriftCommand::assertConfigValues(const Config& config)
     {
-
-        const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
-        const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_config.maxXTranslation, abstractTranslation.y * mk_config.maxYTranslation};
-        const Radians turretBearing{m_gimbal.getTargetFieldYaw()};
-
-        const physics::Velocity2D fieldTranslation{math::rotateVector2D(frameTranslation, turretBearing)};
-
-        const double abstractRotation{m_input.getRotation()};
-
-        const RPM rotation{abstractRotation * mk_config.maxRotation};
-
-        m_chassisSubsystem.setTargetTranslation(fieldTranslation);
-        m_chassisSubsystem.setTargetRotation(rotation);
+        FANG_ASSERT(config.maxTranslation.x >= 0_mps, "maxTranslation.x cannot be negative");
+        FANG_ASSERT(config.maxTranslation.y >= 0_mps, "maxTranslation.y cannot be negative");
     }
 
-    void FieldMecanumCommand::executeKeyboardTestFieldRotate()
-    {}
+    void FieldDriftCommand::assertGetFieldTranslationUniformSigns
+    (
+        const math::AbstractVector2D& abstractFieldTranslation,
+        const physics::Velocity2D& fieldTranslation
+    )
+    {
+        //If the turret frame translation is positive, the frame translation must be positive
+        //Because the configuration scalars must be positive themselves
+        //These will be optimized away on performance builds
+        math::Vector2D<bool> turretFrameTranslationSigns
+        {
+            std::signbit(abstractFieldTranslation.x),
+            std::signbit(abstractFieldTranslation.y)
+        };
 
-    void FieldMecanumCommand::executeKeyboardTestStrafeTurret()
-    {}
+        math::Vector2D<bool> frameTranslationSigns 
+        {
+            std::signbit(fieldTranslation.x),
+            std::signbit(fieldTranslation.y)
+        };
+
+        const bool sameSignCheckX{turretFrameTranslationSigns.x == frameTranslationSigns.x};
+        const bool sameSignCheckY{turretFrameTranslationSigns.y == frameTranslationSigns.y};
+
+        FANG_ASSERT(sameSignCheckX, "Scaling should not invert motion");
+        FANG_ASSERT(sameSignCheckY, "Scaling should not invert motion");
+    }
+
+    RPM FieldDriftCommand::getFieldRotation() const
+    {
+        //Convert the abstract rotation value into a tangible unit
+        const double abstractRotation{chassisInput_.getRotation()};
+        const RPM rotation{abstractRotation * kConfig_.maxRotation};
+
+        const bool sameSignCheck{std::signbit(abstractRotation) == std::signbit(static_cast<double>(abstractRotation))};
+        FANG_ASSERT(sameSignCheck, "Scaling should not invert rotation");
+
+        return rotation;
+    }
 }//namespace fang::chassis
