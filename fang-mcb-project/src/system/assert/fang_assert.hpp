@@ -2,6 +2,7 @@
 #define FANG_ROBOTICS_MCB_WRAP_TRAP_SYSTEM_FANG_ASSERT_HPP
 #include "modm/architecture/interface/assert.hpp"
 #include <string>
+#include <cassert>
 
 #ifndef NDEBUG
     /**
