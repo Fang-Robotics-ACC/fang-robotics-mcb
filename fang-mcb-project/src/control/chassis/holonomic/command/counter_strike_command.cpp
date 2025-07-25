@@ -26,23 +26,7 @@ namespace fang::chassis
 
     void CounterStrikeCommand::execute()
     {
-        switch(m_controlMode)
-        {
-            case ControlMode::REMOTE_TEST_FIELD_ROTATE:
-                executeRemoteTestFieldRotate();
-                break;
-            case ControlMode::REMOTE_TEST_STRAFE_TURRET:
-                executeRemoteTestStrafeTurret();
-                break;
-            case ControlMode::KEYBOARD_TEST_FIELD_ROTATE:
-                executeKeyboardTestFieldRotate();
-                break;
-            case ControlMode::KEYBOARD_TEST_STRAFE_TURRET:
-                executeKeyboardTestStrafeTurret();
-                break;
-            default:
-                assert(!"Unexpected or unsupported mode.");
-        }
+        executeRemoteTestStrafeTurret();
     }
 
     void CounterStrikeCommand::end(bool interrupted)
@@ -51,18 +35,6 @@ namespace fang::chassis
     bool CounterStrikeCommand::isFinished() const
     {
         return false;
-    }
-
-    void CounterStrikeCommand::executeRemoteTestFieldRotate()
-    {
-        const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
-        const double abstractRotation{m_input.getRotation()};
-
-        const physics::Velocity2D translation{abstractTranslation.x * mk_config.maxXTranslation, abstractTranslation.y * mk_config.maxYTranslation};
-        const RPM rotation{abstractRotation * mk_config.maxRotation};
-
-        m_chassisSubsystem.setTargetTranslation(translation);
-        m_chassisSubsystem.setTargetRotation(rotation);
     }
 
     void CounterStrikeCommand::executeRemoteTestStrafeTurret()
@@ -81,10 +53,4 @@ namespace fang::chassis
         m_chassisSubsystem.setTargetTranslation(fieldTranslation);
         m_chassisSubsystem.setTargetRotation(rotation);
     }
-
-    void CounterStrikeCommand::executeKeyboardTestFieldRotate()
-    {}
-
-    void CounterStrikeCommand::executeKeyboardTestStrafeTurret()
-    {}
 }//namespace fang::chassis
