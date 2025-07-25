@@ -8,7 +8,7 @@ void modm_abandon(const modm::AssertionInfo &info)
     //This forces the debugger to see it via copy constructor
     static modm::AssertionInfo readInfo = info; 
     //TODO: write to terminal or buzz in morse code
-    Drivers& drivers{DriversSingleton::getDrivers()};
+    fang::Drivers& drivers{fang::DriversSingleton::getDrivers()};
     fang::emergency::killSystem();
 
     fang::error::assertFailedBuzz(drivers.pwm);
