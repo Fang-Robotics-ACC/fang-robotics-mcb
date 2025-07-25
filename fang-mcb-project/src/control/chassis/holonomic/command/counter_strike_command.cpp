@@ -26,7 +26,8 @@ namespace fang::chassis
 
     void CounterStrikeCommand::execute()
     {
-        executeRemoteTestStrafeTurret();
+        m_chassisSubsystem.setTargetTranslation(getFieldTranslation());
+        m_chassisSubsystem.setTargetRotation(getFieldRotation());
     }
 
     void CounterStrikeCommand::end(bool interrupted)
@@ -37,20 +38,22 @@ namespace fang::chassis
         return false;
     }
 
-    void CounterStrikeCommand::executeRemoteTestStrafeTurret()
+    physics::Velocity2D CounterStrikeCommand::getFieldTranslation() const
     {
-
-        const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
-        const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_config.maxXTranslation, abstractTranslation.y * mk_config.maxYTranslation};
+        //Relative to turret
+        const math::AbstractVector2D turretFrameTranslation{m_input.getTranslation()};
+        const physics::Velocity2D frameTranslation{turretFrameTranslation.x * mk_config.maxXTranslation, turretFrameTranslation.y * mk_config.maxYTranslation};
         const Radians turretBearing{m_gimbal.getTargetFieldYaw()};
 
         const physics::Velocity2D fieldTranslation{math::rotateVector2D(frameTranslation, turretBearing)};
-
-        const double abstractRotation{m_input.getRotation()};
-
-        const RPM rotation{abstractRotation * mk_config.maxRotation};
-
-        m_chassisSubsystem.setTargetTranslation(fieldTranslation);
-        m_chassisSubsystem.setTargetRotation(rotation);
+        return fieldTranslation;
     }
+
+    RPM CounterStrikeCommand::getFieldRotation() const
+    {
+        const double abstractRotation{m_input.getRotation()};
+        const RPM rotation{abstractRotation * mk_config.maxRotation};
+    }
+
+
 }//namespace fang::chassis

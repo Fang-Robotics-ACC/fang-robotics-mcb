@@ -33,9 +33,22 @@ namespace fang::chassis
         void execute() override;
         void end(bool interrupted) override;
         bool isFinished() const;
+    protected:
+        /**
+         * Returns the fieldwise translation, translating the translation input
+         * relative to the turret where forward will make the robot move
+         * forwward wherever the turret is looking 
+         */
+        physics::Velocity2D getFieldTranslation() const;
+
+        /**
+         * Translates the rotation input on the remote into
+         * a rotation where counterclockwise is positive
+         */
+        RPM getFieldRotation() const;
+
     private:
         static constexpr char* mk_name{"Chassis tank drive"};
-        void executeRemoteTestStrafeTurret();
 
         IHolonomicSubsystemControl& m_chassisSubsystem;
         const control::turret::GimbalSubsystem& m_gimbal; //We don't want the command to alter the turret state
