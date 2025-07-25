@@ -37,6 +37,7 @@ namespace fang::chassis
         const double downscale{mk_downscaler.getDownscale(targetFieldTranslation_.getMagnitude())};
         const RPM rotation{mk_config.shurikenSpeed * downscale};
         FANG_ASSERT(rotation <= mk_config.shurikenSpeed, "The shuriken speed should only be downscaled!");
+        return rotation;
     }
 
     void ShurikenCommand::updateTargetFieldTranslation()
