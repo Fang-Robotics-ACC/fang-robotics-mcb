@@ -17,7 +17,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
+      - name: Python Version Install
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8.12'
+      - name: Environment Setup
+        run: |
+          sudo apt install pipenv -y
+          pipenv install --python 3.8.12
       - name: Build
         run: |
-          ls
-          scons build
+          pipenv scons build
