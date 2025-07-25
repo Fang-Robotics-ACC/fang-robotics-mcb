@@ -6,7 +6,7 @@
 
 using namespace units::literals;
 
-namespace chassis
+namespace fang::chassis
 {
     class FieldMecanumLogic
     {

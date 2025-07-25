@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_TRAP_MOCk_DJI_M3508_MOCK_HPP
 
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
-#include "trap/motor/dji_m3508.hpp"
+#include "wrap/trap/motor/dji_m3508.hpp"
 namespace trap
 {
     namespace mock

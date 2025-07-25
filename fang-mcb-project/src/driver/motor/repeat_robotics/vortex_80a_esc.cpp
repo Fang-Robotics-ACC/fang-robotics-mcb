@@ -1,7 +1,7 @@
-#include "vortex80aesc.hpp"
+#include "vortex_80a_esc.hpp"
 #include "communication/gpio/pwm/pwm_info.hpp"
 
-#include "trap/communication/pwm_data.hpp"
+#include "wrap/trap/communication/pwm_data.hpp"
 
 #include "modm/architecture/interface/delay.hpp"
 #include "modm/math/interpolation/linear.hpp"
@@ -13,7 +13,7 @@
 #include <cmath>
 #include <iostream>
 
-namespace motor
+namespace fang::motor
 {
 
     const math::CoolLerp Vortex80AEsc::kBidirectionalMap_{kBidirectionalPoint1_, kBidirectionalPoint2_};
@@ -79,7 +79,7 @@ namespace motor
     {
         kDirectionality_ = directionality;
     }
-    Vortex80AEsc::Directionality Vortex80AEsc::getDirectionality() const
+    Directionality Vortex80AEsc::getDirectionality() const
     {
         return kDirectionality_;
     }

@@ -22,10 +22,12 @@
 #include "control/turret/command/autofire_command.hpp"
 #include "control/turret/command/unjam_command.hpp"
 
-#include "trap/communication/sensors/imu.hpp"
+#include "wrap/trap/communication/sensors/imu.hpp"
 
 #include "tap/control/press_command_mapping.hpp"
 #include "tap/control/hold_command_mapping.hpp"
+
+using namespace fang;
 
 namespace control
 {

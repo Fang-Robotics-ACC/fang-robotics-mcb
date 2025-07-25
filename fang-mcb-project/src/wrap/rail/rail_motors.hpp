@@ -6,7 +6,7 @@
 #include <rail/motor/iposition_motor.hpp>
 #include <rail/motor/ispeed_wheel.hpp>
 
-namespace motor
+namespace fang::motor
 {
     using ISpeedMotor = rail::motor::ISpeedMotor<RPM>;
     using IPositionMotor = rail::motor::IPositionMotor<Radians>;

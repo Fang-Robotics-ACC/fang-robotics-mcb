@@ -1,5 +1,5 @@
-#ifndef FANG_ROBOTICS_MCB_VORTEX_80A_ESC_LOGIC_H
-#define FANG_ROBOTICS_MCB_VORTEX_80A_ESC_LOGIC_H
+#ifndef FANG_ROBOTICS_MCB_DRIVER_MOTOR_VORTEX_80A_ESC_HPP
+#define FANG_ROBOTICS_MCB_DRIVER_MOTOR_VORTEX_80A_ESC_HPP
 #include "util/math/linear/cool_lerp.hpp"
 #include "util/math/linear/vector_2d.hpp"
 
@@ -10,7 +10,7 @@
 
 #include "tap/communication/gpio/pwm.hpp"
 
-namespace motor
+namespace fang::motor
 {
     /**
      * Driver for the Vortex80AEsc involving sending various signals and speed ranges.
@@ -18,7 +18,6 @@ namespace motor
     class Vortex80AEsc
     {
     public:
-        using Directionality = ::motor::Directionality;
         Vortex80AEsc(tap::gpio::Pwm& pwmDriver, const trap::gpio::PwmData& pwmData, const Directionality& directionality = Directionality::BIDIRECTIONAL);
         /**
          * Sends the appropriate arming signal

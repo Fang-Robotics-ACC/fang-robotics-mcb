@@ -1,7 +1,7 @@
 #include "field_mecanum_logic.hpp"
 #include "util/math/geometry/rotate_vector_2d.hpp"
 
-namespace chassis
+namespace fang::chassis
 {
     FieldMecanumLogic::FieldMecanumLogic(const Config& config):
         FieldMecanumLogic(config.horizontalWheelDistance,

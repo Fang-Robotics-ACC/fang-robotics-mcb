@@ -1,4 +1,4 @@
-#include "driver/motor/repeat_robotics/gearboxrepeatultramk2.hpp"
+#include "driver/motor/repeat_robotics/gearbox_repeat_ultra_mk2.hpp"
 #include "wrap/units/units_alias.hpp"
 
 #include "tap/drivers.hpp"
@@ -7,6 +7,7 @@
 #include <gtest/gtest.h>
 
 using namespace units::literals;
+using namespace fang;
 TEST(minSpeedTest, repeatUltraMk2)
 {
     {

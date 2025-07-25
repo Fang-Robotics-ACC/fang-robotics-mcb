@@ -1,6 +1,6 @@
-#ifndef FANG_ROBOTICS_MCB_GEARED_REPEAT_ULTRA_MK2_HPP
-#define FANG_ROBOTICS_MCB_GEARED_REPEAT_ULTRA_MK2_HPP
-#include "repeatultramk2.hpp"
+#ifndef FANG_ROBOTICS_MCB_DRIVER_MOTOR_GEARBOX_REPEAT_ULTRA_MK2_HPP
+#define FANG_ROBOTICS_MCB_DRIVER_MOTOR_GEARBOX_REPEAT_ULTRA_MK2_HPP
+#include "repeat_ultra_mk2.hpp"
 #include "driver/motor/data/directionality.hpp"
 #include "wrap/trap/communication/pwm_data.hpp"
 #include "wrap/units/units_alias.hpp"
@@ -8,7 +8,7 @@
 #include "driver/drivers.hpp"
 #include "tap/util_macros.hpp"
 
-namespace motor
+namespace fang::motor
 {
     /**
     *RPM is positive according to the right hand rule when the motor is the shaft pointing up. This is the the gearbox detached!!!
@@ -19,6 +19,7 @@ namespace motor
     {
     public:
         /**
+         * DEPRECATED, will be removed when the chassis code is refactored
          * These properties are the most common in being duplicate
          * across multiple instances. For your convenience, a struct
          * bundle has been provided.
@@ -29,6 +30,17 @@ namespace motor
             motor::Directionality directionality;
             double gearRatio;
         };
+
+        struct Config
+        {
+            const Volts& controllerInputVoltage;
+            trap::gpio::PwmData pwmData;
+            motor::Directionality directionality;
+            bool inverted;
+            double gearRatio;
+        };
+
+        GearboxRepeatUltraMk2(Drivers& drivers, const Config& config);
 
         GearboxRepeatUltraMk2(tap::Drivers& drivers, const UnifiedProperties& unifiedProperties, const trap::gpio::PwmData& pwmData, bool inverted);
 
@@ -59,18 +71,11 @@ namespace motor
 		mockable void setTargetSpeed(const RPM& speed);
 
         /**
-         * This returns the desired speed, not the actual speed.
-         */
-
-		mockable void setMaxSpeed(const RPM& maxSpeed);
-
-        /**
          * All requests will be clamped to this bound. The default is the maximum
          * theoretical speed which is the motor kv (1450) multiplied by the nominal
          * controller input voltage.
          */
-		mockable RPM getTargetSpeed() const override;
-
+		mockable void setMaxSpeed(const RPM& maxSpeed);
         /**
          * Get the maximum speed which all setTargetSpeed() requests are clamped to
          */

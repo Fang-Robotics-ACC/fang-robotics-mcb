@@ -17,7 +17,7 @@ namespace trap
         /**
          * Wrapper for DJI motor for the DJI M3508 on a CAN bus
          */
-        class DjiM2006 : virtual public ::motor::ISpeedMotor
+        class DjiM2006 : virtual public fang::motor::ISpeedMotor
         {
         public:
             struct Config
@@ -60,9 +60,6 @@ namespace trap
              * Sets the desired speed for the pid to target
              */
             mockable void setTargetSpeed(const RPM& targetSpeed) override;
-
-            mockable RPM getTargetSpeed() const override;
-
 
             /**
              * Returns the last reported RPM from CAN

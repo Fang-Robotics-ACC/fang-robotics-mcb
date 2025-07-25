@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 #include <iostream>
 
+using namespace fang;
 TEST(zeroTest, robotMecanumLogic)
 {
     {

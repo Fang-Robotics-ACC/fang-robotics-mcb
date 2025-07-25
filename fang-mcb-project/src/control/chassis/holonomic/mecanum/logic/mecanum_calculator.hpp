@@ -4,7 +4,7 @@
 #include "wrap/units/units_alias.hpp"
 
 #include "modm/math/geometry/vector.hpp"
-namespace chassis
+namespace fang::chassis
 {
     /**
      * This uses the equations from this paper
@@ -27,7 +27,7 @@ namespace chassis
         RPM getRotation() const;
     private:
         QuadDriveWheelSpeedsRadPersec quadDriveData_{RPM{0}, RPM{0}, RPM{0}, RPM{0}};
-        ::chassis::AbstractMecanumCalculator abstractMecanumCalculator_{};
+        AbstractMecanumCalculator abstractMecanumCalculator_{};
         //l_x + l_y
         const Meters kwheelDistanceConstant_;
         const Meters kWheelRadius_;

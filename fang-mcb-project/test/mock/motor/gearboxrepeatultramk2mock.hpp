@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_GEARBOX_REPEAT_ULTRA_MK2_MOCK_HPP
 #define FANG_ROBOTICS_MCB_GEARBOX_REPEAT_ULTRA_MK2_MOCK_HPP
-#include "driver/motor/repeat_robotics/gearboxrepeatultramk2.hpp"
+#include "driver/motor/repeat_robotics/gearbox_repeat_ultra_mk2.hpp"
 
 #include "wrap/units/units_alias.hpp"
 
@@ -20,10 +20,6 @@ namespace mock
 
             MOCK_METHOD(void, setTargetSpeed, (const RPM& speed), (override));
             MOCK_METHOD(RPM, getTargetSpeed, (), (const, override));
-    		MOCK_METHOD(void, setMaxSpeed, (const RPM& maxSpeed), (override));
-    		MOCK_METHOD(RPM, getMaxSpeed, (), (const, override));
-    		MOCK_METHOD(void, setMinSpeed, (const RPM& minSpeed), (override));
-    		MOCK_METHOD(RPM, getMinSpeed, (), (const, override));
        };//class GearboxRepeatUltraMk2Mock
     }//namespace motor
 }//namespace mock

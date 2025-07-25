@@ -4,6 +4,8 @@
 #include <gtest/gtest.h>
 #include <iostream>
 
+using namespace fang;
+
 TEST(mecanumCalculator, forwardsTest)
 {
     using namespace units::literals;

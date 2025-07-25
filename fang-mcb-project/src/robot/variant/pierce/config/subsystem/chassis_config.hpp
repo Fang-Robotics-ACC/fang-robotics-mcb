@@ -19,7 +19,7 @@ namespace control
     static const chassis::ChassisSubsystem::DriveMotor::UnifiedProperties k_unifiedMotorProperties
     {
         24.0_V,                                      //Controller Input Voltage
-        motor::Directionality::BIDIRECTIONAL, //Directionality
+        fang::motor::Directionality::BIDIRECTIONAL, //Directionality
         14.0                                         //GearRatio
     };
     static const chassis::ChassisSubsystem::ChassisMotorConfig k_defaultMotorConfig

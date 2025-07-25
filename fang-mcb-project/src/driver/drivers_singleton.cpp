@@ -16,8 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with fang-mcb.  If not, see <https://www.gnu.org/licenses/>.
  */
-
-#ifndef ENV_UNIT_TESTS
 #include "drivers_singleton.hpp"
 
 Drivers DriversSingleton::drivers_{};
@@ -26,4 +24,3 @@ Drivers& DriversSingleton::getDrivers()
 {
     return drivers_;
 }
-#endif

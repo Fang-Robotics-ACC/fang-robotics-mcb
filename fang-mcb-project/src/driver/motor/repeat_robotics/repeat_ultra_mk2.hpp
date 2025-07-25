@@ -1,16 +1,18 @@
-#ifndef FANG_ROBOTICS_MCB_MOTORS_REPEAT_ULTRA_MK2_HPP
-#define FANG_ROBOTICS_MCB_MOTORS_REPEAT_ULTRA_MK2_HPP
+#ifndef FANG_ROBOTICS_MCB_DRIVER_MOTOR_REPEAT_ULTRA_MK2_HPP
+#define FANG_ROBOTICS_MCB_DRIVER_MOTOR_REPEAT_ULTRA_MK2_HPP
+#include "driver/drivers.hpp"
 #include "driver/motor/data/directionality.hpp"
-#include "vortex80aesc.hpp"
+#include "vortex_80a_esc.hpp"
 #include "wrap/rail/rail_motors.hpp"
 #include "wrap/units/units_alias.hpp"
 
-#include "trap/algorithms/ramp.hpp"
+#include "wrap/trap/algorithms/ramp.hpp"
 
 #include "tap/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
+#include "wrap/trap/communication/pwm_data.hpp"
 
-namespace motor
+namespace fang::motor
 {
     /*!
     RPM is positive according to the right hand rule when the motor is the shaft pointing up. This is the the gearbox detached!!!
@@ -18,6 +20,14 @@ namespace motor
     class RepeatUltraMk2 : public virtual ISpeedMotor
     {
     public:
+        struct Config
+        {
+            const Volts& controllerInputVoltage;
+            trap::gpio::PwmData pwmData;
+            Directionality directionality;
+            bool inverted ;
+        };
+        RepeatUltraMk2(Drivers& drivers, const Config& config);
         RepeatUltraMk2(tap::Drivers& drivers,
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
@@ -44,7 +54,7 @@ namespace motor
         /**
          * This returns the desired speed, not the actual speed.
          */
-		RPM getTargetSpeed() const override;
+		RPM getTargetSpeed() const;
 
         /**
          * All requests will be clamped to this bound. The default is the maximum

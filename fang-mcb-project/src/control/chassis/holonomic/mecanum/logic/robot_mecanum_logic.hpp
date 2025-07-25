@@ -4,7 +4,7 @@
 #include "control/chassis/data/physics_alias.hpp"
 #include "wrap/units/units_alias.hpp"
 
-namespace chassis
+namespace fang::chassis
 {
     class RobotMecanumLogic
     {

@@ -27,7 +27,6 @@ namespace fang::turret
         FlywheelSystem(Motor motor, const Config& config);
 
 		void setTargetRimSpeed(const MetersPerSecond& rimSpeed) override;
-        MetersPerSecond getTargetRimSpeed() const override;
 
         void initialize() override;
         void update() override;

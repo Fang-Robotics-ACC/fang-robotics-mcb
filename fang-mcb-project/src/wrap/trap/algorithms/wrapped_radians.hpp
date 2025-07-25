@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_WRAPPED_RADIANS_HPP
 #define FANG_ROBOTICS_MCB_WRAPPED_RADIANS_HPP
-#include "trap/algorithms/wrapped_float.hpp"
+#include "wrap/trap/algorithms/wrapped_float.hpp"
 #include "wrap/units/units_alias.hpp"
 #include <cmath>
 

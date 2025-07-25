@@ -39,3 +39,11 @@ void Drivers::motorTimeoutUpdate()
     PROFILE(profiler, djiMotorTxHandler.encodeAndSendCanData, ());
     PROFILE(profiler, terminalSerial.update, ());
 }
+
+void Drivers::kill()
+{
+    //Pwm controllers will stick to the last state
+    //It is uesful to set them all to zero to prevent
+    //The robot from flailing if emergency shutdown is initiated
+    pwm.writeAllZeros();
+}
