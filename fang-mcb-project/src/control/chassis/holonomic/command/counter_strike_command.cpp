@@ -20,16 +20,11 @@ namespace fang::chassis
         gimbal_{turret},
         kConfig_{config}
     {
-        addSubsystemRequirement(&holonomicSubsystem_);
     }
 
     const char* CounterStrikeCommand::getName() const
     {
         return kName;
-    }
-
-    void CounterStrikeCommand::initialize()
-    {
     }
 
     void CounterStrikeCommand::execute()
@@ -38,64 +33,15 @@ namespace fang::chassis
         holonomicSubsystem_.setTargetRotation(getFieldRotation());
     }
 
-    void CounterStrikeCommand::end(bool interrupted)
-    {
-    }
-
-    bool CounterStrikeCommand::isFinished() const
-    {
-        return false;
-    }
-
     physics::Velocity2D CounterStrikeCommand::getFieldTranslation() const
     {
         //The convert from turretwise translation to fieldwise
-        const math::AbstractVector2D turretwiseTranslation{chassisInput_.getTranslation()};
         const Radians turretBearing{gimbal_.getTargetFieldYaw()};
-        const math::AbstractVector2D abstractFieldTranslation
+        const physics::Velocity2D fieldTranslation 
         {
-            math::rotateVector2D(turretwiseTranslation, turretBearing)
+            math::rotateVector2D(FieldDriftCommand::getFieldTranslation(), turretBearing)
         };
-
-        //It must be converted to a tangible value via scaling
-        const physics::Velocity2D fieldTranslation
-        {
-            abstractFieldTranslation.x * kConfig_.maxTranslation.x,
-            abstractFieldTranslation.y * kConfig_.maxTranslation.y
-        };
-
-        assertGetFieldTranslationUniformSigns(abstractFieldTranslation, fieldTranslation);
-
         return fieldTranslation;
-    }
-
-    void CounterStrikeCommand::assertGetFieldTranslationUniformSigns
-    (
-        const math::AbstractVector2D& abstractFieldTranslation,
-        const physics::Velocity2D& fieldTranslation
-    )
-    const
-    {
-        //If the turret frame translation is positive, the frame translation must be positive
-        //Because the configuration scalars must be positive themselves
-        //These will be optimized away on performance builds
-        math::Vector2D<bool> turretFrameTranslationSigns
-        {
-            std::signbit(abstractFieldTranslation.x),
-            std::signbit(abstractFieldTranslation.y)
-        };
-
-        math::Vector2D<bool> frameTranslationSigns 
-        {
-            std::signbit(fieldTranslation.x),
-            std::signbit(fieldTranslation.y)
-        };
-
-        const bool sameSignCheckX{turretFrameTranslationSigns.x == frameTranslationSigns.x};
-        const bool sameSignCheckY{turretFrameTranslationSigns.y == frameTranslationSigns.y};
-
-        FANG_ASSERT(sameSignCheckX, "Scaling should not invert motion");
-        FANG_ASSERT(sameSignCheckY, "Scaling should not invert motion");
     }
 
     RPM CounterStrikeCommand::getFieldRotation() const

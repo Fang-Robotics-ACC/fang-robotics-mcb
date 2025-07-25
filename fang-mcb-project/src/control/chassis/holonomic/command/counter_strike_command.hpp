@@ -37,10 +37,7 @@ namespace fang::chassis
         virtual ~CounterStrikeCommand() = default;
 
         const char* getName() const override;
-        void initialize() override;
         void execute() override;
-        void end(bool interrupted) override;
-        bool isFinished() const;
 
     protected:
         /**
@@ -60,14 +57,6 @@ namespace fang::chassis
 
         const control::turret::GimbalSubsystem& gimbal_; //We don't want the command to alter the turret state
         const Config& kConfig_;
-
-    private:
-    ///For getFieldTranslation
-        void assertGetFieldTranslationUniformSigns
-        (
-            const math::AbstractVector2D& abstractFieldTranslation,
-            const physics::Velocity2D& fieldTranslation
-        ) const;
     };
 }//namespace chassis
 #endif
