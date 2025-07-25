@@ -1,7 +1,7 @@
-#ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_TARDIS_KS
-#define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_TARDIS_KS
+#ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_TARDIS_COMMAND_HPP
+#define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_TARDIS_COMMAND_HPP
+#include "counter_strike_command.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
-#include "control/chassis/field_mecanum_command.hpp"
 #include "control/chassis/algorithms/basic_downscaler.hpp"
 
 #include "control/chassis/formulae/raziel_kalman_shredder.hpp"
@@ -21,7 +21,7 @@ namespace fang::chassis
     class TardisCommand: public tap::control::Command
     {
     public:
-    using MotionConfig = FieldMecanumCommand::Config;
+    using MotionConfig = CounterStrikeCommand::Config;
     /**
      * Positive shuriken speed is counterclockwise
      *
