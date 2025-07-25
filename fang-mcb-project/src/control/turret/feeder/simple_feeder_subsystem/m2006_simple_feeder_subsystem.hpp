@@ -3,7 +3,7 @@
 #include "simple_feeder_subsystem.hpp"
 #include "driver/drivers.hpp"
 #include "control/turret/feeder/simple_feeder_system/simple_feeder_system.hpp"
-#include "control/turret/feeder/simple_feeder_system/m2006_simple_feeder_factory.hpp"
+#include "control/turret/feeder/simple_feeder_system/m2006_simple_feeder.hpp"
 
 #include "wrap/trap/motor/dji_m2006.hpp"
 

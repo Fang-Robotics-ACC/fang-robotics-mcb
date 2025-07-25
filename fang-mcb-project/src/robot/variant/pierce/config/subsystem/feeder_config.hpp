@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_FEEDER_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_FEEDER_CONFIG_HPP
 #include "control/turret/feeder/simple_feeder_subsystem/simple_feeder_subsystem.hpp"
-#include "control/turret/feeder/simple_feeder_subsystem/m2006_simple_feeder_subsystem_factory.hpp"
+#include "control/turret/feeder/simple_feeder_subsystem/m2006_simple_feeder_subsystem.hpp"
 #include "wrap/trap/motor/dji_m2006.hpp"
 #include "wrap/units/units_alias.hpp"
 
