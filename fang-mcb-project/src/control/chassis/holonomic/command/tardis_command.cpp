@@ -25,15 +25,15 @@ namespace fang::chassis
                 .downscaleCoefficient = config.downscaleCoefficient
             }
         },
-        mk_config{config},
-        m_razielKalmanShredder{config.razielKalmanShredderConfig}
+        kConfig_{config},
+        razielKalmanShredder_{config.razielKalmanShredderConfig}
     {
-        m_kalmanTimer.reset();
+        kShredderTimer.reset();
     }
 
     const char* TardisCommand::getName() const
     {
-        return mk_name;
+        return kName;
     }
 
     void TardisCommand::execute()
@@ -44,8 +44,8 @@ namespace fang::chassis
 
     RPM TardisCommand::getFieldRotation() const
     {
-        const Seconds now{m_kalmanTimer.getDuration()};
-        const double razielShredderDownscale{m_razielKalmanShredder.getScalingFactor(static_cast<double>(now))};
+        const Seconds now{kShredderTimer.getDuration()};
+        const double razielShredderDownscale{razielKalmanShredder_.getScalingFactor(static_cast<double>(now))};
         const RPM rotation{ShurikenCommand::getFieldRotation() * razielShredderDownscale};
         return rotation;
     }

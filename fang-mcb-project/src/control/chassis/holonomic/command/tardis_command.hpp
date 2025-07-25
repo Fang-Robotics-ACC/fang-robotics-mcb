@@ -43,10 +43,11 @@ namespace fang::chassis
     protected:
         RPM getFieldRotation() const;
     private:
-        static constexpr char* mk_name{"T.A.R.D.I.S. Mode"};
-        const Config mk_config;
-        RazielKalmanShredder m_razielKalmanShredder;
-        chrono::SimpleTimer m_kalmanTimer{}; //To provide an input for the Raziel-Kalman Shredder
+        static constexpr char* kName{"T.A.R.D.I.S. Mode"};
+
+        const Config kConfig_;
+        RazielKalmanShredder razielKalmanShredder_;
+        chrono::SimpleTimer kShredderTimer{}; //To provide an input for the Raziel-Kalman Shredder
     };
 }
 #endif
