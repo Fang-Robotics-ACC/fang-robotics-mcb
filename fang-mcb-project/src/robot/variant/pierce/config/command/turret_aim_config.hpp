@@ -3,7 +3,7 @@
 #include "control/turret/command/aim_command.hpp"
 #include "wrap/units/units_alias.hpp"
 
-namespace fang 
+namespace fang::robot
 {
     using namespace units::literals;
     static const control::turret::AimCommand::Config k_turretAimConfig

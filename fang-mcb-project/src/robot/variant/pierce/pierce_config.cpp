@@ -21,10 +21,8 @@
 #include "config/mapping/chassis_command_map.hpp"
 #include "config/mapping/turret_command_map.hpp"
 
-namespace control
+namespace fang::robot
 {
-    using namespace fang;
-
     const Pierce::SubsystemConfig k_pierceSubsytemConfig 
     {
         .chassisConfig  = k_chassisConfig,

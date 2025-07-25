@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_TURRET_INPUT_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_TURRET_INPUT_CONFIG_HPP
 #include "control/turret/turret_input_handler.hpp"
-namespace fang 
+namespace fang::robot
 {
     using Remote = tap::communication::serial::Remote;
     using Channel = Remote::Channel;
