@@ -21,22 +21,29 @@ namespace fang::chassis
     {
     public:
     struct Config
-    {
-        MetersPerSecond maxXTranslation;
-        MetersPerSecond maxYTranslation;
-        RPM maxRotation;
-        Degrees maxAngularDisplacement;
-    };
+        {
+            MetersPerSecond maxXTranslation;
+            MetersPerSecond maxYTranslation;
+            RPM maxRotation;
+            Degrees maxAngularDisplacement;
+        };
 
         /**
          * This takes a chassis subsystem and the respective inputHandler
          */
-        CounterStrikeCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config);
+        CounterStrikeCommand
+        (
+            IHolonomicSubsystemControl& holonomicSubsystem,
+            const control::turret::GimbalSubsystem& gimbal,
+            ChassisInputHandler& inputHandler, const Config& config
+        );
+
         const char* getName() const override;
         void initialize() override;
         void execute() override;
         void end(bool interrupted) override;
         bool isFinished() const;
+
     protected:
         /**
          * Returns the fieldwise translation, translating the translation input
@@ -52,12 +59,12 @@ namespace fang::chassis
         RPM getFieldRotation() const;
 
     private:
-        static constexpr char* mk_name{"Chassis tank drive"};
+        static constexpr char* kName{"Chassis tank drive"};
 
-        IHolonomicSubsystemControl& m_chassisSubsystem;
-        const control::turret::GimbalSubsystem& m_gimbal; //We don't want the command to alter the turret state
-        ChassisInputHandler& m_input;
-        const Config& mk_config;
+        IHolonomicSubsystemControl& holonomicSubsystem_;
+        const control::turret::GimbalSubsystem& gimbal_; //We don't want the command to alter the turret state
+        ChassisInputHandler& chassisInput_;
+        const Config& kConfig_;
     };
 }//namespace chassis
 #endif
