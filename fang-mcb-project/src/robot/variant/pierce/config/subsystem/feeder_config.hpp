@@ -50,7 +50,7 @@ namespace fang::robot
 
     };
 
-    static const fang::turret::M2006SimpleFeederSubsystemFactory::Config kFeederMakerConfig
+    static const fang::turret::M2006SimpleFeederSubsystem::Config kFeederMakerConfig
     {
         .feedMotorConfig = kFeederMotorConfig,
         .feederSubsystemConfig = {kFeederHeatLimiterConfig},

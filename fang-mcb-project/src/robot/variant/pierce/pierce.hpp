@@ -42,7 +42,7 @@ namespace fang::robot
         {
             chassis::ChassisSubsystem::ChassisConfig chassisConfig;
             turret::GimbalSubsystem::Config gimbalConfig;
-            fang::turret::M2006SimpleFeederSubsystemFactory::Config feederConfig;
+            fang::turret::M2006SimpleFeederSubsystem::Config feederConfig;
             turret::AmmoBoosterSubsystem::Config boosterConfig;
         };
 
