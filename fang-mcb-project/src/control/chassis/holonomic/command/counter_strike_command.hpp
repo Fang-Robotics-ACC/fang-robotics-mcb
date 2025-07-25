@@ -10,7 +10,12 @@
 namespace fang::chassis
 {
     /**
-     * This intermediates the inputs and the mecanum drive 
+     * First person shooter motion for holonomic drive. Plain and simple.
+     * 
+     * This pairs well with a mouse-supported ChassisInputHandler.
+     * 
+     * If you face forward, a forward input on the remote will make the robot move
+     * forward. Every translation input is rotated to be relative to the turret head.
      */
     class CounterStrikeCommand: public tap::control::Command
     {
