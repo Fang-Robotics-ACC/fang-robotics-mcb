@@ -1,7 +1,11 @@
 #include "gearbox_repeat_ultra_mk2.hpp"
 namespace fang::motor
 {
-    GearboxRepeatUltraMk2::GearboxRepeatUltraMk2(Drivers& drivers, const Config& config):
+    GearboxRepeatUltraMk2::GearboxRepeatUltraMk2
+    (
+        Drivers& drivers,
+        const Config& config
+    ):
         RepeatUltraMk2
         (
             drivers,
@@ -12,7 +16,8 @@ namespace fang::motor
                 config.directionality,
                 config.inverted
             }
-        )
+        ),
+        kGearRatio_{config.gearRatio}
     {
     }
 
