@@ -61,8 +61,8 @@ namespace fang::chassis
         //It must be converted to a tangible value via scaling
         const physics::Velocity2D fieldTranslation
         {
-            abstractFieldTranslation.x * kConfig_.maxXTranslation, 
-            abstractFieldTranslation.y * kConfig_.maxYTranslation
+            abstractFieldTranslation.x * kConfig_.maxTranslationVelocity.x,
+            abstractFieldTranslation.y * kConfig_.maxTranslationVelocity.y
         };
 
         assertGetFieldTranslationUniformSigns(abstractFieldTranslation, fieldTranslation);

@@ -20,10 +20,17 @@ namespace fang::chassis
     class CounterStrikeCommand: public tap::control::Command
     {
     public:
+    /**
+     * maxVelocity: This needs to have both components greater than
+     * or equal to zero. Each component represents the maximum speed
+     * each the robot will move
+     *
+     * maxRotation is the angular velocity that will be achieved
+     * if full throttle is utilized
+     */
     struct Config
         {
-            MetersPerSecond maxXTranslation;
-            MetersPerSecond maxYTranslation;
+            physics::Velocity2D maxTranslationVelocity;
             RPM maxRotation;
         };
 
