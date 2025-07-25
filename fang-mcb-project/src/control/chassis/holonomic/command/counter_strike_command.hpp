@@ -44,7 +44,7 @@ namespace fang::chassis
             ChassisInputHandler& inputHandler, const Config& config
         );
 
-        virtual ~CounterStrikeCommand() {};
+        virtual ~CounterStrikeCommand() = default;
 
         const char* getName() const override;
         void initialize() override;
