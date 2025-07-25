@@ -13,15 +13,13 @@ namespace fang::turret
     {
     public:
         using FeedMotor = trap::motor::DjiM2006;
-        using FeedMotorPtr = std::unique_ptr<FeedMotor>;
-        using SimpleFeederSystemPtr = std::unique_ptr<SimpleFeederSystem>;
         struct Config
         {
             FeedMotor::Config         feedMotorConfig;
             SimpleFeederSystem::Config   feederConfig;
         };
 
-        static SimpleFeederSystemPtr Make(Drivers& drivers, const Config& config);
+        static std::unique_ptr<SimpleFeederSystem> Make(Drivers& drivers, const Config& config);
     };
 }
 #endif
