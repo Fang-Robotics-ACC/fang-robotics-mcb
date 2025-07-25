@@ -4,26 +4,23 @@
 
 #include "tap/control/command.hpp"
 
-namespace control
+namespace fang::turret 
 {
-    namespace turret 
+    class ActivateBoosterCommand: public tap::control::Command
     {
-        class ActivateBoosterCommand: public tap::control::Command
-        {
-        public:
-            ActivateBoosterCommand(AmmoBoosterSubsystem& booster);
+    public:
+        ActivateBoosterCommand(AmmoBoosterSubsystem& booster);
 
-            const char* getName() const override {return "Activate Booster";}
+        const char* getName() const override {return "Activate Booster";}
 
-            void initialize() override;
-            void execute() override;
-            void end(bool interrupted) override;
-            bool isFinished() const override;
+        void initialize() override;
+        void execute() override;
+        void end(bool interrupted) override;
+        bool isFinished() const override;
 
 
-        private:
-            AmmoBoosterSubsystem& m_booster;
-        };
-    }
+    private:
+        AmmoBoosterSubsystem& m_booster;
+    };
 }
 #endif
