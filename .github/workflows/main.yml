@@ -6,17 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: docker.io/aruw/mcb-dev:latest
-    defaults:
-      run:
-        working-directory: fang-mcb-project
     steps:
-      - name: perm
-        run: |
-          npm config set unsafe-perm true
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
       - name: Build
         run: |
+          cd fang-mcb-project
           pipenv run scons build
