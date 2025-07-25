@@ -11,12 +11,12 @@ namespace fang::chassis
 {
     CounterStrikeCommand::CounterStrikeCommand
     (
-        IHolonomicSubsystemControl& chassisSubsystem,
+        IHolonomicSubsystemControl& holonomicSubsystem,
         const control::turret::GimbalSubsystem& turret,
         ChassisInputHandler& inputHandler,
         const Config& config
     ):   
-        FieldDriftCommand{holonomicSubsystem_, chassisInput_, config},
+        FieldDriftCommand{holonomicSubsystem, inputHandler, config},
         gimbal_{turret},
         kConfig_{config}
     {

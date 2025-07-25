@@ -31,7 +31,8 @@ namespace fang::chassis
         (
             IHolonomicSubsystemControl& holonomicSubsystem,
             const control::turret::GimbalSubsystem& gimbal,
-            ChassisInputHandler& inputHandler, const Config& config
+            ChassisInputHandler& inputHandler,
+            const Config& config
         );
 
         virtual ~CounterStrikeCommand() = default;
