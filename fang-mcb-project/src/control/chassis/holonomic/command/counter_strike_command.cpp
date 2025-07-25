@@ -39,7 +39,8 @@ namespace fang::chassis
     }
 
     void CounterStrikeCommand::end(bool interrupted)
-    {}
+    {
+    }
 
     bool CounterStrikeCommand::isFinished() const
     {
