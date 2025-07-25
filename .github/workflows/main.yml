@@ -20,4 +20,4 @@ jobs:
       - name: Build
         run: |
           ls
-          pipenv run scons build
+          scons build
