@@ -3,7 +3,7 @@
 #include "wrap/units/units_alias.hpp"
 #include "modm/architecture/interface/clock.hpp"
 
-namespace chrono
+namespace fang::chrono
 {
     /**
      * Can time stuff up to 71 days within microsecond precision
