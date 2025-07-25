@@ -8,7 +8,7 @@ namespace fang::chassis
      * 
      * This returns a scaling coefficient to be used in relation to rotation or even translation
      * 
-     * https://www.desmos.com/calculator/e19d96ky1e 
+     * https://www.desmos.com/calculator/f3662079d3
      * input - the control value, could be time phase, or anything, really 
      * biteDepth - how much the shredder decreases the speed in a "bite" it should be within [0,1]
      * biteForce - how steep the "bite" is, it must be a posiive integer
