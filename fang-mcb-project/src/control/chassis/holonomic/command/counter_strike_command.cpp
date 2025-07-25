@@ -3,6 +3,7 @@
 #include "wrap/units/units_alias.hpp"
 
 #include "modm/architecture/interface/assert.hpp"
+#include "system/assert/fang_assert.hpp"
 
 #include <cmath>
 
@@ -94,8 +95,8 @@ namespace fang::chassis
         const bool sameSignCheckX{turretFrameTranslationSigns.x == frameTranslationSigns.x};
         const bool sameSignCheckY{turretFrameTranslationSigns.y == frameTranslationSigns.y};
 
-        modm_assert(sameSignCheckX, "CounterStrikeCommand.getFieldTraslation.sameSign.x", "Scaling should not invert motion");
-        modm_assert(sameSignCheckY, "CounterStrikeCommand.getFieldTraslation.sameSign.y", "Scaling should not invert motion");
+        FANG_ASSERT(sameSignCheckX, "CounterStrikeCommand.getFieldTraslation.sameSign.x", "Scaling should not invert motion");
+        FANG_ASSERT(sameSignCheckY, "CounterStrikeCommand.getFieldTraslation.sameSign.y", "Scaling should not invert motion");
     }
 
     RPM CounterStrikeCommand::getFieldRotation() const
@@ -105,7 +106,7 @@ namespace fang::chassis
         const RPM rotation{abstractRotation * kConfig_.maxRotation};
 
         const bool sameSignCheck{std::signbit(abstractRotation) == std::signbit(static_cast<double>(abstractRotation))};
-        modm_assert(sameSignCheck, "CounterStrikeCommand.getFieldRotation.sameSign", "Scaling should not invert rotation");
+        FANG_ASSERT(sameSignCheck, "CounterStrikeCommand.getFieldRotation.sameSign", "Scaling should not invert rotation");
 
         return rotation;
     }
