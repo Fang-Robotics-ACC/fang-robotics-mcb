@@ -8,7 +8,6 @@ namespace fang
         14_mph, //maxXtranslation
         14_mph, //maxYTranslatioon
         100_rpm, //maxRotation
-        0.5_deg //maxAngularDisplacement
     };
     static const chassis::ShurikenCommand::Config k_shurikenConfig
     {

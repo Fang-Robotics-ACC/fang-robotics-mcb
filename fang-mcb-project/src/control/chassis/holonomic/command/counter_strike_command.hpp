@@ -25,7 +25,6 @@ namespace fang::chassis
             MetersPerSecond maxXTranslation;
             MetersPerSecond maxYTranslation;
             RPM maxRotation;
-            Degrees maxAngularDisplacement;
         };
 
         /**

@@ -9,7 +9,6 @@ namespace fang
         10_mph, //maxXtranslation
         10_mph, //maxYTranslatioon
         100_rpm, //maxRotation
-        0.5_deg //maxAngularDisplacement
     };
 
     static const chassis::RazielKalmanShredder::Config k_razielKalmanShredderConfig

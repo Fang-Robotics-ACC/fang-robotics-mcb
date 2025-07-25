@@ -9,7 +9,6 @@ namespace fang
         6.5_mph, //maxXtranslation
         6.5_mph, //maxYTranslatioon
         100_rpm, //maxRotation
-        0.5_deg //maxAngularDisplacement
     };
 }
 
