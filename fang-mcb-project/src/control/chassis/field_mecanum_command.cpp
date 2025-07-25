@@ -6,7 +6,7 @@
 
 namespace fang::chassis
 {
-    FieldMecanumCommand::FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config)
+    FieldMecanumCommand::FieldMecanumCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config)
     :   m_chassisSubsystem{chassisSubsystem},
         m_gimbal{turret},
         m_input{inputHandler},
@@ -60,7 +60,9 @@ namespace fang::chassis
 
         const physics::Velocity2D translation{abstractTranslation.x * mk_config.maxXTranslation, abstractTranslation.y * mk_config.maxYTranslation};
         const RPM rotation{abstractRotation * mk_config.maxRotation};
-        m_chassisSubsystem.setMotion(translation, rotation);
+
+        m_chassisSubsystem.setTargetTranslation(translation);
+        m_chassisSubsystem.setTargetRotation(rotation);
     }
 
     void FieldMecanumCommand::executeRemoteTestStrafeTurret()
@@ -75,7 +77,9 @@ namespace fang::chassis
         const double abstractRotation{m_input.getRotation()};
 
         const RPM rotation{abstractRotation * mk_config.maxRotation};
-        m_chassisSubsystem.setMotion(fieldTranslation, rotation);
+
+        m_chassisSubsystem.setTargetTranslation(fieldTranslation);
+        m_chassisSubsystem.setTargetRotation(rotation);
     }
 
     void FieldMecanumCommand::executeKeyboardTestFieldRotate()

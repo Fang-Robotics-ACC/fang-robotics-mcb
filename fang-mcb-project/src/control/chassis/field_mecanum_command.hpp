@@ -4,6 +4,7 @@
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/turret/gimbal_subsystem.hpp"
 
+#include "wrap/rail/chassis/iholonomic_subsystem_control.hpp"
 #include "tap/control/command.hpp"
 
 namespace fang::chassis
@@ -39,7 +40,7 @@ namespace fang::chassis
         /**
          * This takes a chassis subsystem and the respective inputHandler
          */
-        FieldMecanumCommand(ChassisSubsystem& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config);
+        FieldMecanumCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config);
         const char* getName() const override;
         void initialize() override;
         void execute() override;
@@ -51,7 +52,7 @@ namespace fang::chassis
         void executeKeyboardTestFieldRotate();
         void executeKeyboardTestStrafeTurret();
         static constexpr char* mk_name{"Chassis tank drive"};
-        ChassisSubsystem& m_chassisSubsystem;
+        IHolonomicSubsystemControl& m_chassisSubsystem;
         const control::turret::GimbalSubsystem& m_gimbal; //We don't want the command to alter the turret state
         ChassisInputHandler& m_input;
         ControlMode m_controlMode{ControlMode::REMOTE_TEST_STRAFE_TURRET};
