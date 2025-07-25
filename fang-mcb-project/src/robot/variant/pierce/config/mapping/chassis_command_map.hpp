@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_PIERCE_CHASSIS_COMMAND_MAP_HPP
 #define FANG_ROBOTICS_MCB_PIERCE_CHASSIS_COMMAND_MAP_HPP
 #include "tap/control/remote_map_state.hpp"
-namespace control
+namespace fang 
 {
     using Remote = tap::communication::serial::Remote;
     using SwitchState = Remote::SwitchState;
