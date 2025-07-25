@@ -1,5 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_COUNTER_STRIKE_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_COUNTER_STRIKE_COMMAND_HPP
+#include "field_drift_command.hpp"
+
 #include "control/chassis/chassis_input_handler.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/turret/gimbal_subsystem.hpp"
@@ -17,22 +19,10 @@ namespace fang::chassis
      * If you face forward, a forward input on the remote will make the robot move
      * forward. Every translation input is rotated to be relative to the turret head.
      */
-    class CounterStrikeCommand: public tap::control::Command
+    class CounterStrikeCommand : public FieldDriftCommand 
     {
     public:
-    /**
-     * maxVelocity: This needs to have both components greater than
-     * or equal to zero. Each component represents the maximum speed
-     * each the robot will move
-     *
-     * maxRotation is the angular velocity that will be achieved
-     * if full throttle is utilized
-     */
-    struct Config
-        {
-            physics::Velocity2D maxTranslation;
-            RPM maxRotation;
-        };
+        using Config = FieldDriftCommand::Config;
 
         /**
          * This takes a chassis subsystem and the respective inputHandler
@@ -68,9 +58,7 @@ namespace fang::chassis
 
         static constexpr char* kName{"Chassis tank drive"};
 
-        IHolonomicSubsystemControl& holonomicSubsystem_;
         const control::turret::GimbalSubsystem& gimbal_; //We don't want the command to alter the turret state
-        ChassisInputHandler& chassisInput_;
         const Config& kConfig_;
 
     private:

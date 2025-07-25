@@ -16,9 +16,8 @@ namespace fang::chassis
         ChassisInputHandler& inputHandler,
         const Config& config
     ):   
-        holonomicSubsystem_{chassisSubsystem},
+        FieldDriftCommand{holonomicSubsystem_, chassisInput_, config},
         gimbal_{turret},
-        chassisInput_{inputHandler},
         kConfig_{config}
     {
         addSubsystemRequirement(&holonomicSubsystem_);
