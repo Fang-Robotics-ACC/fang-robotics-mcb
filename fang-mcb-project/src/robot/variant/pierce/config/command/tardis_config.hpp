@@ -6,7 +6,6 @@ namespace fang
 {
     static const chassis::TardisCommand::MotionConfig k_tardisMotionConfig
     {
-        10_mph, //max translation - for turret based strafe
         10_mph, //maxXtranslation
         10_mph, //maxYTranslatioon
         100_rpm, //maxRotation

@@ -5,7 +5,6 @@ namespace fang
 {
     static const chassis::ShurikenCommand::MotionConfig k_shurikenMotionConfig
     {
-        10_mph, //max translation - for turret based strafe
         14_mph, //maxXtranslation
         14_mph, //maxYTranslatioon
         100_rpm, //maxRotation

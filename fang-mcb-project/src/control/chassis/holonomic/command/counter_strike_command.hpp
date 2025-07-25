@@ -22,7 +22,6 @@ namespace fang::chassis
     public:
     struct Config
     {
-        MetersPerSecond maxTranslation;
         MetersPerSecond maxXTranslation;
         MetersPerSecond maxYTranslation;
         RPM maxRotation;

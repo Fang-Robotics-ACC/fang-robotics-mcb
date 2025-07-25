@@ -6,7 +6,6 @@ namespace fang
 {
     static const chassis::CounterStrikeCommand::Config k_fieldMecanumConfig 
     {
-        10_mph, //max translation - for turret based strafe
         6.5_mph, //maxXtranslation
         6.5_mph, //maxYTranslatioon
         100_rpm, //maxRotation
