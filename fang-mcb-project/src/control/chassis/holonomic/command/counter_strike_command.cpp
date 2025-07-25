@@ -48,26 +48,38 @@ namespace fang::chassis
 
     physics::Velocity2D CounterStrikeCommand::getFieldTranslation() const
     {
-        const math::AbstractVector2D turretFrameTranslation{chassisInput_.getTranslation()};
+        //The convert from turretwise translation to fieldwise
+        const math::AbstractVector2D turretwiseTranslation{chassisInput_.getTranslation()};
+        const Radians turretBearing{gimbal_.getTargetFieldYaw()};
+        const math::AbstractVector2D abstractFieldTranslation
+        {
+            math::rotateVector2D(turretwiseTranslation, turretBearing)
+        };
+
         //It must be converted to a tangible value via scaling
-        const physics::Velocity2D frameTranslation{turretFrameTranslation.x * kConfig_.maxXTranslation, turretFrameTranslation.y * kConfig_.maxYTranslation};
+        const physics::Velocity2D fieldTranslation
+        {
+            abstractFieldTranslation.x * kConfig_.maxXTranslation, 
+            abstractFieldTranslation.y * kConfig_.maxYTranslation
+        };
 
         //Invariant assertions: these should NEVER be violated
         {
             //If the turret frame translation is positive, the frame translation must be positive
             //Because the configuration scalars must be positive themselves
+            //These will be optimized away on performance builds
             math::Vector2D<bool> turretFrameTranslationSigns
             {
-                std::signbit(turretFrameTranslation.x),
-                std::signbit(turretFrameTranslation.y)
+                std::signbit(abstractFieldTranslation.x),
+                std::signbit(abstractFieldTranslation.y)
             };
 
             math::Vector2D<bool> frameTranslationSigns 
             {
-                std::signbit(frameTranslation.x),
-                std::signbit(frameTranslation.y)
+                std::signbit(fieldTranslation.x),
+                std::signbit(fieldTranslation.y)
             };
-            //These will be optimized away on performance builds
+
             const bool sameSignCheckX{turretFrameTranslationSigns.x == frameTranslationSigns.x};
             const bool sameSignCheckY{turretFrameTranslationSigns.y == frameTranslationSigns.y};
 
@@ -75,9 +87,7 @@ namespace fang::chassis
             modm_assert(sameSignCheckY, "CounterStrikeCommand.getFieldTraslation.sameSign.y", "Scaling should not invert motion");
         }
 
-        const Radians turretBearing{gimbal_.getTargetFieldYaw()};
 
-        const physics::Velocity2D fieldTranslation{math::rotateVector2D(frameTranslation, turretBearing)};
         return fieldTranslation;
     }
 
