@@ -33,7 +33,7 @@ namespace fang::chassis
         /**
          * Returns a clamped sum of the keyboard and mouse inputs
          */
-        ::math::AbstractVector2D getTranslation() const;
+        math::AbstractVector2D getTranslation() const;
         /**
          * Returns a clamped sum of the keyboard and mouse inputs
          */

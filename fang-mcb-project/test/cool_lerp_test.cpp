@@ -2,7 +2,9 @@
 
 #include <gmock/gmock.h>
 
+using namespace fang;
 using Vector2D = math::CoolLerp::Vector2D;
+
 TEST(zeroTest, coolLerp)
 {
     const Vector2D dataPoint1{0.0, 0.0};
