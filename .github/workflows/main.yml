@@ -23,8 +23,7 @@ jobs:
           python-version: '3.8.12'
       - name: Environment Setup
         run: |
-          sudo apt install pipenv -y
-          pipenv install --python 3.8.12
+          echo wazzzup!!!
       - name: Build
         run: |
-          pipenv scons build
+          scons build
