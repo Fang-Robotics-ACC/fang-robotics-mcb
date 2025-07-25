@@ -6,7 +6,7 @@
 
 namespace fang::chassis 
 {
-    TardisCommand::TardisCommand(ChassisSubsystem& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config)
+    TardisCommand::TardisCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config)
     :   m_chassisSubsystem{chassisSubsystem},
         m_turret{turret},
         m_input{input},
@@ -32,7 +32,9 @@ namespace fang::chassis
     {
         const physics::Velocity2D fieldTranslation{calcuateFieldTranslation()};
         const RPM rotation{calculateRotation(fieldTranslation)};
-        m_chassisSubsystem.setMotion(fieldTranslation, rotation);
+
+        m_chassisSubsystem.setTargetTranslation(fieldTranslation);
+        m_chassisSubsystem.setTargetRotation(rotation);
     }
 
     void TardisCommand::end(bool interrupted)

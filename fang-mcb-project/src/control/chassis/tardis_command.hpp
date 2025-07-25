@@ -37,7 +37,7 @@ namespace fang::chassis
         /**
          * This takes a chassis subsystem and the respective inputHandler
          */
-        TardisCommand(ChassisSubsystem& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config);
+        TardisCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config);
         const char* getName() const override;
         void initialize() override;
         void execute() override;
@@ -47,7 +47,7 @@ namespace fang::chassis
         physics::Velocity2D calcuateFieldTranslation() const;
         RPM calculateRotation(const physics::Velocity2D fieldTranslation) const;
         static constexpr char* mk_name{"T.A.R.D.I.S. Mode"};
-        ChassisSubsystem& m_chassisSubsystem;
+        IHolonomicSubsystemControl& m_chassisSubsystem;
         const control::turret::GimbalSubsystem& m_turret; //We don't want the command to alter the turret state
         ChassisInputHandler& m_input;
         const Config mk_config;
