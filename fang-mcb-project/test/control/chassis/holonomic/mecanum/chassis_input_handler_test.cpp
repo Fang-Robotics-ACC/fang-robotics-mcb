@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 #include <tuple>
+using namespace fang;
 using AbstractVector2D = fang::math::AbstractVector2D;
 using ::testing::Return;
 using namespace units::literals;

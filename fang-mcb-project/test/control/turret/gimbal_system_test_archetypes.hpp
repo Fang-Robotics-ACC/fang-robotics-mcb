@@ -3,6 +3,7 @@
 #include "control/turret/system/gimbal_system.hpp"
 namespace test
 {
+    using namespace fang;
     /**
      * This class is to simply provide private member access to multiple test classes
      * So that we can have variants
