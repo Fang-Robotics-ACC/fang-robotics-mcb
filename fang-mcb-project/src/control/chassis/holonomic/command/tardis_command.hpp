@@ -16,7 +16,11 @@
 namespace fang::chassis 
 {
     /**
-     * The chassis will spin in the desired direction. It will use turret oriented strafe.
+     * This utilizes the Raziel Shredder, an family of anti-Kalman algorithms
+     * designed to induce a bias which is infinitely differentiable i.e. everything up to
+     * acceleratino is under constant change which makes linear prediction more difficult.
+     * 
+     * It does not randomize spin since Kalman Filters do overcome them.
      */
     class TardisCommand : public ShurikenCommand
     {

@@ -12,7 +12,7 @@
 namespace fang::chassis 
 {
     /**
-     * The chassis will spin in the desired direction. It will use turret oriented strafe.
+     * The holonomic drive will automatically spin
      */
     class ShurikenCommand: public CounterStrikeCommand
     {
