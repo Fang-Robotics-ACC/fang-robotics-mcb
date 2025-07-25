@@ -54,7 +54,7 @@ namespace fang::chassis
          */
         RPM getFieldRotation() const;
 
-        static constexpr char* kName{"Chassis tank drive"};
+        static constexpr char* kName{"Counter Strike Global!"};
 
         const control::turret::GimbalSubsystem& gimbal_; //We don't want the command to alter the turret state
         const Config& kConfig_;

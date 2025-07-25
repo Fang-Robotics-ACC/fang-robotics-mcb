@@ -45,7 +45,7 @@ namespace fang::chassis
         void updateTargetFieldTranslation();
 
     private:
-        static constexpr char* mk_name{"Shuriken Mode"};
+        static constexpr char* mk_name{"Shuriken"};
         const Config mk_config;
         const BasicDownscaler mk_downscaler;
 
