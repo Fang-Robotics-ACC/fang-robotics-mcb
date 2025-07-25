@@ -1,20 +1,25 @@
 #include "shuriken_command.hpp"
 #include "util/math/geometry/rotate_vector_2d.hpp"
 #include "wrap/units/units_alias.hpp"
+#include "system/assert/fang_assert.hpp"
 
 #include <cassert>
 
 namespace fang::chassis
 {
-    ShurikenCommand::ShurikenCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config)
-    :   m_chassisSubsystem{chassisSubsystem},
-        m_turret{turret},
-        m_input{input},
+    ShurikenCommand::ShurikenCommand
+    (
+        IHolonomicSubsystemControl& holonomicSubsystem,
+        const control::turret::GimbalSubsystem& turret,
+        ChassisInputHandler& input,
+        const Config& config
+    ):
+        //MAYBE: Move FPS motion logic to separate class
+        CounterStrikeCommand{holonomicSubsystem, turret, input, config.motionConfig},
         mk_config{config},
-        mk_motionConfig{config.motionConfig},
         mk_downscaler{config.downscaleCoefficient}
     {
-        addSubsystemRequirement(&m_chassisSubsystem);
+        addSubsystemRequirement(&holonomicSubsystem_);
     }
 
     const char* ShurikenCommand::getName() const
@@ -22,55 +27,21 @@ namespace fang::chassis
         return mk_name;
     }
 
-    void ShurikenCommand::initialize()
-    {
-    }
-
     void ShurikenCommand::execute()
     {
-        switch(m_controlMode)
-        {
-            case ControlMode::REMOTE_TEST_STRAFE_TURRET:
-                executeRemoteTestStrafeTurret();
-                break;
-            case ControlMode::KEYBOARD_TEST_FIELD_ROTATE:
-                executeKeyboardTestFieldRotate();
-                break;
-            case ControlMode::KEYBOARD_TEST_STRAFE_TURRET:
-                executeKeyboardTestStrafeTurret();
-                break;
-            default:
-                assert(!"Unexpected or unsupported mode.");
-        }
+        holonomicSubsystem_.setTargetTranslation(targetFieldTranslation_);
+        holonomicSubsystem_.setTargetRotation(getFieldRotation());
     }
 
-    void ShurikenCommand::end(bool interrupted)
-    {}
-
-    bool ShurikenCommand::isFinished() const
+    RPM ShurikenCommand::getFieldRotation() const
     {
-        return false;
-    }
-
-    void ShurikenCommand::executeRemoteTestStrafeTurret()
-    {
-
-        const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
-        const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
-        const Radians turretBearing{m_turret.getTargetFieldYaw()};
-
-        const physics::Velocity2D fieldTranslation{math::rotateVector2D(frameTranslation, turretBearing)};
-
-        const double downscale{mk_downscaler.getDownscale(fieldTranslation.getMagnitude())};
+        const double downscale{mk_downscaler.getDownscale(targetFieldTranslation_.getMagnitude())};
         const RPM rotation{mk_config.shurikenSpeed * downscale};
-
-        m_chassisSubsystem.setTargetTranslation(fieldTranslation);
-        m_chassisSubsystem.setTargetRotation(rotation);
+        FANG_ASSERT(rotation <= mk_config.shurikenSpeed, "The shuriken speed should only be downscaled!");
     }
 
-    void ShurikenCommand::executeKeyboardTestFieldRotate()
-    {}
-
-    void ShurikenCommand::executeKeyboardTestStrafeTurret()
-    {}
+    void ShurikenCommand::updateTargetFieldTranslation()
+    {
+        targetFieldTranslation_ = CounterStrikeCommand::getFieldTranslation();
+    }
 }//namespace  
