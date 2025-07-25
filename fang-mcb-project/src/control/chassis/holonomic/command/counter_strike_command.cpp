@@ -2,7 +2,9 @@
 #include "util/math/geometry/rotate_vector_2d.hpp"
 #include "wrap/units/units_alias.hpp"
 
-#include <cassert>
+#include "modm/architecture/interface/assert.hpp"
+
+#include <cmath>
 
 namespace fang::chassis
 {
@@ -51,8 +53,14 @@ namespace fang::chassis
 
     RPM CounterStrikeCommand::getFieldRotation() const
     {
+        //Convert the abstract rotation value into a tangible unit
         const double abstractRotation{m_input.getRotation()};
         const RPM rotation{abstractRotation * mk_config.maxRotation};
+
+        const bool sameSignCheck{std::signbit(abstractRotation) == std::signbit(static_cast<double>(abstractRotation))};
+        modm_assert(sameSignCheck, "CounterStrikeCommand.getFieldRotation.sameSign", "Signs should be the same");
+
+        return rotation;
     }
 
 
