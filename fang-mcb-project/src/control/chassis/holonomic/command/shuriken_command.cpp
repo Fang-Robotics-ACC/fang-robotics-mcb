@@ -16,14 +16,14 @@ namespace fang::chassis
     ):
         //MAYBE: Move FPS motion logic to separate class
         CounterStrikeCommand{holonomicSubsystem, turret, input, {config.maxTranslation, 0_rpm}},
-        mk_config{config},
-        mk_downscaler{config.downscaleCoefficient}
+        kConfig_{config},
+        kDownscaler_{config.downscaleCoefficient}
     {
     }
 
     const char* ShurikenCommand::getName() const
     {
-        return mk_name;
+        return kName;
     }
 
     void ShurikenCommand::execute()
@@ -34,9 +34,9 @@ namespace fang::chassis
 
     RPM ShurikenCommand::getFieldRotation() const
     {
-        const double downscale{mk_downscaler.getDownscale(targetFieldTranslation_.getMagnitude())};
-        const RPM rotation{mk_config.shurikenSpeed * downscale};
-        FANG_ASSERT(rotation <= mk_config.shurikenSpeed, "The shuriken speed should only be downscaled!");
+        const double downscale{kDownscaler_.getDownscale(targetFieldTranslation_.getMagnitude())};
+        const RPM rotation{kConfig_.shurikenSpeed * downscale};
+        FANG_ASSERT(rotation <= kConfig_.shurikenSpeed, "The shuriken speed should only be downscaled!");
         return rotation;
     }
 

@@ -45,10 +45,10 @@ namespace fang::chassis
         void updateTargetFieldTranslation();
 
     private:
-        static constexpr char* mk_name{"Shuriken"};
-        const Config mk_config;
-        const BasicDownscaler mk_downscaler;
+        static constexpr char* kName{"Shuriken"};
 
+        const Config kConfig_;
+        const BasicDownscaler kDownscaler_;
         physics::Velocity2D targetFieldTranslation_{};
     };
 }
