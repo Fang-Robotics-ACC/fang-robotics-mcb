@@ -63,32 +63,38 @@ namespace fang::chassis
             abstractFieldTranslation.y * kConfig_.maxYTranslation
         };
 
-        //Invariant assertions: these should NEVER be violated
-        {
-            //If the turret frame translation is positive, the frame translation must be positive
-            //Because the configuration scalars must be positive themselves
-            //These will be optimized away on performance builds
-            math::Vector2D<bool> turretFrameTranslationSigns
-            {
-                std::signbit(abstractFieldTranslation.x),
-                std::signbit(abstractFieldTranslation.y)
-            };
-
-            math::Vector2D<bool> frameTranslationSigns 
-            {
-                std::signbit(fieldTranslation.x),
-                std::signbit(fieldTranslation.y)
-            };
-
-            const bool sameSignCheckX{turretFrameTranslationSigns.x == frameTranslationSigns.x};
-            const bool sameSignCheckY{turretFrameTranslationSigns.y == frameTranslationSigns.y};
-
-            modm_assert(sameSignCheckX, "CounterStrikeCommand.getFieldTraslation.sameSign.x", "Scaling should not invert motion");
-            modm_assert(sameSignCheckY, "CounterStrikeCommand.getFieldTraslation.sameSign.y", "Scaling should not invert motion");
-        }
-
+        assertGetFieldTranslationUniformSigns(abstractFieldTranslation, fieldTranslation);
 
         return fieldTranslation;
+    }
+
+    void CounterStrikeCommand::assertGetFieldTranslationUniformSigns
+    (
+        const math::AbstractVector2D& abstractFieldTranslation,
+        const physics::Velocity2D& fieldTranslation
+    )
+    const
+    {
+        //If the turret frame translation is positive, the frame translation must be positive
+        //Because the configuration scalars must be positive themselves
+        //These will be optimized away on performance builds
+        math::Vector2D<bool> turretFrameTranslationSigns
+        {
+            std::signbit(abstractFieldTranslation.x),
+            std::signbit(abstractFieldTranslation.y)
+        };
+
+        math::Vector2D<bool> frameTranslationSigns 
+        {
+            std::signbit(fieldTranslation.x),
+            std::signbit(fieldTranslation.y)
+        };
+
+        const bool sameSignCheckX{turretFrameTranslationSigns.x == frameTranslationSigns.x};
+        const bool sameSignCheckY{turretFrameTranslationSigns.y == frameTranslationSigns.y};
+
+        modm_assert(sameSignCheckX, "CounterStrikeCommand.getFieldTraslation.sameSign.x", "Scaling should not invert motion");
+        modm_assert(sameSignCheckY, "CounterStrikeCommand.getFieldTraslation.sameSign.y", "Scaling should not invert motion");
     }
 
     RPM CounterStrikeCommand::getFieldRotation() const

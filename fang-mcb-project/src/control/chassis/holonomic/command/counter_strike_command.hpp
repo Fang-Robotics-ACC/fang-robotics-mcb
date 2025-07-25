@@ -57,9 +57,15 @@ namespace fang::chassis
          */
         RPM getFieldRotation() const;
 
-    private:
+    private: 
         static constexpr char* kName{"Chassis tank drive"};
 
+        ///For getFieldTranslation
+        void assertGetFieldTranslationUniformSigns
+        (
+            const math::AbstractVector2D& abstractFieldTranslation,
+            const physics::Velocity2D& fieldTranslation
+        ) const;
         IHolonomicSubsystemControl& holonomicSubsystem_;
         const control::turret::GimbalSubsystem& gimbal_; //We don't want the command to alter the turret state
         ChassisInputHandler& chassisInput_;
