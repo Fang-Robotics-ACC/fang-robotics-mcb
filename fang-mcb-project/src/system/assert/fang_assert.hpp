@@ -21,7 +21,7 @@
          * The file
          * NAME and DESC should be c style strings
          */
-        #define FANG_ASSERT(PASS, DESC)                                               \
+        #define FANG_ASSERT(CONDITION, DESC)                                                \
             {                                                                               \
                 const std::string FANG_ASSERT_FILE{__FILE__};                               \
                 const std::string FANG_ASSERT_LINE{"Line " + std::to_string(__LINE__)};     \
@@ -31,7 +31,7 @@
                     " : " + FANG_ASSERT_LINE +                                              \
                     " : " + DESC                                                            \
                 };                                                                          \
-                modm_assert(PASS, "Danger! Danger!", DESCRIPTION.c_str());                  \
+                modm_assert(CONDITION, "Danger! Danger!", DESCRIPTION.c_str());             \
             }
         #else
             /**
@@ -41,10 +41,10 @@
              * The file
              * NAME and DESC should be c style strings
              */
-            #define FANG_ASSERT(PASS, DESC)                         \
+            #define FANG_ASSERT(CONDITION, DESC)                    \
             {                                                       \
                 std::string name{NAME};                             \
-                assert(PASS && DESC);                               \
+                assert(CONDITION && DESC);                          \
             }
         #endif
     #endif
