@@ -26,4 +26,5 @@ jobs:
           echo wazzzup!!!
       - name: Build
         run: |
+          pipenv install --python 3.8.10
           scons build
