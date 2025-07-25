@@ -87,7 +87,7 @@ namespace fang::motor
     private:
         RPM speed_{0};
         RPM minSpeed_{0};
-        RPM m_maxSpeed;
+        RPM m_maxSpeed{0};
         const Volts mk_controllerInputVoltage;
         const RPM mk_maxTheoreticalSpeed;
         int8_t m_inversionMultiplier;

@@ -35,8 +35,8 @@ namespace fang::motor
         mk_controllerInputVoltage{controllerInputVoltage},
         mk_maxTheoreticalSpeed{mk_kv * mk_controllerInputVoltage},
         m_maxSpeed{mk_maxTheoreticalSpeed},
-        m_vortex{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality},
-        m_inversionMultiplier{inverted && (directionality == Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}}
+        m_inversionMultiplier{inverted && (directionality == Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}},
+        m_vortex{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality}
     {
         switch(directionality)
         {
