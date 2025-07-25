@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_SHURIKEN_CONFIG_PIERCE_HPP
 #define FANG_ROBOTICS_MCB_SHURIKEN_CONFIG_PIERCE_HPP
-#include "control/chassis/shuriken_command.hpp"
-namespace control
+#include "control/chassis/holonomic/command/shuriken_command.hpp"
+namespace fang 
 {
     static const chassis::ShurikenCommand::MotionConfig k_shurikenMotionConfig
     {

@@ -1,4 +1,4 @@
-#include "field_mecanum_command.hpp"
+#include "counter_strike_command.hpp"
 #include "util/math/geometry/rotate_vector_2d.hpp"
 #include "wrap/units/units_alias.hpp"
 
@@ -6,7 +6,7 @@
 
 namespace fang::chassis
 {
-    FieldMecanumCommand::FieldMecanumCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config)
+    CounterStrikeCommand::CounterStrikeCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config)
     :   m_chassisSubsystem{chassisSubsystem},
         m_gimbal{turret},
         m_input{inputHandler},
@@ -15,16 +15,16 @@ namespace fang::chassis
         addSubsystemRequirement(&m_chassisSubsystem);
     }
 
-    const char* FieldMecanumCommand::getName() const
+    const char* CounterStrikeCommand::getName() const
     {
         return mk_name;
     }
 
-    void FieldMecanumCommand::initialize()
+    void CounterStrikeCommand::initialize()
     {
     }
 
-    void FieldMecanumCommand::execute()
+    void CounterStrikeCommand::execute()
     {
         switch(m_controlMode)
         {
@@ -45,15 +45,15 @@ namespace fang::chassis
         }
     }
 
-    void FieldMecanumCommand::end(bool interrupted)
+    void CounterStrikeCommand::end(bool interrupted)
     {}
 
-    bool FieldMecanumCommand::isFinished() const
+    bool CounterStrikeCommand::isFinished() const
     {
         return false;
     }
 
-    void FieldMecanumCommand::executeRemoteTestFieldRotate()
+    void CounterStrikeCommand::executeRemoteTestFieldRotate()
     {
         const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
         const double abstractRotation{m_input.getRotation()};
@@ -65,7 +65,7 @@ namespace fang::chassis
         m_chassisSubsystem.setTargetRotation(rotation);
     }
 
-    void FieldMecanumCommand::executeRemoteTestStrafeTurret()
+    void CounterStrikeCommand::executeRemoteTestStrafeTurret()
     {
 
         const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
@@ -82,9 +82,9 @@ namespace fang::chassis
         m_chassisSubsystem.setTargetRotation(rotation);
     }
 
-    void FieldMecanumCommand::executeKeyboardTestFieldRotate()
+    void CounterStrikeCommand::executeKeyboardTestFieldRotate()
     {}
 
-    void FieldMecanumCommand::executeKeyboardTestStrafeTurret()
+    void CounterStrikeCommand::executeKeyboardTestStrafeTurret()
     {}
 }//namespace fang::chassis

@@ -23,6 +23,8 @@
 
 namespace control
 {
+    using namespace fang;
+
     const Pierce::SubsystemConfig k_pierceSubsytemConfig 
     {
         .chassisConfig  = k_chassisConfig,

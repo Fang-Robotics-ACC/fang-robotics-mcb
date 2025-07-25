@@ -1,8 +1,8 @@
 #ifndef FANG_ROBOTICS_MCB_PIERCE_CONFIG_COMMAND_TARDIS_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_PIERCE_CONFIG_COMMAND_TARDIS_CONFIG_HPP
-#include "control/chassis/tardis_command.hpp"
+#include "control/chassis/holonomic/command/tardis_command.hpp"
 
-namespace control
+namespace fang 
 {
     static const chassis::TardisCommand::MotionConfig k_tardisMotionConfig
     {

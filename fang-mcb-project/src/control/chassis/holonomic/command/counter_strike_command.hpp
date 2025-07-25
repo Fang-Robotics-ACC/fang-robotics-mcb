@@ -12,7 +12,7 @@ namespace fang::chassis
     /**
      * This intermediates the inputs and the mecanum drive 
      */
-    class FieldMecanumCommand: public tap::control::Command
+    class CounterStrikeCommand: public tap::control::Command
     {
     public:
     struct Config
@@ -40,7 +40,7 @@ namespace fang::chassis
         /**
          * This takes a chassis subsystem and the respective inputHandler
          */
-        FieldMecanumCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config);
+        CounterStrikeCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& inputHandler, const Config& config);
         const char* getName() const override;
         void initialize() override;
         void execute() override;
