@@ -43,7 +43,6 @@
              */
             #define FANG_ASSERT(CONDITION, DESC)                    \
             {                                                       \
-                std::string name{NAME};                             \
                 assert(CONDITION && DESC);                          \
             }
         #endif

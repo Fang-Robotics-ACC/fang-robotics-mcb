@@ -95,8 +95,8 @@ namespace fang::chassis
         const bool sameSignCheckX{turretFrameTranslationSigns.x == frameTranslationSigns.x};
         const bool sameSignCheckY{turretFrameTranslationSigns.y == frameTranslationSigns.y};
 
-        FANG_ASSERT(sameSignCheckX, "CounterStrikeCommand.getFieldTraslation.sameSign.x", "Scaling should not invert motion");
-        FANG_ASSERT(sameSignCheckY, "CounterStrikeCommand.getFieldTraslation.sameSign.y", "Scaling should not invert motion");
+        FANG_ASSERT(sameSignCheckX, "Scaling should not invert motion");
+        FANG_ASSERT(sameSignCheckY, "Scaling should not invert motion");
     }
 
     RPM CounterStrikeCommand::getFieldRotation() const
@@ -106,7 +106,7 @@ namespace fang::chassis
         const RPM rotation{abstractRotation * kConfig_.maxRotation};
 
         const bool sameSignCheck{std::signbit(abstractRotation) == std::signbit(static_cast<double>(abstractRotation))};
-        FANG_ASSERT(sameSignCheck, "CounterStrikeCommand.getFieldRotation.sameSign", "Scaling should not invert rotation");
+        FANG_ASSERT(sameSignCheck, "Scaling should not invert rotation");
 
         return rotation;
     }
