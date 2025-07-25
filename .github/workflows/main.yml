@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: docker.io/aruw/mcb-dev:latest
+      options: --user root
       env:
         NODE_ENV: development
     defaults:
