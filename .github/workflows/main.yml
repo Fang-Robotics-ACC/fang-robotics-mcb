@@ -17,6 +17,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
+      - name: Clean python
+        run: |
+          sudo apt remove python3 python -y
       - name: Python Version Install
         uses: actions/setup-python@v5
         with:
@@ -26,5 +29,4 @@ jobs:
           echo wazzzup!!!
       - name: Build
         run: |
-          pipenv install --python 3.8.10
           scons build
