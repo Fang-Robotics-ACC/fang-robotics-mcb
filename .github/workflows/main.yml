@@ -6,6 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: docker.io/aruw/mcb-dev:latest
+    defaults:
+      run:
+        working-directory: home/ubuntu
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
