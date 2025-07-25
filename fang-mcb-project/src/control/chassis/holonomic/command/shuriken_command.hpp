@@ -19,21 +19,14 @@ namespace fang::chassis
     public:
         using MotionConfig = CounterStrikeCommand::Config;
         /**
-         * Remote uses the dji controller.
-         * Keyboard uses the keyboard inputs.
-         * TEST_FIELD_ROTATE = The horizontal right joystick or mouse causes the chassis to rotate.
-         * TEST_STAFE_TURRET = The chassis will only translate, leaving the horizontal mouse or right joystick
-         * input for the turret.
-         */
-        /**
          * Positive shuriken speed is counterclockwise
          *
          * The higher the downscale coefficient, the less it will downscale with respect to speed
          */
         struct Config
         {
+            physics::Velocity2D maxTranslation;
             RPM shurikenSpeed;
-            MotionConfig motionConfig;
             double downscaleCoefficient;
         };
         /**

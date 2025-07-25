@@ -15,11 +15,10 @@ namespace fang::chassis
         const Config& config
     ):
         //MAYBE: Move FPS motion logic to separate class
-        CounterStrikeCommand{holonomicSubsystem, turret, input, config.motionConfig},
+        CounterStrikeCommand{holonomicSubsystem, turret, input, {config.maxTranslation, 0_rpm}},
         mk_config{config},
         mk_downscaler{config.downscaleCoefficient}
     {
-        addSubsystemRequirement(&holonomicSubsystem_);
     }
 
     const char* ShurikenCommand::getName() const
