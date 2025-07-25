@@ -3,7 +3,7 @@ namespace fang::turret
 {
     std::unique_ptr<SimpleFeederSubsystem> M2006SimpleFeederSubsystem::makeUnique(Drivers& drivers, const Config& config)
     {
-        auto feederSystem{M2006SimpleFeederFactory::Make(drivers, {config.feedMotorConfig, config.feederSystemConfig})};
+        auto feederSystem{M2006SimpleFeederFactory::makeUnique(drivers, {config.feedMotorConfig, config.feederSystemConfig})};
         return std::make_unique<SimpleFeederSubsystem>(drivers, std::move(feederSystem), config.feederSubsystemConfig);
     }
 }

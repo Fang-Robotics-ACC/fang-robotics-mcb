@@ -19,7 +19,7 @@ namespace fang::turret
             SimpleFeederSystem::Config   feederConfig;
         };
 
-        static std::unique_ptr<SimpleFeederSystem> Make(Drivers& drivers, const Config& config);
+        static std::unique_ptr<SimpleFeederSystem> makeUnique(Drivers& drivers, const Config& config);
     };
 }
 #endif
