@@ -27,6 +27,7 @@ jobs:
       - name: Environment Setup
         run: |
           echo wazzzup!!!
+          pip install -r requirements.txt
       - name: Build
         run: |
           scons build
