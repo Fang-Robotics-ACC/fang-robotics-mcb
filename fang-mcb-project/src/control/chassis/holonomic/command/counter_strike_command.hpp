@@ -30,7 +30,7 @@ namespace fang::chassis
      */
     struct Config
         {
-            physics::Velocity2D maxTranslationVelocity;
+            physics::Velocity2D maxTranslation;
             RPM maxRotation;
         };
 
@@ -43,6 +43,8 @@ namespace fang::chassis
             const control::turret::GimbalSubsystem& gimbal,
             ChassisInputHandler& inputHandler, const Config& config
         );
+
+        virtual ~CounterStrikeCommand() {};
 
         const char* getName() const override;
         void initialize() override;
@@ -64,19 +66,20 @@ namespace fang::chassis
          */
         RPM getFieldRotation() const;
 
-    private: 
         static constexpr char* kName{"Chassis tank drive"};
 
-        ///For getFieldTranslation
+        IHolonomicSubsystemControl& holonomicSubsystem_;
+        const control::turret::GimbalSubsystem& gimbal_; //We don't want the command to alter the turret state
+        ChassisInputHandler& chassisInput_;
+        const Config& kConfig_;
+
+    private:
+    ///For getFieldTranslation
         void assertGetFieldTranslationUniformSigns
         (
             const math::AbstractVector2D& abstractFieldTranslation,
             const physics::Velocity2D& fieldTranslation
         ) const;
-        IHolonomicSubsystemControl& holonomicSubsystem_;
-        const control::turret::GimbalSubsystem& gimbal_; //We don't want the command to alter the turret state
-        ChassisInputHandler& chassisInput_;
-        const Config& kConfig_;
     };
 }//namespace chassis
 #endif
