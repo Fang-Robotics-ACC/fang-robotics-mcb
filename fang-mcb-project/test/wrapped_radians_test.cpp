@@ -1,4 +1,4 @@
-#include "trap/algorithms/wrapped_radians.hpp"
+#include "wrap/trap/algorithms/wrapped_radians.hpp"
 #include <gtest/gtest.h>
 
 using WrappedRadians = trap::algorithms::WrappedRadians;

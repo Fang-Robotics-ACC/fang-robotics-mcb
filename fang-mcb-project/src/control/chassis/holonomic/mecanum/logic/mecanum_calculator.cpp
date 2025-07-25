@@ -1,7 +1,7 @@
 #include "mecanum_calculator.hpp"
 #include "wrap/units/units_alias.hpp"
 #include <iostream>
-namespace chassis
+namespace fang::chassis
 {
     void MecanumCalculator::setWheelSpeeds(const WheelSpeeds& quadDriveData)
     {

@@ -15,7 +15,6 @@
                 "fang-mcb-project/lib/RAIL-Robomaster-Abstraction-Interface-Library/include",
                 "fang-mcb-project/lib/units/include",
                 "fang-mcb-project/robot-type",
-                "fang-mcb-project/src/wrap",
                 "fang-mcb-project/test",
                 "fang-mcb-project/"
             ],
@@ -45,7 +44,6 @@
                 "fang-mcb-project/lib/RAIL-Robomaster-Abstraction-Interface-Library/include",
                 "fang-mcb-project/lib/units/include",
                 "fang-mcb-project/robot-type",
-                "fang-mcb-project/src/wrap",
                 "fang-mcb-project/"
             ],
             "compilerPath": "arm-none-eabi-g++",

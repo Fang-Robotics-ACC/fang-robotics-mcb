@@ -1,6 +1,6 @@
 #include "abstract_robot_mecanum_logic.hpp"
 
-namespace chassis
+namespace fang::chassis
 {
     void AbstractRobotMecanumLogic::setMotion(const AbstractVelocity2D& translation, double rotationalOffset)
     {

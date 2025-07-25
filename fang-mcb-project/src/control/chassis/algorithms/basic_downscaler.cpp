@@ -1,6 +1,6 @@
 #include "control/chassis/algorithms/basic_downscaler.hpp"
 
-namespace control::chassis
+namespace fang::chassis
 {
     BasicDownscaler::BasicDownscaler(double downscaleCoefficient)
     :   m_downscaleCoefficient{downscaleCoefficient}

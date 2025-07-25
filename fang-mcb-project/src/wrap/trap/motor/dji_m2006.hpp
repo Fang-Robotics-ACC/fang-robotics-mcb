@@ -61,9 +61,6 @@ namespace trap
              */
             mockable void setTargetSpeed(const RPM& targetSpeed) override;
 
-            mockable RPM getTargetSpeed() const override;
-
-
             /**
              * Returns the last reported RPM from CAN
              */

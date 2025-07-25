@@ -4,7 +4,7 @@
 #include "control/chassis/data/physics_alias.hpp"
 #include "control/chassis/drive/quad_drive/data/quad_drive_data.hpp"
 
-namespace chassis
+namespace fang::chassis
 {
     /**
     * This is called Field Mecanum Logic because the frame

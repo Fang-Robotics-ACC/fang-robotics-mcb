@@ -4,6 +4,7 @@
 #include <gtest/gtest.h>
 #include <iostream>
 
+using namespace fang;
 using Calculator = chassis::AbstractMecanumCalculator;
 using Logic = chassis::AbstractRobotMecanumLogic;
 using Translation2D = chassis::AbstractVelocity2D;

@@ -71,18 +71,11 @@ namespace fang::motor
 		mockable void setTargetSpeed(const RPM& speed);
 
         /**
-         * This returns the desired speed, not the actual speed.
-         */
-
-		mockable void setMaxSpeed(const RPM& maxSpeed);
-
-        /**
          * All requests will be clamped to this bound. The default is the maximum
          * theoretical speed which is the motor kv (1450) multiplied by the nominal
          * controller input voltage.
          */
-		mockable RPM getTargetSpeed() const override;
-
+		mockable void setMaxSpeed(const RPM& maxSpeed);
         /**
          * Get the maximum speed which all setTargetSpeed() requests are clamped to
          */

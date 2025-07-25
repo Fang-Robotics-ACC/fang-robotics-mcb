@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_TRAP_ALGORITHMS_RAMP_2D_HPP
 #define FANG_ROBOTICS_MCB_TRAP_ALGORITHMS_RAMP_2D_HPP
-#include "trap/algorithms/ramp.hpp"
+#include "wrap/trap/algorithms/ramp.hpp"
 #include "util/math/linear/vector_alias.hpp"
 #include "util/math/linear/vector_2d.hpp"
 namespace trap::algorithms

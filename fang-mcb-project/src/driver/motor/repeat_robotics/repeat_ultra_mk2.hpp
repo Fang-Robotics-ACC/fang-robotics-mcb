@@ -6,11 +6,11 @@
 #include "wrap/rail/rail_motors.hpp"
 #include "wrap/units/units_alias.hpp"
 
-#include "trap/algorithms/ramp.hpp"
+#include "wrap/trap/algorithms/ramp.hpp"
 
 #include "tap/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
-#include "trap/communication/pwm_data.hpp"
+#include "wrap/trap/communication/pwm_data.hpp"
 
 namespace fang::motor
 {
@@ -54,7 +54,7 @@ namespace fang::motor
         /**
          * This returns the desired speed, not the actual speed.
          */
-		RPM getTargetSpeed() const override;
+		RPM getTargetSpeed() const;
 
         /**
          * All requests will be clamped to this bound. The default is the maximum

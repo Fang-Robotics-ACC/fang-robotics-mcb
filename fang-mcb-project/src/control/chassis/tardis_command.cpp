@@ -4,66 +4,63 @@
 
 #include <cassert>
 
-namespace control
+namespace fang::chassis 
 {
-    namespace chassis
+    TardisCommand::TardisCommand(IHolonomicSubsystemControl& chassisSubsystem, const control::turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config)
+    :   m_chassisSubsystem{chassisSubsystem},
+        m_turret{turret},
+        m_input{input},
+        mk_config{config},
+        mk_motionConfig{config.motionConfig},
+        mk_downscaler{config.downscaleCoefficient},
+        m_razielKalmanShredder{config.razielKalmanShredderConfig}
     {
-        TardisCommand::TardisCommand(ChassisSubsystem& chassisSubsystem, const turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config)
-        :   m_chassisSubsystem{chassisSubsystem},
-            m_turret{turret},
-            m_input{input},
-            mk_config{config},
-            mk_motionConfig{config.motionConfig},
-            mk_downscaler{config.downscaleCoefficient},
-            m_razielKalmanShredder{config.razielKalmanShredderConfig}
-        {
-            m_kalmanTimer.reset();
-            addSubsystemRequirement(&m_chassisSubsystem);
-        }
+        m_kalmanTimer.reset();
+        addSubsystemRequirement(&m_chassisSubsystem);
+    }
 
-        const char* TardisCommand::getName() const
-        {
-            return mk_name;
-        }
+    const char* TardisCommand::getName() const
+    {
+        return mk_name;
+    }
 
-        void TardisCommand::initialize()
-        {
-        }
+    void TardisCommand::initialize()
+    {
+    }
 
-        void TardisCommand::execute()
-        {
-            const physics::Velocity2D fieldTranslation{calcuateFieldTranslation()};
-            const RPM rotation{calculateRotation(fieldTranslation)};
-            m_chassisSubsystem.setMotion(fieldTranslation, rotation);
-        }
+    void TardisCommand::execute()
+    {
+        const physics::Velocity2D fieldTranslation{calcuateFieldTranslation()};
+        const RPM rotation{calculateRotation(fieldTranslation)};
 
-        void TardisCommand::end(bool interrupted)
-        {}
+        m_chassisSubsystem.setTargetTranslation(fieldTranslation);
+        m_chassisSubsystem.setTargetRotation(rotation);
+    }
 
-        bool TardisCommand::isFinished() const
-        {
-            return false;
-        }
+    void TardisCommand::end(bool interrupted)
+    {}
 
-        physics::Velocity2D TardisCommand::calcuateFieldTranslation() const
-        {
-            const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
-            const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
-            const Radians turretBearing{m_turret.getTargetFieldYaw()};
-            const physics::Velocity2D fieldTranslation{math::rotateVector2D(frameTranslation, turretBearing)};
+    bool TardisCommand::isFinished() const
+    {
+        return false;
+    }
 
-            return fieldTranslation;
-        }
+    physics::Velocity2D TardisCommand::calcuateFieldTranslation() const
+    {
+        const math::AbstractVector2D abstractTranslation{m_input.getTranslation()};
+        const physics::Velocity2D frameTranslation{abstractTranslation.x * mk_motionConfig.maxXTranslation, abstractTranslation.y * mk_motionConfig.maxYTranslation};
+        const Radians turretBearing{m_turret.getTargetFieldYaw()};
+        const physics::Velocity2D fieldTranslation{math::rotateVector2D(frameTranslation, turretBearing)};
 
-        RPM TardisCommand::calculateRotation(const physics::Velocity2D fieldTranslation) const
-        {
-            const Seconds now{m_kalmanTimer.getDuration()};
-            const double razielShredderDownscale{m_razielKalmanShredder.getScalingFactor(static_cast<double>(now))};
-            const double downscale{mk_downscaler.getDownscale(fieldTranslation.getMagnitude())};
-            const RPM rotation{mk_config.shurikenSpeed * downscale * razielShredderDownscale};
-            return rotation;
-        }
+        return fieldTranslation;
+    }
 
-
-    }//namespace control
-}//namespace chassis
+    RPM TardisCommand::calculateRotation(const physics::Velocity2D fieldTranslation) const
+    {
+        const Seconds now{m_kalmanTimer.getDuration()};
+        const double razielShredderDownscale{m_razielKalmanShredder.getScalingFactor(static_cast<double>(now))};
+        const double downscale{mk_downscaler.getDownscale(fieldTranslation.getMagnitude())};
+        const RPM rotation{mk_config.shurikenSpeed * downscale * razielShredderDownscale};
+        return rotation;
+    }
+}

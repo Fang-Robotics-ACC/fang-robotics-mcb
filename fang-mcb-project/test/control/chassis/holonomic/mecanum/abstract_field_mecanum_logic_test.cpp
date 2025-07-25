@@ -4,6 +4,7 @@
 
 #include <gtest/gtest.h>
 
+using namespace fang;
 TEST(translationSetterGetterTest, AbstractFieldMecanumLogic)
 {
     //The field translation should be consistent even though

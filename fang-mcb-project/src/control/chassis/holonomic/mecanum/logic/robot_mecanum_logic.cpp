@@ -4,7 +4,7 @@
 #include <cassert>
 
 using namespace units::literals;
-namespace chassis
+namespace fang::chassis
 {
     RobotMecanumLogic::RobotMecanumLogic(const Config& config):
         RobotMecanumLogic(config.horizontalWheelDistance,
