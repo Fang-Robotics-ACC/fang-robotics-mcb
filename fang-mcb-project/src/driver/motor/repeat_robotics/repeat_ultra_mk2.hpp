@@ -85,13 +85,13 @@ namespace fang::motor
         void initialize() override;
         void update() override;
     private:
-        RPM m_speed{0};
-        RPM m_minSpeed{0};
-        tap::Drivers& m_drivers;
+        RPM speed_{0};
+        RPM minSpeed_{0};
+        RPM m_maxSpeed;
+        tap::Drivers& drivers_;
         tap::gpio::Pwm::Pin m_pwmPin;
         const Volts mk_controllerInputVoltage;
         const RPM mk_maxTheoreticalSpeed;
-        RPM m_maxSpeed;
         int8_t m_inversionMultiplier;
         // This was the Repeat Robotics provided value for the ratio between the rpm and the voltage associated with i
         //kv value is ration of rpm per voltage applied to a brushless dc motor
