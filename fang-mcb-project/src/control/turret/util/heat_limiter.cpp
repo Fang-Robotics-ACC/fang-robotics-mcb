@@ -1,5 +1,5 @@
 #include "heat_limiter.hpp"
-namespace control::turret
+namespace fang::turret
 {
     HeatLimiter::HeatLimiter(Referee& referee, const Config& config)
     :   m_referee{referee},

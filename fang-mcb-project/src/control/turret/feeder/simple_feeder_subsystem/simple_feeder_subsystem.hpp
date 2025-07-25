@@ -12,7 +12,7 @@ namespace fang::turret
         virtual public tap::control::Subsystem
     {
     public:
-        using HeatLimiter = control::turret::HeatLimiter;
+        using HeatLimiter = turret::HeatLimiter;
         struct Config
         {
             HeatLimiter::Config heatLimiterConfig;
