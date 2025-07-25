@@ -4,7 +4,7 @@
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/algorithms/basic_downscaler.hpp"
 
-#include "control/chassis/formulae/raziel_kalman_shredder.hpp"
+#include "control/chassis/formulae/azriel_shredder.hpp"
 
 #include "control/turret/gimbal_subsystem.hpp"
 
