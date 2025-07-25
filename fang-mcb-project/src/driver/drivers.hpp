@@ -21,13 +21,12 @@
 #define DRIVERS_HPP_
 #include "tap/drivers.hpp"
 
+
 class Drivers : public tap::Drivers
 {
     friend class DriversSingleton;
 
-#ifdef ENV_UNIT_TESTS
 public:
-#endif
     Drivers() : tap::Drivers{} {}
 
     //prevent copying
