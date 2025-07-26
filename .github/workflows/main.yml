@@ -17,12 +17,13 @@ jobs:
       run:
         working-directory: fang-robotics-mcb/fang-mcb-project
     steps:
+      
       - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Checkout submodules
         run: |
-          cd ..
-          git checkout ${{github.sha}}
-          git submodule update --init --recursive
-          cd fang-mcb-project
+          git submodule update --init ../taproot-scrips
+          git submodule update --init --recurisve .
       - name: Build
         run: |
           scons profile=fast -j 4 ${{ matrix.type }} # 4 is stanard runner core count
