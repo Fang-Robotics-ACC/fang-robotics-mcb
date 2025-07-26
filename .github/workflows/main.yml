@@ -1,18 +1,10 @@
 name: Docker Build and Test
 run-name: Build and Test
-on: [push]
+on:
+  pull_request:
+    branches: ["main", "release/**"]
 jobs:
-  Set-up-Docker:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache docker
-        run: |
-          mkdir -p images
-          cd images
-          docker pull ghcr.io/fang-robotics-acc/fang-robotics-mcb/fang-mcb:v5.0.0
-          docker save ghcr.io/fang-robotics-acc/fang-robotics-mcb/fang-mcb:v5.0.0 | gzip > docker-image.tgz
-  Build-and-Test:
-    needs: Set-up-Docker
+  Test-And-Build-Docker:
     strategy:
       matrix:
         type: [build, run-tests]
@@ -21,10 +13,7 @@ jobs:
     container:
       image: ghcr.io/fang-robotics-acc/fang-robotics-mcb/fang-mcb:v5.0.0
       options: --user root
-    steps:
-      - name: Docker load
-        run: |
-          docker load < image/docker-image.tgz
+    steps:   
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Checkout submodules
@@ -35,7 +24,5 @@ jobs:
           git submodule update --init --recursive fang-mcb-project
       - name: Build
         run: |
-
           cd fang-mcb-project
-          scons profile=fast -j 4 ${{ matrix.type }} # 4 is stanard runner core count
-
+          scons profile=fast -j 4 ${{matrix.type}} #4 is stanard runner core count
