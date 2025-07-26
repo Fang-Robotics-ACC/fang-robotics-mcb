@@ -34,7 +34,7 @@ jobs:
           echo wazzzup!!!
           pip install -r requirements.txt
           apt update
-          apt install libgmock-dev libtest-dev -y
+          apt install libgmock-dev libgtest-dev -y
       - name: Build
         run: |
           scons ${{ matrix.type }}
