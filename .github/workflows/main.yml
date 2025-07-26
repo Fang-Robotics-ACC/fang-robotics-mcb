@@ -9,7 +9,7 @@ jobs:
   Test-And-Build-Docker:
     strategy:
       matrix:
-        type: [build, run-tests]
+        type: [build]
       fail-fast: false
     runs-on: ubuntu-latest
     container:
@@ -34,8 +34,11 @@ jobs:
       - name: Build
         run: |
           cd fang-mcb-project
-          scons profile=debug -j 4 ${{matrix.type}} #4 is stanard runner core count
-          ls
+          scons profile=debug -j 4 build #4 is stanard runner core count
+      - name: Test
+        run: |
+          cd fang-mcb-project
+          scons profile=debug -j 4 test #4 is stanard runner core count
       - name: Update cache
         uses: actions/cache/save@v4
         id: cache
