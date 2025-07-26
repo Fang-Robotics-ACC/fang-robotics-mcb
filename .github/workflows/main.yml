@@ -33,6 +33,7 @@ jobs:
         run: |
           echo wazzzup!!!
           pip install -r requirements.txt
+          apd install libgmock-dev libtest-dev -y
       - name: Build
         run: |
           scons ${{ matrix.type }}
