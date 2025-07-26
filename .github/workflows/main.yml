@@ -47,7 +47,7 @@ jobs:
       - name: Build
         run: |
           cd fang-mcb-project
-          scons profile=fast -j 4 ${{matrix.type}} #4 is stanard runner core count
+          scons profile=debug -j 4 ${{matrix.type}} #4 is stanard runner core count
           ls
       - name: Update cache
         uses: actions/cache/save@v4
