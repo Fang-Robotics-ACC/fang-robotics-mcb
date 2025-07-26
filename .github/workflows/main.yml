@@ -24,7 +24,7 @@ jobs:
         run: |
           git config --global --add safe.directory .
           git config --global --add safe.directory /__w/fang-robotics-mcb/fang-robotics-mcb
-          git submodule update --init taproot-scrips
+          git submodule update --init taproot-scripts
           git submodule update --init --recurisve fang-mcb-project
       - name: Build
         run: |
