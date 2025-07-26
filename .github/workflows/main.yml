@@ -31,6 +31,19 @@ jobs:
         with:
           path: fang-mcb-project/build
           key: ${{ runner.os}}-${{matrix.type}}-${{ hashFiles('**/lockfiles') }}
+      - name: Diagnose cache
+        run: |
+          ls
+          cd fang-mcb-project
+          ls
+          cd build
+          ls
+          cd hardware
+          ls
+          cd scons-debug
+          ls
+          cd src
+          ls
       - name: Build
         run: |
           cd fang-mcb-project
