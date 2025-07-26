@@ -9,32 +9,20 @@ jobs:
       fail-fast: false
     runs-on: ubuntu-latest
     container:
-      image: docker.io/aruw/mcb-2020-gitlab-ci:2021-06-02.1
-      options: --user root
-      env:
-        NODE_ENV: development
+      image: ghcr.io/fang-robotics-acc/fang-robotics-mcb/fang-mcb:v5.0.0
+      #options: --user root
+      #env:
+      # NODE_ENV: development
     defaults:
       run:
-        working-directory: fang-mcb-project
+        working-directory: fang-robotics-mcb/fang-mcb-project
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-      - name: Initialize library
         run: |
-          echo yay!
-      - name: Clean python
-        run: |
-          apt remove python3 -y
-      - name: Python Version Install
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.8.12'
-      - name: Environment Setup
-        run: |
-          echo wazzzup!!!
+          cd ..
+          git checkout ${{github.sha}}
+          git submodule update --init --recursive
+          cd fang-mcb-project
       - name: Build
         run: |
-          pip install -r requirements.txt
-          scons profile=fast -j 10 ${{ matrix.type }}
+          scons profile=fast -j 4 ${{ matrix.type }} # 4 is stanard runner core count
