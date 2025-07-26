@@ -15,8 +15,9 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-        with:
-          submodules: 'recursive'
+      - name: Initialize library
+        run: |
+          git submodule init --recursive .
       - name: Clean python
         run: |
           apt remove python3 -y
