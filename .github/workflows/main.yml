@@ -30,7 +30,7 @@ jobs:
         id: restore-cache
         with:
           path: fang-mcb-project/build
-          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+          key: ${{ runner.os}}-${{matrix.type}}-${{ hashFiles('**/lockfiles') }}
       - name: Build
         run: |
           cd fang-mcb-project
@@ -41,4 +41,4 @@ jobs:
         id: cache
         with:
           path: fang-mcb-project/build
-          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+          key: ${{ runner.os }}-${{matrix.type}}-${{ hashFiles('**/lockfiles') }}
