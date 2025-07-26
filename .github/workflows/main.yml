@@ -29,8 +29,8 @@ jobs:
         uses: actions/cache/restore@v4
         id: restore-cache
         with:
-          path: fang-mcb-project/build
-          key: ${{ runner.os}}-${{matrix.type}}-${{ hashFiles('**/lockfiles') }}
+          path: fang-mcb-project/build_cache
+          key: ${{ runner.os}}-${{matrix.type}}-${{github.sha}}
       - name: Build
         run: |
           cd fang-mcb-project
@@ -40,5 +40,5 @@ jobs:
         uses: actions/cache/save@v4
         id: cache
         with:
-          path: fang-mcb-project/build
-          key: ${{ runner.os }}-${{matrix.type}}-${{ hashFiles('**/lockfiles') }}
+          path: fang-mcb-project/build_cache
+          key: ${{ runner.os }}-${{matrix.type}}-${{github.sha}}
