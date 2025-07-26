@@ -19,7 +19,7 @@ jobs:
           submodules: 'recursive'
       - name: Clean python
         run: |
-          apt remove python3 python -y
+          apt remove python3 -y
       - name: Python Version Install
         uses: actions/setup-python@v5
         with:
