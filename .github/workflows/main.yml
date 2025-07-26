@@ -33,7 +33,7 @@ jobs:
         run: |
           echo wazzzup!!!
           pip install -r requirements.txt
-          pip install gcov
+          pip install gcovr
       - name: Build
         run: |
           scons ${{ matrix.type }}
