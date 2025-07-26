@@ -4,19 +4,13 @@ on: [push]
 jobs:
   Set-up-Docker:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/fang-robotics-acc/fang-robotics-mcb/fang-mcb:v5.0.0
-      options: --user root
     steps:
-      
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - name: Checkout submodules
+      - name: Cache docker
         run: |
-          git config --global --add safe.directory .
-          git config --global --add safe.directory /__w/fang-robotics-mcb/fang-robotics-mcb
-          git submodule update --init taproot-scripts
-          git submodule update --init --recursive fang-mcb-project
+          mkdir -p images
+          cd images
+          docker pull ghcr.io/fang-robotics-acc/fang-robotics-mcb/fang-mcb:v5.0.0
+          docker save ghcr.io/fang-robotics-acc/fang-robotics-mcb/fang-mcb:v5.0.0 | gzip > docker-image.tgz
   Build-and-Test:
     needs: Set-up-Docker
     strategy:
@@ -28,8 +22,20 @@ jobs:
       image: ghcr.io/fang-robotics-acc/fang-robotics-mcb/fang-mcb:v5.0.0
       options: --user root
     steps:
+      - name: Docker load
+        run: |
+          docker load < image/docker-image.tgz
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Checkout submodules
+        run: |
+          git config --global --add safe.directory .
+          git config --global --add safe.directory /__w/fang-robotics-mcb/fang-robotics-mcb
+          git submodule update --init taproot-scripts
+          git submodule update --init --recursive fang-mcb-project
       - name: Build
         run: |
+
           cd fang-mcb-project
           scons profile=fast -j 4 ${{ matrix.type }} # 4 is stanard runner core count
 
