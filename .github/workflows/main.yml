@@ -32,9 +32,9 @@ jobs:
       - name: Environment Setup
         run: |
           echo wazzzup!!!
-          pip install -r requirements.txt
-          pip install gcovr
       - name: Build
         run: |
+          pip install -r requirements.txt
+          python --version
           scons --version
           scons ${{ matrix.type }}
