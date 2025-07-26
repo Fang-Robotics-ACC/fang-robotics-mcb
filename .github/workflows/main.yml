@@ -33,8 +33,7 @@ jobs:
         run: |
           echo wazzzup!!!
           pip install -r requirements.txt
-          apt update
-          apt install libgmock-dev libgtest-dev -y
+          pip install gcov
       - name: Build
         run: |
           scons ${{ matrix.type }}
