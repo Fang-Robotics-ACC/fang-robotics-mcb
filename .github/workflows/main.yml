@@ -13,15 +13,16 @@ jobs:
       options: --user root
       #env:
       # NODE_ENV: development
-    defaults:
-      run:
-        working-directory: fang-robotics-mcb/fang-mcb-project
+    #defaults:
+     # run:
+        # working-directory: fang-robotics-mcb/fang-mcb-project
     steps:
       
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Checkout submodules
         run: |
+          ls
           git submodule update --init ../taproot-scrips
           git submodule update --init --recurisve .
       - name: Build
