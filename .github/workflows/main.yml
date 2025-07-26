@@ -23,8 +23,9 @@ jobs:
       - name: Checkout submodules
         run: |
           ls
-          git submodule update --init ../taproot-scrips
-          git submodule update --init --recurisve .
+          git submodule update --init taproot-scrips
+          git submodule update --init --recurisve fang-mcb-project
       - name: Build
         run: |
+          cd fang-mcb-project
           scons profile=fast -j 4 ${{ matrix.type }} # 4 is stanard runner core count
