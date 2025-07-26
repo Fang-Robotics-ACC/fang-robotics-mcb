@@ -34,11 +34,7 @@ jobs:
       - name: Environment Setup
         run: |
           echo wazzzup!!!
-          apt update
-          apt install pipenv -y
       - name: Build
         run: |
-          pipenv install --python 3.8.12
-          pipenv shell
           pip install -r requirements.txt
           scons ${{ matrix.type }}
