@@ -2,7 +2,9 @@ name: Docker Build and Test
 run-name: Build and Test
 on:
   pull_request:
-    branches: ["main", "release/**"]
+    branches: 
+      - "main"
+      - 'release/**'
 jobs:
   Test-And-Build-Docker:
     strategy:
