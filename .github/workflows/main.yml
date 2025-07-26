@@ -2,20 +2,11 @@ name: Docker Build and Test
 run-name: Build and Test
 on: [push]
 jobs:
-  Test-And-Build-Docker:
-    strategy:
-      matrix:
-        type: [build, run-tests]
-      fail-fast: false
+  Set-up-Docker:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/fang-robotics-acc/fang-robotics-mcb/fang-mcb:v5.0.0
       options: --user root
-      #env:
-      # NODE_ENV: development
-    #defaults:
-     # run:
-        # working-directory: fang-robotics-mcb/fang-mcb-project
     steps:
       
       - name: Check out repository code
@@ -30,3 +21,19 @@ jobs:
         run: |
           cd fang-mcb-project
           scons profile=fast -j 4 ${{ matrix.type }} # 4 is stanard runner core count
+  Build-and-Test:
+    needs: Set-up-Docker
+    strategy:
+      matrix:
+        type: [build, run-tests]
+      fail-fast: false
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/fang-robotics-acc/fang-robotics-mcb/fang-mcb:v5.0.0
+      options: --user root
+    steps:
+      - name: Build
+        run: |
+          cd fang-mcb-project
+          scons profile=fast -j 4 ${{ matrix.type }} # 4 is stanard runner core count
+
