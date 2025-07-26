@@ -40,7 +40,7 @@ jobs:
           ls
           cd hardware
           ls
-          cd scons-debug
+          cd scons-fast
           ls
           cd src
           ls
