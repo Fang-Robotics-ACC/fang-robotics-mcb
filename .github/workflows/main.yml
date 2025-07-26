@@ -37,4 +37,4 @@ jobs:
       - name: Build
         run: |
           pip install -r requirements.txt
-          scons ${{ matrix.type }}
+          scons profile=fast -j ${{ matrix.type }}
