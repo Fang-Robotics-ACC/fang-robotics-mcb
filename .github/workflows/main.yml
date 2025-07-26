@@ -36,4 +36,5 @@ jobs:
           pip install gcovr
       - name: Build
         run: |
+          scons --version
           scons ${{ matrix.type }}
