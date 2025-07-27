@@ -47,7 +47,7 @@ jobs:
           echo ${{github.ref_name}}
       - name: Update cache
         # Do not save cache for pull request, it can take up to 20 seconds
-        if: ${{(github.ref_name == "main") || (contains(github.ref_name, "release/"))}}
+        if: ${{(github.ref_name == 'main') || (contains(github.ref_name, 'release/'))}}
         uses: actions/cache/save@v4
         id: cache
         with:
