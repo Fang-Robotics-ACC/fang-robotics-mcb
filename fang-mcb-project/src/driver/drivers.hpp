@@ -21,33 +21,35 @@
 #define DRIVERS_HPP_
 #include "tap/drivers.hpp"
 
-class Drivers : public tap::Drivers
+namespace fang
 {
-    friend class DriversSingleton;
+    class Drivers : public tap::Drivers
+    {
+        friend class DriversSingleton;
+    
+    public:
+        Drivers() : tap::Drivers{} {}
+    
+        //prevent copying
+        Drivers(const Drivers&) = delete;
+        Drivers& operator=(Drivers&) = delete;
+    
+    public:
+        void initializeIo();
+        void update();
+        void updateIo();
+        /**
+         * These are assocated classes that needs to be
+         * called at the same interval as the motors are updated
+         * (command scheduler should not spam)
+         */
+        void motorTimeoutUpdate();
+    
+        /**
+         * @post The robot will be unable to move
+         */
+        void kill();
+    };  // class Drivers
+}
 
-#ifdef ENV_UNIT_TESTS
-public:
-#endif
-    Drivers() : tap::Drivers{} {}
-
-    //prevent copying
-    Drivers(const Drivers&) = delete;
-    Drivers& operator=(Drivers&) = delete;
-
-public:
-    void initializeIo();
-    void update();
-    void updateIo();
-    /**
-     * These are assocated classes that needs to be
-     * called at the same interval as the motors are updated
-     * (command scheduler should not spam)
-     */
-    void motorTimeoutUpdate();
-
-    /**
-     * @post The robot will be unable to move
-     */
-    void kill();
-};  // class Drivers
 #endif  // DRIVERS_HPP_

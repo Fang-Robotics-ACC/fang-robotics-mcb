@@ -1,7 +1,7 @@
 #include "util/math/linear/matrix_alias.hpp"
 #include "wrap/units/units_alias.hpp"
 #include <math.h>
-namespace math
+namespace fang::math
 {
     Matrix<2, 2> rotationMatrix2D(const Radians& angle)
     {

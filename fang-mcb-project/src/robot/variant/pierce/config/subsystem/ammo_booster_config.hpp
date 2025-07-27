@@ -6,10 +6,10 @@
 
 #include "units.h"
 
-namespace control
+namespace fang::robot 
 {
-    using AmmoBooster = control::turret::AmmoBoosterSystem;
-    using Flywheel = control::turret::OldFlywheelSystem;
+    using AmmoBooster = turret::AmmoBoosterSystem;
+    using Flywheel = turret::OldFlywheelSystem;
 
     using namespace units::literals;
 

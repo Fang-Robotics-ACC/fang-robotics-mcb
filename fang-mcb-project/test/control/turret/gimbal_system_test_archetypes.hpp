@@ -3,6 +3,7 @@
 #include "control/turret/system/gimbal_system.hpp"
 namespace test
 {
+    using namespace fang;
     /**
      * This class is to simply provide private member access to multiple test classes
      * So that we can have variants
@@ -10,7 +11,7 @@ namespace test
     class GimbalSystemTest
     {
     public:
-        using GimbalSystem = control::turret::GimbalSystem;
+        using GimbalSystem = fang::turret::GimbalSystem;
         using PositionMotor = GimbalSystem::PositionMotor;
 
         GimbalSystemTest(const GimbalSystem::Config& config) : gimbalSystem{drivers, config} {}

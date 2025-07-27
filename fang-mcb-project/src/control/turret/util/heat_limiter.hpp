@@ -5,7 +5,7 @@
 #include "tap/communication/serial/ref_serial.hpp"
 
 #include <inttypes.h>
-namespace control::turret
+namespace fang::turret
 {
     class HeatLimiter
     {

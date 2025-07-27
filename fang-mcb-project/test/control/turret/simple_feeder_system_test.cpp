@@ -6,6 +6,7 @@
 #include <tuple>
 
 using namespace units::literals;
+using namespace fang;
 
 namespace test
 {

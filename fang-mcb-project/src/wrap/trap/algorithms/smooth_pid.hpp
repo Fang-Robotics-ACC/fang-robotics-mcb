@@ -61,7 +61,7 @@ namespace trap
             tap::algorithms::SmoothPid m_smoothPid;
             ErrorType m_lastError{0};
             double m_lastDerivative{0};
-            chrono::SimpleTimer m_runControllerTimer{};
+            fang::chrono::SimpleTimer m_runControllerTimer{};
         };
 
     }

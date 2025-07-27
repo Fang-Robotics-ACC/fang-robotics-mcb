@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_TURRET_ID_HPP
 #define FANG_ROBOTICS_MCB_TURRET_ID_HPP
-namespace control::turret
+namespace fang::turret
 {
     enum class TurretId
     {

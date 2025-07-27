@@ -6,16 +6,17 @@
 
 #include "control/turret/gimbal_subsystem.hpp"
 #include "control/turret/feeder/simple_feeder_subsystem/simple_feeder_subsystem.hpp"
-#include "control/turret/feeder/simple_feeder_subsystem/m2006_simple_feeder_subsystem_factory.hpp"
+#include "control/turret/feeder/simple_feeder_subsystem/m2006_simple_feeder_subsystem.hpp"
 #include "control/turret/ammo_booster_subsystem.hpp"
 
 //Input handlers
 #include "control/turret/turret_input_handler.hpp"
+#include "control/chassis/chassis_input_handler.hpp"
 
 //Commands
-#include "control/chassis/field_mecanum_command.hpp"
-#include "control/chassis/shuriken_command.hpp"
-#include "control/chassis/tardis_command.hpp"
+#include "control/chassis/holonomic/command/counter_strike_command.hpp"
+#include "control/chassis/holonomic/command/shuriken_command.hpp"
+#include "control/chassis/holonomic/command/tardis_command.hpp"
 
 #include "control/turret/command/aim_command.hpp"
 #include "control/turret/command/activate_booster_command.hpp"
@@ -27,9 +28,7 @@
 #include "tap/control/press_command_mapping.hpp"
 #include "tap/control/hold_command_mapping.hpp"
 
-using namespace fang;
-
-namespace control
+namespace fang::robot
 {
     /**
      * First Fang: Pierce
@@ -43,7 +42,7 @@ namespace control
         {
             chassis::ChassisSubsystem::ChassisConfig chassisConfig;
             turret::GimbalSubsystem::Config gimbalConfig;
-            fang::turret::M2006SimpleFeederSubsystemFactory::Config feederConfig;
+            fang::turret::M2006SimpleFeederSubsystem::Config feederConfig;
             turret::AmmoBoosterSubsystem::Config boosterConfig;
         };
 
@@ -56,7 +55,7 @@ namespace control
         struct CommandConfig
         {
             turret::AimCommand::Config aimCommandConfig;
-            chassis::FieldMecanumCommand::Config fieldMecanumConfig;
+            chassis::CounterStrikeCommand::Config fieldMecanumConfig;
             chassis::ShurikenCommand::Config shurikenConfig;
             chassis::TardisCommand::Config tardisConfig;
         };
@@ -124,7 +123,7 @@ namespace control
         tap::control::HoldCommandMapping m_unjamCommandMap{&m_drivers, {&m_unjamCommand}, kMappingConfig_.mouseUnjam};
         tap::control::HoldCommandMapping m_unjamCommandMapRemote{&m_drivers, {&m_unjamCommand}, kMappingConfig_.remoteUnjam};
 
-        chassis::FieldMecanumCommand m_fieldMecanumCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.fieldMecanumConfig};
+        chassis::CounterStrikeCommand m_fieldMecanumCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.fieldMecanumConfig};
         chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.shurikenConfig};
         chassis::TardisCommand m_tardisCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.tardisConfig};
 

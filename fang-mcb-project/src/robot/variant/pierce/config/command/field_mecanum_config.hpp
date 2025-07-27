@@ -1,15 +1,13 @@
 #ifndef FANG_ROBOTICS_MCB_PIERCE_FIELD_MECANUM_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_PIERCE_FIELD_MECANUM_CONFIG_HPP
-#include "control/chassis/field_mecanum_command.hpp"
-namespace control
+#include "control/chassis/holonomic/command/counter_strike_command.hpp"
+
+namespace fang::robot
 {
-    static const chassis::FieldMecanumCommand::Config k_fieldMecanumConfig 
+    static const chassis::CounterStrikeCommand::Config k_fieldMecanumConfig 
     {
-        10_mph, //max translation - for turret based strafe
-        6.5_mph, //maxXtranslation
-        6.5_mph, //maxYTranslatioon
-        100_rpm, //maxRotation
-        0.5_deg //maxAngularDisplacement
+        .maxTranslation = {6.5_mph, 6.5_mph},
+        .maxRotation    = 100_rpm,
     };
 }
 

@@ -1,6 +1,6 @@
 #include "simple_timer.hpp"
 #include "modm/architecture/interface/clock.hpp"
-namespace chrono
+namespace fang::chrono
 {
     SimpleTimer::SimpleTimer()
     {

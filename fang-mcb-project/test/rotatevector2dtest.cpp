@@ -11,6 +11,8 @@
 //Counterrotation error is around 1e-10
 const double k_tolerance{1e-10};
 
+//HACK
+using namespace fang;
 TEST(RotateVector2D, counterClockwise)
 {
     {

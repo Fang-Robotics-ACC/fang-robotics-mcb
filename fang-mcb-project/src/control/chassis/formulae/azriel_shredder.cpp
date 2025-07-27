@@ -1,10 +1,10 @@
-#include "raziel_kalman_shredder.hpp"
+#include "azriel_shredder.hpp"
 
 #include <numbers>
 #include <math.h>
 namespace fang::chassis
 {
-    double RazielKalmanShredder::razielKalmanShredder(double input, double biteDepth, int biteForce,  double period, double phase)
+    double AzrielShredder::razielKalmanShredder(double input, double biteDepth, int biteForce,  double period, double phase)
     {
         //https://www.desmos.com/calculator/e19d96ky1e
 
@@ -24,7 +24,7 @@ namespace fang::chassis
         return scalingShredFactor;
     }
 
-    RazielKalmanShredder::RazielKalmanShredder(const Config& config)
+    AzrielShredder::AzrielShredder(const Config& config)
     :   m_biteDepth{config.biteDepth},
         m_biteForce{config.biteForce},
         m_period{config.period},
@@ -32,27 +32,27 @@ namespace fang::chassis
     {
     }
 
-    void RazielKalmanShredder::setBiteDepth(double biteDepth)
+    void AzrielShredder::setBiteDepth(double biteDepth)
     {
         m_biteDepth = biteDepth;
     }
 
-    void RazielKalmanShredder::setBiteForce(int biteForce)
+    void AzrielShredder::setBiteForce(int biteForce)
     {
         m_biteForce = biteForce;
     }
 
-    void RazielKalmanShredder::setPeriod(double period)
+    void AzrielShredder::setPeriod(double period)
     {
         m_period = period;
     }
 
-    void RazielKalmanShredder::setPhase(double phase)
+    void AzrielShredder::setPhase(double phase)
     {
         m_phase = phase;
     }
 
-    double RazielKalmanShredder::getScalingFactor(double input) const
+    double AzrielShredder::getScalingFactor(double input) const
     {
         return razielKalmanShredder(input, m_biteDepth, m_biteForce, m_period, m_phase);
     }

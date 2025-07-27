@@ -3,7 +3,7 @@
 #include <cassert>
 #include <cmath>
 
-namespace math
+namespace fang::math
 {
     CoolLerp::CoolLerp(const Vector2D& dataPoint1, const Vector2D& dataPoint2)
     : mk_dataPoint1{dataPoint1}, mk_dataPoint2{dataPoint2}, mk_input_range{dataPoint2.x - dataPoint1.x}

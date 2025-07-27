@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_MATH_COOL_LERP_HPP
 #define FANG_ROBOTICS_MCB_MATH_COOL_LERP_HPP
 #include "util/math/linear/vector_2d.hpp"
-namespace math
+namespace fang::math
 {
     /**
      * This interpolates arbitrary values between two datapoints
