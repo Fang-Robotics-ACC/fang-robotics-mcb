@@ -48,7 +48,7 @@ namespace fang::chassis
         const Radians&getRobotAngle() const;
         const Velocity2D& getTranslation() const;
         RPM getRotation() const;
-        WheelSpeeds getWheelSpeeds() const;
+        QuadRPM getWheelSpeeds() const;
     private:
         RPM getFrontRightWheelSpeed() const;
         RPM getFrontLeftWheelSpeed() const;

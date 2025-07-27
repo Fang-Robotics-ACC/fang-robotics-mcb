@@ -5,8 +5,8 @@
 
 namespace fang::chassis
 {
-    using AbstractWheelSpeeds = QuadDriveData<double>;
-    using WheelSpeeds = QuadDriveData<RPM>;
-    using QuadDriveWheelSpeedsRadPersec = QuadDriveData<RadiansPerSecond>;
+    using AbstractQuadSpeeds = QuadDriveData<double>;
+    using QuadRPM = QuadDriveData<RPM>;
+    using QuadSpeedsRadPersec = QuadDriveData<RadiansPerSecond>;
 }
 #endif

@@ -2,7 +2,7 @@
 
 namespace fang::chassis
 {
-    void AbstractMecanumCalculator::setWheelSpeeds(const AbstractWheelSpeeds& quadDriveData)
+    void AbstractMecanumCalculator::setWheelSpeeds(const AbstractQuadSpeeds& quadDriveData)
     {
         quadDriveData_ = quadDriveData;
     }

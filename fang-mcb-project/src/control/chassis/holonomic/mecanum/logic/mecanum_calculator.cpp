@@ -3,7 +3,7 @@
 #include <iostream>
 namespace fang::chassis
 {
-    void MecanumCalculator::setWheelSpeeds(const WheelSpeeds& quadDriveData)
+    void MecanumCalculator::setWheelSpeeds(const QuadRPM& quadDriveData)
     {
         //The input is in RPM; however, the implementation needs the angular velocity in radians
         //This is a quick fix. A more proper way to do this is to add operator overloads for the templates

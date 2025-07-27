@@ -71,7 +71,7 @@ namespace fang::chassis
         return math::rotateVector2D(translation, robotAngle_);
     }
 
-    AbstractWheelSpeeds AbstractFieldMecanumLogic::getWheelSpeeds() const
+    AbstractQuadSpeeds AbstractFieldMecanumLogic::getWheelSpeeds() const
     {
         return robotwiseMecanumLogic_.getWheelSpeeds();
     }
