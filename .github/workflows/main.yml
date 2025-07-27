@@ -9,7 +9,7 @@ jobs:
   Test-And-Build-Docker:
     strategy:
       matrix:
-        type: [build, run-tests]
+        type: [build]
       fail-fast: false
     runs-on: ubuntu-latest
     container:
@@ -24,7 +24,26 @@ jobs:
           git config --global --add safe.directory /__w/fang-robotics-mcb/fang-robotics-mcb
           git submodule update --init taproot-scripts
           git submodule update --init --recursive fang-mcb-project
+          ls
+      - name: Restore cache
+        uses: actions/cache/restore@v4
+        id: restore-cache
+        with:
+          path: fang-mcb-project/build_cache
+          key: ${{ runner.os}}-${{matrix.type}}-${{github.sha}}
+          restore-keys: |
+            ${{ runner.os}}-${{matrix.type}}
       - name: Build
         run: |
           cd fang-mcb-project
-          scons profile=fast -j 4 ${{matrix.type}} #4 is stanard runner core count
+          scons profile=debug -j 4 build #4 is stanard runner core count
+      - name: Test
+        run: |
+          cd fang-mcb-project
+          scons profile=debug -j 4 run-tests #4 is stanard runner core count
+      - name: Update cache
+        uses: actions/cache/save@v4
+        id: cache
+        with:
+          path: fang-mcb-project/build_cache
+          key: ${{ runner.os }}-${{matrix.type}}-${{github.sha}}
