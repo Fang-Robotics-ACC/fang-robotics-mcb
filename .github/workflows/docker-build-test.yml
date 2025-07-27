@@ -42,6 +42,9 @@ jobs:
         run: |
           cd fang-mcb-project
           scons profile=debug -j 4 run-tests #4 is stanard runner core count
+      - name: branch diagnostic
+        run: |
+          echo ${{github.ref_name}}
       - name: Update cache
         # Do not save cache for pull request, it can take up to 20 seconds
         if: 1 == 0 #(${{github.ref_name}} == "main" )|| contains(${{github.ref_name}}, "release/")
