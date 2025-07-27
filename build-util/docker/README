@@ -1,0 +1,37 @@
+A docker container is a mini os usually with software installed to build a gievn piece of source code. 
+You can yeet these tiny os's around the internet so people can compile it without having to do commands
+or other computers, too, such as with Github Actions to auto-test proposed changes before they become cannon.
+
+We use github actions which are triggered by an event such as a pull request. The github computers automatically
+attempt to compile the code and run the tests, and then give us if it went well... or not ^_^
+
+You'll have to update the .github/workflow/build-test.yaml for the new name!
+
+To make
+```
+make
+```
+
+To tag
+```
+./ghcr-tag.sh v5.0.0
+```
+Tagging scheme
+{release version made}-v{container number}
+So when we move to v5.0.1
+we will still use v5.0.0-v2
+But then the next versions will be 
+v5.0.1-v1
+v5.0.1-v2
+v5.0.1-v3
+and so on
+
+To upload (log into docker.ghcr.io)
+```
+docker push g # press tab for autocomplete
+docker push ghcr.io/fang-robotics-acc/fang-robotics-mcb:VERSION
+docker push ghcr.io/fang-robotics-acc/fang-robotics-mcb:v5.0.0-v2
+```
+
+For more info
+https://medium.com/devopsturkiye/pushing-docker-images-to-githubs-registry-manual-and-automated-methods-19cce3544eb1
