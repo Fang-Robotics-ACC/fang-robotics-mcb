@@ -88,13 +88,19 @@ bloated or tangled up. Or robots using new motors without havin to gut code
 variables, and have no unit tests. **Great for continuous integration
 reference!**
 
-**How to truly understand taproot: It feels tedioius or stupid, but if you do
-this, it all makes sense. It's like seeing someone fish vs fishing yourself:**
+**How to truly understand taproot: No matter how experienced you are, even if
+it feels tedious or stupid, but if you do this, it will all make sense. It's
+like seeing someone fish saying "I can fish" vs fishing yourself. We will not
+give direct help on fang-robotics-mcb until you have proven completion of this
+tutorial. All you questions will be answered here. Even our 1st Lead Dev, Raven
+Asher Raziel, had to do this before he got taproot:**
 - [Tank Drive
   Tutorial](https://aruw.gitlab.io/controls/aruw-edu/tutorials/1_tank_drive.html):
 Do this in order to understand the boilerplate. When using the template
 project, make the robot instance static or a static global variable to prevent
-stack overflow. At the tutorial scale, this is not much of an issue.
+stack overflow. At the tutorial scale, this is not much of an issue. Don't
+worry about the agitator unless you want to gain a deeper understanding of PID.
+Do the command mapping and robot selection, too.
 
 Check CONTRIBUTING for our coding standards/conventions.
 
