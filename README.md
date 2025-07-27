@@ -66,19 +66,22 @@ what's there.**
 
 ## New user guide
 ### UBUNTU Automatic setup and build method command line
-Use ubuntu or windows wsl for ubuntu
-
+Use ubuntu or windows wsl for ubuntu:
 ```
 cd github #go to you documents folder or wherever you place github repos
 ```
 
-If you do not have push access and want to test build
-If you want to contribute but do not have write access,
-make a fork and replace the url with your fork
+If you do not have push access and want to test build:
+
+```
 git clone https://github.com/Fang-Robotics-ACC/fang-robotics-mcb.git 
+```
+(If you want to contribute but do not have write access,
+make a fork and replace the url with your fork)
 
 
-If you have push access
+If you have push access:
+
 ```
 git clone git@github.com:Fang-Robotics-ACC/fang-robotics-mcb.git
 ```
@@ -95,7 +98,7 @@ cd fang-robotics-mcb/build-util/environment-setup-scripts
 ```
 
 It might prompt you for consent from time to time especially
-with python. The script will modify your ~/.bashrc
+with Python. The script will modify your ~/.bashrc
 If it fails, check the script for any variable modifications.
 It will add a custom compiler under ~/.local/share/
 
@@ -125,7 +128,7 @@ Robot type needs tobe changed for vscode but DO NOT commit the hardcoded robot t
 
 The debug profile is the most used. It has assertion statements to detect runtime bugs.
 ```
-scons profile=debug robot=
+scons profile=debug robot=NAME
 ```
 
 ### Vscode
