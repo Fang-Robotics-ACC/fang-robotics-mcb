@@ -12,5 +12,5 @@ echo 'export PATH="$HOME/gcc-arm-none-eabi-10.3-2021.10/bin:$HOME/.local/bin:$PA
 source ~/.bashrc
 curl -fsSL https://pyenv.run | bash
 pyenv install 3.8.10
-cd ../fang-mcb-project
+cd ../../fang-mcb-project
 pipenv install --python 3.8.10
