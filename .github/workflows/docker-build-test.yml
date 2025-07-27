@@ -30,7 +30,7 @@ jobs:
         id: restore-cache
         with:
           path: fang-mcb-project/build_cache
-          key: ${{ runner.os}}-${{matrix.type}}-${{github.sha}}
+          key: none
           restore-keys: |
             ${{runner.os}}-${{matrix.type}}-
       - name: Build
