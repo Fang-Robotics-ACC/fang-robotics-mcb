@@ -128,7 +128,7 @@ and unit tested to the point where assertions will not fail.
 
 The default robot is standard, follow the prompts to choose a different one.
 Robot type needs tobe changed for vscode but DO NOT commit the hardcoded robot
-type please
+type please.
 
 The debug profile is the most used. It has assertion statements to detect runtime bugs.
 
