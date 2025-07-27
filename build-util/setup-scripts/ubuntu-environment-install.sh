@@ -11,6 +11,7 @@ sudo apt install build-essential libreadline-dev libncursesw5-dev \
 libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev \
 libffi-dev zlib1g-dev liblzma-dev -y
 
+#Custom embedded compiler
 wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
 tar -xf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
 rm gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
@@ -19,6 +20,7 @@ mkdir -p ~/.local/share
 mv gcc-arm-none-eabi-10.3-2021.10 ~/.local/share
 echo 'export PATH="$HOME/gcc-arm-none-eabi-10.3-2021.10/bin:$HOME/.local/bin:$PATH:$PATH"' >> ~/.bashrc
 
+#Python version manager (read below)
 curl -fsSL https://pyenv.run | bash
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
