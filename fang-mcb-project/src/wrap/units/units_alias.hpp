@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_WRAP_UNITS_UNIT_ALIAS_HPP
 #include "units.h"
 
-//In order given as https://github.com/nholthaus/units?tab=readme-ov-file#namespaces
+//In order given in: https://github.com/nholthaus/units?tab=readme-ov-file#namespaces
 // Length
 using Meters = units::length::meter_t;
 using RawMeters = units::length::meters;
