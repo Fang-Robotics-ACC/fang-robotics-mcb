@@ -55,10 +55,4 @@ using RPMPerVolt = units::unit_t<RawRPMPerVolt>;
 // "How many meters per radians" (meters/radians) * (radins / second) = meters/second?"
 using RawMetersPerRadians = units::compound_unit<RawMeters, units::inverse<RawRadians>>;
 using MetersPerRadians = units::unit_t<RawMetersPerRadians>;
-
-//Potentially deprecated
-using RawRadianMeters = units::compound_unit<units::angle::radians, units::length::meters>;
-using RawRadianMetersPerSecond = units::compound_unit<RawRadianMeters, units::inverse<units::time::seconds>>;
-using RadianMeters = units::unit_t<RawRadianMeters>;
-using RadianMetersPerSecond = units::unit_t<RawRadianMetersPerSecond>;
 #endif
