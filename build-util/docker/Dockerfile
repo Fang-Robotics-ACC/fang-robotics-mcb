@@ -1,6 +1,6 @@
 FROM python:3.8-alpine
 WORKDIR /root
-RUN apk add gcompat build-base git openocd gcc boost openocd stlink wget --no-cache
+RUN apk add gcompat tar build-base git openocd gcc boost openocd stlink wget --no-cache && apk clean
 #NOTE: DO NOT REFACTOR. THIS IS COMING FROM THE LEAD REFACTOR DEV, EACH RUN CREATES A LAYER, IF A LAYER DOESN'T CLEAN UP AFTER ITSELF, DOCKER WILL ADD THE LAYER EVEN IF YOU REMOVE THE FILE THE NEXT LAYER. WE ARE USING SH SO WE DON'T INSTALL BASH.
 # WE ARE NOT MESSING WITH FLATTENERS FOR THE TIME BEING
 # We are stuck with chaining && as you can see
