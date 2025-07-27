@@ -11,6 +11,10 @@ mv gcc-arm-none-eabi-10.3-2021.10 ~/.local/share
 echo 'export PATH="$HOME/gcc-arm-none-eabi-10.3-2021.10/bin:$HOME/.local/bin:$PATH:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 curl -fsSL https://pyenv.run | bash
+echo 'export PYENV_ROOT="$HOME/.pyenv' >> ~/.bashrc
+echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init - bash)"' >> ~/.bashrc
+
 pyenv install 3.8.10
 cd ../../fang-mcb-project
 pipenv install --python 3.8.10
