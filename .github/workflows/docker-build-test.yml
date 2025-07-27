@@ -1,4 +1,4 @@
-name: Docker Build and Test
+name: Docker Build and Test  
 run-name: Test and Build ^_^
 on:
   workflow_dispatch:
@@ -27,9 +27,8 @@ jobs:
         id: restore-cache
         with:
           path: fang-mcb-project/build_cache
-          key: none
-          restore-keys: |
-            ${{runner.os}}-build-
+          key: ${{runner.os}}-build- #Get latest version instead
+          # restore-keys: |
       - name: Build
         run: |
           cd fang-mcb-project
@@ -43,4 +42,4 @@ jobs:
         id: cache
         with:
           path: fang-mcb-project/build_cache
-          key: ${{ runner.os }}-build-${{github.sha}}
+          key: ${{runner.os}}-build-${{github.sha}}
