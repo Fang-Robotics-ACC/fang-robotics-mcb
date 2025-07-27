@@ -57,12 +57,43 @@ member or not—enjoy exploring and extending this code!
 
 ## Resources
 
-- **The [Taproot wiki](https://gitlab.com/aruw/controls/taproot/-/wikis/home). It has lots of content and we strongly recommend you browse through it to get a sense of
-what's there.**
-- [aruw-edu](https://gitlab.com/aruw/controls/aruw-edu): a hands-on tutorial for building robot code with Taproot
-- [aruw-mcb](https://gitlab.com/aruw/controls/aruw-mcb), ARUW's full robot code project available for reference
-- The [generated API documentation for Taproot](https://aruw.gitlab.io/controls/taproot/)
+- **The [Taproot wiki](https://gitlab.com/aruw/controls/taproot/-/wikis/home).
+  It has lots of content and we strongly recommend you browse through it to get
+a sense of what's there.**
+- [aruw-edu](https://gitlab.com/aruw/controls/aruw-edu): a hands-on tutorial
+  for building robot code with Taproot
+- [aruw-mcb](https://gitlab.com/aruw/controls/aruw-mcb), ARUW's full robot code
+  project available for reference DO NOT USE, UW devs told us not to. It is not
+organized for ease of understanding. Check below for their recommendations for
+understanding taproot syntax/organization.
+- The [generated API documentation for
+  Taproot](https://aruw.gitlab.io/controls/taproot/)
 - The [modm website](https://modm.io/) and associated documentation
+
+**Other Taproot syntax references**
+
+Note: Do not refer to these completely for
+code architecture/conventions, only for taroot. We love these teams, they are
+our friends, but we have chosen code architecture with flexbility and
+modularity in mind as we intend to do 7v7 in the near future. This repo must
+support 7 robots without getting bloated or tangled up.
+
+- [tamu-aimbots](https://github.com/TAMU-Robomasters/aimbots-dev): 2nd most
+  organized repo. Some SRP violations but overall high quality code.
+- [ut-ras](https://github.com/ut-ras/robomaster/tree/develop/ut-robomaster):
+  3rd most organized repo. They use some macro hacks, global robot config
+variables, and have no unit tests. **Great for continuous integration
+reference!**
+
+**How to truly understand taproot: It feels tedioius or stupid, but if you do
+this, it all makes sense. It's like seeing someone fish vs fishing yourself:**
+- [Tank Drive
+  Tutorial](https://aruw.gitlab.io/controls/aruw-edu/tutorials/1_tank_drive.html):
+Do this in order to understand the boilerplate. When using the template
+project, make the robot instance static or a static global variable to prevent
+stack overflow. At the tutorial scale, this is not much of an issue.
+
+Check CONTRIBUTING for our coding standards/conventions.
 
 ## New user guide
 ### UBUNTU Automatic setup and build method command line
