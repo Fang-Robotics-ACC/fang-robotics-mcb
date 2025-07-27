@@ -1,6 +1,9 @@
 name: Docker Build and Test  
 run-name: Test and Build ^_^
 on:
+  schedule:
+    # Update release branch cache at mid-day and verify integrity
+    - cron: "0 12 * * *"
   workflow_dispatch:
   pull_request:
     branches: 
