@@ -36,3 +36,4 @@ source ~/.bashrc
 pyenv install 3.8.10
 cd ../../fang-mcb-project
 pipenv install --python ~/.pyenv/versions/3.8.10/bin/python3
+pipenv run pip install -r requirements.txt
