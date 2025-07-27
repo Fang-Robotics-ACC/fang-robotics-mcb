@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/fang-robotics-acc/fang-robotics-mcb/fang-mcb:v5.0.0-2
+      image: ghcr.io/fang-robotics-acc/fang-robotics-mcb:v5.0.0-2
       options: --user root
     steps:   
       - name: Check out repository code
