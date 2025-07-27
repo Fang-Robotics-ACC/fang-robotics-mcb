@@ -111,22 +111,29 @@ pipenv shell # This must be run under the project directory
 scons profile=debug -j 12 build #-j is how many parallel jobs
 ```
 
-To run unit tests - these allowed us to write a thousands of lines of code without
-an actual mcb. Although we had some bugs, the complex higher level functionality worked
-outside of the box.
+To run unit tests:
 
 ```
 scons profile=debug -j 12 run-tests #-j is how many parallel jobs
 ```
 
-In competition rounds, profile=release is used to prevent crashing the robot even if an error occurs
-at risk of the robot flailing around. A failed assertion requires a full power cycle or new flash.
-The robot should be tested and unit tested to the point where assertions will not fail.
+These allowed us to write a thousands of lines of code for months without an
+actual mcb. Although we had some bugs, the complex higher level functionality
+worked outside of the box.
+
+In competition rounds, profile=release is used to prevent crashing the robot
+even if an error occurs at risk of the robot flailing around. A failed
+assertion requires a full power cycle or new flash.  The robot should be tested
+and unit tested to the point where assertions will not fail.
 
 The default robot is standard, follow the prompts to choose a different one.
-Robot type needs tobe changed for vscode but DO NOT commit the hardcoded robot type please
+Robot type needs tobe changed for vscode but DO NOT commit the hardcoded robot
+type please
 
 The debug profile is the most used. It has assertion statements to detect runtime bugs.
+
+To select a robot (Pierce is default):
+
 ```
 scons profile=debug robot=NAME
 ```
