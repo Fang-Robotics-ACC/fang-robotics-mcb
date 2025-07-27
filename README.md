@@ -72,11 +72,14 @@ understanding taproot syntax/organization.
 
 **Other Taproot syntax references**
 
-Note: Do not refer to these completely for
-code architecture/conventions, only for taroot. We love these teams, they are
-our friends, but we have chosen code architecture with flexbility and
-modularity in mind as we intend to do 7v7 in the near future. This repo must
-support 7 robots without getting bloated or tangled up.
+Note: Do not refer to these completely for code architecture/conventions, only
+for taproot. We love these teams, they are our friends, we do not have any beef
+nor desire to start beef with criticizing codes. Nevertheless, we have our
+style, they have theirs. We have chosen code architecture with flexbility and
+modularity (isolating performance hacks only when needed) in mind as we intend
+to do 7v7 in the near future. This repo must support 7 robots without getting
+bloated or tangled up. Or robots using new motors without havin to gut code
+(proper dependency injection makes coding feel like legos)
 
 - [tamu-aimbots](https://github.com/TAMU-Robomasters/aimbots-dev): 2nd most
   organized repo. Some SRP violations but overall high quality code.
