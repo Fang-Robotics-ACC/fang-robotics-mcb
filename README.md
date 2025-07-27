@@ -83,7 +83,7 @@ If you have push access
 git clone git@github.com:Fang-Robotics-ACC/fang-robotics-mcb.git
 ```
 
-(you can use use git clone --recurive, but this method is shown
+(You can use use git clone --recurive, but this method is shown
 because if you switch to a commit with different submodule versions
 you must run that git submodule from likely the root directory
 if you type git status, it will list which submodules are out of sync)
@@ -108,7 +108,9 @@ pipenv shell # This must be run under the project directory
 scons profile=debug -j 12 build #-j is how many parallel jobs
 ```
 
-To run unit tests:
+To run unit tests - these allowed us to write a thousands of lines of code without
+an actual mcb. Although we had some bugs, the complex higher level functionality worked
+outside of the box.
 
 ```
 scons profile=debug -j 12 run-tests #-j is how many parallel jobs
@@ -124,6 +126,7 @@ Robot type needs tobe changed for vscode but DO NOT commit the hardcoded robot t
 The debug profile is the most used. It has assertion statements to detect runtime bugs.
 ```
 scons profile=debug robot=
+```
 
 ### Vscode
 YOU MUST START IT FROM THE ROOT DIRECTORY (fang-robotics-mcb)
@@ -132,11 +135,7 @@ if you do not, then the .vscode folder will NOT be parsed
 cd fang-robotics-mcb
 code .
 ```
-
-ctrl + shift + p
-
-### 
-
+View sections below on how to use the vscode environment
 
 ### Setting up a development environment (old method)
 
