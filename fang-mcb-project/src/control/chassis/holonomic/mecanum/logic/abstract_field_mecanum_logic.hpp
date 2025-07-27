@@ -29,7 +29,7 @@ namespace fang::chassis
     class AbstractFieldMecanumLogic
     {
     public:
-        using AbstractQuadDriveData = AbstractWheelSpeeds;
+        using AbstractQuadDriveData = AbstractQuadSpeeds;
 
         void setMotion(const AbstractVelocity2D& translation, double rotationalOffset);
 

@@ -16,7 +16,7 @@ namespace fang::chassis
         MecanumCalculator(const Meters& horizontalWheelDistance,
                           const Meters& verticalWheelDistance,
                           const Meters& wheelRadius);
-        void setWheelSpeeds(const WheelSpeeds& quadDriveData);
+        void setWheelSpeeds(const QuadRPM& quadDriveData);
         /**
          * Returns the movement of the robot relative to the robot.
          */
@@ -26,7 +26,7 @@ namespace fang::chassis
          */
         RPM getRotation() const;
     private:
-        QuadDriveWheelSpeedsRadPersec quadDriveData_{RPM{0}, RPM{0}, RPM{0}, RPM{0}};
+        QuadSpeedsRadPersec quadDriveData_{RPM{0}, RPM{0}, RPM{0}, RPM{0}};
         AbstractMecanumCalculator abstractMecanumCalculator_{};
         //l_x + l_y
         const Meters kwheelDistanceConstant_;

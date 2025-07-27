@@ -36,7 +36,7 @@ namespace fang::chassis
 
         AbstractVelocity2D getTranslation() const;
         double getRotationOffset() const;
-        AbstractWheelSpeeds getWheelSpeeds() const;
+        AbstractQuadSpeeds getWheelSpeeds() const;
 
     private:
         double getFrontRightWheelSpeed() const;
