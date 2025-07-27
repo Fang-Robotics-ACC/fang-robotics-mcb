@@ -7,7 +7,7 @@ libboost-all-dev openocd stlink-tools \
 libgmock-dev libgtest-dev pipenv wget curl -y
 
 #Python build requirements
-sudo apt install -essential libreadline-dev libncursesw5-dev \
+sudo apt install build-essential libreadline-dev libncursesw5-dev \
 libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev \
 libffi-dev zlib1g-dev liblzma-dev -y
 
