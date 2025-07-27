@@ -1,16 +1,13 @@
 name: Docker Build and Test
-run-name: Build and Test
+run-name: Test and Build ^_^
 on:
+  workflow_dispatch:
   pull_request:
     branches: 
       - "main"
       - 'release/**'
 jobs:
   Test-And-Build-Docker:
-    strategy:
-      matrix:
-        type: [build]
-      fail-fast: false
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/fang-robotics-acc/fang-robotics-mcb:v5.0.0-v2
@@ -32,7 +29,7 @@ jobs:
           path: fang-mcb-project/build_cache
           key: none
           restore-keys: |
-            ${{runner.os}}-${{matrix.type}}-*
+            ${{runner.os}}-build-
       - name: Build
         run: |
           cd fang-mcb-project
@@ -46,4 +43,4 @@ jobs:
         id: cache
         with:
           path: fang-mcb-project/build_cache
-          key: ${{ runner.os }}-${{matrix.type}}-${{github.sha}}
+          key: ${{ runner.os }}-build-${{github.sha}}
