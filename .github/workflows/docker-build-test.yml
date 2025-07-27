@@ -32,7 +32,7 @@ jobs:
           path: fang-mcb-project/build_cache
           key: none
           restore-keys: |
-            ${{runner.os}}-${{matrix.type}}-
+            ${{runner.os}}-${{matrix.type}}-*
       - name: Build
         run: |
           cd fang-mcb-project
