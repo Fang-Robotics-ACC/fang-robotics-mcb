@@ -4,7 +4,9 @@ libboost-all-dev openocd stlink-tools \
 libgmock-dev libgtest-dev pipenv wget curl -y
 
 #Python build requirements
-sudo apt install wget build-essential libreadline-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev -y
+sudo apt install wget build-essential libreadline-dev libncursesw5-dev \
+libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev \
+libffi-dev zlib1g-dev lzma-dev -y
 
 wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
 tar -xf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
@@ -18,6 +20,7 @@ curl -fsSL https://pyenv.run | bash
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init - bash)"' >> ~/.bashrc
+pyenv install 3.8.10
 source ~/.bashrc
 cd ../../fang-mcb-project
-pipenv install --python 3.8.10
+pipenv install --python ~/.pyenv/3.8.10/bin/python3
