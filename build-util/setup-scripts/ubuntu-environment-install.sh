@@ -15,7 +15,7 @@ wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-a
 tar -xf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
 rm gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
 
-mkdir ~/.local/share
+mkdir -p ~/.local/share
 mv gcc-arm-none-eabi-10.3-2021.10 ~/.local/share
 echo 'export PATH="$HOME/gcc-arm-none-eabi-10.3-2021.10/bin:$HOME/.local/bin:$PATH:$PATH"' >> ~/.bashrc
 
