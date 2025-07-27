@@ -97,8 +97,7 @@ namespace fang::motor
          */
         mockable double getGearRatio() const;
     private:
-        double m_gearRatio;
-        RPM m_speed{0};
+        const double kGearRatio_;
 
         RPM motorToShaftSpeed(const RPM& motorSpeed) const;
         RPM shaftToMotorSpeed(const RPM& shaftSpeed) const;

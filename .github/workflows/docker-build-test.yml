@@ -1,0 +1,45 @@
+name: Docker Build and Test  
+run-name: Test and Build ^_^
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: 
+      - "main"
+      - 'release/**'
+jobs:
+  Test-And-Build-Docker:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/fang-robotics-acc/fang-robotics-mcb:v5.0.0-v2
+      options: --user root
+    steps:   
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Checkout submodules
+        run: |
+          git config --global --add safe.directory .
+          git config --global --add safe.directory /__w/fang-robotics-mcb/fang-robotics-mcb
+          git submodule update --init taproot-scripts
+          git submodule update --init --recursive fang-mcb-project
+          ls
+      - name: Restore cache
+        uses: actions/cache/restore@v4
+        id: restore-cache
+        with:
+          path: fang-mcb-project/build_cache
+          key: ${{runner.os}}-build- #Get latest version instead
+          # restore-keys: |
+      - name: Build
+        run: |
+          cd fang-mcb-project
+          scons profile=debug -j 4 build #4 is stanard runner core count
+      - name: Test
+        run: |
+          cd fang-mcb-project
+          scons profile=debug -j 4 run-tests #4 is stanard runner core count
+      - name: Update cache
+        uses: actions/cache/save@v4
+        id: cache
+        with:
+          path: fang-mcb-project/build_cache
+          key: ${{runner.os}}-build-${{github.sha}}

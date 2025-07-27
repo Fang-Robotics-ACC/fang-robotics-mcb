@@ -22,6 +22,8 @@ from SCons.Script import *
 
 from build_tools import parse_args
 
+CacheDir("build_cache")
+
 # Define project settings and build paths
 PROJECT_NAME         = "fang-mcb-project"
 BUILD_PATH           = "build"
