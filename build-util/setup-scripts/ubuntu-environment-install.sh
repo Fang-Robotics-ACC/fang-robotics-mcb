@@ -1,8 +1,7 @@
-sudo apt-get install python3 python-is-python3\
-python3-pip git openocd gcc build-essential\
-libboost-all-dev openocd stlink-tools\
+sudo apt-get install python3 python-is-python3 \
+python3-pip git openocd gcc build-essential \
+libboost-all-dev openocd stlink-tools \
 libgmock-dev libgtest-dev pipenv wget -y
-
 
 wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
 tar -xf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
