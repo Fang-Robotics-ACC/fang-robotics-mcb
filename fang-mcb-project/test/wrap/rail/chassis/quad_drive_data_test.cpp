@@ -32,6 +32,12 @@ namespace fang::chassis
     TEST_P(QuadDriveScalarTest, uniformScalar)
     {
         AbstractQuadDriveData scaledQuad{inputQuad * scale};
+
+        //Test commutative  scaling
+        AbstractQuadDriveData communitativeQuad{scale * inputQuad};
+        expectQuadDriveDataEq(communitativeQuad, scaledQuad);
+
+        //Test proper scaling
         expectQuadDriveDataEq(scaledQuad, expectedQuad);
     }
 
