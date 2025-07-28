@@ -62,18 +62,14 @@ member or not—enjoy exploring and extending this code!
 a sense of what's there.**
 - [aruw-edu](https://gitlab.com/aruw/controls/aruw-edu): a hands-on tutorial
   for building robot code with Taproot
-- [aruw-mcb](https://gitlab.com/aruw/controls/aruw-mcb), ARUW's full robot code
-  project available for reference DO NOT USE, UW devs told us not to. It is not
-organized for ease of understanding. Check below for their recommendations for
-understanding taproot syntax/organization.
 - The [generated API documentation for
   Taproot](https://aruw.gitlab.io/controls/taproot/)
 - The [modm website](https://modm.io/) and associated documentation
 
 **Other Taproot syntax references**
 
-Note: Do not refer to these completely for code architecture/conventions, only
-for taproot. We love these teams, they are our friends, we do not have any beef
+Note: Do not refer to these completely for code architecture/conventions in our codebase, only
+for taproot syntax reference. We love these teams, they are our friends, we do not have any beef
 nor desire to start beef with criticizing codes. Nevertheless, we have our
 style, they have theirs. We have chosen code architecture with flexbility and
 modularity (isolating performance hacks only when needed) in mind as we intend
@@ -82,9 +78,9 @@ bloated or tangled up. Or robots using new motors without havin to gut code
 (proper dependency injection makes coding feel like legos)
 
 - [tamu-aimbots](https://github.com/TAMU-Robomasters/aimbots-dev): 2nd most
-  organized repo. Some SRP violations but overall high quality code.
+  organized repo Style differences: not all functions are as atomic esp complex ones
 - [ut-ras](https://github.com/ut-ras/robomaster/tree/develop/ut-robomaster):
-  3rd most organized repo. They use some macro hacks, global robot config
+  3rd most organized repo. Style differences: they use some macro variables, global robot config
 variables, and have no unit tests. **Great for continuous integration
 reference!**
 
