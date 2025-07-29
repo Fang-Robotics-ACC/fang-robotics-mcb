@@ -15,6 +15,8 @@ namespace fang::chassis
      *
      * This is often passed into a holonomic drive or tank drive
      * to delegate managing the wheel speeds and updating each of the motors
+     *
+     * This can be managed by a taproot command (can be registered).
      */
     class QuadDriveSubsystem:
         virtual public IQuadDriveSubsystem
