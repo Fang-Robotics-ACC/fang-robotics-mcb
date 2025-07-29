@@ -1,5 +1,4 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DATA_QUAD_DRIVE_DATA_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DATA_QUAD_DRIVE_DATA_HPP
 #include "wrap/rail/chassis/quad_data_alias.hpp"
-
 #endif
