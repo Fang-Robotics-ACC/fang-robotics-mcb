@@ -4,6 +4,7 @@
 #include "wrap/rail/chassis/iquad_drive_subsystem.hpp"
 #include "wrap/rail/rail_motor_owner.hpp"
 
+#include <array>
 #include <memory>
 
 namespace fang::chassis
@@ -22,23 +23,24 @@ namespace fang::chassis
         virtual public IQuadDriveSubsystem
     {
     public:
+        using Motor = motor::ISpeedMotor;
 
         QuadDriveSubsystem
         (
-            std::unique_ptr<motor::ISpeedMotor> frontLeftMotor,
-            std::unique_ptr<motor::ISpeedMotor> frontRightMotor,
-            std::unique_ptr<motor::ISpeedMotor> rearLeftMotor,
-            std::unique_ptr<motor::ISpeedMotor> rearRightMotor
+            std::unique_ptr<Motor> frontLeftMotor,
+            std::unique_ptr<Motor> frontRightMotor,
+            std::unique_ptr<Motor> rearLeftMotor,
+            std::unique_ptr<Motor> rearRightMotor
         );
 
         virtual void setTargetWheelSpeeds(const QuadRPM& wheelSpeeds) override;
         virtual void initialize() override;
         virtual void refresh() override;
     private:
-        std::unique_ptr<motor::ISpeedMotor> frontLeftMotor_;
-        std::unique_ptr<motor::ISpeedMotor> frontRightMotor_;
-        std::unique_ptr<motor::ISpeedMotor> rearLeftMotor_;
-        std::unique_ptr<motor::ISpeedMotor> rearRightMotor_;
+        std::unique_ptr<Motor> frontLeftMotor_;
+        std::unique_ptr<Motor> frontRightMotor_;
+        std::unique_ptr<Motor> rearLeftMotor_;
+        std::unique_ptr<Motor> rearRightMotor_;
     };
 }
 #endif
