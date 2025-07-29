@@ -8,10 +8,19 @@
 
 namespace fang::chassis
 {
+    /**
+     * This provides control for a set of 4 ISpeedMotors
+     * It manages the initialization and update functionality
+     * as well.
+     *
+     * This is often passed into a holonomic drive or tank drive
+     * to delegate managing the wheel speeds and updating each of the motors
+     */
     class QuadDriveSubsystem:
         virtual public IQuadDriveSubsystem
     {
     public:
+
         QuadDriveSubsystem
         (
             std::unique_ptr<motor::ISpeedMotor> frontLeftMotor,
