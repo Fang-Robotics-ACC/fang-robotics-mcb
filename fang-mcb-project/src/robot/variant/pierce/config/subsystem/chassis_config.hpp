@@ -38,7 +38,7 @@ namespace fang::robot
         .energyBufferCritThreshold  = 30_J
     };
 
-    static const chassis::RepeatUltraMk2MecanumSubsystem::ChassisConfig k_chassisConfig 
+    static const chassis::RepeatUltraMk2MecanumSubsystem::ChassisConfig k_chassisConfig
     {
         .pwmFrequency           = k_chassisPwmFreq,
         .pwmTimer               = tap::gpio::Pwm::TIMER1,
