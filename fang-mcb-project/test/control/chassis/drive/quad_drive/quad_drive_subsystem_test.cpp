@@ -145,6 +145,6 @@ namespace fang::chassis
         EXPECT_CALL(frontRightMotor_, update);
         EXPECT_CALL(rearLeftMotor_, update);
         EXPECT_CALL(rearRightMotor_, update);
-        quadDriveSubsystem_.initialize();
+        quadDriveSubsystem_.refresh();
     }
 }
