@@ -23,6 +23,11 @@
 
 namespace fang::chassis
 {
+    /**
+     * Provides taproot friendly
+     * subsystem control functionality for a mecanum drive
+     * with dimensional analysis
+     */
     class MecanumSubsystem:
         virtual public IHolonomicSubsystem
     {
