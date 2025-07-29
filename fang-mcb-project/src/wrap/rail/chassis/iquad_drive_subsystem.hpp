@@ -10,6 +10,7 @@ namespace fang::chassis
         virtual public IQuadControl,
         virtual public tap::control::Subsystem
     {
+        virtual ~IQuadDriveSubsystem() {};
     };
 }
 #endif
