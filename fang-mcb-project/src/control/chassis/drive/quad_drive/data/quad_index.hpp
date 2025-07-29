@@ -4,14 +4,16 @@ namespace fang::chassis
 {        
     /**
      * Useful for when quad data or motors are stored in an array
-     * and it is required to access them by index
+     * and it is required to access them by index.
+     *
+     * This is an enum for implicit int convernsions.
      */
-    enum class QuadIndex
+    enum QuadIndex
     {
-        frontLeft = 0,
-        frontRight,
-        rearLeft,
-        rearRight
+        kFrontLeft = 0,
+        kfrontRight,
+        kRearLeft,
+        kRearRight
     };
 }
 #endif
