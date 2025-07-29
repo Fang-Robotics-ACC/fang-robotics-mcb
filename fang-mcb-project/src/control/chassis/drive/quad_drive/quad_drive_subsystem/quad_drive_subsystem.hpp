@@ -12,7 +12,7 @@ namespace fang::chassis
         virtual public IQuadDriveSubsystem
     {
     public:
-        virtual void IQuadDriveSubsystem
+        QuadDriveSubsystem
         (
             std::unique_ptr<motor::ISpeedMotor> frontLeftMotor,
             std::unique_ptr<motor::ISpeedMotor> frontRightMotor,
