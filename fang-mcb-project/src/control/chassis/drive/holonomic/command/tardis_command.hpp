@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_TARDIS_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_TARDIS_COMMAND_HPP
 #include "shuriken_command.hpp"
-#include "control/chassis/drive/holonomic/mecanum/mecanum_subsystem/mecanum_subsystem.hpp"
+#include "control/chassis/drive/holonomic/mecanum/mecanum_subsystem/repeat_ultra_mk2_mecanum_subsystem.hpp"
 #include "control/chassis/algorithms/basic_downscaler.hpp"
 
 #include "control/chassis/formulae/azriel_shredder.hpp"

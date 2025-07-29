@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "driver/drivers.hpp"
 //Subsystems
-#include "control/chassis/drive/holonomic/mecanum/mecanum_subsystem/mecanum_subsystem.hpp"
+#include "control/chassis/drive/holonomic/mecanum/mecanum_subsystem/repeat_ultra_mk2_mecanum_subsystem.hpp"
 
 #include "control/turret/gimbal_subsystem.hpp"
 #include "control/turret/feeder/simple_feeder_subsystem/simple_feeder_subsystem.hpp"
@@ -40,7 +40,7 @@ namespace fang::robot
         using RemoteState = tap::control::RemoteMapState;
         struct SubsystemConfig
         {
-            chassis::MecanumSubsystem::ChassisConfig chassisConfig;
+            chassis::RepeatUltraMk2MecanumSubsystem::ChassisConfig chassisConfig;
             turret::GimbalSubsystem::Config gimbalConfig;
             fang::turret::M2006SimpleFeederSubsystem::Config feederConfig;
             turret::AmmoBoosterSubsystem::Config boosterConfig;
@@ -106,7 +106,7 @@ namespace fang::robot
         std::unique_ptr<fang::turret::SimpleFeederSubsystem> feeder_;
         fang::turret::SimpleFeederSubsystem& m_feeder{*feeder_};
         turret::AmmoBoosterSubsystem m_booster;
-        chassis::MecanumSubsystem m_chassis;
+        chassis::RepeatUltraMk2MecanumSubsystem m_chassis;
 
         chassis::ChassisInputHandler m_chassisInput;
         turret::TurretInputHandler m_turretInput;
