@@ -1,4 +1,6 @@
 #include "quad_drive_subsystem.hpp"
+#include "control/chassis/drive/quad_drive/data/quad_index.hpp"
+
 namespace fang::chassis
 {
     QuadDriveSubsystem::QuadDriveSubsystem
@@ -18,6 +20,14 @@ namespace fang::chassis
             std::move(rearRightMotor)
         }
     {
+    }
+
+    void QuadDriveSubsystem::setTargetWheelSpeeds(const QuadRPM& wheelSpeeds)
+    {
+        motors_[QuadIndex::kFrontLeft]->setTargetSpeed(wheelSpeeds.frontLeft);
+        motors_[QuadIndex::kfrontRight]->setTargetSpeed(wheelSpeeds.frontRight);
+        motors_[QuadIndex::kRearLeft]->setTargetSpeed(wheelSpeeds.rearLeft);
+        motors_[QuadIndex::kRearRight]->setTargetSpeed(wheelSpeeds.rearRight);
     }
 
     void QuadDriveSubsystem::initialize()
