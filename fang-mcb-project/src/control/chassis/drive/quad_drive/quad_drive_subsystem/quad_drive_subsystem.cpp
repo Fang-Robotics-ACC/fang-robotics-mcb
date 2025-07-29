@@ -19,4 +19,20 @@ namespace fang::chassis
         }
     {
     }
+
+    void QuadDriveSubsystem::initialize()
+    {
+        for(std::unique_ptr<Motor>& motor: motors_)
+        {
+            motor->initialize();
+        }
+    }
+
+    void QuadDriveSubsystem::refresh()
+    {
+        for(std::unique_ptr<Motor>& motor: motors_)
+        {
+            motor->update();
+        }
+    }
 }
