@@ -8,7 +8,7 @@
 
 namespace fang::chassis
 {
-    class QuadDriveSystem:
+    class QuadDriveSubsystem:
         virtual public IQuadDriveSubsystem
     {
     public:
