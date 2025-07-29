@@ -45,9 +45,9 @@ namespace fang::chassis
     {
         return rotation_;
     }
-    WheelSpeeds RobotMecanumLogic::getWheelSpeeds() const
+    QuadRPM RobotMecanumLogic::getWheelSpeeds() const
     {
-        return WheelSpeeds{getFrontLeftWheelSpeed(), getFrontRightWheelSpeed(),
+        return QuadRPM{getFrontLeftWheelSpeed(), getFrontRightWheelSpeed(),
                              getRearLeftWheelSpeed(),  getRearRightWheelSpeed()};
     }
 

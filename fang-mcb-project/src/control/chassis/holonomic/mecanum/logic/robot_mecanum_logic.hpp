@@ -47,7 +47,7 @@ namespace fang::chassis
         /**https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
          * This uses equation 20
          */
-        WheelSpeeds getWheelSpeeds() const;
+        QuadRPM getWheelSpeeds() const;
 
     private:
         RPM getFrontRightWheelSpeed() const;

@@ -25,7 +25,7 @@ namespace fang::chassis
     {
     public:
         AbstractMecanumCalculator(){}
-        void setWheelSpeeds(const AbstractWheelSpeeds& quadDriveData);
+        void setWheelSpeeds(const AbstractQuadSpeeds& quadDriveData);
         /**
          * Returns the movement of the robot relative to the robot.
          * Refer to field mecanum calculator to get the translation relative
@@ -44,7 +44,7 @@ namespace fang::chassis
          */
         double getRotationOffset() const;
     private:
-        AbstractWheelSpeeds quadDriveData_{0,0,0,0};
+        AbstractQuadSpeeds quadDriveData_{0,0,0,0};
     };
 }
 #endif

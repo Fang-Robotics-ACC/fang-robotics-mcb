@@ -28,7 +28,7 @@ namespace fang::chassis
         return rotationOffset_;
     }
 
-    AbstractWheelSpeeds AbstractRobotMecanumLogic::getWheelSpeeds() const
+    AbstractQuadSpeeds AbstractRobotMecanumLogic::getWheelSpeeds() const
     {
         return
         {
