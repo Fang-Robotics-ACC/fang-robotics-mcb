@@ -37,10 +37,14 @@ namespace fang::chassis
         virtual void initialize() override;
         virtual void refresh() override;
     private:
-        std::unique_ptr<Motor> frontLeftMotor_;
-        std::unique_ptr<Motor> frontRightMotor_;
-        std::unique_ptr<Motor> rearLeftMotor_;
-        std::unique_ptr<Motor> rearRightMotor_;
+        enum class MotorIndex
+        {
+            frontLeft = 0,
+            frontRight,
+            rearLeft,
+            rearRight
+        };
+        std::array<std::unique_ptr<Motor>, 4> motors_;
     };
 }
 #endif
