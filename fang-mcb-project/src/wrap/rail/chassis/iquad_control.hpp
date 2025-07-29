@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_WRAP_RAIL_CHASSIS_IQUAD_CONTROL_HPP
 
 #include "rail/chassis/iquad_control.hpp"
-#include "control/chassis/drive/quad_drive/data/quad_drive_data.hpp"
+#include "quad_data_alias.hpp"
 
 namespace fang::chassis
 {
