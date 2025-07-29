@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_SHURIKEN_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_SHURIKEN_COMMAND_HPP
 #include "counter_strike_command.hpp"
-#include "control/chassis/chassis_subsystem.hpp"
+#include "control/chassis/drive/holonomic/mecanum/mecanum_subsystem/mecanum_subsystem.hpp"
 #include "control/chassis/algorithms/basic_downscaler.hpp"
 
 #include "control/turret/gimbal_subsystem.hpp"
