@@ -5,7 +5,7 @@
 
 namespace fang::chassis
 {
-    ChassisSubsystem::ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig):
+    MecanumSubsystem::MecanumSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig):
         Subsystem{&drivers},
         m_drivers{drivers},
         mk_pwmFrequency{chassisConfig.pwmFrequency},
@@ -23,35 +23,35 @@ namespace fang::chassis
 
     {}
 
-    void ChassisSubsystem::setMotion(const physics::Velocity2D& translation, const RPM& rotation)
+    void MecanumSubsystem::setMotion(const physics::Velocity2D& translation, const RPM& rotation)
     {
         setTargetTranslation(translation);
         setTargetRotation(rotation);
     }
 
-    void ChassisSubsystem::setTargetTranslation(const physics::Velocity2D& translation)
+    void MecanumSubsystem::setTargetTranslation(const physics::Velocity2D& translation)
     {
         m_translationRamp.setTarget(translation);
     }
 
-    const physics::Velocity2D& ChassisSubsystem::getTranslation() const
+    const physics::Velocity2D& MecanumSubsystem::getTranslation() const
     {
         return m_mecanumLogic.getTranslation();
     }
 
-    void ChassisSubsystem::setTargetRotation(const RPM& rotation)
+    void MecanumSubsystem::setTargetRotation(const RPM& rotation)
     {
 
         m_rotationRamp.setTarget(rotation);
         //m_mecanumLogic.setRotation(rotation);
     }
 
-    RPM ChassisSubsystem::getRotation() const
+    RPM MecanumSubsystem::getRotation() const
     {
         return m_mecanumLogic.getRotation();
     }
 
-    void ChassisSubsystem::initialize()
+    void MecanumSubsystem::initialize()
     {
         setPwmFrequency();
         m_frontLeftMotor.initialize();
@@ -60,7 +60,7 @@ namespace fang::chassis
         m_rearRightMotor.initialize();
     }
 
-    void ChassisSubsystem::refresh()
+    void MecanumSubsystem::refresh()
     {
         updateRamps();
         syncLogicToRamps();
@@ -68,7 +68,7 @@ namespace fang::chassis
         updateFieldAngle();
     }
 
-    void ChassisSubsystem::refreshSafeDisconnect()
+    void MecanumSubsystem::refreshSafeDisconnect()
     {
         m_frontLeftMotor.setTargetSpeed(0_rpm);
         m_frontRightMotor.setTargetSpeed(0_rpm);
@@ -76,19 +76,19 @@ namespace fang::chassis
         m_rearRightMotor.setTargetSpeed(0_rpm);
     }
 
-    void ChassisSubsystem::updateRamps()
+    void MecanumSubsystem::updateRamps()
     {
         m_translationRamp.update();
         m_rotationRamp.update();
     }
 
-    void ChassisSubsystem::syncLogicToRamps()
+    void MecanumSubsystem::syncLogicToRamps()
     {
         m_mecanumLogic.setTranslation(m_translationRamp.getValue());
         m_mecanumLogic.setRotation(m_rotationRamp.getValue());
     }
 
-    void ChassisSubsystem::syncWheelsToLogic()
+    void MecanumSubsystem::syncWheelsToLogic()
     {
         //If we are exeeding power, we should downscale it for safety
         //Returns 0 if we are at or below the critical threshold
@@ -101,13 +101,13 @@ namespace fang::chassis
         m_rearRightMotor.setTargetSpeed(wheelSpeeds.rearRight * powerScale);
     }
 
-    void ChassisSubsystem::updateFieldAngle()
+    void MecanumSubsystem::updateFieldAngle()
     {
         const Radians currentFieldAngle{m_drivers.bmi088.getYaw()};
         m_mecanumLogic.setRobotAngle(currentFieldAngle);
     }
 
-    void ChassisSubsystem::setPwmFrequency()
+    void MecanumSubsystem::setPwmFrequency()
     {
         m_drivers.pwm.setTimerFrequency(mk_pwmTimer, static_cast<double>(Hertz{mk_pwmFrequency}));
     }

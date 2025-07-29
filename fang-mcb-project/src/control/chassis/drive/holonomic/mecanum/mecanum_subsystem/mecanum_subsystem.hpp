@@ -23,7 +23,7 @@
 
 namespace fang::chassis
 {
-    class ChassisSubsystem:
+    class MecanumSubsystem:
         virtual public IHolonomicSubsystem
     {
     public:
@@ -66,7 +66,7 @@ namespace fang::chassis
      * This assumes that all pins are set to a single frequency.
      * This assumes all motor have the same gear ratio.
      */
-    ChassisSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig);
+    MecanumSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig);
 
     /**
      * Simultaneously set the translation and rotation

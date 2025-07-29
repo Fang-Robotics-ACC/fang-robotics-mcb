@@ -40,7 +40,7 @@ namespace fang::robot
         using RemoteState = tap::control::RemoteMapState;
         struct SubsystemConfig
         {
-            chassis::ChassisSubsystem::ChassisConfig chassisConfig;
+            chassis::MecanumSubsystem::ChassisConfig chassisConfig;
             turret::GimbalSubsystem::Config gimbalConfig;
             fang::turret::M2006SimpleFeederSubsystem::Config feederConfig;
             turret::AmmoBoosterSubsystem::Config boosterConfig;
@@ -106,7 +106,7 @@ namespace fang::robot
         std::unique_ptr<fang::turret::SimpleFeederSubsystem> feeder_;
         fang::turret::SimpleFeederSubsystem& m_feeder{*feeder_};
         turret::AmmoBoosterSubsystem m_booster;
-        chassis::ChassisSubsystem m_chassis;
+        chassis::MecanumSubsystem m_chassis;
 
         chassis::ChassisInputHandler m_chassisInput;
         turret::TurretInputHandler m_turretInput;
