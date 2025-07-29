@@ -8,7 +8,7 @@
 namespace fang::chassis
 {
     using namespace units::literals;
-    class QuadDriveSubsytemTest
+    class QuadDriveSubsytemTest : public ::testing::Test
     {
     public:
         
@@ -62,13 +62,33 @@ namespace fang::chassis
         QuadRPM targetWheelSpeeds_{param.targetWheelSpeeds};
     };
 
-    TEST_P(WheelSpeedSetter, setMotorSpeeds)
-    {
-        ////Make sure the right wheel speeds are set
-        //EXPECT_CALL(frontLeftMotor_, setTargetSpeed(targetWheelSpeeds_.frontLeft));
-        //EXPECT_CALL(frontRightMotor_, setTargetSpeed(targetWheelSpeeds_.frontRight));
-        //EXPECT_CALL(rearLeftMotor_, setTargetSpeed(targetWheelSpeeds_.rearLeft));
-        //EXPECT_CALL(rearRightMotor_, setTargetSpeed(targetWheelSpeeds_.rearRight));
-        //quadDriveSubsystem_.setTargetWheelSpeeds(targetWheelSpeeds_);
-    }
+    //TEST_P(WheelSpeedSetter, setMotorSpeeds)
+    //{
+    //    //Make sure the right wheel speeds are set
+    //    EXPECT_CALL(frontLeftMotor_, setTargetSpeed(targetWheelSpeeds_.frontLeft));
+    //    EXPECT_CALL(frontRightMotor_, setTargetSpeed(targetWheelSpeeds_.frontRight));
+    //    EXPECT_CALL(rearLeftMotor_, setTargetSpeed(targetWheelSpeeds_.rearLeft));
+    //    EXPECT_CALL(rearRightMotor_, setTargetSpeed(targetWheelSpeeds_.rearRight));
+    //    quadDriveSubsystem_.setTargetWheelSpeeds(targetWheelSpeeds_);
+    //}
+
+    //All motors should be initialized and updated on
+    //TEST_F(QuadDriveSubsytemTest, initialize)
+    //{
+    //    EXPECT_CALL(frontLeftMotor_, initialize);
+    //    EXPECT_CALL(frontRightMotor_, initialize);
+    //    EXPECT_CALL(rearLeftMotor_, initialize);
+    //    EXPECT_CALL(rearRightMotor_, initialize);
+    //    quadDriveSubsystem_.initialize();
+    //}
+
+    ////All motors should be initialized and updated on
+    //TEST_F(QuadDriveSubsytemTest, updated)
+    //{
+    //    EXPECT_CALL(frontLeftMotor_, initialize);
+    //    EXPECT_CALL(frontRightMotor_, initialize);
+    //    EXPECT_CALL(rearLeftMotor_, initialize);
+    //    EXPECT_CALL(rearRightMotor_, initialize);
+    //    quadDriveSubsystem_.initialize();
+    //}
 }
