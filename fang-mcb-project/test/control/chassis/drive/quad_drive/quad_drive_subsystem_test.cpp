@@ -9,11 +9,14 @@
 namespace fang::chassis
 {
     using namespace units::literals;
-    class QuadDriveSubsytemTest : public ::testing::Test
+    /**
+     * Create a subsystem as well as reference
+     * accessors for checking calls to motors
+     */
+    class QuadDriveSubsystemTestSetup
     {
     public:
-        
-        QuadDriveSubsytemTest():
+        QuadDriveSubsystemTestSetup():
             frontLeftMotorPtr_{std::make_unique<motor::ISpeedMotorMock>()},
             frontRightMotorPtr_{std::make_unique<motor::ISpeedMotorMock>()},
             rearLeftMotorPtr_{std::make_unique<motor::ISpeedMotorMock>()},
@@ -53,46 +56,95 @@ namespace fang::chassis
         Drivers drivers_{};
     };
 
+    class QuadDriveSubsystemTest:
+        public QuadDriveSubsystemTestSetup,
+        public ::testing::Test
+    {
+    };
+
     struct WheelSpeedSetterParam
     {
         QuadRPM targetWheelSpeeds;
     };
     class WheelSpeedSetter:
-        public QuadDriveSubsytemTest,
-        public ::testing::TestWithParam<WheelSpeedSetterParam>
+        virtual public QuadDriveSubsystemTestSetup,
+        virtual public ::testing::TestWithParam<WheelSpeedSetterParam>
     {
     protected:
         WheelSpeedSetterParam param{GetParam()};
         QuadRPM targetWheelSpeeds_{param.targetWheelSpeeds};
     };
 
-    //TEST_P(WheelSpeedSetter, setMotorSpeeds)
-    //{
-    //    //Make sure the right wheel speeds are set
-    //    EXPECT_CALL(frontLeftMotor_, setTargetSpeed(targetWheelSpeeds_.frontLeft));
-    //    EXPECT_CALL(frontRightMotor_, setTargetSpeed(targetWheelSpeeds_.frontRight));
-    //    EXPECT_CALL(rearLeftMotor_, setTargetSpeed(targetWheelSpeeds_.rearLeft));
-    //    EXPECT_CALL(rearRightMotor_, setTargetSpeed(targetWheelSpeeds_.rearRight));
-    //    quadDriveSubsystem_.setTargetWheelSpeeds(targetWheelSpeeds_);
-    //}
+    TEST_P(WheelSpeedSetter, setMotorSpeeds)
+    {
+        //Make sure the right wheel speeds are set
+        EXPECT_CALL(frontLeftMotor_, setTargetSpeed(targetWheelSpeeds_.frontLeft));
+        EXPECT_CALL(frontRightMotor_, setTargetSpeed(targetWheelSpeeds_.frontRight));
+        EXPECT_CALL(rearLeftMotor_, setTargetSpeed(targetWheelSpeeds_.rearLeft));
+        EXPECT_CALL(rearRightMotor_, setTargetSpeed(targetWheelSpeeds_.rearRight));
+        quadDriveSubsystem_.setTargetWheelSpeeds(targetWheelSpeeds_);
+    }
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        zero,
+        WheelSpeedSetter,
+        ::testing::Values
+        (
+            WheelSpeedSetterParam{{0_rpm, 0_rpm, 0_rpm, 0_rpm}}
+        )
+    );
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        positiveOnly,
+        WheelSpeedSetter,
+        ::testing::Values
+        (
+            WheelSpeedSetterParam{{12_rpm, 234_rpm, 345345.2_rpm, 435_rpm}},
+            WheelSpeedSetterParam{{1_rpm, 1_rpm, 2_rpm, 4_rpm}}
+        )
+    );
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        negativeOnly,
+        WheelSpeedSetter,
+        ::testing::Values
+        (
+            WheelSpeedSetterParam{{-12_rpm, -234_rpm, -345345.2_rpm, -435_rpm}},
+            WheelSpeedSetterParam{{-1_rpm, -1_rpm, -2_rpm, -4_rpm}}
+        )
+    );
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        mixed,
+        WheelSpeedSetter,
+        ::testing::Values
+        (
+            WheelSpeedSetterParam{{-12.345345_rpm, 234_rpm, -345345.2_rpm, 435.345_rpm}},
+            WheelSpeedSetterParam{{-1_rpm, -345345_rpm, 2_rpm, -4_rpm}}
+        )
+    );
 
     //All motors should be initialized and updated on
-    //TEST_F(QuadDriveSubsytemTest, initialize)
-    //{
-    //    EXPECT_CALL(frontLeftMotor_, initialize);
-    //    EXPECT_CALL(frontRightMotor_, initialize);
-    //    EXPECT_CALL(rearLeftMotor_, initialize);
-    //    EXPECT_CALL(rearRightMotor_, initialize);
-    //    quadDriveSubsystem_.initialize();
-    //}
+    TEST_F(QuadDriveSubsystemTest, initialize)
+    {
+        EXPECT_CALL(frontLeftMotor_, initialize);
+        EXPECT_CALL(frontRightMotor_, initialize);
+        EXPECT_CALL(rearLeftMotor_, initialize);
+        EXPECT_CALL(rearRightMotor_, initialize);
+        quadDriveSubsystem_.initialize();
+    }
 
-    ////All motors should be initialized and updated on
-    //TEST_F(QuadDriveSubsytemTest, updated)
-    //{
-    //    EXPECT_CALL(frontLeftMotor_, initialize);
-    //    EXPECT_CALL(frontRightMotor_, initialize);
-    //    EXPECT_CALL(rearLeftMotor_, initialize);
-    //    EXPECT_CALL(rearRightMotor_, initialize);
-    //    quadDriveSubsystem_.initialize();
-    //}
+    //All motors should be initialized and updated on
+    TEST_F(QuadDriveSubsystemTest, update)
+    {
+        EXPECT_CALL(frontLeftMotor_, update);
+        EXPECT_CALL(frontRightMotor_, update);
+        EXPECT_CALL(rearLeftMotor_, update);
+        EXPECT_CALL(rearRightMotor_, update);
+        quadDriveSubsystem_.initialize();
+    }
 }
