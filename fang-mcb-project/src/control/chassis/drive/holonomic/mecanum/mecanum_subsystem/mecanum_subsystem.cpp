@@ -1,64 +1,49 @@
 #include "mecanum_subsystem.hpp"
 
+#include "system/assert/fang_assert.hpp"
+#include "tap/algorithms/math_user_utils.hpp"
 #include "wrap/units/units_alias.hpp"
 
 
-/*
 namespace fang::chassis
 {
-    MecanumSubsystem::MecanumSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig):
+    MecanumSubsystem::MecanumSubsystem
+    (
+        Drivers& drivers,
+        std::unique_ptr<IQuadDriveSubsystem> quadDrive,
+        std::unique_ptr<Imu> imu,
+        const Config& config
+    ):
+        //Base
         Subsystem{&drivers},
-        m_drivers{drivers},
-        mk_pwmFrequency{chassisConfig.pwmFrequency},
-        mk_pwmTimer{chassisConfig.pwmTimer},
-        k_translationRampSpeed{chassisConfig.translationRampSpeed},
-        k_rotationRampSpeed{chassisConfig.rotationRampSpeed},
-        mk_motorConfig{chassisConfig.chassisMotors},
-        mk_dimensionConfig{chassisConfig.chassisDimensions},
-        m_frontLeftMotor{drivers, mk_motorConfig.unifiedProperties, mk_motorConfig.frontLeftPwmData, mk_leftInversion},
-        m_frontRightMotor{drivers, mk_motorConfig.unifiedProperties, mk_motorConfig.frontRightPwmData, mk_rightInversion},
-        m_rearLeftMotor{drivers, mk_motorConfig.unifiedProperties, mk_motorConfig.rearLeftPwmData, mk_leftInversion},
-        m_rearRightMotor{drivers, mk_motorConfig.unifiedProperties, mk_motorConfig.rearRightPwmdta, mk_rightInversion},
-        m_mecanumLogic{mk_dimensionConfig.horizontalWheelDistance, mk_dimensionConfig.verticalWheelDistance, mk_dimensionConfig.wheelRadius},
-        m_powerLimiter{drivers.refSerial, chassisConfig.powerLimiterConfig}
-
-    {}
-
-    void MecanumSubsystem::setMotion(const physics::Velocity2D& translation, const RPM& rotation)
+        //Owned systems
+        quadDrive_{std::move(quadDrive_)},
+        imu_{std::move(imu)},
+        //Static Utils
+        mecanumLogic_{config.mecanumLogicConfig},
+        //RampSpeed
+        kTranslationRampSpeed_{config.translationRampSpeed},
+        kRotationRampSpeed_{config.rotationRampSpeed},
+        //Power limiting
+        powerLimiter_{drivers.refSerial, config.powerLimiterConfig}
     {
-        setTargetTranslation(translation);
-        setTargetRotation(rotation);
     }
+
 
     void MecanumSubsystem::setTargetTranslation(const physics::Velocity2D& translation)
     {
-        m_translationRamp.setTarget(translation);
-    }
-
-    const physics::Velocity2D& MecanumSubsystem::getTranslation() const
-    {
-        return m_mecanumLogic.getTranslation();
+        translationRamp_.setTarget(translation);
     }
 
     void MecanumSubsystem::setTargetRotation(const RPM& rotation)
     {
 
-        m_rotationRamp.setTarget(rotation);
-        //m_mecanumLogic.setRotation(rotation);
-    }
-
-    RPM MecanumSubsystem::getRotation() const
-    {
-        return m_mecanumLogic.getRotation();
+        rotationRamp_.setTarget(rotation);
     }
 
     void MecanumSubsystem::initialize()
     {
-        setPwmFrequency();
-        m_frontLeftMotor.initialize();
-        m_frontRightMotor.initialize();
-        m_rearLeftMotor.initialize();
-        m_rearRightMotor.initialize();
+        quadDrive_->initialize();
     }
 
     void MecanumSubsystem::refresh()
@@ -71,47 +56,39 @@ namespace fang::chassis
 
     void MecanumSubsystem::refreshSafeDisconnect()
     {
-        m_frontLeftMotor.setTargetSpeed(0_rpm);
-        m_frontRightMotor.setTargetSpeed(0_rpm);
-        m_rearLeftMotor.setTargetSpeed(0_rpm);
-        m_rearRightMotor.setTargetSpeed(0_rpm);
+        //The robot should not move when disconnected
+        mecanumLogic_.setTranslation({0_mps, 0_mps});
+        mecanumLogic_.setRotation(0_rpm);
+        //Make sure wheels are sent a zero signal
+        syncWheelsToLogic();
     }
 
     void MecanumSubsystem::updateRamps()
     {
-        m_translationRamp.update();
-        m_rotationRamp.update();
+        translationRamp_.update();
+        rotationRamp_.update();
     }
 
     void MecanumSubsystem::syncLogicToRamps()
     {
-        m_mecanumLogic.setTranslation(m_translationRamp.getValue());
-        m_mecanumLogic.setRotation(m_rotationRamp.getValue());
+        mecanumLogic_.setTranslation(translationRamp_.getValue());
+        mecanumLogic_.setRotation(rotationRamp_.getValue());
     }
 
     void MecanumSubsystem::syncWheelsToLogic()
     {
         //If we are exeeding power, we should downscale it for safety
         //Returns 0 if we are at or below the critical threshold
-        //Reutnrs 1 if we are above the limiting threshold (buffer - crit)
-        const float powerScale{m_powerLimiter.getPowerLimitRatio()};
-        const QuadDriveData wheelSpeeds{m_mecanumLogic.getWheelSpeeds()};
-        m_frontLeftMotor.setTargetSpeed(wheelSpeeds.frontLeft * powerScale);
-        m_frontRightMotor.setTargetSpeed(wheelSpeeds.frontRight * powerScale);
-        m_rearLeftMotor.setTargetSpeed(wheelSpeeds.rearLeft * powerScale);
-        m_rearRightMotor.setTargetSpeed(wheelSpeeds.rearRight * powerScale);
+        //Returns 1 if we are above the limiting threshold (buffer - crit)
+        const float powerScale{powerLimiter_.getPowerLimitRatio()};
+        FANG_ASSERT(0.0 <= powerScale && powerScale <= 1.0, "Power should not flip raneg");
+
+        quadDrive_->setTargetWheelSpeeds(powerScale * mecanumLogic_.getWheelSpeeds());
     }
 
     void MecanumSubsystem::updateFieldAngle()
     {
-        const Radians currentFieldAngle{m_drivers.bmi088.getYaw()};
-        m_mecanumLogic.setRobotAngle(currentFieldAngle);
-    }
-
-    void MecanumSubsystem::setPwmFrequency()
-    {
-        m_drivers.pwm.setTimerFrequency(mk_pwmTimer, static_cast<double>(Hertz{mk_pwmFrequency}));
+        const Radians currentFieldAngle{imu_->getYaw()};
+        mecanumLogic_.setRobotAngle(currentFieldAngle);
     }
 }//namespace chassis
-
-*/
