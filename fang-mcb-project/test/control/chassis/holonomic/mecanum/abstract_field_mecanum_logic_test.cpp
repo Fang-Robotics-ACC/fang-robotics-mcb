@@ -1,6 +1,6 @@
 #include "wrap/units/units_alias.hpp"
-#include "control/chassis/holonomic/mecanum/logic/abstract_field_mecanum_logic.hpp"
-#include "control/chassis/holonomic/mecanum/logic/abstract_mecanum_calculator.hpp"
+#include "control/chassis/drive/holonomic/mecanum/logic/abstract_field_mecanum_logic.hpp"
+#include "control/chassis/drive/holonomic/mecanum/logic/abstract_mecanum_calculator.hpp"
 
 #include <gtest/gtest.h>
 

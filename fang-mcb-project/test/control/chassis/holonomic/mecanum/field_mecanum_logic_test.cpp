@@ -1,5 +1,5 @@
-#include "control/chassis/holonomic/mecanum/logic/field_mecanum_logic.hpp"
-#include "control/chassis/holonomic/mecanum/logic/mecanum_calculator.hpp"
+#include "control/chassis/drive/holonomic/mecanum/logic/field_mecanum_logic.hpp"
+#include "control/chassis/drive/holonomic/mecanum/logic/mecanum_calculator.hpp"
 #include "util/math/geometry/rotate_vector_2d.hpp"
 
 #include "wrap/units/units_alias.hpp"

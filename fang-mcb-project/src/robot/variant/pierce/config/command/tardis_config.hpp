@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_PIERCE_CONFIG_COMMAND_TARDIS_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_PIERCE_CONFIG_COMMAND_TARDIS_CONFIG_HPP
-#include "control/chassis/holonomic/command/tardis_command.hpp"
+#include "control/chassis/drive/holonomic/command/tardis_command.hpp"
 
 namespace fang::robot
 {

@@ -1,6 +1,6 @@
 #include "wrap/units/units_alias.hpp"
-#include "control/chassis/holonomic/mecanum/logic/robot_mecanum_logic.hpp"
-#include "control/chassis/holonomic/mecanum/logic/mecanum_calculator.hpp"
+#include "control/chassis/drive/holonomic/mecanum/logic/robot_mecanum_logic.hpp"
+#include "control/chassis/drive/holonomic/mecanum/logic/mecanum_calculator.hpp"
 
 #include <gtest/gtest.h>
 #include <iostream>

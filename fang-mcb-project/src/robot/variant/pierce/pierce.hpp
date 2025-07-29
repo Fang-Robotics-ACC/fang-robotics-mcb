@@ -14,9 +14,9 @@
 #include "control/chassis/chassis_input_handler.hpp"
 
 //Commands
-#include "control/chassis/holonomic/command/counter_strike_command.hpp"
-#include "control/chassis/holonomic/command/shuriken_command.hpp"
-#include "control/chassis/holonomic/command/tardis_command.hpp"
+#include "control/chassis/drive/holonomic/command/counter_strike_command.hpp"
+#include "control/chassis/drive/holonomic/command/shuriken_command.hpp"
+#include "control/chassis/drive/holonomic/command/tardis_command.hpp"
 
 #include "control/turret/command/aim_command.hpp"
 #include "control/turret/command/activate_booster_command.hpp"
