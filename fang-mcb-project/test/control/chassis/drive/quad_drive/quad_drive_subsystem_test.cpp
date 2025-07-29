@@ -1,5 +1,6 @@
 #include "control/chassis/drive/quad_drive/quad_drive_subsystem/quad_drive_subsystem.hpp"
 #include "test/mock/rail/rail_motor_mocks.hpp"
+#include "driver/drivers.hpp"
 
 #include <memory>
 #include <gmock/gmock.h>
@@ -27,6 +28,7 @@ namespace fang::chassis
 
             quadDriveSubsystem_
             {
+                drivers_,
                 std::move(frontLeftMotorPtr_),
                 std::move(frontRightMotorPtr_),
                 std::move(rearLeftMotorPtr_),
@@ -47,6 +49,8 @@ namespace fang::chassis
         motor::ISpeedMotorMock& rearLeftMotor_;
         motor::ISpeedMotorMock& rearRightMotor_;
         QuadDriveSubsystem quadDriveSubsystem_;
+
+        Drivers drivers_{};
     };
 
     struct WheelSpeedSetterParam
