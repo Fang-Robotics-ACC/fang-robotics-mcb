@@ -6,7 +6,7 @@
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/turret/gimbal_subsystem.hpp"
 
-#include "wrap/rail/chassis/iholonomic_subsystem_control.hpp"
+#include "wrap/rail/chassis/iholonomic_subsystem.hpp"
 #include "tap/control/command.hpp"
 
 namespace fang::chassis
