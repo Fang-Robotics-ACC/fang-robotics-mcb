@@ -6,12 +6,12 @@
 
 namespace fang::chassis
 {
-    class IHolonomicSubsystemControl:
+    class IHolonomicSubsystem:
         virtual public IHolonomicControl,
         virtual public tap::control::Subsystem
     {
     public:
-        virtual ~IHolonomicSubsystemControl() {};
+        virtual ~IHolonomicSubsystem() {};
     };
 }
 #endif

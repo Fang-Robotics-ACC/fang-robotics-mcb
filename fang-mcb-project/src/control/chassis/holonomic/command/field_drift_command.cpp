@@ -11,7 +11,7 @@ namespace fang::chassis
 {
     FieldDriftCommand::FieldDriftCommand
     (
-        IHolonomicSubsystemControl& chassisSubsystem,
+        IHolonomicSubsystem& chassisSubsystem,
         ChassisInputHandler& inputHandler,
         const Config& config
     ):   

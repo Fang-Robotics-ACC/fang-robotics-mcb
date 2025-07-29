@@ -23,7 +23,7 @@
 namespace fang::chassis
 {
     class ChassisSubsystem:
-        virtual public IHolonomicSubsystemControl
+        virtual public IHolonomicSubsystem
     {
     public:
     using DriveMotor = fang::motor::GearboxRepeatUltraMk2;

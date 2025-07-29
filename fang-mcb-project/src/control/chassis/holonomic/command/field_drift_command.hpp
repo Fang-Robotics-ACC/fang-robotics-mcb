@@ -36,7 +36,7 @@ namespace fang::chassis
          */
         FieldDriftCommand
         (
-            IHolonomicSubsystemControl& holonomicSubsystem,
+            IHolonomicSubsystem& holonomicSubsystem,
             ChassisInputHandler& inputHandler,
             const Config& config
         );
@@ -63,7 +63,7 @@ namespace fang::chassis
 
         static constexpr char* kName{"Field Drift"};
 
-        IHolonomicSubsystemControl& holonomicSubsystem_;
+        IHolonomicSubsystem& holonomicSubsystem_;
         ChassisInputHandler& chassisInput_;
         const Config& kConfig_;
 
