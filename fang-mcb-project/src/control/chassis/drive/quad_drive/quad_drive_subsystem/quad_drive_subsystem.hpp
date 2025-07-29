@@ -1,6 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DRIVE_QUAD_SUBSYSTEM_DRIVE_QUAD_SUBSYSTEM_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DRIVE_QUAD_SUBSYSTEM_DRIVE_QUAD_SUBSYSTEM_HPP
 #include "control/chassis/drive/quad_drive/data/quad_drive_data.hpp"
+#include "driver/drivers.hpp"
 #include "wrap/rail/chassis/iquad_drive_subsystem.hpp"
 #include "wrap/rail/rail_motor_owner.hpp"
 
@@ -27,6 +28,7 @@ namespace fang::chassis
 
         QuadDriveSubsystem
         (
+            Drivers drivers&,
             std::unique_ptr<Motor> frontLeftMotor,
             std::unique_ptr<Motor> frontRightMotor,
             std::unique_ptr<Motor> rearLeftMotor,
