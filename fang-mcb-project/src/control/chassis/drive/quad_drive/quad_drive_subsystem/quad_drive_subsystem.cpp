@@ -11,7 +11,7 @@ namespace fang::chassis
         std::unique_ptr<Motor> rearLeftMotor,
         std::unique_ptr<Motor> rearRightMotor
     ):
-        Subsystem{&drivers},
+        IQuadDriveSubsystem{drivers},
         motors_
         {
             std::move(frontLeftMotor),
