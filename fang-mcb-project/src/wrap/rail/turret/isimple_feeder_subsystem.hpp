@@ -13,12 +13,12 @@ namespace fang::turret
      * simple feeder subsystem
      */
     class ISimpleFeederSubsystem:
-        public ISimpleFeederControl,
+        public rail::turret::ISimpleFeederControl,
         public tap::control::Subsystem
     {
     public:
         ISimpleFeederSubsystem(tap::Drivers& drivers):
-            tap::control::Subsystem(&drivers)
+            tap::control::Subsystem{&drivers}
         {}
         virtual ~ISimpleFeederSubsystem() {};
     };
