@@ -36,6 +36,8 @@ namespace fang::chassis
         using DriveMotor = fang::motor::GearboxRepeatUltraMk2;
         using PowerLimiter = trap::control::chassis::PowerLimiter;
         using Imu = trap::communication::sensors::Imu;
+        using TranslationRamp = trap::algorithms::Ramp2D<MetersPerSecond, Seconds>;
+        using RotationRamp = trap::algorithms::Ramp<RPM, Seconds>;
 
     struct ChassisDimensionConfig
     {
@@ -52,8 +54,6 @@ namespace fang::chassis
      */
     struct Config
     {
-        double translationRampSpeed;
-        double rotationRampSpeed;
         FieldMecanumLogic::Config mecanumLogicConfig;
         PowerLimiter::Config powerLimiterConfig;
     };
@@ -68,6 +68,8 @@ namespace fang::chassis
         Drivers& drivers,
         std::unique_ptr<IQuadDriveSubsystem> quadDrive,
         std::unique_ptr<Imu> imu,
+        std::unique_ptr<TranslationRamp> translationRamp,
+        std::unique_ptr<RotationRamp> rotationRamp,
         const Config& config
     );
 
@@ -106,13 +108,10 @@ namespace fang::chassis
         std::unique_ptr<IQuadDriveSubsystem> quadDrive_;
         std::unique_ptr<Imu> imu_;
 
+        std::unique_ptr<TranslationRamp> translationRamp_;
+        std::unique_ptr<RotationRamp> rotationRamp_;
+
         FieldMecanumLogic mecanumLogic_;
-
-        const double kTranslationRampSpeed_;
-        const double kRotationRampSpeed_;
-
-        trap::algorithms::Ramp2D<MetersPerSecond, Seconds> translationRamp_{{0_mps,0_mps}, kTranslationRampSpeed_};
-        trap::algorithms::Ramp<RPM, Seconds> rotationRamp_{0_rpm, kRotationRampSpeed_};
     };
 }//namespace fang::chassis 
 
