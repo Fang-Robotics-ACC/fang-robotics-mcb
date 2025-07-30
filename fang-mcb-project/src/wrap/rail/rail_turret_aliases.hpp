@@ -6,7 +6,6 @@
 namespace fang::turret
 {
     using ISimpleFeeder = rail::turret::ISimpleFeeder;
-    using ISimpleFeederPtr = std::unique_ptr<ISimpleFeeder>;
     using ISimpleFeederControl = rail::turret::ISimpleFeederControl;
 }
 #endif
