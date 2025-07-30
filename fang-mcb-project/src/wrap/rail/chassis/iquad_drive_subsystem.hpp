@@ -7,11 +7,15 @@
 namespace fang::chassis
 {
     class IQuadDriveSubsystem:
-        virtual public IQuadControl,
-        virtual public tap::control::Subsystem
+        public IQuadControl,
+        public tap::control::Subsystem
     {
     public:
-        virtual ~IQuadDriveSubsystem() {};
+        IQuadDriveSubsystem(tap::Drivers& drivers):
+            Subsystem{&drivers}
+        {}
+
+        virtual ~IQuadDriveSubsystem() = default;
     };
 }
 #endif
