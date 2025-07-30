@@ -6,7 +6,7 @@
 #include "tap/control/subsystem.hpp"
 #include "tap/drivers.hpp"
 
-namespace rail::turret
+namespace fang::turret
 {
     /**
      * Provide taproot commands with uniform access to
