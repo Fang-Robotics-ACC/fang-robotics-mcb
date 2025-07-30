@@ -1,5 +1,5 @@
-#ifndef FANG_ROBOTICS_MCB_RAIL_TURRET_I_SIMPLE_FEEDER_SUBSYSTEM_CONTROL_HPP
-#define FANG_ROBOTICS_MCB_RAIL_TURRET_I_SIMPLE_FEEDER_SUBSYSTEM_CONTROL_HPP
+#ifndef FANG_ROBOTICS_MCB_RAIL_TURRET_I_SIMPLE_FEEDER_SUBSYSTEM_HPP
+#define FANG_ROBOTICS_MCB_RAIL_TURRET_I_SIMPLE_FEEDER_SUBSYSTEM_HPP
 #include "wrap/rail/drivers.hpp"
 #include "tap/control/subsystem.hpp"
 #include "rail/turret/feeder/isimple_feeder_control.hpp"
