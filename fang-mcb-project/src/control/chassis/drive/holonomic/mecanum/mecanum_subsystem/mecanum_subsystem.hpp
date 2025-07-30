@@ -107,7 +107,6 @@ namespace fang::chassis
         std::unique_ptr<Imu> imu_;
 
         FieldMecanumLogic mecanumLogic_;
-        PowerLimiter powerLimiter_;
 
         const double kTranslationRampSpeed_;
         const double kRotationRampSpeed_;

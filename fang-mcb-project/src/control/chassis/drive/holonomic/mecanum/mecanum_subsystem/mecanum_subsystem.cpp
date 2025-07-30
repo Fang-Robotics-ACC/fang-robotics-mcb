@@ -23,9 +23,7 @@ namespace fang::chassis
         mecanumLogic_{config.mecanumLogicConfig},
         //RampSpeed
         kTranslationRampSpeed_{config.translationRampSpeed},
-        kRotationRampSpeed_{config.rotationRampSpeed},
-        //Power limiting
-        powerLimiter_{drivers.refSerial, config.powerLimiterConfig}
+        kRotationRampSpeed_{config.rotationRampSpeed}
     {
     }
 
@@ -77,13 +75,7 @@ namespace fang::chassis
 
     void MecanumSubsystem::syncWheelsToLogic()
     {
-        //If we are exeeding power, we should downscale it for safety
-        //Returns 0 if we are at or below the critical threshold
-        //Returns 1 if we are above the limiting threshold (buffer - crit)
-        const float powerScale{powerLimiter_.getPowerLimitRatio()};
-        FANG_ASSERT(0.0 <= powerScale && powerScale <= 1.0, "Power should not flip raneg");
-
-        quadDrive_->setTargetWheelSpeeds(powerScale * mecanumLogic_.getWheelSpeeds());
+        quadDrive_->setTargetWheelSpeeds(mecanumLogic_.getWheelSpeeds());
     }
 
     void MecanumSubsystem::updateFieldAngle()
