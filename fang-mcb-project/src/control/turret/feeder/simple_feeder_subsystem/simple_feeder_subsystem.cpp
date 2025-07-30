@@ -5,9 +5,13 @@
 namespace fang::turret
 {
 
-    SimpleFeederSubsystem::SimpleFeederSubsystem(Drivers& drivers, ISimpleFeederPtr feeder, const Config& config):
-        ISimpleFeederSubsystemControl{drivers},
-        Subsystem{&drivers},
+    SimpleFeederSubsystem::SimpleFeederSubsystem
+    (
+        Drivers& drivers,
+        std::unique_ptr<ISimpleFeeder> feeder,
+        const Config& config
+    ):
+        ISimpleFeederSubsystem{drivers},
         feeder_{std::move(feeder)},
         heatLimiter_{drivers.refSerial, {config.heatLimiterConfig}}
     {
