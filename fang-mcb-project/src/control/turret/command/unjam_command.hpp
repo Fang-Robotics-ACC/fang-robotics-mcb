@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_UNJAM_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_UNJAM_COMMAND_HPP
-#include "wrap/rail/rail_turret_aliases.hpp"
+#include "wrap/rail/turret/isimple_feeder_subsystem.hpp"
 
 #include "util/chrono/simple_timer.hpp"
 
@@ -11,7 +11,7 @@ namespace fang::turret
     class UnjamCommand: public tap::control::Command
     {
     public:
-        UnjamCommand(ISimpleFeederSubsystemControl& feeder);
+        UnjamCommand(ISimpleFeederSubsystem& feeder);
 
         const char* getName() const override {return "Unjam";}
 
@@ -22,7 +22,7 @@ namespace fang::turret
 
 
     private:
-       ISimpleFeederSubsystemControl& m_feeder;
+       ISimpleFeederSubsystem& m_feeder;
     };
 }
 #endif
