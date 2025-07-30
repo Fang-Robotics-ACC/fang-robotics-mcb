@@ -5,16 +5,16 @@
 #include "rail/turret/feeder/isimple_feeder_control.hpp"
 namespace rail::turret
 {
-    class ISimpleFeederSubsystemControl:
+    class ISimpleFeederSubsystem:
         virtual public tap::control::Subsystem,
         virtual public ISimpleFeederControl
     {
     public:
         //Trivial hack
-        ISimpleFeederSubsystemControl(Drivers& drivers):
+        ISimpleFeederSubsystem(Drivers& drivers):
             tap::control::Subsystem(&drivers)
         {}
-        virtual ~ISimpleFeederSubsystemControl() {};
+        virtual ~ISimpleFeederSubsystem() {};
     };
 }
 #endif
