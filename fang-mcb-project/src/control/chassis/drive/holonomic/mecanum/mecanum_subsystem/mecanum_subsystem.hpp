@@ -30,7 +30,7 @@ namespace fang::chassis
      * subsystem control functionality for a mecanum drive
      * with dimensional analysis
      */
-    class MecanumSubsystem : virtual public IHolonomicSubsystem
+    class MecanumSubsystem : virtual public IHolonomicSubsystem, public tap::control::Subsystem
     {
     public:
         using DriveMotor = fang::motor::GearboxRepeatUltraMk2;
@@ -98,6 +98,8 @@ namespace fang::chassis
      * Kills functionality upon loss of remote input
      */
     void refreshSafeDisconnect() override;
+
+    operator tap::control::Subsystem& () override;
     private:
         void updateRamps();
         void syncLogicToRamps();

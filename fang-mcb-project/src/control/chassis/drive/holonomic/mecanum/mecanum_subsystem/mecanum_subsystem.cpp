@@ -85,4 +85,9 @@ namespace fang::chassis
         const Radians currentFieldAngle{imu_->getYaw()};
         mecanumLogic_.setRobotAngle(currentFieldAngle);
     }
+
+    MecanumSubsystem::operator tap::control::Subsystem& ()
+    {
+        return *this;
+    }
 }//namespace chassis

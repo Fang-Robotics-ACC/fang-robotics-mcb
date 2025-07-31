@@ -111,4 +111,9 @@ namespace fang::chassis
     {
         m_drivers.pwm.setTimerFrequency(mk_pwmTimer, static_cast<double>(Hertz{mk_pwmFrequency}));
     }
+
+    RepeatUltraMk2MecanumSubsystem::operator tap::control::Subsystem& ()
+    {
+        return *this;
+    }
 }//namespace chassis

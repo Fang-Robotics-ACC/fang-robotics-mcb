@@ -29,7 +29,8 @@ namespace fang::chassis
      * with dimensional analysis
      */
     class RepeatUltraMk2MecanumSubsystem:
-        virtual public IHolonomicSubsystem
+        virtual public IHolonomicSubsystem,
+        public tap::control::Subsystem
     {
     public:
     using DriveMotor = fang::motor::GearboxRepeatUltraMk2;
@@ -112,6 +113,7 @@ namespace fang::chassis
 
     void refreshSafeDisconnect() override;
 
+    operator tap::control::Subsystem& () override;
     private:
         void updateRamps();
         void syncLogicToRamps();
