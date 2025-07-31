@@ -20,6 +20,7 @@ namespace fang::chassis
         kConfig_{config}
     {
         assertConfigValues(config);
+        //You must cast to reference of the type so that the actual subsystem is registered
         addSubsystemRequirement(&static_cast<tap::control::Subsystem&>(holonomicSubsystem_));
     }
 
