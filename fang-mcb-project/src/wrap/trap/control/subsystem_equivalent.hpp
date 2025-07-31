@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_WRAP_TRAP_CONTROL_SUBSYSTEM_EQUIVALENT_HPP
 #define FANG_ROBOTICS_MCB_WRAP_TRAP_CONTROL_SUBSYSTEM_EQUIVALENT_HPP
-#include "tap/drivers.hpp"
+#include "tap/control/subsystem.hpp"
 namespace trap::control
 {
     /**
@@ -18,10 +18,16 @@ namespace trap::control
      * There is a cleaner solution: by allowing conversion into a subsystem
      * the interface can provide a command the subsystem for registration
      * but then not require.
+     *
+     * It is a pointer because subsytems are passed around via pointers when
+     * interacting with traproot.
+     *
+     * The fang code does not interact with subsystems as subsystems directly
      */
     class SubsystemEquivalent
     {
-        virtual operator tap::Drivers* () = 0;
+    public:
+        virtual operator tap::control::Subsystem& () = 0;
     };
 }
 #endif // WRAP_TRAP_CONTROL_SUBSYSTEM_EQUIVALENT_HPP_
