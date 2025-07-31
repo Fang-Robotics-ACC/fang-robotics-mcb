@@ -19,7 +19,6 @@
 #include "tap/communication/gpio/pwm.hpp"
 #include "tap/control/subsystem.hpp"
 
-#include "wrap/rail/chassis/iquad_drive_subsystem.hpp"
 
 #include "driver/motor/repeat_robotics/gearbox_repeat_ultra_mk2.hpp"
 

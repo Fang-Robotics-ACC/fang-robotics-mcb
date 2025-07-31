@@ -1,4 +1,4 @@
-#include "mecanum_subsystem.hpp"
+#include "mecanum_drive.hpp"
 
 #include "system/assert/fang_assert.hpp"
 #include "tap/algorithms/math_user_utils.hpp"
@@ -7,10 +7,10 @@
 
 namespace fang::chassis
 {
-    MecanumSubsystem::MecanumSubsystem
+    MecanumDrive::MecanumDrive
     (
         Drivers& drivers,
-        std::unique_ptr<IQuadDriveSubsystem> quadDrive,
+        std::unique_ptr<IQuadDrive> quadDrive,
         std::unique_ptr<Imu> imu,
         const Config& config
     ):
@@ -22,28 +22,33 @@ namespace fang::chassis
     {
     }
 
-    void MecanumSubsystem::setTargetTranslation(const physics::Velocity2D& translation)
+    void MecanumDrive::setTargetTranslation(const physics::Velocity2D& translation)
     {
         mecanumLogic_.setTranslation(translation);
     }
 
-    void MecanumSubsystem::setTargetRotation(const RPM& rotation)
+    void MecanumDrive::setTargetRotation(const RPM& rotation)
     {
         mecanumLogic_.setRotation(rotation);
     }
 
-    void MecanumSubsystem::initialize()
+    void MecanumDrive::initialize()
     {
         quadDrive_->initialize();
     }
 
-    void MecanumSubsystem::refresh()
+    void MecanumDrive::update()
     {
         updateFieldAngle();
         syncWheelsToLogic();
     }
 
-    void MecanumSubsystem::refreshSafeDisconnect()
+    void MecanumDrive::refresh()
+    {
+        update();
+    }
+
+    void MecanumDrive::refreshSafeDisconnect()
     {
         //The robot should not move when disconnected
         mecanumLogic_.setTranslation({0_mps, 0_mps});
@@ -52,12 +57,12 @@ namespace fang::chassis
         syncWheelsToLogic();
     }
 
-    void MecanumSubsystem::syncWheelsToLogic()
+    void MecanumDrive::syncWheelsToLogic()
     {
         quadDrive_->setTargetWheelSpeeds(mecanumLogic_.getWheelSpeeds());
     }
 
-    void MecanumSubsystem::updateFieldAngle()
+    void MecanumDrive::updateFieldAngle()
     {
         const Radians currentFieldAngle{imu_->getYaw()};
         mecanumLogic_.setRobotAngle(currentFieldAngle);

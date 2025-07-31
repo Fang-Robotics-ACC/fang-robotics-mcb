@@ -8,8 +8,8 @@
 #include "util/physics/data/velocity_2d.hpp"
 
 #include "wrap/units/units_alias.hpp"
-#include "wrap/rail/chassis/iquad_drive_subsystem.hpp"
 #include "wrap/trap/communication/sensors/imu.hpp"
+#include "wrap/rail/chassis/iquad_drive.hpp"
 
 namespace fang::chassis
 {
@@ -18,7 +18,7 @@ namespace fang::chassis
      * subsystem control functionality for a mecanum drive
      * with dimensional analysis
      */
-    class MecanumSubsystem : public HolonomicSubsystem
+    class MecanumDrive : public HolonomicSubsystem
     {
     public:
         using Imu = trap::communication::sensors::Imu;
@@ -46,10 +46,10 @@ namespace fang::chassis
      * @param imu - imu attached to the chassis
      * @param config - see config
      */
-    MecanumSubsystem
+    MecanumDrive
     (
         Drivers& drivers,
-        std::unique_ptr<IQuadDriveSubsystem> quadDrive,
+        std::unique_ptr<IQuadDrive> quadDrive,
         std::unique_ptr<Imu> imu,
         const Config& config
     );
@@ -69,6 +69,7 @@ namespace fang::chassis
     void setTargetRotation(const RPM& rotation) override;
 
     void initialize() override;
+    void update() override;
 
     /**
      * Called regularly
@@ -80,11 +81,10 @@ namespace fang::chassis
      */
     void refreshSafeDisconnect() override;
     private:
-        void updateRamps();
         void updateFieldAngle();
         void syncWheelsToLogic();
 
-        std::unique_ptr<IQuadDriveSubsystem> quadDrive_;
+        std::unique_ptr<IQuadDrive> quadDrive_;
         std::unique_ptr<Imu> imu_;
 
         FieldMecanumLogic mecanumLogic_;
