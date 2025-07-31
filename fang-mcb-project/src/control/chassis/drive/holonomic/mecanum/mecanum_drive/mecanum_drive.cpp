@@ -39,6 +39,7 @@ namespace fang::chassis
 
     void MecanumDrive::update()
     {
+        updateSystems();
         updateFieldAngle();
         syncWheelsToLogic();
     }
@@ -55,6 +56,11 @@ namespace fang::chassis
         mecanumLogic_.setRotation(0_rpm);
         //Make sure wheels are sent a zero signal
         syncWheelsToLogic();
+    }
+
+    void MecanumDrive::updateSystems()
+    {
+        quadDrive_->update();
     }
 
     void MecanumDrive::syncWheelsToLogic()

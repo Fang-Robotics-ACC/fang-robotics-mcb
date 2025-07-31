@@ -81,6 +81,7 @@ namespace fang::chassis
      */
     void refreshSafeDisconnect() override;
     private:
+        void updateSystems();
         void updateFieldAngle();
         void syncWheelsToLogic();
 
