@@ -12,33 +12,24 @@ namespace fang::chassis
         Drivers& drivers,
         std::unique_ptr<IQuadDriveSubsystem> quadDrive,
         std::unique_ptr<Imu> imu,
-        std::unique_ptr<TranslationRamp> translationRamp,
-        std::unique_ptr<RotationRamp> rotationRamp,
         const Config& config
     ):
         //Base
         Subsystem{&drivers},
-        //Owned systems
         quadDrive_{std::move(quadDrive_)},
         imu_{std::move(imu)},
-        //Ramps
-        translationRamp_{std::move(translationRamp)},
-        rotationRamp_{std::move(rotationRamp_)},
-        //Static Utils
         mecanumLogic_{config.mecanumLogicConfig}
     {
     }
 
-
     void MecanumSubsystem::setTargetTranslation(const physics::Velocity2D& translation)
     {
-        translationRamp_->setTarget(translation);
+        mecanumLogic_.setTranslation(translation);
     }
 
     void MecanumSubsystem::setTargetRotation(const RPM& rotation)
     {
-
-        rotationRamp_->setTarget(rotation);
+        mecanumLogic_.setRotation(rotation);
     }
 
     void MecanumSubsystem::initialize()
@@ -48,10 +39,8 @@ namespace fang::chassis
 
     void MecanumSubsystem::refresh()
     {
-        updateRamps();
-        syncLogicToRamps();
-        syncWheelsToLogic();
         updateFieldAngle();
+        syncWheelsToLogic();
     }
 
     void MecanumSubsystem::refreshSafeDisconnect()
@@ -61,18 +50,6 @@ namespace fang::chassis
         mecanumLogic_.setRotation(0_rpm);
         //Make sure wheels are sent a zero signal
         syncWheelsToLogic();
-    }
-
-    void MecanumSubsystem::updateRamps()
-    {
-        translationRamp_->update();
-        rotationRamp_->update();
-    }
-
-    void MecanumSubsystem::syncLogicToRamps()
-    {
-        mecanumLogic_.setTranslation(translationRamp_->getValue());
-        mecanumLogic_.setRotation(rotationRamp_->getValue());
     }
 
     void MecanumSubsystem::syncWheelsToLogic()

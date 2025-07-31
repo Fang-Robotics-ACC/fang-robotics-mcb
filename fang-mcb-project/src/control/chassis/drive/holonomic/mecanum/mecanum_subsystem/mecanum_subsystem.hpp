@@ -68,8 +68,6 @@ namespace fang::chassis
         Drivers& drivers,
         std::unique_ptr<IQuadDriveSubsystem> quadDrive,
         std::unique_ptr<Imu> imu,
-        std::unique_ptr<TranslationRamp> translationRamp,
-        std::unique_ptr<RotationRamp> rotationRamp,
         const Config& config
     );
 
@@ -102,16 +100,11 @@ namespace fang::chassis
     operator tap::control::Subsystem& () override;
     private:
         void updateRamps();
-        void syncLogicToRamps();
-        void syncWheelsToLogic();
         void updateFieldAngle();
-        void setPwmFrequency();
+        void syncWheelsToLogic();
 
         std::unique_ptr<IQuadDriveSubsystem> quadDrive_;
         std::unique_ptr<Imu> imu_;
-
-        std::unique_ptr<TranslationRamp> translationRamp_;
-        std::unique_ptr<RotationRamp> rotationRamp_;
 
         FieldMecanumLogic mecanumLogic_;
     };
