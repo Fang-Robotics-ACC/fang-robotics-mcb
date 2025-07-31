@@ -1,9 +1,9 @@
-#include "quad_drive_subsystem.hpp"
+#include "base_quad_drive.hpp"
 #include "control/chassis/drive/quad_drive/data/quad_index.hpp"
 
 namespace fang::chassis
 {
-    QuadDriveSubsystem::QuadDriveSubsystem
+    BaseQuadDrive::BaseQuadDrive
     (
         Drivers& drivers,
         std::unique_ptr<Motor> frontLeftMotor,
@@ -11,7 +11,7 @@ namespace fang::chassis
         std::unique_ptr<Motor> rearLeftMotor,
         std::unique_ptr<Motor> rearRightMotor
     ):
-        IQuadDriveSubsystem{drivers},
+        QuadDriveSubsystem{drivers},
         motors_
         {
             std::move(frontLeftMotor),
@@ -22,7 +22,7 @@ namespace fang::chassis
     {
     }
 
-    void QuadDriveSubsystem::setTargetWheelSpeeds(const QuadRPM& wheelSpeeds)
+    void BaseQuadDrive::setTargetWheelSpeeds(const QuadRPM& wheelSpeeds)
     {
         motors_[QuadIndex::kFrontLeft]->setTargetSpeed(wheelSpeeds.frontLeft);
         motors_[QuadIndex::kfrontRight]->setTargetSpeed(wheelSpeeds.frontRight);
@@ -30,7 +30,7 @@ namespace fang::chassis
         motors_[QuadIndex::kRearRight]->setTargetSpeed(wheelSpeeds.rearRight);
     }
 
-    void QuadDriveSubsystem::initialize()
+    void BaseQuadDrive::initialize()
     {
         for(std::unique_ptr<Motor>& motor: motors_)
         {
@@ -38,11 +38,16 @@ namespace fang::chassis
         }
     }
 
-    void QuadDriveSubsystem::refresh()
+    void BaseQuadDrive::update()
     {
         for(std::unique_ptr<Motor>& motor: motors_)
         {
             motor->update();
         }
     }
+    void BaseQuadDrive::refresh()
+    {
+        update();
+    }
+
 }

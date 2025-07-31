@@ -1,4 +1,4 @@
-#include "control/chassis/drive/quad_drive/quad_drive_subsystem/quad_drive_subsystem.hpp"
+#include "control/chassis/drive/quad_drive/base_quad_drive/base_quad_drive.hpp"
 #include "test/mock/rail/rail_motor_mocks.hpp"
 #include "driver/drivers.hpp"
 
@@ -51,7 +51,7 @@ namespace fang::chassis
         motor::ISpeedMotorMock& frontRightMotor_;
         motor::ISpeedMotorMock& rearLeftMotor_;
         motor::ISpeedMotorMock& rearRightMotor_;
-        QuadDriveSubsystem quadDriveSubsystem_;
+        BaseQuadDrive quadDriveSubsystem_;
 
         Drivers drivers_{};
     };

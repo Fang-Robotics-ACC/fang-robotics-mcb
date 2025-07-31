@@ -1,8 +1,7 @@
-#ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DRIVE_QUAD_SUBSYSTEM_DRIVE_QUAD_SUBSYSTEM_HPP
-#define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DRIVE_QUAD_SUBSYSTEM_DRIVE_QUAD_SUBSYSTEM_HPP
-#include "control/chassis/drive/quad_drive/data/quad_drive_data.hpp"
+#ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DRIVE_QUAD_DRIVE_BASE_QUAD_DRIVE_HPP
+#define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DRIVE_QUAD_DRIVE_BASE_QUAD_DRIVE_HPP
+#include "control/chassis/drive/quad_drive/quad_drive_subsystem.hpp"
 #include "driver/drivers.hpp"
-#include "wrap/rail/chassis/iquad_drive_subsystem.hpp"
 #include "wrap/rail/rail_motor_owner.hpp"
 
 #include <array>
@@ -20,13 +19,12 @@ namespace fang::chassis
      *
      * This can be managed by a taproot command (can be registered).
      */
-    class QuadDriveSubsystem:
-        virtual public IQuadDriveSubsystem
+    class BaseQuadDrive : public QuadDriveSubsystem
     {
     public:
         using Motor = motor::ISpeedMotor;
 
-        QuadDriveSubsystem
+        BaseQuadDrive
         (
             Drivers& drivers,
             std::unique_ptr<Motor> frontLeftMotor,
@@ -37,6 +35,7 @@ namespace fang::chassis
 
         virtual void setTargetWheelSpeeds(const QuadRPM& wheelSpeeds) override;
         virtual void initialize() override;
+        virtual void update() override;
         virtual void refresh() override;
     private:
         std::array<std::unique_ptr<Motor>, 4> motors_;
