@@ -20,7 +20,7 @@ namespace fang::chassis
         kConfig_{config}
     {
         assertConfigValues(config);
-        addSubsystemRequirement(holonomicSubsystem_);
+        addSubsystemRequirement(&static_cast<tap::control::Subsystem&>(holonomicSubsystem_));
     }
 
     const char* FieldDriftCommand::getName() const
