@@ -1,4 +1,4 @@
-#include "control/chassis/drive/holonomic/mecanum/mecanum_subsystem/mecanum_subsystem.hpp"
+#include "control/chassis/drive/holonomic/mecanum/mecanum_drive/mecanum_drive.hpp"
 
 #include "test/mock/trap/algorithms/ramp_mock.hpp"
 #include "test/mock/trap/algorithms/ramp_2d_mock.hpp"
