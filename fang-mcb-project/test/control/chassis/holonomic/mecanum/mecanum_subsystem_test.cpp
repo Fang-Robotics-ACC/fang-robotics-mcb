@@ -11,41 +11,41 @@
 
 namespace fang::chassis
 {
-//    using namespace units::literals;
-//    /**
-//     * Create a subsystem as well as reference
-//     * accessors for checking calls to motors
-//     */
-//    class MecanumSubsystemTestMockup 
-//    {
-//    protected:
-//        MecanumSubsystemTestMockup():
-//            //This is needed to gain access into the motor states, only required for testing
-//            //Otherwise the motor states are inaccessible (unique pointer stuff)
-//            quadDrivePtr_{std::make_unique<}
+    //using namespace units::literals;
+    ///**
+    // * Create a subsystem as well as reference
+    // * accessors for checking calls to motors
+    // */
+    //class MecanumSubsystemTestMockup
+    //{
+    //protected:
+    //    MecanumSubsystemTestMockup():
+    //        //This is needed to gain access into the motor states, only required for testing
+    //        //Otherwise the motor states are inaccessible (unique pointer stuff)
+    //        quadDrivePtr_{std::make_unique<}
 
 
 
-//            quadDriveSubsystem_
-//        {
-//        }
-//        Drivers drivers_{};
-//    private:
-//        //Prevents dangling references
-//        //Since these pointers are invalid they should not be accessible to the client
-//        std::unique_ptr<IQuadDriveSubsystem> quadDrivePtr_;
-//        std::unique_ptr<MecanumSubsystem::Imu> imuPtr_;
-//        std::unique_ptr<MecanumSubsystem::TranslationRamp> translationRampPtr_;
-//        std::unique_ptr<MecanumSubsystem::RotationRamp> rotationRampPtr_;
-//    protected:
-//        IQuadDriveSubsystem& quadDrive_;
-//        MecanumSubsystem::Imu& imu_;
-//        MecanumSubsystem::TranslationRamp& translationRamp_;
-//        MecanumSubsystem::RotationRamp& rotationRamp_;
+    //        quadDriveSubsystem_
+    //    {
+    //    }
+    //    Drivers drivers_{};
+    //private:
+    //    //Prevents dangling references
+    //    //Since these pointers are invalid they should not be accessible to the client
+    //    std::unique_ptr<IQuadDriveSubsystem> quadDrivePtr_;
+    //    std::unique_ptr<MecanumSubsystem::Imu> imuPtr_;
+    //    std::unique_ptr<MecanumSubsystem::TranslationRamp> translationRampPtr_;
+    //    std::unique_ptr<MecanumSubsystem::RotationRamp> rotationRampPtr_;
+    //protected:
+    //    IQuadDriveSubsystem& quadDrive_;
+    //    MecanumSubsystem::Imu& imu_;
+    //    MecanumSubsystem::TranslationRamp& translationRamp_;
+    //    MecanumSubsystem::RotationRamp& rotationRamp_;
 
-//        MecanumSubsystem& quadDriveSubsystem_;
+    //    MecanumSubsystem& quadDriveSubsystem_;
 
-//    };
+    //};
 
 
 }
