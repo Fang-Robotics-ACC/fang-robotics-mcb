@@ -11,7 +11,7 @@ namespace trap::algorithms
     {
     public:
         MOCK_METHOD(void, setTarget, (ValueUnit target), (override));
-        MOCK_METHOD(ValueUnit, getTarget(), (const, override));
+        MOCK_METHOD(ValueUnit, getTarget, (), (const, override));
         MOCK_METHOD(void, setSpeed, (double speed), (override));
         MOCK_METHOD(void, update, (), (override));
         MOCK_METHOD(ValueUnit, getValue, (), (const, override));
