@@ -21,7 +21,7 @@ namespace fang::chassis
     class MecanumDrive : public HolonomicSubsystem
     {
     public:
-        using Imu = trap::communication::sensors::Imu;
+        using Imu = trap::communication::sensors::IImu;
 
     struct ChassisDimensionConfig
     {
