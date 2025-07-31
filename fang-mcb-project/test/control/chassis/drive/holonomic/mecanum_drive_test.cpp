@@ -29,6 +29,8 @@ namespace fang::chassis
     protected:
         using Imu = MecanumDrive::Imu;
         MecanumDriveTestMockup():
+            //Hack to gain access into testing components without
+            //duplication
             quadDrive_{*(new fang::chassis::IQuadDriveMock())},
             imu_{*(new trap::communication::sensors::IImuMock{})},
             mecanumDrive_
