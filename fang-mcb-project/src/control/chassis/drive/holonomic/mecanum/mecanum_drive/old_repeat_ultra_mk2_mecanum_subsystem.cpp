@@ -60,6 +60,11 @@ namespace fang::chassis
         m_rearRightMotor.initialize();
     }
 
+    void RepeatUltraMk2MecanumSubsystem::update()
+    {
+        refresh();
+    }
+
     void RepeatUltraMk2MecanumSubsystem::refresh()
     {
         updateRamps();

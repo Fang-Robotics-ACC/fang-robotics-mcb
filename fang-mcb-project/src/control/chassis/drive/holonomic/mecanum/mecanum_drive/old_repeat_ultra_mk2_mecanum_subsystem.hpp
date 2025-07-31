@@ -109,6 +109,7 @@ namespace fang::chassis
      * Called regularly
      */
     void refresh() override;
+    void update() override;
 
     void refreshSafeDisconnect() override;
 

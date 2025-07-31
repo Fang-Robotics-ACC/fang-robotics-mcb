@@ -1,6 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_CHASSIS_CONFIG_PIERCE_HPP
 #define FANG_ROBOTICS_MCB_CHASSIS_CONFIG_PIERCE_HPP
-#include "control/chassis/drive/holonomic/mecanum/mecanum_subsystem/old_repeat_ultra_mk2_mecanum_subsystem.hpp"
+
+#include "control/chassis/drive/holonomic/mecanum/mecanum_drive/old_repeat_ultra_mk2_mecanum_subsystem.hpp"
 #include "wrap/units/units_alias.hpp"
 
 namespace fang::robot 

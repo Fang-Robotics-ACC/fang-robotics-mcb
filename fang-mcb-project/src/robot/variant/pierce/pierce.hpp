@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "driver/drivers.hpp"
 //Subsystems
-#include "control/chassis/drive/holonomic/mecanum/mecanum_subsystem/old_repeat_ultra_mk2_mecanum_subsystem.hpp"
+#include "control/chassis/drive/holonomic/mecanum/mecanum_drive/old_repeat_ultra_mk2_mecanum_subsystem.hpp"
 
 #include "control/turret/gimbal_subsystem.hpp"
 #include "control/turret/feeder/simple_feeder_subsystem/simple_feeder_subsystem.hpp"
