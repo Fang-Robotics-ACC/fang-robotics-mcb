@@ -1,51 +1,55 @@
 #include "control/chassis/drive/holonomic/mecanum/mecanum_drive/mecanum_drive.hpp"
 
-#include "test/mock/trap/algorithms/ramp_mock.hpp"
-#include "test/mock/trap/algorithms/ramp_2d_mock.hpp"
-
-#include "wrap/trap/algorithms/ramp_2d.hpp"
-#include "wrap/trap/algorithms/ramp.hpp"
+#include "test/mock/rail/rail_chassis_mocks.hpp"
+#include "test/mock/trap/communication/sensors/iimu_mock.hpp"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
 namespace fang::chassis
 {
-    //using namespace units::literals;
-    ///**
-    // * Create a subsystem as well as reference
-    // * accessors for checking calls to motors
-    // */
-    //class MecanumSubsystemTestMockup
-    //{
-    //protected:
-    //    MecanumSubsystemTestMockup():
-    //        //This is needed to gain access into the motor states, only required for testing
-    //        //Otherwise the motor states are inaccessible (unique pointer stuff)
-    //        quadDrivePtr_{std::make_unique<}
+    using namespace units::literals;
+    constexpr FieldMecanumLogic::Config kDefaultMecanumLogicConfig
+    {
+        .horizontalWheelDistance = 1_m,
+        .verticalWheelDistance = 1_m,
+        .wheelRadius = 0.5_m
+    };
 
+    constexpr MecanumDrive::Config kDefaultConfig
+    {
+        .mecanumLogicConfig =  kDefaultMecanumLogicConfig
+    };
+    /**
+     * Create a subsystem as well as reference
+     * accessors for checking calls to motors
+     */
+    class MecanumDriveTestMockup
+    {
+    protected:
+        using Imu = MecanumDrive::Imu;
+        MecanumDriveTestMockup():
+            quadDrive_{*(new fang::chassis::IQuadDriveMock())},
+            imu_{*(new trap::communication::sensors::IImuMock{})},
+            mecanumDrive_
+            {
+                drivers_,
+                std::unique_ptr<IQuadDrive>(&quadDrive_),
+                std::unique_ptr<Imu>(&imu_),
+                kDefaultConfig
+            }
+        {
+        }
+    private:
+        std::unique_ptr<IQuadDrive>quadDrivePtr_;
+        std::unique_ptr<Imu>imuPtr_;
+    protected:
+        Drivers drivers_{};
+        IQuadDrive& quadDrive_;
+        Imu& imu_;
 
+        MecanumDrive mecanumDrive_;
 
-    //        quadDriveSubsystem_
-    //    {
-    //    }
-    //    Drivers drivers_{};
-    //private:
-    //    //Prevents dangling references
-    //    //Since these pointers are invalid they should not be accessible to the client
-    //    std::unique_ptr<IQuadDriveSubsystem> quadDrivePtr_;
-    //    std::unique_ptr<MecanumSubsystem::Imu> imuPtr_;
-    //    std::unique_ptr<MecanumSubsystem::TranslationRamp> translationRampPtr_;
-    //    std::unique_ptr<MecanumSubsystem::RotationRamp> rotationRampPtr_;
-    //protected:
-    //    IQuadDriveSubsystem& quadDrive_;
-    //    MecanumSubsystem::Imu& imu_;
-    //    MecanumSubsystem::TranslationRamp& translationRamp_;
-    //    MecanumSubsystem::RotationRamp& rotationRamp_;
-
-    //    MecanumSubsystem& quadDriveSubsystem_;
-
-    //};
-
+    };
 
 }
