@@ -6,9 +6,10 @@
 
 namespace fang::chassis 
 {
+    using namespace units::literals;
     TardisCommand::TardisCommand
     (
-        IHolonomicSubsystem& chassisSubsystem,
+        HolonomicSubsystem& chassisSubsystem,
         const turret::GimbalSubsystem& turret,
         ChassisInputHandler& input,
         const Config& config

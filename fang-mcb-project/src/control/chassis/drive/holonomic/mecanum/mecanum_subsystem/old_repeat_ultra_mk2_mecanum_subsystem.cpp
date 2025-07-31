@@ -6,7 +6,7 @@
 namespace fang::chassis
 {
     RepeatUltraMk2MecanumSubsystem::RepeatUltraMk2MecanumSubsystem(Drivers& drivers, const ChassisConfig& chassisConfig):
-        Subsystem{&drivers},
+        HolonomicSubsystem{drivers},
         m_drivers{drivers},
         mk_pwmFrequency{chassisConfig.pwmFrequency},
         mk_pwmTimer{chassisConfig.pwmTimer},
@@ -110,10 +110,5 @@ namespace fang::chassis
     void RepeatUltraMk2MecanumSubsystem::setPwmFrequency()
     {
         m_drivers.pwm.setTimerFrequency(mk_pwmTimer, static_cast<double>(Hertz{mk_pwmFrequency}));
-    }
-
-    RepeatUltraMk2MecanumSubsystem::operator tap::control::Subsystem& ()
-    {
-        return *this;
     }
 }//namespace chassis

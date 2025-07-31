@@ -9,9 +9,10 @@
 
 namespace fang::chassis
 {
+    using namespace units::literals;
     FieldDriftCommand::FieldDriftCommand
     (
-        IHolonomicSubsystem& chassisSubsystem,
+        HolonomicSubsystem& chassisSubsystem,
         ChassisInputHandler& inputHandler,
         const Config& config
     ):   
@@ -21,7 +22,7 @@ namespace fang::chassis
     {
         assertConfigValues(config);
         //You must cast to reference of the type so that the actual subsystem is registered
-        addSubsystemRequirement(&static_cast<tap::control::Subsystem&>(holonomicSubsystem_));
+        addSubsystemRequirement(&holonomicSubsystem_);
     }
 
     const char* FieldDriftCommand::getName() const

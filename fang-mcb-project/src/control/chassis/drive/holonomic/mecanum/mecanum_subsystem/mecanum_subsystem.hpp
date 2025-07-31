@@ -4,24 +4,12 @@
 #include "driver/drivers.hpp"
 #include "driver/motor/data/directionality.hpp"
 #include "control/chassis/drive/holonomic/mecanum/logic/field_mecanum_logic.hpp"
+#include "control/chassis/drive/holonomic/holonomic_subsystem.hpp"
 #include "util/physics/data/velocity_2d.hpp"
 
 #include "wrap/units/units_alias.hpp"
-
-
-#include "wrap/trap/communication/pwm_data.hpp"
-#include "wrap/trap/control/chassis/power_limiter.hpp"
-#include "wrap/trap/algorithms/ramp_2d.hpp"
-#include "wrap/trap/algorithms/ramp.hpp"
-#include "wrap/trap/communication/sensors/imu.hpp"
-
-
-#include "tap/communication/gpio/pwm.hpp"
-#include "tap/control/subsystem.hpp"
-#include "wrap/rail/chassis/iholonomic_subsystem.hpp"
 #include "wrap/rail/chassis/iquad_drive_subsystem.hpp"
-
-#include "driver/motor/repeat_robotics/gearbox_repeat_ultra_mk2.hpp"
+#include "wrap/trap/communication/sensors/imu.hpp"
 
 namespace fang::chassis
 {
@@ -30,14 +18,10 @@ namespace fang::chassis
      * subsystem control functionality for a mecanum drive
      * with dimensional analysis
      */
-    class MecanumSubsystem : virtual public IHolonomicSubsystem, public tap::control::Subsystem
+    class MecanumSubsystem : public HolonomicSubsystem
     {
     public:
-        using DriveMotor = fang::motor::GearboxRepeatUltraMk2;
-        using PowerLimiter = trap::control::chassis::PowerLimiter;
         using Imu = trap::communication::sensors::Imu;
-        using TranslationRamp = trap::algorithms::Ramp2D<MetersPerSecond, Seconds>;
-        using RotationRamp = trap::algorithms::Ramp<RPM, Seconds>;
 
     struct ChassisDimensionConfig
     {
@@ -55,7 +39,6 @@ namespace fang::chassis
     struct Config
     {
         FieldMecanumLogic::Config mecanumLogicConfig;
-        PowerLimiter::Config powerLimiterConfig;
     };
 
     /**
@@ -96,8 +79,6 @@ namespace fang::chassis
      * Kills functionality upon loss of remote input
      */
     void refreshSafeDisconnect() override;
-
-    operator tap::control::Subsystem& () override;
     private:
         void updateRamps();
         void updateFieldAngle();

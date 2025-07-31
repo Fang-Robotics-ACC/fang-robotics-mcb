@@ -7,9 +7,10 @@
 
 namespace fang::chassis
 {
+    using namespace units::literals;
     ShurikenCommand::ShurikenCommand
     (
-        IHolonomicSubsystem& holonomicSubsystem,
+        HolonomicSubsystem& holonomicSubsystem,
         const turret::GimbalSubsystem& gimbal,
         ChassisInputHandler& input,
         const Config& config

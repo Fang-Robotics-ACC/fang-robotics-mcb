@@ -41,7 +41,13 @@ namespace fang::chassis
         /**
          * This takes a chassis subsystem and the respective inputHandler
          */
-        TardisCommand(IHolonomicSubsystem& chassisSubsystem, const turret::GimbalSubsystem& turret ,ChassisInputHandler& input, const Config& config);
+        TardisCommand
+        (
+            HolonomicSubsystem& chassisSubsystem,
+            const turret::GimbalSubsystem& turret,
+            ChassisInputHandler& input,
+            const Config& config
+        );
         const char* getName() const override;
         void execute() override;
     protected:

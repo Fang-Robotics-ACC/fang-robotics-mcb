@@ -4,6 +4,7 @@
 #include "driver/drivers.hpp"
 #include "driver/motor/data/directionality.hpp"
 #include "control/chassis/drive/holonomic/mecanum/logic/field_mecanum_logic.hpp"
+#include "control/chassis/drive/holonomic/holonomic_subsystem.hpp"
 #include "util/physics/data/velocity_2d.hpp"
 
 #include "wrap/units/units_alias.hpp"
@@ -28,9 +29,7 @@ namespace fang::chassis
      * subsystem control functionality for a mecanum drive
      * with dimensional analysis
      */
-    class RepeatUltraMk2MecanumSubsystem:
-        virtual public IHolonomicSubsystem,
-        public tap::control::Subsystem
+    class RepeatUltraMk2MecanumSubsystem : public HolonomicSubsystem
     {
     public:
     using DriveMotor = fang::motor::GearboxRepeatUltraMk2;
@@ -113,7 +112,6 @@ namespace fang::chassis
 
     void refreshSafeDisconnect() override;
 
-    operator tap::control::Subsystem& () override;
     private:
         void updateRamps();
         void syncLogicToRamps();

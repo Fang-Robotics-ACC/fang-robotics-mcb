@@ -15,7 +15,7 @@ namespace fang::chassis
         const Config& config
     ):
         //Base
-        Subsystem{&drivers},
+        HolonomicSubsystem{drivers},
         quadDrive_{std::move(quadDrive_)},
         imu_{std::move(imu)},
         mecanumLogic_{config.mecanumLogicConfig}
@@ -61,10 +61,5 @@ namespace fang::chassis
     {
         const Radians currentFieldAngle{imu_->getYaw()};
         mecanumLogic_.setRobotAngle(currentFieldAngle);
-    }
-
-    MecanumSubsystem::operator tap::control::Subsystem& ()
-    {
-        return *this;
     }
 }//namespace chassis

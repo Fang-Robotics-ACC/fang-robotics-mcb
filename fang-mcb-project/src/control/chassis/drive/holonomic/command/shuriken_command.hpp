@@ -1,7 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_SHURIKEN_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_SHURIKEN_COMMAND_HPP
 #include "counter_strike_command.hpp"
-#include "control/chassis/drive/holonomic/mecanum/mecanum_subsystem/old_repeat_ultra_mk2_mecanum_subsystem.hpp"
 #include "control/chassis/algorithms/basic_downscaler.hpp"
 
 #include "control/turret/gimbal_subsystem.hpp"
@@ -34,7 +33,7 @@ namespace fang::chassis
          */
         ShurikenCommand
         (
-            IHolonomicSubsystem& chassisSubsystem,
+            HolonomicSubsystem& chassisSubsystem,
             const turret::GimbalSubsystem& gimbal,
             ChassisInputHandler& input,
             const Config& config

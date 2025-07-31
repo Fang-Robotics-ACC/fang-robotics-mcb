@@ -3,10 +3,8 @@
 #include "field_drift_command.hpp"
 
 #include "control/chassis/chassis_input_handler.hpp"
-#include "control/chassis/drive/holonomic/mecanum/mecanum_subsystem/old_repeat_ultra_mk2_mecanum_subsystem.hpp"
 #include "control/turret/gimbal_subsystem.hpp"
 
-#include "wrap/rail/chassis/iholonomic_subsystem.hpp"
 #include "tap/control/command.hpp"
 
 namespace fang::chassis
@@ -29,7 +27,7 @@ namespace fang::chassis
          */
         CounterStrikeCommand
         (
-            IHolonomicSubsystem& holonomicSubsystem,
+            HolonomicSubsystem& holonomicSubsystem,
             const turret::GimbalSubsystem& gimbal,
             ChassisInputHandler& inputHandler,
             const Config& config
