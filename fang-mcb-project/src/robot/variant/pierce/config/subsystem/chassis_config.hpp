@@ -22,7 +22,6 @@ namespace fang::robot
     {
         .controllerInputVoltage = kControllerInputVoltage,
         .pwmData = {tap::gpio::Pwm::C1, kPwmFrequency},
-        .directionality = kMotorDirectionality,
         .inverted = kLeftMotorInversion,
         .gearRatio = kUltraMk2GearRatio 
     };
@@ -31,7 +30,6 @@ namespace fang::robot
     {
         .controllerInputVoltage = kControllerInputVoltage,
         .pwmData = {tap::gpio::Pwm::C2, kPwmFrequency},
-        .directionality = kMotorDirectionality,
         .inverted = kRightMotorInversion,
         .gearRatio = kUltraMk2GearRatio 
     };
@@ -40,7 +38,6 @@ namespace fang::robot
     {
         .controllerInputVoltage = kControllerInputVoltage,
         .pwmData = {tap::gpio::Pwm::C3, kPwmFrequency},
-        .directionality = kMotorDirectionality,
         .inverted = kLeftMotorInversion,
         .gearRatio = kUltraMk2GearRatio 
     };
@@ -49,7 +46,6 @@ namespace fang::robot
     {
         .controllerInputVoltage = kControllerInputVoltage,
         .pwmData = {tap::gpio::Pwm::C4, kPwmFrequency},
-        .directionality = kMotorDirectionality,
         .inverted = kRightMotorInversion,
         .gearRatio = kUltraMk2GearRatio 
     };
@@ -62,7 +58,7 @@ namespace fang::robot
         .rearRight = kRearRightMotorConfig
     };
 
-    static const chassis::RepeatUltraMk2MecanumSubsystem::PowerLimiter::Config kChassisPowerLimiterConfig
+    static const chassis::PierceMecanumDrive::PowerLimiter::Config kChassisPowerLimiterConfig
     {
         .startingEnergyBuffer       = 80_J,
         .energyBufferLimitThreshold = 5_J,
