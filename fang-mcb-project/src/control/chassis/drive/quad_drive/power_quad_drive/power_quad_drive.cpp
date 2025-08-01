@@ -1,4 +1,6 @@
 #include "power_quad_drive.hpp"
+
+#include "system/assert/fang_assert.hpp"
 namespace fang::chassis
 {
         PowerQuadDrive::PowerQuadDrive 
@@ -14,7 +16,9 @@ namespace fang::chassis
 
         void PowerQuadDrive::setTargetWheelSpeeds(const QuadRPM& wheelSpeeds)
         {
-            const QuadRPM scaledWheelSpeeds{wheelSpeeds * powerLimiter_->getPowerLimitRatio()};
+            const double powerLimitRatio(powerLimiter_->getPowerLimitRatio());
+            FANG_ASSERT(0 <= powerLimitRatio, "The limit ratio should not reverse direction!!!");
+            const QuadRPM scaledWheelSpeeds{wheelSpeeds * powerLimitRatio};
             BaseQuadDrive::setTargetWheelSpeeds(scaledWheelSpeeds);
         }
 
