@@ -1,4 +1,6 @@
 #include "gearbox_repeat_ultra_mk2.hpp"
+#include "driver/motor/util/gearbox_speed.hpp"
+
 namespace fang::motor
 {
     GearboxRepeatUltraMk2::GearboxRepeatUltraMk2
@@ -57,22 +59,6 @@ namespace fang::motor
 
 	void GearboxRepeatUltraMk2::setTargetSpeed(const RPM& speed)
     {
-        RepeatUltraMk2::setTargetSpeed(shaftToMotorSpeed(speed));
-    }
-
-    RPM GearboxRepeatUltraMk2::motorToShaftSpeed(const RPM& motorSpeed) const
-    {
-        //The gear ratio is how many times the motor rotates per gear rotation
-        //Therefore the motor speed must be divide by the gear ratio
-        return motorSpeed / kGearRatio_;
-    }
-
-    RPM GearboxRepeatUltraMk2::shaftToMotorSpeed(const RPM& shaftSpeed) const
-    {
-
-        //The gear ratio is how many times the motor rotates per gear rotation
-        //Therefore the shaft speed must be multiplied by the gear ratio
-        //To figure out how many times to motor rotates
-        return shaftSpeed * kGearRatio_;
+        RepeatUltraMk2::setTargetSpeed(shaftToMotorSpeed(speed, kGearRatio_));
     }
 }//namespace motor

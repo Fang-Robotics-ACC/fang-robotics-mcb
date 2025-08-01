@@ -71,9 +71,6 @@ namespace fang::motor
 		mockable void setTargetSpeed(const RPM& speed);
     private:
         const double kGearRatio_;
-
-        RPM motorToShaftSpeed(const RPM& motorSpeed) const;
-        RPM shaftToMotorSpeed(const RPM& shaftSpeed) const;
    };
 }
 #endif
