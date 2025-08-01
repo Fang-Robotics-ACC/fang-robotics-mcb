@@ -1,5 +1,4 @@
 #include "control/chassis/drive/holonomic/mecanum/mecanum_drive/mecanum_drive.hpp"
-#include "test/wrap/rail/chassis/expect_quad_drive_data_eq.hpp"
 
 #include "test/mock/rail/rail_chassis_mocks.hpp"
 #include "test/wrap/rail/chassis/quad_drive_match.hpp"
@@ -44,14 +43,10 @@ namespace fang::chassis
             }
         {
         }
-    private:
-        std::unique_ptr<testing::NiceMock<IQuadDriveMock>>quadDrivePtr_;
-        std::unique_ptr<testing::NiceMock<ImuMock>>imuPtr_;
     protected:
         Drivers drivers_{};
         IQuadDriveMock& quadDrive_;
         ImuMock& imu_;
-
         MecanumDrive mecanumDrive_;
     };
 
