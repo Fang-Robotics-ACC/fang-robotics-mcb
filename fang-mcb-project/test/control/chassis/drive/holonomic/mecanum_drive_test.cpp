@@ -28,30 +28,40 @@ namespace fang::chassis
     {
     protected:
         using Imu = MecanumDrive::Imu;
+        using ImuMock = trap::communication::sensors::IImuMock;
         MecanumDriveTestMockup():
-            //Hack to gain access into testing components without
-            //duplication
-            quadDrive_{*(new fang::chassis::IQuadDriveMock())},
-            imu_{*(new trap::communication::sensors::IImuMock{})},
+            //These will become smart pointers, so no worries
+            quadDrive_{*(new IQuadDriveMock{})},
+            imu_{*(new ImuMock{})},
             mecanumDrive_
             {
                 drivers_,
-                std::unique_ptr<IQuadDrive>(&quadDrive_),
-                std::unique_ptr<Imu>(&imu_),
+                std::unique_ptr<IQuadDrive>{&quadDrive_},
+                std::unique_ptr<MecanumDrive::Imu>{&imu_},
                 kDefaultConfig
             }
         {
         }
     private:
-        std::unique_ptr<IQuadDrive>quadDrivePtr_;
-        std::unique_ptr<Imu>imuPtr_;
+        std::unique_ptr<IQuadDriveMock>quadDrivePtr_;
+        std::unique_ptr<ImuMock>imuPtr_;
     protected:
         Drivers drivers_{};
-        IQuadDrive& quadDrive_;
-        Imu& imu_;
+        IQuadDriveMock& quadDrive_;
+        ImuMock& imu_;
 
         MecanumDrive mecanumDrive_;
-
     };
 
+    class MecanumDriveSystemTest:
+        public MecanumDriveTestMockup,
+        public ::testing::Test
+    {
+    };
+
+    TEST_F(MecanumDriveSystemTest, initialize)
+    {
+        EXPECT_CALL(quadDrive_, initialize());
+        mecanumDrive_.initialize();
+    }
 }
