@@ -18,19 +18,6 @@ namespace fang::motor
     class GearboxRepeatUltraMk2 : public RepeatUltraMk2
     {
     public:
-        /**
-         * DEPRECATED, will be removed when the chassis code is refactored
-         * These properties are the most common in being duplicate
-         * across multiple instances. For your convenience, a struct
-         * bundle has been provided.
-         */
-        struct UnifiedProperties
-        {
-            const Volts controllerInputVoltage;
-            motor::Directionality directionality;
-            double gearRatio;
-        };
-
         struct Config
         {
             const Volts& controllerInputVoltage;
