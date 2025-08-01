@@ -10,24 +10,16 @@
 namespace fang::chassis
 {
     /**
-     * This provides control for a set of 4 ISpeedMotors
-     * It manages the initialization and update functionality
-     * as well.
-     *
-     * This is often passed into a holonomic drive or tank drive
-     * to delegate managing the wheel speeds and updating each of the motors
-     *
-     * This can be managed by a taproot command (can be registered).
+     * This checks the power useage and appropriately downscales it
      */
     class PowerQuadDrive : public BaseQuadDrive
     {
     public:
-        using Motor = motor::ISpeedMotor;
 
         PowerQuadDrive 
         (
             Drivers& drivers,
-            std::unique_ptr<BaseQuadDrive> baseQuaddrive,
+            Motors&& motors,
             std::unique_ptr<IPowerLimiterSystem> powerLimiter
         );
 
