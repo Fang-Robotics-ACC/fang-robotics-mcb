@@ -1,6 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DRIVE_QUAD_DRIVE_BASE_QUAD_DRIVE_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DRIVE_QUAD_DRIVE_BASE_QUAD_DRIVE_HPP
 #include "control/chassis/drive/quad_drive/quad_drive_subsystem.hpp"
+#include "control/chassis/drive/quad_drive/data/quad_collection.hpp"
 #include "driver/drivers.hpp"
 #include "wrap/rail/rail_motor_owner.hpp"
 
@@ -23,6 +24,7 @@ namespace fang::chassis
     {
     public:
         using Motor = motor::ISpeedMotor;
+        using Motors = QuadCollection<std::unique_ptr<Motor>>;
 
         BaseQuadDrive
         (
@@ -32,6 +34,17 @@ namespace fang::chassis
             std::unique_ptr<Motor> rearLeftMotor,
             std::unique_ptr<Motor> rearRightMotor
         );
+
+        /**
+         * Motors should be passed explicitly with move semantics to prevent
+         * memory errors. If you are unfamiliar with r-value references,
+         * since they have no name, they pop into existence the moment they
+         * are stated then pop out. This means that we do not have to worry
+         * about motors continuing to hold unto.
+         * If motors must be a named variable, cast it to an r-value reference
+         * with std::move()
+         */
+        BaseQuadDrive(Drivers& drivers, Motors&& motors);
 
         virtual void setTargetWheelSpeeds(const QuadRPM& wheelSpeeds) override;
         virtual void initialize() override;

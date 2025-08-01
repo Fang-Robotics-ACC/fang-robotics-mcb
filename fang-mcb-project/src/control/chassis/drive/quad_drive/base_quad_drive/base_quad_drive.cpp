@@ -22,6 +22,22 @@ namespace fang::chassis
     {
     }
 
+    BaseQuadDrive::BaseQuadDrive
+    (
+        Drivers& drivers,
+        Motors&& motors
+    ):
+        QuadDriveSubsystem{drivers},
+        motors_
+        {
+            std::move(motors.frontLeft),
+            std::move(motors.frontRight),
+            std::move(motors.rearLeft),
+            std::move(motors.rearRight)
+        }
+    {
+    }
+
     void BaseQuadDrive::setTargetWheelSpeeds(const QuadRPM& wheelSpeeds)
     {
         motors_[QuadIndex::kFrontLeft]->setTargetSpeed(wheelSpeeds.frontLeft);
@@ -49,5 +65,4 @@ namespace fang::chassis
     {
         update();
     }
-
 }
