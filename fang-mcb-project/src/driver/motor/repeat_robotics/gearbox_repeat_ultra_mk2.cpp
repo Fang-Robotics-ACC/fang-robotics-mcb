@@ -15,45 +15,10 @@ namespace fang::motor
             {
                 config.controllerInputVoltage,
                 config.pwmData,
-                config.directionality,
                 config.inverted
             }
         ),
         kGearRatio_{config.gearRatio}
-    {
-    }
-
-    GearboxRepeatUltraMk2::GearboxRepeatUltraMk2
-    (
-        tap::Drivers& drivers, const UnifiedProperties&
-        unifiedProperties,
-        const trap::gpio::PwmData& pwmData,
-        bool inverted
-    ):
-        GearboxRepeatUltraMk2
-        (
-            drivers, unifiedProperties.controllerInputVoltage,
-            pwmData.pwmPin,
-            pwmData.pinFrequency,
-            unifiedProperties.directionality,
-            inverted,
-            unifiedProperties.gearRatio
-        )
-    {
-    }
-
-    GearboxRepeatUltraMk2::GearboxRepeatUltraMk2
-    (
-        tap::Drivers& drivers,
-        const Volts& controllerInputVoltage,
-        tap::gpio::Pwm::Pin pwmPin,
-        const Hertz& pinFrequency,
-        Directionality directionality,
-        bool inverted,
-        double gearRatio
-    ):
-        RepeatUltraMk2{drivers, controllerInputVoltage, pwmPin, pinFrequency, directionality, inverted},
-        kGearRatio_{gearRatio}
     {
     }
 
