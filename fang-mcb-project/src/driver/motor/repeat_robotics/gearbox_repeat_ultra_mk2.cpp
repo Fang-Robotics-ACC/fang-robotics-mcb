@@ -60,26 +60,6 @@ namespace fang::motor
         RepeatUltraMk2::setTargetSpeed(shaftToMotorSpeed(speed));
     }
 
-	void GearboxRepeatUltraMk2::setMaxSpeed(const RPM& maxSpeed)
-    {
-        RepeatUltraMk2::setMaxSpeed(shaftToMotorSpeed(maxSpeed));
-    }
-
-	RPM GearboxRepeatUltraMk2::getMaxSpeed() const
-    {
-        return motorToShaftSpeed(RepeatUltraMk2::getMaxSpeed());
-    }
-
-	void GearboxRepeatUltraMk2::setMinSpeed(const RPM& minSpeed)
-    {
-        RepeatUltraMk2::setMinSpeed(shaftToMotorSpeed(minSpeed));
-    }
-
-	RPM GearboxRepeatUltraMk2::getMinSpeed() const
-    {
-        return motorToShaftSpeed(RepeatUltraMk2::getMinSpeed());
-    }
-
     RPM GearboxRepeatUltraMk2::motorToShaftSpeed(const RPM& motorSpeed) const
     {
         //The gear ratio is how many times the motor rotates per gear rotation
@@ -94,10 +74,5 @@ namespace fang::motor
         //Therefore the shaft speed must be multiplied by the gear ratio
         //To figure out how many times to motor rotates
         return shaftSpeed * kGearRatio_;
-    }
-
-    double GearboxRepeatUltraMk2::getGearRatio() const
-    {
-        return kGearRatio_;
     }
 }//namespace motor

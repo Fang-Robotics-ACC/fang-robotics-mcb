@@ -69,33 +69,6 @@ namespace fang::motor
          * theoretical speed would be that.
          */
 		mockable void setTargetSpeed(const RPM& speed);
-
-        /**
-         * All requests will be clamped to this bound. The default is the maximum
-         * theoretical speed which is the motor kv (1450) multiplied by the nominal
-         * controller input voltage.
-         */
-		mockable void setMaxSpeed(const RPM& maxSpeed);
-        /**
-         * Get the maximum speed which all setTargetSpeed() requests are clamped to
-         */
-		mockable RPM getMaxSpeed() const;
-
-        /**
-         * All requests will be clamped to this bound. The default for unidirectional is 0 rpm.
-         * The default for bidirectional is the negative of the maximum theoretical speed.
-         */
-		mockable void setMinSpeed(const RPM& minSpeed);
-
-        /**
-         * Get the minimum speed which all setTargetSpeed requests are clamped to
-         */
-		mockable RPM getMinSpeed() const;
-        
-        /**
-         * Returns the gear ratio: the amount of turns a motor makes per shaft rotation.
-         */
-        mockable double getGearRatio() const;
     private:
         const double kGearRatio_;
 
