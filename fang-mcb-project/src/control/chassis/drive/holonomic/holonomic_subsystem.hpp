@@ -13,6 +13,9 @@ namespace fang::chassis
     public:
         HolonomicSubsystem(Drivers& drivers) : Subsystem{&drivers}
         {}
+
+        //Prevent ambiguity error since multiple ancestors have initialize()
+        virtual void initialize() override = 0;
         virtual ~HolonomicSubsystem() {};
     };
 }
