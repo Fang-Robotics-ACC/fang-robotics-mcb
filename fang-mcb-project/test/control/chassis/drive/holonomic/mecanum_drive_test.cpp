@@ -1,6 +1,8 @@
 #include "control/chassis/drive/holonomic/mecanum/mecanum_drive/mecanum_drive.hpp"
+#include "test/wrap/rail/chassis/expect_quad_drive_data_eq.hpp"
 
 #include "test/mock/rail/rail_chassis_mocks.hpp"
+#include "test/wrap/rail/chassis/quad_drive_match.hpp"
 #include "test/mock/trap/communication/sensors/iimu_mock.hpp"
 
 #include <gtest/gtest.h>
@@ -43,8 +45,8 @@ namespace fang::chassis
         {
         }
     private:
-        std::unique_ptr<IQuadDriveMock>quadDrivePtr_;
-        std::unique_ptr<ImuMock>imuPtr_;
+        std::unique_ptr<testing::NiceMock<IQuadDriveMock>>quadDrivePtr_;
+        std::unique_ptr<testing::NiceMock<ImuMock>>imuPtr_;
     protected:
         Drivers drivers_{};
         IQuadDriveMock& quadDrive_;
@@ -59,9 +61,82 @@ namespace fang::chassis
     {
     };
 
+    //The MecanumDrive manages a quadDrive which must be initialized and updated
+    //As it is delegating some functionality to the mecanum drive, it is being tested
+    //for it actually being called :D
+
     TEST_F(MecanumDriveSystemTest, initialize)
     {
         EXPECT_CALL(quadDrive_, initialize());
         mecanumDrive_.initialize();
     }
+
+    TEST_F(MecanumDriveSystemTest, updateAndRefresh)
+    {
+        EXPECT_CALL(quadDrive_, update());
+        mecanumDrive_.refresh();
+        EXPECT_CALL(quadDrive_, update());
+        mecanumDrive_.update();
+    }
+
+    struct LogicSyncTestParam
+    {
+        Velocity2D targetTranslation;
+        RPM targetRotation;
+        Radians fieldAngle;
+        FieldMecanumLogic::Config mecanumLogicConfig;
+    };
+
+    class MecanumDriveMecanumLogicSync:
+        public MecanumDriveTestMockup,
+        public ::testing::TestWithParam<LogicSyncTestParam>
+    {
+    protected:
+        const LogicSyncTestParam param{GetParam()};
+        const Velocity2D targetTranslation_{param.targetTranslation};
+        const RPM targetRotation_{param.targetRotation};
+        const Radians fieldAngle_{param.fieldAngle};
+        const FieldMecanumLogic::Config mecanumLogicConfig_{param.mecanumLogicConfig};
+    };
+
+    /*
+     * /*The correct wheel speeds must be syncrhonized
+     * mecanum logic does not have any variations, it is a
+     * specific mathematical operation.
+     *
+     * This checks that the quadDrive_ is being passed
+     * the wheel speeds as well as the correct ones
+     * during the refresh
+     */
+    TEST_P(MecanumDriveMecanumLogicSync, sync)
+    {
+        FieldMecanumLogic fieldLogic{mecanumLogicConfig_};
+        ON_CALL(imu_, getYaw()).WillByDefault(testing::Return(fieldAngle_));
+        fieldLogic.setRobotAngle(fieldAngle_);
+
+        fieldLogic.setTranslation(targetTranslation_);
+        fieldLogic.setRotation(targetRotation_);
+
+        mecanumDrive_.setTargetTranslation(targetTranslation_);
+        mecanumDrive_.setTargetRotation(targetRotation_);
+
+        QuadRPM expectedWheelSpeeds{fieldLogic.getWheelSpeeds()};
+        EXPECT_CALL(quadDrive_, setTargetWheelSpeeds(quadDriveDataEq(expectedWheelSpeeds)));
+        mecanumDrive_.update();
+    }
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        zeroTest, MecanumDriveMecanumLogicSync,
+        ::testing::Values
+        (
+            LogicSyncTestParam
+            {
+                .targetTranslation = {0_mps, 0_mps},
+                .targetRotation = 0_rpm,
+                .fieldAngle = 0_rad,
+                .mecanumLogicConfig = kDefaultMecanumLogicConfig
+            }
+        )
+    );
 }
