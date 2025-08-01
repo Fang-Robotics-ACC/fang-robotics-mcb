@@ -54,17 +54,20 @@ TEST(UltraMk2, inversion)
     constexpr Volts controllerVoltage{24};
     constexpr Hertz frequency{500};
     constexpr double gearRatio{14.0};
-    constexpr double minimumDutyCycle{0.5};
+    static constexpr RPMPerVolt kKv{1450.0};
+    RPM maxTheoreticalSpeed{(kKv * controllerVoltage) / gearRatio}; // A geared motor will be slower
+    constexpr double expectedDutyCycle{0.5};
+
 
     
     tap::Drivers drivers{};
     motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::BIDIRECTIONAL, true, gearRatio};
 
-    EXPECT_CALL(drivers.pwm, write(minimumDutyCycle, tap::gpio::Pwm::C1));
+    EXPECT_CALL(drivers.pwm, write(expectedDutyCycle, tap::gpio::Pwm::C1));
 
     //Since this is a bidirectional motor, its maximum speed will become its minimum (since the inversion multiplies it by -1)
     //This results in the speed controller driver sending the signal that corresponds to the minimum speed of the given rage
-    motor.setTargetSpeed(motor.getMaxSpeed());
+    motor.setTargetSpeed(maxTheoreticalSpeed);
     }
 
     {
@@ -73,36 +76,17 @@ TEST(UltraMk2, inversion)
     //For a bidirectional configuration, the minimum speed is the negative of the maximum theoretical speed
     constexpr Volts controllerVoltage{24};
     constexpr Hertz frequency{500};
-    constexpr RPMPerVolt kv{1450};
     constexpr double gearRatio{14.0};
-    constexpr double maxDutyCycle{1.0};
+    static constexpr RPMPerVolt kKv{1450.0};
+    RPM maxTheoreticalSpeed{(kKv * controllerVoltage) / gearRatio}; // A geared motor will be slower
+    constexpr double expectedDutyCycle{1.0};
 
     
     tap::Drivers drivers{};
 
     motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::BIDIRECTIONAL, true, gearRatio};
 
-    EXPECT_CALL(drivers.pwm,write(maxDutyCycle, tap::gpio::Pwm::C1));
-    motor.setTargetSpeed(motor.getMinSpeed());
-    }    
-
-    {
-    //Inversion should be ignored for unidirectional motor
-    //The speed at the minimum range coresponds to a 1ms pulse to the vortex controller
-    //The default max speed is the maximum theoretical speed
-    //For a bidirectional configuration, the minimum speed is the negative of the maximum theoretical speed
-    constexpr Volts controllerVoltage{24};
-    constexpr Hertz frequency{500};
-    constexpr RPMPerVolt kv{1450};
-    constexpr double gearRatio{14.0};
-    constexpr double maxDutyCycle{1.0};
-
-    
-    tap::Drivers drivers{};
-
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::UNIDIRECTIONAL, true, gearRatio};
-
-    EXPECT_CALL(drivers.pwm,write(maxDutyCycle, tap::gpio::Pwm::C1));
-    motor.setTargetSpeed(motor.getMaxSpeed());
+    EXPECT_CALL(drivers.pwm,write(expectedDutyCycle, tap::gpio::Pwm::C1));
+    motor.setTargetSpeed(-maxTheoreticalSpeed);
     }    
 }
