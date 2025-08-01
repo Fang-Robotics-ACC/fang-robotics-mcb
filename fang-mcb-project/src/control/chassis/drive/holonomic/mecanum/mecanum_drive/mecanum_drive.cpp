@@ -16,7 +16,7 @@ namespace fang::chassis
     ):
         //Base
         HolonomicSubsystem{drivers},
-        quadDrive_{std::move(quadDrive_)},
+        quadDrive_{std::move(quadDrive)},
         imu_{std::move(imu)},
         mecanumLogic_{config.mecanumLogicConfig}
     {
