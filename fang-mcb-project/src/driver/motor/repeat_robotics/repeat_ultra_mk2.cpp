@@ -50,37 +50,8 @@ namespace fang::motor
 
 	void RepeatUltraMk2::setTargetSpeed(const RPM& speed)
     {
-        const RPM clampedSpeed{tap::algorithms::limitVal<RPM> (speed, minSpeed_, maxSpeed_)};
-        speed_ = clampedSpeed;
-        const double speedPercentage{clampedSpeed * inversionMultiplier_ / kMaxTheoreticalSpeed_};
+        const double speedPercentage{speed * inversionMultiplier_ / kMaxTheoreticalSpeed_};
         vortex_.setSpeed(speedPercentage);
-    }
-
-	RPM RepeatUltraMk2::getTargetSpeed() const
-    {
-        return speed_;
-    }
-
-	void RepeatUltraMk2::setMaxSpeed(const RPM& maxSpeed)
-    {
-        maxSpeed_ = maxSpeed;
-        setTargetSpeed(getTargetSpeed());
-    }
-
-	RPM RepeatUltraMk2::getMaxSpeed() const
-    {
-        return maxSpeed_;
-    }
-
-	void RepeatUltraMk2::setMinSpeed(const RPM& minSpeed)
-    {
-        minSpeed_ = minSpeed;
-        setTargetSpeed(getTargetSpeed());
-    }
-
-	RPM RepeatUltraMk2::getMinSpeed() const
-    {
-        return minSpeed_;
     }
 
     /**

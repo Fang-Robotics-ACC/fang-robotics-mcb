@@ -51,37 +51,6 @@ namespace fang::motor
          */
 		void setTargetSpeed(const RPM& speed) override;
         
-        /**
-         * This returns the desired speed, not the actual speed.
-         */
-		RPM getTargetSpeed() const;
-
-        /**
-         * All requests will be clamped to this bound. The default is the maximum
-         * theoretical speed which is the motor kv (1450) multiplied by the nominal
-         * controller input voltage.
-         */
-		void setMaxSpeed(const RPM& maxSpeed);
-
-        /**
-         * Get the maximum speed which all setSpeed() requests are clamped to
-         */
-		RPM getMaxSpeed() const;
-
-        /**
-         * All requests will be clamped to this bound. The default for unidirectional is 0 rpm.
-         * The default for bidirectional is the negative of the maximum theoretical speed.
-         */
-		void setMinSpeed(const RPM& minSpeed);
-
-        /**
-         * Get the minimum speed which all setSpeed requests are clamped to
-         */
-		RPM getMinSpeed() const;
-        /**
-         * This needs to have a delay of around half a second. It will be up to the caller
-         * to figure out how to insure this.
-         */
         void initialize() override;
         void update() override;
     private:
