@@ -2,10 +2,11 @@
 #define FANG_ROBOTICS_MCB_TRAP_CONTROL_CHASSIS_POWER_LIMITER_HPP
 #include "wrap/units/units_alias.hpp"
 #include "tap/communication/serial/ref_serial.hpp"
+#include "rail/chassis/ipower_limiter_system.hpp"
 
 namespace trap::control::chassis
 {
-    class PowerLimiter
+    class PowerLimiter : public rail::chassis::IPowerLimiterSystem
     {
     public:
         using RefSerial = tap::communication::serial::RefSerial;
@@ -39,7 +40,13 @@ namespace trap::control::chassis
          *
          * @note Tested with a normal four-wheel mecanum chassis and a two-wheel sentry chassis.
          */
-        float getPowerLimitRatio() const;
+        double getPowerLimitRatio() const override;
+
+        //NOTE: Even though these are not used, the slight violation of the interface segregation
+        //principle is justified as many advanced power limiters use I2C and whatnot which might
+        //require manual mangement
+        void initialize() override;
+        void update() override;
         
     private:
         Joules getEnergyBuffer() const;

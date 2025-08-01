@@ -3,6 +3,7 @@
 #include "util/chrono/simple_timer.hpp"
 
 #include "tap/algorithms/ramp.hpp"
+#include "tap/util_macros.hpp"
 namespace trap::algorithms
 {
     /**
@@ -21,12 +22,12 @@ namespace trap::algorithms
         {
         }
 
-        void setTarget(ValueUnit target)
+        mockable void setTarget(ValueUnit target)
         {
             m_ramp.setTarget(static_cast<float>(target));
         }
 
-        ValueUnit getTarget() const
+        mockable ValueUnit getTarget() const
         {
             return ValueUnit{m_ramp.getTarget()};
         }
@@ -38,12 +39,12 @@ namespace trap::algorithms
          * 
          * This is a float to allow ramp to use primitive types
          */
-        void setSpeed(double speed)
+        mockable void setSpeed(double speed)
         {
             m_speed = speed;
         }
 
-        void update()
+        mockable void update()
         {
             const TimeUnit deltaTime{static_cast<TimeUnit>(m_updateTimer.getDurationAndReset())};
             const double rawDeltaTime{static_cast<double>(deltaTime)};
@@ -52,12 +53,12 @@ namespace trap::algorithms
             m_ramp.update(increment);
         }
 
-        ValueUnit getValue() const
+        mockable ValueUnit getValue() const
         {
             return ValueUnit{m_ramp.getValue()};
         }
 
-        bool isTargetReached() const
+        mockable bool isTargetReached() const
         {
             return m_ramp.isTargetReached();
         }

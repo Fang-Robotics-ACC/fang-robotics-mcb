@@ -2,7 +2,8 @@
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "driver/drivers.hpp"
 //Subsystems
-#include "control/chassis/chassis_subsystem.hpp"
+#include "control/chassis/drive/holonomic/mecanum/mecanum_drive/old_repeat_ultra_mk2_mecanum_subsystem.hpp"
+#include "custom_variant/subsystem/pierce_mecanum_drive.hpp"
 
 #include "control/turret/gimbal_subsystem.hpp"
 #include "control/turret/feeder/simple_feeder_subsystem/simple_feeder_subsystem.hpp"
@@ -14,9 +15,9 @@
 #include "control/chassis/chassis_input_handler.hpp"
 
 //Commands
-#include "control/chassis/holonomic/command/counter_strike_command.hpp"
-#include "control/chassis/holonomic/command/shuriken_command.hpp"
-#include "control/chassis/holonomic/command/tardis_command.hpp"
+#include "control/chassis/drive/holonomic/command/counter_strike_command.hpp"
+#include "control/chassis/drive/holonomic/command/shuriken_command.hpp"
+#include "control/chassis/drive/holonomic/command/tardis_command.hpp"
 
 #include "control/turret/command/aim_command.hpp"
 #include "control/turret/command/activate_booster_command.hpp"
@@ -40,7 +41,7 @@ namespace fang::robot
         using RemoteState = tap::control::RemoteMapState;
         struct SubsystemConfig
         {
-            chassis::ChassisSubsystem::ChassisConfig chassisConfig;
+            chassis::PierceMecanumDrive::Config chassisConfig;
             turret::GimbalSubsystem::Config gimbalConfig;
             fang::turret::M2006SimpleFeederSubsystem::Config feederConfig;
             turret::AmmoBoosterSubsystem::Config boosterConfig;
@@ -104,9 +105,11 @@ namespace fang::robot
 
         turret::GimbalSubsystem m_gimbal;
         std::unique_ptr<fang::turret::SimpleFeederSubsystem> feeder_;
+        std::unique_ptr<fang::chassis::PierceMecanumDrive> mecanumDrive_;
+        //Compatibility hacks
         fang::turret::SimpleFeederSubsystem& m_feeder{*feeder_};
+        fang::chassis::PierceMecanumDrive& m_chassis{*mecanumDrive_};
         turret::AmmoBoosterSubsystem m_booster;
-        chassis::ChassisSubsystem m_chassis;
 
         chassis::ChassisInputHandler m_chassisInput;
         turret::TurretInputHandler m_turretInput;

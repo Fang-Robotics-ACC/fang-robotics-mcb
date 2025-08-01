@@ -25,7 +25,7 @@ namespace fang::robot
 {
     const Pierce::SubsystemConfig k_pierceSubsytemConfig 
     {
-        .chassisConfig  = k_chassisConfig,
+        .chassisConfig  = kChassisConfig,
         .gimbalConfig   = k_gimbalSubsystemConfig,
         .feederConfig   = kFeederMakerConfig,
         .boosterConfig  = k_ammoBoosterConfig
