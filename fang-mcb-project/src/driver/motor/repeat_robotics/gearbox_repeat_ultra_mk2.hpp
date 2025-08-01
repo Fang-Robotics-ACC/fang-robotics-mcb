@@ -22,7 +22,6 @@ namespace fang::motor
         {
             const Volts& controllerInputVoltage;
             trap::gpio::PwmData pwmData;
-            motor::Directionality directionality;
             bool inverted;
             double gearRatio;
         };
