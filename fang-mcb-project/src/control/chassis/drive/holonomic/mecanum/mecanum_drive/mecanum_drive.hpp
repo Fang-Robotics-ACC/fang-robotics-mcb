@@ -1,5 +1,4 @@
-#ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DRIVE_HOLONOMIC_MECANUM_SUBSYSTEM_MECANUM_SUBSYSTEM_HPP
-#define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DRIVE_HOLONOMIC_MECANUM_SUBSYSTEM_MECANUM_SUBSYSTEM_HPP
+#pragma once
 
 #include "driver/drivers.hpp"
 #include "driver/motor/data/directionality.hpp"
@@ -91,5 +90,3 @@ namespace fang::chassis
         FieldMecanumLogic mecanumLogic_;
     };
 }//namespace fang::chassis 
-
-#endif
