@@ -3,6 +3,7 @@
 #include "driver/drivers.hpp"
 //Subsystems
 #include "control/chassis/drive/holonomic/mecanum/mecanum_drive/old_repeat_ultra_mk2_mecanum_subsystem.hpp"
+#include "custom_variant/subsystem/pierce_mecanum_drive.hpp"
 
 #include "control/turret/gimbal_subsystem.hpp"
 #include "control/turret/feeder/simple_feeder_subsystem/simple_feeder_subsystem.hpp"
@@ -40,7 +41,7 @@ namespace fang::robot
         using RemoteState = tap::control::RemoteMapState;
         struct SubsystemConfig
         {
-            chassis::RepeatUltraMk2MecanumSubsystem::ChassisConfig chassisConfig;
+            chassis::PierceMecanumDrive::Config chassisConfig;
             turret::GimbalSubsystem::Config gimbalConfig;
             fang::turret::M2006SimpleFeederSubsystem::Config feederConfig;
             turret::AmmoBoosterSubsystem::Config boosterConfig;
@@ -104,9 +105,11 @@ namespace fang::robot
 
         turret::GimbalSubsystem m_gimbal;
         std::unique_ptr<fang::turret::SimpleFeederSubsystem> feeder_;
+        std::unique_ptr<fang::chassis::PierceMecanumDrive> mecanumDrive_;
+        //Compatibility hacks
         fang::turret::SimpleFeederSubsystem& m_feeder{*feeder_};
+        fang::chassis::PierceMecanumDrive& m_chassis{*mecanumDrive_};
         turret::AmmoBoosterSubsystem m_booster;
-        chassis::RepeatUltraMk2MecanumSubsystem m_chassis;
 
         chassis::ChassisInputHandler m_chassisInput;
         turret::TurretInputHandler m_turretInput;

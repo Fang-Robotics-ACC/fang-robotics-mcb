@@ -1,53 +1,89 @@
 #ifndef FANG_ROBOTICS_MCB_CHASSIS_CONFIG_PIERCE_HPP
 #define FANG_ROBOTICS_MCB_CHASSIS_CONFIG_PIERCE_HPP
 
-#include "control/chassis/drive/holonomic/mecanum/mecanum_drive/old_repeat_ultra_mk2_mecanum_subsystem.hpp"
+#include "robot/variant/pierce/custom_variant/subsystem/pierce_mecanum_drive.hpp"
 #include "wrap/units/units_alias.hpp"
 
 namespace fang::robot 
 {
-    static const Hertz k_chassisPwmFreq{400};
-
     using namespace units::literals;
-        
-    static const chassis::RepeatUltraMk2MecanumSubsystem::ChassisDimensionConfig k_defaultDimensionConfig
+
+    static const auto kPwmTimer{tap::gpio::Pwm::TIMER1};
+    static const Hertz kPwmFrequency{400};
+    static const Volts kControllerInputVoltage{24};
+    static const auto kMotorDirectionality{motor::Directionality::BIDIRECTIONAL};
+    //All motors are assume to move counterclockwise when given a positive signal
+    static bool kLeftMotorInversion{false};
+    static bool kRightMotorInversion{true};
+    static int kUltraMk2GearRatio{14};
+
+
+    static const chassis::PierceMecanumDrive::Motor::Config kFrontLeftMotorConfig
     {
-        150_mm, //Wheel Radius
-        15_in,  //Vertical Wheel Distance
-        13.5_in   //Horizontal Wheel Distance
+        .controllerInputVoltage = kControllerInputVoltage,
+        .pwmData = {tap::gpio::Pwm::C1, kPwmFrequency},
+        .directionality = kMotorDirectionality,
+        .inverted = kLeftMotorInversion,
+        .gearRatio = kUltraMk2GearRatio 
     };
 
-    static const chassis::RepeatUltraMk2MecanumSubsystem::DriveMotor::UnifiedProperties k_unifiedMotorProperties
+    static const chassis::PierceMecanumDrive::Motor::Config kFrontRightMotorConfig
     {
-        24.0_V,                                      //Controller Input Voltage
-        fang::motor::Directionality::BIDIRECTIONAL, //Directionality
-        14.0                                         //GearRatio
-    };
-    static const chassis::RepeatUltraMk2MecanumSubsystem::ChassisMotorConfig k_defaultMotorConfig
-    {
-        k_unifiedMotorProperties,                   //Unified motor properties
-        trap::gpio::PwmData{tap::gpio::Pwm::C1, k_chassisPwmFreq},    //Front Left PwmData
-        trap::gpio::PwmData{tap::gpio::Pwm::C2, k_chassisPwmFreq},    //Front Right PwmData
-        trap::gpio::PwmData{tap::gpio::Pwm::C3, k_chassisPwmFreq},    //Rear Left PwmData
-        trap::gpio::PwmData{tap::gpio::Pwm::C4, k_chassisPwmFreq}     //Rear Right PwmData
+        .controllerInputVoltage = kControllerInputVoltage,
+        .pwmData = {tap::gpio::Pwm::C2, kPwmFrequency},
+        .directionality = kMotorDirectionality,
+        .inverted = kRightMotorInversion,
+        .gearRatio = kUltraMk2GearRatio 
     };
 
-    static const chassis::RepeatUltraMk2MecanumSubsystem::PowerLimiter::Config k_chassisPowerLimiterConfig
+    static const chassis::PierceMecanumDrive::Motor::Config kRearLeftMotorConfig
+    {
+        .controllerInputVoltage = kControllerInputVoltage,
+        .pwmData = {tap::gpio::Pwm::C3, kPwmFrequency},
+        .directionality = kMotorDirectionality,
+        .inverted = kLeftMotorInversion,
+        .gearRatio = kUltraMk2GearRatio 
+    };
+
+    static const chassis::PierceMecanumDrive::Motor::Config kRearRightMotorConfig
+    {
+        .controllerInputVoltage = kControllerInputVoltage,
+        .pwmData = {tap::gpio::Pwm::C4, kPwmFrequency},
+        .directionality = kMotorDirectionality,
+        .inverted = kRightMotorInversion,
+        .gearRatio = kUltraMk2GearRatio 
+    };
+
+    static const chassis::PierceMecanumDrive::MotorConfigs kMotorConfigs
+    {
+        .frontLeft = kFrontLeftMotorConfig,
+        .frontRight = kFrontRightMotorConfig,
+        .rearLeft = kRearLeftMotorConfig,
+        .rearRight = kRearRightMotorConfig
+    };
+
+    static const chassis::RepeatUltraMk2MecanumSubsystem::PowerLimiter::Config kChassisPowerLimiterConfig
     {
         .startingEnergyBuffer       = 80_J,
         .energyBufferLimitThreshold = 5_J,
         .energyBufferCritThreshold  = 30_J
     };
 
-    static const chassis::RepeatUltraMk2MecanumSubsystem::ChassisConfig k_chassisConfig
+    static const chassis::FieldMecanumLogic::Config kFieldMecanumLogicConfig
     {
-        .pwmFrequency           = k_chassisPwmFreq,
-        .pwmTimer               = tap::gpio::Pwm::TIMER1,
-        .translationRampSpeed   = 10,
-        .rotationRampSpeed      = 700,
-        .chassisDimensions      = k_defaultDimensionConfig,
-        .chassisMotors          = k_defaultMotorConfig,
-        .powerLimiterConfig     = k_chassisPowerLimiterConfig
+        150_mm, //Wheel Radius
+        15_in,  //Vertical Wheel Distance
+        13.5_in   //Horizontal Wheel Distance
     };
+
+    static const chassis::PierceMecanumDrive::Config kChassisConfig 
+    {
+        .motorConfigs        = kMotorConfigs,
+        .powerLimiterConfig  = kChassisPowerLimiterConfig,
+        .fieldMecanumConfig  = kFieldMecanumLogicConfig,
+        .chassisPwmFrequency = kPwmFrequency,
+        .pwmTimer            = kPwmTimer,
+    };
+
 }
 #endif
