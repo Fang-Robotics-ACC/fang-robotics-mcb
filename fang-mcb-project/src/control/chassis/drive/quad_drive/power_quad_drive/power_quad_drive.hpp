@@ -27,6 +27,8 @@ namespace fang::chassis
         virtual void initialize() override;
         virtual void update() override;
         virtual void refresh() override;
+
+        virtual ~PowerQuadDrive() {}
     private:
         std::unique_ptr<IPowerLimiterSystem> powerLimiter_;
     };
