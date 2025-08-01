@@ -106,9 +106,12 @@ namespace fang::chassis
      *
      * This checks that the quadDrive_ is being passed
      * the wheel speeds as well as the correct ones
-     * during the refresh
+     * during the refresh.
+     *
+     * Since the mecanum logic is reliant on the imu to provide information,
+     * this checks the imu syncrhonization as well
      */
-    TEST_P(MecanumDriveMecanumLogicSync, sync)
+    TEST_P(MecanumDriveMecanumLogicSync, mecanumImusync)
     {
         FieldMecanumLogic fieldLogic{mecanumLogicConfig_};
         ON_CALL(imu_, getYaw()).WillByDefault(testing::Return(fieldAngle_));
