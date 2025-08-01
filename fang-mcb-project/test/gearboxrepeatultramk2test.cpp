@@ -1,7 +1,7 @@
 #include "driver/motor/repeat_robotics/gearbox_repeat_ultra_mk2.hpp"
 #include "wrap/units/units_alias.hpp"
 
-#include "tap/drivers.hpp"
+#include "driver/drivers.hpp"
 #include "tap/communication/gpio/pwm.hpp"
 
 #include <gtest/gtest.h>
@@ -17,10 +17,10 @@ TEST(UltraMk2, zeroSpeed)
     constexpr Volts controllerVoltage{24};
     constexpr Hertz frequency{500};
     constexpr double gearRatio{14.0};
-    constexpr double stillDutyCycle{0.5};
+    constexpr double stillDutyCycle{0.75};
     
-    tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::UNIDIRECTIONAL, false, gearRatio};
+    Drivers drivers{};
+    motor::GearboxRepeatUltraMk2 motor{drivers, {controllerVoltage, {tap::gpio::Pwm::C1, frequency}, false, gearRatio}};
 
     EXPECT_CALL(drivers.pwm,write(stillDutyCycle, tap::gpio::Pwm::C1));
 
@@ -38,8 +38,17 @@ TEST(UltraMk2, zeroSpeed)
     constexpr double stillDutyCycle{0.75};
 
     
-    tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::BIDIRECTIONAL, false, gearRatio};
+    Drivers drivers{};
+    motor::GearboxRepeatUltraMk2 motor
+    {
+        drivers,
+        {
+            controllerVoltage,
+            {tap::gpio::Pwm::C1, frequency}, 
+            false, 
+            gearRatio
+        }
+    };
 
     EXPECT_CALL(drivers.pwm,write(stillDutyCycle, tap::gpio::Pwm::C1));
     motor.setTargetSpeed(0_rpm);
@@ -60,8 +69,17 @@ TEST(UltraMk2, inversion)
 
 
     
-    tap::Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::BIDIRECTIONAL, true, gearRatio};
+    Drivers drivers{};
+    motor::GearboxRepeatUltraMk2 motor
+    {
+        drivers,
+        {
+            controllerVoltage,
+            {tap::gpio::Pwm::C1, frequency}, 
+            true, 
+            gearRatio
+        }
+    };
 
     EXPECT_CALL(drivers.pwm, write(expectedDutyCycle, tap::gpio::Pwm::C1));
 
@@ -82,9 +100,17 @@ TEST(UltraMk2, inversion)
     constexpr double expectedDutyCycle{1.0};
 
     
-    tap::Drivers drivers{};
-
-    motor::GearboxRepeatUltraMk2 motor{drivers, controllerVoltage, tap::gpio::Pwm::C1, frequency, motor::Directionality::BIDIRECTIONAL, true, gearRatio};
+    Drivers drivers{};
+    motor::GearboxRepeatUltraMk2 motor
+    {
+        drivers,
+        {
+            controllerVoltage,
+            {tap::gpio::Pwm::C1, frequency}, 
+            true, 
+            gearRatio
+        }
+    };
 
     EXPECT_CALL(drivers.pwm,write(expectedDutyCycle, tap::gpio::Pwm::C1));
     motor.setTargetSpeed(-maxTheoreticalSpeed);
