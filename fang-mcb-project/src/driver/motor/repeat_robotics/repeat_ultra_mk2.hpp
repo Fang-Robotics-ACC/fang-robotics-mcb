@@ -57,14 +57,10 @@ namespace fang::motor
         const Volts kControllerInputVoltage_;
         const RPM kMaxTheoreticalSpeed_;
         RPM speed_{0};
-        RPM maxSpeed_{};
         int8_t inversionMultiplier_;
-        RPM minSpeed_{0};
         // This was the Repeat Robotics provided value for the ratio between the rpm and the voltage associated with i
         //kv value is ration of rpm per voltage applied to a brushless dc motor
         static constexpr RPMPerVolt kKv{1450.0};
-        //The voltage of the controller should not be exceeded by its output
-
         Vortex80AEsc vortex_;
    };
 }

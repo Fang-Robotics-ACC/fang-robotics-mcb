@@ -34,18 +34,9 @@ namespace fang::motor
         :
         kControllerInputVoltage_{controllerInputVoltage},
         kMaxTheoreticalSpeed_{kKv * kControllerInputVoltage_},
-        maxSpeed_{kMaxTheoreticalSpeed_},
         inversionMultiplier_{inverted && (directionality == Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}},
         vortex_{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality}
     {
-        switch(directionality)
-        {
-        case(Directionality::BIDIRECTIONAL):
-            minSpeed_ = -maxSpeed_;
-        break;
-        case(Directionality::UNIDIRECTIONAL):
-            minSpeed_ = 0_rpm;
-        }
     }
 
 	void RepeatUltraMk2::setTargetSpeed(const RPM& speed)
