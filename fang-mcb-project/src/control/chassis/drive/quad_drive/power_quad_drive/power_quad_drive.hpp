@@ -1,7 +1,7 @@
-#ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DRIVE_QUAD_DRIVE_BASE_QUAD_DRIVE_HPP
-#define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_DRIVE_QUAD_DRIVE_BASE_QUAD_DRIVE_HPP
-#include "control/chassis/drive/quad_drive/quad_drive_subsystem.hpp"
+#pragma once
+#include "control/chassis/drive/quad_drive/base_quad_drive/base_quad_drive.hpp"
 #include "driver/drivers.hpp"
+#include "wrap/rail/chassis/ipower_limiter_system.hpp"
 #include "wrap/rail/rail_motor_owner.hpp"
 
 #include <array>
@@ -19,27 +19,23 @@ namespace fang::chassis
      *
      * This can be managed by a taproot command (can be registered).
      */
-    class BaseQuadDrive : public QuadDriveSubsystem
+    class PowerQuadDrive : public BaseQuadDrive
     {
     public:
         using Motor = motor::ISpeedMotor;
 
-        BaseQuadDrive
+        PowerQuadDrive 
         (
             Drivers& drivers,
-            std::unique_ptr<Motor> frontLeftMotor,
-            std::unique_ptr<Motor> frontRightMotor,
-            std::unique_ptr<Motor> rearLeftMotor,
-            std::unique_ptr<Motor> rearRightMotor
+            std::unique_ptr<BaseQuadDrive> baseQuaddrive,
+            std::unique_ptr<IPowerLimiterSystem> powerLimiter
         );
 
         virtual void setTargetWheelSpeeds(const QuadRPM& wheelSpeeds) override;
         virtual void initialize() override;
         virtual void update() override;
         virtual void refresh() override;
-        virtual ~BaseQuadDrive() {}
     private:
-        std::array<std::unique_ptr<Motor>, 4> motors_;
+        std::unique_ptr<IPowerLimiterSystem> powerLimiter_;
     };
 }
-#endif
