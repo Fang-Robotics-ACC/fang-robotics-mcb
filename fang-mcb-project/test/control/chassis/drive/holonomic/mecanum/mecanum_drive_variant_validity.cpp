@@ -46,7 +46,9 @@ namespace fang::chassis
         {
             .motorConfigs = kMotorConfigs,
             .powerLimiterConfig = kPowerLimiterConfig,
-            .fieldMecanumConfig = kFieldMecanumConfig
+            .fieldMecanumConfig = kFieldMecanumConfig,
+            .chassisPwmFrequency = 250_Hz,
+            .pwmTimer = tap::gpio::Pwm::TIMER1
         };
         PierceMecanumDrive mecanumDrive{drivers, kConfig};
         mecanumDrive.initialize();
