@@ -139,4 +139,33 @@ namespace fang::chassis
             }
         )
     );
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        mixedTest, MecanumDriveMecanumLogicSync,
+        ::testing::Values
+        (
+            LogicSyncTestParam
+            {
+                .targetTranslation = {100234_mps, -345_mps},
+                .targetRotation = -345_rpm,
+                .fieldAngle = 345_rad,
+                .mecanumLogicConfig = kDefaultMecanumLogicConfig
+            },
+            LogicSyncTestParam
+            {
+                .targetTranslation = {-1034.345_mps, 345.345345_mps},
+                .targetRotation = -2_rpm,
+                .fieldAngle = -23_rad,
+                .mecanumLogicConfig = kDefaultMecanumLogicConfig
+            },
+            LogicSyncTestParam
+            {
+                .targetTranslation = {-1034534.345_mps, 45349585.345345_mps},
+                .targetRotation = -234545_rpm,
+                .fieldAngle = 234_rad,
+                .mecanumLogicConfig = kDefaultMecanumLogicConfig
+            }
+        )
+    );
 }
