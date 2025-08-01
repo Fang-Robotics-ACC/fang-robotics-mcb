@@ -32,12 +32,12 @@ namespace trap
 
         void DjiM3508::setTargetSpeed(const RPM& targetSpeed)
         {
-            m_targetSpeed = ::motor::shaftToMotorSpeed(targetSpeed, m_gearRatio);
+            m_targetSpeed = fang::motor::shaftToMotorSpeed(targetSpeed, m_gearRatio);
         }
 
         RPM DjiM3508::getSpeed() const
         {
-            return ::motor::motorToShaftSpeed(RPM{m_djiMotor.getShaftRPM()}, m_gearRatio);
+            return fang::motor::motorToShaftSpeed(RPM{m_djiMotor.getShaftRPM()}, m_gearRatio);
         }
 
         void DjiM3508::initialize()
