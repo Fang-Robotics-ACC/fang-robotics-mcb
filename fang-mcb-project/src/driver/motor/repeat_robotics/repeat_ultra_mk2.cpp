@@ -13,29 +13,10 @@ namespace fang::motor
 {
 
     RepeatUltraMk2::RepeatUltraMk2(Drivers& drivers, const Config& config):
-        RepeatUltraMk2
-        (
-            drivers,
-            config.controllerInputVoltage,
-            config.pwmData.pwmPin,
-            config.pwmData.pinFrequency,
-            config.directionality,
-            config.inverted
-        )
-    {
-    }
-    RepeatUltraMk2::RepeatUltraMk2(
-        tap::Drivers& drivers,
-        const Volts& controllerInputVoltage,
-        tap::gpio::Pwm::Pin pwmPin,
-        const Hertz& pinFrequency,
-        Directionality directionality,
-        bool inverted)
-        :
-        kControllerInputVoltage_{controllerInputVoltage},
+        kControllerInputVoltage_{config.controllerInputVoltage},
         kMaxTheoreticalSpeed_{kKv * kControllerInputVoltage_},
-        inversionMultiplier_{inverted && (directionality == Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}},
-        vortex_{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality}
+        inversionMultiplier_{config.inverted ? -1 : 1}, // Reverse if inverted lol, motor is bidirectional
+        vortex_{drivers.pwm, config.pwmData}
     {
     }
 

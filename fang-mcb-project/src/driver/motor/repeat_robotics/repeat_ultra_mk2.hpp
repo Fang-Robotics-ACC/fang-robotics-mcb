@@ -24,15 +24,15 @@ namespace fang::motor
         {
             const Volts& controllerInputVoltage;
             trap::gpio::PwmData pwmData;
-            Directionality directionality;
             bool inverted ;
         };
+
         RepeatUltraMk2(Drivers& drivers, const Config& config);
+
         RepeatUltraMk2(tap::Drivers& drivers,
                       const Volts& controllerInputVoltage,
                       tap::gpio::Pwm::Pin pwmPin,
                       const Hertz& pinFrequency,
-                      Directionality directionality,
                       bool inverted = false);
 
         /**
