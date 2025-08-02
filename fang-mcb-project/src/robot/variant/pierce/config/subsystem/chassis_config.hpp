@@ -8,13 +8,15 @@ namespace fang::robot
 {
     using namespace units::literals;
 
+    //pwm initialization
     static const auto kPwmTimer{tap::gpio::Pwm::TIMER1};
     static const Hertz kPwmFrequency{400};
     static const Volts kControllerInputVoltage{24};
-    static const auto kMotorDirectionality{motor::Directionality::BIDIRECTIONAL};
+
     //All motors are assume to move counterclockwise when given a positive signal
     static bool kLeftMotorInversion{false};
     static bool kRightMotorInversion{true};
+
     static int kUltraMk2GearRatio{14};
 
 
