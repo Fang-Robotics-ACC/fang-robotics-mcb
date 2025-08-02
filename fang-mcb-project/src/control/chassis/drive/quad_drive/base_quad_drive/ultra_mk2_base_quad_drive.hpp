@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CASSIS_DRIVE_QUAD_DRIVE_ULTRA_MK2_BASE_QUAD_DRIVE_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CASSIS_DRIVE_QUAD_DRIVE_ULTRA_MK2_BASE_QUAD_DRIVE_HPP
 #include "base_quad_drive.hpp"
-#include "driver/motor/repeat_robotics/ultra_mk2.hpp"
+#include "driver/motor/repeat_robotics/repeat_ultra_mk2.hpp"
 
 #include <memory>
 namespace fang::chassis

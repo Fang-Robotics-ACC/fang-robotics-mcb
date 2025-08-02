@@ -5,7 +5,7 @@
 #include "control/chassis/drive/quad_drive/power_quad_drive/ultra_mk2_power_quad_drive.hpp"
 
 #include "driver/drivers.hpp"
-#include "driver/motor/repeat_robotics/ultra_mk2.hpp"
+#include "driver/motor/repeat_robotics/repeat_ultra_mk2.hpp"
 
 #include "wrap/trap/control/chassis/power_limiter.hpp"
 
