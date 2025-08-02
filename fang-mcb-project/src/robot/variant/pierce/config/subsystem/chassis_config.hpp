@@ -17,7 +17,7 @@ namespace fang::robot
     static bool kLeftMotorInversion{false};
     static bool kRightMotorInversion{true};
 
-    static int kUltraMk2GearRatio{14};
+    static double kUltraMk2GearRatio{14.0};
 
 
     static const chassis::PierceMecanumDrive::Motor::Config kFrontLeftMotorConfig
