@@ -38,14 +38,19 @@ namespace fang::chassis
             pwmTimer_{config.pwmTimer}
         {}
 
-        void initialize() override
+        void setUpPwm()
         {
-            UltraMk2MecanumDrive::initialize();
-            //Taproot stores the frequency in
-            //The frequency is recast to Hertz in case it is stored in a different unit before
+            //Taproot stores the frequency in an integral form.  The frequency
+            //is recast to Hertz in case it is stored in a different unit before
             //it stripped of dimensional analysis
             const static auto kConvertedFreq {static_cast<uint32_t>(Hertz{chassisPwmFrequency_})}; 
             pwm_.setTimerFrequency(pwmTimer_, kConvertedFreq);
+        }
+
+        void initialize() override
+        {
+            UltraMk2MecanumDrive::initialize();
+            setUpPwm();
         }
         //Minor additions can be kept in a header
     private:
