@@ -14,7 +14,7 @@ namespace fang::chassis
     class UltraMk2MecanumDrive : public MecanumDrive
     {
     public:
-        using Motor = motor::GearboxRepeatUltraMk2;
+        using Motor = motor::UltraMk2;
         using PowerLimiter = trap::control::chassis::PowerLimiter;
         struct Config
         {

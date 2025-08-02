@@ -3,7 +3,7 @@
 
 namespace fang::motor
 {
-    GearboxRepeatUltraMk2::GearboxRepeatUltraMk2
+    UltraMk2::UltraMk2
     (
         Drivers& drivers,
         const Config& config
@@ -15,19 +15,19 @@ namespace fang::motor
         vortex_{drivers.pwm, config.pwmData}
     {}
 
-	void GearboxRepeatUltraMk2::setTargetSpeed(const RPM& speed)
+	void UltraMk2::setTargetSpeed(const RPM& speed)
     {
         const RPM motorSpeed{shaftToMotorSpeed(speed, kGearRatio_)};
         const double speedPercentage{motorSpeed / kMaxTheoreticalSpeed_};
         vortex_.setSpeed(speedPercentage * kInversionMultiplier_);
     }
 
-    void GearboxRepeatUltraMk2::initialize()
+    void UltraMk2::initialize()
     {
         vortex_.sendArmingSignal();
     }
 
-    void GearboxRepeatUltraMk2::update()
+    void UltraMk2::update()
     {
         //TODO: Ramping functionality
     }

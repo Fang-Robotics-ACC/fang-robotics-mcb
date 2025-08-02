@@ -10,7 +10,7 @@ namespace fang::chassis
     class UltraMk2PowerQuadDrive : public PowerQuadDrive
     {
     public:
-        using Motor = motor::GearboxRepeatUltraMk2;
+        using Motor = motor::UltraMk2;
         using Config = QuadCollection<Motor::Config>;
 
         /**

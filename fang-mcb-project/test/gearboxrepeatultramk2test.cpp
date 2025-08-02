@@ -20,7 +20,7 @@ TEST(UltraMk2, zeroSpeed)
     constexpr double stillDutyCycle{0.75};
     
     Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor{drivers, {controllerVoltage, {tap::gpio::Pwm::C1, frequency}, false, gearRatio}};
+    motor::UltraMk2 motor{drivers, {controllerVoltage, {tap::gpio::Pwm::C1, frequency}, false, gearRatio}};
 
     EXPECT_CALL(drivers.pwm,write(stillDutyCycle, tap::gpio::Pwm::C1));
 
@@ -39,7 +39,7 @@ TEST(UltraMk2, zeroSpeed)
 
     
     Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor
+    motor::UltraMk2 motor
     {
         drivers,
         {
@@ -70,7 +70,7 @@ TEST(UltraMk2, inversion)
 
     
     Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor
+    motor::UltraMk2 motor
     {
         drivers,
         {
@@ -101,7 +101,7 @@ TEST(UltraMk2, inversion)
 
     
     Drivers drivers{};
-    motor::GearboxRepeatUltraMk2 motor
+    motor::UltraMk2 motor
     {
         drivers,
         {

@@ -17,7 +17,7 @@ namespace fang::motor
     *The gear ratio is motor turns : shaft turns, so a 14:1 gearbox would mean that the motor shaft rotates 14 times in order for the
     *output shaft to rotate once.
     */
-    class GearboxRepeatUltraMk2 : public ISpeedMotor
+    class UltraMk2 : public ISpeedMotor
     {
     public:
         struct Config
@@ -28,9 +28,9 @@ namespace fang::motor
             double gearRatio;
         };
 
-        GearboxRepeatUltraMk2(Drivers& drivers, const Config& config);
+        UltraMk2(Drivers& drivers, const Config& config);
 
-        mockable ~GearboxRepeatUltraMk2() = default;
+        mockable ~UltraMk2() = default;
 
         /**
          * Since this motor does not use feedback to control its speed, this is the
