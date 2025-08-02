@@ -1,11 +1,13 @@
 #ifndef FANG_ROBOTICS_MCB_DRIVER_MOTOR_GEARBOX_REPEAT_ULTRA_MK2_HPP
 #define FANG_ROBOTICS_MCB_DRIVER_MOTOR_GEARBOX_REPEAT_ULTRA_MK2_HPP
-#include "repeat_ultra_mk2.hpp"
-#include "driver/motor/data/directionality.hpp"
+
+#include "vortex_80a_esc.hpp"
+#include "driver/drivers.hpp"
+
+#include "wrap/rail/motor/ispeed_motor.hpp"
 #include "wrap/trap/communication/pwm_data.hpp"
 #include "wrap/units/units_alias.hpp"
 
-#include "driver/drivers.hpp"
 #include "tap/util_macros.hpp"
 
 namespace fang::motor
@@ -15,7 +17,7 @@ namespace fang::motor
     *The gear ratio is motor turns : shaft turns, so a 14:1 gearbox would mean that the motor shaft rotates 14 times in order for the
     *output shaft to rotate once.
     */
-    class GearboxRepeatUltraMk2 : public RepeatUltraMk2
+    class GearboxRepeatUltraMk2 : public ISpeedMotor
     {
     public:
         struct Config
@@ -45,8 +47,27 @@ namespace fang::motor
          * theoretical speed would be that.
          */
 		mockable void setTargetSpeed(const RPM& speed);
+
+        /**
+         * Required to send a zero arming signal
+         * The initialization needs to have an arming signal sent for
+         * 1-2 seconds. It will be left up to the caller on how to 
+         * ensure the delay.
+         */
+        void initialize() override;
+
+        void update();
+
+        static constexpr RPMPerVolt kKv{1450.0};
     private:
+        const Volts kControllerInputVoltage_;
         const double kGearRatio_;
+        const int8_t kInversionMultiplier_;
+        // This was the Repeat Robotics provided value for the ratio between the rpm and the voltage associated with i
+        //kv value is ration of rpm per voltage applied to a brushless dc motor
+        Vortex80AEsc vortex_;
+
+        const RPM kMaxTheoreticalSpeed_{kKv * kControllerInputVoltage_};
    };
 }
 #endif

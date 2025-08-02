@@ -8,22 +8,27 @@ namespace fang::motor
         Drivers& drivers,
         const Config& config
     ):
-        RepeatUltraMk2
-        (
-            drivers,
-            RepeatUltraMk2::Config
-            {
-                config.controllerInputVoltage,
-                config.pwmData,
-                config.inverted
-            }
-        ),
-        kGearRatio_{config.gearRatio}
-    {
-    }
+
+        kControllerInputVoltage_{config.controllerInputVoltage},
+        kGearRatio_{config.gearRatio},
+        kInversionMultiplier_{config.inverted ? -1 : 1}, // Reverse if inverted lol, motor is bidirectional
+        vortex_{drivers.pwm, config.pwmData}
+    {}
 
 	void GearboxRepeatUltraMk2::setTargetSpeed(const RPM& speed)
     {
-        RepeatUltraMk2::setTargetSpeed(shaftToMotorSpeed(speed, kGearRatio_));
+        const RPM motorSpeed{shaftToMotorSpeed(speed, kGearRatio_)};
+        const double speedPercentage{motorSpeed / kMaxTheoreticalSpeed_};
+        vortex_.setSpeed(speedPercentage * kInversionMultiplier_);
+    }
+
+    void GearboxRepeatUltraMk2::initialize()
+    {
+        vortex_.sendArmingSignal();
+    }
+
+    void GearboxRepeatUltraMk2::update()
+    {
+        //TODO: Ramping functionality
     }
 }//namespace motor
