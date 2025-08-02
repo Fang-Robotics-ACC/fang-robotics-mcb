@@ -1,39 +1,55 @@
-#ifndef FANG_ROBOTICS_MCB_DRIVER_MOTOR_REPEAT_ULTRA_MK2_HPP
-#define FANG_ROBOTICS_MCB_DRIVER_MOTOR_REPEAT_ULTRA_MK2_HPP
-#include "driver/drivers.hpp"
-#include "driver/motor/data/directionality.hpp"
+#ifndef FANG_ROBOTICS_MCB_DRIVER_MOTOR_GEARBOX_REPEAT_ULTRA_MK2_HPP
+#define FANG_ROBOTICS_MCB_DRIVER_MOTOR_GEARBOX_REPEAT_ULTRA_MK2_HPP
+
 #include "vortex_80a_esc.hpp"
-#include "wrap/rail/rail_motors.hpp"
+#include "driver/drivers.hpp"
+
+#include "wrap/rail/motor/ispeed_motor.hpp"
+#include "wrap/trap/communication/pwm_data.hpp"
 #include "wrap/units/units_alias.hpp"
 
-#include "wrap/trap/algorithms/ramp.hpp"
-
-#include "tap/drivers.hpp"
-#include "tap/communication/gpio/pwm.hpp"
-#include "wrap/trap/communication/pwm_data.hpp"
+#include "tap/util_macros.hpp"
 
 namespace fang::motor
 {
-    /*!
-    RPM is positive according to the right hand rule when the motor is the shaft pointing up. This is the the gearbox detached!!!
-    */
-    class RepeatUltraMk2 : public virtual ISpeedMotor
+    /**
+     * Drivers for the Repeat Ultra Mk2 controlled by a
+     * Vortex80AEsc AM32 controller.
+     * 
+     * Fun fact of the day:
+     * If the pinion gear breaks, no fear, get some
+     * green loctite 603 which is designed for shear
+     * forces. Generally is ready to use within an hour
+     * if you are in a pinch. (Wait 24 hours if you can.)
+     * 
+     * https://repeat-robotics.com/buy/ultra-2/
+     */
+    class RepeatUltraMk2 : public ISpeedMotor
     {
     public:
+        /**
+         * @param controllerInputVoltage - the nominal voltage supplied to the
+         * motor controller. It doesn't have to be too precise.
+         * 
+         * @param pwmData - the frequency and port information
+         * @param inverted - whether or not to make clockwise counter-clockwise
+         * etc. In fang-mcb and the electronics department, counterclockwise is positive.
+         * 
+         * @param gearRatio - how many motor turns per shaft turn. This
+         * means that a ratio greater than 1 will make the output speed
+         * slower but stronger.
+         */
         struct Config
         {
             const Volts& controllerInputVoltage;
             trap::gpio::PwmData pwmData;
-            Directionality directionality;
-            bool inverted ;
+            bool inverted;
+            double gearRatio;
         };
+
         RepeatUltraMk2(Drivers& drivers, const Config& config);
-        RepeatUltraMk2(tap::Drivers& drivers,
-                      const Volts& controllerInputVoltage,
-                      tap::gpio::Pwm::Pin pwmPin,
-                      const Hertz& pinFrequency,
-                      Directionality directionality,
-                      bool inverted = false);
+
+        mockable ~RepeatUltraMk2() = default;
 
         /**
          * Since this motor does not use feedback to control its speed, this is the
@@ -49,54 +65,30 @@ namespace fang::motor
          * can at most provide a bdlc motor 10 volts. Given the kv value, the maximum
          * theoretical speed would be that.
          */
-		void setTargetSpeed(const RPM& speed) override;
-        
-        /**
-         * This returns the desired speed, not the actual speed.
-         */
-		RPM getTargetSpeed() const;
+		mockable void setTargetSpeed(const RPM& speed);
 
         /**
-         * All requests will be clamped to this bound. The default is the maximum
-         * theoretical speed which is the motor kv (1450) multiplied by the nominal
-         * controller input voltage.
-         */
-		void setMaxSpeed(const RPM& maxSpeed);
-
-        /**
-         * Get the maximum speed which all setSpeed() requests are clamped to
-         */
-		RPM getMaxSpeed() const;
-
-        /**
-         * All requests will be clamped to this bound. The default for unidirectional is 0 rpm.
-         * The default for bidirectional is the negative of the maximum theoretical speed.
-         */
-		void setMinSpeed(const RPM& minSpeed);
-
-        /**
-         * Get the minimum speed which all setSpeed requests are clamped to
-         */
-		RPM getMinSpeed() const;
-        /**
-         * This needs to have a delay of around half a second. It will be up to the caller
-         * to figure out how to insure this.
+         * Required to send a zero arming signal
+         * The initialization needs to have an arming signal sent for
+         * 1-2 seconds. It will be left up to the caller on how to 
+         * ensure the delay.
          */
         void initialize() override;
-        void update() override;
+
+        void update();
+
+        static constexpr RPMPerVolt kKv{1450.0};
     private:
+        void assertConfigValidity(const Config& config);
+
         const Volts kControllerInputVoltage_;
-        const RPM kMaxTheoreticalSpeed_;
-        RPM speed_{0};
-        RPM maxSpeed_{};
-        int8_t inversionMultiplier_;
-        RPM minSpeed_{0};
+        const double kGearRatio_;
+        const int8_t kInversionMultiplier_;
         // This was the Repeat Robotics provided value for the ratio between the rpm and the voltage associated with i
         //kv value is ration of rpm per voltage applied to a brushless dc motor
-        static constexpr RPMPerVolt kKv{1450.0};
-        //The voltage of the controller should not be exceeded by its output
-
         Vortex80AEsc vortex_;
+
+        const RPM kMaxTheoreticalSpeed_{kKv * kControllerInputVoltage_};
    };
 }
-#endif 
+#endif

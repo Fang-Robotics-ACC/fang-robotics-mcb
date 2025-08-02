@@ -2,7 +2,7 @@
 #include "power_quad_drive.hpp"
 
 #include "driver/drivers.hpp"
-#include "driver/motor/repeat_robotics/gearbox_repeat_ultra_mk2.hpp"
+#include "driver/motor/repeat_robotics/repeat_ultra_mk2.hpp"
 
 #include "wrap/rail/chassis/ipower_limiter_system.hpp"
 namespace fang::chassis
@@ -10,7 +10,7 @@ namespace fang::chassis
     class UltraMk2PowerQuadDrive : public PowerQuadDrive
     {
     public:
-        using Motor = motor::GearboxRepeatUltraMk2;
+        using Motor = motor::RepeatUltraMk2;
         using Config = QuadCollection<Motor::Config>;
 
         /**

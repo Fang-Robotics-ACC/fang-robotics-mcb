@@ -17,7 +17,6 @@ namespace fang::chassis
         {
             .controllerInputVoltage = 24_V,
             .pwmData = {tap::gpio::Pwm::C1, 500_Hz},
-            .directionality = motor::Directionality::BIDIRECTIONAL,
             .inverted = false,
             .gearRatio = 14
         };
