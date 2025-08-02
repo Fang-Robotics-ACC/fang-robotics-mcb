@@ -2,7 +2,7 @@
 #include "power_quad_drive.hpp"
 
 #include "driver/drivers.hpp"
-#include "driver/motor/repeat_robotics/gearbox_repeat_ultra_mk2.hpp"
+#include "driver/motor/repeat_robotics/ultra_mk2.hpp"
 
 #include "wrap/rail/chassis/ipower_limiter_system.hpp"
 namespace fang::chassis

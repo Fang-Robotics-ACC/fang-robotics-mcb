@@ -20,7 +20,7 @@
 #include "tap/control/subsystem.hpp"
 
 
-#include "driver/motor/repeat_robotics/gearbox_repeat_ultra_mk2.hpp"
+#include "driver/motor/repeat_robotics/ultra_mk2.hpp"
 
 //namespace fang::chassis
 //{

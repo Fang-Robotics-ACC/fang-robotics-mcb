@@ -1,4 +1,4 @@
-#include "driver/motor/repeat_robotics/gearbox_repeat_ultra_mk2.hpp"
+#include "driver/motor/repeat_robotics/ultra_mk2.hpp"
 #include "wrap/units/units_alias.hpp"
 
 #include "driver/drivers.hpp"
