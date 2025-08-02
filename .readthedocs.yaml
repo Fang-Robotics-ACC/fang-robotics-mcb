@@ -11,7 +11,9 @@ build:
   os: ubuntu-24.04
   tools:
     python: "3.13"
-requirements_file: docs/requirements.txt
+python:
+  install:
+    - requirerments: docs/requirements.txt
 # Build documentation in the "docs/" directory with Sphinx
 sphinx:
    configuration: docs/conf.py
