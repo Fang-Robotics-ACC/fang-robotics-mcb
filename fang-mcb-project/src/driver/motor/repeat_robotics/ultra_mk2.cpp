@@ -8,7 +8,7 @@ namespace fang::motor
 {
     using namespace units::literals;
 
-    UltraMk2::UltraMk2
+    RepeatUltraMk2::RepeatUltraMk2
     (
         Drivers& drivers,
         const Config& config
@@ -22,24 +22,24 @@ namespace fang::motor
         assertConfigValidity(config);
     }
 
-	void UltraMk2::setTargetSpeed(const RPM& speed)
+	void RepeatUltraMk2::setTargetSpeed(const RPM& speed)
     {
         const RPM motorSpeed{shaftToMotorSpeed(speed, kGearRatio_)};
         const double speedPercentage{motorSpeed / kMaxTheoreticalSpeed_};
         vortex_.setSpeed(speedPercentage * kInversionMultiplier_);
     }
 
-    void UltraMk2::initialize()
+    void RepeatUltraMk2::initialize()
     {
         vortex_.sendArmingSignal();
     }
 
-    void UltraMk2::update()
+    void RepeatUltraMk2::update()
     {
         //TODO: Ramping functionality
     }
 
-    void UltraMk2::assertConfigValidity(const Config& config)
+    void RepeatUltraMk2::assertConfigValidity(const Config& config)
     {
         FANG_ASSERT(config.gearRatio > 0.0, "Gear ratio cannot cause singularities or flip the directions");
         FANG_ASSERT(config.controllerInputVoltage >= 0.0_V, "Voltage should be positive. Either fix the code or the wiring");

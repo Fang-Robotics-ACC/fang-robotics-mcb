@@ -9,7 +9,7 @@ namespace fang::chassis
     class UltraMk2BaseQuaddrive : public BaseQuadDrive
     {
     public:
-        using Motor = motor::UltraMk2;
+        using Motor = motor::RepeatUltraMk2;
         struct Config
         {
             Motor::Config frontLeftConfig;

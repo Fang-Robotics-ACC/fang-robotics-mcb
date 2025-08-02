@@ -24,7 +24,7 @@ namespace fang::motor
      * 
      * https://repeat-robotics.com/buy/ultra-2/
      */
-    class UltraMk2 : public ISpeedMotor
+    class RepeatUltraMk2 : public ISpeedMotor
     {
     public:
         /**
@@ -47,9 +47,9 @@ namespace fang::motor
             double gearRatio;
         };
 
-        UltraMk2(Drivers& drivers, const Config& config);
+        RepeatUltraMk2(Drivers& drivers, const Config& config);
 
-        mockable ~UltraMk2() = default;
+        mockable ~RepeatUltraMk2() = default;
 
         /**
          * Since this motor does not use feedback to control its speed, this is the
