@@ -13,6 +13,7 @@ Here you will find documentation for MCB embedded/control code. Navigate to a sp
     :caption: Contents:
 
     api/library_root
+    docs/index
 
 Indices and tables
 ==================
