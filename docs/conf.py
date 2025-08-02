@@ -60,7 +60,8 @@ breathe_default_project = "fang-mcb"
 extensions = [
     # there may be others here already, e.g. 'sphinx.ext.mathjax'
     'breathe',
-    'exhale'
+    'exhale',
+	'myst_parser'
 ]
 
 # Setup the breathe extension
@@ -88,3 +89,7 @@ primary_domain = 'cpp'
 
 # Tell sphinx what the pygments highlight language should be.
 highlight_language = 'cpp'
+source_suffice = {
+	'.rst': 'restructuredtext',
+	'.md': 'markdown'
+}
