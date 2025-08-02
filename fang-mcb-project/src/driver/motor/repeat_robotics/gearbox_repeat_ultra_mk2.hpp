@@ -13,13 +13,32 @@
 namespace fang::motor
 {
     /**
-    *RPM is positive according to the right hand rule when the motor is the shaft pointing up. This is the the gearbox detached!!!
-    *The gear ratio is motor turns : shaft turns, so a 14:1 gearbox would mean that the motor shaft rotates 14 times in order for the
-    *output shaft to rotate once.
-    */
+     * Drivers for the Repeat Ultra Mk2 controlled by a
+     * Vortex80AEsc AM32 controller.
+     * 
+     * Fun fact of the day:
+     * If the pinion gear breaks, no fear, get some
+     * green loctite 603 which is designed for shear
+     * forces. Generally is ready to use within an hour
+     * if you are in a pinch. (Wait 24 hours if you can.)
+     * 
+     * https://repeat-robotics.com/buy/ultra-2/
+     */
     class UltraMk2 : public ISpeedMotor
     {
     public:
+        /**
+         * @param controllerInputVoltage - the nominal voltage supplied to the
+         * motor controller. It doesn't have to be too precise.
+         * 
+         * @param pwmData - the frequency and port information
+         * @param inverted - whether or not to make clockwise counter-clockwise
+         * etc. In fang-mcb and the electronics department, counterclockwise is positive.
+         * 
+         * @param gearRatio - how many motor turns per shaft turn. This
+         * means that a ratio greater than 1 will make the output speed
+         * slower but stronger.
+         */
         struct Config
         {
             const Volts& controllerInputVoltage;
@@ -60,6 +79,8 @@ namespace fang::motor
 
         static constexpr RPMPerVolt kKv{1450.0};
     private:
+        void assertConfigValidity(const Config& config);
+
         const Volts kControllerInputVoltage_;
         const double kGearRatio_;
         const int8_t kInversionMultiplier_;
