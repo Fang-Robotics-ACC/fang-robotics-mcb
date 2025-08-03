@@ -42,12 +42,12 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 
+html_theme = 'sphinx_rtd_theme'
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -61,8 +61,10 @@ extensions = [
     # there may be others here already, e.g. 'sphinx.ext.mathjax'
     'breathe',
     'exhale',
-	'myst_parser'
+	'myst_parser',
+    'sphinx_rtd_dark_mode'
 ]
+
 
 # Setup the breathe extension
 breathe_projects = {
