@@ -17,8 +17,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'fang-mcb'
-copyright = '2020, fang-mcb'
+project = 'fang-robotics-mcb'
+copyright = '2025, Fang Robotics CC'
 author = 'fang-mcb'
 
 # The full version, including alpha/beta/rc tags
@@ -60,7 +60,8 @@ breathe_default_project = "fang-mcb"
 extensions = [
     # there may be others here already, e.g. 'sphinx.ext.mathjax'
     'breathe',
-    'exhale'
+    'exhale',
+	'myst_parser'
 ]
 
 # Setup the breathe extension
@@ -73,7 +74,7 @@ exhale_args = {
     # These arguments are required
     "containmentFolder":     "./api",
     "rootFileName":          "library_root.rst",
-    "rootFileTitle":         "Library API",
+    "rootFileTitle":         "Fang API",
     "doxygenStripFromPath":  "..",
     # Suggested optional arguments
     "createTreeView":        True,
@@ -88,3 +89,7 @@ primary_domain = 'cpp'
 
 # Tell sphinx what the pygments highlight language should be.
 highlight_language = 'cpp'
+source_suffice = {
+	'.rst': 'restructuredtext',
+	'.md': 'markdown'
+}
