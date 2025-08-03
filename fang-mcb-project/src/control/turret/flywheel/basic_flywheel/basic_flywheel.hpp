@@ -27,6 +27,8 @@ namespace fang::turret
 
         BasicFlywheel(std::unique_ptr<Motor> motor, const Config& config);
 
+        virtual ~BasicFlywheel() = default;
+
 		void setTargetRimSpeed(const MetersPerSecond& rimSpeed) override;
 
         void initialize() override;
