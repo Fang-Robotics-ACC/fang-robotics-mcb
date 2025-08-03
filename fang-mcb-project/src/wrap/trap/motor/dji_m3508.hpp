@@ -2,6 +2,7 @@
 #define FANG_ROBOTICS_MCB_TRAP_DJI_M3508_HPP
 #include "wrap/trap/drivers.hpp"
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
+#include "wrap/rail/motor/ispeed_motor.hpp"
 #include "wrap/units/units_alias.hpp"
 
 #include "tap/motor/dji_motor.hpp"
@@ -16,7 +17,7 @@ namespace trap
         /**
          * Wrapper for DJI motor for the DJI M3508 on a CAN bus
          */
-        class DjiM3508
+        class DjiM3508 : virtual public fang::motor::ISpeedMotor
         {
         public:
             struct Config
@@ -46,7 +47,7 @@ namespace trap
             /**
              * Must be called regularly to update the motor pid and set the motor output
              */
-            mockable void update();
+            mockable void update() override;
 
             /**
              * Sets the desired speed for the pid to target
@@ -57,10 +58,11 @@ namespace trap
              * Returns the last reported RPM from CAN
              */
             mockable RPM getSpeed() const;
+
             /**
              * It must be called for the motor to properly function.
              */
-            mockable void initialize();
+            mockable void initialize() override;
 
             /**
              * The desired motor output. It must be limited to a 16 bit int.
