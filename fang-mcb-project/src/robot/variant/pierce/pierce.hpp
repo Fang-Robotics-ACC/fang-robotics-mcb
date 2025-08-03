@@ -17,10 +17,10 @@
 #include "control/chassis/drive/holonomic/command/shuriken_command.hpp"
 #include "control/chassis/drive/holonomic/command/tardis_command.hpp"
 
-#include "control/turret/command/aim_command.hpp"
-#include "control/turret/command/activate_booster_command.hpp"
-#include "control/turret/command/autofire_command.hpp"
-#include "control/turret/command/unjam_command.hpp"
+#include "control/turret/gimbal/command/aim_command.hpp"
+#include "control/turret/ammo_booster/command/activate_booster_command.hpp"
+#include "control/turret/feeder/command/simple_autofire_command.hpp"
+#include "control/turret/feeder/command/simple_unjam_command.hpp"
 
 #include "wrap/trap/communication/sensors/imu.hpp"
 

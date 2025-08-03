@@ -1,4 +1,4 @@
-#include "control/turret/command/aim_command.hpp"
+#include "aim_command.hpp"
 
 #include "tap/algorithms/math_user_utils.hpp"
 

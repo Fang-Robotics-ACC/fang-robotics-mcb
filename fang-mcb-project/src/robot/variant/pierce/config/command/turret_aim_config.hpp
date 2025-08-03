@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_TURRET_AIM_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_TURRET_AIM_CONFIG_HPP
-#include "control/turret/command/aim_command.hpp"
+#include "control/turret/gimbal/command/aim_command.hpp"
 #include "wrap/units/units_alias.hpp"
 
 namespace fang::robot
