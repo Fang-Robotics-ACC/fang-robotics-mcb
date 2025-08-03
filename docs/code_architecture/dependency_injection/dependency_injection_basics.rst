@@ -22,10 +22,10 @@ M3508 or the Repeat Ultra MK 2. These would be private variables.
       QuadDrive() {}
       void setWheelSpeeds(const QuadRPM& wheelSpeeds);
   private:
-      Motor frontLeft{};
-      Motor frontRight{};
-      Motor rearLeft{};
-      Motor rearRight{};
+      Motor frontLeft_{};
+      Motor frontRight_{};
+      Motor rearLeft_{};
+      Motor rearRight_{};
   };
 
 This obeys the general principles of encapsulation and single responsibility.
@@ -68,18 +68,26 @@ constructor?
   class QuadDrive
   {
   public:
-      QuadDrive(
+      QuadDrive
+      (
            std::unique_ptr<ISpeedMotor> frontLeft,
            std::unique_ptr<ISpeedMotor> frontRight,
            std::unique_ptr<ISpeedMotor> rearLeft,
-           std::unique_ptr<ISpeedMotor> rearRight)
+           std::unique_ptr<ISpeedMotor> rearRight
+      ):
+          // Be carefful to move with frontLeft or lese
+          // A segmentation error will occur when it is used
+          frontLeft_{std::move(frontLeft)},
+          frontRight_{std::move(frontRight)}, 
+          rearLeft_{std::move(rearLeft)},
+          rearRight_{std::move(rearRight)}
       {}
       void setWheelSpeeds(const QuadRPM& wheelSpeeds);
   private:
-      std::unique_ptr<ISpeedMotor> frontLeft;
-      std::unique_ptr<ISpeedMotor> frontRight;
-      std::unique_ptr<ISpeedMotor> rearLeft;
-      std::unique_ptr<ISpeedMotor> rearRight;
+      std::unique_ptr<ISpeedMotor> frontLeft_;
+      std::unique_ptr<ISpeedMotor> frontRight_;
+      std::unique_ptr<ISpeedMotor> rearLeft_;
+      std::unique_ptr<ISpeedMotor> rearRight_;
   };
 
 Although, generally, we will create instances with a uniform type of motor, this 
@@ -94,13 +102,13 @@ is to demonstrate the power of dependency injectoin
   std::unique_ptr<TestMotor> test{};
 
   //Note: that we can use pass an anonymous instance directly, but for 
-  //demonstrative purposes and a clearer syntac for the beginner
+  //demonstrative purposes and a clearer syntax for the beginner
   QuadDrive quad
   {
-      std::move(m3508);
-      std::move(ultra);
-      std::move(gm6020);
-      std::move(test);
+      std::move(m3508),
+      std::move(ultra),
+      std::move(gm6020),
+      std::move(test)
   };
 
 Don't know about std::move() or move semantics? Check `this
@@ -137,7 +145,7 @@ class for convenience) who only initializes the class within its constructor.
             Motor::Config frontLeftConfig;
             Motor::Config frontRightConfig;
             Motor::Config rearLeftConfig;
-            Motor::Config rearRightConig;
+            Motor::Config rearRightConfig;
         };
 
         UltraMk2BaseQuaddrive(Drivers& drivers, const Config& config):
@@ -147,7 +155,7 @@ class for convenience) who only initializes the class within its constructor.
                 std::make_unique<Motor>(config.frontLeftConfig),
                 std::make_unique<Motor>(config.frontRightConfig),
                 std::make_unique<Motor>(config.rearLeftConfig),
-                std::make_unique<Motor>(config.rearRightConig)
+                std::make_unique<Motor>(config.rearRightConfig)
             }
         {
         }

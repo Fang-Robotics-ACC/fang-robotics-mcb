@@ -15,7 +15,7 @@ namespace fang::chassis
             Motor::Config frontLeftConfig;
             Motor::Config frontRightConfig;
             Motor::Config rearLeftConfig;
-            Motor::Config rearRightConig;
+            Motor::Config rearRightConfig;
         };
 
         UltraMk2BaseQuaddrive(Drivers& drivers, const Config& config):
@@ -25,7 +25,7 @@ namespace fang::chassis
                 std::make_unique<Motor>(config.frontLeftConfig),
                 std::make_unique<Motor>(config.frontRightConfig),
                 std::make_unique<Motor>(config.rearLeftConfig),
-                std::make_unique<Motor>(config.rearRightConig)
+                std::make_unique<Motor>(config.rearRightConfig)
             }
         {
         }
