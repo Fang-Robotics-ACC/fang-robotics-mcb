@@ -15,7 +15,7 @@ namespace fang::turret
      * to not be used by taproot's command scheduler. This is to provide
      * the turret subsystem a "subsubsystem", which is not supported by taproot.
      */
-    class FlywheelSystem:
+    class BasicFlywheel:
         virtual public motor::ISpeedWheel
     {
     public:
@@ -25,7 +25,7 @@ namespace fang::turret
             Meters radius;
         };
 
-        FlywheelSystem(std::unique_ptr<Motor> motor, const Config& config);
+        BasicFlywheel(std::unique_ptr<Motor> motor, const Config& config);
 
 		void setTargetRimSpeed(const MetersPerSecond& rimSpeed) override;
 

@@ -1,32 +1,32 @@
-#include "flywheel_system.hpp"
+#include "basic_flywheel.hpp"
 #include "wrap/units/units_alias.hpp"
 
 using namespace units::literals;
 namespace fang::turret
 {
-    FlywheelSystem::FlywheelSystem(std::unique_ptr<Motor> motor, const Config& config)
+    BasicFlywheel::BasicFlywheel(std::unique_ptr<Motor> motor, const Config& config)
     :   kRadius_{config.radius / 1_rad},
         motor_{std::move(motor)}
     {
     }
 
-    void FlywheelSystem::setTargetRimSpeed(const MetersPerSecond& rimSpeed)
+    void BasicFlywheel::setTargetRimSpeed(const MetersPerSecond& rimSpeed)
     {
         targetRimSpeed_ = rimSpeed;
         motor_->setTargetSpeed(RimSpeedToMotorSpeed(rimSpeed));
     }
 
-    RPM FlywheelSystem::RimSpeedToMotorSpeed(const MetersPerSecond& rimSpeed) const
+    RPM BasicFlywheel::RimSpeedToMotorSpeed(const MetersPerSecond& rimSpeed) const
     {
         return rimSpeed / kRadius_;
     }
 
-    void FlywheelSystem::update()
+    void BasicFlywheel::update()
     {
         motor_->update();
     }
 
-    void FlywheelSystem::initialize()
+    void BasicFlywheel::initialize()
     {
         motor_->initialize();
     }
