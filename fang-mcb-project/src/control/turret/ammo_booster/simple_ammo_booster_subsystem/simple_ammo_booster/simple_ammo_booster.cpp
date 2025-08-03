@@ -11,12 +11,12 @@ namespace fang::turret
     {
     }
 
-    void SimpleAmmoBooster::autoFireOn()
+    void SimpleAmmoBooster::boostOn()
     {
         setRimSpeeds(ammoVelocity_);
     }
 
-    void SimpleAmmoBooster::autoFireOff()
+    void SimpleAmmoBooster::boostOff()
     {
         setRimSpeeds(kStillSpeed);
     }
@@ -36,6 +36,11 @@ namespace fang::turret
         {
             flywheel->update();
         }
+    }
+
+    void SimpleAmmoBooster::refresh()
+    {
+        update();
     }
 
     void SimpleAmmoBooster::initialize()

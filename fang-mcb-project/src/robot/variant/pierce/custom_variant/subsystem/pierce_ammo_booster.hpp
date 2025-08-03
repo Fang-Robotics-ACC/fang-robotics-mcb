@@ -23,16 +23,23 @@ namespace fang::turret
             SimpleAmmoBooster
             (
                 drivers,
-                Flywheels
-                {
-                    std::make_unique<Flywheel>(config.leftFlywheelConfig),
-                    std::make_unique<Flywheel>(config.rightFlywheelConfig)
-                },
+                makeFlywheels(drivers, config),
                 {config.ammoVelocity}
             )
-
         {
         }
+    private:
+        /**
+         * We cannot copy and std::initializer_list is kinda mid at this
+         * So we must do this hack
+         */
+        static Flywheels makeFlywheels(Drivers& drivers, const Config& config)
+        {
+            Flywheels flywheels{};
+            flywheels.push_back(std::make_unique<Flywheel>(drivers, config.leftFlywheelConfig));
+            flywheels.push_back(std::make_unique<Flywheel>(drivers, config.rightFlywheelConfig));
+            return flywheels;
+        };
 
     };
 

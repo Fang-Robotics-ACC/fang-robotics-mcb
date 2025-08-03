@@ -3,8 +3,7 @@
 
 namespace fang::turret
 {
-    using namespace units::literals;
-    ActivateBoosterCommand::ActivateBoosterCommand(AmmoBoosterSubsystem& booster)
+    ActivateBoosterCommand::ActivateBoosterCommand(SimpleAmmoBoosterSubsystem& booster)
     :   m_booster{booster}
     {
         addSubsystemRequirement(&m_booster);
@@ -12,7 +11,7 @@ namespace fang::turret
 
     void ActivateBoosterCommand::initialize()
     {
-        m_booster.autoFireOn();
+        m_booster.boostOn();
     }
 
     void ActivateBoosterCommand::execute()
@@ -21,7 +20,7 @@ namespace fang::turret
 
     void ActivateBoosterCommand::end(bool interrupted)
     {
-        m_booster.autoFireOff();
+        m_booster.boostOff();
     }
 
     bool ActivateBoosterCommand::isFinished() const

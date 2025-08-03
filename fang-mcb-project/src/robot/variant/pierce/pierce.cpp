@@ -15,9 +15,9 @@ namespace fang::robot
             kMappingConfig_{config.mappingConfig},
             m_imu{drivers.bmi088},
             feeder_{std::make_unique<turret::M2006SimpleFeeder>(drivers, config.subsystemConfig.feederConfig)},
+            booster_{std::make_unique<turret::PierceAmmoBooster>(drivers, config.subsystemConfig.boosterConfig)},
             mecanumDrive_{std::make_unique<chassis::PierceMecanumDrive>(drivers, mk_subsystemConfig.chassisConfig)},
             m_gimbal{drivers, m_imu, mk_subsystemConfig.gimbalConfig},
-            m_booster{drivers, mk_subsystemConfig.boosterConfig},
             m_chassisInput{drivers.remote, mk_inputConfig.chassisInputConfig},
             m_turretInput{drivers.remote, mk_inputConfig.turretInputConfig}
     {

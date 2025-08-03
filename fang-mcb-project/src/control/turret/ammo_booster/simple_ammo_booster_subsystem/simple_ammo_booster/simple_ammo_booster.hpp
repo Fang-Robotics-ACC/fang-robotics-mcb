@@ -34,10 +34,11 @@ namespace fang::turret
             const Config& config
         );
 
-        void autoFireOn();
-        void autoFireOff();
+        void boostOn() override;
+        void boostOff() override;
 
         void update() override;
+        void refresh() override;
         void initialize() override;
     private:
         static constexpr MetersPerSecond kStillSpeed{0};

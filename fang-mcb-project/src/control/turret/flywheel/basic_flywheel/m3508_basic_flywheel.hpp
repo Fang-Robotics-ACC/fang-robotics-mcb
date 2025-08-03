@@ -12,15 +12,15 @@ namespace fang::turret
         using Motor = trap::motor::DjiM3508;
         struct Config
         {
+            Meters radius;
             Motor::Config motorConfig;
-            BasicFlywheel::Config flywheelConfig;
         };
 
         M3508BasicFlywheel(Drivers& drivers, const Config& config):
             BasicFlywheel
             (
-                std::make_unique<Motor>(config.motorConfig),
-                config.flywheelConfig
+                std::make_unique<Motor>(drivers, config.motorConfig),
+                {config.radius}
             )
         {}
 
