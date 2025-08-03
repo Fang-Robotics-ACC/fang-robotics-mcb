@@ -9,6 +9,15 @@ Fang Robotics Firmware for the Seven Fangs:
 * Palisade Bite \[Dart\]
 * Situational Awareness \[Radar System\]
 
+## Read the docs
+
+Instead of a github wiki, we have a readthedocs! It is automatically
+built with every version and pulls doxygen comments from the source code.
+In addition, there will be educational materials regarding the design of the
+codebase itself:
+
+https://fang-robotics-mcb.readthedocs.io/en/latest/
+
 ## License Information
 In the spirit of open‑source software, education, and—most
 importantly—community, Fang Robotics MCB is released under the
