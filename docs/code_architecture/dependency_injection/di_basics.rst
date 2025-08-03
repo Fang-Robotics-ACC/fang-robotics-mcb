@@ -35,10 +35,10 @@ if you wanted to test the QuadDrive to verify its functionality. Given the
 nature of the QuadDrive, it itself does not output any data to test with 
 traditional unit tests. Another approach must be utilized.
 
-There are some important things to note here:
-1. A QuadDrive only sets the speeds of the motors. It provides a way to 
-   encapsulate the responsibility of the lifetime of the motors as well.
-2. The QuadDrive can function with any motor which can set the wheel speeds.
+There are some important things to note here: 1. A QuadDrive only sets the
+speeds of the motors. It provides a way to encapsulate the responsibility of
+the lifetime of the motors as well. 2. The QuadDrive can function with any
+motor which can set the wheel speeds.
 
 What if instead of having a hardcoded Motor type, the QuadDrive could take in 4 
 motors of any kind as long as their speed could be set? Let us create a pure 
