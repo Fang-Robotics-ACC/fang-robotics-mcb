@@ -4,7 +4,7 @@
     contain the root `toctree` directive.
 
 Welcome to fang-mcb documentation!
-==================================================
+==================================
 
 Here you will find documentation for MCB embedded/control code. Navigate to a specific subject by searching. Browse through code by looking through "Library API" below.
 
@@ -12,7 +12,6 @@ Here you will find documentation for MCB embedded/control code. Navigate to a sp
     :maxdepth: 2
     :caption: Contents:
 
-    docs/index
     code_architecture/index
     api/library_root
 

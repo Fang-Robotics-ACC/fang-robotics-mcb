@@ -1,5 +1,5 @@
-Dependency Injection
-====================
+Dependency Injection Basics
+===========================
 
 Dependency injection is a common design pattern within programming. Although
 its name may sound harrowing, it's quite a simple pattern. If you have worked 
@@ -11,7 +11,7 @@ class which manages 4 motors called a QuadDrive. Traditionally, the QuadDrive
 would have 4 instances of objects which are drivers for motors such as the DJI 
 M3508 or the Repeat Ultra MK 2. These would be private variables.
 
-..code-block:: cpp
+.. code-block:: cpp
   /**
    * Doxygen detectable comment :D
    */
@@ -46,7 +46,7 @@ concrete functions which must be implemented by those which inherit from it.
 This allows collections of many objects which may behave in different ways but 
 still essentially do the same category of thing.)
 
-..code-block:: cpp
+.. code-block:: cpp
   class ISpeedMotor
   {
   public:
@@ -58,7 +58,7 @@ still essentially do the same category of thing.)
 And what if our QuadDrive utilized that class? And took 4 motors within its 
 constructor?
   
-..code-block:: cpp
+.. code-block:: cpp
   /**
    * Doxygen detectable comment :D
    */
@@ -82,7 +82,7 @@ constructor?
 Although, generally, we will create instances with a uniform type of motor, this 
 is to demonstrate the power of dependency injectoin
 
-..code-block:: cpp
+.. code-block:: cpp
   std::unique_ptr<DjiM3508> m3508{};
   std::unique_ptr<RepeatUltraMk2> ultra{};
   std::unique_ptr<DjiGM06020> gm6020{};
@@ -99,6 +99,7 @@ is to demonstrate the power of dependency injectoin
       std::move(test);
   };
 
+Don't know about std::move() or move semantics? Check `this
 <https://www.learncpp.com/cpp-tutorial/introduction-to-smart-pointers-move-semantics/>`_ 
 out! Note that we are messing with dynamic memory so that the memory does not 
 need to be bound to an external instance. Once it is "moved", the quad instance 
@@ -156,6 +157,6 @@ class or function will not delete memory which might need to be used afterwards
 because its owner is pretty much non-existence within the next cycle (ish, Tron 
 reference ahhh).
 
-Don't know about std::move() or move semantics? Check `this `This article
+ `This article
 <https://vladris.com/blog/2016/07/06/dependency-injection-in-c.html>`_ goes
 more in depth.
