@@ -21,4 +21,5 @@ Code Architecture
 
 .. toctree::
     :glob:
-    *
+
+    */index
