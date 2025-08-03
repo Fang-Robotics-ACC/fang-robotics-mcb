@@ -22,9 +22,15 @@ namespace fang::turret
             MetersPerSecond ammoVelocity; 
         };
 
+        /**
+         * You need to std::move the vector of flywheels.
+         * Theoretically, it should throw an error should you attempt
+         * to copy unique pointers.
+         */
         SimpleAmmoBooster
         (
             Drivers& drivers,
+            Flywheels&& flywheels,
             const Config& config
         );
 

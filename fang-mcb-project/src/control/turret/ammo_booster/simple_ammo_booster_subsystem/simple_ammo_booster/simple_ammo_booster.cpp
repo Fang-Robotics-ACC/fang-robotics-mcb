@@ -3,9 +3,11 @@
 
 namespace fang::turret
 {
-    SimpleAmmoBooster::SimpleAmmoBooster(Drivers& drivers, const Config& config):
+    SimpleAmmoBooster::SimpleAmmoBooster(Drivers& drivers, Flywheels&& flywheels, const Config& config):
         SimpleAmmoBoosterSubsystem(drivers),
-        ammoVelocity_{config.ammoVelocity}
+        ammoVelocity_{config.ammoVelocity},
+        flywheels_{std::move(flywheels)}
+
     {
     }
 
