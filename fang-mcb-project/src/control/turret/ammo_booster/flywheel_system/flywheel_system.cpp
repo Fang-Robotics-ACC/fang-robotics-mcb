@@ -4,7 +4,7 @@
 using namespace units::literals;
 namespace fang::turret
 {
-    FlywheelSystem::FlywheelSystem(Motor motor, const Config& config)
+    FlywheelSystem::FlywheelSystem(std::unique_ptr<Motor> motor, const Config& config)
     :   kRadius_{config.radius / 1_rad},
         motor_{std::move(motor)}
     {

@@ -2,7 +2,8 @@
 #define FANG_ROBOTICS_MCB_CONTROL_TURRET_SYSTEM_BLUEPRINT_FLYWHEEL_SYSTEM_HPP
 #include "driver/drivers.hpp"
 
-#include "wrap/rail/rail_motor_owner.hpp"
+#include "wrap/rail/motor/ispeed_wheel.hpp"
+#include "wrap/rail/motor/ispeed_motor.hpp"
 #include "wrap/units/units_alias.hpp"
 
 namespace fang::turret
@@ -18,13 +19,13 @@ namespace fang::turret
         virtual public motor::ISpeedWheel
     {
     public:
-        using Motor = motor::ISpeedMotorPtr;
+        using Motor = motor::ISpeedMotor;
         struct Config
         {
             Meters radius;
         };
 
-        FlywheelSystem(Motor motor, const Config& config);
+        FlywheelSystem(std::unique_ptr<Motor> motor, const Config& config);
 
 		void setTargetRimSpeed(const MetersPerSecond& rimSpeed) override;
 
@@ -33,7 +34,7 @@ namespace fang::turret
     private:
         RPM RimSpeedToMotorSpeed(const MetersPerSecond& rimSpeed) const;
         const MetersPerRadians kRadius_; //This is required for the math to smoothly work
-        Motor motor_;
+        std::unique_ptr<Motor> motor_;
 
         MetersPerSecond targetRimSpeed_{};
     };

@@ -3,7 +3,8 @@
 #include "control/chassis/drive/quad_drive/quad_drive_subsystem.hpp"
 #include "control/chassis/drive/quad_drive/data/quad_collection.hpp"
 #include "driver/drivers.hpp"
-#include "wrap/rail/rail_motor_owner.hpp"
+
+#include "wrap/rail/motor/ispeed_motor.hpp"
 
 #include <array>
 #include <memory>
