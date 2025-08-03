@@ -12,6 +12,7 @@ would have 4 instances of objects which are drivers for motors such as the DJI
 M3508 or the Repeat Ultra MK 2. These would be private variables.
 
 .. code-block:: cpp
+
   /**
    * Doxygen detectable comment :D
    */
@@ -47,6 +48,7 @@ This allows collections of many objects which may behave in different ways but
 still essentially do the same category of thing.)
 
 .. code-block:: cpp
+
   class ISpeedMotor
   {
   public:
@@ -59,6 +61,7 @@ And what if our QuadDrive utilized that class? And took 4 motors within its
 constructor?
   
 .. code-block:: cpp
+
   /**
    * Doxygen detectable comment :D
    */
@@ -83,6 +86,7 @@ Although, generally, we will create instances with a uniform type of motor, this
 is to demonstrate the power of dependency injectoin
 
 .. code-block:: cpp
+
   std::unique_ptr<DjiM3508> m3508{};
   std::unique_ptr<RepeatUltraMk2> ultra{};
   std::unique_ptr<DjiGM06020> gm6020{};
@@ -100,14 +104,14 @@ is to demonstrate the power of dependency injectoin
   };
 
 Don't know about std::move() or move semantics? Check `this
-<https://www.learncpp.com/cpp-tutorial/introduction-to-smart-pointers-move-semantics/>`_ 
-out! Note that we are messing with dynamic memory so that the memory does not 
-need to be bound to an external instance. Once it is "moved", the quad instance 
-owns it and is solely responsible for deleting it/figuring out what to do with 
-it or who to let see it. If we utilized the stack, encapsulation would not be 
-respected. On performance, the only hit is on object creation, references and 
-pointers have the same performances, it's just that references are a lot safer 
-for non-owning instaces since it guards against null and other raw pointer 
+<https://www.learncpp.com/cpp-tutorial/introduction-to-smart-pointers-move-semantics/>`_
+out! Note that we are messing with dynamic memory so that the memory does not
+need to be bound to an external instance. Once it is "moved", the quad instance
+owns it and is solely responsible for deleting it/figuring out what to do with
+it or who to let see it. If we utilized the stack, encapsulation would not be
+respected. On performance, the only hit is on object creation, references and
+pointers have the same performances, it's just that references are a lot safer
+for non-owning instaces since it guards against null and other raw pointer
 shenaigans.
 
 This might seem tedious, but classes or factory functions can be automated to 
@@ -122,7 +126,8 @@ This uses the Variant Class design pattern in which a class inherits from a
 dependency injection class (so that it itself may be used as an instance of that 
 class for convenience) who only initializes the class within its constructor.
 
-..code-block:: cpp
+.. code-block:: cpp
+
     class UltraMk2BaseQuaddrive : public BaseQuadDrive
     {
     public:
@@ -157,6 +162,5 @@ class or function will not delete memory which might need to be used afterwards
 because its owner is pretty much non-existence within the next cycle (ish, Tron 
 reference ahhh).
 
- `This article
-<https://vladris.com/blog/2016/07/06/dependency-injection-in-c.html>`_ goes
+`This article <https://vladris.com/blog/2016/07/06/dependency-injection-in-c.html>`_ goes
 more in depth.
