@@ -1,9 +1,10 @@
-#ifndef FANG_ROBOTICS_MCB_CONTROL_TURRET_FEEDER_SIMPLE_FEEDER_SYSTEM_SIMPLE_FEEDER_SYSTEM_HPP
-#define FANG_ROBOTICS_MCB_CONTROL_TURRET_FEEDER_SIMPLE_FEEDER_SYSTEM_SIMPLE_FEEDER_SYSTEM_HPP
+#pragma once
+
 #include "driver/drivers.hpp"
 
-#include "wrap/rail/rail_turret_aliases.hpp"
-#include "wrap/rail/rail_motor_owner.hpp"
+#include "control/turret/feeder/simple_feeder_subsystem.hpp"
+#include "control/turret/util/heat_limiter.hpp"
+#include "wrap/rail/motor/ispeed_motor.hpp"
 #include "wrap/units/units_alias.hpp"
 
 namespace fang::turret
@@ -11,10 +12,11 @@ namespace fang::turret
     /**
      * Intermediate dependency injection based class using the deprecated feeder api
      */
-    class SimpleFeederSystem : virtual public ISimpleFeeder
+    class SimpleFeeder : public SimpleFeederSubsystem 
     {
     public:
-        using Motor = motor::ISpeedMotorPtr;
+        using Motor = motor::ISpeedMotor;
+        using HeatLimiter = fang::turret::HeatLimiter;
         /**
          * roundsPerRevolution cannot be negative or zero which would cause corruption.
          * feedRate - this is the starting rounds per second
@@ -25,12 +27,13 @@ namespace fang::turret
             int roundsPerRevolution;
             Hertz feedRate;
             RPM unjamSpeed;
+            HeatLimiter::Config heatLimiterConfig;
         };
 
         /**
          * A positive value sent to the feedMotor means that it will feed.
          */
-        SimpleFeederSystem(Motor feedMotor, const Config& config);
+        SimpleFeeder(Drivers& drivers, std::unique_ptr<Motor> feedMotor, const Config& config);
 
         void feedOn() override;
         void feedOff() override;
@@ -50,13 +53,13 @@ namespace fang::turret
 
         static constexpr RPM kStillSpeed_{0.0};
 
-        Motor feedMotor_;
+        std::unique_ptr<Motor> feedMotor_;
         const int kRoundsPerRevolution_;
         const Hertz kFeedRate_;
         const RPM kUnjamSpeed_;
+        HeatLimiter  heatLimiter_;
 
         bool activeStatus_{false};
 
     };  
 }
-#endif

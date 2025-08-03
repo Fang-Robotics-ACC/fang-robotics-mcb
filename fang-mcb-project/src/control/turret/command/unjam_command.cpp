@@ -4,7 +4,7 @@
 namespace fang::turret
 {
     using namespace units::literals;
-    UnjamCommand::UnjamCommand(ISimpleFeederSubsystem& feeder)
+    UnjamCommand::UnjamCommand(SimpleFeederSubsystem& feeder)
     :   m_feeder{feeder}
     {
         addSubsystemRequirement(&m_feeder);

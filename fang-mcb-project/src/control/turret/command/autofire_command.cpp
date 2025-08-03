@@ -4,7 +4,7 @@
 namespace fang::turret
 {
     using namespace units::literals;
-    AutofireCommand::AutofireCommand(ISimpleFeederSubsystem& feeder)
+    AutofireCommand::AutofireCommand(SimpleFeederSubsystem& feeder)
     :   m_feeder{feeder}
     {
         addSubsystemRequirement(&m_feeder);

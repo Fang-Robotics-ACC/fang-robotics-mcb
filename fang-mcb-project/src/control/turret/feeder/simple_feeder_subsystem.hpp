@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_RAIL_TURRET_I_SIMPLE_FEEDER_SUBSYSTEM_HPP
 #define FANG_ROBOTICS_MCB_RAIL_TURRET_I_SIMPLE_FEEDER_SUBSYSTEM_HPP
 
-#include "rail/turret/feeder/isimple_feeder_control.hpp"
+#include "wrap/rail/turret/isimple_feeder.hpp"
 
 #include "tap/control/subsystem.hpp"
 #include "tap/drivers.hpp"
@@ -12,15 +12,18 @@ namespace fang::turret
      * Provide taproot commands with uniform access to
      * simple feeder subsystem
      */
-    class ISimpleFeederSubsystem:
-        public rail::turret::ISimpleFeederControl,
+    class SimpleFeederSubsystem:
+        public ISimpleFeeder,
         public tap::control::Subsystem
     {
     public:
-        ISimpleFeederSubsystem(tap::Drivers& drivers):
+        SimpleFeederSubsystem(tap::Drivers& drivers):
             tap::control::Subsystem{&drivers}
         {}
-        virtual ~ISimpleFeederSubsystem() {};
+
+        //Prevent ambiguity conflitcs
+        virtual void initialize() = 0;
+        virtual ~SimpleFeederSubsystem() {};
     };
 }
 #endif

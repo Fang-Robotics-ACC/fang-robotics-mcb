@@ -1,50 +1,55 @@
-#include "simple_feeder_system.hpp"
+#include "simple_feeder.hpp"
 
 #include "wrap/units/units_alias.hpp"
 
 namespace fang::turret
 {
-    SimpleFeederSystem::SimpleFeederSystem(Motor feedMotor, const Config& config):
+    SimpleFeeder::SimpleFeeder
+    (
+        Drivers& drivers,
+        std::unique_ptr<Motor> feedMotor,
+        const Config& config
+    ):
+        SimpleFeederSubsystem(drivers),
         feedMotor_{std::move(feedMotor)},
         kRoundsPerRevolution_{config.roundsPerRevolution},
         kFeedRate_{config.feedRate},
-        kUnjamSpeed_{config.unjamSpeed}
+        kUnjamSpeed_{config.unjamSpeed},
+        heatLimiter_{drivers.refSerial, config.heatLimiterConfig}
     {
-        //assert(mk_roundsPerRevolution != 0 && "roundsPerRevolution must be zero");
-        //assert(mk_roundsPerRevolution  > 0 && "roundsPerRevolution cannot be less than zero");
     }
 
-    void SimpleFeederSystem::feedOn()
+    void SimpleFeeder::feedOn()
     {
         feedMotor_->setTargetSpeed(feedRateToRPM());
     }
 
-    void SimpleFeederSystem::feedOff()
+    void SimpleFeeder::feedOff()
     {
         feedMotor_->setTargetSpeed(kStillSpeed_);
     }
 
-    void SimpleFeederSystem::unjamOn()
+    void SimpleFeeder::unjamOn()
     {
         feedMotor_->setTargetSpeed(-kUnjamSpeed_);
     }
 
-    void SimpleFeederSystem::unjamOff()
+    void SimpleFeeder::unjamOff()
     {
         feedOff();
     }
 
-    void SimpleFeederSystem::update()
+    void SimpleFeeder::update()
     {
         feedMotor_->update();
     }
 
-    void SimpleFeederSystem::initialize()
+    void SimpleFeeder::initialize()
     {
         feedMotor_->initialize();
     }
 
-    RPM SimpleFeederSystem::feedRateToRPM()
+    RPM SimpleFeeder::feedRateToRPM()
     {
         //If there are two rounds per revolution,
         //The wheel only needs to rotate half as fast
