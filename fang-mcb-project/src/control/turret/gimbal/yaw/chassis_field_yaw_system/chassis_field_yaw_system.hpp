@@ -9,6 +9,9 @@
 namespace fang::turret
 {
     /**
+     * This is for a yaw system who's IMU is attached to the
+     * chassis and the yaw is parallel to the chassis z axis.
+     * 
      * Assume that with the axis pointing up, the positive
      * yaw counterclockwise
      */
