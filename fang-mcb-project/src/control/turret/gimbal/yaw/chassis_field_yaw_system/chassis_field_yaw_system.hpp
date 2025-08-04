@@ -28,7 +28,7 @@ namespace fang::turret
          */
         struct Config
         {
-            Radians yawCorrection;
+            Radians yawError;
         };
 
         ChassisFieldYawSystem

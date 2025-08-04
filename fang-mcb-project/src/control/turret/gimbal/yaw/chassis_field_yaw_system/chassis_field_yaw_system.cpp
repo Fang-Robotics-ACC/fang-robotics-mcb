@@ -11,7 +11,7 @@ namespace fang::turret
     ):
         motor_{std::move(motor)},
         chassisImu_{std::move(imu)},
-        kYawError_{config.yawCorrection}
+        kYawError_{config.yawError}
     {
     }
 
@@ -42,6 +42,6 @@ namespace fang::turret
         // Thus, the fed position towards the turret would be -5 degrees counterclockwise
 
         const Radians kFieldYaw{yaw - kYawError_};
-        motor_->setTargetPosition(yaw);
+        motor_->setTargetPosition(kFieldYaw);
     }
 }
