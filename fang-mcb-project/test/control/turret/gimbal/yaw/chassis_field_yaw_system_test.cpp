@@ -28,7 +28,6 @@ namespace fang::turret
             }
         {
         }
-    protected: 
 
     MotorMock& motor_;
     ImuMock& imu_;
@@ -137,16 +136,21 @@ namespace fang::turret
      * motor which is offset from the chassis zero position.
      * (e.g. the turret faces to the left of the robot)
      */
-    class YawErrorCorrectionTest:
-        public FieldYawTestSetup,
-        public ::testing::TestWithParam<YawErrorCorrectionParam>
+    class YawErrorCorrectionTest : public ::testing::TestWithParam<YawErrorCorrectionParam>
     {
     public:
-        YawErrorCorrectionTest():
-            FieldYawTestSetup({param.yawError})
-        {}
+        YawErrorCorrectionTest(){}
     protected:
         const YawErrorCorrectionParam param{GetParam()};
+        // Due to order of initialization and the need
+        // to pass the config variable, this semi-hack is done
+        FieldYawTestSetup test
+        {
+            ChassisFieldYawSystem::Config
+            {
+                .yawError = GetParam().yawError
+            }
+        };
         const Radians expectedMotorAngle_{param.expectedMotorAngle};
         const Radians targetFieldYaw_{param.targetFieldYaw};
     };
@@ -154,9 +158,9 @@ namespace fang::turret
     TEST_P(YawErrorCorrectionTest, yawErrorCorrectionTest)
     {
         //Make the test independent of chassis error correction
-        ON_CALL(imu_, getYaw()).WillByDefault(testing::Return(0_rad));
-        EXPECT_CALL(motor_, setTargetPosition(expectedMotorAngle_));
-        yawSystem_.setTargetFieldYaw(targetFieldYaw_);
+        ON_CALL(test.imu_, getYaw()).WillByDefault(testing::Return(0_rad));
+        EXPECT_CALL(test.motor_, setTargetPosition(expectedMotorAngle_));
+        test.yawSystem_.setTargetFieldYaw(targetFieldYaw_);
     }
 
     INSTANTIATE_TEST_CASE_P
@@ -170,6 +174,48 @@ namespace fang::turret
                 .targetFieldYaw     = 0_rad,
                 .expectedMotorAngle = 0_rad,
                 .yawError = 0_rad
+            }
+        )
+    );
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        positive,
+        YawErrorCorrectionTest,
+        testing::Values
+        (
+            YawErrorCorrectionParam
+            {
+                .targetFieldYaw     = 0_rad,
+                .expectedMotorAngle = -10_rad,
+                .yawError = 10_rad
+            },
+            YawErrorCorrectionParam
+            {
+                .targetFieldYaw     = 5_rad,
+                .expectedMotorAngle = 0_rad,
+                .yawError = 5_rad
+            }
+        )
+    );
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        negative,
+        YawErrorCorrectionTest,
+        testing::Values
+        (
+            YawErrorCorrectionParam
+            {
+                .targetFieldYaw     = 0_rad,
+                .expectedMotorAngle = 10_rad,
+                .yawError = -10_rad
+            },
+            YawErrorCorrectionParam
+            {
+                .targetFieldYaw     = 5_rad,
+                .expectedMotorAngle = 10_rad,
+                .yawError = -5_rad
             }
         )
     );
