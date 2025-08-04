@@ -7,6 +7,6 @@
 namespace fang::motor
 {
     using ISpeedMotorMock = rail::motor::ISpeedMotorMock<RPM>;
-    using IPositionMotorMock = rail::motor::IPositionMotorMock<Radians>
+    using IPositionMotorMock = rail::motor::IPositionMotorMock<Radians>;
 }
 #endif
