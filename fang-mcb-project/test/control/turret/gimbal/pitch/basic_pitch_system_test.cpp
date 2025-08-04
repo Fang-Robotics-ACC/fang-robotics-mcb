@@ -104,4 +104,25 @@ namespace fang::turret
             }
         )
     );
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        negativeAndClamp,
+        PitchClampTest,
+        testing::Values
+        (
+            PitchClampParam
+            {
+                .targetFieldPitch   = -9_deg,
+                .expectedMotorAngle = -9_deg,
+                .pitchRange         = {-10_deg, 10_deg}
+            },
+            PitchClampParam
+            {
+                .targetFieldPitch   = -100_deg,
+                .expectedMotorAngle = -10_deg, // Should be clamped
+                .pitchRange         = {-10_deg, 10_deg}
+            }
+        )
+    );
 }
