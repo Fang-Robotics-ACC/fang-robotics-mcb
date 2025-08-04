@@ -55,9 +55,9 @@ namespace fang::turret
         {}
     protected:
         const TargetFieldYawParam param{GetParam()};
-        Radians targetFieldYaw_{param.targetFieldYaw};
-        Radians chassisAngle_{param.chassisAngle};
-        Radians expectedAngle_{param.expectedMotorAngle};
+        const Radians targetFieldYaw_{param.targetFieldYaw};
+        const Radians chassisAngle_{param.chassisAngle};
+        const Radians expectedAngle_{param.expectedMotorAngle};
     };
 
     
@@ -128,7 +128,8 @@ namespace fang::turret
     struct YawErrorCorrectionParam
     {
         Radians targetFieldYaw;
-        ChassisFieldYawSystem::Config config; //Yaw error correction
+        Radians expectedMotorAngle;
+        Radians yawError; //Yaw error correction
     };
 
     /**
@@ -142,11 +143,34 @@ namespace fang::turret
     {
     public:
         YawErrorCorrectionTest():
-            FieldYawTestSetup(param.config)
+            FieldYawTestSetup({param.yawError})
         {}
     protected:
         const YawErrorCorrectionParam param{GetParam()};
-        Radians targetFieldYaw_{param.targetFieldYaw};
+        const Radians expectedMotorAngle_{param.expectedMotorAngle};
+        const Radians targetFieldYaw_{param.targetFieldYaw};
     };
 
+    TEST_P(YawErrorCorrectionTest, yawErrorCorrectionTest)
+    {
+        //Make the test independent of chassis error correction
+        ON_CALL(imu_, getYaw()).WillByDefault(testing::Return(0_rad));
+        EXPECT_CALL(motor_, setTargetPosition(expectedMotorAngle_));
+        yawSystem_.setTargetFieldYaw(targetFieldYaw_);
+    }
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        zero,
+        YawErrorCorrectionTest,
+        testing::Values
+        (
+            YawErrorCorrectionParam
+            {
+                .targetFieldYaw     = 0_rad,
+                .expectedMotorAngle = 0_rad,
+                .yawError = 0_rad
+            }
+        )
+    );
 }
