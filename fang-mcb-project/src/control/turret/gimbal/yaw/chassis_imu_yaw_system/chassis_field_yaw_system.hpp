@@ -38,6 +38,11 @@ namespace fang::turret
         void update() override;
         void setTargetFieldYaw(const Radians& yaw) override;
     private:
+        /**
+         * Relative to the robot. So 90 degrees would set the rotation
+         * 90 degrees relative to the robot.
+         */
+        void setChassiswiseYaw(const Radians& yaw);
         std::unique_ptr<Motor> motor_;
         std::unique_ptr<Imu> imu_;
         const Radians kYawError_;
