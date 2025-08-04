@@ -31,7 +31,7 @@ namespace fang::turret
         ChassisFieldYawSystem
         (
             std::unique_ptr<Motor> motor,
-            std::unique_ptr<Imu> imu,
+            std::unique_ptr<Imu> chassisImu,
             const Config& config
         );
         void initialize() override;
@@ -44,7 +44,7 @@ namespace fang::turret
          */
         void setChassiswiseYaw(const Radians& yaw);
         std::unique_ptr<Motor> motor_;
-        std::unique_ptr<Imu> imu_;
+        std::unique_ptr<Imu> chassisImu_;
         const Radians kYawError_;
     };
 }

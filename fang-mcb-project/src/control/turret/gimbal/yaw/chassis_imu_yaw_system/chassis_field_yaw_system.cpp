@@ -10,7 +10,7 @@ namespace fang::turret
         const Config& config
     ):
         motor_{std::move(motor)},
-        imu_{std::move(imu)},
+        chassisImu_{std::move(imu)},
         kYawError_{config.yawCorrection}
     {
     }
@@ -27,7 +27,7 @@ namespace fang::turret
 
     void ChassisFieldYawSystem::setTargetFieldYaw(const Radians& yaw)
     {
-        const Radians kChassisYaw{imu_->getYaw()};
+        const Radians kChassisYaw{chassisImu_->getYaw()};
         // If the chassis is 90 degrees counterclockwise to the field
         // And the field yaw is zero, then the robotwise yaw needs to be 
         // -90 degrees
