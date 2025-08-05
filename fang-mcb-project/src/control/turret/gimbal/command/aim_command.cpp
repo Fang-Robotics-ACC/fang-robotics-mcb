@@ -41,15 +41,15 @@ namespace fang::turret
 
     void AimCommand::setPitch(const Microseconds& delta)
     {
-        const double k_pitchScaler{input_.getPitch()};
-        const RPM k_speed{k_pitchScaler * kMaxPitchSpeed_};
-        const Radians k_angularDisplacement{k_speed * delta};
+        const double kPitchScalar{input_.getPitch()};
+        const RPM kSpeed{kPitchScalar * kMaxPitchSpeed_};
+        const Radians kAngularDisplacement{kSpeed * delta};
 
         const Radians kClampedDisplacement
         {
             tap::algorithms::limitVal<Radians>
             (
-                k_angularDisplacement + targetPitch_,
+                kAngularDisplacement + targetPitch_,
                 kPitchRange_.min,
                 kPitchRange_.max
             )
@@ -61,11 +61,11 @@ namespace fang::turret
 
     void AimCommand::setYaw(const Microseconds& delta)
     {
-        const double k_yawScaler{input_.getYaw()};
-        const RPM k_speed{k_yawScaler * kMaxYawSpeed_};
-        const Radians k_angularDisplacement{k_speed * delta};
+        const double kYawScaler{input_.getYaw()};
+        const RPM kSpeed{kYawScaler * kMaxYawSpeed_};
+        const Radians kAngularDisplacement{kSpeed * delta};
 
-        targetYaw_ += k_angularDisplacement;
+        targetYaw_ += kAngularDisplacement;
 
         gimbal_.setTargetFieldYaw(targetYaw_);
     }
