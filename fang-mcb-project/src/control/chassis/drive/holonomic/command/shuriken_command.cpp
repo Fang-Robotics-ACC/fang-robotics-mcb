@@ -11,7 +11,7 @@ namespace fang::chassis
     ShurikenCommand::ShurikenCommand
     (
         HolonomicSubsystem& holonomicSubsystem,
-        const turret::GimbalSubsystem& gimbal,
+        const turret::FieldGimbalSubsystem& gimbal,
         ChassisInputHandler& input,
         const Config& config
     ):

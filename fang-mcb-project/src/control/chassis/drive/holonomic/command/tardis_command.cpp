@@ -10,7 +10,7 @@ namespace fang::chassis
     TardisCommand::TardisCommand
     (
         HolonomicSubsystem& chassisSubsystem,
-        const turret::GimbalSubsystem& turret,
+        const turret::FieldGimbalSubsystem& turret,
         ChassisInputHandler& input,
         const Config& config
     ):

@@ -3,9 +3,6 @@
 #include "counter_strike_command.hpp"
 #include "control/chassis/algorithms/basic_downscaler.hpp"
 
-#include "control/turret/gimbal_subsystem.hpp"
-
-
 #include "tap/control/command.hpp"
 
 namespace fang::chassis 
@@ -34,7 +31,7 @@ namespace fang::chassis
         ShurikenCommand
         (
             HolonomicSubsystem& chassisSubsystem,
-            const turret::GimbalSubsystem& gimbal,
+            const turret::FieldGimbalSubsystem& gimbal,
             ChassisInputHandler& input,
             const Config& config
         );
