@@ -14,6 +14,7 @@ namespace fang::turret
      */
     class FieldGimbal: public FieldGimbalSubsystem
     {
+    public:
         FieldGimbal
         (
             Drivers& drivers,
