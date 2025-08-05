@@ -5,7 +5,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-namespace fang::turret
+namespace fang::turret::chassisFieldYawSystemTest
 {
     using namespace units::literals;
     class FieldYawTestSetup
@@ -219,4 +219,32 @@ namespace fang::turret
             }
         )
     );
+
+    class YawUpdateAndInitalize: 
+        public ::testing::Test,
+        public FieldYawTestSetup
+    {
+    public:
+        YawUpdateAndInitalize():
+        FieldYawTestSetup
+        {
+            ChassisFieldYawSystem::Config
+            {
+                .yawError = 5_deg
+            }
+        }
+        {}
+    };
+
+    TEST_F(YawUpdateAndInitalize, initialize)
+    {
+        EXPECT_CALL(motor_, initialize());
+        yawSystem_.initialize();
+    }
+
+    TEST_F(YawUpdateAndInitalize, update)
+    {
+        EXPECT_CALL(motor_, update());
+        yawSystem_.update();
+    }
 }
