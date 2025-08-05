@@ -4,7 +4,6 @@
 //Subsystems
 #include "custom_variant/subsystem/pierce_mecanum_drive.hpp"
 
-#include "control/turret/gimbal_subsystem.hpp"
 #include "custom_variant/subsystem/pierce_field_gimbal.hpp"
 #include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
 #include "custom_variant/subsystem/pierce_ammo_booster.hpp"
