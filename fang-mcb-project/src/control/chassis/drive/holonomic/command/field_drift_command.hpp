@@ -2,7 +2,6 @@
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_FIELD_DRIFT_COMMAND_HPP
 #include "control/chassis/chassis_input_handler.hpp"
 #include "control/chassis/drive/holonomic/holonomic_subsystem.hpp"
-#include "control/turret/gimbal_subsystem.hpp"
 
 #include "tap/control/command.hpp"
 
