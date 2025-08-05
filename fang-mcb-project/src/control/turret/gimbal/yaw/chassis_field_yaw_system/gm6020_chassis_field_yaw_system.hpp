@@ -9,6 +9,7 @@ namespace fang::turret
 {
     class GM6020FieldYawSystem : public ChassisFieldYawSystem
     {
+    public:
         using Motor = trap::motor::DjiGM6020;
         struct Config
         {
