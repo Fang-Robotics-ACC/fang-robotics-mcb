@@ -5,7 +5,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-namespace fang::turret
+namespace fang::turret::basicPitchSystemTest
 {
     using namespace units::literals;
     class FieldPitchTestSetup
