@@ -1,5 +1,7 @@
+*.swp
 *.pyc
 
+fang-mcb-project/build_cache
 fang-mcb-project/build
 fang-mcb-project/Pipfile.lock
 project.xml.log

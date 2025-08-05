@@ -1,93 +1,34 @@
 #include "repeat_ultra_mk2.hpp"
-#include "units.h"
+#include "driver/motor/util/gearbox_speed.hpp"
+#include "system/assert/fang_assert.hpp"
 
-#include "wrap/trap/communication/pwm_data.hpp"
-#include "tap/algorithms/math_user_utils.hpp"
-
-#include <algorithm>
-#include <cassert>
-
-using namespace units::literals;
+#include "wrap/units/units_alias.hpp"
 
 namespace fang::motor
 {
+    using namespace units::literals;
 
-    RepeatUltraMk2::RepeatUltraMk2(Drivers& drivers, const Config& config):
-        RepeatUltraMk2
-        (
-            drivers,
-            config.controllerInputVoltage,
-            config.pwmData.pwmPin,
-            config.pwmData.pinFrequency,
-            config.directionality,
-            config.inverted
-        )
+    RepeatUltraMk2::RepeatUltraMk2
+    (
+        Drivers& drivers,
+        const Config& config
+    ):
+
+        kControllerInputVoltage_{config.controllerInputVoltage},
+        kGearRatio_{config.gearRatio},
+        kInversionMultiplier_{config.inverted ? -1 : 1}, // Reverse if inverted lol, motor is bidirectional
+        vortex_{drivers.pwm, config.pwmData}
     {
-    }
-    RepeatUltraMk2::RepeatUltraMk2(
-        tap::Drivers& drivers,
-        const Volts& controllerInputVoltage,
-        tap::gpio::Pwm::Pin pwmPin,
-        const Hertz& pinFrequency,
-        Directionality directionality,
-        bool inverted)
-        :
-        kControllerInputVoltage_{controllerInputVoltage},
-        kMaxTheoreticalSpeed_{kKv * kControllerInputVoltage_},
-        maxSpeed_{kMaxTheoreticalSpeed_},
-        inversionMultiplier_{inverted && (directionality == Directionality::BIDIRECTIONAL)? int8_t{-1}: int8_t{1}},
-        vortex_{drivers.pwm, trap::gpio::PwmData{pwmPin, pinFrequency}, directionality}
-    {
-        switch(directionality)
-        {
-        case(Directionality::BIDIRECTIONAL):
-            minSpeed_ = -maxSpeed_;
-        break;
-        case(Directionality::UNIDIRECTIONAL):
-            minSpeed_ = 0_rpm;
-        }
+        assertConfigValidity(config);
     }
 
 	void RepeatUltraMk2::setTargetSpeed(const RPM& speed)
     {
-        const RPM clampedSpeed{tap::algorithms::limitVal<RPM> (speed, minSpeed_, maxSpeed_)};
-        speed_ = clampedSpeed;
-        const double speedPercentage{clampedSpeed * inversionMultiplier_ / kMaxTheoreticalSpeed_};
-        vortex_.setSpeed(speedPercentage);
+        const RPM motorSpeed{shaftToMotorSpeed(speed, kGearRatio_)};
+        const double speedPercentage{motorSpeed / kMaxTheoreticalSpeed_};
+        vortex_.setSpeed(speedPercentage * kInversionMultiplier_);
     }
 
-	RPM RepeatUltraMk2::getTargetSpeed() const
-    {
-        return speed_;
-    }
-
-	void RepeatUltraMk2::setMaxSpeed(const RPM& maxSpeed)
-    {
-        maxSpeed_ = maxSpeed;
-        setTargetSpeed(getTargetSpeed());
-    }
-
-	RPM RepeatUltraMk2::getMaxSpeed() const
-    {
-        return maxSpeed_;
-    }
-
-	void RepeatUltraMk2::setMinSpeed(const RPM& minSpeed)
-    {
-        minSpeed_ = minSpeed;
-        setTargetSpeed(getTargetSpeed());
-    }
-
-	RPM RepeatUltraMk2::getMinSpeed() const
-    {
-        return minSpeed_;
-    }
-
-    /**
-     * The initialization needs to have an arming signal sent for
-     * 1-2 seconds. It will be left up to the caller on how to 
-     * ensure the delay.
-     */
     void RepeatUltraMk2::initialize()
     {
         vortex_.sendArmingSignal();
@@ -95,6 +36,12 @@ namespace fang::motor
 
     void RepeatUltraMk2::update()
     {
+        //TODO: Ramping functionality
     }
 
+    void RepeatUltraMk2::assertConfigValidity(const Config& config)
+    {
+        FANG_ASSERT(config.gearRatio > 0.0, "Gear ratio cannot cause singularities or flip the directions");
+        FANG_ASSERT(config.controllerInputVoltage >= 0.0_V, "Voltage should be positive. Either fix the code or the wiring");
+    }
 }//namespace motor

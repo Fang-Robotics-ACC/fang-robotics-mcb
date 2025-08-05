@@ -1,7 +1,7 @@
 #include "gearbox_speed.hpp"
 #include "wrap/units/units_alias.hpp"
 
-namespace motor
+namespace fang::motor
 {
     RPM motorToShaftSpeed(const RPM& motorSpeed, double gearRatio)
     {

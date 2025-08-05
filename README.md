@@ -1,4 +1,4 @@
-[![pipeline status](https://gitlab.com/aruw/controls/fang-mcb/badges/develop/pipeline.svg)](https://gitlab.com/aruw/controls/fang-mcb/-/commits/develop)
+[![Docker Build and Test](https://github.com/Fang-Robotics-ACC/fang-robotics-mcb/actions/workflows/docker-build-test.yml/badge.svg)](https://github.com/Fang-Robotics-ACC/fang-robotics-mcb/actions/workflows/docker-build-test.yml)
 
 Fang Robotics Firmware for the Seven Fangs:
 * Pierce \[Infantry\]
@@ -9,8 +9,16 @@ Fang Robotics Firmware for the Seven Fangs:
 * Palisade Bite \[Dart\]
 * Situational Awareness \[Radar System\]
 
-## License Information
+## Read the docs
 
+Instead of a github wiki, we have a readthedocs! It is automatically
+built with every version and pulls doxygen comments from the source code.
+In addition, there will be educational materials regarding the design of the
+codebase itself:
+
+https://fang-robotics-mcb.readthedocs.io/en/latest/
+
+## License Information
 In the spirit of open‑source software, education, and—most
 importantly—community, Fang Robotics MCB is released under the
 copyleft AGPLv3 license. This means anyone you compete against in-match
@@ -58,16 +66,133 @@ member or not—enjoy exploring and extending this code!
 
 ## Resources
 
-- **The [Taproot wiki](https://gitlab.com/aruw/controls/taproot/-/wikis/home). It has lots of content and we strongly recommend you browse through it to get a sense of
-what's there.**
-- [aruw-edu](https://gitlab.com/aruw/controls/aruw-edu): a hands-on tutorial for building robot code with Taproot
-- [aruw-mcb](https://gitlab.com/aruw/controls/aruw-mcb), ARUW's full robot code project available for reference
-- The [generated API documentation for Taproot](https://aruw.gitlab.io/controls/taproot/)
+- **The [Taproot wiki](https://gitlab.com/aruw/controls/taproot/-/wikis/home).
+  It has lots of content and we strongly recommend you browse through it to get
+a sense of what's there.**
+- [aruw-edu](https://gitlab.com/aruw/controls/aruw-edu): a hands-on tutorial
+  for building robot code with Taproot
+- The [generated API documentation for
+  Taproot](https://aruw.gitlab.io/controls/taproot/)
 - The [modm website](https://modm.io/) and associated documentation
 
-## New user guide
+**Other Taproot syntax references**
 
-### Setting up a development environment
+Note: Do not refer to these completely for code architecture/conventions in our codebase, only
+for taproot syntax reference. We love these teams, they are our friends, we do not have any beef
+nor desire to start beef with criticizing codes. Nevertheless, we have our
+style, they have theirs. We have chosen code architecture with flexbility and
+modularity (isolating performance hacks only when needed) in mind as we intend
+to do 7v7 in the near future. This repo must support 7 robots without getting
+bloated or tangled up. Or robots using new motors without havin to gut code
+(proper dependency injection makes coding feel like legos)
+
+- [tamu-aimbots](https://github.com/TAMU-Robomasters/aimbots-dev): 2nd most
+  organized repo Style differences: not all functions are as atomic esp complex ones
+- [ut-ras](https://github.com/ut-ras/robomaster/tree/develop/ut-robomaster):
+  3rd most organized repo. Style differences: they use some macro variables, global robot config
+variables, and have no unit tests. **Great for continuous integration
+reference!**
+
+**How to truly understand taproot: No matter how experienced you are, even if
+it feels tedious or stupid, but if you do this, it will all make sense. It's
+like seeing someone fish saying "I can fish" vs fishing yourself. We will not
+give direct help on fang-robotics-mcb until you have proven completion of this
+tutorial. All you questions will be answered here. Even our 1st Lead Dev, Raven
+Asher Raziel, had to do this before he got taproot:**
+- [Tank Drive
+  Tutorial](https://aruw.gitlab.io/controls/aruw-edu/tutorials/1_tank_drive.html):
+Do this in order to understand the boilerplate. When using the template
+project, make the robot instance static or a static global variable to prevent
+stack overflow. At the tutorial scale, this is not much of an issue. Don't
+worry about the agitator unless you want to gain a deeper understanding of PID.
+Do the command mapping and robot selection, too.
+
+Check CONTRIBUTING for our coding standards/conventions.
+
+## New user guide
+### UBUNTU Automatic setup and build method command line
+Use ubuntu or windows wsl for ubuntu:
+```
+cd github #go to you documents folder or wherever you place github repos
+```
+
+If you do not have push access and want to test build:
+
+```
+git clone https://github.com/Fang-Robotics-ACC/fang-robotics-mcb.git 
+```
+(If you want to contribute but do not have write access,
+make a fork and replace the url with your fork)
+
+
+If you have push access:
+
+```
+git clone git@github.com:Fang-Robotics-ACC/fang-robotics-mcb.git
+```
+
+(You can use use git clone --recurive, but this method is shown
+because if you switch to a commit with different submodule versions
+you must run that git submodule from likely the root directory
+if you type git status, it will list which submodules are out of sync)
+
+```
+git submodule update --init --recursive
+cd fang-robotics-mcb/build-util/environment-setup-scripts
+./ubuntu-environment-install.sh
+```
+
+It might prompt you for consent from time to time especially
+with Python. The script will modify your ~/.bashrc
+If it fails, check the script for any variable modifications.
+It will add a custom compiler under ~/.local/share/
+
+If it is successful:
+
+```
+cd ../../ # to go back to repo root directory)
+cd fang-mcb-project
+pipenv shell # This must be run under the project directory
+scons profile=debug -j 12 build #-j is how many parallel jobs
+```
+
+To run unit tests:
+
+```
+scons profile=debug -j 12 run-tests #-j is how many parallel jobs
+```
+
+These allowed us to write a thousands of lines of code for months without an
+actual mcb. Although we had some bugs, the complex higher level functionality
+worked outside of the box.
+
+In competition rounds, profile=release is used to prevent crashing the robot
+even if an error occurs at risk of the robot flailing around. A failed
+assertion requires a full power cycle or new flash.  The robot should be tested
+and unit tested to the point where assertions will not fail.
+
+The default robot is standard, follow the prompts to choose a different one.
+Robot type needs tobe changed for vscode but DO NOT commit the hardcoded robot
+type please.
+
+The debug profile is the most used. It has assertion statements to detect runtime bugs.
+
+To select a robot (Pierce is default):
+
+```
+scons profile=debug robot=NAME
+```
+
+### Vscode
+YOU MUST START IT FROM THE ROOT DIRECTORY (fang-robotics-mcb)
+if you do not, then the .vscode folder will NOT be parsed
+```
+cd fang-robotics-mcb
+code .
+```
+View sections below on how to use the vscode environment
+
+### Setting up a development environment (old method)
 
 If you want the easiest setup experience and **_do not_ require deploying code to hardware**,
 consider developing within the provided [Docker container](https://gitlab.com/aruw/controls/taproot/-/wikis/Docker-Container-Setup).

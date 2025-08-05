@@ -1,4 +1,4 @@
-#include "control/turret/feeder/simple_feeder_system/simple_feeder_system.hpp"
+#include "control/turret/feeder/simple_feeder/simple_feeder.hpp"
 #include "wrap/units/units_alias.hpp"
 #include "test/mock/rail/rail_motor_mocks.hpp"
 
@@ -18,7 +18,7 @@ namespace test
         const Hertz feedRate{std::get<1>(GetParam())};
         const RPM expectedRPMCall{std::get<2>(GetParam())};
 
-        const fang::turret::SimpleFeederSystem::Config kFeederSystemConfig_
+        const fang::turret::SimpleFeeder::Config kFeederSystemConfig_
         {
             .roundsPerRevolution    = roundsPerRevolution,
             .feedRate               = feedRate,
@@ -35,13 +35,14 @@ using namespace test;
 
 TEST_P(BasicFeederSystemTest, basicTest)
 {
+    Drivers drivers{};
     auto feedMotor{std::make_unique<motor::ISpeedMotorMock>()};
     //Get non-owning access to the feed motor
     motor::ISpeedMotorMock& feedMotorView{*feedMotor};
     //This tests whether or not the desired speed sent into the motor given
     //how many rounds per rotation of the feeder gear and the desired fire rate
     EXPECT_CALL(feedMotorView, setTargetSpeed(expectedRPMCall));
-    fang::turret::SimpleFeederSystem feederSystem{std::move(feedMotor), kFeederSystemConfig_};
+    fang::turret::SimpleFeeder feederSystem{drivers, std::move(feedMotor), kFeederSystemConfig_};
 
     feederSystem.feedOn();
 }

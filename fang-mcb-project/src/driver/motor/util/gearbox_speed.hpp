@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_GEARBOX_SPEED_HPP
 #include "wrap/units/units_alias.hpp"
 
-namespace motor
+namespace fang::motor
 {
 
     /**

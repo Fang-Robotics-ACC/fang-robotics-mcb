@@ -17,8 +17,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'fang-mcb'
-copyright = '2020, fang-mcb'
+project = 'fang-robotics-mcb'
+copyright = '2025, Fang Robotics CC'
 author = 'fang-mcb'
 
 # The full version, including alpha/beta/rc tags
@@ -42,12 +42,12 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 
+html_theme = 'sphinx_rtd_theme'
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -60,8 +60,11 @@ breathe_default_project = "fang-mcb"
 extensions = [
     # there may be others here already, e.g. 'sphinx.ext.mathjax'
     'breathe',
-    'exhale'
+    'exhale',
+	'myst_parser',
+    'sphinx_rtd_dark_mode'
 ]
+
 
 # Setup the breathe extension
 breathe_projects = {
@@ -73,7 +76,7 @@ exhale_args = {
     # These arguments are required
     "containmentFolder":     "./api",
     "rootFileName":          "library_root.rst",
-    "rootFileTitle":         "Library API",
+    "rootFileTitle":         "Fang API",
     "doxygenStripFromPath":  "..",
     # Suggested optional arguments
     "createTreeView":        True,
@@ -88,3 +91,7 @@ primary_domain = 'cpp'
 
 # Tell sphinx what the pygments highlight language should be.
 highlight_language = 'cpp'
+source_suffice = {
+	'.rst': 'restructuredtext',
+	'.md': 'markdown'
+}

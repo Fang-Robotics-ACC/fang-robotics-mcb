@@ -1,4 +1,4 @@
-#include "control/turret/ammo_booster/flywheel_system/flywheel_system.hpp"
+#include "control/turret/flywheel/basic_flywheel/basic_flywheel.hpp"
 #include "wrap/units/units_alias.hpp"
 #include "test/mock/rail/rail_motor_mocks.hpp"
 
@@ -9,7 +9,7 @@ using namespace fang;
 class FlywheelSpeedTest : public ::testing::TestWithParam<std::tuple<Meters, MetersPerSecond,RPM>>
 {
 public:
-using FlywheelSystem = fang::turret::FlywheelSystem;
+using FlywheelSystem = fang::turret::BasicFlywheel;
     const Meters radius{std::get<0>(GetParam())};
     const MetersPerSecond targetRimSpeed{std::get<1>(GetParam())};
     const RPM expectedRPMCall{std::get<2>(GetParam())};

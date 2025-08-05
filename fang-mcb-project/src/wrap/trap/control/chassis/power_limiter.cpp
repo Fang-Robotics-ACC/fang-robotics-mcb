@@ -13,7 +13,7 @@ namespace trap::control::chassis
     {
     }
 
-    float PowerLimiter::getPowerLimitRatio() const
+    double PowerLimiter::getPowerLimitRatio() const
     {
 
         const bool refereeConnected{m_refereeSystem.getRefSerialReceivingData()};
@@ -51,5 +51,13 @@ namespace trap::control::chassis
     {
         const RefSerial::RefSerialData::Rx::RobotData& robotData{m_refereeSystem.getRobotData()};
         return Joules{robotData.chassis.powerBuffer};
+    }
+
+    void PowerLimiter::initialize()
+    {
+    }
+
+    void PowerLimiter::update() 
+    {
     }
 }

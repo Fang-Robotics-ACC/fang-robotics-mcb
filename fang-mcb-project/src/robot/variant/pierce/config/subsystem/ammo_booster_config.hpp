@@ -1,21 +1,21 @@
 #ifndef FANG_ROBOTICS_MCB_AMMO_BOOSTER_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_AMMO_BOOSTER_CONFIG_HPP
 #include "control/turret/system/flywheel_system.hpp"
-#include "control/turret/system/ammo_booster_system.hpp"
+#include "robot/variant/pierce/custom_variant/subsystem/pierce_ammo_booster.hpp"
 #include "wrap/units/units_alias.hpp"
 
 #include "units.h"
 
 namespace fang::robot 
 {
-    using AmmoBooster = turret::AmmoBoosterSystem;
-    using Flywheel = turret::OldFlywheelSystem;
+    using AmmoBooster = turret::PierceAmmoBooster;
+    using Flywheel = AmmoBooster::Flywheel;
 
     using namespace units::literals;
 
-    static const Meters k_flywheelRadius{30_mm};
+    static const Meters kFlywheelRadius{30_mm};
 
-    static const trap::motor::DjiSpeedPid::Config k_flywheelMotorPidConfig 
+    static const trap::motor::DjiSpeedPid::Config kFlywheelMotorPidConfig 
     {
         .kp             = 10,
         .ki             = 0,
@@ -24,43 +24,43 @@ namespace fang::robot
         .maxOutput      = trap::motor::DjiM3508::k_maxOutput
     };
 
-    static const Flywheel::DriveMotor::Config k_leftFlywheelMotorConfig
+    static const Flywheel::Motor::Config kLeftFlywheelMotorConfig
     { 
         .motorId        = tap::motor::MOTOR8,
         .canBus         = tap::can::CanBus::CAN_BUS1,
         .name           = "leftFlywheel",
         .inverted       = false,
         .gearRatio      = 1.0, //No gearbox attached
-        .speedPidConfig = k_flywheelMotorPidConfig
+        .speedPidConfig = kFlywheelMotorPidConfig
     };
 
-    static const Flywheel::Config k_leftFlywheelConfig 
+    static const Flywheel::Config kLeftFlywheelConfig 
     {
-        k_flywheelRadius,
-        k_leftFlywheelMotorConfig
+        .radius         = kFlywheelRadius,
+        .motorConfig    = kLeftFlywheelMotorConfig
     };
 
-    static const Flywheel::DriveMotor::Config k_rightFlywheeMotorConfig 
+    static const Flywheel::Motor::Config kRightFlywheeMotorConfig 
     { 
         .motorId        = tap::motor::MOTOR7,
         .canBus         = tap::can::CanBus::CAN_BUS1,
         .name           = "rightFlywheel",
         .inverted       = true,
         .gearRatio      = 1.0, //No gearbox attached
-        .speedPidConfig = k_flywheelMotorPidConfig
+        .speedPidConfig = kFlywheelMotorPidConfig
     };
 
-    static const Flywheel::Config k_rightFlywheelConfig
+    static const Flywheel::Config kRightFlywheelConfig
     {
-        k_flywheelRadius,
-        k_rightFlywheeMotorConfig
+        .radius         = kFlywheelRadius,
+        .motorConfig    = kRightFlywheeMotorConfig
     };
 
-    static const AmmoBooster::Config k_ammoBoosterConfig
+    static const AmmoBooster::Config kAmmoBoosterConfig
     {
         .ammoVelocity           = 18_mps,
-        .leftFlywheelConfig     = k_leftFlywheelConfig,
-        .rightFlywheelConfig    = k_rightFlywheelConfig
+        .leftFlywheelConfig     = kLeftFlywheelConfig,
+        .rightFlywheelConfig    = kRightFlywheelConfig
     };
 }
 #endif
