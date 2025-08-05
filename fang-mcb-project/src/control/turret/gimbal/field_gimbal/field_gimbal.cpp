@@ -17,7 +17,6 @@ namespace fang::turret
     {
         pitchSystem_->initialize();
         yawSystem_->initialize();
-
     }
 
     void FieldGimbal::update()
