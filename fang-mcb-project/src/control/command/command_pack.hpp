@@ -20,12 +20,13 @@ namespace fang::command
     public:
         using CommandMapper = tap::control::CommandMapper;
         using CommandMapping = tap::control::CommandMapping;
+        using RemoteState = tap::control::RemoteMapState;
 
         virtual void initialize() = 0;
 
         CommandPack(CommandMapper& mapper);
     protected:
-        void registerCommands(std::span<CommandMapping> mappings);
+        void registerCommandMappings(std::span<CommandMapping> mappings);
     private:
         tap::control::CommandMapper& mapper_;
     };
