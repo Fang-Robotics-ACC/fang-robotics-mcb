@@ -3,6 +3,7 @@
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
 #include "wrap/trap/algorithms/wrapped_radians.hpp"
 #include "wrap/trap/drivers.hpp"
+#include "wrap/rail/motor/iposition_motor.hpp"
 #include "wrap/units/units_alias.hpp"
 
 #include "tap/communication/can/can_bus.hpp"
@@ -16,7 +17,7 @@ namespace trap
         /**
          * Wrapper for DJI motor for the DJI M3508 on a CAN bus
          */
-        class DjiGM6020 
+        class DjiGM6020 : public fang::motor::IPositionMotor
         {
         public:
             struct Config
@@ -63,12 +64,12 @@ namespace trap
             /**
              * Must be called regularly to update the motor pid and set the motor output
              */
-            mockable void update();
+            mockable void update() override;
 
             /**
              * Sets the desired speed for the pid to target
              */
-            mockable void setTargetPosition(const Radians& targetPosition);
+            mockable void setTargetPosition(const Radians& targetPosition) override;
 
             /**
              * Returns the last reported RPM from CAN
@@ -78,7 +79,7 @@ namespace trap
             /**
              * It must be called for the motor to properly function.
              */
-            mockable void initialize();
+            mockable void initialize() override;
 
             /**
              * The desired motor output. It must be limited to a 16 bit int.

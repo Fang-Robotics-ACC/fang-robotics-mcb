@@ -3,7 +3,7 @@
 #include "field_drift_command.hpp"
 
 #include "control/chassis/chassis_input_handler.hpp"
-#include "control/turret/gimbal_subsystem.hpp"
+#include "control/turret/gimbal/field_gimbal_subsystem.hpp"
 
 #include "tap/control/command.hpp"
 
@@ -28,7 +28,7 @@ namespace fang::chassis
         CounterStrikeCommand
         (
             HolonomicSubsystem& holonomicSubsystem,
-            const turret::GimbalSubsystem& gimbal,
+            const turret::FieldGimbalSubsystem& gimbal,
             ChassisInputHandler& inputHandler,
             const Config& config
         );
@@ -54,7 +54,7 @@ namespace fang::chassis
 
         static constexpr char* kName{"Counter Strike Global!"};
 
-        const turret::GimbalSubsystem& gimbal_; //We don't want the command to alter the turret state
+        const turret::FieldGimbalSubsystem& gimbal_; //We don't want the command to alter the turret state
         const Config& kConfig_;
     };
 }//namespace chassis

@@ -15,7 +15,7 @@ namespace fang::robot
     static const chassis::TardisCommand::Config k_tardisConfig
     {
         .maxTranslation = {10_mph, 10_mph},
-        .maxRotation = 125_rpm,
+        .maxRotation = 300_rpm,
         .downscaleCoefficient       = 10,
         .razielKalmanShredderConfig = k_razielKalmanShredderConfig
     };

@@ -1,11 +1,11 @@
-#ifndef FANG_ROBOTICS_MCB_PIERCE_TURRET_GIMBAL_CONFIG_HPP
-#define FANG_ROBOTICS_MCB_PIERCE_TURRET_GIMBAL_CONFIG_HPP
-#include "control/turret/gimbal_subsystem.hpp"
+#pragma once
+
+#include "robot/variant/pierce/custom_variant/subsystem/pierce_field_gimbal.hpp"
 
 namespace fang::robot 
 {
     using namespace units::literals;
-    static const trap::motor::DjiSpeedPid::Config k_pitchPidConfig
+    static const trap::motor::DjiSpeedPid::Config kPitchPidConfig
     {
         .kp                 = 200'000,
         .ki                 = 5,
@@ -16,18 +16,18 @@ namespace fang::robot
         .tRDerivativeKalman = 1000.0,
         .errorDerivativeFloor = 0.1 //radians
     };
-    static const trap::motor::DjiGM6020::Config k_pitchMotorConfig
+    static const trap::motor::DjiGM6020::Config kPitchMotorConfig
     {
         tap::motor::MOTOR2,
         tap::can::CanBus::CAN_BUS1,
         "pitchMotor",
         true,
         1.0,
-        k_pitchPidConfig,
+        kPitchPidConfig,
         false
     };
 
-    static const trap::motor::DjiSpeedPid::Config k_yawPidConfig
+    static const trap::motor::DjiSpeedPid::Config kYawPidConfig
     {
         .kp                 = 100'000,
         .ki                 = 5,
@@ -38,30 +38,38 @@ namespace fang::robot
         .tRDerivativeKalman = 1000.0,
         .errorDerivativeFloor = 0.10 //radians
     };
-    static const trap::motor::DjiGM6020::Config k_yawConfig
+    static const trap::motor::DjiGM6020::Config kYawMotorConfig 
     {
         tap::motor::MOTOR1,
         tap::can::CanBus::CAN_BUS1,
         "yawMotor",
         false,
         1.0,
-        k_yawPidConfig,
+        kYawPidConfig,
         false
     };
 
-    using GimbalSystem = turret::GimbalSystem;
-    static const GimbalSystem::Config k_gimbalConfig
+    turret::BasicFieldPitchSystem::Config kBasicFieldPitchConfig
     {
-        -25_deg,
-        10_deg,
-        k_pitchMotorConfig,
-        k_yawConfig
+        .pitchError = 0_deg,
+        .pitchRange = {-25_deg, 10_deg}
     };
 
-    static const turret::GimbalSubsystem::Config k_gimbalSubsystemConfig
+    static const turret::PierceFieldGimbal::PitchSystem::Config kPitchSystemConfig
     {
-        .homeYawOffset  = -7.75_deg,
-        .gimbalConfig   = k_gimbalConfig,
+        .motorConfig = kPitchMotorConfig,
+        .pitchSystemConfig = kBasicFieldPitchConfig
+    };
+
+    turret::PierceFieldGimbal::YawSystem::Config kYawSystemConfig 
+    {
+        .motorConfig = kYawMotorConfig,
+        .yawError = -7.5_deg
+    };
+
+    static const turret::PierceFieldGimbal::Config kGimbalSubsystemConfig
+    {
+        .pitchSystemConfig = kPitchSystemConfig,
+        .yawSystemConfig = kYawSystemConfig
     };
 }
-#endif

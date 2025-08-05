@@ -2,7 +2,6 @@
 #include "control/chassis/drive/quad_drive/base_quad_drive/base_quad_drive.hpp"
 #include "driver/drivers.hpp"
 #include "wrap/rail/chassis/ipower_limiter_system.hpp"
-#include "wrap/rail/rail_motor_owner.hpp"
 
 #include <array>
 #include <memory>

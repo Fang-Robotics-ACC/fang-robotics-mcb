@@ -3,8 +3,10 @@
 #include "wrap/units/units_alias.hpp"
 
 #include <rail/mock/motor/ispeed_motor_mock.hpp>
+#include <rail/mock/motor/iposition_motor_mock.hpp>
 namespace fang::motor
 {
     using ISpeedMotorMock = rail::motor::ISpeedMotorMock<RPM>;
+    using IPositionMotorMock = rail::motor::IPositionMotorMock<Radians>;
 }
 #endif

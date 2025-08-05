@@ -5,9 +5,9 @@
 #include "custom_variant/subsystem/pierce_mecanum_drive.hpp"
 
 #include "control/turret/gimbal_subsystem.hpp"
-#include "control/turret/feeder/simple_feeder_subsystem/simple_feeder_subsystem.hpp"
-#include "control/turret/feeder/simple_feeder_subsystem/m2006_simple_feeder_subsystem.hpp"
-#include "control/turret/ammo_booster_subsystem.hpp"
+#include "custom_variant/subsystem/pierce_field_gimbal.hpp"
+#include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
+#include "custom_variant/subsystem/pierce_ammo_booster.hpp"
 
 //Input handlers
 #include "control/turret/turret_input_handler.hpp"
@@ -18,10 +18,10 @@
 #include "control/chassis/drive/holonomic/command/shuriken_command.hpp"
 #include "control/chassis/drive/holonomic/command/tardis_command.hpp"
 
-#include "control/turret/command/aim_command.hpp"
-#include "control/turret/command/activate_booster_command.hpp"
-#include "control/turret/command/autofire_command.hpp"
-#include "control/turret/command/unjam_command.hpp"
+#include "control/turret/gimbal/command/aim_command.hpp"
+#include "control/turret/ammo_booster/command/activate_booster_command.hpp"
+#include "control/turret/feeder/command/simple_autofire_command.hpp"
+#include "control/turret/feeder/command/simple_unjam_command.hpp"
 
 #include "wrap/trap/communication/sensors/imu.hpp"
 
@@ -41,9 +41,9 @@ namespace fang::robot
         struct SubsystemConfig
         {
             chassis::PierceMecanumDrive::Config chassisConfig;
-            turret::GimbalSubsystem::Config gimbalConfig;
-            fang::turret::M2006SimpleFeederSubsystem::Config feederConfig;
-            turret::AmmoBoosterSubsystem::Config boosterConfig;
+            turret::PierceFieldGimbal::Config gimbalConfig;
+            fang::turret::M2006SimpleFeeder::Config feederConfig;
+            turret::PierceAmmoBooster::Config boosterConfig;
         };
 
         struct InputConfig
@@ -102,13 +102,15 @@ namespace fang::robot
 
         trap::communication::sensors::Imu m_imu;
 
-        turret::GimbalSubsystem m_gimbal;
-        std::unique_ptr<fang::turret::SimpleFeederSubsystem> feeder_;
+        std::unique_ptr<turret::PierceFieldGimbal> gimbal_;
+        std::unique_ptr<fang::turret::SimpleFeeder> feeder_;
+        std::unique_ptr<fang::turret::PierceAmmoBooster> booster_;
         std::unique_ptr<fang::chassis::PierceMecanumDrive> mecanumDrive_;
         //Compatibility hacks
-        fang::turret::SimpleFeederSubsystem& m_feeder{*feeder_};
-        fang::chassis::PierceMecanumDrive& m_chassis{*mecanumDrive_};
-        turret::AmmoBoosterSubsystem m_booster;
+        turret::PierceFieldGimbal& m_gimbal{*gimbal_};
+        turret::SimpleFeeder& m_feeder{*feeder_};
+        turret::PierceAmmoBooster& m_booster{*booster_};
+        chassis::PierceMecanumDrive& m_chassis{*mecanumDrive_};
 
         chassis::ChassisInputHandler m_chassisInput;
         turret::TurretInputHandler m_turretInput;
