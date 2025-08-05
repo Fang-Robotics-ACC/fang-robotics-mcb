@@ -125,4 +125,33 @@ namespace fang::turret
             }
         )
     );
+
+    class PitchUpdateAndInitialize: 
+        public ::testing::Test,
+        public FieldPitchTestSetup
+    {
+    public:
+        PitchUpdateAndInitialize():
+        FieldPitchTestSetup
+        {
+            BasicFieldPitchSystem::Config
+            {
+                .pitchError = 0_rad,
+                .pitchRange = {-10_deg, 10_deg} 
+            }
+        }
+        {}
+    };
+
+    TEST_F(PitchUpdateAndInitialize, initialize)
+    {
+        EXPECT_CALL(motor_, initialize());
+        pitchSystem_.initialize();
+    }
+
+    TEST_F(PitchUpdateAndInitialize, update)
+    {
+        EXPECT_CALL(motor_, update());
+        pitchSystem_.update();
+    }
 }
