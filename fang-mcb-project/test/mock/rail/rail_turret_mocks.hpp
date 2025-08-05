@@ -5,6 +5,6 @@
 
 namespace fang::turret
 {
-    using IFieldPitchSystemMock = rail::turret::IFieldYawSystemMock<Radians>;
     using IFieldPitchSystemMock = rail::turret::IFieldPitchSystemMock<Radians>;
+    using IFieldYawSystemMock = rail::turret::IFieldYawSystemMock<Radians>;
 }
