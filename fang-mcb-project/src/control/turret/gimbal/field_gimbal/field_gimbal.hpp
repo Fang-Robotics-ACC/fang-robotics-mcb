@@ -28,10 +28,15 @@ namespace fang::turret
         void update() override;
         void setTargetFieldPitch(const Radians& pitch) override;
         void setTargetFieldYaw(const Radians& yaw) override;
+
+        Radians getTargetFieldPitch() const override;
+        Radians getTargetFieldYaw() const override;
         
 
     private:
         std::unique_ptr<IFieldPitchSystem> pitchSystem_;
         std::unique_ptr<IFieldYawSystem> yawSystem_;
+        Radians targetFieldPitch_{0};
+        Radians targetFieldYaw_{0};
     };
 }

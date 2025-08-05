@@ -27,11 +27,23 @@ namespace fang::turret
 
     void FieldGimbal::setTargetFieldPitch(const Radians& pitch)
     {
-        pitchSystem_->setTargetFieldPitch(pitch);
+        targetFieldPitch_ = pitch;
+        pitchSystem_->setTargetFieldPitch(targetFieldPitch_);
     }
 
     void FieldGimbal::setTargetFieldYaw(const Radians& yaw)
     {
-        yawSystem_->setTargetFieldYaw(yaw);
+        targetFieldYaw_ = yaw;
+        yawSystem_->setTargetFieldYaw(targetFieldYaw_);
+    }
+
+    Radians FieldGimbal::getTargetFieldPitch() const
+    {
+        return targetFieldPitch_;
+    }
+
+    Radians FieldGimbal::getTargetFieldYaw() const
+    {
+        return targetFieldYaw_;
     }
 }
