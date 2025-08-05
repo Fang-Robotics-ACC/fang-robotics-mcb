@@ -48,6 +48,7 @@ namespace fang::turret
 
         void initialize() override;
         void update() override;
+        void refresh() override;
     private:
         RPM feedRateToRPM();
 

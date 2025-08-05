@@ -44,6 +44,11 @@ namespace fang::turret
         feedMotor_->update();
     }
 
+    void SimpleFeeder::refresh() 
+    {
+        update();
+    }
+
     void SimpleFeeder::initialize()
     {
         feedMotor_->initialize();
