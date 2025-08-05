@@ -26,6 +26,7 @@ namespace fang::turret
 
         void initialize() override;
         void update() override;
+        void refresh() override;
         void setTargetFieldPitch(const Radians& pitch) override;
         void setTargetFieldYaw(const Radians& yaw) override;
 

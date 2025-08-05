@@ -25,6 +25,11 @@ namespace fang::turret
         yawSystem_->update();
     }
 
+    void FieldGimbal::refresh()
+    {
+        update();
+    }
+
     void FieldGimbal::setTargetFieldPitch(const Radians& pitch)
     {
         targetFieldPitch_ = pitch;
