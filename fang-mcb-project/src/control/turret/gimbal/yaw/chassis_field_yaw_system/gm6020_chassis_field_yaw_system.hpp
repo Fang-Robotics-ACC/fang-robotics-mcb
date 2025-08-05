@@ -7,7 +7,7 @@
 
 namespace fang::turret
 {
-    class Gm6020FieldYawSystem : public ChassisFieldYawSystem
+    class GM6020FieldYawSystem : public ChassisFieldYawSystem
     {
         using Motor = trap::motor::DjiGM6020;
         struct Config
@@ -15,7 +15,7 @@ namespace fang::turret
             Motor::Config motorConfig;
             Radians yawError;
         };
-        Gm6020FieldYawSystem(Drivers& drivers, std::unique_ptr<Imu> chassisImu, const Config& config):
+        GM6020FieldYawSystem(Drivers& drivers, std::unique_ptr<Imu> chassisImu, const Config& config):
             ChassisFieldYawSystem
             (
                 std::make_unique<Motor>(drivers, config.motorConfig),
