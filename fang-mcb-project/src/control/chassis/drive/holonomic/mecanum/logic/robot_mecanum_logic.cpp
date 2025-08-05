@@ -20,9 +20,9 @@ namespace fang::chassis
     kVerticalWheelDistance_{verticalWheelDistance},
     kWheelRadius_{wheelRadius / 1_rad}
     {
-        //assert(wheelRadius.to<double>() >= 0.0 && "Wheel radius must be positive");
-        //assert(horizontalWheelDistance.to<double>() >= 0.0 && "Chassis dimension must be positive");
-        //assert(verticalWheelDistance.to<double>() >= 0.0 && "Chassis dimension must be positive");
+        //assert(wheelRadius >= 0.0 && "Wheel radius must be positive");
+        //assert(horizontalWheelDistance >= 0.0 && "Chassis dimension must be positive");
+        //assert(verticalWheelDistance >= 0.0 && "Chassis dimension must be positive");
     }
     void RobotMecanumLogic::setMotion(const Velocity2D& translation, const RPM& rotation)
     {
@@ -70,7 +70,7 @@ namespace fang::chassis
         //If all of v_x is positive, then the wheels are pushing in the same
         //direction. It is desired for this to be positive
         //w_2
-        const MetersPerSecond translationFactor{(translation_.y - translation_.x).to<double>()};
+        const MetersPerSecond translationFactor{(translation_.y - translation_.x)};
         const MetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
         return ((1.0 / kWheelRadius_) * (translationFactor + rotationFactor));
     }
@@ -81,7 +81,7 @@ namespace fang::chassis
         //If all of v_x is positive, then the wheels are pushing in the same
         //direction. It is desired for this to be positive
         //w_3
-        const MetersPerSecond translationFactor{(translation_.y - translation_.x).to<double>()};
+        const MetersPerSecond translationFactor{(translation_.y - translation_.x)};
         const MetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
         return ((1.0 / kWheelRadius_) * (translationFactor - rotationFactor));
     }
@@ -93,7 +93,7 @@ namespace fang::chassis
         //If all of v_x is positive, then the wheels are pushing in the same
         //direction. It is desired for this to be positive
         //w_4
-        const MetersPerSecond translationFactor{(translation_.y + translation_.x).to<double>()};
+        const MetersPerSecond translationFactor{(translation_.y + translation_.x)};
         const MetersPerSecond rotationFactor{kWheelDistanceConstant_ * rotation_};
         return ((1.0 / kWheelRadius_) * (translationFactor + rotationFactor));
     }
