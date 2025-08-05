@@ -19,11 +19,7 @@ namespace fang::turret
             Drivers& drivers,
             std::unique_ptr<IFieldPitchSystem> pitchSystem,
             std::unique_ptr<IFieldYawSystem> yawSystem
-        ):
-            FieldGimbalSubsystem{drivers},
-            pitchSystem_{std::move(pitchSystem)},
-            yawSystem_{std::move(yawSystem)}
-        {}
+        );
 
         void initialize() override;
         void update() override;
