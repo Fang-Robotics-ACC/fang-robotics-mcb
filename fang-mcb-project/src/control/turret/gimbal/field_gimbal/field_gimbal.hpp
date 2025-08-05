@@ -22,10 +22,13 @@ namespace fang::turret
             std::unique_ptr<IFieldYawSystem> yawSystem
         );
 
+        virtual ~FieldGimbal() = default;
+
         void initialize() override;
         void update() override;
         void setTargetFieldPitch(const Radians& pitch) override;
         void setTargetFieldYaw(const Radians& yaw) override;
+        
 
     private:
         std::unique_ptr<IFieldPitchSystem> pitchSystem_;

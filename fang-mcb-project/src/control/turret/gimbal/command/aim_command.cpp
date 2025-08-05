@@ -6,13 +6,13 @@ namespace fang::turret
 {
     using namespace units::literals;
     AimCommand::AimCommand(FieldGimbalSubsystem& gimbal, TurretInputHandler& input, const Config& config)
-    :   m_gimbal{gimbal},
-        m_input{input},
+    :   gimbal_{gimbal},
+        input_{input},
         kMaxPitchSpeed_{config.maxPitchSpeed},
         kMaxYawSpeed_{config.maxYawSpeed},
         kPitchRange_{config.pitchRange}
     {
-        addSubsystemRequirement(&m_gimbal);
+        addSubsystemRequirement(&gimbal_);
     }
 
     void AimCommand::initialize()
@@ -24,7 +24,7 @@ namespace fang::turret
 
     void AimCommand::execute()
     {
-        const Seconds delta{m_executeTimer.getDurationAndReset()};
+        const Seconds delta{executeTimer_.getDurationAndReset()};
         setPitch(delta);
         setYaw(delta);
     }
@@ -41,7 +41,7 @@ namespace fang::turret
 
     void AimCommand::setPitch(const Microseconds& delta)
     {
-        const double k_pitchScaler{m_input.getPitch()};
+        const double k_pitchScaler{input_.getPitch()};
         const RPM k_speed{k_pitchScaler * kMaxPitchSpeed_};
         const Radians k_angularDisplacement{k_speed * delta};
 
@@ -49,24 +49,24 @@ namespace fang::turret
         {
             tap::algorithms::limitVal<Radians>
             (
-                k_angularDisplacement + m_targetPitch,
+                k_angularDisplacement + targetPitch_,
                 kPitchRange_.min,
                 kPitchRange_.max
             )
         };
-        m_targetPitch = kClampedDisplacement;
+        targetPitch_ = kClampedDisplacement;
 
-        m_gimbal.setTargetFieldPitch(m_targetPitch);
+        gimbal_.setTargetFieldPitch(targetPitch_);
     }
 
     void AimCommand::setYaw(const Microseconds& delta)
     {
-        const double k_yawScaler{m_input.getYaw()};
+        const double k_yawScaler{input_.getYaw()};
         const RPM k_speed{k_yawScaler * kMaxYawSpeed_};
         const Radians k_angularDisplacement{k_speed * delta};
 
         targetYaw_ += k_angularDisplacement;
 
-        m_gimbal.setTargetFieldYaw(targetYaw_);
+        gimbal_.setTargetFieldYaw(targetYaw_);
     }
 }

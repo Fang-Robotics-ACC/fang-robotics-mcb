@@ -22,25 +22,23 @@ namespace fang::turret
         AimCommand(FieldGimbalSubsystem& gimbal, TurretInputHandler& input, const Config& config);
 
         const char* getName() const override {return "Aim Command";}
-
         void initialize() override;
         void execute() override;
         void end(bool interrupted) override;
         bool isFinished() const override;
 
-
     private:
         void setPitch(const Microseconds& delta);
         void setYaw(const Microseconds& delta);
-        FieldGimbalSubsystem& m_gimbal;
-        TurretInputHandler& m_input;
+        FieldGimbalSubsystem& gimbal_;
+        TurretInputHandler& input_;
 
         const RPM kMaxPitchSpeed_;
         const RPM kMaxYawSpeed_;
         const math::Range<Radians> kPitchRange_;
-        chrono::SimpleTimer m_executeTimer{};
+        chrono::SimpleTimer executeTimer_{};
 
-        Radians m_targetPitch{0};
+        Radians targetPitch_{0};
         Radians targetYaw_{0};
     };
 }
