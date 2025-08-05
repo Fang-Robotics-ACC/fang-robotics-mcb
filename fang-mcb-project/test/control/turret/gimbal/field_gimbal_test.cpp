@@ -118,4 +118,23 @@ namespace fang::turret::fieldGimbalTest
         )
     );
 
+    class InitializeUpdateTest:
+        public Setup,
+        public testing::Test
+    {
+    };
+
+    TEST_F(InitializeUpdateTest, initialize)
+    {
+        EXPECT_CALL(pitchSystem_, initialize());
+        EXPECT_CALL(yawSystem_, initialize());
+        fieldGimbal_.initialize();
+    }
+
+    TEST_F(InitializeUpdateTest, update)
+    {
+        EXPECT_CALL(pitchSystem_, update());
+        EXPECT_CALL(yawSystem_, update());
+        fieldGimbal_.update();
+    }
 }
