@@ -5,21 +5,21 @@
 namespace fang::turret
 {
     using namespace units::literals;
-    AimCommand::AimCommand(GimbalSubsystem& gimbal, TurretInputHandler& input, const Config& config)
+    AimCommand::AimCommand(FieldGimbalSubsystem& gimbal, TurretInputHandler& input, const Config& config)
     :   m_gimbal{gimbal},
         m_input{input},
-        mk_config{config},
-        mk_maxPitch{m_gimbal.getMaxPitch()},
-        mk_MinPitch{m_gimbal.getMinPitch()}
+        kMaxPitchSpeed_{config.maxPitchSpeed},
+        kMaxYawSpeed_{config.maxYawSpeed},
+        kPitchRange_{config.pitchRange}
     {
         addSubsystemRequirement(&m_gimbal);
     }
 
     void AimCommand::initialize()
     {
-        const Radians startingPitch{m_gimbal.getPitch()};
-        m_targetPitch = startingPitch;
-        m_gimbal.setPitch(startingPitch);
+        //const Radians startingPitch{m_gimbal.getPitch()};
+        //m_targetPitch = startingPitch;
+        //m_gimbal.setPitch(startingPitch);
     }
 
     void AimCommand::execute()
@@ -42,22 +42,31 @@ namespace fang::turret
     void AimCommand::setPitch(const Microseconds& delta)
     {
         const double k_pitchScaler{m_input.getPitch()};
-        const RPM k_speed{k_pitchScaler * mk_config.maxPitchSpeed};
+        const RPM k_speed{k_pitchScaler * kMaxPitchSpeed_};
         const Radians k_angularDisplacement{k_speed * delta};
 
-        m_targetPitch =tap::algorithms::limitVal<Radians>(k_angularDisplacement + m_targetPitch, mk_MinPitch, mk_maxPitch);
+        const Radians kClampedDisplacement
+        {
+            tap::algorithms::limitVal<Radians>
+            (
+                k_angularDisplacement + m_targetPitch,
+                kPitchRange_.min,
+                kPitchRange_.max
+            )
+        };
+        m_targetPitch = kClampedDisplacement;
 
-        m_gimbal.setPitch(m_targetPitch);
+        m_gimbal.setTargetFieldPitch(m_targetPitch);
     }
 
     void AimCommand::setYaw(const Microseconds& delta)
     {
         const double k_yawScaler{m_input.getYaw()};
-        const RPM k_speed{k_yawScaler * mk_config.maxYawSpeed};
+        const RPM k_speed{k_yawScaler * kMaxYawSpeed_};
         const Radians k_angularDisplacement{k_speed * delta};
 
-        m_targetYaw += k_angularDisplacement;
+        targetYaw_ += k_angularDisplacement;
 
-        m_gimbal.setFieldYaw(m_targetYaw);
+        m_gimbal.setTargetFieldYaw(targetYaw_);
     }
 }
