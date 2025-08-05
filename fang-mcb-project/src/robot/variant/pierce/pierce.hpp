@@ -5,6 +5,7 @@
 #include "custom_variant/subsystem/pierce_mecanum_drive.hpp"
 
 #include "control/turret/gimbal_subsystem.hpp"
+#include "custom_variant/subsystem/pierce_field_gimbal.hpp"
 #include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
 #include "custom_variant/subsystem/pierce_ammo_booster.hpp"
 
@@ -40,7 +41,7 @@ namespace fang::robot
         struct SubsystemConfig
         {
             chassis::PierceMecanumDrive::Config chassisConfig;
-            turret::GimbalSubsystem::Config gimbalConfig;
+            turret::PierceFieldGimbal::Config gimbalConfig;
             fang::turret::M2006SimpleFeeder::Config feederConfig;
             turret::PierceAmmoBooster::Config boosterConfig;
         };
@@ -101,11 +102,12 @@ namespace fang::robot
 
         trap::communication::sensors::Imu m_imu;
 
-        turret::GimbalSubsystem m_gimbal;
+        std::unique_ptr<turret::PierceFieldGimbal> gimbal_;
         std::unique_ptr<fang::turret::SimpleFeeder> feeder_;
         std::unique_ptr<fang::turret::PierceAmmoBooster> booster_;
         std::unique_ptr<fang::chassis::PierceMecanumDrive> mecanumDrive_;
         //Compatibility hacks
+        turret::PierceFieldGimbal& m_gimbal{*gimbal_};
         turret::SimpleFeeder& m_feeder{*feeder_};
         turret::PierceAmmoBooster& m_booster{*booster_};
         chassis::PierceMecanumDrive& m_chassis{*mecanumDrive_};
