@@ -31,6 +31,13 @@ namespace fang::robot
          * This will make it a lot easier to utilize maker functions
          */
         BaseRobot(BaseRobot&& baseRobot);
+
+        virtual void initialize();
+        virtual void update() = 0;
+    protected:
+        void registerSubsystems();
+        void initializeSubsystems();
+        void initializeCommandPacks();
     private:
         Drivers& drivers_;
         Subsystems subsystems_;
