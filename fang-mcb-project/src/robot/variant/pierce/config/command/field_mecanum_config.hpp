@@ -4,7 +4,7 @@
 
 namespace fang::robot
 {
-    static const chassis::CounterStrikeCommand::Config k_fieldMecanumConfig 
+    static const chassis::CounterStrikeCommand::Config kFieldMecanumConfig 
     {
         .maxTranslation = {12_mph, 12_mph},
         .maxRotation    = 300_rpm,

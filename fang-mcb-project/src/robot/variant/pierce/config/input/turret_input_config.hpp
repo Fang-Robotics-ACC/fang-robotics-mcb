@@ -18,7 +18,7 @@ namespace fang::robot
         .pitchPercentagePerPx   = 0.15,
         .yawPercentagePerPx     = 0.15
     };
-    static const turret::TurretInputHandler::Config k_turretInputConfig
+    static const turret::TurretInputHandler::Config kTurretInputConfig
     {
         k_turretInputRemoteConfig,
         k_turretInputMouseConfig

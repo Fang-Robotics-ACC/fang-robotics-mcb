@@ -13,35 +13,35 @@ namespace fang::robot
     static const SwitchState k_fieldShurikenLeftSwitchActivate{SwitchState::UP};
     static const SwitchState k_tardisLeftSwitchActivate{SwitchState::DOWN};
 
-    static const tap::control::RemoteMapState k_fieldMecanumRemoteState
+    static const tap::control::RemoteMapState kFieldMecanumRemoteState
     {
         k_chassisRightSwitchContext,
         k_fieldMecanumLeftSwitchActivate
     };
 
-    static const tap::control::RemoteMapState k_shurikenModeRemoteState
+    static const tap::control::RemoteMapState kShurikenModeRemoteState
     {
         k_chassisRightSwitchContext,
         k_fieldShurikenLeftSwitchActivate
     };
 
-    static const tap::control::RemoteMapState k_tardisModeRemoteState
+    static const tap::control::RemoteMapState kTardisModeRemoteState
     {
         k_chassisRightSwitchContext,
         k_tardisLeftSwitchActivate
     };
 
-    static const tap::control::RemoteMapState k_fieldMecanumKeyboardState
+    static const tap::control::RemoteMapState kFieldMecanumKeyboardState
     {
         {Key::E}
     };
 
-    static const tap::control::RemoteMapState k_shurikenModeKeyboardState
+    static const tap::control::RemoteMapState kShurikenModeKeyboardState
     {
         {Key::Q}
     };
 
-    static const tap::control::RemoteMapState k_tardisModeKeyboardState
+    static const tap::control::RemoteMapState kTardisModeKeyboardState
     {
         {Key::R}
     };

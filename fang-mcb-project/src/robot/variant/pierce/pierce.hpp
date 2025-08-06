@@ -8,24 +8,7 @@
 #include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
 #include "custom_variant/subsystem/pierce_ammo_booster.hpp"
 
-//Input handlers
-#include "control/turret/turret_input_handler.hpp"
-#include "control/chassis/chassis_input_handler.hpp"
-
-//Commands
-#include "control/chassis/drive/holonomic/command/counter_strike_command.hpp"
-#include "control/chassis/drive/holonomic/command/shuriken_command.hpp"
-#include "control/chassis/drive/holonomic/command/tardis_command.hpp"
-
-#include "control/turret/gimbal/command/aim_command.hpp"
-#include "control/turret/ammo_booster/command/activate_booster_command.hpp"
-#include "control/turret/feeder/command/simple_autofire_command.hpp"
-#include "control/turret/feeder/command/simple_unjam_command.hpp"
-
-#include "wrap/trap/communication/sensors/imu.hpp"
-
-#include "tap/control/press_command_mapping.hpp"
-#include "tap/control/hold_command_mapping.hpp"
+#include "control/command/pierce_command_pack.hpp"
 
 namespace fang::robot
 {
@@ -45,41 +28,10 @@ namespace fang::robot
             turret::PierceAmmoBooster::Config boosterConfig;
         };
 
-        struct InputConfig
-        {
-            chassis::ChassisInputHandler::Config chassisInputConfig;
-            turret::TurretInputHandler::Config turretInputConfig;
-        };
-
-        struct CommandConfig
-        {
-            turret::AimCommand::Config aimCommandConfig;
-            chassis::CounterStrikeCommand::Config fieldMecanumConfig;
-            chassis::ShurikenCommand::Config shurikenConfig;
-            chassis::TardisCommand::Config tardisConfig;
-        };
-
-        struct MappingConfig
-        {
-            RemoteState remoteActivateBooster;
-            RemoteState remoteFire;
-            RemoteState remoteUnjam;
-            RemoteState remoteFieldMecanumMode;
-            RemoteState remoteShurikenMode;
-            RemoteState remoteTardisMode;
-            RemoteState mouseFire;
-            RemoteState mouseUnjam;
-            RemoteState keyboardFieldMecanumMode;
-            RemoteState keyboardShurikenMode;
-            RemoteState keyboardTardisMode;
-        };
-
         struct Config
         {
             SubsystemConfig subsystemConfig;
-            InputConfig inputConfig;
-            MappingConfig mappingConfig;
-            CommandConfig commandConfig;
+            command::PierceCommandPack::Config commandPackConfig;
         };
 
         Pierce(Drivers& drivers, const Config& config);
@@ -88,55 +40,15 @@ namespace fang::robot
         static constexpr Milliseconds k_startupDelay{1500};
 
         void initializeSubsystems();
-        void setDefaultCommands();
-        void registerIoMappings();
-
-        Drivers& m_drivers;
-
-        const SubsystemConfig mk_subsystemConfig;
-        const InputConfig mk_inputConfig;
-        const MappingConfig kMappingConfig_;
-        const CommandConfig mk_commandConfig;
-
-
-        trap::communication::sensors::Imu m_imu;
+        void initializeCommands();
 
         std::unique_ptr<turret::PierceFieldGimbal> gimbal_;
         std::unique_ptr<fang::turret::SimpleFeeder> feeder_;
         std::unique_ptr<fang::turret::PierceAmmoBooster> booster_;
         std::unique_ptr<fang::chassis::PierceMecanumDrive> mecanumDrive_;
-        //Compatibility hacks
-        turret::PierceFieldGimbal& m_gimbal{*gimbal_};
-        turret::SimpleFeeder& m_feeder{*feeder_};
-        turret::PierceAmmoBooster& m_booster{*booster_};
-        chassis::PierceMecanumDrive& m_chassis{*mecanumDrive_};
 
-        chassis::ChassisInputHandler m_chassisInput;
-        turret::TurretInputHandler m_turretInput;
+        command::PierceCommandPack commandPack_;
 
-        turret::AimCommand m_aimCommnd{m_gimbal, m_turretInput, mk_commandConfig.aimCommandConfig};
-        turret::ActivateBoosterCommand m_activateBoosterCommand{m_booster};
-        fang::turret::AutofireCommand m_autofireCommand{m_feeder};
-        fang::turret::UnjamCommand m_unjamCommand{m_feeder};
-
-        tap::control::HoldCommandMapping m_activateBoosterRemoteMap{&m_drivers, {&m_activateBoosterCommand}, kMappingConfig_.remoteActivateBooster};
-        tap::control::HoldCommandMapping m_activateAutofireRemoteMap{&m_drivers, {&m_autofireCommand}, kMappingConfig_.remoteFire};
-
-        tap::control::HoldCommandMapping m_activateAutofireMouseMap{&m_drivers, {&m_autofireCommand}, kMappingConfig_.mouseFire};
-        tap::control::HoldCommandMapping m_unjamCommandMap{&m_drivers, {&m_unjamCommand}, kMappingConfig_.mouseUnjam};
-        tap::control::HoldCommandMapping m_unjamCommandMapRemote{&m_drivers, {&m_unjamCommand}, kMappingConfig_.remoteUnjam};
-
-        chassis::CounterStrikeCommand m_fieldMecanumCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.fieldMecanumConfig};
-        chassis::ShurikenCommand m_shurikenCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.shurikenConfig};
-        chassis::TardisCommand m_tardisCommand{m_chassis, m_gimbal, m_chassisInput, mk_commandConfig.tardisConfig};
-
-        tap::control::HoldCommandMapping m_fieldMecanumRemoteMap{&m_drivers, {&m_fieldMecanumCommand}, kMappingConfig_.remoteFieldMecanumMode};
-        tap::control::PressCommandMapping m_shurikenRemoteMap{&m_drivers, {&m_shurikenCommand}, kMappingConfig_.remoteShurikenMode};
-        tap::control::PressCommandMapping m_tardisRemoteMap{&m_drivers, {&m_tardisCommand}, kMappingConfig_.remoteTardisMode};
-
-        tap::control::PressCommandMapping m_fieldMecanumKeyboardMap{&m_drivers, {&m_fieldMecanumCommand}, kMappingConfig_.keyboardFieldMecanumMode};
-        tap::control::PressCommandMapping m_shurikenKeyboardMap{&m_drivers, {&m_shurikenCommand}, kMappingConfig_.keyboardShurikenMode};
-        tap::control::PressCommandMapping m_tardisKeyboardMap{&m_drivers, {&m_tardisCommand}, kMappingConfig_.keyboardTardisMode};
-    };//class Robot
-}//namspace control
+    };
+}
 #endif
