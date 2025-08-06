@@ -17,6 +17,7 @@ namespace fang::motor
         kControllerInputVoltage_{config.controllerInputVoltage},
         kGearRatio_{config.gearRatio},
         kInversionMultiplier_{config.inverted ? -1 : 1}, // Reverse if inverted lol, motor is bidirectional
+        speedRamp_{0_rpm, config.rampSpeed},
         vortex_{drivers.pwm, config.pwmData}
     {
         assertConfigValidity(config);
@@ -24,9 +25,7 @@ namespace fang::motor
 
 	void RepeatUltraMk2::setTargetSpeed(const RPM& speed)
     {
-        const RPM motorSpeed{shaftToMotorSpeed(speed, kGearRatio_)};
-        const double speedPercentage{motorSpeed / kMaxTheoreticalSpeed_};
-        vortex_.setSpeed(speedPercentage * kInversionMultiplier_);
+        speedRamp_.setTarget(speed);
     }
 
     void RepeatUltraMk2::initialize()
@@ -36,7 +35,17 @@ namespace fang::motor
 
     void RepeatUltraMk2::update()
     {
-        //TODO: Ramping functionality
+        speedRamp_.update();
+        syncVotex();
+    }
+
+    void RepeatUltraMk2::syncVotex()
+    {
+        const RPM kSpeed{speedRamp_.getValue()};
+        const RPM kMotorSpeed{shaftToMotorSpeed(kSpeed, kGearRatio_)};
+        const double kSpeedPercentage{kMotorSpeed / kMaxTheoreticalSpeed_};
+
+        vortex_.setSpeed(kSpeedPercentage * kInversionMultiplier_);
     }
 
     void RepeatUltraMk2::assertConfigValidity(const Config& config)
