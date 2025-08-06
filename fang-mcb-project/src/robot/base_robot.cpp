@@ -9,8 +9,8 @@ namespace fang::robot
         CommandPacks&& commandPacks
     ):
         commandScheduler_{commandScheduler},
-        subsystems_{subsystems},
-        commandPacks_{commandPacks}
+        subsystems_{std::move(subsystems)},
+        commandPacks_{std::move(commandPacks)}
     {}
 
     /**
