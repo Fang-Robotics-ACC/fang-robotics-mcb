@@ -27,6 +27,12 @@ namespace fang::command
             turretInput_{drivers.remote, config.inputConfig.turretInputConfig}
         {}
 
+    void PierceCommandPack::initialize()
+    {
+        setDefaultCommands();
+        registerIoMappings();
+    }
+
     void PierceCommandPack::setDefaultCommands()
     {
         gimbal_.setDefaultCommand(&aim_);

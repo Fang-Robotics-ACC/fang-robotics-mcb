@@ -27,7 +27,7 @@ namespace fang::command
 {
     class PierceCommandPack : public CommandPack
     {
-
+    public:
         struct InputConfig
         {
             chassis::ChassisInputHandler::Config chassisInputConfig;
@@ -83,6 +83,8 @@ namespace fang::command
             chassis::HolonomicSubsystem& chassis,
             const Config& config
         );
+
+        virtual void initialize() override;
     private:
         void registerIoMappings();
         void setDefaultCommands();
