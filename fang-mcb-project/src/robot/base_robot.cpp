@@ -2,7 +2,8 @@
 
 namespace fang::robot
 {
-    BaseRobot::BaseRobot(Subsystems&& subsystems, CommandPacks&& commandPacks):
+    BaseRobot::BaseRobot(Drivers& drivers, Subsystems&& subsystems, CommandPacks&& commandPacks):
+        drivers_{drivers},
         subsystems_{subsystems},
         commandPacks_{commandPacks}
     {}
