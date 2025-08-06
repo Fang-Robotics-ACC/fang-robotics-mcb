@@ -50,7 +50,7 @@ namespace fang::chassis
         const double abstractRotation{chassisInput_.getRotation()};
         const RPM rotation{abstractRotation * kConfig_.maxRotation};
 
-        const bool sameSignCheck{std::signbit(abstractRotation) == std::signbit(static_cast<double>(abstractRotation))};
+        const bool sameSignCheck{std::signbit(abstractRotation) == std::signbit(static_cast<double>(rotation))};
         FANG_ASSERT(sameSignCheck, "Scaling should not invert rotation");
 
         return rotation;
