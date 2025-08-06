@@ -49,6 +49,6 @@ namespace fang::robot
 
         command::PierceCommandPack commandPack_;
 
-    };//class Robot
-}//namspace control
+    };
+}
 #endif
