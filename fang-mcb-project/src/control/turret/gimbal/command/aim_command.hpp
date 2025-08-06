@@ -1,6 +1,5 @@
 #ifndef FANG_ROBOTICS_MCB_AIM_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_AIM_COMMAND_HPP
-#include "control/turret/gimbal_subsystem.hpp"
 #include "control/turret/gimbal/field_gimbal_subsystem.hpp"
 #include "control/turret/turret_input_handler.hpp"
 #include "util/math/arithmetic/range.hpp"

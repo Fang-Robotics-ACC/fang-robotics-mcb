@@ -1,6 +1,5 @@
 #ifndef FANG_ROBOTICS_MCB_AMMO_BOOSTER_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_AMMO_BOOSTER_CONFIG_HPP
-#include "control/turret/system/flywheel_system.hpp"
 #include "robot/variant/pierce/custom_variant/subsystem/pierce_ammo_booster.hpp"
 #include "wrap/units/units_alias.hpp"
 

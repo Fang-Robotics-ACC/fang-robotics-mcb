@@ -23,7 +23,7 @@
 
 namespace fang::robot
 {
-    const Pierce::SubsystemConfig k_pierceSubsytemConfig 
+    const Pierce::SubsystemConfig kPierceSubsystemConfig 
     {
         .chassisConfig  = kChassisConfig,
         .gimbalConfig   = kGimbalSubsystemConfig,
@@ -31,40 +31,55 @@ namespace fang::robot
         .boosterConfig  = kAmmoBoosterConfig
     };
 
-    const Pierce::InputConfig k_pierceInputConfig
+    const command::PierceCommandPack::InputConfig kPierceInputConfig 
     {
-        .chassisInputConfig = k_chassisInputConfig,
-        .turretInputConfig  = k_turretInputConfig
+        .chassisInputConfig = kChassisInputConfig,
+        .turretInputConfig  = kTurretInputConfig
     };
 
-    const Pierce::CommandConfig k_pierceCommandConfig
+    const command::PierceCommandPack::CommandConfig k_pierceCommandConfig
     {
-        .aimCommandConfig   = k_turretAimConfig,
-        .fieldMecanumConfig = k_fieldMecanumConfig,
-        .shurikenConfig     = k_shurikenConfig,
-        .tardisConfig       = k_tardisConfig
+        .aimConfig           = kTurretAimConfig,
+        .counterStrikeConfig = kFieldMecanumConfig,
+        .shurikenConfig      = kShurikenConfig,
+        .tardisConfig        = k_tardisConfig
     };
 
-    const Pierce::MappingConfig k_pierceMappingConfig
+    const command::PierceCommandPack::ComputerMapping kPierceComputerMappingCOnfig 
     {
-        .remoteActivateBooster      = k_activateBoosterRemoteState,
-        .remoteFire                 = k_autofireRemoteState,
-        .remoteUnjam                = k_unjamRemoteState,
-        .remoteFieldMecanumMode     = k_fieldMecanumRemoteState,
-        .remoteShurikenMode         = k_shurikenModeRemoteState,
-        .remoteTardisMode           = k_tardisModeRemoteState,
-        .mouseFire                  = k_autofireMouseState,
-        .mouseUnjam                 = k_unjamMouseState,
-        .keyboardFieldMecanumMode   = k_fieldMecanumKeyboardState,
-        .keyboardShurikenMode       = k_shurikenModeKeyboardState,
-        .keyboardTardisMode         = k_tardisModeKeyboardState
+        .mouseFire     = kAutofireMouseState,
+        .mouseUnjam    = kUnjamMouseState,
+        .counterStrike = kFieldMecanumKeyboardState,
+        .shuriken      = kShurikenModeKeyboardState,
+        .tardis        = kTardisModeKeyboardState
+    };
+
+    const command::PierceCommandPack::RemoteMapping kPierceRemoteMappingConfig 
+    {
+        .activateBooster = kActivateBoosterRemoteState,
+        .fire            = kAutofireRemoteState,
+        .unjam           = kUnjamRemoteState,
+        .counterStrike   = kFieldMecanumRemoteState,
+        .shuriken        = kShurikenModeRemoteState,
+        .tardis          = kTardisModeRemoteState
+    };
+
+    const command::PierceCommandPack::MappingConfig kPierceMappingConfig 
+    {
+        .remote     = kPierceRemoteMappingConfig,
+        .computer   = kPierceComputerMappingCOnfig
+    };
+
+    const command::PierceCommandPack::Config kPierceCommandPackConfig
+    {
+        .inputConfig   = kPierceInputConfig,
+        .mappingConfig = kPierceMappingConfig,
+        .commandConfig = k_pierceCommandConfig
     };
 
     const Pierce::Config k_pierceConfig
     {
-        .subsystemConfig    = k_pierceSubsytemConfig,
-        .inputConfig        = k_pierceInputConfig,
-        .mappingConfig      = k_pierceMappingConfig,
-        .commandConfig      = k_pierceCommandConfig
+        .subsystemConfig   = kPierceSubsystemConfig,
+        .commandPackConfig = kPierceCommandPackConfig
     };
 }

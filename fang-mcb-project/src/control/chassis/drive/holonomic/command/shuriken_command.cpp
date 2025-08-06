@@ -30,20 +30,16 @@ namespace fang::chassis
 
     void ShurikenCommand::execute()
     {
-        holonomicSubsystem_.setTargetTranslation(targetFieldTranslation_);
-        holonomicSubsystem_.setTargetRotation(getFieldRotation());
+        const physics::Velocity2D kTargetFieldTranslation{CounterStrikeCommand::getFieldTranslation()};
+        holonomicSubsystem_.setTargetTranslation(kTargetFieldTranslation);
+        holonomicSubsystem_.setTargetRotation(getFieldRotation(kTargetFieldTranslation));
     }
 
-    RPM ShurikenCommand::getFieldRotation() const
+    RPM ShurikenCommand::getFieldRotation(const physics::Velocity2D& targetFieldTranslation) const
     {
-        const double downscale{kDownscaler_.getDownscale(targetFieldTranslation_.getMagnitude())};
+        const double downscale{kDownscaler_.getDownscale(targetFieldTranslation.getMagnitude())};
         const RPM rotation{kConfig_.shurikenSpeed * downscale};
         FANG_ASSERT(rotation <= kConfig_.shurikenSpeed, "The shuriken speed should only be downscaled!");
         return rotation;
     }
-
-    void ShurikenCommand::updateTargetFieldTranslation()
-    {
-        targetFieldTranslation_ = CounterStrikeCommand::getFieldTranslation();
-    }
-}//namespace  
+}

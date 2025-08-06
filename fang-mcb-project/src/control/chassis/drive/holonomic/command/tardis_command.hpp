@@ -48,7 +48,7 @@ namespace fang::chassis
         const char* getName() const override;
         void execute() override;
     protected:
-        RPM getFieldRotation() const;
+        RPM getFieldRotation(const physics::Velocity2D& targetFieldTranslation) const;
     private:
         static constexpr char* kName{"T.A.R.D.I.S. Mode"};
 

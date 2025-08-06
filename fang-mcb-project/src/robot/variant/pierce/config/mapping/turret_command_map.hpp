@@ -6,30 +6,30 @@ namespace fang::robot
     using Remote = tap::communication::serial::Remote;
     using Key = Remote::Key;
     using MouseButton = tap::control::RemoteMapState::MouseButton;
-    static const tap::control::RemoteMapState k_activateBoosterRemoteState
+    static const tap::control::RemoteMapState kActivateBoosterRemoteState
     {
         Remote::Switch::LEFT_SWITCH,
         Remote::SwitchState::UP
     };
 
-    static const tap::control::RemoteMapState k_autofireRemoteState
+    static const tap::control::RemoteMapState kAutofireRemoteState
     {
         Remote::SwitchState::UP,
         Remote::SwitchState::UP
     };
 
-    static const tap::control::RemoteMapState k_unjamRemoteState
+    static const tap::control::RemoteMapState kUnjamRemoteState
     {
         Remote::SwitchState::UP,
         Remote::SwitchState::DOWN
     };
 
-    static const tap::control::RemoteMapState k_autofireMouseState
+    static const tap::control::RemoteMapState kAutofireMouseState
     {
         MouseButton::LEFT
     };
 
-    static const tap::control::RemoteMapState k_unjamMouseState
+    static const tap::control::RemoteMapState kUnjamMouseState
     {
         MouseButton::RIGHT
     };

@@ -39,15 +39,16 @@ namespace fang::chassis
 
     void TardisCommand::execute()
     {
-        holonomicSubsystem_.setTargetTranslation(CounterStrikeCommand::getFieldTranslation());
-        holonomicSubsystem_.setTargetRotation(getFieldRotation());
+        const physics::Velocity2D kTargetFieldTranslation{CounterStrikeCommand::getFieldTranslation()};
+        holonomicSubsystem_.setTargetTranslation(kTargetFieldTranslation);
+        holonomicSubsystem_.setTargetRotation(getFieldRotation(kTargetFieldTranslation));
     }
 
-    RPM TardisCommand::getFieldRotation() const
+    RPM TardisCommand::getFieldRotation(const physics::Velocity2D& targetFieldTranslation) const
     {
         const Seconds now{kShredderTimer.getDuration()};
         const double razielShredderDownscale{razielKalmanShredder_.getScalingFactor(static_cast<double>(now))};
-        const RPM rotation{ShurikenCommand::getFieldRotation() * razielShredderDownscale};
+        const RPM rotation{ShurikenCommand::getFieldRotation(targetFieldTranslation) * razielShredderDownscale};
         return rotation;
     }
 }

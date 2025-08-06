@@ -55,7 +55,7 @@ namespace fang::chassis
         static constexpr char* kName{"Counter Strike Global!"};
 
         const turret::FieldGimbalSubsystem& gimbal_; //We don't want the command to alter the turret state
-        const Config& kConfig_;
+        const Config kConfig_;
     };
 }//namespace chassis
 #endif

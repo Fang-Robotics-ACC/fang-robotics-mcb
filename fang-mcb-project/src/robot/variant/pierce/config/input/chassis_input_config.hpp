@@ -23,7 +23,7 @@ namespace fang::robot
         Key::D  //right
     };
 
-    static const chassis::ChassisInputHandler::Config k_chassisInputConfig
+    static const chassis::ChassisInputHandler::Config kChassisInputConfig
     {
         k_chassisInputRemoteConfig,
         k_chassisInputKeyboardConfig

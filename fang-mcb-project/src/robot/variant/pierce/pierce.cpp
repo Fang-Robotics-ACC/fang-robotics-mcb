@@ -8,60 +8,30 @@ namespace fang::robot
     using namespace units::literals;
     Pierce::Pierce(Drivers& drivers, const Config& config)
         :
-            m_drivers{drivers},
-            mk_subsystemConfig{config.subsystemConfig},
-            mk_inputConfig{config.inputConfig},
-            mk_commandConfig{config.commandConfig},
-            kMappingConfig_{config.mappingConfig},
-            m_imu{drivers.bmi088},
             gimbal_{std::make_unique<turret::PierceFieldGimbal>(drivers, config.subsystemConfig.gimbalConfig)},
             feeder_{std::make_unique<turret::M2006SimpleFeeder>(drivers, config.subsystemConfig.feederConfig)},
             booster_{std::make_unique<turret::PierceAmmoBooster>(drivers, config.subsystemConfig.boosterConfig)},
-            mecanumDrive_{std::make_unique<chassis::PierceMecanumDrive>(drivers, mk_subsystemConfig.chassisConfig)},
-            m_chassisInput{drivers.remote, mk_inputConfig.chassisInputConfig},
-            m_turretInput{drivers.remote, mk_inputConfig.turretInputConfig}
+            mecanumDrive_{std::make_unique<chassis::PierceMecanumDrive>(drivers, config.subsystemConfig.chassisConfig)},
+            commandPack_{drivers, *booster_, *feeder_, *gimbal_, *mecanumDrive_, config.commandPackConfig}
     {
     }
     
     void Pierce::initialize()
     {
         initializeSubsystems();
-
-        modm::delay_ms(Milliseconds{k_startupDelay}.to<float>());
-        setDefaultCommands();
-        registerIoMappings();
+        initializeCommands();
     }
     
     void Pierce::initializeSubsystems()
     {
-        m_feeder.registerAndInitialize();
-        m_booster.registerAndInitialize();
-        m_gimbal.registerAndInitialize();
-        m_chassis.registerAndInitialize();
+        feeder_->registerAndInitialize();
+        booster_->registerAndInitialize();
+        gimbal_->registerAndInitialize();
+        mecanumDrive_->registerAndInitialize();
     }
-    
-    
-    void Pierce::setDefaultCommands()
+
+    void Pierce::initializeCommands()
     {
-        m_gimbal.setDefaultCommand(&m_aimCommnd);
-        m_chassis.setDefaultCommand(&m_fieldMecanumCommand);
-    }
-    
-    void Pierce::registerIoMappings()
-    {
-        m_drivers.commandMapper.addMap(&m_activateBoosterRemoteMap);
-        m_drivers.commandMapper.addMap(&m_activateAutofireRemoteMap);
-        m_drivers.commandMapper.addMap(&m_activateAutofireMouseMap);
-        m_drivers.commandMapper.addMap(&m_unjamCommandMap);
-        m_drivers.commandMapper.addMap(&m_unjamCommandMapRemote);
-
-        m_drivers.commandMapper.addMap(&m_shurikenRemoteMap);
-        m_drivers.commandMapper.addMap(&m_fieldMecanumRemoteMap);
-        m_drivers.commandMapper.addMap(&m_tardisRemoteMap);
-
-        m_drivers.commandMapper.addMap(&m_shurikenKeyboardMap);
-        m_drivers.commandMapper.addMap(&m_fieldMecanumKeyboardMap);
-
-        m_drivers.commandMapper.addMap(&m_tardisKeyboardMap);
+        commandPack_.initialize();
     }
 }

@@ -6,7 +6,7 @@
 namespace fang::robot
 {
     using namespace units::literals;
-    static const turret::AimCommand::Config k_turretAimConfig
+    static const turret::AimCommand::Config kTurretAimConfig
     {
         .maxPitchSpeed = 40_rpm,
         .maxYawSpeed = 120_rpm,
