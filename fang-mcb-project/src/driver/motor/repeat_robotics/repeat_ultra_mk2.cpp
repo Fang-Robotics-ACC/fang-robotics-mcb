@@ -49,7 +49,7 @@ namespace fang::motor
         //There are slight cases where the rounding errors go above one
         //Max and min are %100 and negative %100, normally i'd shun magic
         //numbers but these are pretty obvious
-        const double kClampedSpeed{tap::algorithms::limitVal(kSpeedPercentage, -1.0, 1.0)};
+        const double kClampedSpeed{tap::algorithms::limitVal<double>(kSpeedPercentage, -1.0, 1.0)};
         vortex_.setSpeed(kClampedSpeed * kInversionMultiplier_);
     }
 
