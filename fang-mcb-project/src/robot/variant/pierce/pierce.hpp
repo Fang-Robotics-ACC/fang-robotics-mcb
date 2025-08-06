@@ -10,15 +10,13 @@
 
 #include "control/command/pierce_command_pack.hpp"
 
-#include "robot/base_robot.hpp"
-
 namespace fang::robot
 {
     /**
      * First Fang: Pierce
      * The first robot in Fang Robotics est. 2025
      */
-    class Pierce : public BaseRobot
+    class Pierce
     {
     public:
         using RemoteState = tap::control::RemoteMapState;
@@ -36,38 +34,21 @@ namespace fang::robot
             command::PierceCommandPack::Config commandPackConfig;
         };
 
-        Pierce::Pierce(Drivers& drivers, const Config& config): BaseRobot{makeRobot(drivers, config)}
-        {}
+        Pierce(Drivers& drivers, const Config& config);
+        void initialize();
     private:
-        static BaseRobot makeRobot(Drivers& drivers, const Config& config)
-        {
-            auto gimbal{std::make_unique<turret::PierceFieldGimbal>(drivers, config.subsystemConfig.gimbalConfig)};
-            auto feeder{std::make_unique<turret::M2006SimpleFeeder>(drivers, config.subsystemConfig.feederConfig)};
-            auto booster{std::make_unique<turret::PierceAmmoBooster>(drivers, config.subsystemConfig.boosterConfig)};
-            auto mecanumDrive{std::make_unique<chassis::PierceMecanumDrive>(drivers, config.subsystemConfig.chassisConfig)};
-            auto commandPack
-            {
-                std::make_unique<command::PierceCommandPack>
-                (
-                    drivers,
-                    *booster,
-                    *feeder,
-                    *gimbal,
-                    *mecanumDrive,
-                    config.commandPackConfig
-                )
-            };
-            // If I could get the makeUniqueVector thing to work, this might be more worthwhile...
-            Subsystems subsystems{};
-            subsystems.push_back(std::move(booster));
-            subsystems.push_back(std::move(feeder));
-            subsystems.push_back(std::move(gimbal));
-            subsystems.push_back(std::move(mecanumDrive));
+        static constexpr Milliseconds k_startupDelay{1500};
 
-            CommandPacks commandPacks{};
-            commandPacks.push_back(std::move(commandPack));
-            return BaseRobot{drivers.commandScheduler, std::move(subsystems), std::move(commandPacks)};
-        }
+        void initializeSubsystems();
+        void initializeCommands();
+
+        std::unique_ptr<turret::PierceFieldGimbal> gimbal_;
+        std::unique_ptr<fang::turret::SimpleFeeder> feeder_;
+        std::unique_ptr<fang::turret::PierceAmmoBooster> booster_;
+        std::unique_ptr<fang::chassis::PierceMecanumDrive> mecanumDrive_;
+
+        command::PierceCommandPack commandPack_;
+
     };
 }
 #endif
