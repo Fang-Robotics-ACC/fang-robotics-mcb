@@ -3,6 +3,7 @@
 #include "system/assert/fang_assert.hpp"
 
 #include "wrap/units/units_alias.hpp"
+#include "tap/algorithms/math_user_utils.hpp"
 
 namespace fang::motor
 {
@@ -45,7 +46,11 @@ namespace fang::motor
         const RPM kMotorSpeed{shaftToMotorSpeed(kSpeed, kGearRatio_)};
         const double kSpeedPercentage{kMotorSpeed / kMaxTheoreticalSpeed_};
 
-        vortex_.setSpeed(kSpeedPercentage * kInversionMultiplier_);
+        //There are slight cases where the rounding errors go above one
+        //Max and min are %100 and negative %100, normally i'd shun magic
+        //numbers but these are pretty obvious
+        const double kClampedSpeed{tap::algorithms::limitVal(kSpeedPercentage, -1.0, 1.0)};
+        vortex_.setSpeed(kClampedSpeed * kInversionMultiplier_);
     }
 
     void RepeatUltraMk2::assertConfigValidity(const Config& config)
