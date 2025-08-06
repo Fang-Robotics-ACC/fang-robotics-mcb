@@ -25,6 +25,8 @@ namespace fang::command
         virtual void initialize() = 0;
 
         CommandPack(CommandMapper& mapper);
+
+        virtual ~CommandPack() = default; 
     protected:
         void registerCommandMappings(std::span<CommandMapping> mappings);
     private:
