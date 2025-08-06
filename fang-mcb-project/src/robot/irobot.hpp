@@ -9,6 +9,7 @@ namespace fang::robot
      */
     class IRobot : virtual public system::ISystem
     {
+    public:
         virtual ~IRobot() {};
     };
 }
