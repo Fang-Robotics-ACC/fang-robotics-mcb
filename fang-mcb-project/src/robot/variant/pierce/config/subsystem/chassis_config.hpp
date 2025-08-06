@@ -19,7 +19,7 @@ namespace fang::robot
 
     static double kUltraMk2GearRatio{14.0};
 
-    static double kMotorRampSpeed{10}; //RepeatUltraMk2 RPM per Second
+    static double kMotorRampSpeed{750}; //RepeatUltraMk2 RPM per Second
 
 
     static const chassis::PierceMecanumDrive::Motor::Config kFrontLeftMotorConfig
