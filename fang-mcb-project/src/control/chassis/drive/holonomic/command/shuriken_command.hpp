@@ -42,16 +42,17 @@ namespace fang::chassis
         /**
          * Translates the rotation input on the remote into
          * a rotation where counterclockwise is positive
+         * 
+         * It also downscales the angular velocity inversly
+         * proportional to the targetFieldTranslation
          */
-        RPM getFieldRotation() const;
-        void updateTargetFieldTranslation();
+        RPM getFieldRotation(const physics::Velocity2D& targetFieldTranslation) const;
 
     private:
         static constexpr char* kName{"Shuriken"};
 
         const Config kConfig_;
         const BasicDownscaler kDownscaler_;
-        physics::Velocity2D targetFieldTranslation_{};
     };
 }
 #endif
