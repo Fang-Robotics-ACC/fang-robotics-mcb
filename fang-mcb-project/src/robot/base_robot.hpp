@@ -18,7 +18,7 @@ namespace fang::robot
         // Even though inheritors need to use maker functions, the benefits
         // of testability and ownership are worth it
         using Subsystems = std::vector<std::unique_ptr<tap::control::Subsystem>>;
-        using CommandPacks = std::vector<std::unique_ptr<tap::control::Subsystem>>;
+        using CommandPacks = std::vector<std::unique_ptr<command::CommandPack>>;
 
         /**
          * The base robot will take ownership of the information
