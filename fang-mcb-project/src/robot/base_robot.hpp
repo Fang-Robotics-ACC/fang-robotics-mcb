@@ -1,10 +1,12 @@
 #pragma once
 
 #include "irobot.hpp"
-#include "tap/control/subsystem.hpp"
 
 #include "driver/drivers.hpp"
 #include "control/command/command_pack.hpp"
+
+#include "tap/control/subsystem.hpp"
+#include "tap/control/command_scheduler.hpp"
 
 #include <memory>
 
