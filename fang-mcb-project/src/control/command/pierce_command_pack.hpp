@@ -111,15 +111,15 @@ namespace fang::command
         tap::control::HoldCommandMapping activateBoosterRemote_{&drivers_, {&activateBooster_}, kRemoteMapping_.activateBooster};
         tap::control::HoldCommandMapping activateAutofireRemote_{&drivers_, {&autofire_}, kRemoteMapping_.fire};
 
-        tap::control::HoldCommandMapping activateAutofireMouseMap_{&drivers_, {&autofire_}, kComputerMapping.mouseFire};
+        tap::control::HoldCommandMapping activateAutofireMouseMap_{&drivers_, {&autofire_}, kComputerMapping_.mouseFire};
         tap::control::HoldCommandMapping unjamMouse_{&drivers_, {&unjam_}, kComputerMapping_.mouseUnjam};
-        tap::control::HoldCommandMapping unjamRemote_{&drivers_, {&unjam_}, kRemoteMapping.remoteUnjam};
+        tap::control::HoldCommandMapping unjamRemote_{&drivers_, {&unjam_}, kRemoteMapping_.unjam};
 
         chassis::CounterStrikeCommand counterStrike_{chassis_, gimbal_, chassisInput_, kCommandConfig_.counterStrikeConfig};
         chassis::ShurikenCommand shuriken_{chassis_, gimbal_, chassisInput_, kCommandConfig_.shurikenConfig};
         chassis::TardisCommand tardis_{chassis_, gimbal_, chassisInput_, kCommandConfig_.tardisConfig};
 
-        tap::control::HoldCommandMapping counterStrikeRemote_{&drivers_, {&counterStrike_}, kRemoteMapping.fieldMecanumMode};
+        tap::control::HoldCommandMapping counterStrikeRemote_{&drivers_, {&counterStrike_}, kRemoteMapping_.counterStrike};
         tap::control::PressCommandMapping shurikenRemote_{&drivers_, {&shuriken_}, kRemoteMapping_.shuriken};
         tap::control::PressCommandMapping tardisRemote_{&drivers_, {&tardis_}, kRemoteMapping_.tardis};
 
