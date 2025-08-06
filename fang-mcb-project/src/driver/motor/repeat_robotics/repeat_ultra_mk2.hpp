@@ -6,6 +6,7 @@
 
 #include "wrap/rail/motor/ispeed_motor.hpp"
 #include "wrap/trap/communication/pwm_data.hpp"
+#include "wrap/trap/algorithms/ramp.hpp"
 #include "wrap/units/units_alias.hpp"
 
 #include "tap/util_macros.hpp"
@@ -38,6 +39,8 @@ namespace fang::motor
          * @param gearRatio - how many motor turns per shaft turn. This
          * means that a ratio greater than 1 will make the output speed
          * slower but stronger.
+         * 
+         * @param rampSpeed - how RPM per second (this is dimensionally stripped for simplicity reasons)
          */
         struct Config
         {
@@ -45,6 +48,7 @@ namespace fang::motor
             trap::gpio::PwmData pwmData;
             bool inverted;
             double gearRatio;
+            double rampSpeed;
         };
 
         RepeatUltraMk2(Drivers& drivers, const Config& config);
@@ -79,11 +83,13 @@ namespace fang::motor
 
         static constexpr RPMPerVolt kKv{1450.0};
     private:
+        void syncVotex();
         void assertConfigValidity(const Config& config);
 
         const Volts kControllerInputVoltage_;
         const double kGearRatio_;
         const int8_t kInversionMultiplier_;
+        trap::algorithms::Ramp<RPM, Seconds> speedRamp_;
         // This was the Repeat Robotics provided value for the ratio between the rpm and the voltage associated with i
         //kv value is ration of rpm per voltage applied to a brushless dc motor
         Vortex80AEsc vortex_;
