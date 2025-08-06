@@ -63,7 +63,7 @@ namespace fang::chassis
 
         HolonomicSubsystem& holonomicSubsystem_;
         ChassisInputHandler& chassisInput_;
-        const Config& kConfig_;
+        const Config kConfig_;
 
     private:
         static void assertConfigValues(const Config& config);
