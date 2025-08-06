@@ -36,7 +36,7 @@ namespace fang::robot
             command::PierceCommandPack::Config commandPackConfig;
         };
 
-        Pierce::Pierce(Drivers& drivers, const Config& config): BaseRobot{makeRobot(drivers, config)}
+        Pierce(Drivers& drivers, const Config& config): BaseRobot{makeRobot(drivers, config)}
         {}
     private:
         static BaseRobot makeRobot(Drivers& drivers, const Config& config)
