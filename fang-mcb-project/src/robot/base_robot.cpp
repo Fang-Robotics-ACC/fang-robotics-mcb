@@ -2,8 +2,13 @@
 
 namespace fang::robot
 {
-    BaseRobot::BaseRobot(Drivers& drivers, Subsystems&& subsystems, CommandPacks&& commandPacks):
-        drivers_{drivers},
+    BaseRobot::BaseRobot
+    (
+        tap::control::CommandScheduler& commandScheduler,
+        Subsystems&& subsystems,
+        CommandPacks&& commandPacks
+    ):
+        commandScheduler_{commandScheduler},
         subsystems_{subsystems},
         commandPacks_{commandPacks}
     {}
@@ -12,7 +17,7 @@ namespace fang::robot
      * This will make it a lot easier to utilize maker functions
      */
     BaseRobot::BaseRobot(BaseRobot&& baseRobot):
-        drivers_ {baseRobot.drivers_},
+        commandScheduler_ {baseRobot.commandScheduler_},
         subsystems_{std::move(baseRobot.subsystems_)},
         commandPacks_{std::move(baseRobot.commandPacks_)}
     {}
@@ -38,7 +43,7 @@ namespace fang::robot
         {
             // Must pass by raw pointer because taproot loves raw pointers
             // As of the last documentation this is a non-owning pointer :P
-            drivers_.commandScheduler.registerSubsystem(subsystem.get());
+            commandScheduler_.registerSubsystem(subsystem.get());
         }
     }
 

@@ -27,7 +27,12 @@ namespace fang::robot
         /**
          * The base robot will take ownership of the information
          */
-        BaseRobot(Drivers& drivers, Subsystems&& subsystems, CommandPacks&& commandPacks);
+        BaseRobot
+        (
+            tap::control::CommandScheduler& commandScheduler,
+            Subsystems&& subsystems,
+            CommandPacks&& commandPacks
+        );
 
         /**
          * This will make it a lot easier to utilize maker functions
@@ -41,7 +46,7 @@ namespace fang::robot
         void initializeSubsystems();
         void initializeCommandPacks();
     private:
-        Drivers& drivers_;
+        tap::control::CommandScheduler& commandScheduler_;
         Subsystems subsystems_;
         CommandPacks commandPacks_;
     };
