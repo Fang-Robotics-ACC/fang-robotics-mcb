@@ -39,8 +39,10 @@ namespace fang::robot
          */
         BaseRobot(BaseRobot&& baseRobot);
 
-        virtual void initialize();
-        virtual void update() = 0;
+        virtual void initialize() override;
+
+        /// Not virtual so that it can be passed around in maker functions
+        virtual void update() {};
     protected:
         void registerSubsystems();
         void initializeSubsystems();
