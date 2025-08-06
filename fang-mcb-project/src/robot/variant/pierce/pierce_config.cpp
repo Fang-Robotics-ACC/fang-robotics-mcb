@@ -33,35 +33,35 @@ namespace fang::robot
 
     const command::PierceCommandPack::InputConfig kPierceInputConfig 
     {
-        .chassisInputConfig = k_chassisInputConfig,
-        .turretInputConfig  = k_turretInputConfig
+        .chassisInputConfig = kChassisInputConfig,
+        .turretInputConfig  = kTurretInputConfig
     };
 
     const command::PierceCommandPack::CommandConfig k_pierceCommandConfig
     {
-        .aimConfig           = k_turretAimConfig,
-        .counterStrikeConfig = k_fieldMecanumConfig,
-        .shurikenConfig      = k_shurikenConfig,
+        .aimConfig           = kTurretAimConfig,
+        .counterStrikeConfig = kFieldMecanumConfig,
+        .shurikenConfig      = kShurikenConfig,
         .tardisConfig        = k_tardisConfig
     };
 
     const command::PierceCommandPack::ComputerMapping kPierceComputerMappingCOnfig 
     {
-        .mouseFire     = k_autofireMouseState,
-        .mouseUnjam    = k_unjamMouseState,
-        .counterStrike = k_fieldMecanumKeyboardState,
-        .shuriken      = k_shurikenModeKeyboardState,
-        .tardis        = k_tardisModeKeyboardState
+        .mouseFire     = kAutofireMouseState,
+        .mouseUnjam    = kUnjamMouseState,
+        .counterStrike = kFieldMecanumKeyboardState,
+        .shuriken      = kShurikenModeKeyboardState,
+        .tardis        = kTardisModeKeyboardState
     };
 
     const command::PierceCommandPack::RemoteMapping kPierceRemoteMappingConfig 
     {
-        .activateBooster = k_activateBoosterRemoteState,
-        .fire            = k_autofireRemoteState,
-        .unjam           = k_unjamRemoteState,
-        .counterStrike   = k_fieldMecanumRemoteState,
-        .shuriken        = k_shurikenModeRemoteState,
-        .tardis          = k_tardisModeRemoteState
+        .activateBooster = kActivateBoosterRemoteState,
+        .fire            = kAutofireRemoteState,
+        .unjam           = kUnjamRemoteState,
+        .counterStrike   = kFieldMecanumRemoteState,
+        .shuriken        = kShurikenModeRemoteState,
+        .tardis          = kTardisModeRemoteState
     };
 
     const command::PierceCommandPack::MappingConfig kPierceMappingConfig 

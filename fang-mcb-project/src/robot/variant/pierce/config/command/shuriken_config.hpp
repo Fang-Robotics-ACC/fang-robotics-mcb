@@ -3,7 +3,7 @@
 #include "control/chassis/drive/holonomic/command/shuriken_command.hpp"
 namespace fang::robot
 {
-    static const chassis::ShurikenCommand::Config k_shurikenConfig
+    static const chassis::ShurikenCommand::Config kShurikenConfig
     {
         .maxTranslation = {6.5_mph, 6.5_mph},
         .shurikenSpeed          = 300_rpm,
