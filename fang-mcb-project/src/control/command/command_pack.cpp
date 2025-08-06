@@ -6,11 +6,11 @@ namespace fang::command
     {
     }
 
-    void CommandPack::registerCommandMappings(std::span<CommandMapping> mappings)
+    void CommandPack::registerCommandMappings(std::span<std::reference_wrapper<CommandMapping>> mappings)
     {
-        for(auto& mapping : mappings) 
+        for(auto mapping : mappings) 
         {
-            mapper_.addMap(&mapping);
+            mapper_.addMap(&mapping.get());
         }
     }
 }

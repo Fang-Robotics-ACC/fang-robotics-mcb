@@ -4,6 +4,7 @@
 #include "tap/control/command_mapping.hpp"
 
 #include <span>
+#include <functional>
 
 namespace fang::command
 {
@@ -28,7 +29,7 @@ namespace fang::command
 
         virtual ~CommandPack() = default; 
     protected:
-        void registerCommandMappings(std::span<CommandMapping> mappings);
+        void registerCommandMappings(std::span<std::reference_wrapper<CommandMapping>> mappings);
     private:
         tap::control::CommandMapper& mapper_;
     };
