@@ -1,0 +1,30 @@
+name: Weekly Cache Clean
+# Delete all caces every week to prevent scons cache buildup of older files
+on:
+  workflow_dispatch:
+  schedule:
+    # Execute at 00:00 and 13:01 UTC daily
+    - cron:  '0 0 * * 1'
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Cleanup
+        run: |
+          echo "Fetching list of cache keys"
+          cacheKeys=$(gh cache list --limit 100 --json id --jq '.[].id')
+
+          ## Setting this to not fail the workflow while deleting cache keys.
+          set +e
+          echo "Deleting caches..."
+          for cacheKey in $cacheKeys
+          do
+              gh cache delete $cacheKey
+          done
+          echo "Done"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
