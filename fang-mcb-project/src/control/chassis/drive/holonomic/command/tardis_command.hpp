@@ -50,7 +50,7 @@ namespace fang::chassis
     protected:
         RPM getFieldRotation(const physics::Velocity2D& targetFieldTranslation) const;
     private:
-        static constexpr char* kName{"T.A.R.D.I.S. Mode"};
+        static constexpr const char* kName{"T.A.R.D.I.S. Mode"};
 
         const Config kConfig_;
         AzrielShredder razielKalmanShredder_;

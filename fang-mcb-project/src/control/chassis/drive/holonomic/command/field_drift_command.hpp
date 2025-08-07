@@ -59,7 +59,7 @@ namespace fang::chassis
          */
         RPM getFieldRotation() const;
 
-        static constexpr char* kName{"Field Drift"};
+        static constexpr const char* kName{"Field Drift"};
 
         HolonomicSubsystem& holonomicSubsystem_;
         ChassisInputHandler& chassisInput_;
