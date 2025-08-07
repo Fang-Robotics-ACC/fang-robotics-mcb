@@ -52,9 +52,6 @@
 #include <cassert>
 #include <iostream>
 
-
-
-
 int main()
 {
 
@@ -67,9 +64,12 @@ int main()
     Board::initialize();
     drivers.initializeIo();
 
-    //This prevents the large size of the robot class from hoarding the stack
-    //which causes annoying stack overflow issues
-    //static classes are in static memory instead of stack memory
+    /*
+     * 
+     * This prevents the large size of the robot class from hoarding the stack
+     * which causes annoying stack overflow issues
+     * static classes are in static memory instead of stack memory
+     */
     static Robot robot{drivers, k_robotConfig};
 
     robot.initialize();
@@ -80,27 +80,28 @@ int main()
         tap::communication::TCPServer::MainServer()->getConnection();
     #endif
 
-
-    // From ARUW's Eli:
-    // "id say you want your main loop speed to be at minimum 8khz for how the dji
-    // motors work, as for the main loop, you dont need faster control than 1khz,
-    // and 500 works just as well, at 1khz you could overrun with more control so
-    // 500 gives you more time "
+    /*
+     * From ARUW's Eli:
+     * "id say you want your main loop speed to be at minimum 8khz for how the dji
+     * motors work, as for the main loop, you dont need faster control than 1khz,
+     * and 500 works just as well, at 1khz you could overrun with more control so
+     * 500 gives you more time "
+     */
     static tap::arch::PeriodicMilliTimer mainLoopTimer(1000.0f / kMainLoopFrequency);
 
-    //Prevents the faster loop from going too fast (it handles io)
+    // Prevents the faster loop from going too fast (it handles io)
     static constexpr Microseconds kFastloopDelay{10};
     while (1)
     {
         drivers.update();
 
-        //Prevent motor signals from being spammed
         if (mainLoopTimer.execute())
         {
             drivers.motorTimeoutUpdate();
         }
 
-        modm::delay_us(static_cast<uint32_t>(kFastloopDelay)); //Any longer and refSerial will not work
+        // Any longer and refSerial will not work
+        modm::delay_us(static_cast<uint32_t>(kFastloopDelay));
     }
     return 0;
 }
