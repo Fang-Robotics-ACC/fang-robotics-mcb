@@ -65,6 +65,9 @@ extensions = [
     'sphinx_rtd_dark_mode'
 ]
 
+# Dark mode is kinda mid but gives the user an option
+default_dark_mode = False
+
 
 # Setup the breathe extension
 breathe_projects = {
