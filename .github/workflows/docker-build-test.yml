@@ -2,6 +2,10 @@ name: Docker Build and Test
 run-name: Test and Build ^_^
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Weekly Cache Clean"] # Rebuild cache for release branch (pr to main will still be fast)
+    types:
+      - completed
   pull_request:
     branches: 
       - "main"
