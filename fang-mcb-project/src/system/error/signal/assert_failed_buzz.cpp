@@ -1,7 +1,7 @@
 #include "assert_failed_buzz.hpp"
 namespace fang::error
 {
-    void assertFailedBuzz(tap::gpio::Pwm& pwm)
+    void playFailedAssertBuzz(tap::gpio::Pwm& pwm)
     {
     //Create signal and preserve info
     constexpr int kAbandonFrequency{220};

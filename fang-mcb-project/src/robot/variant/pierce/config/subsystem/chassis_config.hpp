@@ -19,13 +19,16 @@ namespace fang::robot
 
     static double kUltraMk2GearRatio{14.0};
 
+    static double kMotorRampSpeed{750}; //RepeatUltraMk2 RPM per Second
+
 
     static const chassis::PierceMecanumDrive::Motor::Config kFrontLeftMotorConfig
     {
         .controllerInputVoltage = kControllerInputVoltage,
         .pwmData = {tap::gpio::Pwm::C1, kPwmFrequency},
         .inverted = kLeftMotorInversion,
-        .gearRatio = kUltraMk2GearRatio 
+        .gearRatio = kUltraMk2GearRatio,
+        .rampSpeed = kMotorRampSpeed
     };
 
     static const chassis::PierceMecanumDrive::Motor::Config kFrontRightMotorConfig
@@ -33,7 +36,8 @@ namespace fang::robot
         .controllerInputVoltage = kControllerInputVoltage,
         .pwmData = {tap::gpio::Pwm::C2, kPwmFrequency},
         .inverted = kRightMotorInversion,
-        .gearRatio = kUltraMk2GearRatio 
+        .gearRatio = kUltraMk2GearRatio,
+        .rampSpeed = kMotorRampSpeed
     };
 
     static const chassis::PierceMecanumDrive::Motor::Config kRearLeftMotorConfig
@@ -41,7 +45,8 @@ namespace fang::robot
         .controllerInputVoltage = kControllerInputVoltage,
         .pwmData = {tap::gpio::Pwm::C3, kPwmFrequency},
         .inverted = kLeftMotorInversion,
-        .gearRatio = kUltraMk2GearRatio 
+        .gearRatio = kUltraMk2GearRatio,
+        .rampSpeed = kMotorRampSpeed
     };
 
     static const chassis::PierceMecanumDrive::Motor::Config kRearRightMotorConfig
@@ -49,7 +54,8 @@ namespace fang::robot
         .controllerInputVoltage = kControllerInputVoltage,
         .pwmData = {tap::gpio::Pwm::C4, kPwmFrequency},
         .inverted = kRightMotorInversion,
-        .gearRatio = kUltraMk2GearRatio 
+        .gearRatio = kUltraMk2GearRatio,
+        .rampSpeed = kMotorRampSpeed
     };
 
     static const chassis::PierceMecanumDrive::MotorConfigs kMotorConfigs
@@ -57,7 +63,7 @@ namespace fang::robot
         .frontLeft = kFrontLeftMotorConfig,
         .frontRight = kFrontRightMotorConfig,
         .rearLeft = kRearLeftMotorConfig,
-        .rearRight = kRearRightMotorConfig
+        .rearRight = kRearRightMotorConfig,
     };
 
     static const chassis::PierceMecanumDrive::PowerLimiter::Config kChassisPowerLimiterConfig

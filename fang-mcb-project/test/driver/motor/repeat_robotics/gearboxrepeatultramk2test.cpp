@@ -23,8 +23,8 @@ TEST(UltraMk2, zeroSpeed)
     motor::RepeatUltraMk2 motor{drivers, {controllerVoltage, {tap::gpio::Pwm::C1, frequency}, false, gearRatio}};
 
     EXPECT_CALL(drivers.pwm,write(stillDutyCycle, tap::gpio::Pwm::C1));
-
     motor.setTargetSpeed(0_rpm);
+    motor.update();
     }
 
     {
@@ -46,12 +46,14 @@ TEST(UltraMk2, zeroSpeed)
             controllerVoltage,
             {tap::gpio::Pwm::C1, frequency}, 
             false, 
-            gearRatio
+            gearRatio,
+            10000 //bypass ramp
         }
     };
 
     EXPECT_CALL(drivers.pwm,write(stillDutyCycle, tap::gpio::Pwm::C1));
     motor.setTargetSpeed(0_rpm);
+    motor.update();
     }    
 }
 
@@ -77,7 +79,8 @@ TEST(UltraMk2, inversion)
             controllerVoltage,
             {tap::gpio::Pwm::C1, frequency}, 
             true, 
-            gearRatio
+            gearRatio,
+            maxTheoreticalSpeed.to<double>()//bypass ramp
         }
     };
 
@@ -86,6 +89,7 @@ TEST(UltraMk2, inversion)
     //Since this is a bidirectional motor, its maximum speed will become its minimum (since the inversion multiplies it by -1)
     //This results in the speed controller driver sending the signal that corresponds to the minimum speed of the given rage
     motor.setTargetSpeed(maxTheoreticalSpeed);
+    motor.update();
     }
 
     {
@@ -108,11 +112,13 @@ TEST(UltraMk2, inversion)
             controllerVoltage,
             {tap::gpio::Pwm::C1, frequency}, 
             true, 
-            gearRatio
+            gearRatio,
+            maxTheoreticalSpeed.to<double>()//bypass ramp
         }
     };
 
-    EXPECT_CALL(drivers.pwm,write(expectedDutyCycle, tap::gpio::Pwm::C1));
+    EXPECT_CALL(drivers.pwm, write(expectedDutyCycle, tap::gpio::Pwm::C1));
     motor.setTargetSpeed(-maxTheoreticalSpeed);
+    motor.update();
     }    
 }
