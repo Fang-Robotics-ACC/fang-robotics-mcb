@@ -49,7 +49,7 @@ namespace fang::chassis
         RPM getFieldRotation(const physics::Velocity2D& targetFieldTranslation) const;
 
     private:
-        static constexpr char* kName{"Shuriken"};
+        static constexpr const char* kName{"Shuriken"};
 
         const Config kConfig_;
         const BasicDownscaler kDownscaler_;

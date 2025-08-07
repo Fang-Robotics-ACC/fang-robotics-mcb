@@ -52,7 +52,7 @@ namespace fang::chassis
          */
         RPM getFieldRotation() const;
 
-        static constexpr char* kName{"Counter Strike Global!"};
+        static constexpr const char* kName{"Counter Strike Global!"};
 
         const turret::FieldGimbalSubsystem& gimbal_; //We don't want the command to alter the turret state
         const Config kConfig_;

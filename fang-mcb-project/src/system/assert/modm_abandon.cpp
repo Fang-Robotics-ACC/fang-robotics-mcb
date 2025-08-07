@@ -12,7 +12,7 @@ void modm_abandon(const modm::AssertionInfo &info)
     fang::Drivers& drivers{fang::DriversSingleton::getDrivers()};
     fang::emergency::killSystem();
 
-    fang::error::assertFailedBuzz(drivers.pwm);
+    fang::error::playFailedAssertBuzz(drivers.pwm);
 
     FREEZE_SYSTEM();
 }
