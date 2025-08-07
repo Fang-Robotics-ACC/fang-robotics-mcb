@@ -42,7 +42,7 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'shibuya'
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -62,11 +62,8 @@ extensions = [
     'breathe',
     'exhale',
 	'myst_parser',
-    'sphinx_rtd_dark_mode'
 ]
 
-# Dark mode is kinda mid but gives the user an option
-default_dark_mode = False
 
 
 # Setup the breathe extension
