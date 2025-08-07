@@ -4,6 +4,9 @@
 #include "tap/communication/gpio/pwm.hpp"
 namespace fang::error
 {
+    /**
+     * This is the common signal for if an assertion has failed
+     */
     void playFailedAssertBuzz(tap::gpio::Pwm& pwm);
 }
 #endif
