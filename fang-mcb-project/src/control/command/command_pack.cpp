@@ -8,9 +8,9 @@ namespace fang::command
 
     void CommandPack::registerCommandMappings(std::span<std::reference_wrapper<CommandMapping>> mappings)
     {
-        for(auto mapping : mappings) 
+        for(CommandMapping& mapping : mappings) 
         {
-            mapper_.addMap(&mapping.get());
+            mapper_.addMap(&mapping);
         }
     }
 }
