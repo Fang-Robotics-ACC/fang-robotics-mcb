@@ -4,6 +4,6 @@
 #include "tap/communication/gpio/pwm.hpp"
 namespace fang::error
 {
-    void assertFailedBuzz(tap::gpio::Pwm& pwm);
+    void playFailedAssertBuzz(tap::gpio::Pwm& pwm);
 }
 #endif
