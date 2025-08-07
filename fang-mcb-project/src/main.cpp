@@ -52,11 +52,12 @@
 #include <cassert>
 #include <iostream>
 
-/* define timers here -------------------------------------------------------*/
-tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / kMainLoopFrequency);
+
+
 
 int main()
 {
+
     #ifdef PLATFORM_HOSTED
     std::cout << "Simulation starting..." << std::endl;
     #endif
@@ -79,6 +80,11 @@ int main()
         tap::communication::TCPServer::MainServer()->getConnection();
     #endif
 
+
+    static tap::arch::PeriodicMilliTimer sendMotorTimeout(1000.0f / kMainLoopFrequency);
+
+    //Prevents the faster loop from going too fast (it handles io)
+    static constexpr Microseconds kFastloopDelay{10};
     while (1)
     {
         drivers.update();
@@ -89,7 +95,7 @@ int main()
             drivers.motorTimeoutUpdate();
         }
 
-        modm::delay_us(10); //Any longer and refSerial will not work
+        modm::delay_us(static_cast<unint32_t>(kFastloopDelay)); //Any longer and refSerial will not work
     }
     return 0;
 }
