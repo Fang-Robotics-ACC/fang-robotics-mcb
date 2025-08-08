@@ -5,9 +5,9 @@ namespace fang::robot
 {
     static const chassis::ShurikenCommand::Config kShurikenConfig
     {
-        .maxTranslation = {6.5_mph, 6.5_mph},
-        .shurikenSpeed          = 300_rpm,
-        .downscaleCoefficient   = 10
+        .maxTranslation = {25_mph, 25_mph},
+        .shurikenSpeed          = 350_rpm,
+        .downscaleCoefficient   = 5
     };
 }
 #endif

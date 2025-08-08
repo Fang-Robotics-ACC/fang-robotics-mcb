@@ -6,17 +6,17 @@ namespace fang::robot
 {
     static const chassis::AzrielShredder::Config k_razielKalmanShredderConfig
     {
-        .biteDepth  = 0.3,
-        .biteForce  = 10,
-        .period     = 2, //every two seconds
+        .biteDepth  = 0.9,
+        .biteForce  = 5,
+        .period     = 0.8, //every x seconds
         .phase      = 0,
     };
 
     static const chassis::TardisCommand::Config k_tardisConfig
     {
-        .maxTranslation = {10_mph, 10_mph},
+        .maxTranslation = {20_mph, 20_mph},
         .maxRotation = 300_rpm,
-        .downscaleCoefficient       = 10,
+        .downscaleCoefficient       = 5,
         .razielKalmanShredderConfig = k_razielKalmanShredderConfig
     };
 }
