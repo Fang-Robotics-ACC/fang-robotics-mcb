@@ -50,10 +50,7 @@ namespace fang::chassis
          * forward, backward, left right.
          */
         math::AbstractVector2D getKeyboardTranslation() const;
-        /**
-         * Returns the amount that the turret should rotate
-         */
-        double getRemoteAngularDisplacement() const;
+
         /**
          * How fast either the chassis or the turret should
          * be rotated
