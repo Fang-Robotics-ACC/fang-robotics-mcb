@@ -66,7 +66,8 @@ namespace fang::chassis
 
     double ChassisInputHandler::getRemoteRotation() const
     {
-        const double rotationScale{-m_remote.getChannel(mk_remoteConfig.rotationChannel)};
+        // Thumb wheel is positive on counterclockwise
+        const double rotationScale{m_remote.getChannel(mk_remoteConfig.rotationChannel)};
         return rotationScale;
     }
 }
