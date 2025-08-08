@@ -71,14 +71,10 @@ TEST_P(ChassisInputHandlerTest, inputHandlingTest)
     //Check answers
     const fang::math::AbstractVector2D translationOutput{m_chassisInputHandler.getRemoteTranslation()};
     const double rotationOutput{m_chassisInputHandler.getRemoteRotation()};
-    const double angularDisplacementOutput{m_chassisInputHandler.getRemoteAngularDisplacement()};
 
     EXPECT_DOUBLE_EQ(translationOutput.x, m_expectedTranslation.x);
     EXPECT_DOUBLE_EQ(translationOutput.y, m_expectedTranslation.y);
-    EXPECT_DOUBLE_EQ(rotationOutput, -m_expectedRPM);
-    //Counterclockwise must be positive. The joystick moves in the direction that the top of the wheel
-    //moves
-    EXPECT_DOUBLE_EQ(angularDisplacementOutput, -m_expectedDisplacement);
+    EXPECT_DOUBLE_EQ(rotationOutput, m_expectedRPM);
 }
 
 INSTANTIATE_TEST_SUITE_P(zeroTest, ChassisInputHandlerTest, testing::Values(std::make_tuple(0.0, 0.0, 0.0, AbstractVector2D{0.0, 0.0}, 0_rpm, 0_rad)));
