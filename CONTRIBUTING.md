@@ -164,7 +164,7 @@ namespace fang::robot
 This is a departure from the learncpp.com style with appending m. It has been found to be cumbersome
 in having a constant member variable be named mk\_variable (when signifying immutibility). k\_variable
 was reserved for non-member constants. In order to reduce the chance of naming conflicts/shadowing, non-static constant
-member variables shall have a k appendend to the beginning of the name and a _ to the end to the end.
+member variables shall have a k appendend to the beginning of the name and a _ to the end.
 
 All private member variables shall end with \_
 ```
