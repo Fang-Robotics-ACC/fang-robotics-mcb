@@ -48,7 +48,7 @@ Version Convention
 We use a modified form of semantic versioning.
 A major version is simply that where a major addition i.e. CV, more robots
 or the start of a new competition cycle. Minor versions will keep incrementing.
-The secope of a mejor version/minor version must be defined in the release branch
+The scope of a mejor version/minor version must be defined in the release branch
 to prevent eternal release syndrome
 
 Branch Convention
