@@ -137,7 +137,7 @@ you must run that git submodule from likely the root directory
 if you type git status, it will list which submodules are out of sync)
 
 ```
-cd fang-robotics-mcb/ # or the name of your fork if used a different one
+cd fang-robotics-mcb/ # or the name of your fork if you used a different one
 git submodule update --init --recursive
 cd build-util/environment-setup-scripts/
 ./ubuntu-environment-install.sh
