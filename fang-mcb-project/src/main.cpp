@@ -50,6 +50,8 @@
 #include "units.h"
 #include "robot/robot.hpp"
 
+#include "system/error/signal/assert_failed_buzz.hpp"
+
 #include <cassert>
 #include <iostream>
 
@@ -67,6 +69,8 @@ int main()
     drivers.initializeIo();
 
     testUart.initialize();
+
+
 
     /*
      * 
@@ -102,6 +106,17 @@ int main()
         if (mainLoopTimer.execute())
         {
             testUart.write('z');
+            char bill{};
+            if(!testUart.read(bill))
+            {
+                tap::buzzer::playNote(&drivers.pwm, 500);
+            }
+            else
+            {
+                //5 Silence
+                tap::buzzer::playNote(&drivers.pwm, 0);
+
+            }
             drivers.motorTimeoutUpdate();
         }
 
