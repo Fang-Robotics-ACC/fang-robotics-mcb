@@ -44,6 +44,7 @@
 /* control includes ---------------------------------------------------------*/
 #include "tap/architecture/clock.hpp"
 
+#include "tap/communication/serial/uart_terminal_device.hpp"
 
 #include "io.hpp"
 #include "units.h"
@@ -61,8 +62,11 @@ int main()
 
     fang::Drivers& drivers{fang::DriversSingleton::getDrivers()};
 
+    tap::communication::serial::UartTerminalDevice testUart{&drivers};
     Board::initialize();
     drivers.initializeIo();
+
+    testUart.initialize();
 
     /*
      * 
@@ -97,6 +101,7 @@ int main()
 
         if (mainLoopTimer.execute())
         {
+            testUart.write('z');
             drivers.motorTimeoutUpdate();
         }
 
