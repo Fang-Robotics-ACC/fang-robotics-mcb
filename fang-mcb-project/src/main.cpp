@@ -52,6 +52,8 @@
 
 #include "system/error/signal/assert_failed_buzz.hpp"
 
+#include "cool_serial/continuous_parser.hpp"
+
 #include <cassert>
 #include <iostream>
 
@@ -71,7 +73,10 @@ int main()
     testUart.initialize();
 
 
+    coolSerial::ByteQueue uartQueue{};
+    coolSerial::ContinuousParser parser{uartQueue};
 
+    coolSerial::Bytes expectedData{0xdb, 0xf9, 0xe, 0x40, 0x27, 0xa0, 0xa8, 0xc8, 0x1b, 0xf5, 0x10, 0xd, 0xeb, 0xdc, 0xe0, 0x40};
     /*
      * 
      * This prevents the large size of the robot class from hoarding the stack
@@ -106,15 +111,21 @@ int main()
         if (mainLoopTimer.execute())
         {
             testUart.write('z');
-            char bill{};
-            if(!testUart.read(bill))
+            char byteBuffer{}; //ByteBuffer
+
+            if(!testUart.read(byteBuffer))
             {
-                tap::buzzer::playNote(&drivers.pwm, 500);
             }
             else
             {
-                //5 Silence
-                tap::buzzer::playNote(&drivers.pwm, 0);
+                uartQueue.push(byteBuffer);
+
+                parser.update();
+
+                if(parser.getCurrentMessage().data == expectedData)
+                {
+                    tap::buzzer::playNote(&drivers.pwm, 500);
+                }
 
             }
             drivers.motorTimeoutUpdate();
