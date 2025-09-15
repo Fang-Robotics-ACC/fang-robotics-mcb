@@ -2,8 +2,8 @@
 
 Fang Robotics Firmware for the Seven Fangs:
 * Pierce \[Infantry\]
-* Slice  \[Hero\]
-* Devour \[Sentry\]
+* Devour  \[Hero\]
+* Slice \[Sentry\]
 * Slice n' Dice \[Engineer\]
 * Crazy Cutting \[Drone\]
 * Palisade Bite \[Dart\]
@@ -131,14 +131,15 @@ If you have push access:
 git clone git@github.com:Fang-Robotics-ACC/fang-robotics-mcb.git
 ```
 
-(You can use use git clone --recurive, but this method is shown
+(You can use use git clone --recursive, but this method is shown
 because if you switch to a commit with different submodule versions
 you must run that git submodule from likely the root directory
 if you type git status, it will list which submodules are out of sync)
 
 ```
+cd fang-robotics-mcb/ # or the name of your fork if you used a different one
 git submodule update --init --recursive
-cd fang-robotics-mcb/build-util/environment-setup-scripts
+cd build-util/environment-setup-scripts/
 ./ubuntu-environment-install.sh
 ```
 

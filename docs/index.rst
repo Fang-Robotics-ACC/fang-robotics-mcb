@@ -27,6 +27,7 @@ stuff (FANG_ASSERT), etc.
     :caption: Contents:
 
     code_architecture/index
+    directory_overview/index
     api/library_root
 
 Indices and tables

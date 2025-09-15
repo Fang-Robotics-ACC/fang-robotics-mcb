@@ -1,9 +1,10 @@
 #ifndef FANG_ROBOTICS_MCB_AIM_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_AIM_COMMAND_HPP
 #include "control/turret/gimbal/field_gimbal_subsystem.hpp"
-#include "control/turret/turret_input_handler.hpp"
 #include "util/math/arithmetic/range.hpp"
 #include "util/chrono/simple_timer.hpp"
+
+#include "wrap/rail/turret/iturret_input_handler.hpp"
 
 #include "tap/control/command.hpp"
 
@@ -18,7 +19,7 @@ namespace fang::turret
             RPM maxYawSpeed;
             math::Range<Radians> pitchRange;
         };
-        AimCommand(FieldGimbalSubsystem& gimbal, TurretInputHandler& input, const Config& config);
+        AimCommand(FieldGimbalSubsystem& gimbal, ITurretInputHandler& input, const Config& config);
 
         const char* getName() const override {return "Aim Command";}
         void initialize() override;
@@ -30,7 +31,7 @@ namespace fang::turret
         void setPitch(const Microseconds& delta);
         void setYaw(const Microseconds& delta);
         FieldGimbalSubsystem& gimbal_;
-        TurretInputHandler& input_;
+        ITurretInputHandler& input_;
 
         const RPM kMaxPitchSpeed_;
         const RPM kMaxYawSpeed_;
