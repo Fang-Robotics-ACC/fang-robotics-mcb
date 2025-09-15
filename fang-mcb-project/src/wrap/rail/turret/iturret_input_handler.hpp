@@ -3,5 +3,4 @@
 namespace fang::turret
 {
     using ITurretInputHandler = rail::ITurretInputHandler<double>;
-
 }
