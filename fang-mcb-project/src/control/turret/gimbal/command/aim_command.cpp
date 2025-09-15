@@ -5,7 +5,7 @@
 namespace fang::turret
 {
     using namespace units::literals;
-    AimCommand::AimCommand(FieldGimbalSubsystem& gimbal, TurretInputHandler& input, const Config& config)
+    AimCommand::AimCommand(FieldGimbalSubsystem& gimbal, ITurretInputHandler& input, const Config& config)
     :   gimbal_{gimbal},
         input_{input},
         kMaxPitchSpeed_{config.maxPitchSpeed},

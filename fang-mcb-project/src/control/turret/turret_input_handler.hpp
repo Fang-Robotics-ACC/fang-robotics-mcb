@@ -1,9 +1,12 @@
 #ifndef FANG_ROBOTICS_MCB_TURRET_INPUT_HANDLER_HPP
 #define FANG_ROBOTICS_MCB_TURRET_INPUT_HANDLER_HPP
+
+#include "wrap/rail/turret/iturret_input_handler.hpp"
+
 #include "tap/communication/serial/remote.hpp"
 namespace fang::turret
 {
-    class TurretInputHandler
+    class TurretInputHandler : public ITurretInputHandler
     {
     public:
         using Remote = tap::communication::serial::Remote;
@@ -28,12 +31,12 @@ namespace fang::turret
 
         TurretInputHandler(Remote& remote, const Config& config);
 
-        double getPitch() const;
+        double getPitch() const override;
         /**
          * Counterclockwise is positive, clockwise is negative
          * (Math convention.)
          */
-        double getYaw() const;
+        double getYaw() const override;
         bool getFire() const;
     private:
         static constexpr double mk_abstractMin{-1.0};
