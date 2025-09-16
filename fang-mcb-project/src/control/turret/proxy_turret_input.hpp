@@ -10,7 +10,7 @@ namespace fang::turret
      * For example: TurretMessageHandler -> sets pitch
      * AimCommand <-- gets pitch from ProxyTurretInput
      */
-    class ProxyTurretInput 
+    class ProxyTurretInput : public ITurretInputHandler 
     {
     public:
         /**
@@ -26,7 +26,7 @@ namespace fang::turret
         ProxyTurretInput(const Config& config);
 
         void setPitch(double pitch);
-        double getPitch() const;
+        double getPitch() const override;
 
         /**
          * Counterclockwise is positive, clockwise is negative
@@ -38,7 +38,7 @@ namespace fang::turret
          * Counterclockwise is positive, clockwise is negative
          * (Math convention.)
          */
-        double getYaw() const;
+        double getYaw() const override;
     private:
         const Config kConfig_;
 
