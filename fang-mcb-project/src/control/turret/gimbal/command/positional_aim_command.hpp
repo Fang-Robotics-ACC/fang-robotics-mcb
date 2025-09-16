@@ -36,8 +36,8 @@ namespace fang::turret
         FieldGimbalSubsystem& gimbal_;
         ITurretInputHandler& input_;
 
-        const RPM kPitchScale_;
-        const RPM kYawScale_;
+        const Radians kPitchScale_;
+        const Radians kYawScale_;
         const math::Range<Radians> kPitchRange_;
 
         Radians targetPitch_{0};
