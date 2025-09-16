@@ -7,6 +7,7 @@ namespace fang::command
         PierceAutoTestCommandPack::PierceAutoTestCommandPack
         (
             Drivers& drivers, 
+            turret::ProxyTurretInput turretInput,
             turret::SimpleAmmoBoosterSubsystem& booster,
             turret::SimpleFeederSubsystem& feeder,
             turret::FieldGimbalSubsystem& gimbal,
@@ -23,7 +24,8 @@ namespace fang::command
             feeder_{feeder},
             gimbal_{gimbal},
             chassis_{chassis},
-            chassisInput_{drivers.remote, config.inputConfig.chassisInputConfig}
+            chassisInput_{drivers.remote, config.inputConfig.chassisInputConfig},
+            turretInput_{turretInput}
         {}
 
     void PierceAutoTestCommandPack::initialize()
