@@ -23,8 +23,7 @@ namespace fang::command
             feeder_{feeder},
             gimbal_{gimbal},
             chassis_{chassis},
-            chassisInput_{drivers.remote, config.inputConfig.chassisInputConfig},
-            turretInput_{drivers.remote, config.inputConfig.turretInputConfig}
+            chassisInput_{drivers.remote, config.inputConfig.chassisInputConfig}
         {}
 
     void PierceAutoTestCommandPack::initialize()

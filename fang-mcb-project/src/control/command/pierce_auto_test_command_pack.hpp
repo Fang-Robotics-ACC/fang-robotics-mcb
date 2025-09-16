@@ -3,6 +3,7 @@
 #include "command_pack.hpp"
 
 // Input
+#include "control/turret/proxy_turret_input.hpp"
 #include "control/turret/turret_input_handler.hpp"
 #include "control/chassis/chassis_input_handler.hpp"
 
@@ -101,7 +102,7 @@ namespace fang::command
         const ComputerMapping& kComputerMapping_;
 
         chassis::ChassisInputHandler chassisInput_;
-        turret::TurretInputHandler turretInput_;
+        turret::ProxyTurretInput turretInput_{{1.0,1.0}};
 
         turret::PositionalAimCommand aim_{gimbal_, turretInput_, kCommandConfig_.aimConfig};
         turret::ActivateBoosterCommand activateBooster_{booster_};
