@@ -1,20 +1,18 @@
 #pragma once
 
-#include "driver/drivers.hpp"
 
 #include "cool_serial/byte_queue.hpp"
 #include "cool_serial/continuous_parser.hpp"
 #include "cool_serial/idata_handler.hpp"
 
 #include "tap/communication/serial/uart_terminal_device.hpp"
+#include "tap/drivers.hpp"
 
 #include <functional>
 #include <unordered_map>
 
 namespace fang::communication
 {
-    using DataHandlerRef = std::reference_wrapper<coolSerial::IDataHandler>;
-    using HandlerMap = std::unordered_map<coolSerial::Byte, DataHandlerRef>;
     /**
      * TODO: Create a better UART interface than taproot that adapts to modm's UART
      * For testing reasons, we are using the hardcoded modm.
@@ -25,8 +23,11 @@ namespace fang::communication
     class CoolSerialUart
     {
     public:
-        CoolSerialUart(Drivers& drivers);
-        CoolSerialUart(Drivers& drivers, HandlerMap& handlerMap);
+        using DataHandlerRef = std::reference_wrapper<coolSerial::IDataHandler>;
+        using HandlerMap = std::unordered_map<coolSerial::Byte, DataHandlerRef>;
+
+        CoolSerialUart(tap::Drivers& drivers);
+        CoolSerialUart(tap::Drivers& drivers, const HandlerMap& handlerMap);
 
         void initialize();
         void update();

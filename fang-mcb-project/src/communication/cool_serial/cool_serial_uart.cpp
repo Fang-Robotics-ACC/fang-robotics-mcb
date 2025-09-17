@@ -2,14 +2,14 @@
 
 namespace fang::communication
 {
-    CoolSerialUart::CoolSerialUart(Drivers& drivers, HandlerMap& handlerMap)
+    CoolSerialUart::CoolSerialUart(tap::Drivers& drivers, const HandlerMap& handlerMap)
         :
         uart_{&drivers},
         handlerMap_{handlerMap}
     {
     }
 
-    CoolSerialUart::CoolSerialUart(Drivers& drivers)
+    CoolSerialUart::CoolSerialUart(tap::Drivers& drivers)
         :
         uart_{&drivers}
     {
@@ -40,7 +40,9 @@ namespace fang::communication
 
     void CoolSerialUart::referMessage(const coolSerial::CoolMessageData& message)
     {
-        handlerMap_[message.dataType].get().handleData(message.data);
+        // [] needs to be able to create a default object. DataHandlerRef does not have
+        // a default constructor
+        handlerMap_.at(message.dataType).get().handleData(message.data);
     }
 
     void CoolSerialUart::handleMessage()
@@ -53,7 +55,8 @@ namespace fang::communication
 
     void CoolSerialUart::addHandler(coolSerial::Byte dataType, DataHandlerRef handler)
     {
-        handlerMap_[dataType] = handler;
-
+        // [] needs to be able to create a default object. DataHandlerRef does not have
+        // a default constructor
+        handlerMap_.at(dataType) = handler;
     }
 }
