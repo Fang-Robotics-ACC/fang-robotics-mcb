@@ -2,15 +2,17 @@
 #define FANG_ROBOTICS_MCB_INFANTRY_HPP
 #include "driver/drivers.hpp"
 //Subsystems
-#include "custom_variant/subsystem/pierce_mecanum_drive.hpp"
+#include "robot/variant/pierce/custom_variant/subsystem/pierce_mecanum_drive.hpp"
+#include "robot/variant/pierce/custom_variant/subsystem/pierce_field_gimbal.hpp"
+#include "robot/variant/pierce/custom_variant/subsystem/pierce_ammo_booster.hpp"
 
-#include "custom_variant/subsystem/pierce_field_gimbal.hpp"
 #include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
-#include "custom_variant/subsystem/pierce_ammo_booster.hpp"
-
 #include "control/command/pierce_auto_test_command_pack.hpp"
 
 #include "robot/base_robot.hpp"
+// Auto tests
+#include "control/turret/basic_proxy_turret_input_updater.hpp"
+#include "control/turret/proxy_turret_input.hpp"
 
 namespace fang::robot
 {
@@ -36,10 +38,23 @@ namespace fang::robot
             command::PierceAutoTestCommandPack::Config commandPackConfig;
         };
 
-        PierceAutoTest(Drivers& drivers, const Config& config): BaseRobot{makeRobot(drivers, config)}
-        {}
+        PierceAutoTest(Drivers& drivers, const Config& config)
+            :
+            BaseRobot{makeRobot(drivers, config)},
+            drivers_{drivers}
+        {
+        }
+
+        void update()
+        {
+            proxyTurretInputUpdater_.update();
+        }
+
     private:
-        static BaseRobot makeRobot(Drivers& drivers, const Config& config)
+        Drivers& drivers_;
+        turret::ProxyTurretInput proxyTurretInput_{{1.0, 1.0}}; // Don't scale
+        turret::BasicProxyTurretInputUpdater proxyTurretInputUpdater_{proxyTurretInput_, drivers_.jankyFloatHandler};
+        BaseRobot makeRobot(Drivers& drivers, const Config& config)
         {
             auto gimbal{std::make_unique<turret::PierceFieldGimbal>(drivers, config.subsystemConfig.gimbalConfig)};
             auto feeder{std::make_unique<turret::M2006SimpleFeeder>(drivers, config.subsystemConfig.feederConfig)};
@@ -50,6 +65,7 @@ namespace fang::robot
                 std::make_unique<command::PierceAutoTestCommandPack>
                 (
                     drivers,
+                    proxyTurretInput_,
                     *booster,
                     *feeder,
                     *gimbal,

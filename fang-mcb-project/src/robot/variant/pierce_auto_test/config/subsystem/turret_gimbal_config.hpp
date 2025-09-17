@@ -2,7 +2,7 @@
 
 #include "robot/variant/pierce/custom_variant/subsystem/pierce_field_gimbal.hpp"
 
-namespace fang::robot 
+namespace fang::robot::pierceAuto
 {
     using namespace units::literals;
     static const trap::motor::DjiSpeedPid::Config kPitchPidConfig
