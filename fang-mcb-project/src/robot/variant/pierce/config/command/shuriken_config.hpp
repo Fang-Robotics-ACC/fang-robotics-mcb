@@ -6,7 +6,7 @@ namespace fang::robot
     static const chassis::ShurikenCommand::Config kShurikenConfig
     {
         .maxTranslation = {25_mph, 25_mph},  // HACK: Ultra Mk2 motors do not use feedback rpm loops
-        .shurikenSpeed          = 150_rpm,
+        .shurikenSpeed          = 300_rpm,
         .downscaleCoefficient   = 5
     };
 }
