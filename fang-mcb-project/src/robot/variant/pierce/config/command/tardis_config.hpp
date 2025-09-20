@@ -15,7 +15,7 @@ namespace fang::robot
     static const chassis::TardisCommand::Config k_tardisConfig
     {
         .maxTranslation = {20_mph, 20_mph}, // HACK: Ultra Mk2 motors do not use feedback rpm loops
-        .maxRotation = 200_rpm,
+        .maxRotation = 350_rpm,
         .downscaleCoefficient       = 5,
         .razielKalmanShredderConfig = k_razielKalmanShredderConfig
     };
