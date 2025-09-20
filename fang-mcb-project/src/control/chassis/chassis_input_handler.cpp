@@ -57,16 +57,10 @@ namespace fang::chassis
         return math::AbstractVector2D{xTranslationScale, yTranslationScale};
     }
 
-    double ChassisInputHandler::getRemoteAngularDisplacement() const
-    {
-        //Counterclockwise is positiev
-        const double angularDisplacementScale{-m_remote.getChannel(mk_remoteConfig.rotationChannel)};
-        return angularDisplacementScale;
-    }
-
     double ChassisInputHandler::getRemoteRotation() const
     {
-        const double rotationScale{-m_remote.getChannel(mk_remoteConfig.rotationChannel)};
+        // Thumb wheel is positive on counterclockwise
+        const double rotationScale{m_remote.getChannel(mk_remoteConfig.rotationChannel)};
         return rotationScale;
     }
 }

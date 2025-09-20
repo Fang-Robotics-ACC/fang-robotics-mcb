@@ -6,8 +6,8 @@ namespace fang::robot
 {
     static const chassis::CounterStrikeCommand::Config kFieldMecanumConfig 
     {
-        .maxTranslation = {12_mph, 12_mph},
-        .maxRotation    = 300_rpm,
+        .maxTranslation = {25_mph, 25_mph}, // HACK: Ultra Mk2 motors do not use feedback rpm loops
+        .maxRotation    = 150_rpm,
     };
 }
 

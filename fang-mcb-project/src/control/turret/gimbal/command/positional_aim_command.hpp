@@ -1,8 +1,7 @@
-#ifndef FANG_ROBOTICS_MCB_AIM_COMMAND_HPP
-#define FANG_ROBOTICS_MCB_AIM_COMMAND_HPP
+#pragma once
+
 #include "control/turret/gimbal/field_gimbal_subsystem.hpp"
 #include "util/math/arithmetic/range.hpp"
-#include "util/chrono/simple_timer.hpp"
 
 #include "wrap/rail/turret/iturret_input_handler.hpp"
 
@@ -10,16 +9,20 @@
 
 namespace fang::turret 
 {
-    class AimCommand : public tap::control::Command
+    /**
+     * Unlike aim command, it takes the raw position instead of velocity.
+     * Used for autonomous testing and as a precursor to general auto-aim commands
+     */
+    class PositionalAimCommand : public tap::control::Command
     {
     public:
         struct Config
         {
-            RPM maxPitchSpeed;
-            RPM maxYawSpeed;
+            Radians pitchScale;
+            Radians yawScale;
             math::Range<Radians> pitchRange;
         };
-        AimCommand(FieldGimbalSubsystem& gimbal, ITurretInputHandler& input, const Config& config);
+        PositionalAimCommand(FieldGimbalSubsystem& gimbal, ITurretInputHandler& input, const Config& config);
 
         const char* getName() const override {return "Aim Command";}
         void initialize() override;
@@ -33,13 +36,11 @@ namespace fang::turret
         FieldGimbalSubsystem& gimbal_;
         ITurretInputHandler& input_;
 
-        const RPM kMaxPitchSpeed_;
-        const RPM kMaxYawSpeed_;
+        const Radians kPitchScale_;
+        const Radians kYawScale_;
         const math::Range<Radians> kPitchRange_;
-        chrono::SimpleTimer executeTimer_{};
 
         Radians targetPitch_{0};
         Radians targetYaw_{0};
     };
 }
-#endif
