@@ -11,7 +11,7 @@ namespace fang::turret
         void update();
 
     private:
-        ProxyTurretInput turretInput_;
-        communication::JankyFloatHandler floatHandler_;
+        ProxyTurretInput& turretInput_;
+        communication::JankyFloatHandler& floatHandler_;
     };
 }
