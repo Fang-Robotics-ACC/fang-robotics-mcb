@@ -54,6 +54,7 @@
 
 #include "cool_serial/continuous_parser.hpp"
 
+#include <bit>
 #include <cassert>
 #include <iostream>
 
@@ -86,6 +87,7 @@ int main()
     static Robot robot{drivers, k_robotConfig};
 
     robot.initialize();
+    //testUart.initialize();
 
     #ifdef PLATFORM_HOSTED
         tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
@@ -107,27 +109,33 @@ int main()
     while (1)
     {
         drivers.update();
+        robot.update();
 
         if (mainLoopTimer.execute())
         {
-            testUart.write('z');
-            char byteBuffer{}; //ByteBuffer
+            //char signedByte{};
+            //while(testUart.read(signedByte)) 
+            //{
+            //    coolSerial::Byte* byte{reinterpret_cast<coolSerial::Byte*>(&signedByte)};
+            //    uartQueue.push(*byte);
+            //}
 
-            if(!testUart.read(byteBuffer))
-            {
-            }
-            else
-            {
-                uartQueue.push(byteBuffer);
+            //static unsigned char queuedByte{};
 
-                parser.update();
+            //if(!uartQueue.empty())
+            //{
+            //    queuedByte = uartQueue.front();
+            //    uartQueue.pop();
+            //}
 
-                if(parser.getCurrentMessage().data == expectedData)
-                {
-                    tap::buzzer::playNote(&drivers.pwm, 500);
-                }
-
-            }
+            //if(queuedByte == 0x89)
+            //{
+            //    tap::buzzer::playNote(&drivers.pwm, 500);
+            //}
+            //else
+            //{
+            //    //tap::buzzer::playNote(&drivers.pwm, 0);
+            //}
             drivers.motorTimeoutUpdate();
         }
 
