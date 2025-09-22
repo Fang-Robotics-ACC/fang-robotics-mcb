@@ -7,7 +7,7 @@ namespace fang::command
         PierceAutoTestCommandPack::PierceAutoTestCommandPack
         (
             Drivers& drivers, 
-            turret::ProxyTurretInput turretInput,
+            turret::ProxyTurretInput &turretInput,
             turret::SimpleAmmoBoosterSubsystem& booster,
             turret::SimpleFeederSubsystem& feeder,
             turret::FieldGimbalSubsystem& gimbal,

@@ -78,7 +78,7 @@ namespace fang::command
         PierceAutoTestCommandPack
         (
             Drivers& drivers, 
-            turret::ProxyTurretInput turretInput,
+            turret::ProxyTurretInput& turretInput,
             turret::SimpleAmmoBoosterSubsystem& booster,
             turret::SimpleFeederSubsystem& feeder,
             turret::FieldGimbalSubsystem& gimbal,
@@ -103,7 +103,7 @@ namespace fang::command
         const ComputerMapping& kComputerMapping_;
 
         chassis::ChassisInputHandler chassisInput_;
-        turret::ProxyTurretInput turretInput_;
+        turret::ProxyTurretInput& turretInput_;
 
         turret::PositionalAimCommand aim_{gimbal_, turretInput_, kCommandConfig_.aimConfig};
         turret::ActivateBoosterCommand activateBooster_{booster_};
