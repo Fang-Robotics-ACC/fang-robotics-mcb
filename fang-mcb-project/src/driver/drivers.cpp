@@ -24,6 +24,7 @@ namespace fang
 
     void Drivers::update()
     {
+        coolSerialUart.update();
         PROFILE(profiler, updateIo, ());
     }
 
@@ -40,7 +41,6 @@ namespace fang
         PROFILE(profiler, bmi088.periodicIMUUpdate, ());
         PROFILE(profiler, commandScheduler.run, ());
         PROFILE(profiler, djiMotorTxHandler.encodeAndSendCanData, ());
-        coolSerialUart.update();
         //PROFILE(profiler, terminalSerial.update, ());
     }
 
