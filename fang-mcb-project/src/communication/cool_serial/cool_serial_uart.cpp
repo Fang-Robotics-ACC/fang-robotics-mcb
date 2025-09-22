@@ -22,7 +22,6 @@ namespace fang::communication
 
     void CoolSerialUart::update()
     {
-        
         updateByteQueue();
         parser_.update();
         handleMessage();
@@ -32,7 +31,7 @@ namespace fang::communication
     {
         // Transfer uart buffer to byte queue
         char byte{};
-        if(uart_.read(byte)) 
+        while(uart_.read(byte)) 
         {
             byteQueue_.push(byte);
         }
