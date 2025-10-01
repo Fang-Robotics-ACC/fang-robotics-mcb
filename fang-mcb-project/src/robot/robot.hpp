@@ -5,12 +5,6 @@
 #include "robot/variant/pierce/pierce.hpp"
 using Robot = fang::robot::Pierce;
 static const Robot::Config& k_robotConfig{fang::robot::k_pierceConfig};
-
-// #include "robot/variant/pierce_auto_test/pierce_auto_test.hpp"
-// #include "robot/variant/pierce_auto_test/pierce_auto_test_config.hpp"
-// using Robot = fang::robot::PierceAutoTest;
-// static const Robot::Config& k_robotConfig{fang::robot::k_pierceAutoTestConfig};
-
 #endif
 
 #if defined(TARGET_PIERCE_AUTO_TEST)
@@ -18,6 +12,5 @@ static const Robot::Config& k_robotConfig{fang::robot::k_pierceConfig};
 #include "robot/variant/pierce_auto_test/pierce_auto_test_config.hpp"
 using Robot = fang::robot::PierceAutoTest;
 static const Robot::Config& k_robotConfig{fang::robot::k_pierceAutoTestConfig};
-
 #endif
 #endif
