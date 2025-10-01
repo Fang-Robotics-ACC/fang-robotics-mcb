@@ -20,6 +20,10 @@
 #ifndef DRIVERS_HPP_
 #define DRIVERS_HPP_
 #include "tap/drivers.hpp"
+#include "communication/cool_protocol/janky_float_handler.hpp"
+#include "communication/cool_serial/cool_serial_uart.hpp"
+
+#include <unordered_map>
 
 namespace fang
 {
@@ -28,6 +32,17 @@ namespace fang
         friend class DriversSingleton;
     
     public:
+
+        communication::JankyFloatHandler jankyFloatHandler{};
+        communication::CoolSerialUart coolSerialUart
+        {
+            *this, 
+            communication::CoolSerialUart::HandlerMap
+            {
+                {255, std::ref(jankyFloatHandler)}
+            }
+        };
+
         Drivers() : tap::Drivers{} {}
     
         //prevent copying
