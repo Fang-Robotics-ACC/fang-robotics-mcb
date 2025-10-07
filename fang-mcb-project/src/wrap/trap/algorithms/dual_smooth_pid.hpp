@@ -1,5 +1,8 @@
 #pragma once
+
 #include "smooth_pid.hpp"
+#include "util/chrono/simple_timer.hpp"
+
 namespace trap::algorithms
 {
     template<typename MainType, typename IntermediateType, typename OutputType, typename TimeType>
@@ -43,11 +46,26 @@ namespace trap::algorithms
          */
         OutputType runController(const MainType& mainCurrent, const IntermediateType& intermediateCurrent)
         {
+            const TimeType kDeltaTime{static_cast<TimeType>(runControllerTimer_.getDurationAndReset())};
+            return runController(mainCurrent, intermediateCurrent, kDeltaTime):
+        }
+
+        /**
+         * Allows unit testing an manual time determination see the main version
+         * for parameter information
+         */
+        OutputType runController
+        (
+            const MainType& mainCurrent,
+            const IntermediateType& intermediateCurrent,
+            const TimeType& deltaTime
+        )
+        {
             const MainType kMainError{mainTarget_ - mainCurrent};
-            const IntermediateType kIntermediateTarget{mainPid_.runController(kMainError)};
+            const IntermediateType kIntermediateTarget{mainPid_.runController(kMainError), deltaTime};
 
             const IntermediateType kIntermediateError{kIntermediateTarget - intermediateCurrent};
-            return intermediatePid_.runController(kIntermediateError);
+            return intermediatePid_.runController(kIntermediateError, deltaTime);
         }
 
         void setTarget(const MainType& mainTarget)
@@ -57,6 +75,8 @@ namespace trap::algorithms
     private:
         MainPid mainPid_;
         IntermediatePid intermediatePid_;
-        MainType mainTarget_; 
+
+        MainType mainTarget_{}; 
+        fang::chrono::SimpleTimer runControllerTimer_{};
     };
 }
