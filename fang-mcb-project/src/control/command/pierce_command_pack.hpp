@@ -105,7 +105,7 @@ namespace fang::command
 
         turret::AimCommand aim_{gimbal_, turretInput_, kCommandConfig_.aimConfig};
         turret::ActivateBoosterCommand activateBooster_{booster_};
-        fang::turret::AutofireCommand autofire_{feeder_};
+        fang::turret::FireCommand autofire_{feeder_};
         fang::turret::UnjamCommand unjam_{feeder_};
 
         tap::control::HoldCommandMapping activateBoosterRemote_{&drivers_, {&activateBooster_}, kRemoteMapping_.activateBooster};
