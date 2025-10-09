@@ -1,5 +1,4 @@
-#ifndef FANG_ROBOTICS_MCB_TRAP_DJI_M2006_HPP
-#define FANG_ROBOTICS_MCB_TRAP_DJI_M2006_HPP
+#pragma once
 #include "wrap/rail/motor/ispeed_motor.hpp"
 #include "wrap/trap/drivers.hpp"
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
@@ -106,4 +105,3 @@ namespace trap
         };
     }
 }
-#endif
