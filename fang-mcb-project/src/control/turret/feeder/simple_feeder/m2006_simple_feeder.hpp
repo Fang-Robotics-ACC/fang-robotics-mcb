@@ -12,7 +12,7 @@ namespace fang::turret
     class M2006SimpleFeeder : public SimpleFeeder
     {
     public:
-        using FeedMotor = trap::motor::DjiM2006;
+        using FeedMotor = trap::motor::DjiM2006Old;
         struct Config
         {
             FeedMotor::Config         feedMotorConfig;

@@ -17,7 +17,7 @@ namespace trap
         /**
          * Wrapper for DJI motor for the DJI M3508 on a CAN bus
          */
-        class DjiM2006 : virtual public fang::motor::ISpeedMotor
+        class DjiM2006Old : virtual public fang::motor::ISpeedMotor
         {
         public:
             struct Config
@@ -29,7 +29,7 @@ namespace trap
                 double gearRatio;
                 DjiSpeedPid::Config speedPidConfig;
             };
-            DjiM2006(Drivers& drivers, const Config& config);
+            DjiM2006Old(Drivers& drivers, const Config& config);
             /**
              * drivers - the drivers struct
              * motorId - the motor controller id
@@ -40,11 +40,11 @@ namespace trap
              * This would lead to undefined behavior. An assertion has been placed to prevent
              * the code from continuing.
              */
-            DjiM2006(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
+            DjiM2006Old(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                      const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedConfig);
 
 
-            mockable ~DjiM2006() = default;
+            mockable ~DjiM2006Old() = default;
 
             /**
              * It must be called for the motor to properly function.

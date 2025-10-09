@@ -14,10 +14,10 @@ namespace fang::robot
         0,
         0,
         100,
-        trap::motor::DjiM2006::k_maxOutput
+        trap::motor::DjiM2006Old::k_maxOutput
     };
 
-    static const trap::motor::DjiM2006::Config kFeederMotorConfig
+    static const trap::motor::DjiM2006Old::Config kFeederMotorConfig
     { 
         tap::motor::MOTOR3,
         tap::can::CanBus::CAN_BUS1,
