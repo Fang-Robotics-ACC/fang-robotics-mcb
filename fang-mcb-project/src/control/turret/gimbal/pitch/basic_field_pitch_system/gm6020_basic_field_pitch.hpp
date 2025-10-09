@@ -9,7 +9,7 @@ namespace fang::turret
     class GM6020BasicFieldPitch : public BasicFieldPitchSystem
     {
     public:
-        using Motor = trap::motor::DjiGM6020;
+        using Motor = trap::motor::DjiGM6020Old;
         struct Config
         {
             Motor::Config motorConfig;

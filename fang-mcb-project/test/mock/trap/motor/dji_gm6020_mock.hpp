@@ -8,12 +8,12 @@ namespace trap
     {
         namespace motor
         {
-            class DjiGM6020Mock : virtual public trap::motor::DjiGM6020
+            class DjiGM6020Mock : virtual public trap::motor::DjiGM6020Old
             {
             public:
                 using DjiSpeedPid = trap::motor::DjiSpeedPid;
                 using DjiMotorOutput = trap::motor::DjiMotorOutput;
-                using trap::motor::DjiGM6020::DjiGM6020;
+                using trap::motor::DjiGM6020Old::DjiGM6020Old;
                 virtual ~DjiGM6020Mock() = default;
                 MOCK_METHOD(void, update, (), (override));
     		    MOCK_METHOD(void, setTargetPosition, (const Radians& position), (override));

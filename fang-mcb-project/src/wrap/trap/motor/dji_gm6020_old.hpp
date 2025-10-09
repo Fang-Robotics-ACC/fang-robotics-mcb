@@ -16,7 +16,7 @@ namespace trap
         /**
          * Wrapper for DJI motor for the DJI M3508 on a CAN bus
          */
-        class DjiGM6020 : public fang::motor::IPositionMotor
+        class DjiGM6020Old : public fang::motor::IPositionMotor
         {
         public:
             struct Config
@@ -29,7 +29,7 @@ namespace trap
                 DjiSpeedPid::Config speedPidConfig;
                 bool currentControl = true;
             };
-            DjiGM6020(Drivers& drivers, const Config& config);
+            DjiGM6020Old(Drivers& drivers, const Config& config);
             /**
              * drivers - the drivers struct
              * motorId - the motor controller id
@@ -55,10 +55,10 @@ namespace trap
              * 
              * However, taproot ended up keeping the regular motorID
              */
-            DjiGM6020(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
+            DjiGM6020Old(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
                      const char* name, bool inverted, double gearRatio, const DjiSpeedPid::Config& speedConfig, bool currentControl);
 
-            mockable ~DjiGM6020() = default;
+            mockable ~DjiGM6020Old() = default;
 
             /**
              * Must be called regularly to update the motor pid and set the motor output
