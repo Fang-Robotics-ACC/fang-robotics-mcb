@@ -29,6 +29,13 @@ namespace trap::motor
             double externalEncoderGearRatio = 1.0;
         };
 
+
+        /**
+         * Recommended constructor for storing settings in a config file due
+         * to the convenicence of structs
+         * 
+         * The 
+         */
         DjiMotor(Drivers& drivers, const Config& config);
 
         /**
@@ -36,7 +43,7 @@ namespace trap::motor
          * motorId - the motor controller id
          * canBus - the can bus the motor controller is on. THIS CANNOT BE HIGHER THAN 4
          * name - the name of the motor for the controller menu
-         * gearRatio - the ratio of input revolutions per output revolution 
+         * gearRatio - this should be set to one if you do not use an external encoder!!!!!
          * pid config: make sure the maxOutput does not exceed DjiM3508 k_maxOutput.
          * This would lead to undefined behavior. An assertion has been placed to prevent
          * the code from continuing.
@@ -78,8 +85,12 @@ namespace trap::motor
 
         /**
          * The desired motor output. It must be limited to a 16 bit int.
+         * 
+         * This is an alias to interface with RAIL
          */
 		void setTargetOutput(const DjiMotorOutput& output) override;
+
+		void setDesiredOutput(const DjiMotorOutput& output);
 
         /**
          * true if a can message has been received within the last
