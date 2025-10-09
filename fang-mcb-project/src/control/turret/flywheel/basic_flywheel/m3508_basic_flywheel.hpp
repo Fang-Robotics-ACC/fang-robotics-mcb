@@ -2,7 +2,7 @@
 
 #include "basic_flywheel.hpp"
 #include "driver/drivers.hpp"
-#include "wrap/trap/motor/dji_m3508.hpp"
+#include "wrap/trap/motor/dji_m3508_old.hpp"
 
 namespace fang::turret
 {

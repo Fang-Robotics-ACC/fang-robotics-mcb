@@ -43,7 +43,7 @@ namespace trap::motor
          * motorId - the motor controller id
          * canBus - the can bus the motor controller is on. THIS CANNOT BE HIGHER THAN 4
          * name - the name of the motor for the controller menu
-         * gearRatio - this should be set to one if you do not use an external encoder!!!!!
+         * gearRatio - this should be set to one if you do not use an external encoder in the taproot styyle!!!!!
          * pid config: make sure the maxOutput does not exceed DjiM3508 k_maxOutput.
          * This would lead to undefined behavior. An assertion has been placed to prevent
          * the code from continuing.
