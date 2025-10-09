@@ -2,7 +2,7 @@
 
 #include "simple_feeder.hpp"
 #include "driver/drivers.hpp"
-#include "wrap/trap/motor/dji_m2006.hpp"
+#include "wrap/trap/motor/dji_m2006_old.hpp"
 
 namespace fang::turret
 {

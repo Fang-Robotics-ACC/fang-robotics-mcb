@@ -1,4 +1,4 @@
-#include "dji_m2006.hpp"
+#include "dji_m2006_old.hpp"
 #include "driver/motor/util/gearbox_speed.hpp"
 
 #include <cassert>
