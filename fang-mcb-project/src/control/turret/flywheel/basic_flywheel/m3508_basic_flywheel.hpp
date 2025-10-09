@@ -9,7 +9,7 @@ namespace fang::turret
     class M3508BasicFlywheel : public BasicFlywheel
     {
     public:
-        using Motor = trap::motor::DjiM3508;
+        using Motor = trap::motor::DjiM3508Old;
         struct Config
         {
             Meters radius;
