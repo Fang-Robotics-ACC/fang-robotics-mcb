@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_TRAP_MOCK_DJI_GM_6020_HPP
 #define FANG_ROBOTICS_MCB_TRAP_MOCK_DJI_GM_6020_HPP
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
-#include "wrap/trap/motor/dji_gm6020.hpp"
+#include "wrap/trap/motor/dji_gm6020_old.hpp"
 namespace trap
 {
     namespace mock

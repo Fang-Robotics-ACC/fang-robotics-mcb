@@ -2,7 +2,7 @@
 
 #include "basic_field_pitch_system.hpp"
 #include "driver/drivers.hpp"
-#include "wrap/trap/motor/dji_gm6020.hpp"
+#include "wrap/trap/motor/dji_gm6020_old.hpp"
 
 namespace fang::turret
 {

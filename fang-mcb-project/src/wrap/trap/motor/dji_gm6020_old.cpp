@@ -1,4 +1,4 @@
-#include "dji_gm6020.hpp"
+#include "dji_gm6020_old.hpp"
 #include "driver/motor/util/gearbox_speed.hpp"
 
 #include <cassert>
