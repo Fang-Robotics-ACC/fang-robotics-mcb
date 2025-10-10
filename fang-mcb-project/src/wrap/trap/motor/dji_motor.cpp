@@ -5,8 +5,18 @@
 namespace trap::motor
 {
     DjiMotor::DjiMotor(Drivers& drivers, const Config& config)
-    : DjiMotor{drivers, config.motorId, config.canBus, config.name,
-               config.inverted, config.externalEncoderGearRatio, config.speedPidConfig, config.currentControl}
+        :
+        DjiMotor
+        {
+            drivers,
+            config.motorId,
+            config.canBus,
+            config.name,
+            config.inverted,
+            config.externalEncoderGearRatio,
+            config.speedPidConfig,
+            config.currentControl
+        }
     {
     }
 
