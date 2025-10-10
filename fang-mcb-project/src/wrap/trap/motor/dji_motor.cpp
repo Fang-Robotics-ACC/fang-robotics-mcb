@@ -20,8 +20,17 @@ namespace trap::motor
     {
     }
 
-    DjiMotor::DjiMotor(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
-                       const char* name, bool inverted, double externalEncoderGearRatio, const DjiSpeedPid::Config& speedPidConfig, bool currentControl)
+    DjiMotor::DjiMotor
+        (
+            Drivers& drivers,
+            tap::motor::MotorId motorId,
+            tap::can::CanBus canBus,
+            const char* name,
+            bool inverted,
+            double externalEncoderGearRatio,
+            const DjiSpeedPid::Config& speedPidConfig,
+            bool currentControl
+        )
         :
         m_djiMotor
         {
