@@ -44,11 +44,17 @@
 /* control includes ---------------------------------------------------------*/
 #include "tap/architecture/clock.hpp"
 
+#include "tap/communication/serial/uart_terminal_device.hpp"
 
 #include "io.hpp"
 #include "units.h"
 #include "robot/robot.hpp"
 
+#include "system/error/signal/assert_failed_buzz.hpp"
+
+#include "cool_serial/continuous_parser.hpp"
+
+#include <bit>
 #include <cassert>
 #include <iostream>
 
@@ -61,9 +67,17 @@ int main()
 
     fang::Drivers& drivers{fang::DriversSingleton::getDrivers()};
 
+    tap::communication::serial::UartTerminalDevice testUart{&drivers};
     Board::initialize();
     drivers.initializeIo();
 
+    testUart.initialize();
+
+
+    coolSerial::ByteQueue uartQueue{};
+    coolSerial::ContinuousParser parser{uartQueue};
+
+    coolSerial::Bytes expectedData{0xdb, 0xf9, 0xe, 0x40, 0x27, 0xa0, 0xa8, 0xc8, 0x1b, 0xf5, 0x10, 0xd, 0xeb, 0xdc, 0xe0, 0x40};
     /*
      * 
      * This prevents the large size of the robot class from hoarding the stack
@@ -73,6 +87,7 @@ int main()
     static Robot robot{drivers, k_robotConfig};
 
     robot.initialize();
+    //testUart.initialize();
 
     #ifdef PLATFORM_HOSTED
         tap::motor::motorsim::DjiMotorSimHandler::getInstance()->resetMotorSims();
@@ -94,9 +109,33 @@ int main()
     while (1)
     {
         drivers.update();
+        robot.update();
 
         if (mainLoopTimer.execute())
         {
+            //char signedByte{};
+            //while(testUart.read(signedByte)) 
+            //{
+            //    coolSerial::Byte* byte{reinterpret_cast<coolSerial::Byte*>(&signedByte)};
+            //    uartQueue.push(*byte);
+            //}
+
+            //static unsigned char queuedByte{};
+
+            //if(!uartQueue.empty())
+            //{
+            //    queuedByte = uartQueue.front();
+            //    uartQueue.pop();
+            //}
+
+            //if(queuedByte == 0x89)
+            //{
+            //    tap::buzzer::playNote(&drivers.pwm, 500);
+            //}
+            //else
+            //{
+            //    //tap::buzzer::playNote(&drivers.pwm, 0);
+            //}
             drivers.motorTimeoutUpdate();
         }
 
