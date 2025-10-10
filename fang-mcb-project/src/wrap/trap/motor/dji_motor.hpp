@@ -13,9 +13,7 @@ namespace trap::motor
     /**
      * Wrapper for DJI motor for the DJI M3508 on a CAN bus
      */
-    class DjiMotor 
-        :
-        public IDjiOutputMotor
+    class DjiMotor : public IDjiOutputMotor
     {
     public:
         struct Config
