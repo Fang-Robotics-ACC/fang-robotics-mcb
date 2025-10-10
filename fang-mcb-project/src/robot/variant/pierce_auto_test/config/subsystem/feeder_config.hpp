@@ -1,7 +1,7 @@
 #ifndef FANG_ROBOTICS_MCB_FEEDER_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_FEEDER_CONFIG_HPP
 #include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
-#include "wrap/trap/motor/dji_m2006.hpp"
+#include "wrap/trap/motor/dji_m2006_old.hpp"
 #include "wrap/units/units_alias.hpp"
 
 namespace fang::robot 
@@ -14,10 +14,10 @@ namespace fang::robot
         0,
         0,
         100,
-        trap::motor::DjiM2006::k_maxOutput
+        trap::motor::DjiM2006Old::k_maxOutput
     };
 
-    static const trap::motor::DjiM2006::Config kFeederMotorConfig
+    static const trap::motor::DjiM2006Old::Config kFeederMotorConfig
     { 
         tap::motor::MOTOR3,
         tap::can::CanBus::CAN_BUS1,

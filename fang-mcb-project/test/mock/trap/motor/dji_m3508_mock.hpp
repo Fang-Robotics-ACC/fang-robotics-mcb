@@ -2,19 +2,19 @@
 #define FANG_ROBOTICS_MCB_TRAP_MOCk_DJI_M3508_MOCK_HPP
 
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
-#include "wrap/trap/motor/dji_m3508.hpp"
+#include "wrap/trap/motor/dji_m3508_old.hpp"
 namespace trap
 {
     namespace mock
     {
         namespace motor
         {
-            class DjiM3508Mock : virtual public trap::motor::DjiM3508
+            class DjiM3508Mock : virtual public trap::motor::DjiM3508Old
             {
             public:
                 using DjiSpeedPid = trap::motor::DjiSpeedPid;
                 using DjiMotorOutput = trap::motor::DjiMotorOutput;
-                using trap::motor::DjiM3508::DjiM3508;
+                using trap::motor::DjiM3508Old::DjiM3508Old;
                 virtual ~DjiM3508Mock() = default;
                 MOCK_METHOD(void, update, (), (override));
     		    MOCK_METHOD(void, setTargetSpeed, (const RPM& speed), (override));
