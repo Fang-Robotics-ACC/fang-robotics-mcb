@@ -14,7 +14,6 @@ namespace trap::motor
             config.name,
             config.inverted,
             config.externalEncoderGearRatio,
-            config.speedPidConfig,
             config.currentControl
         }
     {
@@ -28,7 +27,6 @@ namespace trap::motor
             const char* name,
             bool inverted,
             double externalEncoderGearRatio,
-            const DjiSpeedPid::Config& speedPidConfig,
             bool currentControl
         )
         :
