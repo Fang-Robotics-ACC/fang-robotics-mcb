@@ -29,4 +29,4 @@ namespace fang::turret
         //Only needs to switch the booster
         return false;
     }
-}
+} 
