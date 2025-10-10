@@ -14,14 +14,21 @@ namespace trap::motor
             config.name,
             config.inverted,
             config.externalEncoderGearRatio,
-            config.speedPidConfig,
             config.currentControl
         }
     {
     }
 
-    DjiMotor::DjiMotor(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
-                       const char* name, bool inverted, double externalEncoderGearRatio, const DjiSpeedPid::Config& speedPidConfig, bool currentControl)
+    DjiMotor::DjiMotor
+        (
+            Drivers& drivers,
+            tap::motor::MotorId motorId,
+            tap::can::CanBus canBus,
+            const char* name,
+            bool inverted,
+            double externalEncoderGearRatio,
+            bool currentControl
+        )
         :
         m_djiMotor
         {
