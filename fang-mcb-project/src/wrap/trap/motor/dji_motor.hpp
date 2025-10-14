@@ -109,6 +109,6 @@ namespace trap::motor
 
     static constexpr DjiMotorOutput kMaxOutput{std::numeric_limits<DjiMotorOutput>::max()};
     private:
-        tap::motor::DjiMotor m_djiMotor;
+        tap::motor::DjiMotor djiMotor_;
     };
 }

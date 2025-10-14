@@ -30,7 +30,7 @@ namespace trap::motor
             bool currentControl
         )
         :
-        m_djiMotor
+        djiMotor_
         {
             &drivers, 
             motorId,
@@ -50,12 +50,12 @@ namespace trap::motor
 
     void DjiMotor::initialize()
     {
-        m_djiMotor.initialize();
+        djiMotor_.initialize();
     }
 
 	void DjiMotor::setDesiredOutput(const DjiMotorOutput& output)
     {
-        m_djiMotor.setDesiredOutput(output);
+        djiMotor_.setDesiredOutput(output);
     }
 
     void DjiMotor::setTargetOutput(const DjiMotorOutput& desiredOutput)
@@ -65,21 +65,21 @@ namespace trap::motor
 
     bool DjiMotor::isMotorOnline() const
     {
-        return m_djiMotor.isMotorOnline();
+        return djiMotor_.isMotorOnline();
     }
 
     Celsius DjiMotor::getTemperature() const
     {
-        return Celsius{m_djiMotor.getTemperature()};
+        return Celsius{djiMotor_.getTemperature()};
     }
 
     tap::can::CanBus DjiMotor::getCanBus() const
     {
-        return m_djiMotor.getCanBus();
+        return djiMotor_.getCanBus();
     }
 
     const char* DjiMotor::getName() const
     {
-        return m_djiMotor.getName();
+        return djiMotor_.getName();
     }
 }
