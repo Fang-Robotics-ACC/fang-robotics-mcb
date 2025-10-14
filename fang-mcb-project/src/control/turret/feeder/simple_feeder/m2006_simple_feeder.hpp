@@ -2,7 +2,7 @@
 
 #include "simple_feeder.hpp"
 #include "driver/drivers.hpp"
-#include "wrap/trap/motor/dji_m2006.hpp"
+#include "wrap/trap/motor/dji_m2006_old.hpp"
 
 namespace fang::turret
 {
@@ -12,7 +12,7 @@ namespace fang::turret
     class M2006SimpleFeeder : public SimpleFeeder
     {
     public:
-        using FeedMotor = trap::motor::DjiM2006;
+        using FeedMotor = trap::motor::DjiM2006Old;
         struct Config
         {
             FeedMotor::Config         feedMotorConfig;

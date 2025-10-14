@@ -19,7 +19,7 @@ namespace fang::robot
         .ki             = 0,
         .kd             = 0,
         .maxICumulative = 0,
-        .maxOutput      = trap::motor::DjiM3508::k_maxOutput
+        .maxOutput      = trap::motor::DjiM3508Old::k_maxOutput
     };
 
     static const Flywheel::Motor::Config kLeftFlywheelMotorConfig
