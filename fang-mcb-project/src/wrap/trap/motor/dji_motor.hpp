@@ -88,6 +88,9 @@ namespace trap::motor
          */
         Radians getAngularPosition() const override;
 
+        /**
+         * Returns the last reported angular velocity in RPM
+         */
         RPM getAngularVelocity() const override;
 
         /**
