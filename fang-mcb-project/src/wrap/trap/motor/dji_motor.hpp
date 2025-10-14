@@ -3,6 +3,8 @@
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
 #include "wrap/trap/algorithms/wrapped_radians.hpp"
 #include "wrap/units/units_alias.hpp"
+#include "wrap/rail/telemetry/iangular_position_telemetry.hpp"
+#include "wrap/rail/telemetry/iangular_velocity_telemetry.hpp"
 
 #include "tap/communication/can/can_bus.hpp"
 #include "tap/motor/dji_motor.hpp"
@@ -15,7 +17,11 @@ namespace trap::motor
     /**
      * Wrapper for DJI motor for the DJI M3508 on a CAN bus
      */
-    class DjiMotor : public IDjiOutputMotor
+    class DjiMotor
+        :
+        public IDjiOutputMotor,
+        public fang::telemetry::IAngularPosition,
+        public fang::telemetry::IAngularVelocity 
     {
     public:
         struct Config
@@ -80,7 +86,9 @@ namespace trap::motor
         /**
          * Returns the last reported RPM from CAN
          */
-        Radians getAngularPosition() const;
+        Radians getAngularPosition() const override;
+
+        RPM getAngularVelocity() const override;
 
         /**
          * The desired motor output. It must be limited to a 16 bit int.

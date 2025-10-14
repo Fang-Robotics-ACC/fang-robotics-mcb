@@ -56,6 +56,11 @@ namespace trap::motor
         return Radians{djiMotor_.getPositionWrapped()};
     }
 
+    RPM DjiMotor::getAngularVelocity() const
+    {
+        return RPM{djiMotor_.getShaftRPM()};
+    }
+
     void DjiMotor::initialize()
     {
         djiMotor_.initialize();
