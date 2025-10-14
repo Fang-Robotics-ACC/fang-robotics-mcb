@@ -66,14 +66,9 @@ namespace trap::motor
         djiMotor_.initialize();
     }
 
-	void DjiMotor::setDesiredOutput(const DjiMotorOutput& output)
-    {
-        djiMotor_.setDesiredOutput(output);
-    }
-
     void DjiMotor::setTargetOutput(const DjiMotorOutput& desiredOutput)
     {
-        setDesiredOutput(desiredOutput);
+        djiMotor_.setDesiredOutput(desiredOutput);
     }
 
     bool DjiMotor::isMotorOnline() const

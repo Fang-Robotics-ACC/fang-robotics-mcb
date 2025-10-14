@@ -97,8 +97,6 @@ namespace trap::motor
          */
 		void setTargetOutput(const DjiMotorOutput& output) override;
 
-		void setDesiredOutput(const DjiMotorOutput& output);
-
         /**
          * true if a can message has been received within the last
          * MOTOR_DISCONNECT_TIME.
