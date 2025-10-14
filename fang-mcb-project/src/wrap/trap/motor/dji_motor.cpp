@@ -27,7 +27,8 @@ namespace trap::motor
             const char* name,
             bool inverted,
             double externalEncoderGearRatio,
-            bool currentControl
+            bool currentControl,
+            const DjiMotor& maxOutput
         )
         :
         m_djiMotor

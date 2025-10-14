@@ -62,7 +62,8 @@ namespace trap::motor
          * However, taproot ended up keeping the regular motorID
          */
         DjiMotor(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
-                 const char* name, bool inverted, double externalEncoderGearRatio, bool currentControl);
+                 const char* name, bool inverted, double externalEncoderGearRatio, bool currentControl,
+                const DjiMotor& maxOutput);
 
         mockable ~DjiMotor() {};
 
