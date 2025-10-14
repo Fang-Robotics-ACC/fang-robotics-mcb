@@ -10,7 +10,7 @@ namespace trap::motor
      * Driver for a Dji M3508 motor controlled by a
      * Dji C620 controller
      */
-    class DjiM3508 : public DjiMotor
+    class DjiM2006 : public DjiMotor
     {
     public:
         // Inheriting constructors :D
