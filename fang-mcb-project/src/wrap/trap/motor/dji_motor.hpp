@@ -8,6 +8,8 @@
 #include "tap/motor/dji_motor.hpp"
 #include "tap/util_macros.hpp"
 
+#include <limits>
+
 namespace trap::motor
 {
     /**
@@ -62,8 +64,7 @@ namespace trap::motor
          * However, taproot ended up keeping the regular motorID
          */
         DjiMotor(Drivers& drivers, tap::motor::MotorId motorId, tap::can::CanBus canBus,
-                 const char* name, bool inverted, double externalEncoderGearRatio, bool currentControl,
-                const DjiMotor& maxOutput);
+                 const char* name, bool inverted, double externalEncoderGearRatio, bool currentControl);
 
         mockable ~DjiMotor() {};
 
@@ -106,7 +107,7 @@ namespace trap::motor
 
         const char* getName() const;
 
-    static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_GM6020};
+    static constexpr DjiMotorOutput kMaxOutput{std::numeric_limits<DjiMotorOutput>::max()};
     private:
         tap::motor::DjiMotor m_djiMotor;
     };
