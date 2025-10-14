@@ -48,6 +48,14 @@ namespace trap::motor
     {
     }
 
+    /**
+     * Returns the last reported RPM from CAN
+     */
+    Radians DjiMotor::getAngularPosition() const
+    {
+        return Radians{djiMotor_.getPositionWrapped()};
+    }
+
     void DjiMotor::initialize()
     {
         djiMotor_.initialize();
