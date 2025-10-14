@@ -119,7 +119,7 @@ namespace fang::command
         chassis::ShurikenCommand shuriken_{chassis_, gimbal_, chassisInput_, kCommandConfig_.shurikenConfig};
         chassis::TardisCommand tardis_{chassis_, gimbal_, chassisInput_, kCommandConfig_.tardisConfig};
 
-        tap::control::HoldCommandMapping counterStrikeRemote_{&drivers_, {&counterStrike_}, kRemoteMapping_.counterStrike};
+        tap::control::PressCommandMapping counterStrikeRemote_{&drivers_, {&counterStrike_}, kRemoteMapping_.counterStrike};
         tap::control::PressCommandMapping shurikenRemote_{&drivers_, {&shuriken_}, kRemoteMapping_.shuriken};
         tap::control::PressCommandMapping tardisRemote_{&drivers_, {&tardis_}, kRemoteMapping_.tardis};
 
