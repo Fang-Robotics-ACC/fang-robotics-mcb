@@ -30,7 +30,7 @@ namespace trap::motor
             bool currentControl
         )
         :
-        m_djiMotor
+        djiMotor_
         {
             &drivers, 
             motorId,
@@ -48,38 +48,46 @@ namespace trap::motor
     {
     }
 
-    void DjiMotor::initialize()
+    /**
+     * Returns the last reported RPM from CAN
+     */
+    Radians DjiMotor::getAngularPosition() const
     {
-        m_djiMotor.initialize();
+        return Radians{djiMotor_.getPositionWrapped()};
     }
 
-	void DjiMotor::setDesiredOutput(const DjiMotorOutput& output)
+    RPM DjiMotor::getAngularVelocity() const
     {
-        m_djiMotor.setDesiredOutput(output);
+        return RPM{djiMotor_.getShaftRPM()};
+    }
+
+    void DjiMotor::initialize()
+    {
+        djiMotor_.initialize();
     }
 
     void DjiMotor::setTargetOutput(const DjiMotorOutput& desiredOutput)
     {
-        setDesiredOutput(desiredOutput);
+        djiMotor_.setDesiredOutput(desiredOutput);
     }
 
     bool DjiMotor::isMotorOnline() const
     {
-        return m_djiMotor.isMotorOnline();
+        return djiMotor_.isMotorOnline();
     }
 
     Celsius DjiMotor::getTemperature() const
     {
-        return Celsius{m_djiMotor.getTemperature()};
+        return Celsius{djiMotor_.getTemperature()};
     }
 
     tap::can::CanBus DjiMotor::getCanBus() const
     {
-        return m_djiMotor.getCanBus();
+        return djiMotor_.getCanBus();
     }
 
     const char* DjiMotor::getName() const
     {
-        return m_djiMotor.getName();
+        return djiMotor_.getName();
     }
 }

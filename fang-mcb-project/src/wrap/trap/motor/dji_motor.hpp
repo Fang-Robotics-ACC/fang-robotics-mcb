@@ -3,17 +3,25 @@
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
 #include "wrap/trap/algorithms/wrapped_radians.hpp"
 #include "wrap/units/units_alias.hpp"
+#include "wrap/rail/telemetry/iangular_position_telemetry.hpp"
+#include "wrap/rail/telemetry/iangular_velocity_telemetry.hpp"
 
 #include "tap/communication/can/can_bus.hpp"
 #include "tap/motor/dji_motor.hpp"
 #include "tap/util_macros.hpp"
+
+#include <limits>
 
 namespace trap::motor
 {
     /**
      * Wrapper for DJI motor for the DJI M3508 on a CAN bus
      */
-    class DjiMotor : public IDjiOutputMotor
+    class DjiMotor
+        :
+        public IDjiOutputMotor,
+        public fang::telemetry::IAngularPosition,
+        public fang::telemetry::IAngularVelocity 
     {
     public:
         struct Config
@@ -78,7 +86,12 @@ namespace trap::motor
         /**
          * Returns the last reported RPM from CAN
          */
-        Radians getAngularPosition() const;
+        Radians getAngularPosition() const override;
+
+        /**
+         * Returns the last reported angular velocity in RPM
+         */
+        RPM getAngularVelocity() const override;
 
         /**
          * The desired motor output. It must be limited to a 16 bit int.
@@ -86,8 +99,6 @@ namespace trap::motor
          * This is an alias to interface with RAIL
          */
 		void setTargetOutput(const DjiMotorOutput& output) override;
-
-		void setDesiredOutput(const DjiMotorOutput& output);
 
         /**
          * true if a can message has been received within the last
@@ -105,8 +116,8 @@ namespace trap::motor
 
         const char* getName() const;
 
-    static const DjiMotorOutput k_maxOutput{tap::motor::DjiMotor::MAX_OUTPUT_GM6020};
+    static constexpr DjiMotorOutput kMaxOutput{std::numeric_limits<DjiMotorOutput>::max()};
     private:
-        tap::motor::DjiMotor m_djiMotor;
+        tap::motor::DjiMotor djiMotor_;
     };
 }
