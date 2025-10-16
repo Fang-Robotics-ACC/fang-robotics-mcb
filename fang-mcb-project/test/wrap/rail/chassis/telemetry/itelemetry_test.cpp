@@ -5,7 +5,7 @@
 
 namespace ITelemetryTest 
 {
-    TEST(railTelemetry, existence)
+    TEST(railTelemetry, compilation)
     {
         class Derp : public ::rail::telemetry::ITelemetry<double>
         {
