@@ -44,10 +44,10 @@ namespace trap::algorithms
          * This wrapper automatically calculates how much the error has changed
          * and the amount of time which has passed between calls
          */
-        OutputType runController(const MainType& mainError, const IntermediateType& intermediateError)
+        OutputType runController(const MainType& mainCurrent, const IntermediateType& intermediateCurrent)
         {
             const TimeType kDeltaTime{static_cast<TimeType>(runControllerTimer_.getDurationAndReset())};
-            return runController(mainError, intermediateError, kDeltaTime):
+            return runController(mainCurrent, intermediateCurrent, kDeltaTime):
         }
 
         /**
@@ -56,16 +56,22 @@ namespace trap::algorithms
          */
         OutputType runController
         (
-            const MainType& mainError,
-            const IntermediateType& intermediateError,
+            const MainType& mainCurrent,
+            const IntermediateType& intermediateCurrent,
             const TimeType& deltaTime
         )
         {
-            const IntermediateType kIntermediateTarget{mainPid_.runController(mainError), deltaTime};
+            const MainType kMainError{mainTarget_ - mainCurrent};
+            const IntermediateType kIntermediateTarget{mainPid_.runController(kMainError), deltaTime};
 
-            return intermediatePid_.runController(intermediateError, deltaTime);
+            const IntermediateType kIntermediateError{kIntermediateTarget - intermediateCurrent};
+            return intermediatePid_.runController(kIntermediateError, deltaTime);
         }
 
+        void setTarget(const MainType& mainTarget)
+        {
+            mainTarget_ = mainTarget;
+        }
     private:
         MainPid mainPid_;
         IntermediatePid intermediatePid_;
