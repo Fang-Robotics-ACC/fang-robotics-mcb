@@ -14,7 +14,7 @@ namespace fang::chassis
         std::unique_ptr<Imu> imu,
         const Config& config
     ):
-        //Base
+        // Base
         HolonomicSubsystem{drivers},
         quadDrive_{std::move(quadDrive)},
         imu_{std::move(imu)},
@@ -51,7 +51,7 @@ namespace fang::chassis
 
     void MecanumDrive::refreshSafeDisconnect()
     {
-        //The robot should not move when disconnected
+        // The robot should not move when disconnected
         setTargetTranslation({0_mps, 0_mps});
         setTargetRotation(0_rpm);
 
@@ -81,4 +81,4 @@ namespace fang::chassis
         const Radians currentFieldAngle{imu_->getYaw()};
         mecanumLogic_.setRobotAngle(currentFieldAngle);
     }
-}//namespace chassis
+}// namespace chassis
