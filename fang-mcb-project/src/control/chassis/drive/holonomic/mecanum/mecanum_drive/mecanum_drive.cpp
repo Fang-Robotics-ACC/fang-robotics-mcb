@@ -55,8 +55,15 @@ namespace fang::chassis
         setTargetTranslation({0_mps, 0_mps});
         setTargetRotation(0_rpm);
 
-        //Make sure wheels are sent a zero signal
-        syncWheelsToLogic();
+        // Make sure wheels are sent a zero signal
+        // Update is called because it deals with 
+        // Updating systems which are required for functionality
+        // Since the current scheme is that the motors
+        // are told to be still, then calling the update
+        // routine is not problamatic
+        // In more complicated setups, it might be advantageous
+        // at the coset of code duplication
+        update();
     }
 
     void MecanumDrive::updateSystems()
