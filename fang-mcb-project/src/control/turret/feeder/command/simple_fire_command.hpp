@@ -8,11 +8,11 @@
 
 namespace fang::turret
 {
-    class AutofireCommand:
+    class FireCommand:
         public tap::control::Command
     {
     public:
-        AutofireCommand(SimpleFeederSubsystem& feeder);
+        FireCommand(SimpleFeederSubsystem& feeder);
         const char* getName() const override {return "Auto Fire";}
         void initialize() override;
         void execute() override;

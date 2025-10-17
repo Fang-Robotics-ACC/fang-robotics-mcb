@@ -1,5 +1,4 @@
-#ifndef FANG_ROBOTICS_MCB_AMMO_BOOSTER_CONFIG_HPP
-#define FANG_ROBOTICS_MCB_AMMO_BOOSTER_CONFIG_HPP
+#pragma once
 #include "robot/variant/pierce/custom_variant/subsystem/pierce_ammo_booster.hpp"
 #include "wrap/units/units_alias.hpp"
 
@@ -20,12 +19,12 @@ namespace fang::robot
         .ki             = 0,
         .kd             = 0,
         .maxICumulative = 0,
-        .maxOutput      = trap::motor::DjiM3508::k_maxOutput
+        .maxOutput      = trap::motor::DjiM3508Old::k_maxOutput
     };
 
     static const Flywheel::Motor::Config kLeftFlywheelMotorConfig
     { 
-        .motorId        = tap::motor::MOTOR8,
+        .motorId        = tap::motor::MOTOR7,
         .canBus         = tap::can::CanBus::CAN_BUS1,
         .name           = "leftFlywheel",
         .inverted       = false,
@@ -41,7 +40,7 @@ namespace fang::robot
 
     static const Flywheel::Motor::Config kRightFlywheeMotorConfig 
     { 
-        .motorId        = tap::motor::MOTOR7,
+        .motorId        = tap::motor::MOTOR8,
         .canBus         = tap::can::CanBus::CAN_BUS1,
         .name           = "rightFlywheel",
         .inverted       = true,
@@ -62,4 +61,3 @@ namespace fang::robot
         .rightFlywheelConfig    = kRightFlywheelConfig
     };
 }
-#endif
