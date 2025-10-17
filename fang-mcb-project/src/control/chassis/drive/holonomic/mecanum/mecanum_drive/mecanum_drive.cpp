@@ -52,8 +52,9 @@ namespace fang::chassis
     void MecanumDrive::refreshSafeDisconnect()
     {
         //The robot should not move when disconnected
-        mecanumLogic_.setTranslation({0_mps, 0_mps});
-        mecanumLogic_.setRotation(0_rpm);
+        setTargetTranslation({0_mps, 0_mps});
+        setTargetRotation(0_rpm);
+
         //Make sure wheels are sent a zero signal
         syncWheelsToLogic();
     }
