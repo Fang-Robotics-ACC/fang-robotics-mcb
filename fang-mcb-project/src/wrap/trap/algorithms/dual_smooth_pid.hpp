@@ -56,22 +56,16 @@ namespace trap::algorithms
          */
         OutputType runController
         (
-            const MainType& mainCurrent,
-            const IntermediateType& intermediateCurrent,
+            const MainType& mainError,
+            const IntermediateType& intermediateError,
             const TimeType& deltaTime
         )
         {
-            const MainType kMainError{mainTarget_ - mainCurrent};
-            const IntermediateType kIntermediateTarget{mainPid_.runController(kMainError), deltaTime};
+            const IntermediateType kIntermediateTarget{mainPid_.runController(mainError), deltaTime};
 
-            const IntermediateType kIntermediateError{kIntermediateTarget - intermediateCurrent};
-            return intermediatePid_.runController(kIntermediateError, deltaTime);
+            return intermediatePid_.runController(intermediateError, deltaTime);
         }
 
-        void setTarget(const MainType& mainTarget)
-        {
-            mainTarget_ = mainTarget;
-        }
     private:
         MainPid mainPid_;
         IntermediatePid intermediatePid_;
