@@ -35,4 +35,9 @@ namespace trap::algorithms::dualSmoothPidTest
         DoubleSmoothPid intermediatePid{kConfig.intermediatePidConfig};
     };
 
+    TEST_P(MatchTest, generalMatching)
+    {
+        // DualSmoothPid needs a means to check the internals
+        // Or a means independent of time
+    }
 }
