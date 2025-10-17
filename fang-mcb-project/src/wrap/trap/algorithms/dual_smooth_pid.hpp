@@ -44,10 +44,10 @@ namespace trap::algorithms
          * This wrapper automatically calculates how much the error has changed
          * and the amount of time which has passed between calls
          */
-        OutputType runController(const MainType& mainCurrent, const IntermediateType& intermediateCurrent)
+        OutputType runController(const MainType& mainError, const IntermediateType& intermediateError)
         {
             const TimeType kDeltaTime{static_cast<TimeType>(runControllerTimer_.getDurationAndReset())};
-            return runController(mainCurrent, intermediateCurrent, kDeltaTime):
+            return runController(mainError, intermediateError, kDeltaTime):
         }
 
         /**
