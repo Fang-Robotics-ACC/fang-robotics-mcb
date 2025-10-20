@@ -21,7 +21,7 @@ namespace trap::algorithms::dualCascadePidTest
     //Sets up for manually calculating a cascade pid
     //and comparing if DualSmoothPid returns the same results
     //
-    class MatchTest : testing::TestWithParam<MatchTestParam>
+    class DualCascadePidMatchTest : public testing::TestWithParam<MatchTestParam>
     {
     protected:
         const MatchTestParam& kParam{GetParam()};
@@ -39,6 +39,9 @@ namespace trap::algorithms::dualCascadePidTest
 
         /**
          * Manually calculate cascading PID
+         * 
+         * Cascading PID uses one pid to generate the target
+         * value for the next pid
          */
         double calculateManualPid()
         {
@@ -60,11 +63,57 @@ namespace trap::algorithms::dualCascadePidTest
     };
 
 
-    TEST_P(MatchTest, generalMatching)
+    TEST_P(DualCascadePidMatchTest, generalMatching)
     {
+        const double kManualOutput{calculateManualPid()};
+        const double kOutput
+        {
+            dualPid.runController
+            (
+                kMainCurrent,
+                kIntermediateCurrent,
+                kDeltaTime
+            )
+        };
+
+        EXPECT_DOUBLE_EQ(kOutput, kManualOutput);
         // DualSmoothPid needs a means to check the internals
         // Or a means independent of time
     }
+
+    constexpr DoubleDualSmoothPid::IntermediatePid::Config kGeneralPidConfig
+    {
+        .kp = 1.0,
+        .ki = 23.3,
+        .kd = 14.0
+    };
+
+    constexpr DoubleDualSmoothPid::Config kConfig
+    {
+        .mainPidConfig = kGeneralPidConfig,
+        .intermediatePidConfig = kGeneralPidConfig,
+        .mainPidInitialValue = 0.0,
+        .intermediatePidInitialValue = 0.0
+    };
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        zero,
+        DualCascadePidMatchTest,
+        ::testing::Values
+        (
+            MatchTestParam
+            {
+                .mainTarget = 0.0,
+                .mainCurrent = 0.0,
+                .intermediateCurrent = 0.0,
+                .deltaTime = 1.0, // Delta time cannot be zero
+                .config = kConfig,
+                .mainErrorDerivative = 0.0,
+                .intermediateErrorDerivative = 0.0
+            }
+        )
+    );
 
     TEST(dualSmoothPid, compilationTest)
     {
