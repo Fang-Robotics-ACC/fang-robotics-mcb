@@ -1,5 +1,5 @@
 #include "wrap/trap/algorithms/smooth_pid.hpp"
-#include "wrap/trap/algorithms/dual_smooth_pid.hpp"
+#include "wrap/trap/algorithms/dual_cascade_pid.hpp"
 #include <gmock/gmock.h>
 
 
