@@ -5,7 +5,6 @@
 
 namespace trap::algorithms
 {
-    template<typename MainType, typename IntermediateType, typename OutputType, typename TimeType>
     /**
      * Cascading PID
      * 
@@ -17,6 +16,7 @@ namespace trap::algorithms
      * The main target is the radians, but the target for the intermediate error
      * is give by the first PID
      */
+    template<typename MainType, typename IntermediateType, typename OutputType, typename TimeType>
     class DualCascadePid
     {
     public:
@@ -33,7 +33,7 @@ namespace trap::algorithms
         DualCascadePid(const Config& config)
             :
             mainPid_{config.mainPidConfig, config.mainPidInitialValue},
-            intermediatePid_{config.intermediatePidConfig, config.intermediatePidConfig}
+            intermediatePid_{config.intermediatePidConfig, config.intermediatePidInitialValue}
         {
         }
 
@@ -47,7 +47,7 @@ namespace trap::algorithms
         OutputType runController(const MainType& mainCurrent, const IntermediateType& intermediateCurrent)
         {
             const TimeType kDeltaTime{static_cast<TimeType>(runControllerTimer_.getDurationAndReset())};
-            return runController(mainCurrent, intermediateCurrent, kDeltaTime):
+            return runController(mainCurrent, intermediateCurrent, kDeltaTime);
         }
 
         /**
