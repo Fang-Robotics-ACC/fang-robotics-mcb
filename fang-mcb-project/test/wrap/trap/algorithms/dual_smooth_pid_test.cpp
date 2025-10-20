@@ -7,7 +7,6 @@ namespace trap::algorithms::dualSmoothPidTest
 {
     using DoubleDualSmoothPid = DualCascadePid<double, double, double, double>;
     using DoubleSmoothPid = SmoothPid<double, double, double>;
-    /*
     struct MatchTestParam 
     {
         double mainTarget;
@@ -40,7 +39,6 @@ namespace trap::algorithms::dualSmoothPidTest
         // DualSmoothPid needs a means to check the internals
         // Or a means independent of time
     }
-    */
 
     TEST(dualSmoothPid, compilationTest)
     {
