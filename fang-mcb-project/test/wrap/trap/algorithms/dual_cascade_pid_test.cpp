@@ -3,7 +3,7 @@
 #include <gmock/gmock.h>
 
 
-namespace trap::algorithms::dualSmoothPidTest
+namespace trap::algorithms::dualCascadePidTest
 {
     using DoubleDualSmoothPid = DualCascadePid<double, double, double, double>;
     using DoubleSmoothPid = SmoothPid<double, double, double>;
