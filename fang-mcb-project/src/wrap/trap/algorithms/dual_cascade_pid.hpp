@@ -41,6 +41,7 @@ namespace trap::algorithms
          * @param mainCurent - current value of main 
          * @param intermediateCurrent  - current value of intermediate type
          * 
+         * WARNING: THIS IS DIFFERENT FROM STANDARD PID API
          * This wrapper automatically calculates how much the error has changed
          * and the amount of time which has passed between calls
          */
@@ -62,10 +63,25 @@ namespace trap::algorithms
         )
         {
             const MainType kMainError{mainTarget_ - mainCurrent};
-            const IntermediateType kIntermediateTarget{mainPid_.runController(kMainError), deltaTime};
+            const IntermediateType kIntermediateTarget
+            {
+                mainPid_.runController
+                (
+                    kMainError,
+                    deltaTime
+                )
+            };
 
             const IntermediateType kIntermediateError{kIntermediateTarget - intermediateCurrent};
-            return intermediatePid_.runController(kIntermediateError, deltaTime);
+            const OutputType kOutput
+            {
+                intermediatePid_.runController
+                (
+                    kIntermediateError,
+                    deltaTime
+                )
+            };
+            return kOutput; 
         }
 
         void setTarget(const MainType& mainTarget)
