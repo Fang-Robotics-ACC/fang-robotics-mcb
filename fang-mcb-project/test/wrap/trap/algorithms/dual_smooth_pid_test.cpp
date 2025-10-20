@@ -7,6 +7,7 @@ namespace trap::algorithms::dualSmoothPidTest
 {
     using DoubleDualSmoothPid = DualCascadePid<double, double, double, double>;
     using DoubleSmoothPid = SmoothPid<double, double, double>;
+    /*
     struct MatchTestParam 
     {
         double mainTarget;
@@ -16,10 +17,9 @@ namespace trap::algorithms::dualSmoothPidTest
         DoubleDualSmoothPid::Config config;
     };
 
-    /**
-     * Sets up for manually calculating a cascade pid
-     * and comparing if DualSmoothPid returns the same results
-     */
+    //Sets up for manually calculating a cascade pid
+    //and comparing if DualSmoothPid returns the same results
+    //
     class MatchTest : testing::TestWithParam<MatchTestParam>
     {
     protected:
@@ -39,5 +39,26 @@ namespace trap::algorithms::dualSmoothPidTest
     {
         // DualSmoothPid needs a means to check the internals
         // Or a means independent of time
+    }
+    */
+
+    TEST(dualSmoothPid, compilationTest)
+    {
+        constexpr DoubleDualSmoothPid::IntermediatePid::Config kGeneralPidConfig
+        {
+            .kp = 1.0,
+            .ki = 23.3,
+            .kd = 14.0
+        };
+
+        constexpr DoubleDualSmoothPid::Config kConfig
+        {
+            .mainPidConfig = kGeneralPidConfig,
+            .intermediatePidConfig = kGeneralPidConfig,
+            .mainPidInitialValue = 0.0,
+            .intermediatePidInitialValue = 0.0
+        };
+
+        DoubleDualSmoothPid pid{kConfig};
     }
 }

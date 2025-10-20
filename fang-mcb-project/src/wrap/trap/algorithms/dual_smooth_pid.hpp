@@ -17,7 +17,7 @@ namespace trap::algorithms
      * The main target is the radians, but the target for the intermediate error
      * is give by the first PID
      */
-    class DualSmoothPid
+    class DualCascadePid
     {
     public:
         using MainPid = SmoothPid<MainType, IntermediateType, TimeType>;
@@ -30,7 +30,7 @@ namespace trap::algorithms
             OutputType intermediatePidInitialValue;
         };
 
-        DualSmoothPid(const Config& config)
+        DualCascadePid(const Config& config)
             :
             mainPid_{config.mainPidConfig, config.mainPidInitialValue},
             intermediatePid_{config.intermediatePidConfig, config.intermediatePidConfig}
