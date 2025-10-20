@@ -35,6 +35,14 @@ namespace trap
             ControlType runController(ErrorType error)
             {
                 const TimeUnit deltaTime{m_runControllerTimer.getDurationAndReset()};
+                return runController(error, deltaTime);
+            }
+
+            /**
+             * Manual delta time but with automatic derivative calculation
+             */
+            ControlType runController(const ErrorType& error, const TimeUnit& deltaTime)
+            {
                 const ErrorType deltaError{error - m_lastError};
                 const double errorDerivative{static_cast<double>(deltaError) / static_cast<double>(deltaTime)};
                 //Prevents oscillations by filtering out higher frequencies
