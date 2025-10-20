@@ -14,6 +14,8 @@ namespace trap::algorithms::dualCascadePidTest
         double intermediateCurrent;
         double deltaTime;
         DoubleDualSmoothPid::Config config;
+        double mainErrorDerivative = 0.0;
+        double intermediateErrorDerivative = 0.0;
     };
 
     //Sets up for manually calculating a cascade pid
@@ -28,6 +30,8 @@ namespace trap::algorithms::dualCascadePidTest
         const double kIntermediateCurrent{kParam.intermediateCurrent};
         const double kDeltaTime{kParam.deltaTime};
         const DoubleDualSmoothPid::Config kConfig{kParam.config};
+        const double kMainErrorDerivative{kParam.mainErrorDerivative};
+        const double kIntermediateErrorDerivative{kParam.intermediateErrorDerivative};
 
         DoubleDualSmoothPid dualPid{kConfig};
         DoubleSmoothPid mainPid{kConfig.mainPidConfig};
