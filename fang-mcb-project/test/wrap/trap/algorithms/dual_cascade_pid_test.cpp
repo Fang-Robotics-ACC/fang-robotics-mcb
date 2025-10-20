@@ -36,7 +36,29 @@ namespace trap::algorithms::dualCascadePidTest
         DoubleDualSmoothPid dualPid{kConfig};
         DoubleSmoothPid mainPid{kConfig.mainPidConfig};
         DoubleSmoothPid intermediatePid{kConfig.intermediatePidConfig};
+
+        /**
+         * Manually calculate cascading PID
+         */
+        double calculateManualPid()
+        {
+            const double kMainError{kMainTarget - kMainCurrent};
+            const double kIndermediateTarget
+            {
+                mainPid.runController(kMainError, kMainErrorDerivative, kDeltaTime)
+            };
+
+            // Only cascade through two PIDs
+            const double kIntermediateError{kIndermediateTarget - kIntermediateCurrent};
+            const double kOutput 
+            {
+                intermediatePid.runController(kIntermediateError, kIntermediateErrorDerivative, kDeltaTime)
+            };
+
+            return kOutput;
+        }
     };
+
 
     TEST_P(MatchTest, generalMatching)
     {
