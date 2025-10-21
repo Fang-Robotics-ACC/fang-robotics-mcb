@@ -13,7 +13,10 @@ namespace trap::algorithms
      * 
      * this is not necessarily the type that is received but the type
      * that is used for controlling. This is useful for types which
-     * override arrithmetic such as RingFloat or RingRadias
+     * override arrithmetic such as RingFloat or RingRadians
+     * 
+     * Error is calculated with target - current. So any
+     * overload of the operator- will allow for custom behavior 
      * 
      * e.g. Radians which then output a target RPM which outputs an abstract Motoroutput
      * 
