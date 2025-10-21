@@ -48,6 +48,7 @@ namespace fang::motor::dualCascadeMotorTest
         std::unique_ptr<TelemetryMock> speedTelemetry{std::make_unique<TelemetryMock>()};
         DualCascadeMotor<double, double, double> cascadeMotor 
         {
+            DualCascadeMotor<double, double, double>::Config{},
             std::move(motor),
             std::move(positionTelemetry),
             std::move(speedTelemetry)
