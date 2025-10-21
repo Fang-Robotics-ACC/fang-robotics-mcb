@@ -9,7 +9,11 @@ namespace trap::algorithms
      * Cascading PID
      * 
      * MainError is the type for the beginning and main targeted value
-     * IntermediateError is the type that is in the middl
+     * IntermediateError is the type that is in the middle
+     * 
+     * this is not necessarily the type that is received but the type
+     * that is used for controlling. This is useful for types which
+     * override arrithmetic such as RingFloat or RingRadias
      * 
      * e.g. Radians which then output a target RPM which outputs an abstract Motoroutput
      * 
@@ -62,7 +66,10 @@ namespace trap::algorithms
             const TimeType& deltaTime
         )
         {
-            const MainType kMainError{mainTarget_ - mainCurrent};
+            // Important, the casting of MainType into Maintype is because sometimes,
+            // the returned data is not in the proper type when arithmeticf is altered
+            // such as when RingRadians has an operator overload
+            const MainType kMainError{MainType{mainTarget_} - MainType{mainCurrent}};
             const IntermediateType kIntermediateTarget
             {
                 mainPid_.runController
@@ -72,7 +79,14 @@ namespace trap::algorithms
                 )
             };
 
-            const IntermediateType kIntermediateError{kIntermediateTarget - intermediateCurrent};
+            // Important, the casting of IntermediateType into IntermedateType is because sometimes,
+            // the returned data is not in the proper type when arithmeticf is altered
+            // such as when RingRadians has an operator overload
+            const IntermediateType kIntermediateError
+            {
+                IntermediateType{kIntermediateTarget} 
+              - IntermediateType{intermediateCurrent}
+            };
             const OutputType kOutput
             {
                 intermediatePid_.runController
