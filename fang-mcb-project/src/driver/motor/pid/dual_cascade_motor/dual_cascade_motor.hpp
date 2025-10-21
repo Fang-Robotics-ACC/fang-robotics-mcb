@@ -2,6 +2,7 @@
 
 #include "wrap/rail/motor/ioutput_motor.hpp"
 #include "wrap/rail/telemetry/itelemetry.hpp"
+#include "wrap/rail/system/isystem.hpp"
 
 #include <memory>
 
@@ -15,7 +16,7 @@ namespace fang::motor
      * (2nd pid)
      */
     template <typename Output, typename Control, typename Intermediate>
-    class DualCascadeMotor
+    class DualCascadeMotor : public system::ISystem
     {
     public:
         using ControlledMotor = IOutputMotor<Output>;
@@ -26,13 +27,23 @@ namespace fang::motor
         (
             std::unique_ptr<ControlledMotor> motor,
             std::unique_ptr<ControlTelemetry> controlTelemetry,
-            std::unique_ptr<IntermediateTelemetry> intermediateTelemetry>
+            std::unique_ptr<IntermediateTelemetry> intermediateTelemetry
         )
             :
             motor_{std::move(motor)},
             controlTelemetry_{std::move(controlTelemetry)},
             intermediateTelemetry_{std::move(intermediateTelemetry)}
         {
+        }
+
+        void initialize() override
+        {
+            motor_->initialize();
+        }
+
+        void update() override
+        {
+            motor_->update();
         }
 
     private:
