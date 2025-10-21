@@ -2,6 +2,7 @@
 #include "wrap/trap/algorithms/dual_cascade_pid.hpp"
 
 #include "rail/mock/telemetry/itelemetry_mock.hpp"
+#include "rail/mock/motor/ioutput_motor_mock.hpp"
 
 #include <memory>
 #include <gtest/gtest.h>
@@ -10,6 +11,7 @@ namespace fang::motor::dualCascadeMotorTest
 {
     using DoubleDualSmoothPid = trap::algorithms::DualCascadePid<double, double, double, double>;
     using TelemetryMock = rail::telemetry::ITelemetryMock<double>;
+    using OutputMotorMock = rail::motor::IOutputMotorMock<double>;
 
     struct MatchTestParam 
     {
@@ -39,8 +41,18 @@ namespace fang::motor::dualCascadeMotorTest
         */
     };
 
-    TEST(dualCascadeMotor, zero)
+    TEST(dualCascadeMotor, compilation)
     {
+        std::unique_ptr<OutputMotorMock> motor{std::make_unique<OutputMotorMock>()};
+        std::unique_ptr<TelemetryMock> positionTelemetry{std::make_unique<TelemetryMock>()};
+        std::unique_ptr<TelemetryMock> speedTelemetry{std::make_unique<TelemetryMock>()};
+        DualCascadeMotor<double, double, double> cascadeMotor 
+        {
+            std::move(motor),
+            std::move(positionTelemetry),
+            std::move(speedTelemetry)
+        };
+
         // Basic match test
         // The output of the motor should be the same as a dualCascadePid
         // fed the same data
