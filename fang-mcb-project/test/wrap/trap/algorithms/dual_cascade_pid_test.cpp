@@ -115,6 +115,48 @@ namespace trap::algorithms::dualCascadePidTest
         )
     );
 
+    // Example of multiple values
+    INSTANTIATE_TEST_CASE_P
+    (
+        positive,
+        DualCascadePidMatchTest,
+        ::testing::Values
+        (
+            MatchTestParam
+            {
+                .mainTarget = 324.230,
+                .mainCurrent = 23.0,
+                .intermediateCurrent = 232.0,
+                .deltaTime = 1.0, // Delta time cannot be zero
+                .config = kConfig,
+                .mainErrorDerivative = 0.0,
+                .intermediateErrorDerivative = 0.0
+            },
+            MatchTestParam
+            {
+                .mainTarget = 10.0,
+                .mainCurrent = 1.0,
+                .intermediateCurrent = 1.0,
+                .deltaTime = 1.0, // Delta time cannot be zero
+                .config = kConfig,
+                .mainErrorDerivative = 0.0,
+                .intermediateErrorDerivative = 0.0
+            },
+            MatchTestParam
+            {
+                .mainTarget = 1.0,
+                .mainCurrent = 3.0,
+                .intermediateCurrent = 0.0,
+                .deltaTime = 1.0, // Delta time cannot be zero
+                .config = kConfig,
+                .mainErrorDerivative = 0.0,
+                .intermediateErrorDerivative = 0.0
+            }
+        )
+    );
+
+    // TODO: Add more test cases
+
     TEST(dualSmoothPid, compilationTest)
     {
         constexpr DoubleDualSmoothPid::IntermediatePid::Config kGeneralPidConfig
