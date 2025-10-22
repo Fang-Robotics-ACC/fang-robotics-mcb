@@ -33,8 +33,8 @@ namespace trap::algorithms
         {
             MainPid::Config mainPidConfig;
             IntermediatePid::Config intermediatePidConfig;
-            IntermediateType mainPidInitialValue;
-            OutputType intermediatePidInitialValue;
+            MainType mainPidInitialValue;
+            IntermediateType intermediatePidInitialValue;
         };
 
         DualCascadePid(const Config& config)
