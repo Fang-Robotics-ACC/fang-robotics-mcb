@@ -53,13 +53,6 @@ namespace fang::motor::dualCascadeMotorTest
             std::move(positionTelemetry),
             std::move(speedTelemetry)
         };
-
-        // Basic match test
-        // The output of the motor should be the same as a dualCascadePid
-        // fed the same data
-
-        // Connect the motor to two telemetry mock objects
-        // Connect the motor to OutputMotorMock
     }
 
     TEST(dualCascadeMotor, initializeAndUpdate)
@@ -85,7 +78,11 @@ namespace fang::motor::dualCascadeMotorTest
         cascadeMotor.update();
     }
 
-    // Update test
+    //TODO:
+    // Basic match test
+    // The output of the motor should be the same as a dualCascadePid
+    // fed the same data
 
-    // Initialize test
+    // Connect the motor to two telemetry mock objects
+    // Connect the motor to OutputMotorMock
 }
