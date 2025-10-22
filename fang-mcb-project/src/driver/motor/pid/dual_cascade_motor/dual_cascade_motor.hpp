@@ -51,8 +51,8 @@ namespace fang::motor
 
         void update() override
         {
-            motor_->update();
             syncMotorToPid();
+            motor_->update();
         }
 
         void setTarget(const Control& control)
