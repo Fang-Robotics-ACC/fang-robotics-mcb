@@ -20,7 +20,7 @@ namespace fang::motor
      * (2nd pid)
      */
     template <typename Output, typename Control, typename Intermediate>
-    class DualCascadeMotor : public system::ISystem
+    class DualCascadeMotor : virtual public system::ISystem
     {
     public:
         using ControlledMotor = IOutputMotor<Output>;
