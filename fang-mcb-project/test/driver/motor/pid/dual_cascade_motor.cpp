@@ -62,6 +62,29 @@ namespace fang::motor::dualCascadeMotorTest
         // Connect the motor to OutputMotorMock
     }
 
+    TEST(dualCascadeMotor, initializeAndUpdate)
+    {
+        std::unique_ptr<OutputMotorMock> motor{std::make_unique<OutputMotorMock>()};
+        std::unique_ptr<TelemetryMock> positionTelemetry{std::make_unique<TelemetryMock>()};
+        std::unique_ptr<TelemetryMock> speedTelemetry{std::make_unique<TelemetryMock>()};
+
+        OutputMotorMock* motorPtr{motor.get()};
+
+        DualCascadeMotor<double, double, double> cascadeMotor 
+        {
+            DualCascadeMotor<double, double, double>::Config{},
+            std::move(motor),
+            std::move(positionTelemetry),
+            std::move(speedTelemetry)
+        };
+
+        EXPECT_CALL(*motorPtr, initialize());
+        EXPECT_CALL(*motorPtr, update());
+
+        cascadeMotor.initialize();
+        cascadeMotor.update();
+    }
+
     // Update test
 
     // Initialize test
