@@ -29,14 +29,12 @@ namespace fang::motor
         using Pid = trap::algorithms::DualCascadePid<Control, Intermediate, Output, Seconds>;
         using Config = Pid::Config;
 
-        DualCascadeMotor
-        (
+        DualCascadeMotor(
             const Config& config,
             std::unique_ptr<ControlledMotor> motor,
             std::unique_ptr<ControlTelemetry> controlTelemetry,
             std::unique_ptr<IntermediateTelemetry> intermediateTelemetry
-        )
-            :
+        ):
             pid_{config},
             motor_{std::move(motor)},
             controlTelemetry_{std::move(controlTelemetry)},
@@ -70,8 +68,7 @@ namespace fang::motor
         {
             const Output kOutput
             {
-                pid_.runController
-                (
+                pid_.runController(
                     controlTelemetry_->getData(),
                     intermediateTelemetry_->getData()
                 )
