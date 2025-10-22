@@ -13,6 +13,8 @@ namespace trap::algorithms
      */
     class RingRadians : public WrappedRadians
     {
+        using WrappedRadians::WrappedRadians;
+
         Radians operator-(const WrappedRadians& other)
         {
             return minDifference(other);
