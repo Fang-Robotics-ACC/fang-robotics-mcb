@@ -13,9 +13,11 @@ namespace trap::algorithms
      */
     class RingRadians : public WrappedRadians
     {
+    public:
         using WrappedRadians::WrappedRadians;
 
-        Radians operator-(const WrappedRadians& other)
+        RingRadians() : WrappedRadians{Radians{0}} {}
+        Radians operator-(const WrappedRadians& other) const
         {
             return minDifference(other);
         }

@@ -46,11 +46,12 @@ namespace fang::motor::dualCascadePositionTest
     {
         std::unique_ptr<OutputMotorMock> motor{std::make_unique<OutputMotorMock>()};
         auto positionTelemetry{
-            std::make_unique<rail::telemetry::ITelemetryMock<Radians>>()
+            std::make_unique<rail::telemetry::ITelemetryMock<trap::algorithms::RingRadians>>()
         };
         std::unique_ptr<TelemetryMock> speedTelemetry{std::make_unique<TelemetryMock>()};
 
-        DualCascadePosition<double, double> cascadeMotor{
+        DualCascadePosition<double, double> cascadeMotor
+        {
             DualCascadePosition<double, double>::Config{},
             std::move(motor),
             std::move(positionTelemetry),

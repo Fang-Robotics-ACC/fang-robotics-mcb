@@ -1,6 +1,6 @@
 #pragma once
 
-#include "dual_cascade_motor.hpp"
+#include "dual_cascade_position.hpp"
 
 #include "telemetry/adapter/iangular_velocity_adapter.hpp"
 #include "telemetry/adapter/iangular_position_adapter_ringed.hpp"
@@ -16,26 +16,24 @@
 namespace fang::motor
 {
     class DualCascadeGm6020:
-        public DualCascadeMotor
+        public DualCascadePosition
         <
             trap::motor::DjiMotorOutput,
-            trap::algorithms::RingRadians,
             RPM
         >
     {
     public:
         using Motor = trap::motor::DjiGM6020;
-        using PidMotor = DualCascadeMotor
+        using PidMotor = DualCascadePosition
         <
             trap::motor::DjiMotorOutput,
-            trap::algorithms::RingRadians,
             RPM
         >;
 
         struct Config
         {
             Motor::Config motorConfig;
-            Pid::Config pidMotorConfig;
+            PidMotor::Config pidMotorConfig;
         };
 
         DualCascadeGm6020(Drivers& drivers, const Config& config):

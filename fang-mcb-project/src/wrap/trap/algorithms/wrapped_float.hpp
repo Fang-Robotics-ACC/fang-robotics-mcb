@@ -135,6 +135,16 @@ namespace trap
                 return Unit{m_wrappedFloat.getLowerBound()};
             }
 
+            operator double() const
+            {
+                return m_wrappedFloat.getWrappedValue();
+            }
+
+            operator Unit() const
+            {
+                return Unit{m_wrappedFloat.getWrappedValue()};
+            }
+
         private:
         TappedFloat m_wrappedFloat;
         };
