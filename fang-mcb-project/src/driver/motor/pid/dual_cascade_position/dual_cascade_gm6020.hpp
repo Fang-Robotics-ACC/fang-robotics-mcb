@@ -30,8 +30,7 @@ namespace fang::motor
             RPM
         >;
 
-        struct Config
-        {
+        struct Config{
             Motor::Config motorConfig;
             PidMotor::Config pidMotorConfig;
         };
@@ -45,33 +44,26 @@ namespace fang::motor
         private:
             PidMotor make(Drivers& drivers, const Config& config)
             {
-                auto motor
-                {
-                    std::make_unique<Motor>
-                    (
+                auto motor{
+                    std::make_unique<Motor>(
                         drivers,
                         config.motorConfig
                     )
                 };
 
-                auto positionTelemetry
-                {
-                    std::make_unique<telemetry::IAngularPositionAdapterRinged>
-                    (
-                        motor
+                auto positionTelemetry{
+                    std::make_unique<telemetry::IAngularPositionAdapterRinged>(
+                        *motor
                     )
                 };
 
-                auto velocityTelemetry
-                {
-                    std::make_unique<telemetry::IAngularVelocityAdapter>
-                    (
-                        motor
+                auto velocityTelemetry{
+                    std::make_unique<telemetry::IAngularVelocityAdapter>(
+                        *motor
                     )
                 };
 
-            return PidMotor
-                {
+            return PidMotor{
                     config.pidMotorConfig,
                     std::move(motor),
                     std::move(positionTelemetry),
