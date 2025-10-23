@@ -92,7 +92,13 @@ namespace fang::robot
         false
     };
 
-    turret::BasicFieldPitchSystem::Config kBasicFieldPitchConfig
+    static const motor::DualCascadeGm6020::Config kDualCascadeYawMotorConfig
+    {
+        .motorConfig = kYawMotorConfig,
+        .pidMotorConfig = kYawMotorPidConfig 
+    };
+
+    static const turret::BasicFieldPitchSystem::Config kBasicFieldPitchConfig
     {
         .pitchError = 0_deg,
         .pitchRange = {-25_deg, 10_deg}
@@ -104,9 +110,9 @@ namespace fang::robot
         .pitchSystemConfig = kBasicFieldPitchConfig
     };
 
-    turret::PierceFieldGimbal::YawSystem::Config kYawSystemConfig 
+    static turret::PierceFieldGimbal::YawSystem::Config kYawSystemConfig 
     {
-        .motorConfig = kYawMotorConfig,
+        .motorConfig = kDualCascadeYawMotorConfig,
         .yawSystemConfig = turret::PierceFieldGimbal::YawSystem::ChassisFieldYawSystem::Config
         {
             .yawError =-7.5_deg
