@@ -46,23 +46,47 @@ namespace fang::robot
         .intermediatePidInitialValue = 0.0_rpm,
     };
 
-    static const motor::DualCascadeGm6020::Config
+    static const motor::DualCascadeGm6020::Config kDualCascadePitchMotorConfig
     {
         .motorConfig = kPitchMotorConfig,
         .pidMotorConfig = kPitchMotorPidConfig
     };
 
-    static const trap::motor::DjiSpeedPid::Config kYawPidConfig
+    static const trap::motor::DjiSpeedPid::Config kYawPositionPid
     {
-        .kp                 = 100'000,
-        .ki                 = 5,
-        .kd                 = 2500.0,
-        .maxICumulative     = 7000,
+        .kp                 = 0,
+        .ki                 = 0,
+        .kd                 = 0.0,
+        .maxICumulative     = 0,
         .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
         .tQDerivativeKalman = 0.01, //Cause value to be more "sluggish to reduce oscillation"
-        .tRDerivativeKalman = 1000.0,
-        .errorDerivativeFloor = 0.10 //radians
+        .tRDerivativeKalman = 0.0,
+        .errorDerivativeFloor = 0.0 //radians
     };
+
+    static const trap::motor::DjiSpeedPid::Config kYawVelocityPid
+    {
+        .kp                 = 0,
+        .ki                 = 0,
+        .kd                 = 0.0,
+        .maxICumulative     = 0,
+        .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
+        .tQDerivativeKalman = 0.0, //Cause value to be more "sluggish to reduce oscillation"
+        .tRDerivativeKalman = 0.0,
+        .errorDerivativeFloor = 0.0 //radians
+    };
+
+    static const motor::DualCascadeGm6020::PidMotor::Config kYawMotorPidConfig
+    {
+
+        .mainPidConfig = kYawPositionPid,
+        .intermediatePidConfig = kYawVelocityPid,
+        .mainPidInitialValue = 0.0_rad,
+        .intermediatePidInitialValue = 0.0_rpm,
+    };
+
+
+
     static const trap::motor::DjiGM6020::Config kYawMotorConfig 
     {
         tap::motor::MOTOR1,
@@ -79,7 +103,7 @@ namespace fang::robot
 
     static const turret::PierceFieldGimbal::PitchSystem::Config kPitchSystemConfig
     {
-        .motorConfig = kPitchMotorConfig,
+        .motorConfig = kDualCascadePitchMotorConfig,
         .pitchSystemConfig = kBasicFieldPitchConfig
     };
 
