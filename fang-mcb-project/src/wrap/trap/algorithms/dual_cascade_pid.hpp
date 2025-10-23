@@ -62,36 +62,33 @@ namespace trap::algorithms
          * Allows unit testing an manual time determination see the main version
          * for parameter information
          */
-        OutputType runController
-        (
+        OutputType runController(
             const MainType& mainCurrent,
             const IntermediateType& intermediateCurrent,
             const TimeType& deltaTime
         )
         {
             const MainType kMainError{mainTarget_ - mainCurrent};
-            const IntermediateType kIntermediateTarget
-            {
-                mainPid_.runController
-                (
+
+            const IntermediateType kIntermediateTarget{
+                mainPid_.runController(
                     kMainError,
                     deltaTime
                 )
             };
 
-            const IntermediateType kIntermediateError
-            {
+            const IntermediateType kIntermediateError{
                 kIntermediateTarget 
               - intermediateCurrent
             };
-            const OutputType kOutput
-            {
-                intermediatePid_.runController
-                (
+
+            const OutputType kOutput{
+                intermediatePid_.runController(
                     kIntermediateError,
                     deltaTime
                 )
             };
+
             return kOutput; 
         }
 
