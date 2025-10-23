@@ -69,10 +69,7 @@ namespace trap::algorithms
             const TimeType& deltaTime
         )
         {
-            // Important, the casting of MainType into Maintype is because sometimes,
-            // the returned data is not in the proper type when arithmeticf is altered
-            // such as when RingRadians has an operator overload
-            const MainType kMainError{MainType{mainTarget_} - MainType{mainCurrent}};
+            const MainType kMainError{mainTarget_ - mainCurrent};
             const IntermediateType kIntermediateTarget
             {
                 mainPid_.runController
@@ -82,13 +79,10 @@ namespace trap::algorithms
                 )
             };
 
-            // Important, the casting of IntermediateType into IntermedateType is because sometimes,
-            // the returned data is not in the proper type when arithmeticf is altered
-            // such as when RingRadians has an operator overload
             const IntermediateType kIntermediateError
             {
-                IntermediateType{kIntermediateTarget} 
-              - IntermediateType{intermediateCurrent}
+                kIntermediateTarget 
+              - intermediateCurrent
             };
             const OutputType kOutput
             {
