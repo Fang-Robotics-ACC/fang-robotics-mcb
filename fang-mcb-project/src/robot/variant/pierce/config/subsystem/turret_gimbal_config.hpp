@@ -39,7 +39,6 @@ namespace fang::robot
 
     static const motor::DualCascadeGm6020::PidMotor::Config kPitchMotorPidConfig
     {
-
         .mainPidConfig = kPitchPositionPid,
         .intermediatePidConfig = kPitchVelocityPid,
         .mainPidInitialValue = 0.0_rad,
@@ -84,8 +83,6 @@ namespace fang::robot
         .mainPidInitialValue = 0.0_rad,
         .intermediatePidInitialValue = 0.0_rpm,
     };
-
-
 
     static const trap::motor::DjiGM6020::Config kYawMotorConfig 
     {
