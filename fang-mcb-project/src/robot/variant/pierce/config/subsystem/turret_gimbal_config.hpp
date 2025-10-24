@@ -31,10 +31,10 @@ namespace fang::robot
 
     static const trap::motor::DjiGM6020::Config kPitchMotorConfig
     {
-        .motorId    = tap::motor::MOTOR2,
-        .canBus     = tap::can::CanBus::CAN_BUS1,
-        .name       = "pitchMotor",
-        .inverted   =  true,
+        .motorId        = tap::motor::MOTOR2,
+        .canBus         = tap::can::CanBus::CAN_BUS1,
+        .name           = "pitchMotor",
+        .inverted       =  true,
         .currentControl = false
     };
 
@@ -87,10 +87,10 @@ namespace fang::robot
 
     static const trap::motor::DjiGM6020::Config kYawMotorConfig 
     {
-        .motorId    = tap::motor::MOTOR1,
-        .canBus     = tap::can::CanBus::CAN_BUS1,
-        .name       = "yawMotor",
-        .inverted   = false,
+        .motorId        = tap::motor::MOTOR1,
+        .canBus         = tap::can::CanBus::CAN_BUS1,
+        .name           = "yawMotor",
+        .inverted       = false,
         .currentControl = false
     };
 
