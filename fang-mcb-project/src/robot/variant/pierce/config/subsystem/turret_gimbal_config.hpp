@@ -34,7 +34,8 @@ namespace fang::robot
         .motorId    = tap::motor::MOTOR2,
         .canBus     = tap::can::CanBus::CAN_BUS1,
         .name       = "pitchMotor",
-        .inverted   =  true
+        .inverted   =  true,
+        .currentControl = false
     };
 
     static const motor::DualCascadeGm6020::PidMotor::Config kPitchMotorPidConfig
@@ -89,7 +90,8 @@ namespace fang::robot
         .motorId    = tap::motor::MOTOR1,
         .canBus     = tap::can::CanBus::CAN_BUS1,
         .name       = "yawMotor",
-        .inverted   = false
+        .inverted   = false,
+        .currentControl = false
     };
 
     static const motor::DualCascadeGm6020::Config kDualCascadeYawMotorConfig
