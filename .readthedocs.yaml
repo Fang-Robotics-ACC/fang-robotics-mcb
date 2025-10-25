@@ -18,8 +18,7 @@ build:
       html:
         - echo "Building HTML"
         - mkdir -p $READTHEDOCS_OUTPUT/
-        - cd docs/
-        - doxygen
+        - doxygen ./docs/Doxyfile
     
     
 #python:
