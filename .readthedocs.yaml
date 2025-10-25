@@ -13,6 +13,7 @@ build:
     python: "3.10" #Required by rtd
   apt_packages:
     - doxygen
+    - graphviz
   jobs:
     build:
       html:
