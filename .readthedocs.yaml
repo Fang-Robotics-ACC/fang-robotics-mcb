@@ -14,13 +14,12 @@ build:
   apt_packages:
     - doxygen
   jobs:
-    make-dir:
-      - mkdir -p $READTHEDOCS_OUTPUT/html/
-    #pre-install:
-    #  - sudo apt install doxygen
-    doxygen-gen:
-      - cd docs/
-      - doxygen 
+    build:
+      html:
+        - echo "Building HTML"
+        - mkdir -p $READTHEDOCS_OUTPUT/
+        - cd docs/
+        - doxygen
     
     
 #python:
