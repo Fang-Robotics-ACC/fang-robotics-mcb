@@ -1,4 +1,4 @@
-#Welcome to fang-mcb documentation! {#mainpage}
+Welcome to fang-mcb documentation! {#mainpage}
 ==================================
 
 Here you will find documentation for Fang Robotics MCB embedded and control 
