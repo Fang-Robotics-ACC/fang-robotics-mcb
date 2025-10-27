@@ -84,8 +84,8 @@ namespace trap::algorithms::dualCascadePidTest
     constexpr DoubleDualSmoothPid::IntermediatePid::Config kGeneralPidConfig
     {
         .kp = 1.0,
-        .ki = 12.0,
-        .kd = 4.0,
+        .ki = 0.0,
+        .kd = 0.0,
         .maxOutput = 10000
     };
 
