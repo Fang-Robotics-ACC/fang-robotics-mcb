@@ -12,6 +12,7 @@ namespace trap
         {
         public:
             WrappedRadians(const Radians& value);
+            WrappedRadians(double value);
 
             WrappedRadians(const WrappedFloat<Radians>& value);
             static constexpr double k_pi{M_PI};

@@ -22,7 +22,7 @@ namespace trap
             //A bit of cheating
             using Config = tap::algorithms::SmoothPidConfig;
 
-            SmoothPid(const Config& config, ErrorType initialLastError = ErrorType{0})
+            SmoothPid(const Config& config, ErrorType initialLastError = ErrorType{0.0})
             : m_smoothPid{config}, m_lastError{initialLastError}
             {
             }
