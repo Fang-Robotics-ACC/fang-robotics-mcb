@@ -3,7 +3,7 @@
 #include "dual_cascade_position.hpp"
 
 #include "telemetry/adapter/iangular_velocity_adapter.hpp"
-#include "telemetry/adapter/iangular_position_adapter_ringed.hpp"
+#include "telemetry/adapter/iangular_position_adapter.hpp"
 
 #include "wrap/trap/motor/dji_gm6020.hpp"
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
@@ -46,7 +46,7 @@ namespace fang::motor
             };
 
             auto positionTelemetry{
-                std::make_unique<telemetry::IAngularPositionAdapterRinged>(
+                std::make_unique<telemetry::IAngularPositionAdapter>(
                     *motor
                 )
             };
