@@ -22,23 +22,33 @@ namespace fang::motor::dualCascadePositionTest
 
     struct MatchTestParam 
     {
-        double mainTarget;
-        double mainCurrent;
-        double intermediateCurrent;
-        double deltaTime;
-        DoubleDualSmoothPid::Config config;
-        double mainErrorDerivative = 0.0;
-        double intermediateErrorDerivative = 0.0;
+        Radians mainTarget;
+        Radians mainCurrent;
+        RPM intermediateCurrent;
+        Seconds deltaTime;
+        PositionCascadeMotor::Config config;
     };
 
-    class DualCascadeMotorMatchTest : public testing::TestWithParam<MatchTestParam>
+    class DualCascadePositionMatchTest : public testing::TestWithParam<MatchTestParam>
     {
     protected:
         const MatchTestParam kParam{GetParam()};
-        DoubleDualSmoothPid dualPid{kParam.config};
-        std::unique_ptr<TelemetryMock> positionTelemetry{std::make_unique<TelemetryMock>()};
-        std::unique_ptr<TelemetryMock> speedTelemetry{std::make_unique<TelemetryMock>()};
+        DualPid dualPid{kParam.config};
 
+        std::unique_ptr<MainTelemetry> positionTelemetryPtr{std::make_unique<MainTelemetry>()};
+        std::unique_ptr<IntermediateTelemetry> speedTelemetryPtr{std::make_unique<IntermediateTelemetry>()};
+        std::unique_ptr<OutputMotorMock> outputMotorPtr{std::make_unique<OutputMotorMock>()};
+
+        MainTelemetry& positionTelemetry {*positionTelemetryPtr};
+        IntermediateTelemetry& speedTelemetry{*speedTelemetryPtr};
+        OutputMotorMock& outputMotor{*outputMotorPtr};
+
+        DualCascadePosition<double, RPM> cascadeMotor{
+            kParam.config,
+            std::move(outputMotorPtr),
+            std::move(positionTelemetryPtr),
+            std::move(speedTelemetryPtr)
+        };
         /*
         DualCascadeMotor<double, double, double> cascadeMotor
         {
