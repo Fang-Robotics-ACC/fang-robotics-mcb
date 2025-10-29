@@ -70,8 +70,7 @@ namespace trap::algorithms::dualCascadePidRingTest
         const double kOutput{
             dualPid.runController(
                 kMainCurrent,
-                kIntermediateCurrent,
-                kDeltaTime
+                kIntermediateCurrent
             )
         };
 
