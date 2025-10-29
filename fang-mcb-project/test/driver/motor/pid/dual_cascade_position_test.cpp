@@ -13,7 +13,7 @@ namespace fang::motor::dualCascadePositionTest
     using PositionCascadeMotor = DualCascadePosition<double, RPM>;
     using DualPid = PositionCascadeMotor::Pid;
 
-    using MainTelemetry= rail::telemetry::ITelemetryMock<trap::algorithms::RingRadians>;
+    using MainTelemetry= rail::telemetry::ITelemetryMock<Radians>;
     using IntermediateTelemetry= rail::telemetry::ITelemetryMock<RPM>;
     using OutputMotorMock = rail::motor::IOutputMotorMock<double>;
     using TelemetryMock = rail::telemetry::ITelemetryMock<double>;
@@ -151,7 +151,7 @@ namespace fang::motor::dualCascadePositionTest
         std::unique_ptr<OutputMotorMock> motor{std::make_unique<OutputMotorMock>()};
 
         auto positionTelemetry{
-            std::make_unique<rail::telemetry::ITelemetryMock<trap::algorithms::RingRadians>>()
+            std::make_unique<rail::telemetry::ITelemetryMock<Radians>>()
         };
 
         std::unique_ptr<IntermediateTelemetry> speedTelemetry{std::make_unique<IntermediateTelemetry>()};
