@@ -15,20 +15,14 @@
 
 namespace fang::motor
 {
-    class DualCascadeGm6020:
-        public DualCascadePosition
-        <
-            trap::motor::DjiMotorOutput,
-            RPM
-        >
+    class DualCascadeGm6020
+        :
+        public DualCascadePosition<trap::motor::DjiMotorOutput, RPM>
     {
     public:
         using Motor = trap::motor::DjiGM6020;
-        using PidMotor = DualCascadePosition
-        <
-            trap::motor::DjiMotorOutput,
-            RPM
-        >;
+
+        using PidMotor = DualCascadePosition<trap::motor::DjiMotorOutput, RPM>;
 
         struct Config{
             Motor::Config motorConfig;
@@ -41,34 +35,34 @@ namespace fang::motor
         {
         }
 
-        private:
-            PidMotor make(Drivers& drivers, const Config& config)
-            {
-                auto motor{
-                    std::make_unique<Motor>(
-                        drivers,
-                        config.motorConfig
-                    )
-                };
+    private:
+        PidMotor make(Drivers& drivers, const Config& config)
+        {
+            auto motor{
+                std::make_unique<Motor>(
+                    drivers,
+                    config.motorConfig
+                )
+            };
 
-                auto positionTelemetry{
-                    std::make_unique<telemetry::IAngularPositionAdapterRinged>(
-                        *motor
-                    )
-                };
+            auto positionTelemetry{
+                std::make_unique<telemetry::IAngularPositionAdapterRinged>(
+                    *motor
+                )
+            };
 
-                auto velocityTelemetry{
-                    std::make_unique<telemetry::IAngularVelocityAdapter>(
-                        *motor
-                    )
-                };
+            auto velocityTelemetry{
+                std::make_unique<telemetry::IAngularVelocityAdapter>(
+                    *motor
+                )
+            };
 
             return PidMotor{
-                    config.pidMotorConfig,
-                    std::move(motor),
-                    std::move(positionTelemetry),
-                    std::move(velocityTelemetry)
-                };
-            }
+                config.pidMotorConfig,
+                std::move(motor),
+                std::move(positionTelemetry),
+                std::move(velocityTelemetry)
+            };
+        }
     };
 }
