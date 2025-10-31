@@ -5,75 +5,79 @@
 namespace fang::robot 
 {
     using namespace units::literals;
+    
     static const trap::motor::DjiSpeedPid::Config kPitchPositionPid
     {
-        .kp                 = 0,
-        .ki                 = 0,
-        .kd                 = 0.0,
-        .maxICumulative     = 0,
+        .kp                 = 100.0,
+        .ki                 = 0.0,
+        .kd                 = 1,
+        .maxICumulative     = 0.0,
         .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
-        .tQDerivativeKalman = 0.01, //Cause value to be more "sluggish to reduce oscillation"
-        .tRDerivativeKalman = 0.0,
-        .errorDerivativeFloor = 0.0 //radians
+        .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
+        .tRDerivativeKalman = 500.0,
+        .tQProportionalKalman = 2.0,
+        .tRProportionalKalman = 250.0,
     };
 
     static const trap::motor::DjiSpeedPid::Config kPitchVelocityPid
     {
-        .kp                 = 0,
+        .kp                 = 500,
         .ki                 = 0,
         .kd                 = 0.0,
         .maxICumulative     = 0,
         .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
-        .tQDerivativeKalman = 0.0, //Cause value to be more "sluggish to reduce oscillation"
-        .tRDerivativeKalman = 0.0,
-        .errorDerivativeFloor = 0.0 //radians
+        .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
+        .tRDerivativeKalman = 500.0,
+        .tQProportionalKalman = 0.25,
+        .tRProportionalKalman = 500.0,
+        .errorDerivativeFloor = 00 //rpm
     };
 
-    static const trap::motor::DjiGM6020::Config kPitchMotorConfig
+    static const trap::motor::DjiMotor::Config kPitchMotorConfig
     {
         .motorId        = tap::motor::MOTOR2,
         .canBus         = tap::can::CanBus::CAN_BUS1,
         .name           = "pitchMotor",
-        .inverted       =  true,
-        .currentControl = false
+        .inverted       =  false,
+        .currentControl = true 
     };
 
     static const motor::DualCascadeGm6020::PidMotor::Config kPitchMotorPidConfig
     {
+
         .mainPidConfig = kPitchPositionPid,
         .intermediatePidConfig = kPitchVelocityPid,
         .mainPidInitialValue = 0.0_rad,
         .intermediatePidInitialValue = 0.0_rpm,
     };
 
-    static const motor::DualCascadeGm6020::Config kDualCascadePitchMotorConfig
-    {
-        .motorConfig = kPitchMotorConfig,
-        .pidMotorConfig = kPitchMotorPidConfig
-    };
+   
 
     static const trap::motor::DjiSpeedPid::Config kYawPositionPid
     {
-        .kp                 = 0,
-        .ki                 = 0,
+        .kp                 = 100.0,
+        .ki                 = 0.0,
         .kd                 = 0.0,
-        .maxICumulative     = 0,
+        .maxICumulative     = 0.0,
         .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
-        .tQDerivativeKalman = 0.01, //Cause value to be more "sluggish to reduce oscillation"
-        .tRDerivativeKalman = 0.0,
-        .errorDerivativeFloor = 0.0 //radians
+        .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
+        .tRDerivativeKalman = 500.0,
+        .tQProportionalKalman = 10.0,
+        .tRProportionalKalman = 250.0,
     };
 
     static const trap::motor::DjiSpeedPid::Config kYawVelocityPid
     {
-        .kp                 = 0,
+        .kp                 = 500,
         .ki                 = 0,
         .kd                 = 0.0,
         .maxICumulative     = 0,
         .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
-        .tQDerivativeKalman = 0.0, //Cause value to be more "sluggish to reduce oscillation"
-        .tRDerivativeKalman = 0.0,
-        .errorDerivativeFloor = 0.0 //radians
+        .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
+        .tRDerivativeKalman = 500.0,
+        .tQProportionalKalman = 10.0,
+        .tRProportionalKalman = 250.0,
+        .errorDerivativeFloor = 00 //rpm
     };
 
     static const motor::DualCascadeGm6020::PidMotor::Config kYawMotorPidConfig
@@ -91,10 +95,16 @@ namespace fang::robot
         .canBus         = tap::can::CanBus::CAN_BUS1,
         .name           = "yawMotor",
         .inverted       = false,
-        .currentControl = false
+        .currentControl = true 
     };
 
-    static const motor::DualCascadeGm6020::Config kDualCascadeYawMotorConfig
+    static const motor::DualCascadeGm6020::Config kDualCascadePitchMotorConfig
+    {
+        .motorConfig = kPitchMotorConfig,
+        .pidMotorConfig = kPitchMotorPidConfig 
+    };
+
+     static const motor::DualCascadeGm6020::Config kDualCascadeYawMotorConfig
     {
         .motorConfig = kYawMotorConfig,
         .pidMotorConfig = kYawMotorPidConfig 
@@ -117,7 +127,7 @@ namespace fang::robot
         .motorConfig = kDualCascadeYawMotorConfig,
         .yawSystemConfig = turret::PierceFieldGimbal::YawSystem::ChassisFieldYawSystem::Config
         {
-            .yawError =-7.5_deg
+            .yawError = -37_deg
         }
     };
 
