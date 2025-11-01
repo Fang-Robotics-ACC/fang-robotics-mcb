@@ -16,11 +16,26 @@ namespace fang::motor
     template <typename Output, typename Intermediate>
     class DualCascadePosition
         :
-        public DualCascadeMotor<Output, trap::algorithms::RingRadians, Intermediate>,
+        public DualCascadeMotor
+            <
+            Output, 
+            Radians, 
+            Intermediate,
+            Seconds,
+            trap::algorithms::RingRadians
+            >,
         virtual public IPositionMotor
     {
     public:
-        using CascadeMotor = DualCascadeMotor<Output, trap::algorithms::RingRadians, Intermediate>;
+        using CascadeMotor = 
+        DualCascadeMotor<
+            Output, 
+            Radians, 
+            Intermediate,
+            Seconds,
+            trap::algorithms::RingRadians
+        >;
+
         using Config = CascadeMotor::Config;
 
         using CascadeMotor::CascadeMotor;

@@ -15,6 +15,7 @@ namespace fang::turret
             Motor::Config motorConfig;
             BasicFieldPitchSystem::Config pitchSystemConfig;
         };
+
         GM6020BasicFieldPitch(Drivers& drivers, const Config& config):
             BasicFieldPitchSystem
             {

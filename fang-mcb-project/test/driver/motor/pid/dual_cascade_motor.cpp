@@ -9,7 +9,8 @@
 
 namespace fang::motor::dualCascadeMotorTest
 {
-    using DoubleDualSmoothPid = trap::algorithms::DualCascadePid<double, double, double, double>;
+    using namespace units::literals;
+    using DoubleDualSmoothPid = trap::algorithms::DualCascadePid<double, double, double, Seconds>;
     using TelemetryMock = rail::telemetry::ITelemetryMock<double>;
     using OutputMotorMock = rail::motor::IOutputMotorMock<double>;
 
@@ -18,10 +19,8 @@ namespace fang::motor::dualCascadeMotorTest
         double mainTarget;
         double mainCurrent;
         double intermediateCurrent;
-        double deltaTime;
+        Seconds deltaTime;
         DoubleDualSmoothPid::Config config;
-        double mainErrorDerivative = 0.0;
-        double intermediateErrorDerivative = 0.0;
     };
 
     class DualCascadeMotorMatchTest : public testing::TestWithParam<MatchTestParam>
@@ -29,17 +28,120 @@ namespace fang::motor::dualCascadeMotorTest
     protected:
         const MatchTestParam kParam{GetParam()};
         DoubleDualSmoothPid dualPid{kParam.config};
+        std::unique_ptr<OutputMotorMock> outputMotorMock{std::make_unique<OutputMotorMock>()};
         std::unique_ptr<TelemetryMock> positionTelemetry{std::make_unique<TelemetryMock>()};
         std::unique_ptr<TelemetryMock> speedTelemetry{std::make_unique<TelemetryMock>()};
 
-        /*
-        DualCascadeMotor<double, double, double> cascadeMotor
-        {
+        OutputMotorMock* outputMotorPtr{outputMotorMock.get()};
+        TelemetryMock* positionTelemetryPtr{positionTelemetry.get()};
+        TelemetryMock* speedTelemetryPtr{speedTelemetry.get()};
 
-
+        DualCascadeMotor<double, double, double> cascadeMotor{
+            kParam.config,
+            std::move(outputMotorMock),
+            std::move(positionTelemetry),
+            std::move(speedTelemetry)
         };
-        */
     };
+
+    /**
+     * WARNING: THIS UTILIZED A BACKDOOR FUNCTION
+     * THE SELF-DELTA FUNCTION IS NOT CALLED AT ALL
+     * 
+     * Assert that the motor is setting things the correct way
+     * (delegating telemetry and dual cascade pid properly)
+     */
+    TEST_P(DualCascadeMotorMatchTest, matchTest)
+    {
+        ON_CALL(*positionTelemetryPtr, getData())
+            .WillByDefault(testing::Return(kParam.mainCurrent));
+
+        ON_CALL(*speedTelemetryPtr, getData())
+            .WillByDefault(testing::Return(kParam.intermediateCurrent));
+
+        cascadeMotor.setTarget(kParam.mainTarget);
+
+        dualPid.setTarget(kParam.mainTarget);
+
+        const double kExpectedOutput{
+            dualPid.runController(
+                kParam.mainCurrent,
+                kParam.intermediateCurrent,
+                kParam.deltaTime
+            )
+        };
+    
+        EXPECT_CALL(*outputMotorPtr, setTargetOutput(kExpectedOutput));
+
+        cascadeMotor.update(kParam.deltaTime);
+    }
+
+    const DoubleDualSmoothPid::IntermediatePid::Config kGeneralPidConfig
+    {
+        .kp = 1.0,
+        .ki = 12.0,
+        .kd = 4.0,
+        .maxOutput = 10000
+    };
+
+    const DoubleDualSmoothPid::Config kConfig
+    {
+        .mainPidConfig = kGeneralPidConfig,
+        .intermediatePidConfig = kGeneralPidConfig,
+        .mainPidInitialValue = 0.0,
+        .intermediatePidInitialValue = 0.0
+    };
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        zero,
+        DualCascadeMotorMatchTest,
+        testing::Values
+        (
+            MatchTestParam 
+            {
+                .mainTarget = 0.0,
+                .mainCurrent = 0.0,
+                .intermediateCurrent = 0.0,
+                .deltaTime = 1.0_s, // Delta time equal to zero leads to NAN error
+                .config = kConfig
+            }
+        )
+    );
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        positive,
+        DualCascadeMotorMatchTest,
+        testing::Values
+        (
+            MatchTestParam 
+            {
+                .mainTarget = 100.0,
+                .mainCurrent = 10.0,
+                .intermediateCurrent = 10.0,
+                .deltaTime = 1.0_s, // Delta time equal to zero leads to NAN error
+                .config = kConfig
+            },
+            MatchTestParam 
+            {
+                .mainTarget = 12323.0,
+                .mainCurrent = 134.0,
+                .intermediateCurrent = 13290.0,
+                .deltaTime = 1.0_s, // Delta time equal to zero leads to NAN error
+                .config = kConfig
+            },
+            MatchTestParam 
+            {
+                .mainTarget = 120.0,
+                .mainCurrent = 354.0,
+                .intermediateCurrent = 458.0,
+                .deltaTime = 0.23_s, // Delta time equal to zero leads to NAN error
+                .config = kConfig
+            }
+        )
+    );
+
 
     TEST(dualCascadeMotor, compilation)
     {
@@ -77,12 +179,5 @@ namespace fang::motor::dualCascadeMotorTest
         cascadeMotor.initialize();
         cascadeMotor.update();
     }
-
-    //TODO:
-    // Basic match test
-    // The output of the motor should be the same as a dualCascadePid
-    // fed the same data
-
-    // Connect the motor to two telemetry mock objects
-    // Connect the motor to OutputMotorMock
+    // TODO: Use non-backdoor match testing
 }

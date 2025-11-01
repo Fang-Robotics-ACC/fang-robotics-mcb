@@ -5,51 +5,112 @@
 namespace fang::robot 
 {
     using namespace units::literals;
-    static const trap::motor::DjiSpeedPid::Config kPitchPidConfig
+    
+    static const trap::motor::DjiSpeedPid::Config kPitchPositionPid
     {
-        .kp                 = 200'000,
-        .ki                 = 5,
-        .kd                 = 000.0,
-        .maxICumulative     = 7000,
-        .maxOutput          = trap::motor::DjiGM6020Old::k_maxOutput,
-        .tQDerivativeKalman = 0.01, //Cause value to be more "sluggish to reduce oscillation"
-        .tRDerivativeKalman = 1000.0,
-        .errorDerivativeFloor = 0.1 //radians
-    };
-    static const trap::motor::DjiGM6020Old::Config kPitchMotorConfig
-    {
-        tap::motor::MOTOR2,
-        tap::can::CanBus::CAN_BUS1,
-        "pitchMotor",
-        true,
-        1.0,
-        kPitchPidConfig,
-        false
+        .kp                 = 100.0,
+        .ki                 = 0.0,
+        .kd                 = 1,
+        .maxICumulative     = 0.0,
+        .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
+        .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
+        .tRDerivativeKalman = 500.0,
+        .tQProportionalKalman = 2.0,
+        .tRProportionalKalman = 250.0,
     };
 
-    static const trap::motor::DjiSpeedPid::Config kYawPidConfig
+    static const trap::motor::DjiSpeedPid::Config kPitchVelocityPid
     {
-        .kp                 = 100'000,
-        .ki                 = 5,
-        .kd                 = 2500.0,
-        .maxICumulative     = 7000,
-        .maxOutput          = trap::motor::DjiGM6020Old::k_maxOutput,
-        .tQDerivativeKalman = 0.01, //Cause value to be more "sluggish to reduce oscillation"
-        .tRDerivativeKalman = 1000.0,
-        .errorDerivativeFloor = 0.10 //radians
-    };
-    static const trap::motor::DjiGM6020Old::Config kYawMotorConfig 
-    {
-        tap::motor::MOTOR1,
-        tap::can::CanBus::CAN_BUS1,
-        "yawMotor",
-        false,
-        1.0,
-        kYawPidConfig,
-        false
+        .kp                 = 500,
+        .ki                 = 0,
+        .kd                 = 0.0,
+        .maxICumulative     = 0,
+        .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
+        .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
+        .tRDerivativeKalman = 500.0,
+        .tQProportionalKalman = 0.25,
+        .tRProportionalKalman = 500.0,
+        .errorDerivativeFloor = 00 //rpm
     };
 
-    turret::BasicFieldPitchSystem::Config kBasicFieldPitchConfig
+    static const trap::motor::DjiMotor::Config kPitchMotorConfig
+    {
+        .motorId        = tap::motor::MOTOR2,
+        .canBus         = tap::can::CanBus::CAN_BUS1,
+        .name           = "pitchMotor",
+        .inverted       =  false,
+        .currentControl = true 
+    };
+
+    static const motor::DualCascadeGm6020::PidMotor::Config kPitchMotorPidConfig
+    {
+
+        .mainPidConfig = kPitchPositionPid,
+        .intermediatePidConfig = kPitchVelocityPid,
+        .mainPidInitialValue = 0.0_rad,
+        .intermediatePidInitialValue = 0.0_rpm,
+    };
+
+   
+
+    static const trap::motor::DjiSpeedPid::Config kYawPositionPid
+    {
+        .kp                 = 100.0,
+        .ki                 = 0.0,
+        .kd                 = 0.0,
+        .maxICumulative     = 0.0,
+        .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
+        .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
+        .tRDerivativeKalman = 500.0,
+        .tQProportionalKalman = 10.0,
+        .tRProportionalKalman = 250.0,
+    };
+
+    static const trap::motor::DjiSpeedPid::Config kYawVelocityPid
+    {
+        .kp                 = 500,
+        .ki                 = 0,
+        .kd                 = 0.0,
+        .maxICumulative     = 0,
+        .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
+        .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
+        .tRDerivativeKalman = 500.0,
+        .tQProportionalKalman = 10.0,
+        .tRProportionalKalman = 250.0,
+        .errorDerivativeFloor = 00 //rpm
+    };
+
+    static const motor::DualCascadeGm6020::PidMotor::Config kYawMotorPidConfig
+    {
+
+        .mainPidConfig = kYawPositionPid,
+        .intermediatePidConfig = kYawVelocityPid,
+        .mainPidInitialValue = 0.0_rad,
+        .intermediatePidInitialValue = 0.0_rpm,
+    };
+
+    static const trap::motor::DjiGM6020::Config kYawMotorConfig 
+    {
+        .motorId        = tap::motor::MOTOR1,
+        .canBus         = tap::can::CanBus::CAN_BUS1,
+        .name           = "yawMotor",
+        .inverted       = false,
+        .currentControl = true 
+    };
+
+    static const motor::DualCascadeGm6020::Config kDualCascadePitchMotorConfig
+    {
+        .motorConfig = kPitchMotorConfig,
+        .pidMotorConfig = kPitchMotorPidConfig 
+    };
+
+     static const motor::DualCascadeGm6020::Config kDualCascadeYawMotorConfig
+    {
+        .motorConfig = kYawMotorConfig,
+        .pidMotorConfig = kYawMotorPidConfig 
+    };
+
+    static const turret::BasicFieldPitchSystem::Config kBasicFieldPitchConfig
     {
         .pitchError = 0_deg,
         .pitchRange = {-25_deg, 10_deg}
@@ -57,14 +118,17 @@ namespace fang::robot
 
     static const turret::PierceFieldGimbal::PitchSystem::Config kPitchSystemConfig
     {
-        .motorConfig = kPitchMotorConfig,
+        .motorConfig = kDualCascadePitchMotorConfig,
         .pitchSystemConfig = kBasicFieldPitchConfig
     };
 
-    turret::PierceFieldGimbal::YawSystem::Config kYawSystemConfig 
+    static turret::PierceFieldGimbal::YawSystem::Config kYawSystemConfig 
     {
-        .motorConfig = kYawMotorConfig,
-        .yawError = -7.5_deg
+        .motorConfig = kDualCascadeYawMotorConfig,
+        .yawSystemConfig = turret::PierceFieldGimbal::YawSystem::ChassisFieldYawSystem::Config
+        {
+            .yawError = -37_deg
+        }
     };
 
     static const turret::PierceFieldGimbal::Config kGimbalSubsystemConfig

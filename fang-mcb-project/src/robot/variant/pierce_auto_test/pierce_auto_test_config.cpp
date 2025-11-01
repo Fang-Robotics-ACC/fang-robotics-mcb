@@ -3,7 +3,7 @@
 
 //Subsystem configs
 #include "config/subsystem/chassis_config.hpp"
-#include "config/subsystem/turret_gimbal_config.hpp"
+#include "robot/variant/pierce/config/subsystem/turret_gimbal_config.hpp"
 #include "config/subsystem/feeder_config.hpp"
 #include "config/subsystem/ammo_booster_config.hpp"
 
@@ -26,7 +26,7 @@ namespace fang::robot
     const PierceAutoTest::SubsystemConfig kPierceSubsystemConfig 
     {
         .chassisConfig  = kChassisConfig,
-        .gimbalConfig   = pierceAuto::kGimbalSubsystemConfig,
+        .gimbalConfig   = kGimbalSubsystemConfig,
         .feederConfig   = kFeederMakerConfig,
         .boosterConfig  = kAmmoBoosterConfig
     };

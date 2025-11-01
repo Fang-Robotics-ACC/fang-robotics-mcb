@@ -5,6 +5,7 @@
 
 #include <gtest/gtest.h>
 
+#include <unistd.h>
 #include <tuple>
 
 using SmoothPid = trap::algorithms::SmoothPid<RPM, int32_t, Microseconds>;
@@ -40,10 +41,18 @@ INSTANTIATE_TEST_SUITE_P(largeValue, SmoothPidTest,
 
 TEST(runtimeTimeDeltaTest, SmoothPid)
 {
+    // MODERN COMPUTERS CAN RUN FASTER THAN 1 MICROSECOND
+    // THIS RESULTS IN A ZERO DELTA TIME
+    // WHICH RESULTS IN DIVISION BY ZERO
+    // AND A NAN ERROR
     SmoothPid smoothPid {SmoothPid::Config{}};
     smoothPid.runController(2342_rpm);
+    usleep(1);
     smoothPid.runController(342_rpm);
+    usleep(1);
 
     smoothPid.runController(2_rpm);
+    usleep(1);
     smoothPid.runController(0_rpm);
+    usleep(1);
 }

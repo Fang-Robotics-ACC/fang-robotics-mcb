@@ -5,6 +5,10 @@ namespace trap
 {
     namespace algorithms
     {
+        WrappedRadians::WrappedRadians(double value) : WrappedRadians{Radians{value}}
+        {
+        }
+
         WrappedRadians::WrappedRadians(const Radians& value) : WrappedFloat<Radians>(value, mk_minimumValue, mk_maximumValue)
         {
         }
