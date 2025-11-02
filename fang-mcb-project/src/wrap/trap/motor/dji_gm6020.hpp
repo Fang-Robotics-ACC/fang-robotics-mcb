@@ -14,7 +14,20 @@ namespace trap::motor
     {
     public:
         // Inheriting constructors :D
-        using DjiMotor::DjiMotor;
+        DjiGM6020(Drivers& drivers, const Config& config):
+            DjiMotor{
+                drivers,
+                static_cast<tap::motor::MotorId>(static_cast<int>(config.motorId) + kGM6020CANAddressOffset),
+                config.canBus,
+                config.name,
+                config.inverted,
+                config.externalEncoderGearRatio,
+                config.currentControl
+            }
+        {
+        }
+
         constexpr static DjiMotorOutput kMaxOutput{tap::motor::DjiMotor::MAX_OUTPUT_GM6020};
+        static constexpr int kGM6020CANAddressOffset{4};
     };
 }

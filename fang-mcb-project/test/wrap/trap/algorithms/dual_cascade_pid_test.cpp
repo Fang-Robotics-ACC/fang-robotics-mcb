@@ -48,14 +48,14 @@ namespace trap::algorithms::dualCascadePidTest
             const double kMainError{kMainTarget - kMainCurrent};
             const double kIndermediateTarget
             {
-                mainPid.runController(kMainError, kMainErrorDerivative, kDeltaTime)
+                mainPid.runController(kMainError, kDeltaTime)
             };
 
             // Only cascade through two PIDs
             const double kIntermediateError{kIndermediateTarget - kIntermediateCurrent};
             const double kOutput 
             {
-                intermediatePid.runController(kIntermediateError, kIntermediateErrorDerivative, kDeltaTime)
+                intermediatePid.runController(kIntermediateError, kDeltaTime)
             };
 
             return kOutput;
@@ -66,10 +66,10 @@ namespace trap::algorithms::dualCascadePidTest
     TEST_P(DualCascadePidMatchTest, generalMatching)
     {
         const double kManualOutput{calculateManualPid()};
-        const double kOutput
-        {
-            dualPid.runController
-            (
+
+        dualPid.setTarget(kMainTarget);
+        const double kOutput{
+            dualPid.runController(
                 kMainCurrent,
                 kIntermediateCurrent,
                 kDeltaTime
@@ -84,8 +84,9 @@ namespace trap::algorithms::dualCascadePidTest
     constexpr DoubleDualSmoothPid::IntermediatePid::Config kGeneralPidConfig
     {
         .kp = 1.0,
-        .ki = 23.3,
-        .kd = 14.0
+        .ki = 0.0,
+        .kd = 0.0,
+        .maxOutput = 10000
     };
 
     constexpr DoubleDualSmoothPid::Config kConfig

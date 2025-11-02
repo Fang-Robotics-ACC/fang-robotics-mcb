@@ -19,14 +19,30 @@ namespace fang::motor
      * Intermediate - the type used in between controlling and outputting
      * (2nd pid)
      */
-    template <typename Output, typename Control, typename Intermediate>
+    template
+        <
+        typename Output,
+        typename Control,
+        typename Intermediate,
+        typename Time = Seconds,
+        typename MainError = Control,
+        typename IntermediateError = Intermediate 
+        >
     class DualCascadeMotor : virtual public system::ISystem
     {
     public:
         using ControlledMotor = IOutputMotor<Output>;
         using ControlTelemetry = telemetry::ITelemetry<Control>;
         using IntermediateTelemetry = telemetry::ITelemetry<Intermediate>;
-        using Pid = trap::algorithms::DualCascadePid<Control, Intermediate, Output, Seconds>;
+        using Pid = trap::algorithms::DualCascadePid
+            <
+            Control,
+            Intermediate,
+            Output,
+            Time,
+            MainError,
+            IntermediateError
+            >;
         using Config = Pid::Config;
 
         DualCascadeMotor(
@@ -50,6 +66,24 @@ namespace fang::motor
         void update() override
         {
             syncMotorToPid();
+            motor_->update();
+        }
+
+        /**
+         * Back door function used for testing until
+         * we DI chrono based classes, too.
+         */
+        void update(const Time& delta)
+        {
+            const Output kOutput
+            {
+                pid_.runController(
+                    controlTelemetry_->getData(),
+                    intermediateTelemetry_->getData(),
+                    delta
+                )
+            };
+            motor_->setTargetOutput(kOutput);
             motor_->update();
         }
 
