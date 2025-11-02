@@ -10,15 +10,16 @@ version: 2
 build:
   os: ubuntu-24.04
   tools:
-    doxygen: "1.9.8"
+    python: "3.10" #Required by rtd
+  apt_packages:
+    - doxygen
+    - graphviz
   jobs:
-    make-dir:
-      - mkdir -p $READTHEDOCS_OUTPUT/html/
-    pre-install:
-      - sudo apt install doxygen
-    doxygen-gen:
-      - cd docs/
-      - doxygen 
+    build:
+      html:
+        - echo "Building HTML"
+        - mkdir -p $READTHEDOCS_OUTPUT/
+        - doxygen ./docs/Doxyfile
     
     
 #python:
