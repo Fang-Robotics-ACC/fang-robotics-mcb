@@ -8,12 +8,13 @@ namespace trap::algorithms
     /**
      * Cascading PID
      * 
-     * MainError is the type for the beginning and main targeted value
-     * IntermediateError is the type that is in the middle
+     * MainType is the type for the beginning and main targeted value
+     * Intermediate is the type that is in the middle
+     * Output is the type of the calculated value
      * 
-     * this is not necessarily the type that is received but the type
-     * that is used for controlling. This is useful for types which
-     * override arrithmetic such as RingFloat or RingRadians
+     * MainError and IntermediateError is a custom override for utilizing types
+     * which override arithmetic (wrapped float types). They should be convertible or constructible
+     * from and to MainType and IntermediateType respectively
      * 
      * Error is calculated with target - current. So any
      * overload of the operator- will allow for custom behavior 
@@ -23,7 +24,15 @@ namespace trap::algorithms
      * The main target is the radians, but the target for the intermediate error
      * is give by the first PID
      */
-    template<typename MainType, typename IntermediateType, typename OutputType, typename TimeType>
+    template
+    <
+        typename MainType,
+        typename IntermediateType,
+        typename OutputType,
+        typename TimeType,
+        typename MainError = MainType,
+        typename IntermediateError = IntermediateType
+    >
     class DualCascadePid
     {
     public:
@@ -62,42 +71,48 @@ namespace trap::algorithms
          * Allows unit testing an manual time determination see the main version
          * for parameter information
          */
-        OutputType runController
-        (
+        OutputType  runController(
             const MainType& mainCurrent,
             const IntermediateType& intermediateCurrent,
             const TimeType& deltaTime
         )
         {
-            // Important, the casting of MainType into Maintype is because sometimes,
-            // the returned data is not in the proper type when arithmeticf is altered
-            // such as when RingRadians has an operator overload
-            const MainType kMainError{MainType{mainTarget_} - MainType{mainCurrent}};
-            const IntermediateType kIntermediateTarget
-            {
-                mainPid_.runController
-                (
+            const MainType kMainError{
+                MainError{mainTarget_}
+              - MainError{mainCurrent}
+            };
+
+            static MainType mainError{};
+            mainError = kMainError;
+
+            const IntermediateType kIntermediateTarget{
+                mainPid_.runController(
                     kMainError,
                     deltaTime
                 )
             };
 
-            // Important, the casting of IntermediateType into IntermedateType is because sometimes,
-            // the returned data is not in the proper type when arithmeticf is altered
-            // such as when RingRadians has an operator overload
-            const IntermediateType kIntermediateError
-            {
-                IntermediateType{kIntermediateTarget} 
-              - IntermediateType{intermediateCurrent}
+            static IntermediateType intermediateTarget{};
+            intermediateTarget = kIntermediateTarget;
+
+            const IntermediateType kIntermediateError{
+                IntermediateError{kIntermediateTarget}
+              - IntermediateError{intermediateCurrent}
             };
-            const OutputType kOutput
-            {
-                intermediatePid_.runController
-                (
+
+            static IntermediateType intermediateError{};
+            intermediateError = kIntermediateError;
+
+            const OutputType kOutput{
+                intermediatePid_.runController(
                     kIntermediateError,
                     deltaTime
                 )
             };
+
+            static OutputType output{};
+            output = kOutput;
+
             return kOutput; 
         }
 

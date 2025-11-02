@@ -10,29 +10,45 @@
 
 namespace fang::motor::dualCascadePositionTest
 {
-    using DoubleDualSmoothPid = trap::algorithms::DualCascadePid<double, double, double, double>;
-    using TelemetryMock = rail::telemetry::ITelemetryMock<double>;
+    using PositionCascadeMotor = DualCascadePosition<double, RPM>;
+    using DualPid = PositionCascadeMotor::Pid;
+
+    using MainTelemetry= rail::telemetry::ITelemetryMock<Radians>;
+    using IntermediateTelemetry= rail::telemetry::ITelemetryMock<RPM>;
     using OutputMotorMock = rail::motor::IOutputMotorMock<double>;
+    using TelemetryMock = rail::telemetry::ITelemetryMock<double>;
+
+    using namespace units::literals;
 
     struct MatchTestParam 
     {
-        double mainTarget;
-        double mainCurrent;
-        double intermediateCurrent;
-        double deltaTime;
-        DoubleDualSmoothPid::Config config;
-        double mainErrorDerivative = 0.0;
-        double intermediateErrorDerivative = 0.0;
+        Radians mainTarget;
+        Radians mainCurrent;
+        RPM intermediateCurrent;
+        Seconds deltaTime;
+        PositionCascadeMotor::Config config;
     };
 
-    class DualCascadeMotorMatchTest : public testing::TestWithParam<MatchTestParam>
+    class DualCascadePositionMatchTest : public testing::TestWithParam<MatchTestParam>
     {
     protected:
         const MatchTestParam kParam{GetParam()};
-        DoubleDualSmoothPid dualPid{kParam.config};
-        std::unique_ptr<TelemetryMock> positionTelemetry{std::make_unique<TelemetryMock>()};
-        std::unique_ptr<TelemetryMock> speedTelemetry{std::make_unique<TelemetryMock>()};
+        DualPid dualPid{kParam.config};
 
+        std::unique_ptr<MainTelemetry> positionTelemetryPtr{std::make_unique<MainTelemetry>()};
+        std::unique_ptr<IntermediateTelemetry> speedTelemetryPtr{std::make_unique<IntermediateTelemetry>()};
+        std::unique_ptr<OutputMotorMock> outputMotorPtr{std::make_unique<OutputMotorMock>()};
+
+        MainTelemetry& positionTelemetry {*positionTelemetryPtr};
+        IntermediateTelemetry& speedTelemetry{*speedTelemetryPtr};
+        OutputMotorMock& outputMotor{*outputMotorPtr};
+
+        DualCascadePosition<double, RPM> cascadeMotor{
+            kParam.config,
+            std::move(outputMotorPtr),
+            std::move(positionTelemetryPtr),
+            std::move(speedTelemetryPtr)
+        };
         /*
         DualCascadeMotor<double, double, double> cascadeMotor
         {
@@ -42,44 +58,111 @@ namespace fang::motor::dualCascadePositionTest
         */
     };
 
+    TEST_P(DualCascadePositionMatchTest, matchTest)
+    {
+        ON_CALL(positionTelemetry, getData())
+            .WillByDefault(testing::Return(kParam.mainCurrent));
+
+        ON_CALL(speedTelemetry, getData())
+            .WillByDefault(testing::Return(kParam.intermediateCurrent));
+
+        cascadeMotor.setTarget(kParam.mainTarget);
+
+        dualPid.setTarget(kParam.mainTarget);
+
+        const double kExpectedOutput{
+            dualPid.runController(
+                kParam.mainCurrent,
+                kParam.intermediateCurrent,
+                kParam.deltaTime
+            )
+        };
+    
+        EXPECT_CALL(outputMotor, setTargetOutput(kExpectedOutput));
+
+        cascadeMotor.update(kParam.deltaTime);
+    }
+
+    const DualPid::MainPid::Config kMainDefaultPidConfig{
+        .kp = 1.0,
+        .ki = 12.0,
+        .kd = 4.0,
+        .maxOutput = 10000
+    };
+
+    const DualPid::IntermediatePid::Config kIntermediateDefaultPidConfig{
+        .kp = 1.0,
+        .ki = 12.0,
+        .kd = 4.0,
+        .maxOutput = 10000
+    };
+
+    const DualPid::Config kConfig{
+        .mainPidConfig = kMainDefaultPidConfig,
+        .intermediatePidConfig = kIntermediateDefaultPidConfig,
+        .mainPidInitialValue = 0.0_rad,
+        .intermediatePidInitialValue = 0.0_rpm
+    };
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        zero,
+        DualCascadePositionMatchTest,
+        testing::Values
+        (
+            MatchTestParam 
+            {
+                .mainTarget = 0.0_rad,
+                .mainCurrent = 0.0_rad,
+                .intermediateCurrent = 0.0_rpm,
+                .deltaTime = 1.0_s, // Delta time equal to zero leads to NAN error
+                .config = kConfig 
+            }
+        )
+    );
+
+    INSTANTIATE_TEST_CASE_P
+    (
+        positive,
+        DualCascadePositionMatchTest,
+        testing::Values
+        (
+            MatchTestParam 
+            {
+                .mainTarget = 1.0_rad,
+                .mainCurrent = 3.0_rad,
+                .intermediateCurrent = 0_rpm,
+                .deltaTime = 1.0_s, // Delta time equal to zero leads to NAN error
+                .config = kConfig 
+            },
+            MatchTestParam 
+            {
+                .mainTarget = 3.0_rad,
+                .mainCurrent = 1.0_rad,
+                .intermediateCurrent = 100_rpm,
+                .deltaTime = 1.0_s, // Delta time equal to zero leads to NAN error
+                .config = kConfig 
+            }
+        )
+    );
+
     TEST(dualCascadeMotor, compilation)
     {
         std::unique_ptr<OutputMotorMock> motor{std::make_unique<OutputMotorMock>()};
+
         auto positionTelemetry{
-            std::make_unique<rail::telemetry::ITelemetryMock<trap::algorithms::RingRadians>>()
+            std::make_unique<rail::telemetry::ITelemetryMock<Radians>>()
         };
-        std::unique_ptr<TelemetryMock> speedTelemetry{std::make_unique<TelemetryMock>()};
 
-        DualCascadePosition<double, double> cascadeMotor
+        std::unique_ptr<IntermediateTelemetry> speedTelemetry{std::make_unique<IntermediateTelemetry>()};
+
+        DualCascadePosition<double, RPM> cascadeMotor
         {
-            DualCascadePosition<double, double>::Config{},
+            DualCascadePosition<double, RPM>::Config{},
             std::move(motor),
             std::move(positionTelemetry),
             std::move(speedTelemetry)
         };
-    }
-
-    TEST(dualCascadeMotor, initializeAndUpdate)
-    {
-        std::unique_ptr<OutputMotorMock> motor{std::make_unique<OutputMotorMock>()};
-        std::unique_ptr<TelemetryMock> positionTelemetry{std::make_unique<TelemetryMock>()};
-        std::unique_ptr<TelemetryMock> speedTelemetry{std::make_unique<TelemetryMock>()};
-
-        OutputMotorMock* motorPtr{motor.get()};
-
-        DualCascadeMotor<double, double, double> cascadeMotor 
-        {
-            DualCascadeMotor<double, double, double>::Config{},
-            std::move(motor),
-            std::move(positionTelemetry),
-            std::move(speedTelemetry)
-        };
-
-        EXPECT_CALL(*motorPtr, initialize());
-        EXPECT_CALL(*motorPtr, update());
-
-        cascadeMotor.initialize();
-        cascadeMotor.update();
     }
 
     //TODO:

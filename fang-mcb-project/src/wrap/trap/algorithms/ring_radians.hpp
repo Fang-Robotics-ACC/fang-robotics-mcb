@@ -19,7 +19,7 @@ namespace trap::algorithms
         RingRadians() : WrappedRadians{Radians{0}} {}
         Radians operator-(const WrappedRadians& other) const
         {
-            return minDifference(other);
+            return other.minDifference(*this);
         }
     };
 }
