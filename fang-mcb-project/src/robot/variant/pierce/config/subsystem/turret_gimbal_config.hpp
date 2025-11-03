@@ -8,29 +8,28 @@ namespace fang::robot
     
     static const trap::motor::DjiSpeedPid::Config kPitchPositionPid
     {
-        .kp                 = 100.0,
+        .kp                 = 40.0,
         .ki                 = 0.0,
-        .kd                 = 1,
+        .kd                 = 0.0,
         .maxICumulative     = 0.0,
         .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
         .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
-        .tRDerivativeKalman = 500.0,
-        .tQProportionalKalman = 2.0,
-        .tRProportionalKalman = 250.0,
+        .tRDerivativeKalman = 0.0,
+        .tQProportionalKalman = 30.0,
+        .tRProportionalKalman = 10'000.0,
     };
 
     static const trap::motor::DjiSpeedPid::Config kPitchVelocityPid
     {
-        .kp                 = 500,
+        .kp                 = 5'000,
         .ki                 = 0,
         .kd                 = 0.0,
         .maxICumulative     = 0,
         .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
         .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
-        .tRDerivativeKalman = 500.0,
-        .tQProportionalKalman = 0.25,
-        .tRProportionalKalman = 500.0,
-        .errorDerivativeFloor = 00 //rpm
+        .tRDerivativeKalman = 0.0,
+        .tQProportionalKalman = 1,
+        .tRProportionalKalman = 100'000.0,
     };
 
     static const trap::motor::DjiMotor::Config kPitchMotorConfig
@@ -113,7 +112,11 @@ namespace fang::robot
     static const turret::BasicFieldPitchSystem::Config kBasicFieldPitchConfig
     {
         .pitchError = 0_deg,
-        .pitchRange = {-25_deg, 10_deg}
+        .pitchRange = 
+            {
+                .min = -20_deg,
+                .max = 15_deg
+            }
     };
 
     static const turret::PierceFieldGimbal::PitchSystem::Config kPitchSystemConfig
