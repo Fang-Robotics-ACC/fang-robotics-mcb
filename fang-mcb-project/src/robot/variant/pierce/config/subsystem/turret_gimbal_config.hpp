@@ -61,21 +61,21 @@ namespace fang::robot
         .maxICumulative     = 0.0,
         .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
         .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
-        .tRDerivativeKalman = 500.0,
-        .tQProportionalKalman = 10.0,
-        .tRProportionalKalman = 250.0,
+        .tRDerivativeKalman = 0.0,
+        .tQProportionalKalman = 1,
+        .tRProportionalKalman = 100.0,
     };
 
     static const trap::motor::DjiSpeedPid::Config kYawVelocityPid
     {
-        .kp                 = 500,
+        .kp                 = 700,
         .ki                 = 0,
         .kd                 = 0.0,
         .maxICumulative     = 0,
         .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
         .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
-        .tRDerivativeKalman = 500.0,
-        .tQProportionalKalman = 10.0,
+        .tRDerivativeKalman = 0.0,
+        .tQProportionalKalman = 1.0,
         .tRProportionalKalman = 250.0,
         .errorDerivativeFloor = 00 //rpm
     };
