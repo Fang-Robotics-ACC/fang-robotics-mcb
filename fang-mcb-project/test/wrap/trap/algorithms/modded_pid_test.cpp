@@ -34,4 +34,34 @@ TEST(ModdedPid, nullModdingMatch)
     const double kOutput{modded.runController(kError, kDeltaTime)};
     EXPECT_DOUBLE_EQ(kExpectedOutput, kOutput);
 }
+
+/**
+ * The pid will not have a modder and utilize the default
+ * 
+ * Run both controllers and ensure they both provide the same output
+ */
+TEST(ModdedPid, simpleModding)
+{
+    class AddOneModder : public IPidModder<double>
+    {
+        double getModdedOutput(const double& output)
+        {
+            return output + 1;
+        }
+    };
+
+    AddOneModder testModder{};
+
+    SmoothPidMain expected{kGeneralPidConfig};
+    Pid modded{kGeneralPidConfig, std::make_unique<AddOneModder>()};
+
+    const double kError{10.0};
+    const Milliseconds kDeltaTime{10};
+
+    const double kRawExpectedOutput{expected.runController(kError, kDeltaTime)};
+    const double kExpectedOutput{kRawExpectedOutput + 1.0};
+
+    const double kOutput{modded.runController(kError, kDeltaTime)};
+    EXPECT_DOUBLE_EQ(kExpectedOutput, kOutput);
+}
 }
