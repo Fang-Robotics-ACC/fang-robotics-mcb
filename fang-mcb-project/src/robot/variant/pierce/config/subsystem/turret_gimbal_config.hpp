@@ -8,20 +8,20 @@ namespace fang::robot
     
     static const trap::motor::DjiSpeedPid::Config kPitchPositionPid
     {
-        .kp                 = 40.0,
+        .kp                 = 30.0,
         .ki                 = 0.0,
         .kd                 = 0.0,
         .maxICumulative     = 0.0,
         .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
         .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
         .tRDerivativeKalman = 0.0,
-        .tQProportionalKalman = 30.0,
-        .tRProportionalKalman = 10'000.0,
+        .tQProportionalKalman = 1.0,
+        .tRProportionalKalman = 40'000.0,
     };
 
     static const trap::motor::DjiSpeedPid::Config kPitchVelocityPid
     {
-        .kp                 = 5'000,
+        .kp                 = 3'000,
         .ki                 = 0,
         .kd                 = 0.0,
         .maxICumulative     = 0,
@@ -29,7 +29,7 @@ namespace fang::robot
         .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
         .tRDerivativeKalman = 0.0,
         .tQProportionalKalman = 1,
-        .tRProportionalKalman = 100'000.0,
+        .tRProportionalKalman = 50'000.0,
     };
 
     static const trap::motor::DjiMotor::Config kPitchMotorConfig
@@ -54,7 +54,7 @@ namespace fang::robot
 
     static const trap::motor::DjiSpeedPid::Config kYawPositionPid
     {
-        .kp                 = 100.0,
+        .kp                 = 70.0,
         .ki                 = 0.0,
         .kd                 = 0.0,
         .maxICumulative     = 0.0,
@@ -67,7 +67,7 @@ namespace fang::robot
 
     static const trap::motor::DjiSpeedPid::Config kYawVelocityPid
     {
-        .kp                 = 700,
+        .kp                 = 600,
         .ki                 = 0,
         .kd                 = 0.0,
         .maxICumulative     = 0,
