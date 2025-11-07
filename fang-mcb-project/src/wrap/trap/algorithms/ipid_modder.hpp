@@ -17,7 +17,7 @@ public:
      * This has a null behavior so that
      */
     virtual Control getModdedOutput(const Control& output) = 0;
-    virtual ~IPidModder = default;
+    virtual ~IPidModder() = default;
 };
 
 /**
