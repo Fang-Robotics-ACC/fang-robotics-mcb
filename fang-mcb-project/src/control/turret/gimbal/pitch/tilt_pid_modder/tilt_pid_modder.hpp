@@ -1,3 +1,4 @@
+#pragma once
 #include "wrap/trap/algorithms/ipid_modder.hpp"
 #include "wrap/rail/telemetry/iangular_position_telemetry.hpp"
 
@@ -65,11 +66,12 @@ public:
 
         // It must be scaled to various turret head sizes
         const double kCorrection{config_.correctionScaler * kPhysicsCorrection};
+        const Output kOutputCorrection{static_cast<Output>(kCorrection)};
 
         // The turret is targeting a specific position, but
         // The correct should remove the influence of gravity
         // So that its ability to achieve the desired position is unhindered
-        return static_cast<Output>{kCorrection} + output;
+        return Output{kOutputCorrection + output};
     };
 private:
     std::unique_ptr<telemetry::IAngularPosition> fieldPitchSensor_;
