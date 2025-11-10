@@ -26,6 +26,7 @@ public:
     {
         ChassisFieldYawSystem::Config chassisFieldYawConfig;
         CounterYawModder::Config counterYawConfig;
+        ModdedCascadeMotor::Config moddedCascadeConfig;
     };
 
     CounterChassisFieldYaw(
@@ -39,6 +40,7 @@ public:
         ChassisFieldYawSystem 
         {
             std::make_unique<ModdedCascadeMotor>(
+                config.moddedCascadeConfig,
                 std::move(motor),
                 std::move(controlTelemetry),
                 std::move(intermediateTelemetry),
@@ -46,7 +48,7 @@ public:
                 std::make_unique<trap::algorithms::NullPidModder<Output>>()
             ),
             std::move(imu),
-            config.pitchSystemConfig
+            config.chassisFieldYawConfig
         }
     {}
 

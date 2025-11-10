@@ -7,16 +7,17 @@ namespace fang::telemetry
 class ImuChassisYawVelocityAdapter : public IAngularVelocity
 {
 public:
-    ImuChassisYawVelocityAdapter(trap::communication::sensors::IImu imu):
-        imu_{imu}
+    using Imu = trap::communication::sensors::IImu;
+    ImuChassisYawVelocityAdapter(std::unique_ptr<Imu> imu):
+        imu_{std::move(imu)}
     {}
 
     RPM getAngularVelocity() const override
     {
-        return imu_.getAngularVelocityZ();
+        return imu_->getAngularVelocityZ();
     }
 
 private:
-    trap::communication::sensors::IImu& imu_;
+    std::unique_ptr<Imu> imu_;
 };
 }
