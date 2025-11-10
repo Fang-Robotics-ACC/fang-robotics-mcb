@@ -15,58 +15,58 @@
 
 namespace fang::motor
 {
-    class ModdedCascadeGm6020
-        :
-        public ModdedCascadePosition<trap::motor::DjiMotorOutput, RPM>
-    {
-    public:
-        using Motor = trap::motor::DjiGM6020;
-        using PidMotor = ModdedCascadePosition<trap::motor::DjiMotorOutput, RPM>;
+class ModdedCascadeGm6020
+    :
+    public ModdedCascadePosition<trap::motor::DjiMotorOutput, RPM>
+{
+public:
+    using Motor = trap::motor::DjiGM6020;
+    using PidMotor = ModdedCascadePosition<trap::motor::DjiMotorOutput, RPM>;
 
-        struct Config{
-            Motor::Config motorConfig;
-            PidMotor::Config pidMotorConfig;
+    struct Config{
+        Motor::Config motorConfig;
+        PidMotor::Config pidMotorConfig;
+    };
+
+    ModdedCascadeGm6020(
+        Drivers& drivers,
+        const Config& config,
+        std::unique_ptr<MainModder> mainModder = std::make_unique<trap::algorithms::NullPidModder<RPM>>(),
+        std::unique_ptr<IntermediateModder> intermediateModder  = std::make_unique<trap::algorithms::NullPidModder<trap::motor::DjiMotorOutput>>()
+    ):
+        PidMotor
+        {make(drivers, config)}
+    {
+    }
+
+private:
+    PidMotor make(Drivers& drivers, const Config& config)
+    {
+        auto motor{
+            std::make_unique<Motor>(
+                drivers,
+                config.motorConfig
+            )
         };
 
-        ModdedCascadeGm6020(
-            Drivers& drivers,
-            const Config& config,
-            std::unique_ptr<MainModder> mainModder = std::make_unique<trap::algorithms::NullPidModder<RPM>>(),
-            std::unique_ptr<IntermediateModder> intermediateModder  = std::make_unique<trap::algorithms::NullPidModder<trap::motor::DjiMotorOutput>>()
-        ):
-            PidMotor
-            {make(drivers, config)}
-        {
-        }
+        auto positionTelemetry{
+            std::make_unique<telemetry::IAngularPositionAdapter>(
+                *motor
+            )
+        };
 
-    private:
-        PidMotor make(Drivers& drivers, const Config& config)
-        {
-            auto motor{
-                std::make_unique<Motor>(
-                    drivers,
-                    config.motorConfig
-                )
-            };
+        auto velocityTelemetry{
+            std::make_unique<telemetry::IAngularVelocityAdapter>(
+                *motor
+            )
+        };
 
-            auto positionTelemetry{
-                std::make_unique<telemetry::IAngularPositionAdapter>(
-                    *motor
-                )
-            };
-
-            auto velocityTelemetry{
-                std::make_unique<telemetry::IAngularVelocityAdapter>(
-                    *motor
-                )
-            };
-
-            return PidMotor{
-                config.pidMotorConfig,
-                std::move(motor),
-                std::move(positionTelemetry),
-                std::move(velocityTelemetry)
-            };
-        }
-    };
+        return PidMotor{
+            config.pidMotorConfig,
+            std::move(motor),
+            std::move(positionTelemetry),
+            std::move(velocityTelemetry)
+        };
+    }
+};
 }
