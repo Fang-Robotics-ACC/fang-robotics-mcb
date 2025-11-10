@@ -12,11 +12,12 @@ template<typename ErrorType, typename ControlType, typename TimeUnit>
 class ModdedPid : public SmoothPid<ErrorType, ControlType, TimeUnit>
 {
 public:
+    using IModder = IPidModder<ControlType>;
     using BasePid = SmoothPid<ErrorType, ControlType, TimeUnit>;
     using Config = BasePid::Config;
     ModdedPid(
         const Config& config,
-        std::unique_ptr<IPidModder<ControlType>> modder = std::make_unique<NullPidModder<ControlType>>(),
+        std::unique_ptr<IModder> modder = std::make_unique<NullPidModder<ControlType>>(),
         ErrorType initialLastError = ErrorType{0.0}
     ):
         BasePid(config, initialLastError),
@@ -41,6 +42,6 @@ public:
         return modder_->getModdedOutput(BasePid::runController(error, deltaTime));
     }
 private:
-    std::unique_ptr<IPidModder<ControlType>> modder_;
+    std::unique_ptr<IModder> modder_;
 };
 }
