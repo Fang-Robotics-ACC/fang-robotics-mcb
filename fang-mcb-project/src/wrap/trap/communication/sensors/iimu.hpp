@@ -13,6 +13,10 @@ namespace trap::communication::sensors
         virtual Radians getPitch() const = 0;
         virtual Radians getYaw() const = 0;
         virtual Radians getRoll() const = 0;
+
+        virtual RadiansPerSecond getAngularVelocityX() const = 0;
+        virtual RadiansPerSecond getAngularVelocityY() const = 0;
+        virtual RadiansPerSecond getAngularVelocityZ() const = 0;
         virtual ~IImu() {};
     };
 }

@@ -17,6 +17,10 @@ namespace trap::communication::sensors
         Radians getPitch() const override;
         Radians getYaw() const override;
         Radians getRoll() const override;
+
+        RadiansPerSecond getAngularVelocityX() const override;
+        RadiansPerSecond getAngularVelocityY() const override;
+        RadiansPerSecond getAngularVelocityZ() const override;
     private:
         ImuInterface& m_imu;
     };
