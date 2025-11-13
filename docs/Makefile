@@ -19,5 +19,8 @@
 # # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 # %: Makefile
 #	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-run:
-	doxygen ./Doxyfile
+run: build
+	firefox ../html/index.html
+build:
+	cd ..;\
+	doxygen docs/Doxyfile
