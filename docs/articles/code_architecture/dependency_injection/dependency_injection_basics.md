@@ -11,22 +11,22 @@ class which manages 4 motors called a QuadDrive. Traditionally, the QuadDrive
 would have 4 instances of objects which are drivers for motors such as the DJI 
 M3508 or the Repeat Ultra MK 2. These would be private variables.
 
-.. code-block:: cpp
-
-  /**
-   * Doxygen detectable comment :D
-   */
-  class QuadDrive
-  {
-  public:
-      QuadDrive() {}
-      void setWheelSpeeds(const QuadRPM& wheelSpeeds);
-  private:
-      Motor frontLeft_{};
-      Motor frontRight_{};
-      Motor rearLeft_{};
-      Motor rearRight_{};
-  };
+```cpp
+/**
+ * Doxygen detectable comment :D
+ */
+class QuadDrive
+{
+public:
+    QuadDrive() {}
+    void setWheelSpeeds(const QuadRPM& wheelSpeeds);
+private:
+    Motor frontLeft_{};
+    Motor frontRight_{};
+    Motor rearLeft_{};
+    Motor rearRight_{};
+};
+```
 
 This obeys the general principles of encapsulation and single responsibility.
 
@@ -47,69 +47,70 @@ concrete functions which must be implemented by those which inherit from it.
 This allows collections of many objects which may behave in different ways but 
 still essentially do the same category of thing.)
 
-.. code-block:: cpp
-
-  class ISpeedMotor
-  {
-  public:
-      // There are glitches when use = default with
-      //interfaces
-      virtual ~ISpeedMotor(){}  void setSpeed(const RPM& speed) = 0;
-  };
+```cpp
+class ISpeedMotor
+{
+public:
+    // There are glitches when use = default with
+    //interfaces
+    virtual ~ISpeedMotor(){}  void setSpeed(const RPM& speed) = 0;
+};
+```
 
 And what if our QuadDrive utilized that class? And took 4 motors within its 
 constructor?
   
-.. code-block:: cpp
+```cpp
 
-  /**
-   * Doxygen detectable comment :D
-   */
-  class QuadDrive
-  {
-  public:
-      QuadDrive
-      (
-           std::unique_ptr<ISpeedMotor> frontLeft,
-           std::unique_ptr<ISpeedMotor> frontRight,
-           std::unique_ptr<ISpeedMotor> rearLeft,
-           std::unique_ptr<ISpeedMotor> rearRight
-      ):
-          // Be carefful to move with frontLeft or lese
-          // A segmentation error will occur when it is used
-          frontLeft_{std::move(frontLeft)},
-          frontRight_{std::move(frontRight)}, 
-          rearLeft_{std::move(rearLeft)},
-          rearRight_{std::move(rearRight)}
-      {}
-      void setWheelSpeeds(const QuadRPM& wheelSpeeds);
-  private:
-      std::unique_ptr<ISpeedMotor> frontLeft_;
-      std::unique_ptr<ISpeedMotor> frontRight_;
-      std::unique_ptr<ISpeedMotor> rearLeft_;
-      std::unique_ptr<ISpeedMotor> rearRight_;
-  };
+/**
+ * Doxygen detectable comment :D
+ */
+class QuadDrive
+{
+public:
+    QuadDrive
+    (
+         std::unique_ptr<ISpeedMotor> frontLeft,
+         std::unique_ptr<ISpeedMotor> frontRight,
+         std::unique_ptr<ISpeedMotor> rearLeft,
+         std::unique_ptr<ISpeedMotor> rearRight
+    ):
+        // Be carefful to move with frontLeft or lese
+        // A segmentation error will occur when it is used
+        frontLeft_{std::move(frontLeft)},
+        frontRight_{std::move(frontRight)}, 
+        rearLeft_{std::move(rearLeft)},
+        rearRight_{std::move(rearRight)}
+    {}
+    void setWheelSpeeds(const QuadRPM& wheelSpeeds);
+private:
+    std::unique_ptr<ISpeedMotor> frontLeft_;
+    std::unique_ptr<ISpeedMotor> frontRight_;
+    std::unique_ptr<ISpeedMotor> rearLeft_;
+    std::unique_ptr<ISpeedMotor> rearRight_;
+};
+```
 
 Although, generally, we will create instances with a uniform type of motor, this 
 is to demonstrate the power of dependency injectoin
 
-.. code-block:: cpp
+```cpp
+std::unique_ptr<DjiM3508> m3508{};
+std::unique_ptr<RepeatUltraMk2> ultra{};
+std::unique_ptr<DjiGM06020> gm6020{};
+// A mock class may be used for proper function calls
+std::unique_ptr<TestMotor> test{};
 
-  std::unique_ptr<DjiM3508> m3508{};
-  std::unique_ptr<RepeatUltraMk2> ultra{};
-  std::unique_ptr<DjiGM06020> gm6020{};
-  // A mock class may be used for proper function calls
-  std::unique_ptr<TestMotor> test{};
-
-  //Note: that we can use pass an anonymous instance directly, but for 
-  //demonstrative purposes and a clearer syntax for the beginner
-  QuadDrive quad
-  {
-      std::move(m3508),
-      std::move(ultra),
-      std::move(gm6020),
-      std::move(test)
-  };
+//Note: that we can use pass an anonymous instance directly, but for 
+//demonstrative purposes and a clearer syntax for the beginner
+QuadDrive quad
+{
+    std::move(m3508),
+    std::move(ultra),
+    std::move(gm6020),
+    std::move(test)
+};
+```
 
 Don't know about std::move() or move semantics? Check `this
 <https://www.learncpp.com/cpp-tutorial/introduction-to-smart-pointers-move-semantics/>`_
@@ -134,32 +135,33 @@ This uses the Variant Class design pattern in which a class inherits from a
 dependency injection class (so that it itself may be used as an instance of that 
 class for convenience) who only initializes the class within its constructor.
 
-.. code-block:: cpp
+```cpp
 
-    class UltraMk2BaseQuaddrive : public BaseQuadDrive
+class UltraMk2BaseQuaddrive : public BaseQuadDrive
+{
+public:
+    using Motor = motor::RepeatUltraMk2;
+    struct Config
     {
-    public:
-        using Motor = motor::RepeatUltraMk2;
-        struct Config
-        {
-            Motor::Config frontLeftConfig;
-            Motor::Config frontRightConfig;
-            Motor::Config rearLeftConfig;
-            Motor::Config rearRightConfig;
-        };
-
-        UltraMk2BaseQuaddrive(Drivers& drivers, const Config& config):
-            BaseQuadDrive
-            {
-                drivers,
-                std::make_unique<Motor>(config.frontLeftConfig),
-                std::make_unique<Motor>(config.frontRightConfig),
-                std::make_unique<Motor>(config.rearLeftConfig),
-                std::make_unique<Motor>(config.rearRightConfig)
-            }
-        {
-        }
+        Motor::Config frontLeftConfig;
+        Motor::Config frontRightConfig;
+        Motor::Config rearLeftConfig;
+        Motor::Config rearRightConfig;
     };
+
+    UltraMk2BaseQuaddrive(Drivers& drivers, const Config& config):
+        BaseQuadDrive
+        {
+            drivers,
+            std::make_unique<Motor>(config.frontLeftConfig),
+            std::make_unique<Motor>(config.frontRightConfig),
+            std::make_unique<Motor>(config.rearLeftConfig),
+            std::make_unique<Motor>(config.rearRightConfig)
+        }
+    {
+    }
+};
+```
 
 Note that since that the unique_ptr instances from std::make_unique() are 
 anonymous (they have no names attached to them), they are considered r-values, 
