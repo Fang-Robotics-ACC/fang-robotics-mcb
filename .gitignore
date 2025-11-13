@@ -16,3 +16,7 @@ gcov-result
 docs/_build
 docs/api
 docs/doxyoutput
+
+# Ignore doxygen builds
+html/
+latex/
