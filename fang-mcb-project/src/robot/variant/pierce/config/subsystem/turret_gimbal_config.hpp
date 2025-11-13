@@ -8,7 +8,7 @@ namespace fang::robot
     
     static const trap::motor::DjiSpeedPid::Config kPitchPositionPid
     {
-        .kp                 = 30.0,
+        .kp                 = 50.0,
         .ki                 = 0.0,
         .kd                 = 0.0,
         .maxICumulative     = 0.0,
@@ -16,12 +16,13 @@ namespace fang::robot
         .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
         .tRDerivativeKalman = 0.0,
         .tQProportionalKalman = 1.0,
-        .tRProportionalKalman = 40'000.0,
+        .tRProportionalKalman = 500.0,
+        .errDeadzone = 0.17
     };
 
     static const trap::motor::DjiSpeedPid::Config kPitchVelocityPid
     {
-        .kp                 = 3'000,
+        .kp                 = 5'000,
         .ki                 = 0,
         .kd                 = 0.0,
         .maxICumulative     = 0,
@@ -29,7 +30,7 @@ namespace fang::robot
         .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
         .tRDerivativeKalman = 0.0,
         .tQProportionalKalman = 1,
-        .tRProportionalKalman = 50'000.0,
+        .tRProportionalKalman = 150'000.0,
     };
 
     static const trap::motor::DjiMotor::Config kPitchMotorConfig
@@ -37,7 +38,7 @@ namespace fang::robot
         .motorId        = tap::motor::MOTOR2,
         .canBus         = tap::can::CanBus::CAN_BUS1,
         .name           = "pitchMotor",
-        .inverted       =  false,
+        .inverted       =  true,
         .currentControl = true 
     };
 
@@ -54,7 +55,7 @@ namespace fang::robot
 
     static const trap::motor::DjiSpeedPid::Config kYawPositionPid
     {
-        .kp                 = 70.0,
+        .kp                 = 80.0,
         .ki                 = 0.0,
         .kd                 = 0.0,
         .maxICumulative     = 0.0,
@@ -67,7 +68,7 @@ namespace fang::robot
 
     static const trap::motor::DjiSpeedPid::Config kYawVelocityPid
     {
-        .kp                 = 600,
+        .kp                 = 475,
         .ki                 = 0,
         .kd                 = 0.0,
         .maxICumulative     = 0,
@@ -75,17 +76,14 @@ namespace fang::robot
         .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
         .tRDerivativeKalman = 0.0,
         .tQProportionalKalman = 1.0,
-        .tRProportionalKalman = 250.0,
-        .errorDerivativeFloor = 00 //rpm
+        .tRProportionalKalman = 200.0,
+        .errorDerivativeFloor = 0 //rpm
     };
 
-    static const motor::DualCascadeGm6020::PidMotor::Config kYawMotorPidConfig
+    static const turret::PierceFieldGimbal::YawSystem::Gm6020CounterChassisFieldYaw::ModdedCascadeMotor::Config kYawMotorPidConfig
     {
-
         .mainPidConfig = kYawPositionPid,
-        .intermediatePidConfig = kYawVelocityPid,
-        .mainPidInitialValue = 0.0_rad,
-        .intermediatePidInitialValue = 0.0_rpm,
+        .intermediatePidConfig = kYawVelocityPid
     };
 
     static const trap::motor::DjiGM6020::Config kYawMotorConfig 
@@ -103,20 +101,19 @@ namespace fang::robot
         .pidMotorConfig = kPitchMotorPidConfig 
     };
 
-     static const motor::DualCascadeGm6020::Config kDualCascadeYawMotorConfig
-    {
-        .motorConfig = kYawMotorConfig,
-        .pidMotorConfig = kYawMotorPidConfig 
-    };
+    //static const motor::DualCascadeGm6020::Config kDualCascadeYawMotorConfig
+    //{
+    //    .motorConfig = kYawMotorConfig,
+    //    .pidMotorConfig = kYawMotorPidConfig 
+    //};
 
     static const turret::BasicFieldPitchSystem::Config kBasicFieldPitchConfig
     {
         .pitchError = 0_deg,
-        .pitchRange = 
-            {
-                .min = -20_deg,
-                .max = 15_deg
-            }
+        .pitchRange = {
+            .min = -20_deg,
+            .max = 15_deg
+        }
     };
 
     static const turret::PierceFieldGimbal::PitchSystem::Config kPitchSystemConfig
@@ -127,10 +124,12 @@ namespace fang::robot
 
     static turret::PierceFieldGimbal::YawSystem::Config kYawSystemConfig 
     {
-        .motorConfig = kDualCascadeYawMotorConfig,
-        .yawSystemConfig = turret::PierceFieldGimbal::YawSystem::ChassisFieldYawSystem::Config
+        .motorConfig = kYawMotorConfig,
+        .fieldYawConfig = 
         {
-            .yawError = -37_deg
+            .chassisFieldYawConfig = {.yawError = -37_deg},
+            .counterYawConfig = {.correctionScale = 1.0},
+            .moddedCascadeConfig = kYawMotorPidConfig
         }
     };
 
