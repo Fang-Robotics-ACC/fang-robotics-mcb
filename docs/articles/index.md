@@ -17,16 +17,8 @@ Add oddities to look out for (stack size, units.h linear and angular, multiple
 inheritance shenanigans), case studies before and after refactoring, custom 
 stuff (FANG_ASSERT), etc.
 
-.. toctree::
-    :maxdepth: 2
-    :caption: Contents:
+Table of Contents
+=====================
+[Architecture](code_architecture/index.md)
 
-    code_architecture/index
-    directory_overview/index
-    api/library_root
-
-Indices and tables
-==================
-
-:ref:`genindex`
-
+[Directory Overview](directory_overview/index.md)
