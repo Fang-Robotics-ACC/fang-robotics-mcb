@@ -38,14 +38,14 @@ fang-robotics-mcb/fang-mcb-project/test/control/chassis/drive/holonomic/mecanum_
 Notice that gtest and gmock is utilized. testing::NiceMock is used in this case 
 to prevent warnings from happening.
 
-```
+```cpp
 namespace fang::chassis::quadDriveSubsystemTest
 {
 ```
 Sometimes, helper function or fixtures are declared which generic names, in 
 order to prevent naming collisions, a custom namepsace is made for each level
 
-```
+```cpp
 /**
  * Create a subsystem as well as reference
  * accessors for checking calls to motors
@@ -102,7 +102,7 @@ the motors.
 and explaining them. The rest of the file will be explained in depth afterwards. 
 If you know how to work with gtest, it should be straightforward.**
 
-```
+```cpp
 private:
     //Prevents dangling references
     //Since these pointers are invalid they should not be accessible to the client
@@ -136,7 +136,7 @@ moved. In production, this is **slightly dangerous** as it is intended to bypass
 the point of dependency injection and information hiding. (The client manages 
 the motors themselves, no one else).
 
-```
+```cpp
 /**
 * Create a subsystem as well as reference
 * accessors for checking calls to motors
@@ -173,7 +173,7 @@ There will be excerpts from the constructor. This is where a bulk of the
 variable initialization is done. In fang-mcb, uniform bracket initialization is 
 the preferred method for initializing all variables.
 
-```
+```cpp
 frontLeftMotorPtr_{std::make_unique<motor::ISpeedMotorMock>()},
 frontRightMotorPtr_{std::make_unique<motor::ISpeedMotorMock>()},
 rearLeftMotorPtr_{std::make_unique<motor::ISpeedMotorMock>()},
@@ -182,7 +182,7 @@ rearRightMotorPtr_{std::make_unique<motor::ISpeedMotorMock>()},
 First, std::make\_unique initilizes the original smart pointers with actual 
 variable information. This is preferred over new because it is exception safe.
 
-```
+```cpp
 frontLeftMotor_{*frontLeftMotorPtr_},
 frontRightMotor_{*frontRightMotorPtr_},
 rearLeftMotor_{*rearLeftMotorPtr_},
@@ -194,7 +194,7 @@ return the actual object, not the address of the object. These will remain valid
 for the lifetime of the quadDriveSubsystem_, which is tied to the fixture 
 itself.
 
-```
+```cpp
 quadDriveSubsystem_
 {
     drivers_,
@@ -210,7 +210,7 @@ r-reference, which means that the responsibility is moved to
 quadDrivdeSubsystem_ on freeing the memory or not. It also gains ownership and 
 sole access to these pointers.
 
-```
+```cpp
 class QuadDriveSubsystemTest:
     public QuadDriveSubsystemTestSetup,
     public ::testing::Test
@@ -238,7 +238,7 @@ This class is a parameterized test. Other tutorials use std::tuple<> but that is
 cumbersome and has a lack of the context for the meaning of the values (earlier 
 tests would have comments). Structs were the suitable solution for this.
 
-```
+```cpp
 TEST_P(WheelSpeedSetter, setMotorSpeeds)
 {
     //Make sure the right wheel speeds are set
@@ -295,7 +295,8 @@ INSTANTIATE_TEST_CASE_P
 ```
 These are just instantiation of the paramterized tests. They should use 
 designators as shown below:
-```
+
+```cpp
 Struct derp
     {
         .derp1 = 12,
@@ -305,7 +306,7 @@ Struct derp
 
 The following is the instantiation of the test fixture.
 
-```
+```cpp
 //All motors should be initialized and updated on
 TEST_F(QuadDriveSubsystemTest, initialize)
 {
@@ -329,7 +330,7 @@ TEST_F(QuadDriveSubsystemTest, update)
 This uses QuadDriveSubsystemTest. Notice how it checks for the call of each 
 motor **BEFORE** quadDriveSubsystem_ has refresh() called.
 
-```
+```cpp
 }
 ```
 Namespace bracket close :D
