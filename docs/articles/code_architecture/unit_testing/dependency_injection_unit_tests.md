@@ -94,7 +94,7 @@ protected:
 };
 
 ```
-Thi is the main test setup. Notice that it does NOT inherit from gtest. This 
+This is the main test setup. Notice that it does NOT inherit from gtest. This 
 only sets up the variables which will be used in other tests such as accessing 
 the motors.
 
