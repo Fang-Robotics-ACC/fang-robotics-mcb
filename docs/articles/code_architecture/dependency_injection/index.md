@@ -6,5 +6,4 @@ principle of SOLID. It allows a great deal of code reuse without duplication.
 Here, we will address the basics, concerns, and the specifics of how and why 
 Fang Robotics MCB utilizes it and adapts it slightly from traditional patterns.
 
-* [Depependency Injection Basics](dependency_injection_basics.md)
-* [Class Variant Design Pattern](class_variant_design_pattern.md)
+[Depependency Injection Basics](dependency_injection_basics.md)
