@@ -201,3 +201,6 @@ designed for a specific type of compiler, we are not seeking portability as
 much.
 
 With beginners, this avoids hours of frustration.
+
+
+UT-RAS, Stampede has utilized #pragma once for years without issue.
