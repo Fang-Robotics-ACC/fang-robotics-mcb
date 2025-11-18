@@ -192,3 +192,12 @@ ICoolInterface& cool{glacier};
 ```
 
 
+## Pragma
+
+Header files shall use #pragma once instead of traditional header guards. There 
+has been too much time wasted on incorred header guards. There are no warnings 
+for header guards which have potential collisions. Since this codebase is 
+designed for a specific type of compiler, we are not seeking portability as 
+much.
+
+With beginners, this avoids hours of frustration.
