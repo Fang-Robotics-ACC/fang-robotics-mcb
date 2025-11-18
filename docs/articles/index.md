@@ -22,3 +22,5 @@ Table of Contents
 [Architecture](code_architecture/index.md)
 
 [Directory Overview](directory_overview/index.md)
+
+[Oddities](oddities.md)
