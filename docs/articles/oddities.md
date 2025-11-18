@@ -17,6 +17,15 @@ Constructor(std::unique_ptr<Type>() object) : object_{std::move(object)}
 The constructor needs to pass a **smart** pointer via value instead of l-value 
 reference, address, or r-value reference.
 
+This is important because it shows the caller of the constructor that their 
+variables are being moved into the parameters when being used as arguments. In 
+addition, the variables being initialized within the class are clearly being 
+initialized via moving instead of copy or reference.
+
+It guarantees and shows that guarantee that move semantics are being used.
+
+### Stack Overflow explanation
+
 https://stackoverflow.com/questions/75800644/passing-stdunique-ptr-to-constructor-through-r-value-reference
 
 "Don't use std::unique\_ptr at all where no transfer is intended (use a raw 
