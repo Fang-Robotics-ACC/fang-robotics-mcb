@@ -89,3 +89,67 @@ which will eventually be evaluated to the modm\_abandon() function.
 
 The assertion info can be piped to UART or any method of communication. At the 
 time of writing this article, it is in the process of being implemented.
+
+## Virtual Declaration when two base classes have the same virtual function
+
+https://stackoverflow.com/questions/1313063/request-for-member-is-ambiguous-in-g
+
+```cpp
+class HolonomicSubsystem:
+        public IHolonomicDrive,
+        public tap::control::Subsystem
+    {
+    public:
+        HolonomicSubsystem(Drivers& drivers) : Subsystem{&drivers}
+        {}
+
+        //Prevent ambiguity error since multiple ancestors have initialize()
+        virtual void initialize() override = 0;
+        virtual ~HolonomicSubsystem() {};
+    };
+```
+If HolonomicSubsystem does not have an explicit override for initialize(), it 
+leads to compilation errors because void initialize() is defined in both classes 
+it inherits from.
+
+Please note that we are not overly abusing inheritance as IHolonomicDrive is a 
+purely abstract class.
+
+This is the interface that it uses for meshing with commands so that different 
+holonomic drives can be used for the same command
+
+
+```cpp
+template <class Velocity, class AngularVelocity>
+class IHolonomicDrive:
+    virtual public IHolonomicControl<Velocity, AngularVelocity>,
+    virtual public system::ISystem
+{
+public:
+    virtual ~IHolonomicDrive() {};
+};
+```
+initialize() is defined in ISystem.
+
+```cpp
+class Subsystem
+{
+public:
+    Subsystem(Drivers* drivers);
+
+    virtual ~Subsystem();
+
+    /**
+     * Called once when you add the Subsystem to the commandScheduler stored in the
+     * Drivers class.
+     */
+    virtual void initialize() {}
+```
+initialize() is defined in Subsystem
+
+So in order to provide the compiler a correct definition, it has to be 
+explicitly defined in IHolonomicSubsystem (this is required due to taproot 
+commands requiring taproot Subsystem registration).
+
+When MecanumDrive's initialize() is called when casted as a Subsystem or an 
+IHolonomicDrive, the same initialize() is called.
