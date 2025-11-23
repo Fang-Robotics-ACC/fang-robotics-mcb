@@ -25,14 +25,13 @@ Out of those focii, these distinct features emerged:
   *organized*
 * Single Reponsibility Principle: *So important it is said twice*
 * Doxygen Documentation: *Document code... in the code*
-* Dependency Injection: *Decouple higher level code from lower level specifics*
-* Unit Tests: *Test code... with code... Works in tandem with Dependency*
+* [Dependency Injection](dependency_injection/index.md): *Decouple higher level 
+  code from lower level specifics*
+* [Unit Tests](unit_testing/index.md): *Test code... with code... Works in 
+  tandem with Dependency*
   *Injection*
 * TRAProot: *Taproot wrappers with dimensional analysis and polymorphism*
 * RAIL: *Uniform abstraction interfaces with testing mocks*
 * And more!
 
-.. toctree::
-    :glob:
 
-    */index

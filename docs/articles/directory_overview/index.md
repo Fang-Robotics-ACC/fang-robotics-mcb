@@ -9,11 +9,7 @@ fang-mcb is sorted into various folders under src:
 * Robot: The classes for each unique robot as well as the general class for all robots.
 * System: This deals with lower level utilies such as error handling, error communication, and whatnot.
 * Util: Miscellaneous catagory for useful mathematical, physics, time utilities, and more.
-* Wrap: Wrappers for various libraries such as taproot (traproot), RAIL, and more.
+* [Wrap](wrap/index.md): Wrappers for various libraries such as taproot 
+  (traproot), RAIL, and more.
 
 
-
-..toctree::
-    :glob:
-
-    */index
