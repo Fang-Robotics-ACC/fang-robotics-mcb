@@ -47,7 +47,9 @@
 
 #include "io.hpp"
 #include "units.h"
-#include "robot/robot.hpp"
+#include "robot/robot_singleton.hpp"
+
+#include "wrap/units/units_alias.hpp"
 
 #include <cassert>
 #include <iostream>
