@@ -34,7 +34,7 @@ fang::Drivers& drivers{fang::DriversSingleton::getDrivers()};
     // on the BaseRobot anyways
     fang::robot::BaseRobot robot{drivers.commandScheduler, {}, {}};
     fang::robot::IRobot& fang::RobotSingleton::robot{robot};
-#elif defined(TARGET_INFANTRY_PIERCE)
+#elif defined(TARGET_PIERCE)
     #include "robot/variant/pierce/pierce_config.hpp"
     #include "robot/variant/pierce/pierce.hpp"
     using Robot = fang::robot::Pierce;
