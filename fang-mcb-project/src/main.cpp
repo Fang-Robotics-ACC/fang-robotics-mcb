@@ -47,7 +47,9 @@
 
 #include "io.hpp"
 #include "units.h"
-#include "robot/robot.hpp"
+#include "robot/robot_singleton.hpp"
+
+#include "wrap/units/units_alias.hpp"
 
 #include <cassert>
 #include <iostream>
@@ -70,7 +72,7 @@ int main()
      * which causes annoying stack overflow issues
      * static classes are in static memory instead of stack memory
      */
-    static Robot robot{drivers, k_robotConfig};
+    fang::robot::IRobot& robot{fang::RobotSingleton::getRobot()};
 
     robot.initialize();
 
