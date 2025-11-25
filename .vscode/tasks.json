@@ -103,7 +103,7 @@
             "presentation": {
                 "panel": "new"
             },
-            "command": "pipenv run scons run profile=debug robot=TARGET_PIERCE",
+            "command": "pipenv run scons run profile=debug robot=TARGET_PIERCE -j 64",
             "group": "build",
             "problemMatcher": [],
             "options": {
