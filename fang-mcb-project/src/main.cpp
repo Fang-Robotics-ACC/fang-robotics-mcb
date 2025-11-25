@@ -70,7 +70,7 @@ int main()
      * which causes annoying stack overflow issues
      * static classes are in static memory instead of stack memory
      */
-    static Robot robot{drivers, k_robotConfig};
+    fang::robot::IRobot& robot{fang::RobotSingleton::getRobot()};
 
     robot.initialize();
 
