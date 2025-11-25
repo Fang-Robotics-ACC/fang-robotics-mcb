@@ -98,12 +98,103 @@
             }
         },
         {
-            "label": "Program - Debug",
+            "label": "Program - Debug Pierce",
             "type": "shell",
             "presentation": {
                 "panel": "new"
             },
-            "command": "pipenv run scons run profile=debug",
+            "command": "pipenv run scons run profile=debug robot=TARGET_PIERCE -j 64",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceRoot}/fang-mcb-project"
+            }
+        },
+        {
+            "label": "Program - Debug Pierce Auto Test",
+            "type": "shell",
+            "presentation": {
+                "panel": "new"
+            },
+            "command": "pipenv run scons run profile=debug robot=TARGET_PIERCE_AUTO_TEST -j 64",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceRoot}/fang-mcb-project"
+            }
+        },
+        {
+            "label": "Program - Debug Slice",
+            "type": "shell",
+            "presentation": {
+                "panel": "new"
+            },
+            "command": "pipenv run scons run profile=debug robot=TARGET_SLICE -j 64",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceRoot}/fang-mcb-project"
+            }
+        },
+        {
+            "label": "Program - Debug Devour",
+            "type": "shell",
+            "presentation": {
+                "panel": "new"
+            },
+            "command": "pipenv run scons run profile=debug robot=TARGET_SLICE -j 64",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceRoot}/fang-mcb-project"
+            }
+        },
+        {
+            "label": "Program - Release Pierce",
+            "type": "shell",
+            "presentation": {
+                "panel": "new"
+            },
+            "command": "pipenv run scons run profile=release robot=TARGET_PIERCE -j 64",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceRoot}/fang-mcb-project"
+            }
+        },
+        {
+            "label": "Program - Release Pierce Auto Test",
+            "type": "shell",
+            "presentation": {
+                "panel": "new"
+            },
+            "command": "pipenv run scons run profile=release robot=TARGET_PIERCE_AUTO_TEST -j 64",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceRoot}/fang-mcb-project"
+            }
+        },
+        {
+            "label": "Program - Release Slice",
+            "type": "shell",
+            "presentation": {
+                "panel": "new"
+            },
+            "command": "pipenv run scons run profile=release robot=TARGET_SLICE -j 64",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceRoot}/fang-mcb-project"
+            }
+        },
+        {
+            "label": "Program - Release Devour",
+            "type": "shell",
+            "presentation": {
+                "panel": "new"
+            },
+            "command": "pipenv run scons run profile=release robot=TARGET_SLICE -j 64",
             "group": "build",
             "problemMatcher": [],
             "options": {
