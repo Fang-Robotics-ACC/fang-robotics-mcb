@@ -1,16 +1,17 @@
 #ifndef FANG_ROBOTICS_MCB_ROBOT_HPP
 #define FANG_ROBOTICS_MCB_ROBOT_HPP
-    #if defined(TARGET_INFANTRY_PIERCE)
-        #include "robot/variant/pierce/pierce_config.hpp"
-        #include "robot/variant/pierce/pierce.hpp"
-        using Robot = fang::robot::Pierce;
-        static const Robot::Config& k_robotConfig{fang::robot::k_pierceConfig};
-    #endif
+#include "irobot.hpp"
+namespace fang
+{
+// TODO: Make into singleton with api like RobotSingleton::getRobot()
+class RobotSingleton
+{
+public:
+    static robot::IRobot& getRobot();
 
-    #if defined(TARGET_PIERCE_AUTO_TEST)
-        #include "robot/variant/pierce_auto_test/pierce_auto_test.hpp"
-        #include "robot/variant/pierce_auto_test/pierce_auto_test_config.hpp"
-        using Robot = fang::robot::PierceAutoTest;
-        static const Robot::Config& k_robotConfig{fang::robot::k_pierceAutoTestConfig};
-    #endif
+private:
+    static robot::IRobot& robot;
+};
+}
+
 #endif
