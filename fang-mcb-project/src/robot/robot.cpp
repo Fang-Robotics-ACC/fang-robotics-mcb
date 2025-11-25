@@ -1,22 +1,23 @@
 #include "robot.hpp"
 #include "driver/drivers_singleton.hpp"
+/*
+ * Don't add namespace fang so we don't have to have doulbe sets of macros
+ *
+ */
 
-namespace fang
+fang::robot::IRobot& fang::RobotSingleton::getRobot()
 {
-    robot::IRobot& RobotSingleton::getRobot()
-    {
-        return robot;
-    }
-    // For convenience
-    Drivers& drivers{DriversSingleton::getDrivers()};
+    return robot;
+}
+// For convenience
+fang::Drivers& drivers{fang::DriversSingleton::getDrivers()};
 
 #if defined(TARGET_INFANTRY_PIERCE)
     #include "robot/variant/pierce/pierce_config.hpp"
     #include "robot/variant/pierce/pierce.hpp"
     using Robot = fang::robot::Pierce;
-    static const Robot::Config& k_robotConfig{fang::robot::k_pierceConfig};
-    Robot robot{drivers, k_robotConfig};
-    RobotSingleton::robot{robot};
+    Robot robot{drivers, fang::robot::k_pierceConfig};
+    fang::robot::IRobot& fang::RobotSingleton::robot{robot};
 #endif
 
 #if defined(TARGET_PIERCE_AUTO_TEST)
@@ -27,4 +28,3 @@ namespace fang
     Robot robot{drivers, k_robotConfig};
     RobotSingleton::robot{robot};
 #endif
-}
