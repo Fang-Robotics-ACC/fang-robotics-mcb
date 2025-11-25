@@ -111,6 +111,45 @@
             }
         },
         {
+            "label": "Program - Debug Pierce Auto Test",
+            "type": "shell",
+            "presentation": {
+                "panel": "new"
+            },
+            "command": "pipenv run scons run profile=debug robot=TARGET_PIERCE_AUTO_TEST -j 64",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceRoot}/fang-mcb-project"
+            }
+        },
+        {
+            "label": "Program - Debug Slice",
+            "type": "shell",
+            "presentation": {
+                "panel": "new"
+            },
+            "command": "pipenv run scons run profile=debug robot=TARGET_SLICE -j 64",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceRoot}/fang-mcb-project"
+            }
+        },
+        {
+            "label": "Program - Debug Devour",
+            "type": "shell",
+            "presentation": {
+                "panel": "new"
+            },
+            "command": "pipenv run scons run profile=debug robot=TARGET_SLICE -j 64",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceRoot}/fang-mcb-project"
+            }
+        },
+        {
             "label": "lbuild build",
             "type": "shell",
             "presentation": {
