@@ -98,12 +98,12 @@
             }
         },
         {
-            "label": "Program - Debug",
+            "label": "Program - Debug Pierce",
             "type": "shell",
             "presentation": {
                 "panel": "new"
             },
-            "command": "pipenv run scons run profile=debug",
+            "command": "pipenv run scons run profile=debug robot=TARGET_PIERCE",
             "group": "build",
             "problemMatcher": [],
             "options": {
