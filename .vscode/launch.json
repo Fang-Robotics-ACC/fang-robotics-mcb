@@ -42,12 +42,12 @@
             ]
         },
         {
-            "name": "Debug Hardware",
+            "name": "Debug Hardware Pierce",
             "type": "cortex-debug",
             "request": "launch",
             "servertype": "openocd",
             "cwd": "${workspaceRoot}",
-            "preLaunchTask": "Program - Debug",
+            "preLaunchTask": "Program - Debug Pierce",
             "executable": "./fang-mcb-project/build/hardware/scons-debug/fang-mcb-project.elf",
             "device": "STM32F427II",
             "showDevDebugOutput": "raw",
