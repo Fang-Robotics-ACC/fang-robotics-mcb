@@ -1,17 +1,20 @@
 #include "base_robot.hpp"
 #include "robot_singleton.hpp"
 #include "driver/drivers_singleton.hpp"
+
+// These are done so that we don't have to hardcode static instances of every possible robot
+#include "robot/variant/pierce/cool_pierce.hpp"
 /*
  * Don't add namespace fang so we don't have to have doulbe sets of macros
  *
  */
+namespace fang
+{
 
 fang::robot::IRobot& fang::RobotSingleton::getRobot()
 {
     return robot;
 }
-// For convenience
-fang::Drivers& drivers{fang::DriversSingleton::getDrivers()};
 
 /**
  * 
@@ -27,26 +30,25 @@ fang::Drivers& drivers{fang::DriversSingleton::getDrivers()};
  * (get access to arm-none-eabi-gcc with C++23)
  * File pull requests all that jazz..
  */
-
+// LOOK UP STATIC INITIALIZATION ORDER PROBLEM/FIASCO 
+// isocpp.org/wiki/faq/ctors#static-init-order-on-first-use
 #if defined(ENV_UNIT_TESTS)
     // This is a bit of a HACK: by creating an empty baseRobot
     // in unit tests, it is not expected for any actions to be performed
     // on the BaseRobot anyways
-    fang::robot::BaseRobot robot{drivers.commandScheduler, {}, {}};
+    fang::robot::BaseRobot robot{fang::DriversSingleton::getDrivers().commandScheduler, {}, {}};
     fang::robot::IRobot& fang::RobotSingleton::robot{robot};
 #elif defined(TARGET_PIERCE)
-    #include "robot/variant/pierce/pierce_config.hpp"
-    #include "robot/variant/pierce/pierce.hpp"
-    using Robot = fang::robot::Pierce;
-    Robot robot{drivers, fang::robot::k_pierceConfig};
-    fang::robot::IRobot& fang::RobotSingleton::robot{robot};
+    fang::robot::CoolPierce pierce{fang::DriversSingleton::getDrivers()};
+    fang::robot::IRobot& fang::RobotSingleton::robot{pierce};
 #elif defined(TARGET_PIERCE_AUTO_TEST)
     #include "robot/variant/pierce_auto_test/pierce_auto_test.hpp"
     #include "robot/variant/pierce_auto_test/pierce_auto_test_config.hpp"
     using Robot = fang::robot::PierceAutoTest;
-    static const Robot::Config& k_robotConfig{fang::robot::k_pierceAutoTestConfig};
-    Robot robot{drivers, k_robotConfig};
-    RobotSingleton::robot{robot};
-#else
+    // TODO: Figure out why if we don't copy the global variable it gives default values
+    // this is an issue on the embedded and unit test builds (refer to robot singleton tests)
+    static const Robot::Config kRobotConfig{fang::roobot::k_pierceAutoTestConfig};
+    static Robot robot{drivers, kRobotConfig};
     RobotSingleton::robot{robot};
 #endif
+}

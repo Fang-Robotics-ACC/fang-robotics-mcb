@@ -79,7 +79,7 @@ const PierceAutoTest::Config& getPierceAutoTestConfig()
         .commandConfig = kPierceCommandConfig
     };
 
-    const PierceAutoTest::Config kPierceAutoTestConfig
+    static const PierceAutoTest::Config kPierceAutoTestConfig
     {
         .subsystemConfig   = kPierceSubsystemConfig,
         .commandPackConfig = kPierceAutoTestCommandPackConfig
