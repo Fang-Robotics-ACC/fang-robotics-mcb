@@ -14,14 +14,12 @@ fang::Drivers& drivers{fang::DriversSingleton::getDrivers()};
 TEST(RobotSingleton, pierceBuild)
 {
     using Robot = fang::robot::Pierce;
-    Robot robot{drivers, fang::robot::k_pierceConfig};
+    Robot robot{drivers,fang::robot::getPierceConfig()};
 }
 
 TEST(RobotSingleton, pierceAutoTestBuild)
 {
     using Robot = fang::robot::PierceAutoTest;
-
-    static const Robot::Config& k_robotConfig{fang::robot::k_pierceAutoTestConfig};
-    Robot robot{drivers, k_robotConfig};
+    Robot robot{drivers,fang::robot::getPierceAutoTestConfig()};
 }
 }
