@@ -4,6 +4,8 @@
 
 // These are done so that we don't have to hardcode static instances of every possible robot
 #include "robot/variant/pierce/cool_pierce.hpp"
+#include "robot/variant/pierce_auto_test/cool_pierce_auto_test.hpp"
+
 /*
  * Don't add namespace fang so we don't have to have doulbe sets of macros
  *
@@ -11,7 +13,7 @@
 namespace fang
 {
 
-fang::robot::IRobot& fang::RobotSingleton::getRobot()
+robot::IRobot& fang::RobotSingleton::getRobot()
 {
     return robot;
 }
@@ -36,19 +38,13 @@ fang::robot::IRobot& fang::RobotSingleton::getRobot()
     // This is a bit of a HACK: by creating an empty baseRobot
     // in unit tests, it is not expected for any actions to be performed
     // on the BaseRobot anyways
-    fang::robot::BaseRobot robot{fang::DriversSingleton::getDrivers().commandScheduler, {}, {}};
-    fang::robot::IRobot& fang::RobotSingleton::robot{robot};
+    static robot::BaseRobot theRobot{DriversSingleton::getDrivers().commandScheduler, {}, {}};
+    robot::IRobot& RobotSingleton::robot{theRobot};
 #elif defined(TARGET_PIERCE)
-    fang::robot::CoolPierce pierce{fang::DriversSingleton::getDrivers()};
-    fang::robot::IRobot& fang::RobotSingleton::robot{pierce};
+    robot::CoolPierce pierce{fang::DriversSingleton::getDrivers()};
+    robot::IRobot& fang::RobotSingleton::robot{pierce};
 #elif defined(TARGET_PIERCE_AUTO_TEST)
-    #include "robot/variant/pierce_auto_test/pierce_auto_test.hpp"
-    #include "robot/variant/pierce_auto_test/pierce_auto_test_config.hpp"
-    using Robot = fang::robot::PierceAutoTest;
-    // TODO: Figure out why if we don't copy the global variable it gives default values
-    // this is an issue on the embedded and unit test builds (refer to robot singleton tests)
-    static const Robot::Config kRobotConfig{fang::roobot::k_pierceAutoTestConfig};
-    static Robot robot{drivers, kRobotConfig};
-    RobotSingleton::robot{robot};
+    robot::CoolPierceAutoTest pierceAutoTest{DriversSingleton::getDrivers()};
+    robot::IRobot& RobotSingleton::robot{pierceAutoTest};
 #endif
 }
