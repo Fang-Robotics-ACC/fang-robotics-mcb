@@ -12,6 +12,10 @@ namespace trap::communication::sensors
         MOCK_METHOD(Radians, getPitch, (), (const, override));
         MOCK_METHOD(Radians, getYaw, (), (const, override));
         MOCK_METHOD(Radians, getRoll, (), (const, override));
+
+        MOCK_METHOD(RadiansPerSecond, getAngularVelocityX, (), (const, override));
+        MOCK_METHOD(RadiansPerSecond, getAngularVelocityY, (), (const, override));
+        MOCK_METHOD(RadiansPerSecond, getAngularVelocityZ, (), (const, override));
     };
 }
 
