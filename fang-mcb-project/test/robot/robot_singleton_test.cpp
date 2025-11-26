@@ -13,10 +13,8 @@ fang::Drivers& drivers{fang::DriversSingleton::getDrivers()};
 
 TEST(RobotSingleton, pierceBuild)
 {
-    // TODO: MYSTERY: figure out why we need to copy robot config to prevent zeroing of a global variable???
     using Robot = fang::robot::Pierce;
-    const Robot::Config kRobotConfig{fang::robot::k_pierceConfig};
-    Robot robot{drivers, kRobotConfig};
+    Robot robot{drivers, fang::robot::k_pierceConfig};
 }
 
 TEST(RobotSingleton, pierceAutoTestBuild)
