@@ -23,6 +23,8 @@
 
 namespace fang::robot
 {
+const PierceAutoTest::Config& getPierceAutoTestConfig()
+{
     const PierceAutoTest::SubsystemConfig kPierceSubsystemConfig 
     {
         .chassisConfig  = kChassisConfig,
@@ -37,7 +39,7 @@ namespace fang::robot
         .turretInputConfig  = kTurretInputConfig
     };
 
-    const command::PierceAutoTestCommandPack::CommandConfig k_pierceCommandConfig
+    const command::PierceAutoTestCommandPack::CommandConfig kPierceCommandConfig
     {
         .aimConfig           = kTurretAimConfig,
         .counterStrikeConfig = kFieldMecanumConfig,
@@ -74,12 +76,14 @@ namespace fang::robot
     {
         .inputConfig   = kPierceInputConfig,
         .mappingConfig = kPierceMappingConfig,
-        .commandConfig = k_pierceCommandConfig
+        .commandConfig = kPierceCommandConfig
     };
 
-    const PierceAutoTest::Config k_pierceAutoTestConfig
+    const PierceAutoTest::Config kPierceAutoTestConfig
     {
         .subsystemConfig   = kPierceSubsystemConfig,
         .commandPackConfig = kPierceAutoTestCommandPackConfig
     };
+    return kPierceAutoTestConfig;
+}
 }
