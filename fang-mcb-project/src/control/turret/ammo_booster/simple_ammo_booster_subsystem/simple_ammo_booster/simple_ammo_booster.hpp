@@ -30,7 +30,7 @@ namespace fang::turret
         SimpleAmmoBooster
         (
             Drivers& drivers,
-            Flywheels&& flywheels,
+            Flywheels flywheels,
             const Config& config
         );
 
