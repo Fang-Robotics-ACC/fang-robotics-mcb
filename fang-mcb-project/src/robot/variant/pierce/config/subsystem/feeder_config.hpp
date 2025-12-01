@@ -6,7 +6,8 @@
 
 namespace fang::robot 
 {
-
+inline const turret::M2006SimpleFeeder::Config& getPierceFeederConfig()
+{
     using namespace units::literals;
     static const trap::motor::DjiSpeedPid::Config kFeederMotorPidConfig
     {
@@ -49,5 +50,7 @@ namespace fang::robot
         .feedMotorConfig = kFeederMotorConfig,
         .feederConfig = kFeederSystemConfig 
     };
+    return kFeederMakerConfig;
+}
 }
 #endif

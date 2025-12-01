@@ -130,7 +130,7 @@ namespace fang::turret::proxyTurretInputTest
         (
             MatchTestParam
             {
-                .config = 
+                .config =  
                 ProxyTurretInput::Config
                 {
                     .pitchScale = 1.0,

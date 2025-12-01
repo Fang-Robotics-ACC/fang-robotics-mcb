@@ -6,6 +6,9 @@
 
 namespace fang::robot 
 {
+    // Construct on first use idiom ahhhh
+inline const chassis::PierceMecanumDrive::Config& getPierceChassisConfig()
+{
     using namespace units::literals;
 
     //pwm initialization
@@ -89,5 +92,7 @@ namespace fang::robot
         .pwmTimer            = kPwmTimer,
     };
 
+    return kChassisConfig;
+}
 }
 #endif

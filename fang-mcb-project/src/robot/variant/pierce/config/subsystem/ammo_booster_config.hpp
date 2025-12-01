@@ -6,6 +6,8 @@
 
 namespace fang::robot 
 {
+inline const turret::PierceAmmoBooster::Config& getPierceAmmoBoosterConfig()
+{
     using AmmoBooster = turret::PierceAmmoBooster;
     using Flywheel = AmmoBooster::Flywheel;
 
@@ -60,4 +62,6 @@ namespace fang::robot
         .leftFlywheelConfig     = kLeftFlywheelConfig,
         .rightFlywheelConfig    = kRightFlywheelConfig
     };
+    return kAmmoBoosterConfig;
+}
 }

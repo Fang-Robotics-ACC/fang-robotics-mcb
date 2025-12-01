@@ -4,6 +4,8 @@
 
 namespace fang::robot 
 {
+inline const turret::PierceFieldGimbal::Config& getPierceGimbalConfig()
+{
     using namespace units::literals;
     
     static const trap::motor::DjiSpeedPid::Config kPitchPositionPid
@@ -101,12 +103,6 @@ namespace fang::robot
         .pidMotorConfig = kPitchMotorPidConfig 
     };
 
-    //static const motor::DualCascadeGm6020::Config kDualCascadeYawMotorConfig
-    //{
-    //    .motorConfig = kYawMotorConfig,
-    //    .pidMotorConfig = kYawMotorPidConfig 
-    //};
-
     static const turret::BasicFieldPitchSystem::Config kBasicFieldPitchConfig
     {
         .pitchError = 0_deg,
@@ -122,7 +118,7 @@ namespace fang::robot
         .pitchSystemConfig = kBasicFieldPitchConfig
     };
 
-    static turret::PierceFieldGimbal::YawSystem::Config kYawSystemConfig 
+    static const turret::PierceFieldGimbal::YawSystem::Config kYawSystemConfig 
     {
         .motorConfig = kYawMotorConfig,
         .fieldYawConfig = 
@@ -138,4 +134,6 @@ namespace fang::robot
         .pitchSystemConfig = kPitchSystemConfig,
         .yawSystemConfig = kYawSystemConfig
     };
+    return kGimbalSubsystemConfig;
+}
 }

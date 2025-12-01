@@ -27,10 +27,10 @@ const Pierce::Config& getPierceConfig()
 {
     static const Pierce::SubsystemConfig kPierceSubsystemConfig 
     {
-        .chassisConfig  = kChassisConfig,
-        .gimbalConfig   = kGimbalSubsystemConfig,
-        .feederConfig   = kFeederMakerConfig,
-        .boosterConfig  = kAmmoBoosterConfig
+        .chassisConfig  = getPierceChassisConfig(),
+        .gimbalConfig   = getPierceGimbalConfig(),
+        .feederConfig   = getPierceFeederConfig(),
+        .boosterConfig  = getPierceAmmoBoosterConfig()
     };
 
     static const command::PierceCommandPack::InputConfig kPierceInputConfig 

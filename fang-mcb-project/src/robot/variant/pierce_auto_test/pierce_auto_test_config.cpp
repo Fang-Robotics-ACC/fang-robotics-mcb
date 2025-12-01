@@ -28,7 +28,7 @@ const PierceAutoTest::Config& getPierceAutoTestConfig()
     const PierceAutoTest::SubsystemConfig kPierceSubsystemConfig 
     {
         .chassisConfig  = kChassisConfig,
-        .gimbalConfig   = kGimbalSubsystemConfig,
+        .gimbalConfig   = getPierceGimbalConfig(),
         .feederConfig   = kFeederMakerConfig,
         .boosterConfig  = kAmmoBoosterConfig
     };
