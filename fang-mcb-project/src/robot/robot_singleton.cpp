@@ -62,7 +62,7 @@ fang::robot::IRobot& fang::RobotSingleton::robot{robot};
     #include "robot/variant/pierce_auto_test/pierce_auto_test_config.hpp"
     using Robot = fang::robot::PierceAutoTest;
     Robot pierceAutoTest{drivers, kPierceAutoTestConfig};
-    RobotSingleton::robot{pierceAutoTest};
+    fang::robot::IRobot& fang::RobotSingleton::robot{pierceAutoTest};
 #endif
 
 
