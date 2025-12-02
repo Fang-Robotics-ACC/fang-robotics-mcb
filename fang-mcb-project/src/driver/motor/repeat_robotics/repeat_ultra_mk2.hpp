@@ -44,7 +44,7 @@ namespace fang::motor
          */
         struct Config
         {
-            const Volts& controllerInputVoltage;
+            Volts controllerInputVoltage;
             trap::gpio::PwmData pwmData;
             bool inverted;
             double gearRatio;

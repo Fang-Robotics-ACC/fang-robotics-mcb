@@ -20,5 +20,18 @@ namespace trap::communication::sensors
         return Radians{m_imu.getRoll()};
     }
 
+    RadiansPerSecond Imu::getAngularVelocityX() const
+    {
+        return RadiansPerSecond{m_imu.getGx()};
+    }
 
+    RadiansPerSecond Imu::getAngularVelocityY() const
+    {
+        return RadiansPerSecond{m_imu.getGy()};
+    }
+    
+    RadiansPerSecond Imu::getAngularVelocityZ() const
+    {
+        return RadiansPerSecond{m_imu.getGz()};
+    }
 }

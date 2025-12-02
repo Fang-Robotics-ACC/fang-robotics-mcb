@@ -98,6 +98,19 @@
             }
         },
         {
+            "label": "Program - Debug",
+            "type": "shell",
+            "presentation": {
+                "panel": "new"
+            },
+            "command": "pipenv run scons run profile=debug -j 64",
+            "group": "build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceRoot}/fang-mcb-project"
+            }
+        },
+        {
             "label": "Program - Debug Pierce",
             "type": "shell",
             "presentation": {

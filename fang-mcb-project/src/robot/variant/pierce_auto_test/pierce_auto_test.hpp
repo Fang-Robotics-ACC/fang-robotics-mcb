@@ -1,5 +1,4 @@
-#ifndef FANG_ROBOTICS_MCB_INFANTRY_HPP
-#define FANG_ROBOTICS_MCB_INFANTRY_HPP
+#pragma once
 #include "driver/drivers.hpp"
 //Subsystems
 #include "robot/variant/pierce/custom_variant/subsystem/pierce_mecanum_drive.hpp"
@@ -86,4 +85,3 @@ namespace fang::robot
         }
     };
 }
-#endif

@@ -1,6 +1,85 @@
 #pragma once
 #include "pierce_auto_test.hpp"
-namespace fang::robot 
+
+//Subsystem configs
+#include "config/subsystem/chassis_config.hpp"
+#include "robot/variant/pierce/config/subsystem/turret_gimbal_config.hpp"
+#include "config/subsystem/feeder_config.hpp"
+#include "config/subsystem/ammo_booster_config.hpp"
+
+//Input configs 
+#include "config/input/turret_input_config.hpp"
+#include "config/input/chassis_input_config.hpp"
+
+//Command configs
+#include "config/command/turret_auto_aim_config.hpp"
+#include "config/command/field_mecanum_config.hpp"
+#include "config/command/shuriken_config.hpp"
+#include "config/command/tardis_config.hpp"
+
+//Mapping configs
+#include "config/mapping/chassis_command_map.hpp"
+#include "config/mapping/turret_command_map.hpp"
+
+namespace fang::robot
 {
-    extern const PierceAutoTest::Config k_pierceAutoTestConfig;
+static const PierceAutoTest::SubsystemConfig kPierceSubsystemConfig 
+{
+    .chassisConfig  = kChassisConfig,
+    .gimbalConfig   = kGimbalSubsystemConfig,
+    .feederConfig   = kFeederMakerConfig,
+    .boosterConfig  = kAmmoBoosterConfig
+};
+
+static const command::PierceAutoTestCommandPack::InputConfig kPierceInputConfig 
+{
+    .chassisInputConfig = kChassisInputConfig,
+    .turretInputConfig  = kTurretInputConfig
+};
+
+static const command::PierceAutoTestCommandPack::CommandConfig kPierceCommandConfig
+{
+    .aimConfig           = kTurretAimConfig,
+    .counterStrikeConfig = kFieldMecanumConfig,
+    .shurikenConfig      = kShurikenConfig,
+    .tardisConfig        = k_tardisConfig
+};
+
+static const command::PierceAutoTestCommandPack::ComputerMapping kPierceComputerMappingCOnfig 
+{
+    .mouseFire     = kAutofireMouseState,
+    .mouseUnjam    = kUnjamMouseState,
+    .counterStrike = kFieldMecanumKeyboardState,
+    .shuriken      = kShurikenModeKeyboardState,
+    .tardis        = kTardisModeKeyboardState
+};
+
+static const command::PierceAutoTestCommandPack::RemoteMapping kPierceRemoteMappingConfig 
+{
+    .activateBooster = kActivateBoosterRemoteState,
+    .fire            = kAutofireRemoteState,
+    .unjam           = kUnjamRemoteState,
+    .counterStrike   = kFieldMecanumRemoteState,
+    .shuriken        = kShurikenModeRemoteState,
+    .tardis          = kTardisModeRemoteState
+};
+
+static const command::PierceAutoTestCommandPack::MappingConfig kPierceMappingConfig 
+{
+    .remote     = kPierceRemoteMappingConfig,
+    .computer   = kPierceComputerMappingCOnfig
+};
+
+static const command::PierceAutoTestCommandPack::Config kPierceAutoTestCommandPackConfig
+{
+    .inputConfig   = kPierceInputConfig,
+    .mappingConfig = kPierceMappingConfig,
+    .commandConfig = kPierceCommandConfig
+};
+
+static const PierceAutoTest::Config kPierceAutoTestConfig
+{
+    .subsystemConfig   = kPierceSubsystemConfig,
+    .commandPackConfig = kPierceAutoTestCommandPackConfig
+};
 }
