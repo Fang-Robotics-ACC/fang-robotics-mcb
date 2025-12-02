@@ -58,10 +58,11 @@ using namespace fang::robot;
      * We should consider making a of taproot, modm, and protothreads to use modules
      * (get access to arm-none-eabi-gcc with C++23)
      * File pull requests all that jazz..
+     *
+     * This is a bit of a HACK: by creating an empty baseRobot
+     * in unit tests, it is not expected for any actions to be performed
+     * on the BaseRobot anyways
      */
-    // This is a bit of a HACK: by creating an empty baseRobot
-    // in unit tests, it is not expected for any actions to be performed
-    // on the BaseRobot anyways
     fang::robot::BaseRobot robot{drivers.commandScheduler, {}, {}};
     fang::robot::IRobot& fang::RobotSingleton::robot{robot};
 
