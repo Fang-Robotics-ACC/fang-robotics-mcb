@@ -6,51 +6,47 @@
 
 namespace fang::robot 
 {
-inline const turret::M2006SimpleFeeder::Config& getPierceFeederConfig()
+using namespace units::literals;
+static const trap::motor::DjiSpeedPid::Config kFeederMotorPidConfig
 {
-    using namespace units::literals;
-    static const trap::motor::DjiSpeedPid::Config kFeederMotorPidConfig
-    {
-        20,
-        0,
-        0,
-        100,
-        trap::motor::DjiM2006Old::k_maxOutput
-    };
+    20,
+    0,
+    0,
+    100,
+    trap::motor::DjiM2006Old::k_maxOutput
+};
 
-    static const trap::motor::DjiM2006Old::Config kFeederMotorConfig
-    { 
-        tap::motor::MOTOR3,
-        tap::can::CanBus::CAN_BUS1,
-        "Feeder Motor",
-        false,
-        10,
-        kFeederMotorPidConfig
-    };
+static const trap::motor::DjiM2006Old::Config kFeederMotorConfig
+{ 
+    tap::motor::MOTOR3,
+    tap::can::CanBus::CAN_BUS1,
+    "Feeder Motor",
+    false,
+    10,
+    kFeederMotorPidConfig
+};
 
 
 
-    static const turret::SimpleFeeder::HeatLimiter::Config kFeederHeatLimiterConfig
-    {
-        .criticalHeatLimit  = 220,
-        .turretId           = turret::TurretId::TURRET_17MM_1
+static const turret::SimpleFeeder::HeatLimiter::Config kFeederHeatLimiterConfig
+{
+    .criticalHeatLimit  = 220,
+    .turretId           = turret::TurretId::TURRET_17MM_1
 
-    };
+};
 
-    static const turret::SimpleFeeder::Config kFeederSystemConfig
-    {
-        .roundsPerRevolution    = 7,
-        .feedRate               = 5_Hz,
-        .unjamSpeed             = 30_rpm,
-        .heatLimiterConfig      = kFeederHeatLimiterConfig
-    };
+static const turret::SimpleFeeder::Config kFeederSystemConfig
+{
+    .roundsPerRevolution    = 7,
+    .feedRate               = 5_Hz,
+    .unjamSpeed             = 30_rpm,
+    .heatLimiterConfig      = kFeederHeatLimiterConfig
+};
 
-    static const turret::M2006SimpleFeeder::Config kFeederMakerConfig
-    {
-        .feedMotorConfig = kFeederMotorConfig,
-        .feederConfig = kFeederSystemConfig 
-    };
-    return kFeederMakerConfig;
-}
+static const turret::M2006SimpleFeeder::Config kFeederMakerConfig
+{
+    .feedMotorConfig = kFeederMotorConfig,
+    .feederConfig = kFeederSystemConfig 
+};
 }
 #endif
