@@ -2,6 +2,8 @@
 #define FANG_ROBOTICS_MCB_TRAP_SMOOTH_PID_HPP
 #include "util/chrono/simple_timer.hpp"
 #include "wrap/units/units_alias.hpp"
+#include "system/assert/fang_assert.hpp"
+#include <cmath>
 
 #include "tap/algorithms/math_user_utils.hpp"
 #include "tap/algorithms/smooth_pid.hpp"
@@ -22,7 +24,7 @@ namespace trap
             //A bit of cheating
             using Config = tap::algorithms::SmoothPidConfig;
 
-            SmoothPid(const Config& config, ErrorType initialLastError = ErrorType{0})
+            SmoothPid(const Config& config, ErrorType initialLastError = ErrorType{0.0})
             : m_smoothPid{config}, m_lastError{initialLastError}
             {
             }
@@ -35,6 +37,14 @@ namespace trap
             ControlType runController(ErrorType error)
             {
                 const TimeUnit deltaTime{m_runControllerTimer.getDurationAndReset()};
+                return runController(error, deltaTime);
+            }
+
+            /**
+             * Manual delta time but with automatic derivative calculation
+             */
+            ControlType runController(const ErrorType& error, const TimeUnit& deltaTime)
+            {
                 const ErrorType deltaError{error - m_lastError};
                 const double errorDerivative{static_cast<double>(deltaError) / static_cast<double>(deltaTime)};
                 //Prevents oscillations by filtering out higher frequencies
@@ -53,6 +63,9 @@ namespace trap
             ControlType runController(ErrorType error, double errorDerivative, TimeUnit deltaTime)
             {
                 float result {m_smoothPid.runController(static_cast<float>(error), static_cast<float>(errorDerivative), static_cast<float>(deltaTime))};
+                FANG_ASSERT(!std::isnan(result), "Cannot be nan");
+                static float testResult{};
+                testResult = result;
                 return ControlType{result};
             }
 

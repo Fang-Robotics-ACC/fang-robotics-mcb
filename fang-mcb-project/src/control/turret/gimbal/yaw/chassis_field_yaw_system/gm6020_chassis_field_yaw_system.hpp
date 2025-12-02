@@ -3,14 +3,14 @@
 #include "chassis_field_yaw_system.hpp"
 
 #include "driver/drivers.hpp"
-#include "wrap/trap/motor/dji_gm6020.hpp"
+#include "wrap/trap/motor/dji_gm6020_old.hpp"
 
 namespace fang::turret
 {
     class GM6020FieldYawSystem : public ChassisFieldYawSystem
     {
     public:
-        using Motor = trap::motor::DjiGM6020;
+        using Motor = trap::motor::DjiGM6020Old;
         struct Config
         {
             Motor::Config motorConfig;

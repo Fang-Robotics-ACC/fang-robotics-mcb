@@ -18,11 +18,15 @@
 from SCons.Script import *
 
 ROBOT_TYPE_FILE     = "robot-type/robot_type.hpp"
-VALID_ROBOT_TYPES   = [ "TARGET_INFANTRY_PIERCE",
-                        "TARGET_DRONE",
-                        "TARGET_ENGINEER",
-                        "TARGET_SENTRY",
-                        "TARGET_HERO" ]
+VALID_ROBOT_TYPES   = ["TARGET_PIERCE",
+                        "TARGET_PIERCE_AUTO_TEST",
+                        "TARGET_DEVOUR",
+                        "TARGET_SLICE",
+                        "TARGET_SLICE_N_DICE",
+                        "TARGET_CRAZY_CUTTING",
+                        "TARGET_PALISADE_BITE",
+                        "TARGET_SITUATIONAL_AWARENESS"
+                      ]
 
 def get_robot_type():
     robot_type = ARGUMENTS.get("robot")

@@ -14,7 +14,7 @@
 // Turret Commands
 #include "control/turret/gimbal/command/aim_command.hpp"
 #include "control/turret/ammo_booster/command/activate_booster_command.hpp"
-#include "control/turret/feeder/command/simple_autofire_command.hpp"
+#include "control/turret/feeder/command/simple_fire_command.hpp"
 #include "control/turret/feeder/command/simple_unjam_command.hpp"
 
 // Mapping Types
@@ -105,7 +105,7 @@ namespace fang::command
 
         turret::AimCommand aim_{gimbal_, turretInput_, kCommandConfig_.aimConfig};
         turret::ActivateBoosterCommand activateBooster_{booster_};
-        fang::turret::AutofireCommand autofire_{feeder_};
+        fang::turret::FireCommand autofire_{feeder_};
         fang::turret::UnjamCommand unjam_{feeder_};
 
         tap::control::HoldCommandMapping activateBoosterRemote_{&drivers_, {&activateBooster_}, kRemoteMapping_.activateBooster};
@@ -119,7 +119,7 @@ namespace fang::command
         chassis::ShurikenCommand shuriken_{chassis_, gimbal_, chassisInput_, kCommandConfig_.shurikenConfig};
         chassis::TardisCommand tardis_{chassis_, gimbal_, chassisInput_, kCommandConfig_.tardisConfig};
 
-        tap::control::HoldCommandMapping counterStrikeRemote_{&drivers_, {&counterStrike_}, kRemoteMapping_.counterStrike};
+        tap::control::PressCommandMapping counterStrikeRemote_{&drivers_, {&counterStrike_}, kRemoteMapping_.counterStrike};
         tap::control::PressCommandMapping shurikenRemote_{&drivers_, {&shuriken_}, kRemoteMapping_.shuriken};
         tap::control::PressCommandMapping tardisRemote_{&drivers_, {&tardis_}, kRemoteMapping_.tardis};
 

@@ -4,72 +4,132 @@
 
 namespace fang::robot 
 {
-    using namespace units::literals;
-    static const trap::motor::DjiSpeedPid::Config kPitchPidConfig
-    {
-        .kp                 = 200'000,
-        .ki                 = 5,
-        .kd                 = 000.0,
-        .maxICumulative     = 7000,
-        .maxOutput          = trap::motor::DjiGM6020::k_maxOutput,
-        .tQDerivativeKalman = 0.01, //Cause value to be more "sluggish to reduce oscillation"
-        .tRDerivativeKalman = 1000.0,
-        .errorDerivativeFloor = 0.1 //radians
-    };
-    static const trap::motor::DjiGM6020::Config kPitchMotorConfig
-    {
-        tap::motor::MOTOR2,
-        tap::can::CanBus::CAN_BUS1,
-        "pitchMotor",
-        true,
-        1.0,
-        kPitchPidConfig,
-        false
-    };
+using namespace units::literals;
 
-    static const trap::motor::DjiSpeedPid::Config kYawPidConfig
-    {
-        .kp                 = 100'000,
-        .ki                 = 5,
-        .kd                 = 2500.0,
-        .maxICumulative     = 7000,
-        .maxOutput          = trap::motor::DjiGM6020::k_maxOutput,
-        .tQDerivativeKalman = 0.01, //Cause value to be more "sluggish to reduce oscillation"
-        .tRDerivativeKalman = 1000.0,
-        .errorDerivativeFloor = 0.10 //radians
-    };
-    static const trap::motor::DjiGM6020::Config kYawMotorConfig 
-    {
-        tap::motor::MOTOR1,
-        tap::can::CanBus::CAN_BUS1,
-        "yawMotor",
-        false,
-        1.0,
-        kYawPidConfig,
-        false
-    };
+static const trap::motor::DjiSpeedPid::Config kPitchPositionPid
+{
+    .kp                 = 50.0,
+    .ki                 = 0.0,
+    .kd                 = 0.0,
+    .maxICumulative     = 0.0,
+    .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
+    .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
+    .tRDerivativeKalman = 0.0,
+    .tQProportionalKalman = 1.0,
+    .tRProportionalKalman = 500.0,
+    .errDeadzone = 0.17
+};
 
-    turret::BasicFieldPitchSystem::Config kBasicFieldPitchConfig
-    {
-        .pitchError = 0_deg,
-        .pitchRange = {-25_deg, 10_deg}
-    };
+static const trap::motor::DjiSpeedPid::Config kPitchVelocityPid
+{
+    .kp                 = 5'000,
+    .ki                 = 0,
+    .kd                 = 0.0,
+    .maxICumulative     = 0,
+    .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
+    .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
+    .tRDerivativeKalman = 0.0,
+    .tQProportionalKalman = 1,
+    .tRProportionalKalman = 150'000.0,
+};
 
-    static const turret::PierceFieldGimbal::PitchSystem::Config kPitchSystemConfig
-    {
-        .motorConfig = kPitchMotorConfig,
-        .pitchSystemConfig = kBasicFieldPitchConfig
-    };
+static const trap::motor::DjiMotor::Config kPitchMotorConfig
+{
+    .motorId        = tap::motor::MOTOR2,
+    .canBus         = tap::can::CanBus::CAN_BUS1,
+    .name           = "pitchMotor",
+    .inverted       =  true,
+    .currentControl = true 
+};
 
-    turret::PierceFieldGimbal::YawSystem::Config kYawSystemConfig 
-    {
-        .motorConfig = kYawMotorConfig,
-        .yawError = -7.5_deg
-    };
+static const motor::DualCascadeGm6020::PidMotor::Config kPitchMotorPidConfig
+{
 
-    static const turret::PierceFieldGimbal::Config kGimbalSubsystemConfig
+    .mainPidConfig = kPitchPositionPid,
+    .intermediatePidConfig = kPitchVelocityPid,
+    .mainPidInitialValue = 0.0_rad,
+    .intermediatePidInitialValue = 0.0_rpm,
+};
+
+
+
+static const trap::motor::DjiSpeedPid::Config kYawPositionPid
+{
+    .kp                 = 80.0,
+    .ki                 = 0.0,
+    .kd                 = 0.0,
+    .maxICumulative     = 0.0,
+    .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
+    .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
+    .tRDerivativeKalman = 0.0,
+    .tQProportionalKalman = 1,
+    .tRProportionalKalman = 100.0,
+};
+
+static const trap::motor::DjiSpeedPid::Config kYawVelocityPid
+{
+    .kp                 = 475,
+    .ki                 = 0,
+    .kd                 = 0.0,
+    .maxICumulative     = 0,
+    .maxOutput          = trap::motor::DjiGM6020::kMaxOutput,
+    .tQDerivativeKalman = 1.0, //Cause value to be more "sluggish to reduce oscillation"
+    .tRDerivativeKalman = 0.0,
+    .tQProportionalKalman = 1.0,
+    .tRProportionalKalman = 200.0,
+    .errorDerivativeFloor = 0 //rpm
+};
+
+static const turret::PierceFieldGimbal::YawSystem::Gm6020CounterChassisFieldYaw::ModdedCascadeMotor::Config kYawMotorPidConfig
+{
+    .mainPidConfig = kYawPositionPid,
+    .intermediatePidConfig = kYawVelocityPid
+};
+
+static const trap::motor::DjiGM6020::Config kYawMotorConfig 
+{
+    .motorId        = tap::motor::MOTOR1,
+    .canBus         = tap::can::CanBus::CAN_BUS1,
+    .name           = "yawMotor",
+    .inverted       = false,
+    .currentControl = true 
+};
+
+static const motor::DualCascadeGm6020::Config kDualCascadePitchMotorConfig
+{
+    .motorConfig = kPitchMotorConfig,
+    .pidMotorConfig = kPitchMotorPidConfig 
+};
+
+static const turret::BasicFieldPitchSystem::Config kBasicFieldPitchConfig
+{
+    .pitchError = 0_deg,
+    .pitchRange = {
+        .min = -20_deg,
+        .max = 15_deg
+    }
+};
+
+static const turret::PierceFieldGimbal::PitchSystem::Config kPitchSystemConfig
+{
+    .motorConfig = kDualCascadePitchMotorConfig,
+    .pitchSystemConfig = kBasicFieldPitchConfig
+};
+
+static const turret::PierceFieldGimbal::YawSystem::Config kYawSystemConfig 
+{
+    .motorConfig = kYawMotorConfig,
+    .fieldYawConfig = 
     {
-        .pitchSystemConfig = kPitchSystemConfig,
-        .yawSystemConfig = kYawSystemConfig
-    };
+        .chassisFieldYawConfig = {.yawError = -37_deg},
+        .counterYawConfig = {.correctionScale = 1.0},
+        .moddedCascadeConfig = kYawMotorPidConfig
+    }
+};
+
+static const turret::PierceFieldGimbal::Config kGimbalSubsystemConfig
+{
+    .pitchSystemConfig = kPitchSystemConfig,
+    .yawSystemConfig = kYawSystemConfig
+};
 }

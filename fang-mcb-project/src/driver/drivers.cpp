@@ -16,13 +16,15 @@ namespace fang
         remote.initialize();
         bmi088.initialize(kMainLoopFrequency, 0.1, 0);
         refSerial.initialize();
-        terminalSerial.initialize();
+        coolSerialUart.initialize();
+        //terminalSerial.initialize();
         schedulerTerminalHandler.init();
         djiMotorTerminalSerialHandler.init();
     }
 
     void Drivers::update()
     {
+        coolSerialUart.update();
         PROFILE(profiler, updateIo, ());
     }
 
@@ -39,7 +41,7 @@ namespace fang
         PROFILE(profiler, bmi088.periodicIMUUpdate, ());
         PROFILE(profiler, commandScheduler.run, ());
         PROFILE(profiler, djiMotorTxHandler.encodeAndSendCanData, ());
-        PROFILE(profiler, terminalSerial.update, ());
+        //PROFILE(profiler, terminalSerial.update, ());
     }
 
     void Drivers::kill()

@@ -14,6 +14,7 @@
                 "fang-mcb-project/taproot/modm/ext/cmsis/dsp",
                 "fang-mcb-project/lib/RAIL-Robomaster-Abstraction-Interface-Library/include",
                 "fang-mcb-project/lib/units/include",
+                "fang-mcb-project/lib/cool-serial/include",
                 "fang-mcb-project/robot-type",
                 "fang-mcb-project/test",
                 "fang-mcb-project/"
@@ -41,6 +42,7 @@
                 "fang-mcb-project/taproot/modm/ext/cmsis/core",
                 "fang-mcb-project/taproot/modm/ext/cmsis/device",
                 "fang-mcb-project/taproot/modm/ext/cmsis/dsp",
+                "fang-mcb-project/lib/cool-serial/include",
                 "fang-mcb-project/lib/RAIL-Robomaster-Abstraction-Interface-Library/include",
                 "fang-mcb-project/lib/units/include",
                 "fang-mcb-project/robot-type",

@@ -10,3 +10,6 @@
 [submodule "fang-mcb-project/lib/units"]
 	path = fang-mcb-project/lib/units
 	url = https://github.com/nholthaus/units.git
+[submodule "fang-mcb-project/lib/cool-serial"]
+	path = fang-mcb-project/lib/cool-serial
+	url = https://github.com/RavenRandomz/cool-serial.git

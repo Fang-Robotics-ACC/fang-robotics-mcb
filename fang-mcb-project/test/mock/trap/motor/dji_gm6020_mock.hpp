@@ -1,19 +1,19 @@
 #ifndef FANG_ROBOTICS_MCB_TRAP_MOCK_DJI_GM_6020_HPP
 #define FANG_ROBOTICS_MCB_TRAP_MOCK_DJI_GM_6020_HPP
 #include "wrap/trap/motor/dji_motor_aliases.hpp"
-#include "wrap/trap/motor/dji_gm6020.hpp"
+#include "wrap/trap/motor/dji_gm6020_old.hpp"
 namespace trap
 {
     namespace mock
     {
         namespace motor
         {
-            class DjiGM6020Mock : virtual public trap::motor::DjiGM6020
+            class DjiGM6020Mock : virtual public trap::motor::DjiGM6020Old
             {
             public:
                 using DjiSpeedPid = trap::motor::DjiSpeedPid;
                 using DjiMotorOutput = trap::motor::DjiMotorOutput;
-                using trap::motor::DjiGM6020::DjiGM6020;
+                using trap::motor::DjiGM6020Old::DjiGM6020Old;
                 virtual ~DjiGM6020Mock() = default;
                 MOCK_METHOD(void, update, (), (override));
     		    MOCK_METHOD(void, setTargetPosition, (const Radians& position), (override));
