@@ -17,9 +17,14 @@ public:
     static constexpr Byte kFirstStartOfFrame{0x20};
     static constexpr Byte kSecondStartofFrame{0x40};
 
+    static constexpr int kChannelCount{14};
+
     static constexpr int kStartOfFrameSize{2}; // Bytes
-    static constexpr int kChannelSectionSize{30}; // Bytes (Channel + 16 bit Checkshum)
-    static constexpr int kPacketSize{32}; // Bytes
+    static constexpr int kBytesPer16BitInt{2};
+    static constexpr int kChecksumSectionSize{2}; // Bytes
+
+    static constexpr int kChannelSectionSize{kChannelCount * kBytesPer16BitInt}; // Bytes (Channel + 16 bit Checkshum)
+    static constexpr int kPacketSize{kStartOfFrameSize + kChannelSectionSize + kChecksumSectionSize}; // Bytes
 
     static constexpr uint16_t kChecksumConstant{0xffff};
 
