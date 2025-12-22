@@ -42,6 +42,7 @@ namespace fang::stl
         // benefits the code as we have a decent amount of variants which
         // need a vector of unique_ptr items.
         ([&]{vector.push_back(std::move(movedElement));}(), ...);
+        FANG_ASSERT(vector.size() == sizeof...(movedElement), "Vector size must match parameter pack size");
         return vector;
     }
 }
