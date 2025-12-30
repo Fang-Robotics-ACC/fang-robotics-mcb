@@ -36,7 +36,7 @@ sudo apt install build-essential libreadline-dev libncursesw5-dev \
 libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev \
 libffi-dev zlib1g-dev liblzma-dev -y
 
-install_arm-none-eabi-gcc()
+install_arm_none_eabi_gcc()
 {
     # Custom embedded compiler
     wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
@@ -47,6 +47,8 @@ install_arm-none-eabi-gcc()
     mv gcc-arm-none-eabi-10.3-2021.10 ~/.local/share
     echo 'export PATH="$HOME/.local/share/gcc-arm-none-eabi-10.3-2021.10/bin:$HOME/.local/bin:$PATH:$PATH"' >> ~/.bashrc
 }
+
+
 
 install_pyenv()
 {
@@ -60,7 +62,8 @@ install_pyenv()
     pyenv install 3.8.10
 }
 
-install_pipenv()
+
+install_pipenv_env()
 {
    # This is needed because this is what the taproot devs use
    # One majory reason is that the modm uses has_key() which got deprecated
@@ -72,3 +75,24 @@ install_pipenv()
    pipenv install --python ~/.pyenv/versions/3.8.10/bin/python3
    pipenv run pip install -r requirements.txt
 }
+
+if ! command -v arm-none-eabi-gcc
+then
+    install_arm_none_eabi_gcc
+else
+    echo "arm already installed"
+fi
+
+if ! command -v pyenv
+then
+    install_pyenv
+else
+    echo "pyenv already installed"
+fi
+
+if [ ! -f ../../fang-mcb-project/Pipfile.lock ]; then
+    install_pipenv_env
+else
+    echo "pienv envalready installed!"
+fi
+
