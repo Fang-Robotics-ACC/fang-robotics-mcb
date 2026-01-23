@@ -14,20 +14,39 @@ TEST(IBusChannelSection, deserialization)
     IBusChannelSection section
     {{
         0x00, 0x01, //0x0100 in least endian format or 256
-        0x10, 0x00, //0x0010 in least endian format or 128
+        0x10, 0x00, //0x0010 in least endian format or 16
         0x00, 0x01, //0x0100 in least endian format or 256
-        0x10, 0x00, //0x0010 in least endian format or 128
-        0x10, 0x00, //0x0010 in least endian format or 128
-        0x10, 0x00, //0x0010 in least endian format or 128
-        0x10, 0x00, //0x0010 in least endian format or 128
+        0x10, 0x00, //0x0010 in least endian format or 16
+        0x10, 0x00, //0x0010 in least endian format or 16
+        0x10, 0x00, //0x0010 in least endian format or 16
+        0x10, 0x00, //0x0010 in least endian format or 16
         0x00, 0x01, //0x0100 in least endian format or 256
-        0x10, 0x00, //0x0010 in least endian format or 128
+        0x10, 0x00, //0x0010 in least endian format or 16
         0x00, 0x01, //0x0100 in least endian format or 256
-        0x10, 0x00, //0x0010 in least endian format or 128
-        0x10, 0x00, //0x0010 in least endian format or 128
-        0x10, 0x00, //0x0010 in least endian format or 128
-        0x10, 0x00  //0x0010 in least endian format or 128
+        0x10, 0x00, //0x0010 in least endian format or 16
+        0x10, 0x00, //0x0010 in least endian format or 16
+        0x10, 0x00, //0x0010 in least endian format or 16
+        0x10, 0x00  //0x0010 in least endian format or 16
     }};
 
+    IBusChannelData expectedData
+    {
+        256,
+        16,
+        256,
+        16,
+        16,
+        16,
+        16,    
+        256,
+        16,
+        256,
+        16,
+        16,
+        16,
+        16
+    };
+
+    EXPECT_EQ(expectedData, section.getChannelData());
 }
 }
