@@ -25,8 +25,8 @@ TEST(deserializeInt16, 256Test)
     // If all the bytes are zero, the corresponding number should be zero
     // Bytes for zero
     constexpr Byte kMostSignificant{0x01};
-    constexpr Byte kLeastSignificant{0x0};
-    constexpr uint16_t kExpected{32};
+    constexpr Byte kLeastSignificant{0x00};
+    constexpr uint16_t kExpected{256};
 
     const uint16_t kOutput{deserializeUInt16(kMostSignificant, kLeastSignificant)} ;
 
