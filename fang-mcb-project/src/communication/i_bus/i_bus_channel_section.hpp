@@ -12,6 +12,8 @@ namespace fang::communication
 class IBusChannelSection : public std::array<Byte, IBus::kChannelSectionSize>
 {
 public:
+    using std::array<Byte, IBus::kChannelSectionSize>::array;
+
     IBusChannelData getChannelData() const
     {
         IBusChannelData channelData{};
