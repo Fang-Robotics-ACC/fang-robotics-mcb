@@ -38,6 +38,10 @@ IBusChannelData IBusChannelSection::getChannelData() const
             byteSum += byte;
         }
 
+        // Checksum involves header bytes
+        byteSum += IBus::kFirstStartOfFrame;
+        byteSum += IBus::kSecondStartofFrame;
+
         // For some reason the actual checksum is the sum subtracted from a constant :P
         return IBus::kChecksumConstant - byteSum;
     }
