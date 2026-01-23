@@ -10,11 +10,12 @@ IBusChannelData IBusChannelSection::getChannelData() const
         IBusChannelData channelData{};
         // There are two bytes per 16 bit int
         // msb is the first int
-        for(int channel{0}; channel < IBus::kChannelSectionSize; channel += 2)
+        for(int channel{0}; channel < IBus::kChannelCount; ++channel )
         {
+            const int index{channel * 2};
             // They are sent in reverse
-            const Byte kMostSignificantByte{bytes_.at(channel + 1)};
-            const Byte kLestSignificantByte{bytes_.at(channel)};
+            const Byte kMostSignificantByte{bytes_.at(index + 1)};
+            const Byte kLestSignificantByte{bytes_.at(index)};
 
             channelData.at(channel) = serialization::deserializeUInt16(kMostSignificantByte, kLestSignificantByte);
         }
