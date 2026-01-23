@@ -25,6 +25,8 @@ public:
 
             channelData.at(channel) = serialization::deserializeUInt16(kMostSignificantByte, kLestSignificantByte);
         }
+
+        return channelData; 
     }
 };
 }
