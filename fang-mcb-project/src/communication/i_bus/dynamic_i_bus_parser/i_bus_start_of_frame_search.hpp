@@ -8,7 +8,7 @@
 
 namespace fang::communication
 {
-class IBusStartOfFrameSearch  : coolSerial::SegmentFoundListener
+class IBusStartOfFrameSearch
 {
 public:
     IBusStartOfFrameSearch(
@@ -16,18 +16,22 @@ public:
         coolSerial::StartOfFrameFoundListener& listener
     ):
         queue_{queue},
-        segmentExtractor_{queue, *this, IBus::kStartOfFrameSize},
         frameFoundListener_{listener}
     {
     }
-    void segmentFound(const coolSerial::Bytes& bytes) override;
 
     void update()
     {
     }
 private:
+    enum State
+    {
+        kSearchForFirstByte,
+        kSearchForSecondByte
+    };
+
     coolSerial::ByteQueue& queue_;
-    coolSerial::DynamicSegmentExtractor segmentExtractor_;
     coolSerial::StartOfFrameFoundListener& frameFoundListener_;
+    State state_{kSearchForFirstByte};
 };
 }
