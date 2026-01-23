@@ -1,6 +1,10 @@
 #include "i_bus_channel_section.hpp"
 namespace fang::communication
 {
+IBusChannelSection::IBusChannelSection(const ChannelBytes& bytes) : bytes_{bytes}
+{
+}
+
 IBusChannelData IBusChannelSection::getChannelData() const
     {
         IBusChannelData channelData{};

@@ -14,6 +14,7 @@ class IBusChannelSection
 public:
     using ChannelBytes = std::array<Byte, IBus::kChannelSectionSize>;
 
+    IBusChannelSection(const ChannelBytes& bytes);
     IBusChannelData getChannelData() const;
 
     /**
