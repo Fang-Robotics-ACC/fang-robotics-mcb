@@ -28,6 +28,6 @@ public:
      */
     bool isValid(uint16_t checkSum);
 private:
-std::array<Byte, IBus::kChannelSectionSize> bytes_;
+    std::array<Byte, IBus::kChannelSectionSize> bytes_;
 };
 }
