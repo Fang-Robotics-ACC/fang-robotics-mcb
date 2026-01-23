@@ -9,13 +9,12 @@ namespace fang::communication
  * This stores the bytes of the channel section. It is capable of deserializing
  * the bytes into 
  */
-class IBusChannelSection : public std::array<Byte, IBus::kChannelSectionSize>
+class IBusChannelSection
 {
 public:
-    using std::array<Byte, IBus::kChannelSectionSize>::array;
+    using ChannelBytes = std::array<Byte, IBus::kChannelSectionSize>;
 
-    IBusChannelData getChannelData();
-    
+    IBusChannelData getChannelData() const;
 
     /**
      * The IBus checksum is calculated by summing all of the bytes and subtracting them from 
@@ -28,5 +27,7 @@ public:
      * You can feed a checksum from the checksum section to verify
      */
     bool isValid(uint16_t checkSum);
+private:
+std::array<Byte, IBus::kChannelSectionSize> bytes_;
 };
 }

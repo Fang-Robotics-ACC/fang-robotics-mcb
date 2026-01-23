@@ -9,8 +9,8 @@ IBusChannelData IBusChannelSection::getChannelData() const
         for(int channel{0}; channel < IBus::kChannelSectionSize; channel += 2)
         {
             // They are sent in reverse
-            const Byte kMostSignificantByte{at(channel + 1)};
-            const Byte kLestSignificantByte{at(channel)};
+            const Byte kMostSignificantByte{bytes_.at(channel + 1)};
+            const Byte kLestSignificantByte{bytes_.at(channel)};
 
             channelData.at(channel) = serialization::deserializeUInt16(kMostSignificantByte, kLestSignificantByte);
         }
@@ -27,7 +27,7 @@ IBusChannelData IBusChannelSection::getChannelData() const
     {
         uint16_t byteSum{0};
 
-        for(const Byte& byte : *this)
+        for(const Byte& byte : bytes_)
         {
             byteSum += byte;
         }
