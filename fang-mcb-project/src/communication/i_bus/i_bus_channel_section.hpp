@@ -46,5 +46,13 @@ public:
         // For some reason the actual checksum is the sum subtracted from a constant :P
         return IBus::kChecksumConstant - byteSum;
     }
+
+    /**
+     * You can feed a checksum from the checksum section to verify
+     */
+    bool isValid(uint16_t checkSum)
+    {
+        return checkSum == calculateChecksum();
+    }
 };
 }
