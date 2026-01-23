@@ -29,7 +29,7 @@ TEST(IBusChannelSection, deserialization)
         0x10, 0x00  //0x0010 in least endian format or 16
     }};
 
-    IBusChannelData expectedData
+    IBusChannelData expecteddata
     {
         256,
         16,
@@ -47,6 +47,33 @@ TEST(IBusChannelSection, deserialization)
         16
     };
 
-    EXPECT_EQ(expectedData, section.getChannelData());
+    EXPECT_EQ(expecteddata, section.getChannelData());
+}
+
+TEST(IBusChannelSection, checkSum)
+{
+    // https://basejunction.wordpress.com/2015/08/23/en-flysky-i6-14-channels-part1/
+
+    const uint16_t expectedCheckSum{0xf354};
+
+    const IBusChannelSection channelSection
+    {{
+        0xdc, 0x05,
+        0xdb, 0x05,
+        0xEF, 0x03,
+        0xdd, 0x05,
+        0xd0, 0x07,
+        0xd0, 0x07,
+        0xdc, 0x05,
+        0xdc, 0x05,
+        0xdc, 0x05,
+        0xdc, 0x05,
+        0xdc, 0x05,
+        0xdc, 0x05,
+        0xdc, 0x05,
+        0xdc, 0x05
+    }};
+
+    EXPECT_TRUE(channelSection.isValid(expectedCheckSum));
 }
 }
