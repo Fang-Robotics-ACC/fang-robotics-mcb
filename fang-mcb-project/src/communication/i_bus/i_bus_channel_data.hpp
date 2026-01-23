@@ -7,6 +7,5 @@ namespace fang::communication
 {
     class IBusChannelData : public std::array<std::uint16_t, IBus::kChannelCount>
     {
-    public:
     };
 }
