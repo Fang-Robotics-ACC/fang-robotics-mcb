@@ -1,5 +1,7 @@
 #pragma once
 
+#include "system/assert/fang_assert.hpp"
+#include <iostream>
 #include <memory>
 #include <vector>
 
@@ -26,7 +28,6 @@ namespace fang::stl
     std::vector<T> makeVectorWithMovedList(C ... movedElement)
     {
         std::vector<T> vector{};
-
         // Ahh lambda function
         // Arcane fold expression magick
 
@@ -40,7 +41,8 @@ namespace fang::stl
         // I try to minimize odd shenanigans like this, but this greatly
         // benefits the code as we have a decent amount of variants which
         // need a vector of unique_ptr items.
-        ([&]{vector.push_back(std::move(movedElement));}, ...);
+        ([&]{vector.push_back(std::move(movedElement));}(), ...);
+        FANG_ASSERT(vector.size() == sizeof...(movedElement), "Vector size must match parameter pack size");
         return vector;
     }
 }

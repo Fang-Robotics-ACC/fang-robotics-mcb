@@ -322,6 +322,7 @@ The Taproot project recommends that user projects occasionally upgrade the versi
 Taproot that they depend on. The guide for doing so is
 [here](https://gitlab.com/aruw/controls/taproot/-/wikis/Upgrading-a-Taproot-project). 
 
+
 ## Building and running via the terminal
 
 The below commands require that your working directory is `/fang-mcb-project` (where the
@@ -351,3 +352,38 @@ Usage: scons <target> [profile=<debug|release|fast>] [robot=TARGET_<ROBOT_TYPE>]
         - <ROBOT_TYPE> must be one of the following:
             - STANDARD, DRONE, ENGINEER, SENTRY, HERO:
 ```
+
+
+## Command Line Only Environment!!!
+
+Although some may argue that a godly program doesn't use lsp so they have to 
+reckon with architectural errors quickly, the goto feature is really cool.
+
+You'll need to install nvim and then coc. From coc, you'll need to install 
+coc-clangd.
+
+Whenever you run build in the command line, you'll need to install bear.
+Warning: This exports  the taproot utilities in their mock versions. This is 
+generally inconsequential as you are unlikely to be working directly with 
+taproot utilities.
+
+We are figureing out how to export a specific environment variable.
+
+You are able to also use the scons build with the regular environment but it 
+does NOT have the stl for some reason. This means it'll give errors. This is 
+likey due to the nature of arm-none-eabi-gcc shipping with its custom stl.
+
+We are figureing out how to get it to not have errors
+```
+bear -- scons build-tests
+```
+
+Reguarldess of future build types, the compile\_commands will work.
+
+If you add a file, you'll need to run bear -- again to have lsp
+
+```
+bear -- scons build
+```
+
+TODO: Add gdb utilities with open ocd
