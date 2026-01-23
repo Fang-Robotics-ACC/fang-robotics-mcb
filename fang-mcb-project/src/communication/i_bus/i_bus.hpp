@@ -1,4 +1,6 @@
 #include "communication/uart/byte.hpp"
+
+#include <array>
 #include <cstdint>
 
 #pragma once
@@ -16,6 +18,7 @@ class IBus
 public:
     static constexpr Byte kFirstStartOfFrame{0x20};
     static constexpr Byte kSecondStartofFrame{0x40};
+    static constexpr std::array<Byte, 2> kStartOfFrame{kFirstStartOfFrame, kSecondStartofFrame};
 
     static constexpr int kChannelCount{14};
 
