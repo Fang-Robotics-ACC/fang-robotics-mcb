@@ -1,6 +1,5 @@
 #include "i_bus.hpp"
 #include "i_bus_channel_data.hpp"
-#include "util/serialization/deserialize_uint16.hpp"
 
 #include <array>
 namespace fang::communication

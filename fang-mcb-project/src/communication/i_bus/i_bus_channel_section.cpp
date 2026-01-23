@@ -1,4 +1,5 @@
 #include "i_bus_channel_section.hpp"
+#include "util/serialization/deserialize_uint16.hpp"
 namespace fang::communication
 {
 IBusChannelSection::IBusChannelSection(const ChannelBytes& bytes) : bytes_{bytes}
