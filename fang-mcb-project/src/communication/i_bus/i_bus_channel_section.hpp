@@ -17,7 +17,7 @@ public:
         IBusChannelData channelData{};
         // There are two bytes per 16 bit int
         // msb is the first int
-        for(int channel{0}; channel < IBus::kChannelSectionSize; ++ channel)
+        for(int channel{0}; channel < IBus::kChannelSectionSize; channel += 2)
         {
             // They are sent in reverse
             const Byte kMostSignificantByte{at(channel + 1)};
@@ -27,6 +27,24 @@ public:
         }
 
         return channelData; 
+    }
+
+    /**
+     * The IBus checksum is calculated by summing all of the bytes and subtracting them from 
+     * 0xFFFF
+     * https://blog.dsp.id.au/posts/2017/10/22/flysky-ibus-protocol/
+     */
+    uint16_t calculateChecksum()
+    {
+        uint16_t byteSum{0};
+
+        for(const Byte& byte : *this)
+        {
+            byteSum += byte;
+        }
+
+        // For some reason the actual checksum is the sum subtracted from a constant :P
+        return IBus::kChecksumConstant - byteSum;
     }
 };
 }
