@@ -21,12 +21,12 @@ public:
      * 0xFFFF
      * https://blog.dsp.id.au/posts/2017/10/22/flysky-ibus-protocol/
      */
-    uint16_t calculateChecksum();
+    uint16_t calculateChecksum() const;
 
     /**
      * You can feed a checksum from the checksum section to verify
      */
-    bool isValid(uint16_t checkSum);
+    bool isValid(uint16_t checkSum) const;
 private:
     std::array<Byte, IBus::kChannelSectionSize> bytes_;
 };

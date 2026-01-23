@@ -29,7 +29,7 @@ IBusChannelData IBusChannelSection::getChannelData() const
      * 0xFFFF
      * https://blog.dsp.id.au/posts/2017/10/22/flysky-ibus-protocol/
      */
-    uint16_t IBusChannelSection::calculateChecksum()
+    uint16_t IBusChannelSection::calculateChecksum() const
     {
         uint16_t byteSum{0};
 
@@ -45,7 +45,7 @@ IBusChannelData IBusChannelSection::getChannelData() const
     /**
      * You can feed a checksum from the checksum section to verify
      */
-    bool IBusChannelSection::isValid(uint16_t checkSum)
+    bool IBusChannelSection::isValid(uint16_t checkSum) const
     {
         return checkSum == calculateChecksum();
     }
