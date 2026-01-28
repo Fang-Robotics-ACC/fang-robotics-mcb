@@ -66,5 +66,10 @@ private:
     // State change logic
     void startOfFrameFound() override;
     void segmentFound(const coolSerial::Bytes& bytes) override;
+
+    /**
+     * Combined segment has the channel bytes then the checksum
+     */
+    uint16_t extractChecksumFromCombinedSegment(const coolSerial::Bytes& bytes);
 };
 }

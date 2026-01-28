@@ -19,20 +19,27 @@ void DynamicParser::startOfFrameFound()
 
 void DynamicParser::segmentFound(const coolSerial::Bytes& bytes)
 {
-    FANG_ASSERT(bytes.size() == (kChannelSectionSize + kChecksumSectionSize), "Segment must be proper size.");
     // Begin by extracting the channel data and checksum
     ChannelSection channelSection_{coolSerial::Bytes{bytes.begin(), bytes.begin() + kChannelSectionSize}};
 
-    // Extract checksum
+        state_ = startOfFrameSearch_;
+}
+
+uint16_t DynamicParser::extractChecksumFromCombinedSegment(const coolSerial::Bytes& bytes)
+{
+    FANG_ASSERT(bytes.size() == (kChannelSectionSize + kChecksumSectionSize), "Segment must be proper size.");
+
     const std::array<coolSerial::Byte, 2>  kChecksumSection{};
     std::copy(bytes.end() - 2, bytes.end() - 1, kChecksumSection.begin());
-    // Dangerous but the assertion checks asserts appropriate bounds
+
     const int kMaxIndex{kChannelSectionSize + kChecksumSectionSize - 1};
+
     // Least endian order
     const int kChecksumLeastSignificantByteIndex{kMaxIndex - 1};
     const int kChecksumMostSignficantByteIndex{kMaxIndex};
+
+    // Dangerous but the assertion checks asserts appropriate bounds
     const uint16_t checksum{serialization::deserializeUInt16(bytes[kChecksumMostSignficantByteIndex], bytes[kChecksumLeastSignificantByteIndex])};
 
-    state_ = startOfFrameSearch_;
 }
 }
