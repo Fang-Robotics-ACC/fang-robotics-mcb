@@ -2,10 +2,7 @@
 #include "cool_serial/byte_queue.hpp"
 
 #include "i_bus_start_of_frame_search.hpp"
-#include "cool_serial/dynamic_parser/dynamic_data_extract.hpp"
-#include "cool_serial/dynamic_parser/data_found_listener.hpp"
-#include <cool_serial/dynamic_parser/segment_found_listener.hpp>
-#include <cool_serial/dynamic_parser/start_of_frame_found_listener.hpp>
+#include "cool_serial/dynamic_parser/dynamic_segment_extractor.hpp"
 
 namespace fang::communication::ibus
 {
@@ -19,13 +16,12 @@ namespace fang::communication::ibus
  * 
  * If the channel data is valid, it informs a ChannelFoundListener with the channel data.
  */
-class DynamicParser : public coolSerial::StartOfFrameFoundListener, public coolSerial::DataFoundListener
+class DynamicParser : public coolSerial::StartOfFrameFoundListener, public coolSerial::SegmentFoundListener
 {
 public:
-    DynamicParser(coolSerial::ByteQueue& byteBuffer, DataFoundListener& listener):
-        dataFoundListener_{listener},
+    DynamicParser(coolSerial::ByteQueue& byteBuffer):
         startOfFrameSearch_{byteBuffer, *this},
-        dataExtract_ {byteBuffer, *this}
+        segmentExtract_{byteBuffer, *this, kChannelSectionSize + kChannelSectionSize}
     {}
     void update()
     {
@@ -41,30 +37,29 @@ private:
         virtual void update() = 0;
     };
 
-    class StartOfFrameSearch : public State, public StartOfFrameSearch 
+    class StartOfFrameSearch : public State, public ibus::StartOfFrameSearch 
     {
     public:
-        using StartOfFrameSearch::StartOfFrameSearch;
+        using ibus::StartOfFrameSearch::StartOfFrameSearch;
         void update() override
         {
             StartOfFrameSearch::update();
         }
     };
 
-    class DataExtract : public State, public coolSerial::DynamicDataExtract
+    class SegmentExtract : public State, public coolSerial::DynamicSegmentExtractor
     {
     public:
-        using DynamicDataExtract::DynamicDataExtract;
+        using DynamicSegmentExtractor::DynamicSegmentExtractor;
         void update() override
         {
-            DynamicDataExtract::update();
+            DynamicSegmentExtractor::update();
         }
     };
 
-    coolSerial::DataFoundListener& dataFoundListener_;
-
     StartOfFrameSearch startOfFrameSearch_;
-    DataExtract dataExtract_;
+    // This extracts both the channel data and the associated checksum
+    coolSerial::DynamicSegmentExtractor segmentExtract_;
 
     std::reference_wrapper<State> state_{startOfFrameSearch_};
 
