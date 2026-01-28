@@ -1,6 +1,7 @@
 #pragma
 #include "cool_serial/byte_queue.hpp"
 
+#include "channel_data_found_listener.hpp"
 #include "i_bus_start_of_frame_search.hpp"
 #include "cool_serial/dynamic_parser/dynamic_segment_extractor.hpp"
 
@@ -14,12 +15,12 @@ namespace fang::communication::ibus
  * Upon finding the SOF, it extracts a segment of 30 bytes which include both the channel section (28 bytes) and the
  * checksum (2 bytes)
  * 
- * If the channel data is valid, it informs a ChannelFoundListener with the channel data.
+ * If the channel data is valid, it informs a ChannelDataFoundListener with the channel data.
  */
 class DynamicParser : public coolSerial::StartOfFrameFoundListener, public coolSerial::SegmentFoundListener
 {
 public:
-    DynamicParser(coolSerial::ByteQueue& byteBuffer);
+    DynamicParser(coolSerial::ByteQueue& byteBuffer, ChannelDataFoundListener& listener);
 
     void update()
     {
@@ -55,6 +56,7 @@ private:
         }
     };
 
+    ChannelDataFoundListener& channelDataFoundListener_;
     StartOfFrameSearch startOfFrameSearch_;
     // This extracts both the channel data and the associated checksum
     SegmentExtract segmentExtract_;
