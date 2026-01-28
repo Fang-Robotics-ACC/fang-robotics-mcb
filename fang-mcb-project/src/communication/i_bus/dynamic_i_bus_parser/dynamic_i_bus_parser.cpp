@@ -20,9 +20,11 @@ void DynamicParser::startOfFrameFound()
 void DynamicParser::segmentFound(const coolSerial::Bytes& bytes)
 {
     // Begin by extracting the channel data and checksum
-    ChannelSection channelSection_{coolSerial::Bytes{bytes.begin(), bytes.begin() + kChannelSectionSize}};
+    ChannelSection channelSection{coolSerial::Bytes{bytes.begin(), bytes.begin() + kChannelSectionSize}};
 
-        state_ = startOfFrameSearch_;
+    const uint16_t checksum{extractChecksumFromCombinedSegment(bytes)};
+
+    state_ = startOfFrameSearch_;
 }
 
 uint16_t DynamicParser::extractChecksumFromCombinedSegment(const coolSerial::Bytes& bytes)
