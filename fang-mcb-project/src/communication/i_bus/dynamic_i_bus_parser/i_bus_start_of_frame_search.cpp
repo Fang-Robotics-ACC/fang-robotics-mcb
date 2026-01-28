@@ -1,7 +1,7 @@
 #include "i_bus_start_of_frame_search.hpp"
-namespace fang::communication
+namespace fang::communication::ibus
 {
-void IBusStartOfFrameSearch::update()
+void StartOfFrameSearch::update()
 {
     while(queue_.byteAvailable())
     {

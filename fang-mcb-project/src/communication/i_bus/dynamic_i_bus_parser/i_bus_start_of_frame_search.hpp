@@ -6,12 +6,12 @@
 #include "cool_serial/dynamic_parser/segment_found_listener.hpp"
 #include "cool_serial/dynamic_parser/dynamic_segment_extractor.hpp"
 
-namespace fang::communication
+namespace fang::communication::ibus
 {
-class IBusStartOfFrameSearch
+class StartOfFrameSearch
 {
 public:
-    IBusStartOfFrameSearch(
+    StartOfFrameSearch(
         coolSerial::ByteQueue& queue,
         coolSerial::StartOfFrameFoundListener& listener
     ):

@@ -2,7 +2,7 @@
 #include "communication/i_bus/i_bus_channel_data.hpp"
 
 #include <gtest/gtest.h>
-namespace fang::communication::iBusChannelSectionTest
+namespace fang::communication::ibus::channelSectionTest
 {
 
 TEST(IBusChannelSection, deserialization)
@@ -11,7 +11,7 @@ TEST(IBusChannelSection, deserialization)
     // being hardcoded from a series of bytes
 
     // 14 channels, 28 bytes
-    IBusChannelSection section
+    ChannelSection section
     {{
         0x00, 0x01, //0x0100 in least endian format or 256
         0x10, 0x00, //0x0010 in least endian format or 16
@@ -29,7 +29,7 @@ TEST(IBusChannelSection, deserialization)
         0x10, 0x00  //0x0010 in least endian format or 16
     }};
 
-    IBusChannelData expecteddata
+    ChannelData expecteddata
     {
         256,
         16,
@@ -50,13 +50,13 @@ TEST(IBusChannelSection, deserialization)
     EXPECT_EQ(expecteddata, section.getChannelData());
 }
 
-TEST(IBusChannelSection, checkSum)
+TEST(ChannelSection, checkSum)
 {
     // https://basejunction.wordpress.com/2015/08/23/en-flysky-i6-14-channels-part1/
 
     const uint16_t expectedCheckSum{0xf354};
 
-    const IBusChannelSection channelSection
+    const ChannelSection channelSection
     {{
         0xdc, 0x05,
         0xdb, 0x05,

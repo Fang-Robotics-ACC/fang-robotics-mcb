@@ -1,17 +1,17 @@
 #include "i_bus_channel_section.hpp"
 #include "util/serialization/deserialize_uint16.hpp"
-namespace fang::communication
+namespace fang::communication::ibus
 {
-IBusChannelSection::IBusChannelSection(const ChannelBytes& bytes) : bytes_{bytes}
+ChannelSection::ChannelSection(const ChannelBytes& bytes) : bytes_{bytes}
 {
 }
 
-IBusChannelData IBusChannelSection::getChannelData() const
+ChannelData ChannelSection::getChannelData() const
     {
-        IBusChannelData channelData{};
+        ChannelData channelData{};
         // There are two bytes per 16 bit int
         // msb is the first int
-        for(int channel{0}; channel < IBus::kChannelCount; ++channel )
+        for(int channel{0}; channel <kChannelCount; ++channel )
         {
             const int index{channel * 2};
             // They are sent in reverse
@@ -29,7 +29,7 @@ IBusChannelData IBusChannelSection::getChannelData() const
      * 0xFFFF
      * https://blog.dsp.id.au/posts/2017/10/22/flysky-ibus-protocol/
      */
-    uint16_t IBusChannelSection::calculateChecksum() const
+    uint16_t ChannelSection::calculateChecksum() const
     {
         uint16_t byteSum{0};
 
@@ -39,17 +39,17 @@ IBusChannelData IBusChannelSection::getChannelData() const
         }
 
         // Checksum involves header bytes
-        byteSum += IBus::kFirstStartOfFrame;
-        byteSum += IBus::kSecondStartofFrame;
+        byteSum += kFirstStartOfFrame;
+        byteSum += kSecondStartofFrame;
 
         // For some reason the actual checksum is the sum subtracted from a constant :P
-        return IBus::kChecksumConstant - byteSum;
+        return kChecksumConstant - byteSum;
     }
 
     /**
      * You can feed a checksum from the checksum section to verify
      */
-    bool IBusChannelSection::isValid(uint16_t checkSum) const
+    bool ChannelSection::isValid(uint16_t checkSum) const
     {
         return checkSum == calculateChecksum();
     }

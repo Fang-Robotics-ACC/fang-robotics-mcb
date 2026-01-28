@@ -7,7 +7,7 @@
 #include <cool_serial/dynamic_parser/segment_found_listener.hpp>
 #include <cool_serial/dynamic_parser/start_of_frame_found_listener.hpp>
 
-namespace fang::communication 
+namespace fang::communication::ibus
 {
 /**
  * Adaptation of coolSerial dynamic parser for flysky
@@ -41,13 +41,13 @@ private:
         virtual void update() = 0;
     };
 
-    class StartOfFrameSearch : public State, public IBusStartOfFrameSearch 
+    class StartOfFrameSearch : public State, public StartOfFrameSearch 
     {
     public:
-        using IBusStartOfFrameSearch::IBusStartOfFrameSearch;
+        using StartOfFrameSearch::StartOfFrameSearch;
         void update() override
         {
-            IBusStartOfFrameSearch::update();
+            StartOfFrameSearch::update();
         }
     };
 

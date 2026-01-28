@@ -2,19 +2,19 @@
 #include "i_bus_channel_data.hpp"
 
 #include <array>
-namespace fang::communication
+namespace fang::communication::ibus
 {
 /**
  * This stores the bytes of the channel section. It is capable of deserializing
  * the bytes into 
  */
-class IBusChannelSection
+class ChannelSection
 {
 public:
-    using ChannelBytes = std::array<Byte, IBus::kChannelSectionSize>;
+    using ChannelBytes = std::array<Byte, kChannelSectionSize>;
 
-    IBusChannelSection(const ChannelBytes& bytes);
-    IBusChannelData getChannelData() const;
+    ChannelSection(const ChannelBytes& bytes);
+    ChannelData getChannelData() const;
 
     /**
      * The IBus checksum is calculated by summing all of the bytes and subtracting them from 
@@ -28,6 +28,6 @@ public:
      */
     bool isValid(uint16_t checkSum) const;
 private:
-    std::array<Byte, IBus::kChannelSectionSize> bytes_;
+    std::array<Byte, kChannelSectionSize> bytes_;
 };
 }

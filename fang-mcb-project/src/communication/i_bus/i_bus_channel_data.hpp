@@ -3,7 +3,7 @@
 #include <array>
 #include <cstdint>
 
-namespace fang::communication
+namespace fang::communication::ibus
 {
-    using IBusChannelData  = std::array<std::uint16_t, IBus::kChannelCount>;
+    using ChannelData  = std::array<std::uint16_t, kChannelCount>;
 }

@@ -1,12 +1,12 @@
 #include <array>
 #include "i_bus.hpp"
 
-namespace fang::communication
+namespace fang::communication::ibus
 {
     /**
      * This
      */
-    class IBusPacket : public std::array<Byte, IBus::kPacketSize>
+    class Packet : public std::array<Byte, kPacketSize>
     {
     };
 }
