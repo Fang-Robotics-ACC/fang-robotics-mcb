@@ -63,7 +63,6 @@ private:
 
     // State change logic
     void startOfFrameFound() override;
-    
     void segmentFound(const coolSerial::Bytes& bytes) override;
 };
 }
