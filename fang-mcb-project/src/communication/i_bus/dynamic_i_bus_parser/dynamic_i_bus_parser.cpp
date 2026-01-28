@@ -24,7 +24,12 @@ void DynamicParser::segmentFound(const coolSerial::Bytes& bytes)
 
     const uint16_t checksum{extractChecksumFromCombinedSegment(bytes)};
 
+    if(channelSection.isValid(checksum))
+    {
+        channelDataFoundListener_.channelDataFound(channelSection.getChannelData());
+    }
     state_ = startOfFrameSearch_;
+
 }
 
 uint16_t DynamicParser::extractChecksumFromCombinedSegment(const coolSerial::Bytes& bytes)
