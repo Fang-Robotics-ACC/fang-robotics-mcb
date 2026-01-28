@@ -20,9 +20,7 @@ public:
     {
     }
 
-    void update()
-    {
-    }
+    void update();
 private:
     enum State
     {
