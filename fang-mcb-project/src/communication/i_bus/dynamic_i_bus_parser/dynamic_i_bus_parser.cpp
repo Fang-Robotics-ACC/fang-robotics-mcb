@@ -10,9 +10,11 @@ DynamicParser::DynamicParser(coolSerial::ByteQueue& byteBuffer):
 
 void DynamicParser::startOfFrameFound()
 {
+    state_ = segmentExtract_;
 }
 
 void DynamicParser::segmentFound(const coolSerial::Bytes& bytes)
 {
+    state_ = startOfFrameSearch_;
 }
 }

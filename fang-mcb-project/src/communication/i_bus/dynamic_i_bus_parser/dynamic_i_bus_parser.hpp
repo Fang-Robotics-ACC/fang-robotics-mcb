@@ -57,7 +57,7 @@ private:
 
     StartOfFrameSearch startOfFrameSearch_;
     // This extracts both the channel data and the associated checksum
-    coolSerial::DynamicSegmentExtractor segmentExtract_;
+    SegmentExtract segmentExtract_;
 
     std::reference_wrapper<State> state_{startOfFrameSearch_};
 
