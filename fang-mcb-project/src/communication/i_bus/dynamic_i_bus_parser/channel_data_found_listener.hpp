@@ -5,7 +5,7 @@ namespace fang::communication::ibus
 class ChannelDataFoundListener 
 {
 public:
-    virtual void channelDataFound() = 0;
+    virtual void channelDataFound(const ChannelData& channelData) = 0;
     virtual ~ChannelDataFoundListener() {}
 };
 }
