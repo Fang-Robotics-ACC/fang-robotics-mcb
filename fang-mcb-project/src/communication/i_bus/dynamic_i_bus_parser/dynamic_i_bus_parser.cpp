@@ -7,4 +7,12 @@ namespace fang::communication::ibus
         startOfFrameSearch_{byteBuffer, *this},
         segmentExtract_{byteBuffer, *this, kChannelSectionSize + kChannelSectionSize}
     {}
+
+    void DynamicParser::startOfFrameFound()
+    {
+    }
+
+    void DynamicParser::segmentFound(const coolSerial::Bytes& bytes)
+    {
+    }
 }
