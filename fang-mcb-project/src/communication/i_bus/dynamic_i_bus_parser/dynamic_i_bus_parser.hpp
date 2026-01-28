@@ -19,10 +19,8 @@ namespace fang::communication::ibus
 class DynamicParser : public coolSerial::StartOfFrameFoundListener, public coolSerial::SegmentFoundListener
 {
 public:
-    DynamicParser(coolSerial::ByteQueue& byteBuffer):
-        startOfFrameSearch_{byteBuffer, *this},
-        segmentExtract_{byteBuffer, *this, kChannelSectionSize + kChannelSectionSize}
-    {}
+    DynamicParser(coolSerial::ByteQueue& byteBuffer);
+
     void update()
     {
         state_.get().update();
@@ -64,35 +62,8 @@ private:
     std::reference_wrapper<State> state_{startOfFrameSearch_};
 
     // State change logic
-    void startOfFrameFound() override
-    {
-        state_ = headerExtract_;
-        // In case the buffer has more of the message
-        update();
-    }
-
-    void headerFound(const HeaderData& headerData) override
-    {
-        if (headerData.isValid())
-        {
-            dataExtract_.setDataExtractionInfo(headerData.dataInfo);
-            state_ = dataExtract_;
-            // In case the buffer has more of the message
-            update();
-        }
-        else
-        {
-            // Do not call update, wait until next cycle
-            state_ = startOfFrameSearch_;
-        }
-    }
-
-    void dataFound(const CoolMessageData& data) override
-    {
-        // Do not call update, wait until next cycle
-        // at most one message is extracted every update()
-        dataFoundListener_.dataFound(data);
-        state_ = startOfFrameSearch_;
-    }
+    void startOfFrameFound() override;
+    
+    void segmentFound(const coolSerial::Bytes& bytes) override;
 };
 }
