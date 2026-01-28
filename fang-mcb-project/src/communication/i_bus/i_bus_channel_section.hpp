@@ -1,5 +1,6 @@
 #include "i_bus.hpp"
 #include "i_bus_channel_data.hpp"
+#include "cool_serial/bytes.hpp"
 
 #include <array>
 namespace fang::communication::ibus
@@ -14,6 +15,11 @@ public:
     using ChannelBytes = std::array<Byte, kChannelSectionSize>;
 
     ChannelSection(const ChannelBytes& bytes);
+
+    /**
+     * Adapter for bytes
+     */
+    ChannelSection(const coolSerial::Bytes& bytes);
     ChannelData getChannelData() const;
 
     /**
@@ -28,6 +34,8 @@ public:
      */
     bool isValid(uint16_t checkSum) const;
 private:
+    // Not constant but all other functions are const
+    // Not constant to avoid unnecessary double copies
     std::array<Byte, kChannelSectionSize> bytes_;
 };
 }

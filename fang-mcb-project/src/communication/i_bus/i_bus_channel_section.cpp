@@ -1,4 +1,6 @@
 #include "i_bus_channel_section.hpp"
+
+#include "system/assert/fang_assert.hpp"
 #include "util/serialization/deserialize_uint16.hpp"
 namespace fang::communication::ibus
 {
@@ -23,6 +25,12 @@ ChannelData ChannelSection::getChannelData() const
 
         return channelData; 
     }
+
+ChannelSection::ChannelSection(const coolSerial::Bytes& bytes)
+{
+    FANG_ASSERT(bytes.size() == (kChannelSectionSize + kChecksumSectionSize), "Segment must be proper size.");
+    std::copy(bytes.begin(), bytes.end(), bytes_.begin());
+}
 
     /**
      * The IBus checksum is calculated by summing all of the bytes and subtracting them from 
