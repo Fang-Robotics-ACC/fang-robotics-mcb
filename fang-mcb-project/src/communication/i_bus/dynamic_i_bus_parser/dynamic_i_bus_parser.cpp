@@ -3,16 +3,16 @@
 
 namespace fang::communication::ibus
 {
-    DynamicParser::DynamicParser(coolSerial::ByteQueue& byteBuffer):
-        startOfFrameSearch_{byteBuffer, *this},
-        segmentExtract_{byteBuffer, *this, kChannelSectionSize + kChannelSectionSize}
-    {}
+DynamicParser::DynamicParser(coolSerial::ByteQueue& byteBuffer):
+    startOfFrameSearch_{byteBuffer, *this},
+    segmentExtract_{byteBuffer, *this, kChannelSectionSize + kChannelSectionSize}
+{}
 
-    void DynamicParser::startOfFrameFound()
-    {
-    }
+void DynamicParser::startOfFrameFound()
+{
+}
 
-    void DynamicParser::segmentFound(const coolSerial::Bytes& bytes)
-    {
-    }
+void DynamicParser::segmentFound(const coolSerial::Bytes& bytes)
+{
+}
 }
