@@ -36,6 +36,7 @@ uint16_t DynamicParser::extractChecksumFromCombinedSegment(const coolSerial::Byt
 {
     FANG_ASSERT(bytes.size() == (kChannelSectionSize + kChecksumSectionSize), "Segment must be proper size.");
 
+    // Calculate the indexes for each byte from the combined segment
     const int kMaxIndex{kChannelSectionSize + kChecksumSectionSize - 1};
     // Least endian order
     const int kChecksumLeastSignificantByteIndex{kMaxIndex - 1};
