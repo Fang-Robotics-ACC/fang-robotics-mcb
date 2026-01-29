@@ -9,10 +9,20 @@ void StartOfFrameSearch::update()
         switch(state_)
         {
         case kSearchForFirstByte:
-            state_ = kSearchForSecondByte;
+            if(kNext == kFirstStartOfFrame)
+            {
+                state_ = kSearchForSecondByte;
+            }
             break;
         case kSearchForSecondByte:
-            frameFoundListener_.startOfFrameFound();
+            if(kNext == kSecondStartofFrame)
+            {
+                frameFoundListener_.startOfFrameFound();
+            }
+            // Either way, the first SOF will be sought ought because
+            // if it is invalid, the process restarts
+            // if it is valid, then process restarts
+            // when the process restarts, then the state is kSearchForFirstByte
             state_ = kSearchForFirstByte;
         }
     }
