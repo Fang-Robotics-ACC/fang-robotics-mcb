@@ -45,5 +45,6 @@ uint16_t DynamicParser::extractChecksumFromCombinedSegment(const coolSerial::Byt
     // Dangerous but the assertion checks asserts appropriate bounds
     const uint16_t checksum{serialization::deserializeUInt16(bytes[kChecksumMostSignficantByteIndex], bytes[kChecksumLeastSignificantByteIndex])};
 
+    return checksum;
 }
 }
