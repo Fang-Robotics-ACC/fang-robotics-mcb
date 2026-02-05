@@ -32,7 +32,7 @@ sudo dnf group install c-development development-tools
 sudo dnf install python3 python-is-python3 \
 python3-pip git openocd gcc \
 boost-devel openocd stlink \
-gmock-devel gtest-devel pipenv wget curl -y
+gmock-devel gtest-devel wget curl -y
 
 # Python build requirements
 sudo dnf install readline-devel ncurses-devel sqlite-devel tk-devel gdbm-devel bzip2-devel libffi-devel python3-pip -y
