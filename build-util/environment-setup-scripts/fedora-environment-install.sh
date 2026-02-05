@@ -26,7 +26,7 @@
 # SOFTWARE.
 
 # Group build requirements
-sudo dnf group install c-development development-tools
+sudo dnf group install c-development development-tools -y
 
 # General build requirements
 sudo dnf install python3 python-is-python3 \
