@@ -67,6 +67,7 @@ install_pyenv()
 
 install_pipenv_env()
 {
+   pip install --user pipenv
    # This is needed because this is what the taproot devs use
    # One majory reason is that the modm uses has_key() which got deprecated
    # in later versions of python 3 
