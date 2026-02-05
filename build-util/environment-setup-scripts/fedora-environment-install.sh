@@ -25,11 +25,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"Development Tools"
+# Group build requirements
+sudo dnf group install c-development development-tools
+
 # General build requirements
 sudo apt-get install python3 python-is-python3 \
-python3-pip git openocd gcc build-essential \
-libboost-all-dev openocd stlink-tools \
-libgmock-dev libgtest-dev pipenv wget curl -y
+python3-pip git openocd gcc \
+boost-devel openocd stlink \
+gmock-devel gtest-devel pipenv wget curl -y
 
 # Python build requirements
 sudo apt install build-essential libreadline-dev libncursesw5-dev \
