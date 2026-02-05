@@ -35,9 +35,8 @@ boost-devel openocd stlink \
 gmock-devel gtest-devel pipenv wget curl -y
 
 # Python build requirements
-sudo apt install build-essential libreadline-dev libncursesw5-dev \
-libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev \
-libffi-dev zlib1g-dev liblzma-dev -y
+sudo dnf install readline-devel ncurses-devel sqlite-devel tk-devel gdbm-devel bzip2-devel libffi-devel python3-pip -y
+
 
 install_arm_none_eabi_gcc()
 {
