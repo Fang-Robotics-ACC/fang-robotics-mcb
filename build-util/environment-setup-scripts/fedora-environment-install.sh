@@ -29,7 +29,7 @@
 sudo dnf group install c-development development-tools
 
 # General build requirements
-sudo apt-get install python3 python-is-python3 \
+sudo dnf install python3 python-is-python3 \
 python3-pip git openocd gcc \
 boost-devel openocd stlink \
 gmock-devel gtest-devel pipenv wget curl -y
