@@ -12,7 +12,7 @@ TEST(IBusChannelSection, deserialization)
 
     // 14 channels, 28 bytes
     ChannelSection section
-    {{
+    {ChannelSection::ChannelBytes{
         0x00, 0x01, //0x0100 in least endian format or 256
         0x10, 0x00, //0x0010 in least endian format or 16
         0x00, 0x01, //0x0100 in least endian format or 256
@@ -57,7 +57,7 @@ TEST(ChannelSection, checkSum)
     const uint16_t expectedCheckSum{0xf354};
 
     const ChannelSection channelSection
-    {{
+    {ChannelSection::ChannelBytes{
         0xdc, 0x05,
         0xdb, 0x05,
         0xEF, 0x03,
