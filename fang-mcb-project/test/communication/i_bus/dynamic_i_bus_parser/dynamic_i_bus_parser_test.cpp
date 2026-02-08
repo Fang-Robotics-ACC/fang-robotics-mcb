@@ -1,5 +1,9 @@
 #include "communication/i_bus/dynamic_i_bus_parser/dynamic_i_bus_parser.hpp"
 #include "communication/i_bus/i_bus_channel_section.hpp"
+
+#include "cool_serial/byte_queue.hpp"
+#include "ichannel_data_found_listener_mock.hpp"
+
 #include <gtest/gtest.h>
 
 namespace fang::communication::ibus::dynamicIbusParserTest
@@ -45,5 +49,12 @@ TEST(DynamicParser, completeParse)
         1500,
         1500
     };
+
+    coolSerial::ByteQueue queue{std::deque<coolSerial::Byte>{kExpectedData.begin(), kExpectedData.end()}};
+    testing::StrictMock<IChannelDataFoundListenerMock> dataFoundListener{};
+    DynamicParser parser{queue, dataFoundListener};
+
+    parser.update();
+    EXPECT_CALL(dataFoundListener, channelDataFound(kExpectedData));
 }
 }
