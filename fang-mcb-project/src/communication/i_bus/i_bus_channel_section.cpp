@@ -28,7 +28,7 @@ ChannelData ChannelSection::getChannelData() const
 
 ChannelSection::ChannelSection(const coolSerial::Bytes& bytes)
 {
-    FANG_ASSERT(bytes.size() == (kChannelSectionSize + kChecksumSectionSize), "Segment must be proper size.");
+    FANG_ASSERT(bytes.size() == (kChannelSectionSize), "Segment must be proper size.");
     std::copy(bytes.begin(), bytes.end(), bytes_.begin());
 }
 
