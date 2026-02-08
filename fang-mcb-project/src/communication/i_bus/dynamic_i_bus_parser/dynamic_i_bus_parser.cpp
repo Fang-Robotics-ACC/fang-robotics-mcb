@@ -15,6 +15,7 @@ DynamicParser::DynamicParser(coolSerial::ByteQueue& byteBuffer, IChannelDataFoun
 void DynamicParser::startOfFrameFound()
 {
     state_ = segmentExtract_;
+    update();
 }
 
 void DynamicParser::segmentFound(const coolSerial::Bytes& bytes)
