@@ -59,4 +59,78 @@ TEST(DynamicParser, completeParse)
     EXPECT_CALL(dataFoundListener, channelDataFound(kExpectedData));
     parser.update();
 }
+
+/**
+ * Takes known ibus signals from :https://basejunction.wordpress.com/2015/08/23/en-flysky-i6-14-channels-part1/
+ * and checks if it is parsed correctly :D
+ */
+TEST(DynamicParser, segmement)
+{
+    const ChannelData kExpectedData
+    {
+        1500,
+        1499,
+        1007,
+        1501,
+        2000,
+        2000,
+        1500,
+        1500,
+        1500,
+        1500,
+        1500,
+        1500,
+        1500,
+        1500
+    };
+
+    coolSerial::ByteQueue queue{};
+    testing::StrictMock<IChannelDataFoundListenerMock> dataFoundListener{};
+    DynamicParser parser{queue, dataFoundListener};
+
+    const coolSerial::Bytes kFrameSegment0 
+    {
+        0x20, 0x40, // sof header
+    };
+
+    queue.addBytes(kFrameSegment0);
+    parser.update();
+
+    const coolSerial::Bytes kFrameSegment1 
+    {
+        0xdc, 0x05,
+        0xdb, 0x05,
+        0xEF, 0x03,
+        0xdd, 0x05,
+    };
+
+    queue.addBytes(kFrameSegment1);
+    parser.update();
+
+    const coolSerial::Bytes kFrameSegment2 
+    {
+        0xd0, 0x07,
+        0xd0, 0x07,
+        0xdc, 0x05,
+        0xdc, 0x05,
+        0xdc, 0x05,
+        0xdc, 0x05,
+        0xdc, 0x05,
+        0xdc, 0x05,
+        0xdc, 0x05,
+        0xdc, 0x05,
+    };
+
+    queue.addBytes(kFrameSegment2);
+    parser.update();
+
+    const coolSerial::Bytes kFrameSegment3
+    {
+        0x54, 0xf3  // checksum
+    };
+
+    queue.addBytes(kFrameSegment3);
+    EXPECT_CALL(dataFoundListener, channelDataFound(kExpectedData));
+    parser.update();
+}
 }
