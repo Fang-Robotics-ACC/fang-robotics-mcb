@@ -14,8 +14,9 @@ namespace fang::communication::ibus::dynamicIbusParserTest
  */
 TEST(DynamicParser, completeParse)
 {
-    const ChannelSection kChannelSection
-    {ChannelSection::ChannelBytes{
+    const coolSerial::Bytes kKnownIbusFrame
+    {
+        0x20, 0x40, // sof header
         0xdc, 0x05,
         0xdb, 0x05,
         0xEF, 0x03,
@@ -29,8 +30,9 @@ TEST(DynamicParser, completeParse)
         0xdc, 0x05,
         0xdc, 0x05,
         0xdc, 0x05,
-        0xdc, 0x05
-    }};
+        0xdc, 0x05,
+        0x54, 0xf3  // checksum
+    };
 
     const ChannelData kExpectedData
     {
@@ -50,7 +52,7 @@ TEST(DynamicParser, completeParse)
         1500
     };
 
-    coolSerial::ByteQueue queue{std::deque<coolSerial::Byte>{kExpectedData.begin(), kExpectedData.end()}};
+    coolSerial::ByteQueue queue{std::deque<coolSerial::Byte>{kKnownIbusFrame.begin(), kKnownIbusFrame.end()}};
     testing::StrictMock<IChannelDataFoundListenerMock> dataFoundListener{};
     DynamicParser parser{queue, dataFoundListener};
 
