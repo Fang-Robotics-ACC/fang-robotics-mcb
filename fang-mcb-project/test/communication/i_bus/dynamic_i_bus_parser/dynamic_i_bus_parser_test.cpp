@@ -56,7 +56,7 @@ TEST(DynamicParser, completeParse)
     testing::StrictMock<IChannelDataFoundListenerMock> dataFoundListener{};
     DynamicParser parser{queue, dataFoundListener};
 
-    parser.update();
     EXPECT_CALL(dataFoundListener, channelDataFound(kExpectedData));
+    parser.update();
 }
 }
