@@ -1,7 +1,7 @@
 #pragma
 #include "cool_serial/byte_queue.hpp"
 
-#include "channel_data_found_listener.hpp"
+#include "ichannel_data_found_listener.hpp"
 #include "i_bus_start_of_frame_search.hpp"
 #include "cool_serial/dynamic_parser/dynamic_segment_extractor.hpp"
 
@@ -20,7 +20,7 @@ namespace fang::communication::ibus
 class DynamicParser : public coolSerial::StartOfFrameFoundListener, public coolSerial::SegmentFoundListener
 {
 public:
-    DynamicParser(coolSerial::ByteQueue& byteBuffer, ChannelDataFoundListener& listener);
+    DynamicParser(coolSerial::ByteQueue& byteBuffer, IChannelDataFoundListener& listener);
 
     void update()
     {
@@ -56,7 +56,7 @@ private:
         }
     };
 
-    ChannelDataFoundListener& channelDataFoundListener_;
+    IChannelDataFoundListener& channelDataFoundListener_;
     StartOfFrameSearch startOfFrameSearch_;
     // This extracts both the channel data and the associated checksum
     SegmentExtract segmentExtract_;

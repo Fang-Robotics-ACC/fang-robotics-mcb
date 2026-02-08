@@ -6,7 +6,7 @@
 
 namespace fang::communication::ibus
 {
-DynamicParser::DynamicParser(coolSerial::ByteQueue& byteBuffer, ChannelDataFoundListener& channelDataFoundListener):
+DynamicParser::DynamicParser(coolSerial::ByteQueue& byteBuffer, IChannelDataFoundListener& channelDataFoundListener):
     channelDataFoundListener_{channelDataFoundListener},
     startOfFrameSearch_{byteBuffer, *this},
     segmentExtract_{byteBuffer, *this, kChannelSectionSize + kChannelSectionSize}
