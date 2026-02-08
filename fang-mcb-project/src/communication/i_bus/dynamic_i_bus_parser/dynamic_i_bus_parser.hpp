@@ -42,7 +42,7 @@ private:
         using ibus::StartOfFrameSearch::StartOfFrameSearch;
         void update() override
         {
-            StartOfFrameSearch::update();
+            ibus::StartOfFrameSearch::update();
         }
     };
 
