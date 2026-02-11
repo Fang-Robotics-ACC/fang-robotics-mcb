@@ -1,5 +1,6 @@
 #pragma once
 
+#include "util/math/linear/cool_lerp.hpp"
 #include "tap/communication/serial/remote.hpp"
 #include "driver/drivers.hpp"
 #include "communication/i_bus/i_bus_channel_data.hpp"
@@ -48,6 +49,7 @@ public:
     double getChannel(Channel channel) const;
     TapRemote::SwitchState getSwitch() const;
 private:
+    static const math::CoolLerp kNormalizer;
     static constexpr int kBaudrate{115200};
     /**
      * Normalizes channels
@@ -56,5 +58,6 @@ private:
 
     Drivers& drivers_;
     communication::ibus::DynamicParser ibusParser_;
+    ChannelValues channelValues_{};
 };
 }
