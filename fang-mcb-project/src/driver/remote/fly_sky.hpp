@@ -41,7 +41,7 @@ public:
     };
 
     FlySky(Drivers& drivers, coolSerial::ByteQueue& byteQueue);
-    void update() ;
+    void update();
 
     void channelDataFound(const communication::ibus::ChannelData& channelData);
 
