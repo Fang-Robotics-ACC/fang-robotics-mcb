@@ -1,6 +1,9 @@
 #pragma once
 
 #include "tap/communication/serial/remote.hpp"
+#include "communication/i_bus/i_bus_channel_data.hpp"
+#include "communication/i_bus/dynamic_i_bus_parser/ichannel_data_found_listener.hpp"
+#include "communication/i_bus/dynamic_i_bus_parser/dynamic_i_bus_parser.hpp"
 
 namespace fang::remote
 {
@@ -15,10 +18,12 @@ namespace fang::remote
  * 
  * TODO: Consider combining switch A and B to provide for up, middle, and down, then a 4th default state
  */
-class FlySky
+class FlySky : communication::ibus::IChannelDataFoundListener
 {
 public:
     using TapRemote = tap::communication::serial::Remote;
+    // So that it can store then as normalzied decimals
+    using ChannelValues = std::array<double, communication::ibus::kChannelCount>;
 
     enum class Channel 
     {
@@ -37,7 +42,14 @@ public:
     void initialize();
     void update() ;
 
+    void channelDataFound(const communication::ibus::ChannelData& channelData);
+
     double getChannel(Channel channel) const;
     TapRemote::SwitchState getSwitch() const;
+private:
+    /**
+     * Normalizes channels
+     */
+    void  setChannels(communication::ibus::ChannelData channelData);
 };
 }
