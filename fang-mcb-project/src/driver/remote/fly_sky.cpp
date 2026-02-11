@@ -9,4 +9,8 @@ FlySky::FlySky(Drivers& drivers, coolSerial::ByteQueue& byteQueue)
 {
 }
 
+void FlySky::update()
+{
+    ibusParser_.update();
+}
 }
