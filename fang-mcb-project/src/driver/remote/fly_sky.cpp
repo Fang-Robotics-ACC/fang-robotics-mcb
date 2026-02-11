@@ -13,4 +13,12 @@ void FlySky::update()
 {
     ibusParser_.update();
 }
+
+void FlySky::channelDataFound(const communication::ibus::ChannelData& channelData)
+{
+    // For ease, the channel data is normalized 
+    // Normalize channel data
+    // Convert to joystick and switch data values
+    // update commandMapper based off of those new values
+}
 }
