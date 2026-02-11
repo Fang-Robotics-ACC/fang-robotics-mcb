@@ -55,6 +55,7 @@ private:
      */
     void  setChannels(communication::ibus::ChannelData channelData);
 
+    Drivers& drivers_;
     communication::ibus::DynamicParser ibusParser_;
 };
 }
