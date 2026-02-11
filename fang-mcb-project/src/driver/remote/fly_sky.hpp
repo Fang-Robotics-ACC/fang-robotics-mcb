@@ -47,9 +47,12 @@ public:
     double getChannel(Channel channel) const;
     TapRemote::SwitchState getSwitch() const;
 private:
+    static constexpr int kBaudrate{115200};
     /**
      * Normalizes channels
      */
     void  setChannels(communication::ibus::ChannelData channelData);
+
+    communication::ibus::DynamicParser ibusParser_;
 };
 }
