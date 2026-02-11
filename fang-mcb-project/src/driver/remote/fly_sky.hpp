@@ -1,6 +1,7 @@
 #pragma once
 
 #include "tap/communication/serial/remote.hpp"
+#include "driver/drivers.hpp"
 #include "communication/i_bus/i_bus_channel_data.hpp"
 #include "communication/i_bus/dynamic_i_bus_parser/ichannel_data_found_listener.hpp"
 #include "communication/i_bus/dynamic_i_bus_parser/dynamic_i_bus_parser.hpp"
@@ -39,6 +40,7 @@ public:
         wheelB 
     };
 
+    FlySky(Drivers& drivers, coolSerial::ByteQueue& byteQueue);
     void initialize();
     void update() ;
 
