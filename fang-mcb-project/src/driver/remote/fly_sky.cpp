@@ -21,8 +21,14 @@ void FlySky::update()
 void FlySky::channelDataFound(const communication::ibus::ChannelData& channelData)
 {
     setChannels(channelData);
-    // Convert to joystick and switch data values
-    // update commandMapper based off of those new values
+
+    drivers_.commandMapper.handleKeyStateChange(
+        0, // This remote cannot pass key data
+        getTaprootSwitch(TapRemote::Switch::LEFT_SWITCH),
+        getTaprootSwitch(TapRemote::Switch::RIGHT_SWITCH),
+        false, // No mouse click relayed
+        false // No mouse click relayed
+    );
 }
 
 FlySky::TapRemote::SwitchState FlySky::getSwitch(Switch switchId) const
