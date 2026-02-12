@@ -6,9 +6,9 @@ namespace fang::remote
 {
 const math::CoolLerp FlySky::kNormalizer{{1000.0, -1.0}, {1000, 1.0}};
 
-FlySky::FlySky(Drivers& drivers, coolSerial::ByteQueue& byteQueue)
+FlySky::FlySky(tap::control::CommandMapper& commandMapper, coolSerial::ByteQueue& byteQueue)
     :
-    drivers_{drivers},
+    commandMapper_{commandMapper},
     ibusParser_{byteQueue, *this}
 {
 }
@@ -22,7 +22,7 @@ void FlySky::channelDataFound(const communication::ibus::ChannelData& channelDat
 {
     setChannels(channelData);
 
-    drivers_.commandMapper.handleKeyStateChange(
+    commandMapper_.handleKeyStateChange(
         0, // This remote cannot pass key data
         getTaprootSwitch(TapRemote::Switch::LEFT_SWITCH),
         getTaprootSwitch(TapRemote::Switch::RIGHT_SWITCH),

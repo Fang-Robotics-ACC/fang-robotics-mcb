@@ -2,7 +2,7 @@
 
 #include "util/math/linear/cool_lerp.hpp"
 #include "tap/communication/serial/remote.hpp"
-#include "driver/drivers.hpp"
+#include "tap/control/command_mapper.hpp"
 #include "communication/i_bus/i_bus_channel_data.hpp"
 #include "communication/i_bus/dynamic_i_bus_parser/ichannel_data_found_listener.hpp"
 #include "communication/i_bus/dynamic_i_bus_parser/dynamic_i_bus_parser.hpp"
@@ -59,7 +59,13 @@ public:
         D 
     };
 
-    FlySky(Drivers& drivers, coolSerial::ByteQueue& byteQueue);
+    /**
+     * The commandMapper is what listens for remoteStateChanges in order to know what mappings to trigger
+     * generally, you are using the one in the Drivers singleton. (As much as taproot locked some architectural elements
+     * to use drivers everywhere, requiring a singleton CommandMaper CommandScheduler, this code is designed to use only
+     * what it needs for ease of testing and minimizing coupling.)
+     */
+    FlySky(tap::control::CommandMapper& commandMapper, coolSerial::ByteQueue& byteQueue);
     void update();
 
     void channelDataFound(const communication::ibus::ChannelData& channelData);
@@ -86,7 +92,7 @@ private:
     void setChannels(communication::ibus::ChannelData channelData);
     TapRemote::SwitchState channelToSwitchState(double channelData) const;
 
-    Drivers& drivers_;
+    tap::control::CommandMapper& commandMapper_;
     communication::ibus::DynamicParser ibusParser_;
     ChannelValues channelValues_{};
 };
