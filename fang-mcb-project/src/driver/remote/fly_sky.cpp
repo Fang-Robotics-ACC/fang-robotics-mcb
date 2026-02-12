@@ -27,10 +27,37 @@ void FlySky::channelDataFound(const communication::ibus::ChannelData& channelDat
 
 FlySky::TapRemote::SwitchState FlySky::getSwitch(Switch switchId) const
 {
+    double channelData{};
+    switch(switchId)
+    {
+
+        case Switch::switchA:
+            channelData = getChannel(Channel::switchA);
+            break;
+        case Switch::switchB:
+            channelData = getChannel(Channel::switchB);
+            break;
+        case Switch::switchC:
+            channelData = getChannel(Channel::switchC);
+            break;
+        case Switch::switchD:
+            channelData = getChannel(Channel::switchD);
+            break;
+    }
+    return channelToSwitchState(channelData);
 }
 
 FlySky::TapRemote::SwitchState FlySky::getTaprootSwitch(TapRemote::Switch switchId) const
 {
+    switch(switchId)
+    {
+        case TapRemote::Switch::LEFT_SWITCH:
+            return getSwitch(Switch::switchB);
+            break;
+        case TapRemote::Switch::RIGHT_SWITCH:
+            return getSwitch(Switch::switchC);
+            break;
+    }
 }
 
 
