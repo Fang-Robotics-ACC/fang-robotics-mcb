@@ -4,7 +4,7 @@
 
 namespace fang::remote
 {
-const math::CoolLerp FlySky::kNormalizer{{1000.0, -1.0}, {1000, 1.0}};
+const math::CoolLerp FlySky::kNormalizer{{1000.0, -1.0}, {2000, 1.0}};
 
 FlySky::FlySky(tap::control::CommandMapper& commandMapper, coolSerial::ByteQueue& byteQueue)
     :
@@ -76,8 +76,8 @@ void  FlySky::setChannels(communication::ibus::ChannelData channelData)
     for(int i{0}; i < static_cast<int>(channelData.size()); ++i)
     {
         // To safeguard against floating point errors triggering out of bounds
-        const double kNormalized{tap::algorithms::limitVal<double>(channelData[i], -1000.0, 1000.0)};
-        channelValues_[i] = kNormalized;
+        const double kNormalized{kNormalizer.interpolate(channelData[i])};
+        channelValues_[i] = tap::algorithms::limitVal(kNormalized, -1.0, 1.0);
     }
 }
 
