@@ -66,10 +66,14 @@ FlySky::TapRemote::SwitchState FlySky::getTaprootSwitch(TapRemote::Switch switch
     }
 }
 
+double FlySky::getChannel(Channel channel) const
+{
+    return channelValues_[static_cast<int>(channel)];
+}
 
 void  FlySky::setChannels(communication::ibus::ChannelData channelData)
 {
-    for(int i{0}; i < channelData.size(); ++i)
+    for(int i{0}; i < static_cast<int>(channelData.size()); ++i)
     {
         // To safeguard against floating point errors triggering out of bounds
         const double kNormalized{tap::algorithms::limitVal<double>(channelData[i], -1000.0, 1000.0)};
