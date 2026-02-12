@@ -31,16 +31,16 @@ FlySky::TapRemote::SwitchState FlySky::getSwitch(Switch switchId) const
     switch(switchId)
     {
 
-        case Switch::switchA:
+        case Switch::A:
             channelData = getChannel(Channel::switchA);
             break;
-        case Switch::switchB:
+        case Switch::B:
             channelData = getChannel(Channel::switchB);
             break;
-        case Switch::switchC:
+        case Switch::C:
             channelData = getChannel(Channel::switchC);
             break;
-        case Switch::switchD:
+        case Switch::D:
             channelData = getChannel(Channel::switchD);
             break;
     }
@@ -52,10 +52,10 @@ FlySky::TapRemote::SwitchState FlySky::getTaprootSwitch(TapRemote::Switch switch
     switch(switchId)
     {
         case TapRemote::Switch::LEFT_SWITCH:
-            return getSwitch(Switch::switchB);
+            return getSwitch(Switch::B);
             break;
         case TapRemote::Switch::RIGHT_SWITCH:
-            return getSwitch(Switch::switchC);
+            return getSwitch(Switch::C);
             break;
     }
 }

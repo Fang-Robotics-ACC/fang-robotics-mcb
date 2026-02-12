@@ -41,12 +41,22 @@ public:
         wheelB 
     };
 
+    /**
+     * Note: the reason we are breaking away from the normal enum class
+     * naming convention is because they are single letters
+     * 
+     * Switch::A looks clearer than Switch::a
+     * 
+     * k is not needed for it is an enum class
+     * 
+     * Switch::switchA just looks redundant
+     */
     enum class Switch
     {
-        switchA,
-        switchB,
-        switchC,
-        switchD 
+        A,
+        B,
+        C,
+        D 
     };
 
     FlySky(Drivers& drivers, coolSerial::ByteQueue& byteQueue);
