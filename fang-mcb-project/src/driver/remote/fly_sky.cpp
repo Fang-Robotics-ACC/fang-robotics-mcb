@@ -99,5 +99,7 @@ FlySky::TapRemote::SwitchState FlySky::channelToSwitchState(double channelData) 
     {
         FANG_ASSERT(false, "invalid channelData, likely does not correspond to a switch");
     }
+
+    return switchState;
 }
 }
