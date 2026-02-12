@@ -54,7 +54,17 @@ public:
 
     void channelDataFound(const communication::ibus::ChannelData& channelData);
 
+    /**
+     * This is required to inform the command mapper of switch state changes.
+     * 
+     * It can only access switch B and switch C (LEFT_SWITCH and RIGHT_SWITCH)
+     * respectively
+     */
     TapRemote::SwitchState getTaprootSwitch(TapRemote::Switch switchId) const;
+
+    /**
+     * This can access all switches
+     */
     TapRemote::SwitchState getSwitch(Switch switchId) const;
     double getChannel(Channel channel) const;
 private:
