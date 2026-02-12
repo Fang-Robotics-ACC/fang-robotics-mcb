@@ -41,20 +41,30 @@ public:
         wheelB 
     };
 
+    enum class Switch
+    {
+        switchA,
+        switchB,
+        switchC,
+        switchD 
+    };
+
     FlySky(Drivers& drivers, coolSerial::ByteQueue& byteQueue);
     void update();
 
     void channelDataFound(const communication::ibus::ChannelData& channelData);
 
+    TapRemote::SwitchState getTaprootSwitch(TapRemote::Switch switchId) const;
+    TapRemote::SwitchState getSwitch(Switch switchId) const;
     double getChannel(Channel channel) const;
-    TapRemote::SwitchState getSwitch() const;
 private:
     static const math::CoolLerp kNormalizer;
     static constexpr int kBaudrate{115200};
     /**
      * Normalizes channels
      */
-    void  setChannels(communication::ibus::ChannelData channelData);
+    void setChannels(communication::ibus::ChannelData channelData);
+    TapRemote::SwitchState channelToSwitchState(double channelData) const;
 
     Drivers& drivers_;
     communication::ibus::DynamicParser ibusParser_;
