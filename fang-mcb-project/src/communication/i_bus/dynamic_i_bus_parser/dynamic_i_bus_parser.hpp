@@ -1,4 +1,4 @@
-#pragma
+#pragma once
 #include "cool_serial/byte_queue.hpp"
 
 #include "ichannel_data_found_listener.hpp"
