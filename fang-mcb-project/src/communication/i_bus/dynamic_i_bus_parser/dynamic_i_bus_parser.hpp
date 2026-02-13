@@ -5,6 +5,8 @@
 #include "i_bus_start_of_frame_search.hpp"
 #include "cool_serial/dynamic_parser/dynamic_segment_extractor.hpp"
 
+#include <functional>
+
 namespace fang::communication::ibus
 {
 /**
