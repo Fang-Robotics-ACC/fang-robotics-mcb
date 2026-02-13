@@ -77,7 +77,7 @@ void  FlySky::setChannels(communication::ibus::ChannelData channelData)
     {
         // To safeguard against floating point errors triggering out of bounds
         const double kNormalized{kNormalizer.interpolate(channelData[i])};
-        channelValues_[i] = tap::algorithms::limitVal(kNormalized, -1.0, 1.0);
+        channelValues_[i] = tap::algorithms::limitVal<double>(kNormalized, -1.0, 1.0);
     }
 }
 
