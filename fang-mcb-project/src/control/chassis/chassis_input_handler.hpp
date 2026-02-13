@@ -2,13 +2,14 @@
 #define FANG_ROBOTICS_MCB_CHASSIS_INPUT_HANDLER_HPP
 #include "util/math/linear/vector_alias.hpp"
 #include "wrap/units/units_alias.hpp"
+#include "wrap/rail/chassis/ichassis_input_handler.hpp"
 
 #include "tap/communication/serial/remote.hpp"
 
 namespace fang::chassis 
 {
     using Remote = tap::communication::serial::Remote;
-    class ChassisInputHandler
+    class ChassisInputHandler : public IChassisInputHandler
     {
     public:
         struct RemoteConfig
@@ -37,12 +38,12 @@ namespace fang::chassis
         /**
          * Returns a clamped sum of the keyboard and mouse inputs
          */
-        math::AbstractVector2D getTranslation() const;
+        math::AbstractVector2D getTranslation() const override;
 
         /**
          * Returns a clamped sum of the keyboard and mouse inputs
          */
-        double getRotation() const;
+        double getRotation() const override;
 
         /**
          * Returns the desired translation motion
