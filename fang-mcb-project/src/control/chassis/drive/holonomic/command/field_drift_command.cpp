@@ -13,7 +13,7 @@ namespace fang::chassis
     FieldDriftCommand::FieldDriftCommand
     (
         HolonomicSubsystem& chassisSubsystem,
-        ChassisInputHandler& inputHandler,
+        DjiHolonomicInputHandler& inputHandler,
         const Config& config
     ):   
         holonomicSubsystem_{chassisSubsystem},

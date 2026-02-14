@@ -35,7 +35,7 @@ namespace fang::chassis
         FieldDriftCommand
         (
             HolonomicSubsystem& holonomicSubsystem,
-            ChassisInputHandler& inputHandler,
+            DjiHolonomicInputHandler& inputHandler,
             const Config& config
         );
 
@@ -62,7 +62,7 @@ namespace fang::chassis
         static constexpr const char* kName{"Field Drift"};
 
         HolonomicSubsystem& holonomicSubsystem_;
-        ChassisInputHandler& chassisInput_;
+        DjiHolonomicInputHandler& chassisInput_;
         const Config kConfig_;
 
     private:

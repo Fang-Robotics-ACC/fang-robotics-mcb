@@ -12,7 +12,7 @@ namespace fang::chassis
     /**
      * First person shooter motion for holonomic drive. Plain and simple.
      * 
-     * This pairs well with a mouse-supported ChassisInputHandler.
+     * This pairs well with a mouse-supported DjiHolonomicInputHandler.
      * 
      * If you face forward, a forward input on the remote will make the robot move
      * forward. Every translation input is rotated to be relative to the turret head.
@@ -29,7 +29,7 @@ namespace fang::chassis
         (
             HolonomicSubsystem& holonomicSubsystem,
             const turret::FieldGimbalSubsystem& gimbal,
-            ChassisInputHandler& inputHandler,
+            DjiHolonomicInputHandler& inputHandler,
             const Config& config
         );
 

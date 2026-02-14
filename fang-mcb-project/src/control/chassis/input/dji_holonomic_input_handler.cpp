@@ -5,14 +5,14 @@
 
 namespace fang::chassis 
 {
-    ChassisInputHandler::ChassisInputHandler(Remote& remote, const Config& config)
+    DjiHolonomicInputHandler::DjiHolonomicInputHandler(Remote& remote, const Config& config)
     :   m_remote{remote},
         mk_remoteConfig{config.remoteConfig},
         mk_keyboardConfig{config.keyboardConfig}
     {
     }
 
-    math::AbstractVector2D ChassisInputHandler::getTranslation() const
+    math::AbstractVector2D DjiHolonomicInputHandler::getTranslation() const
     {
         const math::AbstractVector2D translationSum{getKeyboardTranslation() + getRemoteTranslation()};
         const double xClamped{tap::algorithms::limitVal<double>(translationSum.x, mk_abstractMin, mk_abstractMax)};
@@ -20,12 +20,12 @@ namespace fang::chassis
         return math::AbstractVector2D{xClamped, yClamped};
     }
 
-    double ChassisInputHandler::getRotation() const
+    double DjiHolonomicInputHandler::getRotation() const
     {
         return tap::algorithms::limitVal<double>(getRemoteRotation(), mk_abstractMin, mk_abstractMax);
     }
 
-    math::AbstractVector2D ChassisInputHandler::getKeyboardTranslation() const
+    math::AbstractVector2D DjiHolonomicInputHandler::getKeyboardTranslation() const
     {
         if (m_remote.keyPressed(mk_keyboardConfig.forwardKey))
         {
@@ -49,7 +49,7 @@ namespace fang::chassis
         }
     }
 
-    math::AbstractVector2D ChassisInputHandler::getRemoteTranslation() const
+    math::AbstractVector2D DjiHolonomicInputHandler::getRemoteTranslation() const
     {
         const double xTranslationScale{m_remote.getChannel(mk_remoteConfig.xTranslationChannel)};
         const double yTranslationScale{m_remote.getChannel(mk_remoteConfig.yTranslationChannel)};
@@ -57,7 +57,7 @@ namespace fang::chassis
         return math::AbstractVector2D{xTranslationScale, yTranslationScale};
     }
 
-    double ChassisInputHandler::getRemoteRotation() const
+    double DjiHolonomicInputHandler::getRemoteRotation() const
     {
         // Thumb wheel is positive on counterclockwise
         const double rotationScale{m_remote.getChannel(mk_remoteConfig.rotationChannel)};

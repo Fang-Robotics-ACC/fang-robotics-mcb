@@ -30,7 +30,7 @@ namespace fang::command
     public:
         struct InputConfig
         {
-            chassis::ChassisInputHandler::Config chassisInputConfig;
+            chassis::DjiHolonomicInputHandler::Config chassisInputConfig;
             turret::TurretInputHandler::Config turretInputConfig;
         };
 
@@ -100,7 +100,7 @@ namespace fang::command
         const RemoteMapping& kRemoteMapping_;
         const ComputerMapping& kComputerMapping_;
 
-        chassis::ChassisInputHandler chassisInput_;
+        chassis::DjiHolonomicInputHandler chassisInput_;
         turret::TurretInputHandler turretInput_;
 
         turret::AimCommand aim_{gimbal_, turretInput_, kCommandConfig_.aimConfig};
