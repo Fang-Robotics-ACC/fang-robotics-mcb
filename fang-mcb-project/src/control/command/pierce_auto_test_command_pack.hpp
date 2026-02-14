@@ -5,7 +5,7 @@
 // Input
 #include "control/turret/proxy_turret_input.hpp"
 #include "control/turret/turret_input_handler.hpp"
-#include "control/chassis/chassis_input_handler.hpp"
+#include "control/chassis/input/dji_holonomic_input_handler.hpp"
 
 // Chassis Commands
 #include "control/chassis/drive/holonomic/command/counter_strike_command.hpp"

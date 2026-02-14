@@ -2,7 +2,7 @@
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_COUNTER_STRIKE_COMMAND_HPP
 #include "field_drift_command.hpp"
 
-#include "control/chassis/chassis_input_handler.hpp"
+#include "control/chassis/input/dji_holonomic_input_handler.hpp"
 #include "control/turret/gimbal/field_gimbal_subsystem.hpp"
 
 #include "tap/control/command.hpp"

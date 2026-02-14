@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_PIERCE_CHASSIS_INPUT_CONFIG_HPP
 #define FANG_ROBOTICS_MCB_PIERCE_CHASSIS_INPUT_CONFIG_HPP
-#include "control/chassis/chassis_input_handler.hpp"
+#include "control/chassis/input/dji_holonomic_input_handler.hpp"
 namespace fang::robot
 {
 
