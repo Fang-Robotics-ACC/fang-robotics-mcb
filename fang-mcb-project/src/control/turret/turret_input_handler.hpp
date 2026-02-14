@@ -1,12 +1,12 @@
 #ifndef FANG_ROBOTICS_MCB_TURRET_INPUT_HANDLER_HPP
 #define FANG_ROBOTICS_MCB_TURRET_INPUT_HANDLER_HPP
 
-#include "wrap/rail/turret/iturret_input_handler.hpp"
+#include "wrap/rail/turret/igimbal_input_handler.hpp"
 
 #include "tap/communication/serial/remote.hpp"
 namespace fang::turret
 {
-    class TurretInputHandler : public ITurretInputHandler
+    class TurretInputHandler : public IGimbalInputHandler
     {
     public:
         using Remote = tap::communication::serial::Remote;

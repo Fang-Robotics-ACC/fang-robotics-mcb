@@ -1,6 +1,6 @@
 #pragma once
 
-#include "wrap/rail/turret/iturret_input_handler.hpp"
+#include "wrap/rail/turret/igimbal_input_handler.hpp"
 
 namespace fang::turret
 {
@@ -10,7 +10,7 @@ namespace fang::turret
      * For example: TurretMessageHandler -> sets pitch
      * AimCommand <-- gets pitch from ProxyTurretInput
      */
-    class ProxyTurretInput : public ITurretInputHandler 
+    class ProxyTurretInput : public IGimbalInputHandler 
     {
     public:
         /**

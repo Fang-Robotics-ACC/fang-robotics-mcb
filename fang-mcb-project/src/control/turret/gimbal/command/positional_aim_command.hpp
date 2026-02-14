@@ -3,7 +3,7 @@
 #include "control/turret/gimbal/field_gimbal_subsystem.hpp"
 #include "util/math/arithmetic/range.hpp"
 
-#include "wrap/rail/turret/iturret_input_handler.hpp"
+#include "wrap/rail/turret/igimbal_input_handler.hpp"
 
 #include "tap/control/command.hpp"
 
@@ -22,7 +22,7 @@ namespace fang::turret
             Radians yawScale;
             math::Range<Radians> pitchRange;
         };
-        PositionalAimCommand(FieldGimbalSubsystem& gimbal, ITurretInputHandler& input, const Config& config);
+        PositionalAimCommand(FieldGimbalSubsystem& gimbal, IGimbalInputHandler& input, const Config& config);
 
         const char* getName() const override {return "Aim Command";}
         void initialize() override;
@@ -34,7 +34,7 @@ namespace fang::turret
         void setPitch(const Microseconds& delta);
         void setYaw(const Microseconds& delta);
         FieldGimbalSubsystem& gimbal_;
-        ITurretInputHandler& input_;
+        IGimbalInputHandler& input_;
 
         const Radians kPitchScale_;
         const Radians kYawScale_;

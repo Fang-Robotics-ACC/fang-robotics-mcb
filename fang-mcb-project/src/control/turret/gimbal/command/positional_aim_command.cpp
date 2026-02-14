@@ -5,7 +5,7 @@
 namespace fang::turret
 {
     using namespace units::literals;
-    PositionalAimCommand::PositionalAimCommand(FieldGimbalSubsystem& gimbal, ITurretInputHandler& input, const Config& config)
+    PositionalAimCommand::PositionalAimCommand(FieldGimbalSubsystem& gimbal, IGimbalInputHandler& input, const Config& config)
     :   gimbal_{gimbal},
         input_{input},
         kPitchScale_{config.pitchScale},
