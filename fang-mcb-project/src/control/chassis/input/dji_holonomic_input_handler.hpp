@@ -2,14 +2,14 @@
 #define FANG_ROBOTICS_MCB_CHASSIS_INPUT_HANDLER_HPP
 #include "util/math/linear/vector_alias.hpp"
 #include "wrap/units/units_alias.hpp"
-#include "wrap/rail/chassis/ichassis_input_handler.hpp"
+#include "wrap/rail/chassis/iholonomic_input_handler.hpp"
 
 #include "tap/communication/serial/remote.hpp"
 
 namespace fang::chassis 
 {
     using Remote = tap::communication::serial::Remote;
-    class DjiHolonomicInputHandler : public IChassisInputHandler
+    class DjiHolonomicInputHandler : public IHolonomicInputHandler
     {
     public:
         struct RemoteConfig
