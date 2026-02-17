@@ -3,7 +3,7 @@
 #include "command_pack.hpp"
 
 // Input
-#include "control/turret/turret_input_handler.hpp"
+#include "control/turret/input/dji_gimbal_input.hpp"
 #include "control/chassis/input/dji_holonomic_input.hpp"
 
 // Chassis Commands
@@ -31,7 +31,7 @@ namespace fang::command
         struct InputConfig
         {
             chassis::DjiHolonomicInput::Config chassisInputConfig;
-            turret::TurretInputHandler::Config turretInputConfig;
+            turret::DjiGimbalInput::Config turretInputConfig;
         };
 
         struct CommandConfig
@@ -101,7 +101,7 @@ namespace fang::command
         const ComputerMapping& kComputerMapping_;
 
         chassis::DjiHolonomicInput chassisInput_;
-        turret::TurretInputHandler turretInput_;
+        turret::DjiGimbalInput turretInput_;
 
         turret::AimCommand aim_{gimbal_, turretInput_, kCommandConfig_.aimConfig};
         turret::ActivateBoosterCommand activateBooster_{booster_};
