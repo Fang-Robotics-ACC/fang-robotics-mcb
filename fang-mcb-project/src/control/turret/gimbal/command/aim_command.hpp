@@ -4,7 +4,7 @@
 #include "util/math/arithmetic/range.hpp"
 #include "util/chrono/simple_timer.hpp"
 
-#include "wrap/rail/turret/igimbal_input_handler.hpp"
+#include "wrap/rail/turret/igimbal_input.hpp"
 
 #include "tap/control/command.hpp"
 
@@ -19,7 +19,7 @@ namespace fang::turret
             RPM maxYawSpeed;
             math::Range<Radians> pitchRange;
         };
-        AimCommand(FieldGimbalSubsystem& gimbal, IGimbalInputHandler& input, const Config& config);
+        AimCommand(FieldGimbalSubsystem& gimbal, IGimbalInput& input, const Config& config);
 
         const char* getName() const override {return "Aim Command";}
         void initialize() override;
@@ -31,7 +31,7 @@ namespace fang::turret
         void setPitch(const Microseconds& delta);
         void setYaw(const Microseconds& delta);
         FieldGimbalSubsystem& gimbal_;
-        IGimbalInputHandler& input_;
+        IGimbalInput& input_;
 
         const RPM kMaxPitchSpeed_;
         const RPM kMaxYawSpeed_;
