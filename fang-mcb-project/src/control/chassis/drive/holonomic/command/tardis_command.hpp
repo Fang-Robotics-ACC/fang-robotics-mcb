@@ -42,7 +42,7 @@ namespace fang::chassis
         (
             HolonomicSubsystem& chassisSubsystem,
             const turret::FieldGimbalSubsystem& turret,
-            DjiHolonomicInputHandler& input,
+            DjiHolonomicInput& input,
             const Config& config
         );
         const char* getName() const override;

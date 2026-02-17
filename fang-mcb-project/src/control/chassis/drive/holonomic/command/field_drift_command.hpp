@@ -1,6 +1,6 @@
 #ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_FIELD_DRIFT_COMMAND_HPP
 #define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_FIELD_DRIFT_COMMAND_HPP
-#include "control/chassis/input/dji_holonomic_input_handler.hpp"
+#include "control/chassis/input/dji_holonomic_input.hpp"
 #include "control/chassis/drive/holonomic/holonomic_subsystem.hpp"
 
 #include "tap/control/command.hpp"
@@ -35,7 +35,7 @@ namespace fang::chassis
         FieldDriftCommand
         (
             HolonomicSubsystem& holonomicSubsystem,
-            DjiHolonomicInputHandler& inputHandler,
+            DjiHolonomicInput& inputHandler,
             const Config& config
         );
 
@@ -62,7 +62,7 @@ namespace fang::chassis
         static constexpr const char* kName{"Field Drift"};
 
         HolonomicSubsystem& holonomicSubsystem_;
-        DjiHolonomicInputHandler& chassisInput_;
+        DjiHolonomicInput& chassisInput_;
         const Config kConfig_;
 
     private:

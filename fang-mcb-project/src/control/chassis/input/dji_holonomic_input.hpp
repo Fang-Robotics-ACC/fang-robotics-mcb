@@ -9,7 +9,7 @@
 namespace fang::chassis 
 {
     using Remote = tap::communication::serial::Remote;
-    class DjiHolonomicInputHandler : public IHolonomicInput
+    class DjiHolonomicInput : public IHolonomicInput
     {
     public:
         struct RemoteConfig
@@ -33,7 +33,7 @@ namespace fang::chassis
             KeyboardConfig keyboardConfig;
         };
 
-        DjiHolonomicInputHandler(Remote& remote, const Config& config);
+        DjiHolonomicInput(Remote& remote, const Config& config);
 
         /**
          * Returns a clamped sum of the keyboard and mouse inputs

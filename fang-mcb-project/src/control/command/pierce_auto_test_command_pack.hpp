@@ -5,7 +5,7 @@
 // Input
 #include "control/turret/proxy_turret_input.hpp"
 #include "control/turret/turret_input_handler.hpp"
-#include "control/chassis/input/dji_holonomic_input_handler.hpp"
+#include "control/chassis/input/dji_holonomic_input.hpp"
 
 // Chassis Commands
 #include "control/chassis/drive/holonomic/command/counter_strike_command.hpp"
@@ -31,7 +31,7 @@ namespace fang::command
     public:
         struct InputConfig
         {
-            chassis::DjiHolonomicInputHandler::Config chassisInputConfig;
+            chassis::DjiHolonomicInput::Config chassisInputConfig;
             turret::TurretInputHandler::Config turretInputConfig;
         };
 
@@ -102,7 +102,7 @@ namespace fang::command
         const RemoteMapping& kRemoteMapping_;
         const ComputerMapping& kComputerMapping_;
 
-        chassis::DjiHolonomicInputHandler chassisInput_;
+        chassis::DjiHolonomicInput chassisInput_;
         turret::ProxyTurretInput& turretInput_;
 
         turret::PositionalAimCommand aim_{gimbal_, turretInput_, kCommandConfig_.aimConfig};
