@@ -3,10 +3,10 @@
 #include "driver/drivers.hpp"
 //Subsystems
 #include "custom_variant/subsystem/pierce_mecanum_drive.hpp"
-
 #include "custom_variant/subsystem/pierce_field_gimbal.hpp"
-#include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
 #include "custom_variant/subsystem/pierce_ammo_booster.hpp"
+
+#include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
 
 #include "control/command/pierce_command_pack.hpp"
 
@@ -40,6 +40,7 @@ namespace fang::robot
 
         Pierce(Drivers& drivers, const Config& config): remote_{&drivers}, BaseRobot{makeRobot(drivers, config)}
         {}
+
     private:
         tap::communication::serial::Remote remote_;
 
