@@ -12,6 +12,8 @@
 
 #include "robot/base_robot.hpp"
 
+#include "tap/communication/serial/remote.hpp"
+
 namespace fang::robot
 {
     /**
@@ -36,9 +38,11 @@ namespace fang::robot
             command::PierceCommandPack::Config commandPackConfig;
         };
 
-        Pierce(Drivers& drivers, const Config& config): BaseRobot{makeRobot(drivers, config)}
+        Pierce(Drivers& drivers, const Config& config): remote_{&drivers}, BaseRobot{makeRobot(drivers, config)}
         {}
     private:
+        tap::communication::serial::Remote remote_;
+
         static BaseRobot makeRobot(Drivers& drivers, const Config& config)
         {
             auto gimbal{std::make_unique<turret::PierceFieldGimbal>(drivers, config.subsystemConfig.gimbalConfig)};
