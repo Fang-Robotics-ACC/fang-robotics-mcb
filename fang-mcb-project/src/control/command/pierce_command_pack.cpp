@@ -1,5 +1,3 @@
-#pragma once
-
 #include "pierce_command_pack.hpp"
 
 namespace fang::command

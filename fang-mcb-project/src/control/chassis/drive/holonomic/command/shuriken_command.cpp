@@ -12,7 +12,7 @@ namespace fang::chassis
     (
         HolonomicSubsystem& holonomicSubsystem,
         const turret::FieldGimbalSubsystem& gimbal,
-        DjiHolonomicInput& input,
+        IHolonomicInput& input,
         const Config& config
     ):
         //MAYBE: Move FPS motion logic to separate class

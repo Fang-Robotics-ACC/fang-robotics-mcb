@@ -2,8 +2,8 @@
 
 #include "field_drift_command.hpp"
 
-#include "control/chassis/input/dji_holonomic_input.hpp"
 #include "control/turret/gimbal/field_gimbal_subsystem.hpp"
+#include "wrap/rail/chassis/iholonomic_input.hpp"
 
 #include "tap/control/command.hpp"
 
@@ -29,7 +29,7 @@ namespace fang::chassis
         (
             HolonomicSubsystem& holonomicSubsystem,
             const turret::FieldGimbalSubsystem& gimbal,
-            DjiHolonomicInput& inputHandler,
+            IHolonomicInput& holonomicInput,
             const Config& config
         );
 

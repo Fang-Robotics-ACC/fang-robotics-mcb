@@ -32,7 +32,7 @@ namespace fang::chassis
         (
             HolonomicSubsystem& chassisSubsystem,
             const turret::FieldGimbalSubsystem& gimbal,
-            DjiHolonomicInput& input,
+            IHolonomicInput& holonomicInput,
             const Config& config
         );
         virtual ~ShurikenCommand() = default;
