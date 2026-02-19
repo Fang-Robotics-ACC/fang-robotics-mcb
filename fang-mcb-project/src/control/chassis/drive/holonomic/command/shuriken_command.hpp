@@ -1,5 +1,5 @@
-#ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_SHURIKEN_COMMAND_HPP
-#define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_SHURIKEN_COMMAND_HPP
+#pragma once
+
 #include "counter_strike_command.hpp"
 #include "control/chassis/algorithms/basic_downscaler.hpp"
 
@@ -55,4 +55,3 @@ namespace fang::chassis
         const BasicDownscaler kDownscaler_;
     };
 }
-#endif

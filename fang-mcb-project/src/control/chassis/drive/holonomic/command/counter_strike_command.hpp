@@ -1,5 +1,5 @@
-#ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_COUNTER_STRIKE_COMMAND_HPP
-#define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_COUNTER_STRIKE_COMMAND_HPP
+#pragma once
+
 #include "field_drift_command.hpp"
 
 #include "control/chassis/input/dji_holonomic_input.hpp"
@@ -58,4 +58,3 @@ namespace fang::chassis
         const Config kConfig_;
     };
 }//namespace chassis
-#endif

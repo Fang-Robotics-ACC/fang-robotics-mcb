@@ -1,5 +1,4 @@
-#ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_TARDIS_COMMAND_HPP
-#define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_TARDIS_COMMAND_HPP
+#pragma once
 
 #include "shuriken_command.hpp"
 
@@ -57,4 +56,3 @@ namespace fang::chassis
         chrono::SimpleTimer kShredderTimer{}; //To provide an input for the Raziel-Kalman Shredder
     };
 }
-#endif

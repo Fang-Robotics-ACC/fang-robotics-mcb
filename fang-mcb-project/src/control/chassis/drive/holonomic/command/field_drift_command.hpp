@@ -1,5 +1,4 @@
-#ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_FIELD_DRIFT_COMMAND_HPP
-#define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_FIELD_DRIFT_COMMAND_HPP
+#pragma once
 #include "control/chassis/input/dji_holonomic_input.hpp"
 #include "control/chassis/drive/holonomic/holonomic_subsystem.hpp"
 
@@ -74,4 +73,3 @@ namespace fang::chassis
         );
     };
 }//namespace chassis
-#endif
