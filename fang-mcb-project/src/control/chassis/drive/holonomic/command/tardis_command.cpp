@@ -11,14 +11,14 @@ namespace fang::chassis
     (
         HolonomicSubsystem& chassisSubsystem,
         const turret::FieldGimbalSubsystem& turret,
-        ChassisInputHandler& input,
+        IHolonomicInput& holonomicInput,
         const Config& config
     ):
         ShurikenCommand
         {
             chassisSubsystem,
             turret,
-            input,
+            holonomicInput,
             ShurikenCommand::Config
             {
                 .maxTranslation = config.maxTranslation,

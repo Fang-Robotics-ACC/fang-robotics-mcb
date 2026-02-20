@@ -31,10 +31,10 @@ static const Pierce::SubsystemConfig kPierceSubsystemConfig
     .boosterConfig  = kAmmoBoosterConfig
 };
 
-static const command::PierceCommandPack::InputConfig kPierceInputConfig 
+static const Pierce::InputConfig kPierceInputConfig 
 {
-    .chassisInputConfig = kChassisInputConfig,
-    .turretInputConfig  = kTurretInputConfig
+    .holonomic = kChassisInputConfig,
+    .gimbal = kTurretInputConfig
 };
 
 static const command::PierceCommandPack::CommandConfig kPierceCommandConfig
@@ -72,7 +72,6 @@ static const command::PierceCommandPack::MappingConfig kPierceMappingConfig
 
 static const command::PierceCommandPack::Config kPierceCommandPackConfig
 {
-    .inputConfig   = kPierceInputConfig,
     .mappingConfig = kPierceMappingConfig,
     .commandConfig = kPierceCommandConfig
 };
@@ -80,6 +79,7 @@ static const command::PierceCommandPack::Config kPierceCommandPackConfig
 static const Pierce::Config kPierceConfig
 {
     .subsystemConfig   = kPierceSubsystemConfig,
+    .input = kPierceInputConfig,
     .commandPackConfig = kPierceCommandPackConfig
 };
 }

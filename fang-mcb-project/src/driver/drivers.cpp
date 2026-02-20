@@ -13,7 +13,7 @@ namespace fang
         leds.init();
         can.initialize();
         errorController.init();
-        remote.initialize();
+        // remote.initialize();
         bmi088.initialize(kMainLoopFrequency, 0.1, 0);
         refSerial.initialize();
         coolSerialUart.initialize();
@@ -32,7 +32,7 @@ namespace fang
     {
         canRxHandler.pollCanData();
         refSerial.updateSerial();
-        remote.read();
+        // remote.read();
         bmi088.read();
     }
 

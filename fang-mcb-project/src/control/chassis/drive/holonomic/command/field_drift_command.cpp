@@ -13,11 +13,11 @@ namespace fang::chassis
     FieldDriftCommand::FieldDriftCommand
     (
         HolonomicSubsystem& chassisSubsystem,
-        ChassisInputHandler& inputHandler,
+        IHolonomicInput& holonomicInput,
         const Config& config
     ):   
         holonomicSubsystem_{chassisSubsystem},
-        chassisInput_{inputHandler},
+        holonomicInput_{holonomicInput},
         kConfig_{config}
     {
         assertConfigValues(config);
@@ -52,7 +52,7 @@ namespace fang::chassis
     physics::Velocity2D FieldDriftCommand::getFieldTranslation() const
     {
         //The convert from turretwise translation to fieldwise
-        const math::AbstractVector2D abstractFieldTranslation{chassisInput_.getTranslation()};
+        const math::AbstractVector2D abstractFieldTranslation{holonomicInput_.getTranslation()};
         //It must be converted to a tangible value via scaling
         const physics::Velocity2D fieldTranslation
         {
@@ -102,7 +102,7 @@ namespace fang::chassis
     RPM FieldDriftCommand::getFieldRotation() const
     {
         //Convert the abstract rotation value into a tangible unit
-        const double abstractRotation{chassisInput_.getRotation()};
+        const double abstractRotation{holonomicInput_.getRotation()};
         const RPM rotation{abstractRotation * kConfig_.maxRotation};
 
         const bool sameSignCheck{std::signbit(abstractRotation) == std::signbit(static_cast<double>(abstractRotation))};

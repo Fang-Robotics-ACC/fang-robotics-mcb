@@ -1,5 +1,5 @@
 #include "driver/drivers.hpp"
-#include "control/chassis/chassis_input_handler.hpp"
+#include "control/chassis/input/dji_holonomic_input.hpp"
 
 #include "wrap/units/units_alias.hpp"
 #include "tap/mock/remote_mock.hpp"
@@ -18,20 +18,20 @@ using Remote = tap::communication::serial::Remote;
 using Channel = Remote::Channel;
 using Key = Remote::Key;
 
-static const fang::chassis::ChassisInputHandler::RemoteConfig k_chassisInputRemoteConfig
+static const fang::chassis::DjiHolonomicInput::RemoteConfig k_chassisInputRemoteConfig
 {
     Channel::LEFT_HORIZONTAL,   //xTranslation
     Channel::LEFT_VERTICAL,     //yTranslation
     Channel::WHEEL              //rotation
 };
-static const fang::chassis::ChassisInputHandler::KeyboardConfig k_chassisInputKeyboardConfig
+static const fang::chassis::DjiHolonomicInput::KeyboardConfig k_chassisInputKeyboardConfig
 {
     Key::W, //forward
     Key::S, //backward
     Key::A, //left
     Key::D  //right
 };
-static const fang::chassis::ChassisInputHandler::Config k_chassisInputConfig
+static const fang::chassis::DjiHolonomicInput::Config k_chassisInputConfig
 {
     k_chassisInputRemoteConfig,
     k_chassisInputKeyboardConfig
@@ -52,7 +52,7 @@ protected:
     Drivers m_drivers{};
     tap::mock::RemoteMock& m_remote{m_drivers.remote};
 
-    fang::chassis::ChassisInputHandler m_chassisInputHandler{m_remote, k_chassisInputConfig};
+    fang::chassis::DjiHolonomicInput m_chassisInputHandler{m_remote, k_chassisInputConfig};
     
 };
 

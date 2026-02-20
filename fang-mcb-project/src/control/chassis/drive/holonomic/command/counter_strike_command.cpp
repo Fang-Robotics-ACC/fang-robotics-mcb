@@ -13,10 +13,10 @@ namespace fang::chassis
     (
         HolonomicSubsystem& holonomicSubsystem,
         const turret::FieldGimbalSubsystem& turret,
-        ChassisInputHandler& inputHandler,
+        IHolonomicInput& holonomicInput,
         const Config& config
     ):   
-        FieldDriftCommand{holonomicSubsystem, inputHandler, config},
+        FieldDriftCommand{holonomicSubsystem, holonomicInput, config},
         gimbal_{turret},
         kConfig_{config}
     {
@@ -47,7 +47,7 @@ namespace fang::chassis
     RPM CounterStrikeCommand::getFieldRotation() const
     {
         //Convert the abstract rotation value into a tangible unit
-        const double abstractRotation{chassisInput_.getRotation()};
+        const double abstractRotation{holonomicInput_.getRotation()};
         const RPM rotation{abstractRotation * kConfig_.maxRotation};
 
         const bool sameSignCheck{std::signbit(abstractRotation) == std::signbit(static_cast<double>(rotation))};

@@ -3,14 +3,16 @@
 #include "driver/drivers.hpp"
 //Subsystems
 #include "custom_variant/subsystem/pierce_mecanum_drive.hpp"
-
 #include "custom_variant/subsystem/pierce_field_gimbal.hpp"
-#include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
 #include "custom_variant/subsystem/pierce_ammo_booster.hpp"
+
+#include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
 
 #include "control/command/pierce_command_pack.hpp"
 
 #include "robot/base_robot.hpp"
+
+#include "tap/communication/serial/remote.hpp"
 
 namespace fang::robot
 {
@@ -22,6 +24,13 @@ namespace fang::robot
     {
     public:
         using RemoteState = tap::control::RemoteMapState;
+
+        struct InputConfig
+        {
+            chassis::DjiHolonomicInput::Config holonomic;
+            turret::DjiGimbalInput::Config gimbal;
+        };
+
         struct SubsystemConfig
         {
             chassis::PierceMecanumDrive::Config chassisConfig;
@@ -33,13 +42,22 @@ namespace fang::robot
         struct Config
         {
             SubsystemConfig subsystemConfig;
+            InputConfig input;
             command::PierceCommandPack::Config commandPackConfig;
         };
 
-        Pierce(Drivers& drivers, const Config& config): BaseRobot{makeRobot(drivers, config)}
+        Pierce(Drivers& drivers, const Config& config)
+            :
+            holonomicInput_{drivers.remote, config.input.holonomic},
+            gimbalInput_{drivers.remote, config.input.gimbal},
+            BaseRobot{makeRobot(drivers, holonomicInput_, gimbalInput_, config)}
         {}
+
     private:
-        static BaseRobot makeRobot(Drivers& drivers, const Config& config)
+        chassis::DjiHolonomicInput holonomicInput_;
+        turret::DjiGimbalInput gimbalInput_; 
+
+        static BaseRobot makeRobot(Drivers& drivers, chassis::DjiHolonomicInput& holonomicInput, turret::DjiGimbalInput& gimbalInput, const Config& config)
         {
             auto gimbal{std::make_unique<turret::PierceFieldGimbal>(drivers, config.subsystemConfig.gimbalConfig)};
             auto feeder{std::make_unique<turret::M2006SimpleFeeder>(drivers, config.subsystemConfig.feederConfig)};
@@ -54,6 +72,8 @@ namespace fang::robot
                     *feeder,
                     *gimbal,
                     *mecanumDrive,
+                    gimbalInput,
+                    holonomicInput,
                     config.commandPackConfig
                 )
             };

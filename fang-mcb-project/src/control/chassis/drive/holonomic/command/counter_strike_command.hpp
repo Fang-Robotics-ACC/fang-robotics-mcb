@@ -1,9 +1,9 @@
-#ifndef FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_COUNTER_STRIKE_COMMAND_HPP
-#define FANG_ROBOTICS_MCB_CONTROL_CHASSIS_HOLONOMIC_COMMAND_COUNTER_STRIKE_COMMAND_HPP
+#pragma once
+
 #include "field_drift_command.hpp"
 
-#include "control/chassis/chassis_input_handler.hpp"
 #include "control/turret/gimbal/field_gimbal_subsystem.hpp"
+#include "wrap/rail/chassis/iholonomic_input.hpp"
 
 #include "tap/control/command.hpp"
 
@@ -12,7 +12,7 @@ namespace fang::chassis
     /**
      * First person shooter motion for holonomic drive. Plain and simple.
      * 
-     * This pairs well with a mouse-supported ChassisInputHandler.
+     * This pairs well with a mouse-supported DjiHolonomicInput.
      * 
      * If you face forward, a forward input on the remote will make the robot move
      * forward. Every translation input is rotated to be relative to the turret head.
@@ -29,7 +29,7 @@ namespace fang::chassis
         (
             HolonomicSubsystem& holonomicSubsystem,
             const turret::FieldGimbalSubsystem& gimbal,
-            ChassisInputHandler& inputHandler,
+            IHolonomicInput& holonomicInput,
             const Config& config
         );
 
@@ -58,4 +58,3 @@ namespace fang::chassis
         const Config kConfig_;
     };
 }//namespace chassis
-#endif

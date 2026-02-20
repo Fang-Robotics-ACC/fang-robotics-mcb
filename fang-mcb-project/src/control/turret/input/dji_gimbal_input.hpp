@@ -1,12 +1,11 @@
-#ifndef FANG_ROBOTICS_MCB_TURRET_INPUT_HANDLER_HPP
-#define FANG_ROBOTICS_MCB_TURRET_INPUT_HANDLER_HPP
+#pragma once
 
-#include "wrap/rail/turret/iturret_input_handler.hpp"
+#include "wrap/rail/turret/igimbal_input.hpp"
 
 #include "tap/communication/serial/remote.hpp"
 namespace fang::turret
 {
-    class TurretInputHandler : public ITurretInputHandler
+    class DjiGimbalInput : public IGimbalInput
     {
     public:
         using Remote = tap::communication::serial::Remote;
@@ -29,7 +28,7 @@ namespace fang::turret
             MouseConfig mouseConfig;
         };
 
-        TurretInputHandler(Remote& remote, const Config& config);
+        DjiGimbalInput(Remote& remote, const Config& config);
 
         double getPitch() const override;
         /**
@@ -54,4 +53,3 @@ namespace fang::turret
         const MouseConfig mk_mouseConfig;
     };
 }
-#endif
