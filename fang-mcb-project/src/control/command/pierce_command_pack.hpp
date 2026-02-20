@@ -95,10 +95,10 @@ namespace fang::command
         const RemoteMapping& kRemoteMapping_;
         const ComputerMapping& kComputerMapping_;
 
-        chassis::IHolonomicInput& chassisInput_;
-        turret::IGimbalInput& turretInput_;
+        chassis::IHolonomicInput& holonomicInput_;
+        turret::IGimbalInput& gimbalInput_;
 
-        turret::AimCommand aim_{gimbal_, turretInput_, kCommandConfig_.aimConfig};
+        turret::AimCommand aim_{gimbal_, gimbalInput_, kCommandConfig_.aimConfig};
         turret::ActivateBoosterCommand activateBooster_{booster_};
         fang::turret::FireCommand autofire_{feeder_};
         fang::turret::UnjamCommand unjam_{feeder_};
@@ -110,9 +110,9 @@ namespace fang::command
         tap::control::HoldCommandMapping unjamMouse_{&drivers_, {&unjam_}, kComputerMapping_.mouseUnjam};
         tap::control::HoldCommandMapping unjamRemote_{&drivers_, {&unjam_}, kRemoteMapping_.unjam};
 
-        chassis::CounterStrikeCommand counterStrike_{chassis_, gimbal_, chassisInput_, kCommandConfig_.counterStrikeConfig};
-        chassis::ShurikenCommand shuriken_{chassis_, gimbal_, chassisInput_, kCommandConfig_.shurikenConfig};
-        chassis::TardisCommand tardis_{chassis_, gimbal_, chassisInput_, kCommandConfig_.tardisConfig};
+        chassis::CounterStrikeCommand counterStrike_{chassis_, gimbal_, holonomicInput_, kCommandConfig_.counterStrikeConfig};
+        chassis::ShurikenCommand shuriken_{chassis_, gimbal_, holonomicInput_, kCommandConfig_.shurikenConfig};
+        chassis::TardisCommand tardis_{chassis_, gimbal_, holonomicInput_, kCommandConfig_.tardisConfig};
 
         tap::control::PressCommandMapping counterStrikeRemote_{&drivers_, {&counterStrike_}, kRemoteMapping_.counterStrike};
         tap::control::PressCommandMapping shurikenRemote_{&drivers_, {&shuriken_}, kRemoteMapping_.shuriken};

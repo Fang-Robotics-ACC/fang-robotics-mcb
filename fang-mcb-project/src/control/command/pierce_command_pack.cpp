@@ -23,8 +23,8 @@ namespace fang::command
             feeder_{feeder},
             gimbal_{gimbal},
             chassis_{chassis},
-            chassisInput_{holonomicInput},
-            turretInput_{gimbalInput}
+            holonomicInput_{holonomicInput},
+            gimbalInput_{gimbalInput}
         {}
 
     void PierceCommandPack::initialize()
