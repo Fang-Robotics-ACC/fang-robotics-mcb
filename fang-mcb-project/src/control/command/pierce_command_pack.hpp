@@ -28,12 +28,6 @@ namespace fang::command
     class PierceCommandPack : public CommandPack
     {
     public:
-        struct InputConfig
-        {
-            chassis::DjiHolonomicInput::Config chassisInputConfig;
-            turret::DjiGimbalInput::Config turretInputConfig;
-        };
-
         struct CommandConfig
         {
             turret::AimCommand::Config aimConfig;
@@ -69,7 +63,6 @@ namespace fang::command
 
         struct Config
         {
-            InputConfig inputConfig;
             MappingConfig mappingConfig;
             CommandConfig commandConfig;
         };
@@ -81,6 +74,8 @@ namespace fang::command
             turret::SimpleFeederSubsystem& feeder,
             turret::FieldGimbalSubsystem& gimbal,
             chassis::HolonomicSubsystem& chassis,
+            turret::IGimbalInput& gimbalInput,
+            chassis::IHolonomicInput& holonomicInput,
             const Config& config
         );
 
@@ -100,8 +95,8 @@ namespace fang::command
         const RemoteMapping& kRemoteMapping_;
         const ComputerMapping& kComputerMapping_;
 
-        chassis::DjiHolonomicInput chassisInput_;
-        turret::DjiGimbalInput turretInput_;
+        chassis::IHolonomicInput& chassisInput_;
+        turret::IGimbalInput& turretInput_;
 
         turret::AimCommand aim_{gimbal_, turretInput_, kCommandConfig_.aimConfig};
         turret::ActivateBoosterCommand activateBooster_{booster_};
