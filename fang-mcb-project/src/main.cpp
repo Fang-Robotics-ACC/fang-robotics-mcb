@@ -99,6 +99,7 @@ int main()
 
         if (mainLoopTimer.execute())
         {
+            robot.update();
             drivers.motorTimeoutUpdate();
         }
 
