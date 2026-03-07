@@ -48,12 +48,25 @@ namespace fang::robot
 
         Pierce(Drivers& drivers, const Config& config)
             :
+            remote_{drivers.remote},
             holonomicInput_{drivers.remote, config.input.holonomic},
             gimbalInput_{drivers.remote, config.input.gimbal},
             BaseRobot{makeRobot(drivers, holonomicInput_, gimbalInput_, config)}
         {}
 
+        void initialize() override
+        {
+            BaseRobot::initialize();
+            remote_.initialize();
+        }
+
+        void update() override
+        {
+            remote_.read();
+        }
+
     private:
+        tap::communication::serial::Remote& remote_;
         chassis::DjiHolonomicInput holonomicInput_;
         turret::DjiGimbalInput gimbalInput_; 
 
