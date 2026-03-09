@@ -5,6 +5,7 @@
 #include "custom_variant/subsystem/pierce_mecanum_drive.hpp"
 #include "custom_variant/subsystem/pierce_field_gimbal.hpp"
 #include "custom_variant/subsystem/pierce_ammo_booster.hpp"
+#include "cool_serial/byte_queue.hpp"
 
 #include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
 
@@ -13,6 +14,8 @@
 #include "robot/base_robot.hpp"
 
 #include "tap/communication/serial/remote.hpp"
+#include "control/turret/input/fly_sky_gimbal_input.hpp"
+#include "driver/remote/fly_sky.hpp"
 
 namespace fang::robot
 {
@@ -48,29 +51,45 @@ namespace fang::robot
 
         Pierce(Drivers& drivers, const Config& config)
             :
+            uart_{drivers.uart},
             remote_{drivers.remote},
+            flySkyByteQueue_{},
+            flyRemote_{drivers.commandMapper, flySkyByteQueue_},
             holonomicInput_{drivers.remote, config.input.holonomic},
             gimbalInput_{drivers.remote, config.input.gimbal},
-            BaseRobot{makeRobot(drivers, holonomicInput_, gimbalInput_, config)}
+            flySkyGimbalInput_{flyRemote_, {remote::FlySky::Channel::leftVertical, remote::FlySky::Channel::leftHorizontal}},
+            BaseRobot{makeRobot(drivers, holonomicInput_, flySkyGimbalInput_, config)}
         {}
 
         void initialize() override
         {
             BaseRobot::initialize();
+            uart_.init<tap::communication::serial::Uart::Uart1, 115200, tap::communication::serial::Uart::Parity::Disabled>();
             remote_.initialize();
         }
 
         void update() override
         {
+            uint8_t data{};
+            while(uart_.read(tap::communication::serial::Uart::Uart1,  &data))
+            {
+                flySkyByteQueue_.push(data);
+            }
             remote_.read();
+            flyRemote_.update();
         }
 
     private:
+        tap::communication::serial::Uart& uart_;
         tap::communication::serial::Remote& remote_;
+        coolSerial::ByteQueue flySkyByteQueue_;
+        remote::FlySky flyRemote_;
         chassis::DjiHolonomicInput holonomicInput_;
-        turret::DjiGimbalInput gimbalInput_; 
+        turret::DjiGimbalInput gimbalInput_;
+        turret::FlySkyGimbalInput flySkyGimbalInput_;
 
-        static BaseRobot makeRobot(Drivers& drivers, chassis::DjiHolonomicInput& holonomicInput, turret::DjiGimbalInput& gimbalInput, const Config& config)
+
+        static BaseRobot makeRobot(Drivers& drivers, chassis::IHolonomicInput& holonomicInput, turret::IGimbalInput& gimbalInput, const Config& config)
         {
             auto gimbal{std::make_unique<turret::PierceFieldGimbal>(drivers, config.subsystemConfig.gimbalConfig)};
             auto feeder{std::make_unique<turret::M2006SimpleFeeder>(drivers, config.subsystemConfig.feederConfig)};
