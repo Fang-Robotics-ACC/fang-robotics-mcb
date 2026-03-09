@@ -16,7 +16,7 @@ namespace fang
         // remote.initialize();
         bmi088.initialize(kMainLoopFrequency, 0.1, 0);
         refSerial.initialize();
-        coolSerialUart.initialize();
+        //coolSerialUart.initialize();
         //terminalSerial.initialize();
         schedulerTerminalHandler.init();
         djiMotorTerminalSerialHandler.init();
@@ -24,7 +24,7 @@ namespace fang
 
     void Drivers::update()
     {
-        coolSerialUart.update();
+        //coolSerialUart.update();
         PROFILE(profiler, updateIo, ());
     }
 
