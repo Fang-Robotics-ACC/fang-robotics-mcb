@@ -58,7 +58,7 @@ namespace fang::robot
             holonomicInput_{drivers.remote, config.input.holonomic},
             gimbalInput_{drivers.remote, config.input.gimbal},
             flySkyGimbalInput_{flyRemote_, {remote::FlySky::Channel::leftVertical, remote::FlySky::Channel::leftHorizontal}},
-            BaseRobot{makeRobot(drivers, holonomicInput_, flySkyGimbalInput_, config)}
+            BaseRobot{makeRobot(drivers, holonomicInput_, gimbalInput_, config)}
         {}
 
         void initialize() override
