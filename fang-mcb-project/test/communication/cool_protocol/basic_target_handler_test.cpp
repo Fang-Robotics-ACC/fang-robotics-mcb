@@ -7,15 +7,6 @@
 
 namespace fang::communication
 {
-MATCHER_P(basicTargetEq, target, "")
-{
-    return 
-    {
-        target.x == arg.x
-        && target.y == arg.y
-        && target.z == arg.z
-    };
-}
 class IBasicTargetListenerMock : public IBasicTargetListener
 {
 public:
@@ -36,7 +27,7 @@ TEST(BasicTargetHandler, deserialization)
 
     testing::NiceMock<IBasicTargetListenerMock> basicListener{};
     builder.Finish(BasicTarget::Pack(builder, &expectedTarget));
-    EXPECT_CALL(basicListener, basicTargetFound(basicTargetEq(expectedTarget)));
+    EXPECT_CALL(basicListener, basicTargetFound(expectedTarget));
 
     BasicTargetHandler handler{basicListener};
 
