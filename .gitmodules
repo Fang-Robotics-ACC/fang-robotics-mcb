@@ -19,3 +19,6 @@
 [submodule "fang-mcb-project/lib/echo"]
 	path = fang-mcb-project/lib/echo
 	url = https://github.com/Fang-Robotics-ACC/echo.git
+[submodule "fang-mcb-project/lib/flatbuffers"]
+	path = fang-mcb-project/lib/flatbuffers
+	url = https://github.com/google/flatbuffers.git
