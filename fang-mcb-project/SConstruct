@@ -73,6 +73,7 @@ env.AppendUnique(CPPPATH=[
     abspath(r"lib/units/include"),
     abspath(r"lib/RAIL-Robomaster-Abstraction-Interface-Library/include"),
     abspath(r"lib/cool-serial/include"),
+    abspath(r"lib/flatbuffers/include"),
     abspath(r"lib/echo/include")
 ])
 
