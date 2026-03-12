@@ -8,4 +8,13 @@ public:
     virtual void basicTargetFound(const BasicTargetT& basicTarget) = 0;
     ~IBasicTargetListener() = default;
 };
+
+class NullBasicTargetListener : public IBasicTargetListener
+{
+public:
+    void basicTargetFound(const BasicTargetT& basicTarget) override
+    {
+        static BasicTargetT target{basicTarget};
+    }
+};
 }
