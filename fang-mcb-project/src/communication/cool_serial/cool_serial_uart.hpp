@@ -19,33 +19,32 @@ namespace fang::communication
      * 
      * Or at least decouple the uart from taproots UartTerminalDevice
      * to allow custom ports and baudrates.
+     * 
+     * 921600 is the default baudrate for CV Chip
      */
+    template<tap::communication::serial::Uart::UartPort kPort, int kBaudrate>
     class CoolSerialUart
     {
     public:
         using DataHandlerRef = std::reference_wrapper<coolSerial::IDataHandler>;
         using HandlerMap = std::unordered_map<coolSerial::Byte, DataHandlerRef>;
 
-        CoolSerialUart(tap::Drivers& drivers, const HandlerMap& handlerMap, tap::communication::serial::Uart::UartPort port = tap::communication::serial::Uart::Uart1, int baudrate = 115200)
+        CoolSerialUart(tap::Drivers& drivers, const HandlerMap& handlerMap)
             :
             uart_{drivers.uart},
-            kUartPort_{port},
-            kBaudrate_{baudrate},
             handlerMap_{handlerMap}
         {
         }
 
-        CoolSerialUart(tap::Drivers& drivers, tap::communication::serial::Uart::UartPort port = tap::communication::serial::Uart::Uart1, int baudrate = 115200)
+        CoolSerialUart(tap::Drivers& drivers)
                 :
-                uart_{drivers.uart},
-                kBaudrate_{baudrate},
-                kUartPort_{port}
+                uart_{drivers.uart}
             {
             }
 
         void initialize()
         {
-            uart_.init<tap::communication::serial::Uart::Uart6, 921600, tap::communication::serial::Uart::Parity::Disabled>();
+            uart_.init<kPort, kBaudrate, tap::communication::serial::Uart::Parity::Disabled>();
         }
 
         void update()
@@ -66,7 +65,6 @@ namespace fang::communication
             handlerMap_.at(dataType) = handler;
         }
     private:
-        static const int kBaudRate{115200};
 
         void updateByteQueue()
         {
@@ -93,8 +91,6 @@ namespace fang::communication
         }
 
         HandlerMap handlerMap_{};
-        const tap::communication::serial::Uart::UartPort kUartPort_;
-        const int kBaudrate_;
         tap::communication::serial::Uart& uart_;
         coolSerial::ByteQueue byteQueue_{};
         coolSerial::ContinuousParser parser_{byteQueue_};

@@ -30,6 +30,7 @@ namespace fang::robot
     {
     public:
         using RemoteState = tap::control::RemoteMapState;
+        using CoolSerialUart = communication::CoolSerialUart<tap::communication::serial::Uart::Uart1, 921600>;
 
         struct InputConfig
         {
@@ -64,11 +65,10 @@ namespace fang::robot
             coolSerialUart_
             {
                 drivers,
-                communication::CoolSerialUart::HandlerMap
+                CoolSerialUart::HandlerMap
                 {
                     {254, std::ref(basicTargetHandler_)}
-                },
-                tap::communication::serial::Uart::Uart6
+                }
             },
             BaseRobot{makeRobot(drivers, holonomicInput_, gimbalInput_, config)}
         {}
@@ -105,7 +105,7 @@ namespace fang::robot
         chassis::DjiHolonomicInput holonomicInput_;
         turret::DjiGimbalInput gimbalInput_;
         turret::FlySkyGimbalInput flySkyGimbalInput_;
-        communication::CoolSerialUart coolSerialUart_;
+        CoolSerialUart coolSerialUart_;
 
 
         static BaseRobot makeRobot(Drivers& drivers, chassis::IHolonomicInput& holonomicInput, turret::IGimbalInput& gimbalInput, const Config& config)
