@@ -26,8 +26,8 @@ namespace fang::communication
         using DataHandlerRef = std::reference_wrapper<coolSerial::IDataHandler>;
         using HandlerMap = std::unordered_map<coolSerial::Byte, DataHandlerRef>;
 
-        CoolSerialUart(tap::Drivers& drivers);
-        CoolSerialUart(tap::Drivers& drivers, const HandlerMap& handlerMap);
+        CoolSerialUart(tap::Drivers& drivers, tap::communication::serial::Uart::UartPort port = tap::communication::serial::Uart::Uart1, int baudrate = 115200);
+        CoolSerialUart(tap::Drivers& drivers, const HandlerMap& handlerMap, tap::communication::serial::Uart::UartPort port = tap::communication::serial::Uart::Uart1, int baudrate = 115200);
 
         void initialize();
         void update();
@@ -43,7 +43,9 @@ namespace fang::communication
         void referMessage(const coolSerial::CoolMessageData& message);
 
         HandlerMap handlerMap_{};
-        tap::communication::serial::UartTerminalDevice uart_;
+        const tap::communication::serial::Uart::UartPort kUartPort_;
+        const int kBaudrate_;
+        tap::communication::serial::Uart& uart_;
         coolSerial::ByteQueue byteQueue_{};
         coolSerial::ContinuousParser parser_{byteQueue_};
     };

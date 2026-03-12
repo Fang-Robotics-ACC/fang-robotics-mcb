@@ -2,22 +2,26 @@
 
 namespace fang::communication
 {
-    CoolSerialUart::CoolSerialUart(tap::Drivers& drivers, const HandlerMap& handlerMap)
+    CoolSerialUart::CoolSerialUart(tap::Drivers& drivers, const HandlerMap& handlerMap, tap::communication::serial::Uart::UartPort port, int baudrate)
         :
-        uart_{&drivers},
+        uart_{drivers.uart},
+        kUartPort_{port},
+        kBaudrate_{baudrate},
         handlerMap_{handlerMap}
     {
     }
 
-    CoolSerialUart::CoolSerialUart(tap::Drivers& drivers)
+    CoolSerialUart::CoolSerialUart(tap::Drivers& drivers, tap::communication::serial::Uart::UartPort port, int baudrate)
         :
-        uart_{&drivers}
+        uart_{drivers.uart},
+        kBaudrate_{baudrate},
+        kUartPort_{port}
     {
     }
 
     void CoolSerialUart::initialize()
     {
-        uart_.initialize();
+        uart_.init<tap::communication::serial::Uart::Uart6, 921600, tap::communication::serial::Uart::Parity::Disabled>();
     }
 
     void CoolSerialUart::update()
@@ -30,8 +34,8 @@ namespace fang::communication
     void CoolSerialUart::updateByteQueue()
     {
         // Transfer uart buffer to byte queue
-        char byte{};
-        while(uart_.read(byte)) 
+        unsigned char byte{};
+        while(uart_.read(kUartPort_, &byte)) 
         {
             byteQueue_.push(byte);
         }
