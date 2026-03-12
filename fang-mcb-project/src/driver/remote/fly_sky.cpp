@@ -87,11 +87,12 @@ FlySky::TapRemote::SwitchState FlySky::channelToSwitchState(double channelData) 
 
     // Slightly out of bounds to be tolerant to floating point errors
     // Adapted from UMN fly_sky drivers
-    if (-0.25 <= channelData && channelData < 0.25)
+    // NOTE: SINCE THE CHANNELS GO FROM -1 TO 1, THE SCALING IS DIFFERENT
+    if (-1.25 <= channelData && channelData < -0.75)
     {
         switchState = TapRemote::SwitchState::DOWN;
     }
-    else if (0.25 <= channelData && channelData < 0.75)
+    else if (-0.25 <= channelData && channelData < 0.25)
     {
         switchState = TapRemote::SwitchState::MID;
     }

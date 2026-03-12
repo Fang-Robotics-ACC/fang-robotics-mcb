@@ -41,8 +41,8 @@ TEST(fang_remote_FlySky, zeroTest)
 
     EXPECT_CALL(commandMapper, handleKeyStateChange(
         0, // This remote cannot pass key data
-        tap::communication::serial::Remote::SwitchState::DOWN,
-        tap::communication::serial::Remote::SwitchState::DOWN,
+        tap::communication::serial::Remote::SwitchState::MID,
+        tap::communication::serial::Remote::SwitchState::MID,
         false, // No mouse click relayed
         false // No mouse click relayed
     ));
