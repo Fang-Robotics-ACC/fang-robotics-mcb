@@ -71,37 +71,37 @@ namespace fang::robot
                     {254, std::ref(basicTargetHandler_)}
                 }
             },
-            BaseRobot{makeRobot(drivers, holonomicInput_, flySkyGimbalInput_, config)}
+            BaseRobot{makeRobot(drivers, holonomicInput_, gimbalInput_, config)}
         {}
 
         void initialize() override
         {
             //coolSerialUart_.initialize();
             BaseRobot::initialize();
-            uart_.init<tap::communication::serial::Uart::Uart1, 115200, tap::communication::serial::Uart::Parity::Disabled>();
-            //remote_.initialize();
+            //uart_.init<tap::communication::serial::Uart::Uart1, 115200, tap::communication::serial::Uart::Parity::Disabled>();
+            remote_.initialize();
         }
 
         void update() override
         {
             //coolSerialUart_.update();
-            uint8_t data{};
-            while(uart_.read(tap::communication::serial::Uart::Uart1,  &data))
-            {
-                flySkyByteQueue_.push(data);
-            }
-            //remote_.read();
-            flyRemote_.update();
+            //uint8_t data{};
+            //while(uart_.read(tap::communication::serial::Uart::Uart1,  &data))
+            //{
+            //    flySkyByteQueue_.push(data);
+            //}
+            remote_.read();
+            //flyRemote_.update();
         }
 
         void handleData(const coolSerial::Bytes& bytes)
         {
-            FANG_ASSERT(bytes.size() == 1, "Ahhh");
+            //FANG_ASSERT(bytes.size() == 1, "Ahhh");
 
-            const unsigned char kByte{bytes[0]};
-            //FANG_ASSERT(bytes[0] != 32, "Ahhh");
-            static uint8_t debugByte = kByte;
-            flySkyByteQueue_.push(kByte);
+            //const unsigned char kByte{bytes[0]};
+            ////FANG_ASSERT(bytes[0] != 32, "Ahhh");
+            //static uint8_t debugByte = kByte;
+            //flySkyByteQueue_.push(kByte);
         }
 
     private:
