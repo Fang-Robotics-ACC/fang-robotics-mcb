@@ -30,15 +30,15 @@ public:
     enum class Channel 
     {
         rightHorizontal = 0,
-        rightVertical,
-        leftVertical,
-        leftHorizontal,
-        switchA,
-        switchB,
-        switchC,
-        switchD,
-        wheelA,
-        wheelB 
+        rightVertical = 1,
+        leftVertical = 2,
+        leftHorizontal = 3,
+        wheelA = 4,
+        wheelB = 5,
+        switchC = 6,
+        switchD = 7,
+        switchA = 8,
+        switchB = 9 
     };
 
     /**
@@ -56,7 +56,9 @@ public:
         A,
         B,
         C,
-        D 
+        D,
+        wheelA,
+        wheelB
     };
 
     /**
