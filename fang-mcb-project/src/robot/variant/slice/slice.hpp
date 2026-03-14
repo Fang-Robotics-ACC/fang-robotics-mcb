@@ -24,7 +24,7 @@ namespace fang::robot
      * First Fang: Pierce
      * The first robot in Fang Robotics est. 2025
      */
-    class Pierce : public BaseRobot
+    class Slice : public BaseRobot
     {
     public:
         using RemoteState = tap::control::RemoteMapState;
@@ -50,7 +50,7 @@ namespace fang::robot
             command::PierceCommandPack::Config commandPackConfig;
         };
 
-        Pierce(Drivers& drivers, const Config& config)
+        Slice(Drivers& drivers, const Config& config)
             :
             uart_{drivers.uart},
             remote_{drivers.remote},

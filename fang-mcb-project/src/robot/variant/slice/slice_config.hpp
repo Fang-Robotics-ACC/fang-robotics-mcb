@@ -23,7 +23,7 @@
 
 namespace fang::robot 
 {
-static const Pierce::SubsystemConfig kSliceceSubsystemConfig 
+static const Slice::SubsystemConfig kSliceceSubsystemConfig 
 {
     .chassisConfig  = kChassisConfig,
     .gimbalConfig   = kGimbalSubsystemConfig,
@@ -31,7 +31,7 @@ static const Pierce::SubsystemConfig kSliceceSubsystemConfig
     .boosterConfig  = kAmmoBoosterConfig
 };
 
-static const Pierce::InputConfig kSliceInputConfig 
+static const Slice::InputConfig kSliceInputConfig 
 {
     .holonomic = kChassisInputConfig,
     .gimbal = kTurretInputConfig
@@ -76,7 +76,7 @@ static const command::PierceCommandPack::Config kSliceCommandPackConfig
     .commandConfig = kSliceCommandConfig
 };
 
-static const Pierce::Config kSliceConfig
+static const Slice::Config kSliceConfig
 {
     .subsystemConfig   = kSliceceSubsystemConfig,
     .input = kSliceInputConfig,
