@@ -1,5 +1,5 @@
 #pragma once
-#include "pierce.hpp"
+#include "slice.hpp"
 //Subsystem configs
 #include "config/subsystem/chassis_config.hpp"
 #include "config/subsystem/turret_gimbal_config.hpp"
@@ -23,7 +23,7 @@
 
 namespace fang::robot 
 {
-static const Pierce::SubsystemConfig kPierceSubsystemConfig 
+static const Slice::SubsystemConfig kPierceSubsystemConfig 
 {
     .chassisConfig  = kChassisConfig,
     .gimbalConfig   = kGimbalSubsystemConfig,
@@ -31,7 +31,7 @@ static const Pierce::SubsystemConfig kPierceSubsystemConfig
     .boosterConfig  = kAmmoBoosterConfig
 };
 
-static const Pierce::InputConfig kPierceInputConfig 
+static const Slice::InputConfig kPierceInputConfig 
 {
     .holonomic = kChassisInputConfig,
     .gimbal = kTurretInputConfig
@@ -76,7 +76,7 @@ static const command::PierceCommandPack::Config kPierceCommandPackConfig
     .commandConfig = kPierceCommandConfig
 };
 
-static const Pierce::Config kPierceConfig
+static const Slice::Config kPierceConfig
 {
     .subsystemConfig   = kPierceSubsystemConfig,
     .input = kPierceInputConfig,
