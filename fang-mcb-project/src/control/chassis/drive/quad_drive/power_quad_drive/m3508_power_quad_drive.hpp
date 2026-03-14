@@ -4,7 +4,6 @@
 #include "driver/drivers.hpp"
 
 #include "src/wrap/trap/motor/dji_m3508_old.hpp"
-#include "src/wrap/trap/motor/dji_m3508.hpp"
 
 #include "wrap/rail/chassis/ipower_limiter_system.hpp"
 

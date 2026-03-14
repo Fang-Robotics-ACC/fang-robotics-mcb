@@ -7,13 +7,8 @@
 #include "src/control/chassis/drive/quad_drive/power_quad_drive/m3508_power_quad_drive.hpp"
 #include "driver/drivers.hpp"
 
+#include "wrap/trap/motor/dji_m3508_old.hpp"
 
-#include "taproot/src/tap/motor/dji_motor.hpp"
-#include "taproot/src/tap/motor/m3508_constants.hpp"
-
-
-#include "wrap/trap/motor/dji_m3508.hpp"
-#include "wrap/trap/motor/dji_motor.hpp"
 
 #include "wrap/trap/control/chassis/power_limiter.hpp"
 
@@ -22,7 +17,7 @@ namespace fang::chassis
     class M3508MecanumDrive : public MecanumDrive
     {
     public:
-        using Motor = trap::motor::DjiM3508;
+        using Motor = trap::motor::DjiM3508Old;
         using PowerLimiter = trap::control::chassis::PowerLimiter;
         struct Config
         {
