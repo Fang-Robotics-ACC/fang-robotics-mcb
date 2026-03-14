@@ -30,7 +30,7 @@ namespace fang::robot
     {
     public:
         using RemoteState = tap::control::RemoteMapState;
-        using CoolSerialUart = communication::CoolSerialUart<tap::communication::serial::Uart::Uart1, 115200>;
+        using CoolSerialUart = communication::CoolSerialUart<tap::communication::serial::Uart::Uart1, 576000>;
 
         struct InputConfig
         {
