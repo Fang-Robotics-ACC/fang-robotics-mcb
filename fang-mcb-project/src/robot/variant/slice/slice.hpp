@@ -37,10 +37,10 @@ namespace fang::robot
 
         struct SubsystemConfig
         {
-            chassis::PierceMecanumDrive::Config chassisConfig;
-            turret::PierceFieldGimbal::Config gimbalConfig;
+            chassis::SliceMecanumDrive::Config chassisConfig;
+            turret::SliceFieldGimbal::Config gimbalConfig;
             fang::turret::M2006SimpleFeeder::Config feederConfig;
-            turret::PierceAmmoBooster::Config boosterConfig;
+            turret::SliceAmmoBooster::Config boosterConfig;
         };
 
         struct Config
@@ -92,10 +92,10 @@ namespace fang::robot
 
         static BaseRobot makeRobot(Drivers& drivers, chassis::IHolonomicInput& holonomicInput, turret::IGimbalInput& gimbalInput, const Config& config)
         {
-            auto gimbal{std::make_unique<turret::PierceFieldGimbal>(drivers, config.subsystemConfig.gimbalConfig)};
+            auto gimbal{std::make_unique<turret::SliceFieldGimbal>(drivers, config.subsystemConfig.gimbalConfig)};
             auto feeder{std::make_unique<turret::M2006SimpleFeeder>(drivers, config.subsystemConfig.feederConfig)};
-            auto booster{std::make_unique<turret::PierceAmmoBooster>(drivers, config.subsystemConfig.boosterConfig)};
-            auto mecanumDrive{std::make_unique<chassis::PierceMecanumDrive>(drivers, config.subsystemConfig.chassisConfig)};
+            auto booster{std::make_unique<turret::SliceAmmoBooster>(drivers, config.subsystemConfig.boosterConfig)};
+            auto mecanumDrive{std::make_unique<chassis::SliceMecanumDrive>(drivers, config.subsystemConfig.chassisConfig)};
             auto commandPack
             {
                 std::make_unique<command::PierceCommandPack>
