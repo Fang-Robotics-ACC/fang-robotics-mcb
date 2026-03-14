@@ -8,7 +8,7 @@
 #include "wrap/trap/communication/sensors/imu.hpp"
 namespace fang::turret
 {
-    class PierceFieldGimbal : public FieldGimbal
+    class SliceFieldGimbal : public FieldGimbal
     {
     public:
         using PitchSystem = GM6020CascadeFieldPitch;
@@ -20,7 +20,7 @@ namespace fang::turret
             YawSystem::Config yawSystemConfig;
 
         };
-        PierceFieldGimbal(Drivers& drivers, const Config& config):
+        SliceFieldGimbal(Drivers& drivers, const Config& config):
             FieldGimbal
             {
                 drivers,
@@ -36,6 +36,6 @@ namespace fang::turret
             }
         {}
 
-        virtual ~PierceFieldGimbal() {}
+        virtual ~SliceFieldGimbal() {}
     };
 }

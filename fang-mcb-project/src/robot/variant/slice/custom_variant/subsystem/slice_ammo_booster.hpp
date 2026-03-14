@@ -8,7 +8,7 @@
 
 namespace fang::turret
 {
-    class PierceAmmoBooster : public SimpleAmmoBooster
+    class SliceAmmoBooster : public SimpleAmmoBooster
     {
     public:
         using Flywheel = M3508BasicFlywheel;
@@ -20,7 +20,7 @@ namespace fang::turret
             Flywheel::Config rightFlywheelConfig;
         };
 
-        PierceAmmoBooster(Drivers& drivers, const Config& config):
+        SliceAmmoBooster(Drivers& drivers, const Config& config):
             SimpleAmmoBooster
             (
                 drivers,
