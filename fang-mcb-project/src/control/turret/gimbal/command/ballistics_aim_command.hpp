@@ -18,13 +18,11 @@ namespace fang::turret
     public:
         struct Config
         {
-            Radians pitchScale;
-            Radians yawScale;
             math::Range<Radians> pitchRange;
         };
         BallisticsAimCommand(FieldGimbalSubsystem& gimbal, const Config& config);
 
-        const char* getName() const override {return "Aim Command";}
+        const char* getName() const override {return "Ballistic Aim";}
         void initialize() override;
         void execute() override;
         void end(bool interrupted) override;
@@ -32,9 +30,5 @@ namespace fang::turret
 
     private:
         FieldGimbalSubsystem& gimbal_;
-        IGimbalInput& input_;
-
-        Radians targetPitch_{0};
-        Radians targetYaw_{0};
     };
 }
