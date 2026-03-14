@@ -1,6 +1,7 @@
 #include "ballistics_aim_command.hpp"
 
 #include "tap/algorithms/math_user_utils.hpp"
+#include "tap/algorithms/transforms/transform.hpp"
 
 namespace fang::turret
 {
@@ -22,8 +23,14 @@ namespace fang::turret
 
     void BallisticsAimCommand::execute()
     {
+
         gimbal_.setTargetFieldPitch(1.0_rad);
         gimbal_.setTargetFieldYaw(1.0_rad);
+    }
+
+    BallisticsAimCommand::Vector BallisticsAimCommand::cameraToGlobal(const Vector& vector) const
+    {
+        
     }
 
     void BallisticsAimCommand::end(bool interrupted)

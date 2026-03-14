@@ -3,6 +3,7 @@
 #include "control/turret/gimbal/field_gimbal_subsystem.hpp"
 #include "communication/cool_protocol/ibasic_target_listener.hpp"
 #include "util/math/arithmetic/range.hpp"
+#include "tap/algorithms/transforms/vector.hpp"
 
 #include "wrap/rail/turret/igimbal_input.hpp"
 
@@ -31,6 +32,8 @@ namespace fang::turret
         bool isFinished() const override;
 
     private:
+        using Vector = tap::algorithms::transforms::Vector;
+        Vector cameraToGlobal(const Vector& vector) const;
         FieldGimbalSubsystem& gimbal_;
         BasicTargetT currentTarget_{};
     };
