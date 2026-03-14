@@ -6,7 +6,7 @@
 
 namespace fang::chassis
 {
-    class SliceMecanumDrive : public UltraMk2MecanumDrive
+    class PierceMecanumDrive : public UltraMk2MecanumDrive
     {
     public:
         using PowerLimiter = trap::control::chassis::PowerLimiter;
@@ -21,7 +21,7 @@ namespace fang::chassis
             tap::gpio::Pwm::Timer pwmTimer;
         };
 
-        SliceMecanumDrive
+        PierceMecanumDrive
         (
             Drivers& drivers,
             const Config& config

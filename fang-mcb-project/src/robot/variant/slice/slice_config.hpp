@@ -23,7 +23,7 @@
 
 namespace fang::robot 
 {
-static const Slice::SubsystemConfig kPierceSubsystemConfig 
+static const Pierce::SubsystemConfig kSliceceSubsystemConfig 
 {
     .chassisConfig  = kChassisConfig,
     .gimbalConfig   = kGimbalSubsystemConfig,
@@ -31,13 +31,13 @@ static const Slice::SubsystemConfig kPierceSubsystemConfig
     .boosterConfig  = kAmmoBoosterConfig
 };
 
-static const Slice::InputConfig kPierceInputConfig 
+static const Pierce::InputConfig kSliceInputConfig 
 {
     .holonomic = kChassisInputConfig,
     .gimbal = kTurretInputConfig
 };
 
-static const command::PierceCommandPack::CommandConfig kPierceCommandConfig
+static const command::PierceCommandPack::CommandConfig kSliceCommandConfig
 {
     .aimConfig           = kTurretAimConfig,
     .counterStrikeConfig = kFieldMecanumConfig,
@@ -45,7 +45,7 @@ static const command::PierceCommandPack::CommandConfig kPierceCommandConfig
     .tardisConfig        = k_tardisConfig
 };
 
-static const command::PierceCommandPack::ComputerMapping kPierceComputerMappingCOnfig 
+static const command::PierceCommandPack::ComputerMapping kSliceComputerMappingCOnfig 
 {
     .mouseFire     = kAutofireMouseState,
     .mouseUnjam    = kUnjamMouseState,
@@ -54,7 +54,7 @@ static const command::PierceCommandPack::ComputerMapping kPierceComputerMappingC
     .tardis        = kTardisModeKeyboardState
 };
 
-static const command::PierceCommandPack::RemoteMapping kPierceRemoteMappingConfig 
+static const command::PierceCommandPack::RemoteMapping kSliceRemoteMappingConfig 
 {
     .activateBooster = kActivateBoosterRemoteState,
     .fire            = kAutofireRemoteState,
@@ -64,22 +64,22 @@ static const command::PierceCommandPack::RemoteMapping kPierceRemoteMappingConfi
     .tardis          = kTardisModeRemoteState
 };
 
-static const command::PierceCommandPack::MappingConfig kPierceMappingConfig 
+static const command::PierceCommandPack::MappingConfig kSliceMappingConfig 
 {
-    .remote     = kPierceRemoteMappingConfig,
-    .computer   = kPierceComputerMappingCOnfig
+    .remote     = kSliceRemoteMappingConfig,
+    .computer   = kSliceComputerMappingCOnfig
 };
 
-static const command::PierceCommandPack::Config kPierceCommandPackConfig
+static const command::PierceCommandPack::Config kSliceCommandPackConfig
 {
-    .mappingConfig = kPierceMappingConfig,
-    .commandConfig = kPierceCommandConfig
+    .mappingConfig = kSliceMappingConfig,
+    .commandConfig = kSliceCommandConfig
 };
 
-static const Slice::Config kPierceConfig
+static const Pierce::Config kSliceConfig
 {
-    .subsystemConfig   = kPierceSubsystemConfig,
-    .input = kPierceInputConfig,
-    .commandPackConfig = kPierceCommandPackConfig
+    .subsystemConfig   = kSliceceSubsystemConfig,
+    .input = kSliceInputConfig,
+    .commandPackConfig = kSliceCommandPackConfig
 };
 }

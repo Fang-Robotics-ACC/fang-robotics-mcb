@@ -1,7 +1,6 @@
-#ifndef FANG_ROBOTICS_MCB_CHASSIS_CONFIG_PIERCE_HPP
-#define FANG_ROBOTICS_MCB_CHASSIS_CONFIG_PIERCE_HPP
+#pragma once
 
-#include "robot/variant/pierce/custom_variant/subsystem/pierce_mecanum_drive.hpp"
+#include "robot/variant/slice/custom_variant/subsystem/slice_mecanum_drive.hpp"
 #include "wrap/units/units_alias.hpp"
 
 namespace fang::robot 
@@ -90,4 +89,3 @@ static const chassis::PierceMecanumDrive::Config kChassisConfig
     .pwmTimer            = kPwmTimer,
 };
 }
-#endif

@@ -1,5 +1,5 @@
 #pragma once
-#include "robot/variant/pierce/custom_variant/subsystem/pierce_ammo_booster.hpp"
+#include "robot/variant/slice/custom_variant/subsystem/slice_ammo_booster.hpp"
 #include "wrap/units/units_alias.hpp"
 
 #include "units.h"

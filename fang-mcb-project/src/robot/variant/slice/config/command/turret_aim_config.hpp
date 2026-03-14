@@ -1,5 +1,5 @@
-#ifndef FANG_ROBOTICS_MCB_TURRET_AIM_CONFIG_HPP
-#define FANG_ROBOTICS_MCB_TURRET_AIM_CONFIG_HPP
+#pragma once
+
 #include "control/turret/gimbal/command/aim_command.hpp"
 #include "wrap/units/units_alias.hpp"
 
@@ -13,4 +13,3 @@ namespace fang::robot
         .pitchRange = {-25_deg, 10_deg}
     };
 }
-#endif

@@ -22,7 +22,7 @@ namespace fang::robot
     static double kMotorRampSpeed{750}; //RepeatUltraMk2 RPM per Second
 
 
-    static const chassis::SliceMecanumDrive::Motor::Config kFrontLeftMotorConfig
+    static const chassis::PierceMecanumDrive::Motor::Config kFrontLeftMotorConfig
     {
         .controllerInputVoltage = kControllerInputVoltage,
         .pwmData = {tap::gpio::Pwm::C1, kPwmFrequency},
@@ -31,7 +31,7 @@ namespace fang::robot
         .rampSpeed = kMotorRampSpeed
     };
 
-    static const chassis::SliceMecanumDrive::Motor::Config kFrontRightMotorConfig
+    static const chassis::PierceMecanumDrive::Motor::Config kFrontRightMotorConfig
     {
         .controllerInputVoltage = kControllerInputVoltage,
         .pwmData = {tap::gpio::Pwm::C2, kPwmFrequency},
@@ -40,7 +40,7 @@ namespace fang::robot
         .rampSpeed = kMotorRampSpeed
     };
 
-    static const chassis::SliceMecanumDrive::Motor::Config kRearLeftMotorConfig
+    static const chassis::PierceMecanumDrive::Motor::Config kRearLeftMotorConfig
     {
         .controllerInputVoltage = kControllerInputVoltage,
         .pwmData = {tap::gpio::Pwm::C3, kPwmFrequency},
@@ -49,7 +49,7 @@ namespace fang::robot
         .rampSpeed = kMotorRampSpeed
     };
 
-    static const chassis::SliceMecanumDrive::Motor::Config kRearRightMotorConfig
+    static const chassis::PierceMecanumDrive::Motor::Config kRearRightMotorConfig
     {
         .controllerInputVoltage = kControllerInputVoltage,
         .pwmData = {tap::gpio::Pwm::C4, kPwmFrequency},
@@ -58,7 +58,7 @@ namespace fang::robot
         .rampSpeed = kMotorRampSpeed
     };
 
-    static const chassis::SliceMecanumDrive::MotorConfigs kMotorConfigs
+    static const chassis::PierceMecanumDrive::MotorConfigs kMotorConfigs
     {
         .frontLeft = kFrontLeftMotorConfig,
         .frontRight = kFrontRightMotorConfig,
@@ -66,7 +66,7 @@ namespace fang::robot
         .rearRight = kRearRightMotorConfig,
     };
 
-    static const chassis::SliceMecanumDrive::PowerLimiter::Config kChassisPowerLimiterConfig
+    static const chassis::PierceMecanumDrive::PowerLimiter::Config kChassisPowerLimiterConfig
     {
         .startingEnergyBuffer       = 80_J,
         .energyBufferLimitThreshold = 5_J,
@@ -80,7 +80,7 @@ namespace fang::robot
         13.5_in   //Horizontal Wheel Distance
     };
 
-    static const chassis::SliceMecanumDrive::Config kChassisConfig 
+    static const chassis::PierceMecanumDrive::Config kChassisConfig 
     {
         .motorConfigs        = kMotorConfigs,
         .powerLimiterConfig  = kChassisPowerLimiterConfig,

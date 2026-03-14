@@ -1,6 +1,6 @@
 #pragma once
 
-#include "robot/variant/pierce/custom_variant/subsystem/pierce_field_gimbal.hpp"
+#include "robot/variant/slice/custom_variant/subsystem/slice_field_gimbal.hpp"
 
 namespace fang::robot 
 {

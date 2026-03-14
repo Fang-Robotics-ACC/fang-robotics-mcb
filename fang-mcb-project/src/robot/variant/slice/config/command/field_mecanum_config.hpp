@@ -1,9 +1,10 @@
-#ifndef FANG_ROBOTICS_MCB_PIERCE_FIELD_MECANUM_CONFIG_HPP
-#define FANG_ROBOTICS_MCB_PIERCE_FIELD_MECANUM_CONFIG_HPP
-#include "control/chassis/drive/holonomic/command/counter_strike_command.hpp"
+#pragma once
 
+#include "control/chassis/drive/holonomic/command/counter_strike_command.hpp"
+#include "wrap/units/units_alias.hpp"
 namespace fang::robot
 {
+    using namespace units::literals;
     static const chassis::CounterStrikeCommand::Config kFieldMecanumConfig 
     {
         .maxTranslation = {25_mph, 25_mph}, // HACK: Ultra Mk2 motors do not use feedback rpm loops
@@ -11,4 +12,3 @@ namespace fang::robot
     };
 }
 
-#endif

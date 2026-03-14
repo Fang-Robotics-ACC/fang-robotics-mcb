@@ -25,7 +25,7 @@ namespace fang::robot
         using RemoteState = tap::control::RemoteMapState;
         struct SubsystemConfig
         {
-            chassis::SliceMecanumDrive::Config chassisConfig;
+            chassis::PierceMecanumDrive::Config chassisConfig;
             turret::PierceFieldGimbal::Config gimbalConfig;
             fang::turret::M2006SimpleFeeder::Config feederConfig;
             turret::PierceAmmoBooster::Config boosterConfig;
@@ -58,7 +58,7 @@ namespace fang::robot
             auto gimbal{std::make_unique<turret::PierceFieldGimbal>(drivers, config.subsystemConfig.gimbalConfig)};
             auto feeder{std::make_unique<turret::M2006SimpleFeeder>(drivers, config.subsystemConfig.feederConfig)};
             auto booster{std::make_unique<turret::PierceAmmoBooster>(drivers, config.subsystemConfig.boosterConfig)};
-            auto mecanumDrive{std::make_unique<chassis::SliceMecanumDrive>(drivers, config.subsystemConfig.chassisConfig)};
+            auto mecanumDrive{std::make_unique<chassis::PierceMecanumDrive>(drivers, config.subsystemConfig.chassisConfig)};
             auto commandPack
             {
                 std::make_unique<command::PierceAutoTestCommandPack>

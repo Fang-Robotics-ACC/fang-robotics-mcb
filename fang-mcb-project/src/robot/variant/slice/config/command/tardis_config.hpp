@@ -1,9 +1,11 @@
-#ifndef FANG_ROBOTICS_MCB_PIERCE_CONFIG_COMMAND_TARDIS_CONFIG_HPP
-#define FANG_ROBOTICS_MCB_PIERCE_CONFIG_COMMAND_TARDIS_CONFIG_HPP
+#pragma once
+
 #include "control/chassis/drive/holonomic/command/tardis_command.hpp"
+#include "wrap/units/units_alias.hpp"
 
 namespace fang::robot
 {
+    using namespace units::literals;
     static const chassis::AzrielShredder::Config k_razielKalmanShredderConfig
     {
         .biteDepth  = 0.9,
@@ -20,5 +22,3 @@ namespace fang::robot
         .razielKalmanShredderConfig = k_razielKalmanShredderConfig
     };
 }
- 
-#endif

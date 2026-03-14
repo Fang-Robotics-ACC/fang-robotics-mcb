@@ -3,9 +3,9 @@
 
 #include "driver/drivers.hpp"
 //Subsystems
-#include "custom_variant/subsystem/pierce_mecanum_drive.hpp"
-#include "custom_variant/subsystem/pierce_field_gimbal.hpp"
-#include "custom_variant/subsystem/pierce_ammo_booster.hpp"
+#include "custom_variant/subsystem/slice_mecanum_drive.hpp"
+#include "custom_variant/subsystem/slice_field_gimbal.hpp"
+#include "custom_variant/subsystem/slice_ammo_booster.hpp"
 #include "cool_serial/byte_queue.hpp"
 
 #include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
@@ -24,7 +24,7 @@ namespace fang::robot
      * First Fang: Pierce
      * The first robot in Fang Robotics est. 2025
      */
-    class Slice : public BaseRobot
+    class Pierce : public BaseRobot
     {
     public:
         using RemoteState = tap::control::RemoteMapState;
@@ -37,7 +37,7 @@ namespace fang::robot
 
         struct SubsystemConfig
         {
-            chassis::SliceMecanumDrive::Config chassisConfig;
+            chassis::PierceMecanumDrive::Config chassisConfig;
             turret::PierceFieldGimbal::Config gimbalConfig;
             fang::turret::M2006SimpleFeeder::Config feederConfig;
             turret::PierceAmmoBooster::Config boosterConfig;
@@ -50,7 +50,7 @@ namespace fang::robot
             command::PierceCommandPack::Config commandPackConfig;
         };
 
-        Slice(Drivers& drivers, const Config& config)
+        Pierce(Drivers& drivers, const Config& config)
             :
             uart_{drivers.uart},
             remote_{drivers.remote},
@@ -95,7 +95,7 @@ namespace fang::robot
             auto gimbal{std::make_unique<turret::PierceFieldGimbal>(drivers, config.subsystemConfig.gimbalConfig)};
             auto feeder{std::make_unique<turret::M2006SimpleFeeder>(drivers, config.subsystemConfig.feederConfig)};
             auto booster{std::make_unique<turret::PierceAmmoBooster>(drivers, config.subsystemConfig.boosterConfig)};
-            auto mecanumDrive{std::make_unique<chassis::SliceMecanumDrive>(drivers, config.subsystemConfig.chassisConfig)};
+            auto mecanumDrive{std::make_unique<chassis::PierceMecanumDrive>(drivers, config.subsystemConfig.chassisConfig)};
             auto commandPack
             {
                 std::make_unique<command::PierceCommandPack>
