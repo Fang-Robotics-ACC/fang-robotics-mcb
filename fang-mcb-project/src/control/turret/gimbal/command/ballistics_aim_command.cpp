@@ -15,6 +15,11 @@ namespace fang::turret
     {
     }
 
+    void BallisticsAimCommand::basicTargetFound(const BasicTargetT& basicTarget)
+    {
+
+    }
+
     void BallisticsAimCommand::execute()
     {
         gimbal_.setTargetFieldPitch(1.0_rad);
