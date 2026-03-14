@@ -49,6 +49,12 @@ FlySky::TapRemote::SwitchState FlySky::getSwitch(Switch switchId) const
         case Switch::D:
             channelData = getChannel(Channel::switchD);
             break;
+        case Switch::wheelA:
+            channelData = getChannel(Channel::wheelA);
+            break;
+        case Switch::wheelB:
+            channelData = getChannel(Channel::wheelB);
+            break;
     }
     return channelToSwitchState(channelData);
 }
@@ -58,10 +64,10 @@ FlySky::TapRemote::SwitchState FlySky::getTaprootSwitch(TapRemote::Switch switch
     switch(switchId)
     {
         case TapRemote::Switch::LEFT_SWITCH:
-            return getSwitch(Switch::B);
+            return getSwitch(Switch::wheelA);
             break;
         case TapRemote::Switch::RIGHT_SWITCH:
-            return getSwitch(Switch::C);
+            return getSwitch(Switch::wheelB);
             break;
     }
 }
@@ -83,27 +89,32 @@ void  FlySky::setChannels(communication::ibus::ChannelData channelData)
 
 FlySky::TapRemote::SwitchState FlySky::channelToSwitchState(double channelData) const
 {
+    static double theChannelData{};
+    theChannelData = channelData;
     TapRemote::SwitchState switchState;
 
     // Slightly out of bounds to be tolerant to floating point errors
     // Adapted from UMN fly_sky drivers
-    if (-0.25 <= channelData && channelData < 0.25)
+    if ((-1.25 <= channelData) && (channelData < -0.75))
     {
-        switchState = TapRemote::SwitchState::DOWN;
+        //FANG_ASSERT(false, "invalid channelData, likely does not correspond to a switch");
+        return TapRemote::SwitchState::DOWN;
     }
-    else if (0.25 <= channelData && channelData < 0.75)
+    else if ((-0.25 <= channelData) && (channelData < 0.25))
     {
-        switchState = TapRemote::SwitchState::MID;
+        //FANG_ASSERT(false, "invalid channelData, likely does not correspond to a switch");
+        return TapRemote::SwitchState::MID;
     }
-    else if (0.75 <= channelData && channelData <= 1.25)
+    else if ((0.75 <= channelData) && (channelData <= 1.25))
     {
-        switchState = TapRemote::SwitchState::UP;
+        //FANG_ASSERT(false, "invalid channelData, likely does not correspond to a switch");
+        return TapRemote::SwitchState::UP;
     }
     else
     {
-        switchState = TapRemote::SwitchState::UNKNOWN;
-        //static double switchStateError = channelData;
-        //FANG_ASSERT(false, "invalid channelData, likely does not correspond to a switch");
+        return TapRemote::SwitchState::UNKNOWN;
+        static double switchStateError = channelData;
+        FANG_ASSERT(false, "invalid channelData, likely does not correspond to a switch");
     }
 
     return switchState;
