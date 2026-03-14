@@ -34,14 +34,14 @@ namespace fang
     public:
 
         communication::JankyFloatHandler jankyFloatHandler{};
-        communication::CoolSerialUart coolSerialUart
-        {
-            *this, 
-            communication::CoolSerialUart::HandlerMap
-            {
-                {255, std::ref(jankyFloatHandler)}
-            }
-        };
+        //communication::CoolSerialUart coolSerialUart
+        //{
+        //    *this, 
+        //    communication::CoolSerialUart::HandlerMap
+        //    {
+        //        {255, std::ref(jankyFloatHandler)}
+        //    }
+        //};
 
         Drivers() : tap::Drivers{} {}
     

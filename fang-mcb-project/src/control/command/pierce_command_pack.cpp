@@ -1,5 +1,3 @@
-#pragma once
-
 #include "pierce_command_pack.hpp"
 
 namespace fang::command
@@ -11,6 +9,8 @@ namespace fang::command
             turret::SimpleFeederSubsystem& feeder,
             turret::FieldGimbalSubsystem& gimbal,
             chassis::HolonomicSubsystem& chassis,
+            turret::IGimbalInput& gimbalInput,
+            chassis::IHolonomicInput& holonomicInput,
             const Config& config
         ):
             CommandPack{drivers.commandMapper},
@@ -23,8 +23,8 @@ namespace fang::command
             feeder_{feeder},
             gimbal_{gimbal},
             chassis_{chassis},
-            chassisInput_{drivers.remote, config.inputConfig.chassisInputConfig},
-            turretInput_{drivers.remote, config.inputConfig.turretInputConfig}
+            holonomicInput_{holonomicInput},
+            gimbalInput_{gimbalInput}
         {}
 
     void PierceCommandPack::initialize()

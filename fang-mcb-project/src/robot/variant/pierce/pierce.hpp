@@ -3,14 +3,22 @@
 #include "driver/drivers.hpp"
 //Subsystems
 #include "custom_variant/subsystem/pierce_mecanum_drive.hpp"
-
 #include "custom_variant/subsystem/pierce_field_gimbal.hpp"
-#include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
 #include "custom_variant/subsystem/pierce_ammo_booster.hpp"
+#include "communication/cool_serial/cool_serial_uart.hpp"
+#include "communication/cool_protocol/ibasic_target_listener.hpp"
+#include "communication/cool_protocol/basic_target_handler.hpp"
+#include "cool_serial/byte_queue.hpp"
+
+#include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
 
 #include "control/command/pierce_command_pack.hpp"
 
 #include "robot/base_robot.hpp"
+
+#include "tap/communication/serial/remote.hpp"
+#include "control/turret/input/fly_sky_gimbal_input.hpp"
+#include "driver/remote/fly_sky.hpp"
 
 namespace fang::robot
 {
@@ -18,10 +26,18 @@ namespace fang::robot
      * First Fang: Pierce
      * The first robot in Fang Robotics est. 2025
      */
-    class Pierce : public BaseRobot
+    class Pierce : public BaseRobot, public coolSerial::IDataHandler
     {
     public:
         using RemoteState = tap::control::RemoteMapState;
+        using CoolSerialUart = communication::CoolSerialUart<tap::communication::serial::Uart::Uart1, 921600>;
+
+        struct InputConfig
+        {
+            chassis::DjiHolonomicInput::Config holonomic;
+            turret::DjiGimbalInput::Config gimbal;
+        };
+
         struct SubsystemConfig
         {
             chassis::PierceMecanumDrive::Config chassisConfig;
@@ -33,13 +49,77 @@ namespace fang::robot
         struct Config
         {
             SubsystemConfig subsystemConfig;
+            InputConfig input;
             command::PierceCommandPack::Config commandPackConfig;
         };
 
-        Pierce(Drivers& drivers, const Config& config): BaseRobot{makeRobot(drivers, config)}
+        Pierce(Drivers& drivers, const Config& config)
+            :
+            uart_{drivers.uart},
+            remote_{drivers.remote},
+            flySkyByteQueue_{},
+            flyRemote_{drivers.commandMapper, flySkyByteQueue_},
+            holonomicInput_{drivers.remote, config.input.holonomic},
+            gimbalInput_{drivers.remote, config.input.gimbal},
+            flySkyGimbalInput_{flyRemote_, {remote::FlySky::Channel::leftVertical, remote::FlySky::Channel::leftHorizontal}},
+            coolSerialUart_
+            {
+                drivers,
+                CoolSerialUart::HandlerMap
+                {
+                    {253, std::ref(*this)},
+                    {254, std::ref(basicTargetHandler_)}
+                }
+            },
+            BaseRobot{makeRobot(drivers, holonomicInput_, gimbalInput_, config)}
         {}
+
+        void initialize() override
+        {
+            //coolSerialUart_.initialize();
+            BaseRobot::initialize();
+            //uart_.init<tap::communication::serial::Uart::Uart1, 115200, tap::communication::serial::Uart::Parity::Disabled>();
+            remote_.initialize();
+        }
+
+        void update() override
+        {
+            //coolSerialUart_.update();
+            //uint8_t data{};
+            //while(uart_.read(tap::communication::serial::Uart::Uart1,  &data))
+            //{
+            //    flySkyByteQueue_.push(data);
+            //}
+            remote_.read();
+            //flyRemote_.update();
+        }
+
+        void handleData(const coolSerial::Bytes& bytes)
+        {
+            //FANG_ASSERT(bytes.size() == 1, "Ahhh");
+
+            //const unsigned char kByte{bytes[0]};
+            ////FANG_ASSERT(bytes[0] != 32, "Ahhh");
+            //static uint8_t debugByte = kByte;
+            //flySkyByteQueue_.push(kByte);
+        }
+
     private:
-        static BaseRobot makeRobot(Drivers& drivers, const Config& config)
+        // for debug purposes
+        communication::NullBasicTargetListener nullBasicTargetListener_{};
+        communication::BasicTargetHandler basicTargetHandler_{nullBasicTargetListener_};
+
+        tap::communication::serial::Uart& uart_;
+        tap::communication::serial::Remote& remote_;
+        coolSerial::ByteQueue flySkyByteQueue_;
+        remote::FlySky flyRemote_;
+        chassis::DjiHolonomicInput holonomicInput_;
+        turret::DjiGimbalInput gimbalInput_;
+        turret::FlySkyGimbalInput flySkyGimbalInput_;
+        CoolSerialUart coolSerialUart_;
+
+
+        static BaseRobot makeRobot(Drivers& drivers, chassis::IHolonomicInput& holonomicInput, turret::IGimbalInput& gimbalInput, const Config& config)
         {
             auto gimbal{std::make_unique<turret::PierceFieldGimbal>(drivers, config.subsystemConfig.gimbalConfig)};
             auto feeder{std::make_unique<turret::M2006SimpleFeeder>(drivers, config.subsystemConfig.feederConfig)};
@@ -54,6 +134,8 @@ namespace fang::robot
                     *feeder,
                     *gimbal,
                     *mecanumDrive,
+                    gimbalInput,
+                    holonomicInput,
                     config.commandPackConfig
                 )
             };

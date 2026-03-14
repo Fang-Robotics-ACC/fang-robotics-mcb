@@ -39,7 +39,7 @@ static const trap::motor::DjiMotor::Config kPitchMotorConfig
     .canBus         = tap::can::CanBus::CAN_BUS1,
     .name           = "pitchMotor",
     .inverted       =  true,
-    .currentControl = true 
+    .currentControl = false 
 };
 
 static const motor::DualCascadeGm6020::PidMotor::Config kPitchMotorPidConfig
@@ -92,7 +92,7 @@ static const trap::motor::DjiGM6020::Config kYawMotorConfig
     .canBus         = tap::can::CanBus::CAN_BUS1,
     .name           = "yawMotor",
     .inverted       = false,
-    .currentControl = true 
+    .currentControl = false 
 };
 
 static const motor::DualCascadeGm6020::Config kDualCascadePitchMotorConfig

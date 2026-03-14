@@ -1,18 +1,18 @@
-#include "chassis_input_handler.hpp"
+#include "dji_holonomic_input.hpp"
 #include "util/math/linear/vector_alias.hpp"
 
 #include "tap/algorithms/math_user_utils.hpp"
 
 namespace fang::chassis 
 {
-    ChassisInputHandler::ChassisInputHandler(Remote& remote, const Config& config)
+    DjiHolonomicInput::DjiHolonomicInput(Remote& remote, const Config& config)
     :   m_remote{remote},
         mk_remoteConfig{config.remoteConfig},
         mk_keyboardConfig{config.keyboardConfig}
     {
     }
 
-    math::AbstractVector2D ChassisInputHandler::getTranslation() const
+    math::AbstractVector2D DjiHolonomicInput::getTranslation() const
     {
         const math::AbstractVector2D translationSum{getKeyboardTranslation() + getRemoteTranslation()};
         const double xClamped{tap::algorithms::limitVal<double>(translationSum.x, mk_abstractMin, mk_abstractMax)};
@@ -20,12 +20,12 @@ namespace fang::chassis
         return math::AbstractVector2D{xClamped, yClamped};
     }
 
-    double ChassisInputHandler::getRotation() const
+    double DjiHolonomicInput::getRotation() const
     {
         return tap::algorithms::limitVal<double>(getRemoteRotation(), mk_abstractMin, mk_abstractMax);
     }
 
-    math::AbstractVector2D ChassisInputHandler::getKeyboardTranslation() const
+    math::AbstractVector2D DjiHolonomicInput::getKeyboardTranslation() const
     {
         if (m_remote.keyPressed(mk_keyboardConfig.forwardKey))
         {
@@ -49,7 +49,7 @@ namespace fang::chassis
         }
     }
 
-    math::AbstractVector2D ChassisInputHandler::getRemoteTranslation() const
+    math::AbstractVector2D DjiHolonomicInput::getRemoteTranslation() const
     {
         const double xTranslationScale{m_remote.getChannel(mk_remoteConfig.xTranslationChannel)};
         const double yTranslationScale{m_remote.getChannel(mk_remoteConfig.yTranslationChannel)};
@@ -57,7 +57,7 @@ namespace fang::chassis
         return math::AbstractVector2D{xTranslationScale, yTranslationScale};
     }
 
-    double ChassisInputHandler::getRemoteRotation() const
+    double DjiHolonomicInput::getRemoteRotation() const
     {
         // Thumb wheel is positive on counterclockwise
         const double rotationScale{m_remote.getChannel(mk_remoteConfig.rotationChannel)};
