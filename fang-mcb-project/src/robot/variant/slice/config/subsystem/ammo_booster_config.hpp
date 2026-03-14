@@ -7,7 +7,7 @@
 namespace fang::robot 
 {
 
-using AmmoBooster = turret::PierceAmmoBooster;
+using AmmoBooster = turret::SliceAmmoBooster;
 using Flywheel = AmmoBooster::Flywheel;
 
 using namespace units::literals;

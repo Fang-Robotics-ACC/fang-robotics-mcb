@@ -80,7 +80,7 @@ static const trap::motor::DjiSpeedPid::Config kYawVelocityPid
     .errorDerivativeFloor = 0 //rpm
 };
 
-static const turret::PierceFieldGimbal::YawSystem::Gm6020CounterChassisFieldYaw::ModdedCascadeMotor::Config kYawMotorPidConfig
+static const turret::SliceFieldGimbal::YawSystem::Gm6020CounterChassisFieldYaw::ModdedCascadeMotor::Config kYawMotorPidConfig
 {
     .mainPidConfig = kYawPositionPid,
     .intermediatePidConfig = kYawVelocityPid
@@ -110,13 +110,13 @@ static const turret::BasicFieldPitchSystem::Config kBasicFieldPitchConfig
     }
 };
 
-static const turret::PierceFieldGimbal::PitchSystem::Config kPitchSystemConfig
+static const turret::SliceFieldGimbal::PitchSystem::Config kPitchSystemConfig
 {
     .motorConfig = kDualCascadePitchMotorConfig,
     .pitchSystemConfig = kBasicFieldPitchConfig
 };
 
-static const turret::PierceFieldGimbal::YawSystem::Config kYawSystemConfig 
+static const turret::SliceFieldGimbal::YawSystem::Config kYawSystemConfig 
 {
     .motorConfig = kYawMotorConfig,
     .fieldYawConfig = 
@@ -127,7 +127,7 @@ static const turret::PierceFieldGimbal::YawSystem::Config kYawSystemConfig
     }
 };
 
-static const turret::PierceFieldGimbal::Config kGimbalSubsystemConfig
+static const turret::SliceFieldGimbal::Config kGimbalSubsystemConfig
 {
     .pitchSystemConfig = kPitchSystemConfig,
     .yawSystemConfig = kYawSystemConfig
