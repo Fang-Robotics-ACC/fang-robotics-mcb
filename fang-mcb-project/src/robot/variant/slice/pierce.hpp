@@ -1,5 +1,6 @@
-#ifndef FANG_ROBOTICS_MCB_INFANTRY_HPP
-#define FANG_ROBOTICS_MCB_INFANTRY_HPP
+#pragma once
+
+
 #include "driver/drivers.hpp"
 //Subsystems
 #include "custom_variant/subsystem/pierce_mecanum_drive.hpp"
