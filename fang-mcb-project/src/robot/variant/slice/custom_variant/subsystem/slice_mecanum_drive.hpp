@@ -1,12 +1,13 @@
 #pragma once
 
-#include "control/chassis/drive/holonomic/mecanum/mecanum_drive/ultra_mk2_mecanum_drive.hpp"
+#include "control/chassis/drive/holonomic/mecanum/mecanum_drive/m3508_mecanum_drive.hpp"
+
 #include "wrap/trap/communication/sensors/imu.hpp"
 #include "wrap/trap/control/chassis/power_limiter.hpp"
 
 namespace fang::chassis
 {
-    class SliceMecanumDrive : public UltraMk2MecanumDrive
+    class SliceMecanumDrive : public M3508MecanumDrive
     {
     public:
         using PowerLimiter = trap::control::chassis::PowerLimiter;
@@ -26,7 +27,7 @@ namespace fang::chassis
             Drivers& drivers,
             const Config& config
         ):
-            UltraMk2MecanumDrive
+            M3508MecanumDrive
             {
                 drivers,
                 std::make_unique<PowerLimiter>(drivers.refSerial, config.powerLimiterConfig),
@@ -49,7 +50,7 @@ namespace fang::chassis
 
         void initialize() override
         {
-            UltraMk2MecanumDrive::initialize();
+            M3508MecanumDrive::initialize();
             setUpPwm();
         }
         //Minor additions can be kept in a header
