@@ -30,7 +30,7 @@ namespace fang::robot
     {
     public:
         using RemoteState = tap::control::RemoteMapState;
-        using CoolSerialUart = communication::CoolSerialUart<tap::communication::serial::Uart::Uart1, 921600>;
+        using CoolSerialUart = communication::CoolSerialUart<tap::communication::serial::Uart::Uart1, 115200>;
 
         struct InputConfig
         {
@@ -76,22 +76,22 @@ namespace fang::robot
 
         void initialize() override
         {
-            //coolSerialUart_.initialize();
+            coolSerialUart_.initialize();
             BaseRobot::initialize();
-            uart_.init<tap::communication::serial::Uart::Uart1, 921600, tap::communication::serial::Uart::Parity::Disabled>();
+            //uart_.init<tap::communication::serial::Uart::Uart1, 921600, tap::communication::serial::Uart::Parity::Disabled>();
             //remote_.initialize();
         }
 
         void update() override
         {
-            //coolSerialUart_.update();
+            coolSerialUart_.update();
             uint8_t data{};
-            while(uart_.read(tap::communication::serial::Uart::Uart1,  &data))
-            {
-                //FANG_ASSERT(false, "Ahhh");
-                flySkyByteQueue_.push(data);
-            }
-            //FANG_ASSERT(flySkyByteQueue_.size() != 200, "Fuck");
+            //while(uart_.read(tap::communication::serial::Uart::Uart1,  &data))
+            //{
+            ////    //FANG_ASSERT(false, "Ahhh");
+            //    flySkyByteQueue_.push(data);
+            //}
+            //FANG_ASSERT(flySkyByteQueue_.size() <= 200, "Fuck");
             //remote_.read();
             flyRemote_.update();
         }
@@ -99,11 +99,12 @@ namespace fang::robot
         void handleData(const coolSerial::Bytes& bytes)
         {
             //FANG_ASSERT(bytes.size() == 1, "Ahhh");
+            //FANG_ASSERT(false, "false");
 
             //const unsigned char kByte{bytes[0]};
             ////FANG_ASSERT(bytes[0] != 32, "Ahhh");
             //static uint8_t debugByte = kByte;
-            //flySkyByteQueue_.push(kByte);
+            flySkyByteQueue_.addBytes(bytes);
         }
 
     private:

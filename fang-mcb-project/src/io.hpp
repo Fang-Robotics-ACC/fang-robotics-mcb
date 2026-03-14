@@ -3,7 +3,7 @@
 /**
  * How often the main loop should loop
  */
-static constexpr float kMainLoopFrequency{500.0f}; //Hertz
+static constexpr float kMainLoopFrequency{250.0f}; //Hertz
 
 /**
  * Place any sort of input/output initialization here. For example, place

@@ -92,7 +92,7 @@ int main()
     static tap::arch::PeriodicMilliTimer mainLoopTimer(1000.0f / kMainLoopFrequency);
 
     // Prevents the faster loop from going too fast (it handles io)
-    static constexpr Microseconds kFastloopDelay{10};
+    static constexpr Microseconds kFastloopDelay{1};
     while (1)
     {
         drivers.update();
