@@ -78,6 +78,13 @@ using namespace fang::robot;
     using Robot = fang::robot::PierceAutoTest;
     Robot pierceAutoTest{drivers, kPierceAutoTestConfig};
     fang::robot::IRobot& fang::RobotSingleton::robot{pierceAutoTest};
+
+#elif defined(TARGET_SLICE)
+    #include "robot/variant/slice/slice.hpp"
+    #include "robot/variant/slice/slice_config.hpp"
+    using Robot = Slice;
+    Robot slice{drivers, kSliceConfig};
+    fang::robot::IRobot& fang::RobotSingleton::robot{slice};
 #endif
 
 
