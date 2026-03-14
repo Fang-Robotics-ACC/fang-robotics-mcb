@@ -32,5 +32,6 @@ namespace fang::turret
 
     private:
         FieldGimbalSubsystem& gimbal_;
+        BasicTargetT currentTarget_{};
     };
 }

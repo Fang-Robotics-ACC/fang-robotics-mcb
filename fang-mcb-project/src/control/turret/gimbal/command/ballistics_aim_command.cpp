@@ -17,7 +17,7 @@ namespace fang::turret
 
     void BallisticsAimCommand::basicTargetFound(const BasicTargetT& basicTarget)
     {
-
+        currentTarget_ = basicTarget;
     }
 
     void BallisticsAimCommand::execute()
