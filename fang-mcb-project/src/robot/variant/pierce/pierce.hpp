@@ -71,27 +71,29 @@ namespace fang::robot
                     {254, std::ref(basicTargetHandler_)}
                 }
             },
-            BaseRobot{makeRobot(drivers, holonomicInput_, gimbalInput_, config)}
+            BaseRobot{makeRobot(drivers, holonomicInput_, flySkyGimbalInput_, config)}
         {}
 
         void initialize() override
         {
             //coolSerialUart_.initialize();
             BaseRobot::initialize();
-            //uart_.init<tap::communication::serial::Uart::Uart1, 115200, tap::communication::serial::Uart::Parity::Disabled>();
-            remote_.initialize();
+            uart_.init<tap::communication::serial::Uart::Uart1, 921600, tap::communication::serial::Uart::Parity::Disabled>();
+            //remote_.initialize();
         }
 
         void update() override
         {
             //coolSerialUart_.update();
-            //uint8_t data{};
-            //while(uart_.read(tap::communication::serial::Uart::Uart1,  &data))
-            //{
-            //    flySkyByteQueue_.push(data);
-            //}
-            remote_.read();
-            //flyRemote_.update();
+            uint8_t data{};
+            while(uart_.read(tap::communication::serial::Uart::Uart1,  &data))
+            {
+                //FANG_ASSERT(false, "Ahhh");
+                flySkyByteQueue_.push(data);
+            }
+            //FANG_ASSERT(flySkyByteQueue_.size() != 200, "Fuck");
+            //remote_.read();
+            flyRemote_.update();
         }
 
         void handleData(const coolSerial::Bytes& bytes)
