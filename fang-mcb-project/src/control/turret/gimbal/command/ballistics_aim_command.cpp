@@ -27,6 +27,11 @@ namespace fang::turret
         currentTarget_ = basicTarget;
     }
 
+    void BallisticsAimCommand::handleData(const coolSerial::Bytes& bytes)
+    {
+        basicTargetHandler_.handleData(bytes);
+    }
+
     void BallisticsAimCommand::execute()
     {
 
