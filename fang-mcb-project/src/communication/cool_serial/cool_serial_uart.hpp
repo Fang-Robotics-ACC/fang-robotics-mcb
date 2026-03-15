@@ -13,6 +13,19 @@
 
 namespace fang::communication
 {
+    class ICoolSerialUart
+    {
+    public:
+        using DataHandlerRef = std::reference_wrapper<coolSerial::IDataHandler>;
+        virtual void initialize() = 0;
+        virtual void update() = 0;
+        /**
+         * HINT: DataHandlerRef{handler} where handler inherits and implements
+         * IDataHandler's functions
+         */
+        virtual void addHandler(coolSerial::Byte dataType, DataHandlerRef handler) = 0;
+        ~ICoolSerialUart() = default;
+    };
     /**
      * TODO: Create a better UART interface than taproot that adapts to modm's UART
      * For testing reasons, we are using the hardcoded modm.
@@ -23,10 +36,9 @@ namespace fang::communication
      * 921600 is the default baudrate for CV Chip
      */
     template<tap::communication::serial::Uart::UartPort kPort, int kBaudrate>
-    class CoolSerialUart
+    class CoolSerialUart : public ICoolSerialUart
     {
     public:
-        using DataHandlerRef = std::reference_wrapper<coolSerial::IDataHandler>;
         using HandlerMap = std::unordered_map<coolSerial::Byte, DataHandlerRef>;
 
         CoolSerialUart(tap::Drivers& drivers, const HandlerMap& handlerMap)
@@ -42,12 +54,12 @@ namespace fang::communication
             {
             }
 
-        void initialize()
+        void initialize() override
         {
             uart_.init<kPort, kBaudrate, tap::communication::serial::Uart::Parity::Disabled>();
         }
 
-        void update()
+        void update() override
         {
             updateByteQueue();
             parser_.update();
@@ -58,7 +70,7 @@ namespace fang::communication
          * HINT: DataHandlerRef{handler} where handler inherits and implements
          * IDataHandler's functions
          */
-        void addHandler(coolSerial::Byte dataType, DataHandlerRef handler)
+        void addHandler(coolSerial::Byte dataType, DataHandlerRef handler) override
         {
             // [] needs to be able to create a default object. DataHandlerRef does not have
             // a default constructor
