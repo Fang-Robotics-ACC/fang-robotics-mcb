@@ -15,6 +15,7 @@
 #include "config/command/field_mecanum_config.hpp"
 #include "config/command/shuriken_config.hpp"
 #include "config/command/tardis_config.hpp"
+#include "config/command/auto_aim_config.hpp"
 
 //Mapping configs
 #include "config/mapping/chassis_command_map.hpp"
@@ -40,6 +41,7 @@ static const Slice::InputConfig kSliceInputConfig
 static const command::SliceCommandPack::CommandConfig kSliceCommandConfig
 {
     .aimConfig           = kTurretAimConfig,
+    .autoAimConfig       = kAutoAimConfig,
     .counterStrikeConfig = kFieldMecanumConfig,
     .shurikenConfig      = kShurikenConfig,
     .tardisConfig        = k_tardisConfig
