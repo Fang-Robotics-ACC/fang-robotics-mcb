@@ -21,7 +21,7 @@ namespace fang::turret
     public:
         struct Config
         {
-            math::Range<Radians> pitchRange;
+            MetersPerSecond bulletVelocity;
         };
         BallisticsAimCommand(FieldGimbalSubsystem& gimbal, trap::communication::sensors::IImu& cameraOrientationImu, const Config& config);
         void basicTargetFound(const BasicTargetT& basicTarget) override;
@@ -38,6 +38,7 @@ namespace fang::turret
         using Orientation = tap::algorithms::transforms::Orientation;
         using Position = tap::algorithms::transforms::Position;
         Vector cameraToGlobal(const Vector& cameraCoordinates) const;
+        const Config config_;
         FieldGimbalSubsystem& gimbal_;
         trap::communication::sensors::IImu& cameraOrientationImu_;
         BasicTargetT currentTarget_{};
