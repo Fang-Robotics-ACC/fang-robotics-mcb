@@ -2,60 +2,62 @@
 
 #include "robot/variant/slice/custom_variant/subsystem/slice_mecanum_drive.hpp"
 #include "wrap/units/units_alias.hpp"
+#include "wrap/trap/motor/dji_motor_aliases.hpp"
+
+#include "tap/algorithms/smooth_pid.hpp"
 
 namespace fang::robot 
 {
 // Construct on first use idiom ahhhh
 using namespace units::literals;
 
-//pwm initialization
-static const auto kPwmTimer{tap::gpio::Pwm::TIMER1};
-static const Hertz kPwmFrequency{400};
-static const Volts kControllerInputVoltage{24};
-
 //All motors are assume to move counterclockwise when given a positive signal
 static bool kLeftMotorInversion{false};
 static bool kRightMotorInversion{true};
 
-static double kUltraMk2GearRatio{14.0};
-
-static double kMotorRampSpeed{750}; //RepeatUltraMk2 RPM per Second
-
+// M3580 Pid Config
+trap::motor::DjiMotorOutput M3508maxOutput{trap::motor::DjiM3508Old::k_maxOutput};
+tap::algorithms::SmoothPidConfig M3508PidConfig{.kp = 100, .ki = 0.0f, .kd = 0.0f, .maxICumulative = 0.0f, .maxOutput = M3508maxOutput};
 
 static const chassis::SliceMecanumDrive::Motor::Config kFrontLeftMotorConfig
-{
-    .controllerInputVoltage = kControllerInputVoltage,
-    .pwmData = {tap::gpio::Pwm::C1, kPwmFrequency},
+{   
+    .motorId = tap::motor::MotorId::MOTOR1,
+    .canBus = tap::can::CanBus::CAN_BUS2,
+    .name = "FL",
     .inverted = kLeftMotorInversion,
-    .gearRatio = kUltraMk2GearRatio,
-    .rampSpeed = kMotorRampSpeed
+    .gearRatio = tap::motor::DjiMotorEncoder::GEAR_RATIO_M3508,
+    .speedPidConfig = M3508PidConfig
+
 };
 
 static const chassis::SliceMecanumDrive::Motor::Config kFrontRightMotorConfig
 {
-    .controllerInputVoltage = kControllerInputVoltage,
-    .pwmData = {tap::gpio::Pwm::C2, kPwmFrequency},
+    .motorId = tap::motor::MotorId::MOTOR2,
+    .canBus = tap::can::CanBus::CAN_BUS2,
+    .name = "FR",
     .inverted = kRightMotorInversion,
-    .gearRatio = kUltraMk2GearRatio,
-    .rampSpeed = kMotorRampSpeed
+    .gearRatio = tap::motor::DjiMotorEncoder::GEAR_RATIO_M3508,
+    .speedPidConfig = M3508PidConfig
 };
 
 static const chassis::SliceMecanumDrive::Motor::Config kRearLeftMotorConfig
 {
-    .controllerInputVoltage = kControllerInputVoltage,
-    .pwmData = {tap::gpio::Pwm::C3, kPwmFrequency},
+    .motorId = tap::motor::MotorId::MOTOR3,
+    .canBus = tap::can::CanBus::CAN_BUS2,
+    .name = "RL",
     .inverted = kLeftMotorInversion,
-    .gearRatio = kUltraMk2GearRatio,
-    .rampSpeed = kMotorRampSpeed
+    .gearRatio = tap::motor::DjiMotorEncoder::GEAR_RATIO_M3508,
+    .speedPidConfig = M3508PidConfig
 };
 
 static const chassis::SliceMecanumDrive::Motor::Config kRearRightMotorConfig
 {
-    .controllerInputVoltage = kControllerInputVoltage,
-    .pwmData = {tap::gpio::Pwm::C4, kPwmFrequency},
+    .motorId = tap::motor::MotorId::MOTOR4,
+    .canBus = tap::can::CanBus::CAN_BUS2,
+    .name = "RR",
     .inverted = kRightMotorInversion,
-    .gearRatio = kUltraMk2GearRatio,
-    .rampSpeed = kMotorRampSpeed
+    .gearRatio = tap::motor::DjiMotorEncoder::GEAR_RATIO_M3508,
+    .speedPidConfig = M3508PidConfig
 };
 
 static const chassis::SliceMecanumDrive::MotorConfigs kMotorConfigs
@@ -84,8 +86,6 @@ static const chassis::SliceMecanumDrive::Config kChassisConfig
 {
     .motorConfigs        = kMotorConfigs,
     .powerLimiterConfig  = kChassisPowerLimiterConfig,
-    .fieldMecanumConfig  = kFieldMecanumLogicConfig,
-    .chassisPwmFrequency = kPwmFrequency,
-    .pwmTimer            = kPwmTimer,
+    .fieldMecanumConfig  = kFieldMecanumLogicConfig
 };
 }
