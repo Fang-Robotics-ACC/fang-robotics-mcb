@@ -6,6 +6,7 @@
 #include "tap/algorithms/transforms/vector.hpp"
 
 #include "wrap/rail/turret/igimbal_input.hpp"
+#include "wrap/trap/communication/sensors/iimu.hpp"
 
 #include "tap/control/command.hpp"
 
@@ -22,7 +23,7 @@ namespace fang::turret
         {
             math::Range<Radians> pitchRange;
         };
-        BallisticsAimCommand(FieldGimbalSubsystem& gimbal, const Config& config);
+        BallisticsAimCommand(FieldGimbalSubsystem& gimbal, trap::communication::sensors::IImu& cameraOrientationImu, const Config& config);
         void basicTargetFound(const BasicTargetT& basicTarget) override;
 
         const char* getName() const override {return "Ballistic Aim";}
@@ -33,8 +34,12 @@ namespace fang::turret
 
     private:
         using Vector = tap::algorithms::transforms::Vector;
-        Vector cameraToGlobal(const Vector& vector) const;
+        using Transform = tap::algorithms::transforms::Transform;
+        using Orientation = tap::algorithms::transforms::Orientation;
+        using Position = tap::algorithms::transforms::Position;
+        Vector cameraToGlobal(const Vector& cameraCoordinates) const;
         FieldGimbalSubsystem& gimbal_;
+        trap::communication::sensors::IImu& cameraOrientationImu_;
         BasicTargetT currentTarget_{};
     };
 }
