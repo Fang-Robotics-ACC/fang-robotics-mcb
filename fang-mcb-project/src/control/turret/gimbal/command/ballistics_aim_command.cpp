@@ -34,20 +34,36 @@ namespace fang::turret
         const Vector kGlobalTarget{cameraToGlobal({currentTarget_.x, currentTarget_.y, currentTarget_.z})};
         float calculatedTravelTime{};
         float calculatedTurretPitch{};
+        float calculatedTurretYaw{};
 
-        tap::algorithms::ballistics::computeTravelTime
-        (
-            {kGlobalTarget.x(), kGlobalTarget.y(), kGlobalTarget.z()},
-            MetersPerSecond{config_.bulletVelocity}.to<double>(),
-            &calculatedTravelTime,
-            &calculatedTurretPitch,
-            0.0
-        );
-        //https://www.geeksforgeeks.org/physics/angle-between-two-vectors-formula/
-        const Vector kAxisX{1.0, 0.0 ,0.0};
-        const Radians kTargetPitch{calculatedTurretPitch};
-        const Radians kTargetYaw{std::acos((kAxisX.dot(kGlobalTarget))/(kGlobalTarget.magnitude() * 1.0))};
+    //const AbstractKinematicState &targetInitialState,
+    //float bulletVelocity,
+    //uint8_t numIterations,
+    //float *turretPitch,
+    //float *turretYaw,
+    //float *projectedTravelTime,
+    //const float pitchAxisOffset)
+        const bool kSuccess
+        {
+            tap::algorithms::ballistics::findTargetProjectileIntersection
+            (
+                tap::algorithms::ballistics::SecondOrderKinematicState //target state
+                {
+                    {kGlobalTarget.x(), kGlobalTarget.y(), kGlobalTarget.z()},
+                    {0,0,0},
+                    {0,0,0}
+                },
+                MetersPerSecond{config_.bulletVelocity}.to<double>(),
+                2, //iterations
+                &calculatedTravelTime,
+                &calculatedTurretPitch,
+                &calculatedTurretYaw,
+                0.0
+            )
             
+        };
+        const Radians kTargetPitch{calculatedTurretPitch};
+        const Radians kTargetYaw{calculatedTurretYaw};
 
         gimbal_.setTargetFieldPitch(kTargetPitch);
         gimbal_.setTargetFieldYaw(kTargetYaw);
