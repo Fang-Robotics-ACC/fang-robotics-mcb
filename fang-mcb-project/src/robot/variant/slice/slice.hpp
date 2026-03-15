@@ -64,35 +64,37 @@ namespace fang::robot
             },
 
             uart_{drivers.uart},
+            cameraOrientationImu_{drivers.bmi088},
             remote_{drivers.remote},
             flySkyByteQueue_{},
             flyRemote_{drivers.commandMapper, flySkyByteQueue_},
             holonomicInput_{drivers.remote, config.input.holonomic},
             gimbalInput_{drivers.remote, config.input.gimbal},
             flySkyGimbalInput_{flyRemote_, {remote::FlySky::Channel::leftVertical, remote::FlySky::Channel::leftHorizontal}},
-            BaseRobot{makeRobot(drivers, holonomicInput_, gimbalInput_, config, coolSerialUart_)}
+            BaseRobot{makeRobot(drivers, holonomicInput_, gimbalInput_, config, coolSerialUart_, cameraOrientationImu_)}
         {}
 
         void initialize() override
         {
             BaseRobot::initialize();
-            uart_.init<tap::communication::serial::Uart::Uart1, 115200, tap::communication::serial::Uart::Parity::Disabled>();
             remote_.initialize();
         }
 
         void update() override
         {
-            uint8_t data{};
-            while(uart_.read(tap::communication::serial::Uart::Uart1,  &data))
-            {
-                flySkyByteQueue_.push(data);
-            }
+            coolSerialUart_.update();
             remote_.read();
-            flyRemote_.update();
+            //flyRemote_.update();
+        }
+
+        void handleData(const coolSerial::Bytes& bytes)
+        {
+            flySkyByteQueue_.addBytes(bytes);
         }
 
     private:
         CoolSerialUart coolSerialUart_;
+        trap::communication::sensors::Imu cameraOrientationImu_;
         tap::communication::serial::Uart& uart_;
         tap::communication::serial::Remote& remote_;
         coolSerial::ByteQueue flySkyByteQueue_;
@@ -102,7 +104,7 @@ namespace fang::robot
         turret::FlySkyGimbalInput flySkyGimbalInput_;
 
 
-        static BaseRobot makeRobot(Drivers& drivers, chassis::IHolonomicInput& holonomicInput, turret::IGimbalInput& gimbalInput, const Config& config, communication::ICoolSerialUart& coolSerial)
+        static BaseRobot makeRobot(Drivers& drivers, chassis::IHolonomicInput& holonomicInput, turret::IGimbalInput& gimbalInput, const Config& config, communication::ICoolSerialUart& coolSerial, trap::communication::sensors::IImu& cameraOrientationImu)
         {
             auto gimbal{std::make_unique<turret::SliceFieldGimbal>(drivers, config.subsystemConfig.gimbalConfig)};
             auto feeder{std::make_unique<turret::M2006SimpleFeeder>(drivers, config.subsystemConfig.feederConfig)};
@@ -120,6 +122,7 @@ namespace fang::robot
                     gimbalInput,
                     holonomicInput,
                     coolSerial,
+                    cameraOrientationImu,
                     config.commandPackConfig
                 )
             };
