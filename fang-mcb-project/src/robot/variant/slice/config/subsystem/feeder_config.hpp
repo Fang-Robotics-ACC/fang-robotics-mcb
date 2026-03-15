@@ -18,7 +18,7 @@ static const trap::motor::DjiSpeedPid::Config kFeederMotorPidConfig
 
 static const trap::motor::DjiM2006Old::Config kFeederMotorConfig
 { 
-    tap::motor::MOTOR3,
+    tap::motor::MOTOR5,
     tap::can::CanBus::CAN_BUS1,
     "Feeder Motor",
     false,

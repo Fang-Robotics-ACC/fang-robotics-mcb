@@ -25,8 +25,8 @@ static const trap::motor::DjiSpeedPid::Config kFlywheelMotorPidConfig
 
 static const Flywheel::Motor::Config kLeftFlywheelMotorConfig
 { 
-    .motorId        = tap::motor::MOTOR7,
-    .canBus         = tap::can::CanBus::CAN_BUS1,
+    .motorId        = tap::motor::MOTOR8,
+    .canBus         = tap::can::CanBus::CAN_BUS2,
     .name           = "leftFlywheel",
     .inverted       = false,
     .gearRatio      = 1.0, //No gearbox attached
@@ -41,8 +41,8 @@ static const Flywheel::Config kLeftFlywheelConfig
 
 static const Flywheel::Motor::Config kRightFlywheeMotorConfig 
 { 
-    .motorId        = tap::motor::MOTOR8,
-    .canBus         = tap::can::CanBus::CAN_BUS1,
+    .motorId        = tap::motor::MOTOR7,
+    .canBus         = tap::can::CanBus::CAN_BUS2,
     .name           = "rightFlywheel",
     .inverted       = true,
     .gearRatio      = 1.0, //No gearbox attached

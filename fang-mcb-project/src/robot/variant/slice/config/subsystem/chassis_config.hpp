@@ -22,7 +22,7 @@ tap::algorithms::SmoothPidConfig M3508PidConfig{.kp = 100, .ki = 0.0f, .kd = 0.0
 static const chassis::SliceMecanumDrive::Motor::Config kFrontLeftMotorConfig
 {   
     .motorId = tap::motor::MotorId::MOTOR1,
-    .canBus = tap::can::CanBus::CAN_BUS2,
+    .canBus = tap::can::CanBus::CAN_BUS1,
     .name = "FL",
     .inverted = kLeftMotorInversion,
     .gearRatio = tap::motor::DjiMotorEncoder::GEAR_RATIO_M3508,
@@ -33,7 +33,7 @@ static const chassis::SliceMecanumDrive::Motor::Config kFrontLeftMotorConfig
 static const chassis::SliceMecanumDrive::Motor::Config kFrontRightMotorConfig
 {
     .motorId = tap::motor::MotorId::MOTOR2,
-    .canBus = tap::can::CanBus::CAN_BUS2,
+    .canBus = tap::can::CanBus::CAN_BUS1,
     .name = "FR",
     .inverted = kRightMotorInversion,
     .gearRatio = tap::motor::DjiMotorEncoder::GEAR_RATIO_M3508,
@@ -43,7 +43,7 @@ static const chassis::SliceMecanumDrive::Motor::Config kFrontRightMotorConfig
 static const chassis::SliceMecanumDrive::Motor::Config kRearLeftMotorConfig
 {
     .motorId = tap::motor::MotorId::MOTOR3,
-    .canBus = tap::can::CanBus::CAN_BUS2,
+    .canBus = tap::can::CanBus::CAN_BUS1,
     .name = "RL",
     .inverted = kLeftMotorInversion,
     .gearRatio = tap::motor::DjiMotorEncoder::GEAR_RATIO_M3508,
@@ -53,7 +53,7 @@ static const chassis::SliceMecanumDrive::Motor::Config kRearLeftMotorConfig
 static const chassis::SliceMecanumDrive::Motor::Config kRearRightMotorConfig
 {
     .motorId = tap::motor::MotorId::MOTOR4,
-    .canBus = tap::can::CanBus::CAN_BUS2,
+    .canBus = tap::can::CanBus::CAN_BUS1,
     .name = "RR",
     .inverted = kRightMotorInversion,
     .gearRatio = tap::motor::DjiMotorEncoder::GEAR_RATIO_M3508,
