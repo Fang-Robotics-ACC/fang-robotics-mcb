@@ -11,6 +11,7 @@ namespace fang::command
             chassis::HolonomicSubsystem& chassis,
             turret::IGimbalInput& gimbalInput,
             chassis::IHolonomicInput& holonomicInput,
+            communication::ICoolSerialUart& coolSerialUart,
             const Config& config
         ):
             CommandPack{drivers.commandMapper},
@@ -24,6 +25,7 @@ namespace fang::command
             gimbal_{gimbal},
             chassis_{chassis},
             holonomicInput_{holonomicInput},
+            coolSerialUart_{coolSerialUart},
             gimbalInput_{gimbalInput}
         {}
 

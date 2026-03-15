@@ -76,6 +76,7 @@ namespace fang::command
             chassis::HolonomicSubsystem& chassis,
             turret::IGimbalInput& gimbalInput,
             chassis::IHolonomicInput& holonomicInput,
+            communication::ICoolSerialUart& coolSerialUart,
             const Config& config
         );
 
@@ -88,6 +89,7 @@ namespace fang::command
         turret::SimpleFeederSubsystem& feeder_;
         turret::FieldGimbalSubsystem& gimbal_;
         chassis::HolonomicSubsystem& chassis_;
+        communication::ICoolSerialUart& coolSerialUart_;
 
         Drivers& drivers_;
         //Used only for initialization DO NOT ACCESS AFTERWARDS
