@@ -10,7 +10,7 @@
 
 #include "control/turret/feeder/simple_feeder/m2006_simple_feeder.hpp"
 
-#include "control/command/pierce_command_pack.hpp"
+#include "custom_variant/slice_command_pack.hpp"
 
 #include "robot/base_robot.hpp"
 
@@ -47,7 +47,7 @@ namespace fang::robot
         {
             SubsystemConfig subsystemConfig;
             InputConfig input;
-            command::PierceCommandPack::Config commandPackConfig;
+            command::SliceCommandPack::Config commandPackConfig;
         };
 
         Slice(Drivers& drivers, const Config& config)
@@ -98,7 +98,7 @@ namespace fang::robot
             auto mecanumDrive{std::make_unique<chassis::SliceMecanumDrive>(drivers, config.subsystemConfig.chassisConfig)};
             auto commandPack
             {
-                std::make_unique<command::PierceCommandPack>
+                std::make_unique<command::SliceCommandPack>
                 (
                     drivers,
                     *booster,

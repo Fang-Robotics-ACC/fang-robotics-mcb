@@ -37,7 +37,7 @@ static const Slice::InputConfig kSliceInputConfig
     .gimbal = kTurretInputConfig
 };
 
-static const command::PierceCommandPack::CommandConfig kSliceCommandConfig
+static const command::SliceCommandPack::CommandConfig kSliceCommandConfig
 {
     .aimConfig           = kTurretAimConfig,
     .counterStrikeConfig = kFieldMecanumConfig,
@@ -45,7 +45,7 @@ static const command::PierceCommandPack::CommandConfig kSliceCommandConfig
     .tardisConfig        = k_tardisConfig
 };
 
-static const command::PierceCommandPack::ComputerMapping kSliceComputerMappingCOnfig 
+static const command::SliceCommandPack::ComputerMapping kSliceComputerMappingCOnfig 
 {
     .mouseFire     = kAutofireMouseState,
     .mouseUnjam    = kUnjamMouseState,
@@ -54,7 +54,7 @@ static const command::PierceCommandPack::ComputerMapping kSliceComputerMappingCO
     .tardis        = kTardisModeKeyboardState
 };
 
-static const command::PierceCommandPack::RemoteMapping kSliceRemoteMappingConfig 
+static const command::SliceCommandPack::RemoteMapping kSliceRemoteMappingConfig 
 {
     .activateBooster = kActivateBoosterRemoteState,
     .fire            = kAutofireRemoteState,
@@ -64,13 +64,13 @@ static const command::PierceCommandPack::RemoteMapping kSliceRemoteMappingConfig
     .tardis          = kTardisModeRemoteState
 };
 
-static const command::PierceCommandPack::MappingConfig kSliceMappingConfig 
+static const command::SliceCommandPack::MappingConfig kSliceMappingConfig 
 {
     .remote     = kSliceRemoteMappingConfig,
     .computer   = kSliceComputerMappingCOnfig
 };
 
-static const command::PierceCommandPack::Config kSliceCommandPackConfig
+static const command::SliceCommandPack::Config kSliceCommandPackConfig
 {
     .mappingConfig = kSliceMappingConfig,
     .commandConfig = kSliceCommandConfig
