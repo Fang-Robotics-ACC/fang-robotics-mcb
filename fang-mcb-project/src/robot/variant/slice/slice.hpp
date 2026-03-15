@@ -24,9 +24,11 @@ namespace fang::robot
      * First Fang: Pierce
      * The first robot in Fang Robotics est. 2025
      */
-    class Slice : public BaseRobot
+    class Slice : public BaseRobot, public coolSerial::IDataHandler
     {
     public:
+        using CoolSerialUart = communication::CoolSerialUart<tap::communication::serial::Uart::Uart1, 921600>;
+
         using RemoteState = tap::control::RemoteMapState;
 
         struct InputConfig
@@ -52,6 +54,15 @@ namespace fang::robot
 
         Slice(Drivers& drivers, const Config& config)
             :
+            coolSerialUart_
+            {
+                drivers,
+                CoolSerialUart::HandlerMap
+                {
+                    {253, std::ref(*this)}
+                }
+            },
+
             uart_{drivers.uart},
             remote_{drivers.remote},
             flySkyByteQueue_{},
@@ -59,7 +70,7 @@ namespace fang::robot
             holonomicInput_{drivers.remote, config.input.holonomic},
             gimbalInput_{drivers.remote, config.input.gimbal},
             flySkyGimbalInput_{flyRemote_, {remote::FlySky::Channel::leftVertical, remote::FlySky::Channel::leftHorizontal}},
-            BaseRobot{makeRobot(drivers, holonomicInput_, gimbalInput_, config)}
+            BaseRobot{makeRobot(drivers, holonomicInput_, gimbalInput_, config, coolSerialUart_)}
         {}
 
         void initialize() override
@@ -81,6 +92,7 @@ namespace fang::robot
         }
 
     private:
+        CoolSerialUart coolSerialUart_;
         tap::communication::serial::Uart& uart_;
         tap::communication::serial::Remote& remote_;
         coolSerial::ByteQueue flySkyByteQueue_;
@@ -90,7 +102,7 @@ namespace fang::robot
         turret::FlySkyGimbalInput flySkyGimbalInput_;
 
 
-        static BaseRobot makeRobot(Drivers& drivers, chassis::IHolonomicInput& holonomicInput, turret::IGimbalInput& gimbalInput, const Config& config)
+        static BaseRobot makeRobot(Drivers& drivers, chassis::IHolonomicInput& holonomicInput, turret::IGimbalInput& gimbalInput, const Config& config, communication::ICoolSerialUart& coolSerial)
         {
             auto gimbal{std::make_unique<turret::SliceFieldGimbal>(drivers, config.subsystemConfig.gimbalConfig)};
             auto feeder{std::make_unique<turret::M2006SimpleFeeder>(drivers, config.subsystemConfig.feederConfig)};
@@ -107,6 +119,7 @@ namespace fang::robot
                     *mecanumDrive,
                     gimbalInput,
                     holonomicInput,
+                    coolSerial,
                     config.commandPackConfig
                 )
             };

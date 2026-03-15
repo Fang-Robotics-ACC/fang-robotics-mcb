@@ -12,6 +12,7 @@ namespace fang::command
             turret::IGimbalInput& gimbalInput,
             chassis::IHolonomicInput& holonomicInput,
             communication::ICoolSerialUart& coolSerialUart,
+            trap::communication::sensors::IImu& cameraOrientationImu,
             const Config& config
         ):
             CommandPack{drivers.commandMapper},
@@ -26,8 +27,11 @@ namespace fang::command
             chassis_{chassis},
             holonomicInput_{holonomicInput},
             coolSerialUart_{coolSerialUart},
+            cameraOrientationImu_{cameraOrientationImu},
             gimbalInput_{gimbalInput}
-        {}
+        {
+            coolSerialUart.addHandler(kBasicTargetCoolSerialId, std::ref(autoAim_));
+        }
 
     void SliceCommandPack::initialize()
     {

@@ -16,12 +16,15 @@
 #include "control/turret/ammo_booster/command/activate_booster_command.hpp"
 #include "control/turret/feeder/command/simple_fire_command.hpp"
 #include "control/turret/feeder/command/simple_unjam_command.hpp"
+#include "control/turret/gimbal/command/ballistics_aim_command.hpp"
 
 // Mapping Types
 #include "tap/control/press_command_mapping.hpp"
 #include "tap/control/hold_command_mapping.hpp"
 
 #include "tap/control/remote_map_state.hpp"
+
+#include "wrap/trap/communication/sensors/iimu.hpp"
 
 namespace fang::command
 {
@@ -31,6 +34,7 @@ namespace fang::command
         struct CommandConfig
         {
             turret::AimCommand::Config aimConfig;
+            turret::BallisticsAimCommand::Config autoAimConfig;
             chassis::CounterStrikeCommand::Config counterStrikeConfig;
             chassis::ShurikenCommand::Config shurikenConfig;
             chassis::TardisCommand::Config tardisConfig;
@@ -77,11 +81,14 @@ namespace fang::command
             turret::IGimbalInput& gimbalInput,
             chassis::IHolonomicInput& holonomicInput,
             communication::ICoolSerialUart& coolSerialUart,
+            trap::communication::sensors::IImu& cameraOrientationImu,
             const Config& config
         );
 
         virtual void initialize() override;
     private:
+        static const int kBasicTargetCoolSerialId{254};
+
         void registerIoMappings();
         void setDefaultCommands();
 
@@ -90,6 +97,7 @@ namespace fang::command
         turret::FieldGimbalSubsystem& gimbal_;
         chassis::HolonomicSubsystem& chassis_;
         communication::ICoolSerialUart& coolSerialUart_;
+        trap::communication::sensors::IImu& cameraOrientationImu_;
 
         Drivers& drivers_;
         //Used only for initialization DO NOT ACCESS AFTERWARDS
@@ -100,12 +108,15 @@ namespace fang::command
         chassis::IHolonomicInput& holonomicInput_;
         turret::IGimbalInput& gimbalInput_;
 
+        //Turret Commands
         turret::AimCommand aim_{gimbal_, gimbalInput_, kCommandConfig_.aimConfig};
         turret::ActivateBoosterCommand activateBooster_{booster_};
         fang::turret::FireCommand autofire_{feeder_};
         fang::turret::UnjamCommand unjam_{feeder_};
+        turret::BallisticsAimCommand autoAim_{gimbal_, cameraOrientationImu_, kCommandConfig_.autoAimConfig};
 
-        tap::control::HoldCommandMapping activateBoosterRemote_{&drivers_, {&activateBooster_}, kRemoteMapping_.activateBooster};
+        //HACK: IMPORTANT: THE MAPPING BELOW IS HIJACKED FOR TESTING, INCORRECT NAME
+        tap::control::HoldCommandMapping activateBoosterRemote_{&drivers_, {&autoAim_}, kRemoteMapping_.activateBooster};
         tap::control::HoldCommandMapping activateAutofireRemote_{&drivers_, {&autofire_}, kRemoteMapping_.fire};
 
         tap::control::HoldCommandMapping activateAutofireMouseMap_{&drivers_, {&autofire_}, kComputerMapping_.mouseFire};
