@@ -30,7 +30,7 @@ namespace fang::command
             cameraOrientationImu_{cameraOrientationImu},
             gimbalInput_{gimbalInput}
         {
-            coolSerialUart.addHandler(kBasicTargetCoolSerialId, std::ref(autoAim_));
+            //coolSerialUart.addHandler(kBasicTargetCoolSerialId, std::ref(autoAim_));
         }
 
     void SliceCommandPack::initialize()

@@ -35,7 +35,7 @@ static const trap::motor::DjiSpeedPid::Config kPitchVelocityPid
 
 static const trap::motor::DjiMotor::Config kPitchMotorConfig
 {
-    .motorId        = tap::motor::MOTOR2,
+    .motorId        = tap::motor::MOTOR1,
     .canBus         = tap::can::CanBus::CAN_BUS1,
     .name           = "pitchMotor",
     .inverted       =  true,
@@ -88,7 +88,7 @@ static const turret::SliceFieldGimbal::YawSystem::Gm6020CounterChassisFieldYaw::
 
 static const trap::motor::DjiGM6020::Config kYawMotorConfig 
 {
-    .motorId        = tap::motor::MOTOR1,
+    .motorId        = tap::motor::MOTOR2,
     .canBus         = tap::can::CanBus::CAN_BUS1,
     .name           = "yawMotor",
     .inverted       = false,
