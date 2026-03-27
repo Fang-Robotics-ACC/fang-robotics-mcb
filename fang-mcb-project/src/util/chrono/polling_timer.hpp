@@ -13,7 +13,6 @@ namespace fang::chrono
  * {
  *     doThis();
  *     compensateDuration(pollingTimer.getTimePastAlarmAndReset());
- *     pollingTimer.restart();
  * }
  * 
  * Can time stuff up to 71 days within microsecond precision or 47 minutes double check modm
