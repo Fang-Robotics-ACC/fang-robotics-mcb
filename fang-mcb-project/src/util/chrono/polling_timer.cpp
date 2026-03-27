@@ -12,7 +12,7 @@ void PollingTimer::setDuration(Microseconds duration)
     timingDuration_ = duration;
 }
 
-void PollingTimer::start()
+void PollingTimer::restart()
 {
     simpleTimer_.reset();
 }
@@ -25,6 +25,12 @@ bool PollingTimer::isFinished() const
 Microseconds PollingTimer::getTimePastAlarm() const
 {
     return simpleTimer_.getDuration() - timingDuration_;
+}
+
+Microseconds PollingTimer::getTimePastAlarmAndReset()
+{
+    return simpleTimer_.getDurationAndReset() - timingDuration_;
+
 }
 
 Microseconds PollingTimer::getTimeLeft() const

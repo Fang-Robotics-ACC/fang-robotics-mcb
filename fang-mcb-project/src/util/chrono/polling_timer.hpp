@@ -5,7 +5,18 @@
 namespace fang::chrono
 {
 /**
- * Can time stuff up to 71 days within microsecond precision
+ * This is designed to be able to compare between elapsed time in polling loops.
+ * So you can have an event timed around a delay without having to stop execution
+ * 
+ * such as 
+ * if (pollingTimer.isFinished)
+ * {
+ *     doThis();
+ *     compensateDuration(pollingTimer.getTimePastAlarmAndReset());
+ *     pollingTimer.restart();
+ * }
+ * 
+ * Can time stuff up to 71 days within microsecond precision or 47 minutes double check modm
  */
 class PollingTimer
 {
@@ -26,7 +37,7 @@ public:
     /**
      * Has the timer to begin timing now
      */
-    void start();
+    void restart();
 
     /**
      * true if the timer has elapsed
@@ -40,6 +51,13 @@ public:
      * This will allow you to compensate.
      */
     Microseconds getTimePastAlarm() const;
+
+    /**
+     * This is a special call that will allow you to precisely reset
+     * the timer AND get the time past alarm without uncounted delay
+     * it usees the unique implementation of SimplerTimer's getDurationAndReset
+     */
+    Microseconds getTimePastAlarmAndReset();
 
     /**
      * This will provide a negative value if it has finished
