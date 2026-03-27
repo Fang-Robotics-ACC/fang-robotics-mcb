@@ -21,7 +21,7 @@ namespace fang::chrono
          * 
          * The default duration is zero. Hopefully, this won't crash anything.
          */
-        void setDuration();
+        void setDuration(Microseconds duration);
 
         /**
          * Has the timer to begin timing now
@@ -30,15 +30,23 @@ namespace fang::chrono
 
         /**
          * true if the timer has elapsed
+         * >= comparison
          */
-        bool isFinished();
+        bool isFinished() const;
 
         /**
-         * This will provide a negative value.
+         * This will provide a negative value if it has not finished
          * 
          * This will allow you to compensate.
          */
-        Microseconds getTimePastAlarm();
+        Microseconds getTimePastAlarm() const;
+
+        /**
+         * This will provide a negative value if it has finished
+         * 
+         * This will allow you to compensate.
+         */
+        Microseconds getTimeLeft() const;
 
         /**
          * Resets the count
@@ -46,7 +54,7 @@ namespace fang::chrono
         void reset();
 
     private:
-        SimpleTimer simpleTimer_;
+        SimpleTimer simpleTimer_{};
         Microseconds timingDuration_{};
     };
 }
